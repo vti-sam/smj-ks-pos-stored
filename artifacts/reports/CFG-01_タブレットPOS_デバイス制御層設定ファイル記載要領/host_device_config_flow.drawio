@@ -1,0 +1,68 @@
+<mxfile host="Electron">
+  <diagram name="host_device_config_flow" id="hdc_flow_01">
+    <mxGraphModel dx="1414" dy="841" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="node_start" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#FFFFFF;strokeColor=#3B82F6;strokeWidth=2;fontColor=#1E3A8A;fontStyle=1;fontSize=11;" value="Windows Hostを起動する" vertex="1">
+          <mxGeometry height="44" width="250" x="245" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="node_useconfig" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#A8A29E;strokeWidth=2;fontColor=#292524;fontStyle=0;fontSize=10;" value="Host実行フォルダの設定を使用する&lt;br/&gt;&lt;font color=&quot;#6B7280&quot;&gt;Resources/host_device_config.json&lt;/font&gt;" vertex="1">
+          <mxGeometry height="54" width="300" x="220" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="node_read" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#A8A29E;strokeWidth=2;fontColor=#292524;fontStyle=0;fontSize=11;" value="Host側の設定内容を読み取る" vertex="1">
+          <mxGeometry height="44" width="250" x="245" y="305" as="geometry" />
+        </mxCell>
+        <mxCell id="node_readdevices" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#A8A29E;strokeWidth=2;fontColor=#292524;fontStyle=0;fontSize=11;" value="devices配列を上から順に確認する" vertex="1">
+          <mxGeometry height="44" width="250" x="245" y="395" as="geometry" />
+        </mxCell>
+        <mxCell id="node_validate" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#A8A29E;strokeWidth=2;fontColor=#292524;fontStyle=0;fontSize=11;" value="起動対象の機器と実装識別IDを確認する" vertex="1">
+          <mxGeometry height="44" width="250" x="245" y="485" as="geometry" />
+        </mxCell>
+        <mxCell id="node_startdevice" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#A8A29E;strokeWidth=2;fontColor=#292524;fontStyle=0;fontSize=11;" value="Host側で外部機器を起動する" vertex="1">
+          <mxGeometry height="44" width="250" x="245" y="575" as="geometry" />
+        </mxCell>
+        <mxCell id="node_ready" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#FFFFFF;strokeColor=#10B981;strokeWidth=2;fontColor=#065F46;fontStyle=1;fontSize=11;" value="Host側のデバイス制御準備完了" vertex="1">
+          <mxGeometry height="44" width="250" x="245" y="665" as="geometry" />
+        </mxCell>
+        <mxCell id="node_error" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#EF4444;strokeWidth=2;fontColor=#991B1B;fontStyle=0;fontSize=10;" value="設定に問題がある場合&lt;br/&gt;調査用ログを出力する" vertex="1">
+          <mxGeometry height="54" width="190" x="595" y="358" as="geometry" />
+        </mxCell>
+        <mxCell id="e_start_useconfig" edge="1" parent="1" source="node_start" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#78716C;strokeWidth=2;" target="node_useconfig">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_useconfig_read" edge="1" parent="1" source="node_useconfig" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#78716C;strokeWidth=2;" target="node_read">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_read_readdevices" edge="1" parent="1" source="node_read" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#78716C;strokeWidth=2;" target="node_readdevices">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_readdevices_validate" edge="1" parent="1" source="node_readdevices" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#78716C;strokeWidth=2;" target="node_validate">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_validate_startdevice" edge="1" parent="1" source="node_validate" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#78716C;strokeWidth=2;" target="node_startdevice">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_startdevice_ready" edge="1" parent="1" source="node_startdevice" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#78716C;strokeWidth=2;" target="node_ready">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_read_error" edge="1" parent="1" source="node_read" style="rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#EF4444;strokeWidth=2;dashed=1;dashPattern=8 4;fontColor=#991B1B;fontSize=9;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" target="node_error" value="読込不可 / 記載不正">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="565" y="327" />
+              <mxPoint x="565" y="372" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_validate_error" edge="1" parent="1" source="node_validate" style="rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#EF4444;strokeWidth=2;dashed=1;dashPattern=8 4;fontColor=#991B1B;fontSize=9;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" target="node_error" value="ID不一致 / 実装識別ID不一致">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="565" y="507" />
+              <mxPoint x="565" y="399" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

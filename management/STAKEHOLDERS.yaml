@@ -1,0 +1,129 @@
+schema_version: 1
+meta:
+  source: google_sheets
+  sheet: Stakeholders / 関係者
+  source_of_truth: google_sheets
+  read_only_export: true
+  generated_at: '2026-06-17T14:26:35+09:00'
+records:
+- id: SH-001
+  type: Stakeholder
+  name: 菅原充仁
+  email: sugawara.michihito@mail.sharp
+  organization: Sharp
+  role: Sharp側管理責任者；顧客側の意思決定およびエスカレーション担当
+  influence: High
+  interest: Medium
+  expectations: 全体状況、scope/riskの大きな影響、エスカレーションが必要な判断事項を把握すること。
+  communication_strategy: scope/cost/scheduleに影響がある場合は密に連携し、通常時はsummaryで状況を共有します。
+  notes_vi: Quản lý phía Sharp, phụ trách quyết định và escalation.
+- id: SH-002
+  type: Stakeholder
+  name: 鎌田克
+  email: kamata.katsu@mail.sharp
+  organization: Sharp
+  role: Sharp側管理担当；顧客側の意思決定およびエスカレーション担当
+  influence: High
+  interest: Medium
+  expectations: 全体状況、scope/riskの大きな影響、エスカレーションが必要な判断事項を把握すること。
+  communication_strategy: scope/cost/scheduleに影響がある場合は密に連携し、通常時はsummaryで状況を共有します。
+  notes_vi: Quản lý phía Sharp, theo dõi quyết định và escalation.
+- id: SH-003
+  type: Stakeholder
+  name: 小林智幸
+  email: kobayashi.tomoyuki@mail.sharp
+  organization: Sharp
+  role: Sharp側チームリード；app、UI/UX、POSに関する主要窓口
+  influence: High
+  interest: High
+  expectations: reviewしやすい設計、明確なflow、確認事項への迅速な回答を期待します。
+  communication_strategy: 設計reviewと日次または短周期の確認で密に連携します。
+  notes_vi: Trưởng nhóm phía Sharp, đầu mối app/UI/UX/POS.
+- id: SH-004
+  type: Stakeholder
+  name: 伊藤怜央馬
+  email: ito.reoma@mail.sharp
+  organization: Sharp
+  role: Sharp側主担当；app、UI/UX、POSに関する主要窓口
+  influence: High
+  interest: High
+  expectations: reviewしやすい設計、明確なflow、確認事項への迅速な回答を期待します。
+  communication_strategy: 設計reviewと日次または短周期の確認で密に連携します。
+  notes_vi: Phụ trách chính phía Sharp về app/UI/UX/POS.
+- id: SH-005
+  type: Stakeholder
+  name: 小山 岳広
+  email: ta-koyama@japannet.co.jp
+  organization: Japannet
+  role: Japannet側主要技術担当
+  influence: High
+  interest: High
+  expectations: 技術方針、integration point、技術制約の確定を支援すること。
+  communication_strategy: 技術判断や難しい問題が発生した際に密に連携します。
+  notes_vi: Đầu mối kỹ thuật chính phía Japannet.
+- id: SH-006
+  type: Stakeholder
+  name: NGOC Pham Van (VJP)
+  email: ngoc.phamvan@vti.com.vn
+  organization: VTI
+  role: VTI側上位管理者 / GM；VTI側実行管理
+  influence: High
+  interest: Medium
+  expectations: deliverable、escalation、resource、costを管理すること。
+  communication_strategy: 重要なリスクやresource/cost判断が必要な場合に高頻度で共有します。
+  notes_vi: GM phía VTI, quản lý delivery, escalation, resource và cost.
+- id: SH-007
+  type: Stakeholder
+  name: VTI_SAM
+  email: son.nguyenhong1@vti.com.vn
+  organization: VTI
+  role: VTI側Tech Lead / BrSE；技術および実行の主担当
+  influence: High
+  interest: High
+  expectations: 技術調整、設計、coding、risk、お客様との技術コミュニケーションを主導すること。
+  communication_strategy: deliverableと技術確認の直接窓口として対応します。
+  notes_vi: Tech Lead/BrSE phía VTI, phụ trách kỹ thuật và giao tiếp chính.
+- id: SH-008
+  type: Stakeholder
+  name: VTI_NHUT
+  email: nhut.nguyenminh@vti.com.vn
+  organization: VTI
+  role: BrSE支援；日本語・ベトナム語コミュニケーション支援
+  influence: Medium
+  interest: High
+  expectations: 要求確認、meeting支援、review、日本語・ベトナム語の橋渡しを行うこと。
+  communication_strategy: お客様連携ではSAMと連携し、確認事項を短周期で整理します。
+  notes_vi: BrSE hỗ trợ giao tiếp Nhật-Việt và làm rõ yêu cầu.
+- id: SH-009
+  type: Stakeholder
+  name: VTI_ヒエップ
+  email: hiep.nguyendinh@vti.com.vn
+  organization: VTI
+  role: VTI側PM；D8開発チーム調整担当
+  influence: High
+  interest: High
+  expectations: task、deadline、resource、blockerを把握し、開発チームを調整すること。
+  communication_strategy: 計画、daily follow-up、内部escalationで密に連携します。
+  notes_vi: PM phía VTI/D8, điều phối task, deadline và blocker.
+- id: SH-010
+  type: Stakeholder
+  name: Vu Van Canh
+  email: canh.vuvan@vti.com.vn
+  organization: VTI
+  role: 開発メンバー
+  influence: Medium
+  interest: High
+  expectations: 明確なtask、完了条件、迅速な技術feedbackを受けて実装すること。
+  communication_strategy: PM/SAM経由で同期し、技術確認が必要な場合は直接連携します。
+  notes_vi: Developer phía VTI, nhận task và xử lý feedback kỹ thuật.
+- id: SH-011
+  type: Stakeholder
+  name: Đỗ Hoàng Nam VTI.D6
+  email: nam.dohoang@vti.com.vn
+  organization: VTI
+  role: 開発メンバー
+  influence: Medium
+  interest: High
+  expectations: 明確なtask、完了条件、迅速な技術feedbackを受けて実装すること。
+  communication_strategy: PM/SAM経由で同期し、技術確認が必要な場合は直接連携します。
+  notes_vi: Developer phía VTI, nhận task và xử lý feedback kỹ thuật.

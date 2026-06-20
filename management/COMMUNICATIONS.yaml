@@ -1,0 +1,113 @@
+schema_version: 1
+meta:
+  source: google_sheets
+  sheet: Communications / 連絡管理
+  source_of_truth: google_sheets
+  read_only_export: true
+  generated_at: '2026-06-17T14:26:35+09:00'
+records:
+- id: COMM-001
+  type: Communication Rule
+  title: 'Sharp管理者向け報告: 菅原充仁 / 鎌田克'
+  expectations: 全体状況を報告し、scope/cost/scheduleに影響がある場合は意思決定またはエスカレーションを依頼します。
+  communication_channel: Teams / Email / 会議
+  frequency: 必要時またはmilestoneごと
+  format: 短い報告
+  owner: VTI_SAM
+  notes_vi: Báo cáo tổng thể cho nhóm quản lý Sharp.
+- id: COMM-002
+  type: Communication Rule
+  title: 'Sharp app/UI/UX/POS担当向け連携: 小林智幸 / 伊藤怜央馬'
+  expectations: 設計、flow、UI/UX、POS app挙動について主要確認を行います。
+  communication_channel: Teams / Email / 会議 / Backlog
+  frequency: 日次、週2-3回、または必要時
+  format: 設計memo、ticket、短い報告
+  owner: VTI_SAM
+  notes_vi: Trao đổi chính về thiết kế, flow, UI/UX và POS app.
+- id: COMM-003
+  type: Communication Rule
+  title: 'Japannet技術窓口向け連携: 小山 岳広'
+  expectations: 技術方針、integration point、難しい技術課題を確認します。
+  communication_channel: Teams / Email / 会議
+  frequency: 問題発生時
+  format: 技術memo、Q&A
+  owner: VTI_SAM
+  notes: 管理者向けよりも技術詳細に踏み込む場合があります。
+  notes_vi: Trao đổi kỹ thuật với đầu mối Japannet.
+- id: COMM-004
+  type: Communication Rule
+  title: VTI内部調整
+  expectations: deliverable、resource、risk、お客様feedback、next actionを内部で同期します。
+  communication_channel: 内部chat / 会議
+  frequency: 日次、週次、必要時
+  format: 内部status
+  owner: VTI_SAM
+  notes: お客様向けescalationと回答準備に使用します。
+  notes_vi: Điều phối nội bộ VTI về delivery, resource, risk và phản hồi KH.
+- id: COMM-005
+  type: Communication Rule
+  title: VTI開発チーム連携
+  expectations: task詳細、完了条件、blocker、review feedback、deadlineを共有します。
+  communication_channel: 内部chat / 会議 / Backlog
+  frequency: 日次、必要時
+  format: task memo、Backlog ticket、内部status
+  owner: VTI_SAM
+  notes: D8担当PMおよび開発メンバーとの連携。
+  notes_vi: Điều phối task triển khai trong nhóm VTI.
+- id: COMM-006
+  type: Escalation Rule
+  title: scope/cost/scheduleに大きな影響がある場合のescalation
+  expectations: '受信者: 顧客PM, 顧客担当, VTI窓口
+
+    回答目安: 1-2営業日以内'
+  communication_channel: Teams / Email / 会議
+  frequency: 発生時
+  format: 報告、会議
+  owner: VTI_SAM
+  notes: SAMが影響summaryを事前に準備します。
+  notes_vi: Escalation khi ảnh hưởng lớn tới scope/cost/schedule.
+- id: COMM-007
+  type: Escalation Rule
+  title: 技術方針またはintegration未確定によるblocker escalation
+  expectations: '受信者: 顧客担当, VTI責任者
+
+    回答目安: できるだけ早く、当週中優先'
+  communication_channel: Teams / 会議 / Backlog
+  frequency: blocker発生時
+  format: 選択肢提案
+  owner: VTI_SAM
+  notes: optionとrecommendationを短く準備します。
+  notes_vi: Escalation khi hướng kỹ thuật/integration gây blocker.
+- id: COMM-008
+  type: Escalation Rule
+  title: 2026-07-31前にUAT/review feedbackが集中するリスクのescalation
+  expectations: '受信者: Sharp主要窓口, VTI窓口, VTI責任者
+
+    回答目安: 関連UAT/review milestone前'
+  communication_channel: Teams / Email
+  frequency: UAT/review milestone前
+  format: リスク分類報告
+  owner: VTI_SAM
+  notes: critical/non-criticalを分類し、対応案を提示します。
+  notes_vi: Escalation nguy cơ feedback UAT/review dồn muộn.
+- id: COMM-009
+  type: Escalation Rule
+  title: offshore実装blockerまたはresource不足のescalation
+  expectations: '受信者: D8担当PM, VTI窓口, VTI責任者
+
+    回答目安: 当営業日中'
+  communication_channel: 内部chat / 会議
+  frequency: 発生時
+  format: 内部status
+  owner: VTI_SAM
+  notes: deadlineへ影響する前にblocker、owner、対応方針を明確にします。
+  notes_vi: Escalation nội bộ khi offshore bị block hoặc thiếu resource.
+- id: COMM-010
+  type: Key Notes
+  title: Sharp窓口とJapannet技術窓口の使い分け
+  expectations: '管理者向け内容と技術設計内容を分け、深すぎるcode説明を避けながら判断に必要な情報を提示します。
+
+    対応: お客様向けには分かりやすいbasic design/flowを使い、詳細技術はinternal/design noteで管理します。'
+  owner: VTI_SAM
+  notes: 説明粒度を誤るとreview長期化または合意不足につながる可能性があります。
+  notes_vi: Phân biệt nội dung quản lý Sharp và trao đổi kỹ thuật Japannet.

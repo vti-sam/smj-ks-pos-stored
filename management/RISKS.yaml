@@ -1,0 +1,138 @@
+schema_version: 1
+meta:
+  source: google_sheets
+  sheet: Risks / リスク
+  source_of_truth: google_sheets
+  read_only_export: true
+  generated_at: '2026-06-17T14:26:35+09:00'
+records:
+- id: R-001
+  risk_type: Technical
+  title: KSNEWSYS-424は単純移行ではなくStrategy構成への再設計が必要
+  description: KSNEWSYS-424は単純な1対1移行ではなく、Device/Receiptの責務分離とStrategy構成への再設計が必要です。
+  status: Open
+  priority: Critical
+  owner: VTI_SAM
+  probability: High
+  impact: High
+  mitigation: 対象資産、Device/Receipt責務、代表Adapter pathを早期に確定し、必要な決定事項を記録します。
+  contingency: 計画を超える場合は、non-critical範囲をdeferredまたはchange requestとして分離します。
+  related_items: S-424, OI-001
+  notes_vi: KSNEWSYS-424 cần redesign theo Strategy, không phải migration đơn giản.
+- id: R-002
+  risk_type: Technical
+  title: Device/OCX/terminal環境によりテスト結果が不安定になる可能性
+  description: Device、OCX、terminal環境の差異により、テスト結果が不安定になる可能性があります。
+  status: Open
+  priority: High
+  owner: VTI_SAM
+  probability: Medium
+  impact: High
+  mitigation: 代表デバイス／環境をお客様と早期に確認し、ログとエビデンスを残し、unit checkとactual device checkを分けて扱います。
+  contingency: 十分な環境がない場合は制約事項として記録し、UAT条件をお客様／onsiteに確認します。
+  related_items: S-424, OI-001
+  notes_vi: Môi trường Device/OCX/terminal có thể làm kết quả test không ổn định.
+- id: R-003
+  risk_type: Scope
+  title: 0.50MMの軽微調整範囲を超えるscope creep
+  description: 0.50MMの軽微な関連調整範囲を超えるscope creepが発生する可能性があります。
+  status: Open
+  priority: High
+  owner: VTI_SAM
+  probability: Medium
+  impact: High
+  mitigation: WBSとDecisionsでchange controlを適用し、見積外の大きな変更を自動吸収しません。
+  contingency: impact analysisを作成し、追加工数またはscope trade-offを提案します。
+  related_items: OI-004
+  notes_vi: Scope creep có thể vượt phần minor adjustment 0.50MM.
+- id: R-004
+  risk_type: Schedule
+  title: 7月末にUAT/レビューfeedbackが集中するリスク
+  description: UATまたはレビューfeedbackが7月後半に集中し、修正期間が不足する可能性があります。
+  status: Open
+  priority: High
+  owner: VTI_SAM
+  probability: Medium
+  impact: High
+  mitigation: 2026-07-15をcheckpointとしてお客様と調整し、7月はdaily triageで優先度を整理します。
+  contingency: non-critical項目はdeferし、fix/workaround/release noteの判断を依頼します。
+  related_items: OI-002, MS-003, MS-004
+  notes_vi: Feedback UAT/review có nguy cơ dồn vào cuối tháng 7.
+- id: R-005
+  risk_type: Cost
+  title: 0.40MM吸収により実質bufferが薄い
+  description: 0.40MMをVTI側で吸収しているため、実質的なcost/schedule bufferが薄くなっています。
+  status: Open
+  priority: Medium
+  owner: VTI_SAM
+  probability: Medium
+  impact: Medium
+  mitigation: actual/remainingを週次で確認し、deadline基準でrisk/actionを優先します。
+  contingency: 早めにescalateし、scope調整またはresource allocationを検討します。
+  related_items: OI-004
+  notes_vi: Phần hấp thụ 0.40MM làm buffer thực tế mỏng.
+- id: R-006
+  risk_type: Technical
+  title: KSNEWSYS-426 Sentry DSNがDebug確認用に一時hardcodeされている
+  description: KSNEWSYS-426のSentry基盤で、Debug確認用のDSNが一時的にhardcodeされています。
+  status: Open
+  priority: High
+  owner: VTI_SAM
+  probability: Medium
+  impact: High
+  mitigation: test-onlyであることを明記し、release前にfallback DSNを削除してKSPOS_SENTRY_DSNまたはruntime secretを使用します。
+  contingency: releaseをblockし、設定hotfixを完了してからdeliverします。
+  related_items: S-426, OI-003
+  notes_vi: Sentry DSN hardcode chỉ được phép dùng tạm cho Debug test.
+- id: R-007
+  risk_type: Technical
+  title: masking regexのfalse positive/false negativeリスク
+  description: 実際のログ形式が増えた場合、masking regexにfalse positiveまたはfalse negativeが発生する可能性があります。
+  status: Open
+  priority: Medium
+  owner: VTI_SAM
+  probability: Medium
+  impact: Medium
+  mitigation: 現時点のregex baseを維持し、実フロー確定後にkey-based maskingとunit testを追加します。
+  contingency: 一時的にbody/raw objectのログ出力を制限し、dashboard eventサンプルをレビューします。
+  related_items: S-426, OI-003
+  notes_vi: Regex masking có thể sai khi format log thực tế thay đổi.
+- id: R-008
+  risk_type: Technical
+  title: Sentry基盤が実API/device commandに未接続
+  description: Sentry基盤は現時点でlifecycle/navigation/manual event中心で、実API/device commandにはまだhookされていません。
+  status: Open
+  priority: Medium
+  owner: VTI_SAM
+  probability: Medium
+  impact: Medium
+  mitigation: 現scopeを明確に説明し、実フロー確定後にAPI/device hookを追加します。
+  contingency: HttpClient handlerまたはdevice adapter base向けの追加Backlog/actionを作成します。
+  related_items: S-426, OI-003
+  notes_vi: Sentry base chưa hook vào API/device command thật.
+- id: R-009
+  risk_type: Technical
+  title: Sentry資料・code review遅延によるcoding/unit test遅延
+  description: お客様のSentry資料またはcode reviewが遅れると、coding/unit testへの移行が遅れる可能性があります。
+  status: Open
+  priority: Medium
+  owner: VTI_SAM
+  probability: Medium
+  impact: Medium
+  mitigation: 短く確認しやすい資料を送付し、basic design/class designの早期合意を促します。
+  contingency: feedbackが遅い場合は争点の少ない部分を先行し、必要に応じてchange requestに分離します。
+  related_items: S-426, OI-003
+  notes_vi: KH review Sentry muộn có thể làm chậm coding/unit test.
+- id: R-010
+  risk_type: Technical
+  title: crash復元時のSQLite破損またはschema差異によるboot loopリスク
+  description: crash後の復元時にSQLite local fileが破損している、またはapp upgradeでDB schemaが変わっている場合、restore失敗によりboot loopが発生する可能性があります。
+  status: Open
+  priority: High
+  owner: VTI_SAM
+  probability: Medium
+  impact: High
+  mitigation: SQLite schema versionを確認し、corruptionまたはversion不一致時にlocal DBをresetできる設計とunit testを用意します。
+  contingency: 復元できない場合はappをdefault状態へresetし、再loginを促します。
+  related_items: S-427, T-427-01, T-427-02, T-427-03, T-427-04, T-427-05, T-427-06, T-427-07
+  notes_vi: SQLite hỏng hoặc lệch schema có thể gây boot loop khi restore sau crash.

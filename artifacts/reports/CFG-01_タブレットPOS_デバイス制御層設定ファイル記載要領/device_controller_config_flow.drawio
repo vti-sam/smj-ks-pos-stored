@@ -1,0 +1,101 @@
+<mxfile host="Electron">
+  <diagram name="device_controller_config_flow" id="dcc_flow_01">
+    <mxGraphModel dx="1414" dy="841" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="node_start" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#FFFFFF;strokeColor=#3B82F6;strokeWidth=2;fontColor=#1E3A8A;fontStyle=1;fontSize=11;" value="タブレットPOSアプリを起動する" vertex="1">
+          <mxGeometry height="44" width="250" x="245" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="node_check" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#475569;strokeWidth=2;fontColor=#0F172A;fontStyle=1;fontSize=10;verticalAlign=middle;" value="端末別の設定ファイルがあるか" vertex="1">
+          <mxGeometry height="80" width="300" x="220" y="195" as="geometry" />
+        </mxCell>
+        <mxCell id="node_runtime" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#94A3B8;strokeWidth=2;fontColor=#1E293B;fontStyle=0;fontSize=10;" value="端末別の設定を使用する&lt;br/&gt;&lt;font color=&quot;#6B7280&quot;&gt;AppData/device_controller_config.json&lt;/font&gt;" vertex="1">
+          <mxGeometry height="54" width="230" x="50" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="node_default" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#94A3B8;strokeWidth=2;fontColor=#1E293B;fontStyle=0;fontSize=10;" value="アプリ同梱の初期設定を使用する&lt;br/&gt;&lt;font color=&quot;#6B7280&quot;&gt;Resources/Raw/device_controller_config.json&lt;/font&gt;" vertex="1">
+          <mxGeometry height="54" width="240" x="460" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="node_read" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#94A3B8;strokeWidth=2;fontColor=#1E293B;fontStyle=0;fontSize=11;" value="端末側の設定内容を読み取る" vertex="1">
+          <mxGeometry height="44" width="250" x="245" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="node_validate" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#94A3B8;strokeWidth=2;fontColor=#1E293B;fontStyle=0;fontSize=11;" value="使用する機器候補と有効デバイスを確認する" vertex="1">
+          <mxGeometry height="44" width="250" x="245" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="node_apply" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#94A3B8;strokeWidth=2;fontColor=#1E293B;fontStyle=0;fontSize=11;" value="デバイス制御で使用できる状態にする" vertex="1">
+          <mxGeometry height="44" width="250" x="245" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="node_ready" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#FFFFFF;strokeColor=#10B981;strokeWidth=2;fontColor=#065F46;fontStyle=1;fontSize=11;" value="端末側のデバイス制御準備完了" vertex="1">
+          <mxGeometry height="44" width="250" x="245" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="node_error" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#EF4444;strokeWidth=2;fontColor=#991B1B;fontStyle=0;fontSize=10;" value="設定に問題がある場合&lt;br/&gt;調査用ログを出力する" vertex="1">
+          <mxGeometry height="54" width="190" x="595" y="478" as="geometry" />
+        </mxCell>
+        <mxCell id="e_start_check" edge="1" parent="1" source="node_start" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;" target="node_check">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_check_runtime" edge="1" parent="1" source="node_check" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;fontColor=#475569;fontSize=10;labelBackgroundColor=#ffffff;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="node_runtime" value="ある">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="220" y="235" />
+              <mxPoint x="165" y="235" />
+              <mxPoint x="165" y="330" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_check_default" edge="1" parent="1" source="node_check" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;fontColor=#475569;fontSize=10;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="node_default" value="ない">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="520" y="235" />
+              <mxPoint x="580" y="235" />
+              <mxPoint x="580" y="330" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_runtime_read" edge="1" parent="1" source="node_runtime" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="node_read">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="165" y="414" />
+              <mxPoint x="165" y="462" />
+              <mxPoint x="245" y="462" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_default_read" edge="1" parent="1" source="node_default" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="node_read">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="580" y="414" />
+              <mxPoint x="580" y="462" />
+              <mxPoint x="495" y="462" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_read_validate" edge="1" parent="1" source="node_read" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;" target="node_validate">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_validate_apply" edge="1" parent="1" source="node_validate" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;" target="node_apply">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_apply_ready" edge="1" parent="1" source="node_apply" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;" target="node_ready">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_read_error" edge="1" parent="1" source="node_read" style="rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#EF4444;strokeWidth=2;dashed=1;dashPattern=8 4;fontColor=#991B1B;fontSize=9;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" target="node_error" value="読込不可 / 記載不正">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="565" y="462" />
+              <mxPoint x="565" y="492" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_validate_error" edge="1" parent="1" source="node_validate" style="rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#EF4444;strokeWidth=2;dashed=1;dashPattern=8 4;fontColor=#991B1B;fontSize=9;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" target="node_error" value="ID不一致 / OS不一致">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="565" y="552" />
+              <mxPoint x="565" y="519" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

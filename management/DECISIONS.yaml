@@ -1,0 +1,120 @@
+schema_version: 1
+meta:
+  source: google_sheets
+  sheet: Decisions / 決定事項
+  source_of_truth: google_sheets
+  read_only_export: true
+  generated_at: '2026-06-17T14:26:35+09:00'
+records:
+- id: DEC-2026-05-22-GRAPHIFY-CODEGRAPH
+  title: PM-control graphにGraphify、sourcesにCodeGraphを使用する
+  status: Closed
+  date: 46164
+  context: PM-controlのmemory/managementとsource codeを、それぞれ適切なgraphで参照する必要があります。
+  decision: PM-control graphにはGraphifyを使用し、sources/配下のsource codeにはCodeGraphを使用します。
+  reason: 管理知識graphとcode dependency graphを分け、誤った文脈でlookupしないようにするためです。
+  impact: 現在のskill-first routing方針の参照決定として扱います。
+  related_items: DEC-2026-05-23-YAML-MANAGEMENT, DEC-2026-06-04-SKILL-FIRST-ROUTING
+  notes_vi: Dùng Graphify cho PM-control graph và CodeGraph cho source code.
+- id: DEC-2026-05-23-YAML-MANAGEMENT
+  title: 管理YAMLをAI/Codex向けread-only cacheとして使用する
+  status: Confirmed
+  date: 46165
+  context: Google Sheetsがsource of truthですが、agentには高速で安定したrepo内contextが必要です。
+  decision: management/直下の大文字YAMLをAI/Codex/Graphify向けread-only export/cacheとして使用します。
+  reason: textとして読みやすく、stable IDを持ち、Google Sheetsから再生成できるためです。
+  impact: YAMLをsource of truthとして直接更新せず、変更はGoogle Sheetsまたは明確なregenerate workflowを通します。
+  related_items: PROJECT-SCOPE-CONFIRMATION
+  notes_vi: Dùng YAML management làm cache read-only cho AI/Codex.
+- id: DEC-2026-05-21-COST-BASELINE
+  title: 見積baselineを8.40MM計算／8.00MM提示として管理する
+  status: Confirmed
+  date: 46163
+  context: 2026-07-31までのscope/cost/scheduleを追跡するbaselineが必要です。
+  decision: 8.40MM calculatedと8.00MM offeredをbaselineとし、0.40MM差分は現scope内でVTIが吸収します。
+  reason: scope creep、buffer不足、estimate外の発生を検知する基準を作るためです。
+  impact: actual/remainingとscope発生はWBS/Risksと合わせて追跡し、大きな変更は自動吸収しません。
+  related_items: EFFORT-SUMMARY, COST-001, OI-004, R-003, R-005
+  notes_vi: Quản lý baseline 8.40MM calculated / 8.00MM offered.
+- id: DEC-2026-05-21-CHANGE-CONTROL
+  title: 大きなscope変更は影響分析を必須とする
+  status: Confirmed
+  date: 46163
+  context: 現scopeは0.40MM差分を吸収しており、bufferが薄い状態です。
+  decision: minor related adjustmentは共通管理に含めますが、major spec/scope changeはimpact analysisまたはchange requestに分離します。
+  reason: 大きな発生を0.40MM吸収分へ入れてcost/schedule baselineを崩さないためです。
+  impact: 変更発生時はWBS open itemとriskにowner、deadline、関連riskを記録します。
+  related_items: OI-004, R-003, R-005
+  notes_vi: Scope change lớn phải tách impact analysis/change request.
+- id: DEC-2026-05-23-KSNEWSYS-424-STRATEGY-ADAPTER
+  title: KSNEWSYS-424はVB 1対1変換ではなくStrategy/Adapter再設計を採用する
+  status: Confirmed
+  date: 46165
+  context: Device/Receiptのレガシー資産はVB/OCXとterminal挙動に依存しており、単純な行単位変換は高リスクです。
+  decision: 代表的なDevice/Receipt経路をStrategy/Adapter構成で実装し、全面移行前にInterface境界を明確にします。
+  reason: legacy実装への密結合を下げ、review資料とtest evidenceを整理しやすくするためです。
+  impact: target asset/device/OCX一覧とInterface境界は、完全実装前にOI-001として継続追跡します。
+  related_items: S-424, OI-001, R-001, R-002
+  notes_vi: KSNEWSYS-424 dùng Strategy/Adapter, không chuyển đổi VB 1-1.
+- id: DEC-2026-05-23-SENTRY-DSN-TEST-ONLY
+  title: Sentry DSN hardcodeはDebug確認専用とする
+  status: Confirmed
+  date: 46165
+  context: KSNEWSYS-426のSentry基盤では、一時DSNを使ってDebug環境を確認しています。
+  decision: hardcode/fallback DSNはtest-onlyとし、release前にKSPOS_SENTRY_DSNまたはruntime secretへ切り替えてfallbackを削除します。
+  reason: credential漏洩やproduction eventの誤送信を防ぐためです。
+  impact: DSN整理と設定確認が完了するまでreleaseをblockします。
+  related_items: S-426, OI-003, R-006
+  notes_vi: Sentry DSN hardcode chỉ dùng test, release phải đổi sang secret/config.
+- id: DEC-2026-05-28-KSNEWSYS-215-TOOLTIP-CLICK
+  title: 一覧画面のToolTipとclick event flowをShared Command方式で確定する
+  status: Confirmed
+  date: 46170
+  context: .NET MAUIでは子controlのclickで親Rowのfocusが外れるため、Icon clickとRow clickを区別する必要があります。JNTはtooltip情報のSQLite保存を要求しています。
+  decision: Shared Command + CommandParameterでRowまたはIconを渡し、ViewModel側でclick動作を判定します。Icon click時はRowへfocusを戻してToolTipを表示し、ToolTip
+    dataはSQLiteから起動時にmemory cacheへloadします。
+  reason: iOS/Windows Native Handlersへの深い介入を避け、MAUI update時のリスクを下げ、SQLite I/Oを抑えてUI応答を改善するためです。
+  impact: 2026-04-09にSVNへcode修正をmergeし、tooltip_sqlite_cache_architecture_v2.mdを引き渡し資料に統合済みです。
+  related_items: S-424, KSNEWSYS-215
+  notes_vi: Chốt tooltip click flow bằng Shared Command và cache SQLite vào memory.
+- id: DEC-2026-05-28-KSNEWSYS-399-SCREEN-RESOLUTION
+  title: 画面解像度ごとの表示方針を確定する
+  status: Confirmed
+  date: 46170
+  context: POS appはWindows RZ-476の4:3画面とiPad miniの両方で動作する必要があり、比率差によるUI崩れを避ける必要があります。
+  decision: Windows RZ-476はFull screenで1024x768固定layoutを中央配置し、周囲を余白にします。iPadはMAUI標準のresponsive動作を使用します。
+  reason: 複雑なdynamic UI開発と検証costを抑えつつ、legacy Windows端末での表示安定性を確保するためです。
+  impact: 2026-05-19にcodeをmaster branchへmerge済みです。
+  related_items: S-424, KSNEWSYS-399
+  notes_vi: Windows dùng layout 1024x768 cố định, iPad dùng responsive MAUI.
+- id: DEC-2026-05-28-CONFIG-JSON-DEVICE-MANAGEMENT
+  title: device設定をconfig.jsonで集中管理する
+  status: Confirmed
+  date: 46170
+  context: device control layerではIPやCOM portなどをcodeに依存せず柔軟に設定する必要があります。
+  decision: DeviceCtrl層にconfig.jsonを配置し、app起動時にserverから取得・更新します。物理port変更時はconfig.jsonを更新します。
+  reason: device設定値を集中管理し、店舗ごとのhardware/environment変更時にrebuild/release不要にするためです。
+  impact: config.json設計を確定し、2026-04-22にprototype codeを更新済みです。
+  related_items: S-424, KSNEWSYS-379, KSNEWSYS-380, KSNEWSYS-200
+  notes_vi: Quản lý cấu hình thiết bị POS tập trung bằng config.json.
+- id: DEC-2026-05-28-EPSON-PRINTER-CONNECTION-TETHERING
+  title: Epson TM-m30III/TM-m55のSB-H50接続問題はNetwork Tethering無効化で対応する
+  status: Confirmed
+  date: 46170
+  context: Epson TM-m30III/TM-m55がSB-H50 hub経由で認識されない問題がありました。
+  decision: Epson printerのWeb ConfigでNetwork Tetheringを無効化します。
+  reason: Network Tethering有効時、printerがUSB printerではなくnetwork deviceとして認識され、SB-H50が認識できなくなるためです。
+  impact: 検証成功済みで、device setup guideに記録済みです。
+  related_items: S-424, KSNEWSYS-196
+  notes_vi: Tắt Network Tethering để máy in Epson nhận qua SB-H50.
+- id: DEC-2026-06-04-SKILL-FIRST-ROUTING
+  title: PM-controlのknowledge/source code処理はskill-first routingとする
+  status: Confirmed
+  date: 46177
+  context: repo内workflowでは読み書き範囲を制御し、task外context拡張を避け、verify stepを明確にする必要があります。
+  decision: 長期知識はknowledge/に保存してknowledge-memory-syncで扱い、source codeはsource-code-intelでscoped search、直接file read、build/test/compiler
+    evidenceを使います。
+  reason: source-of-truthを明確にし、agentがtask scopeに合うworkflowを選べるようにするためです。
+  impact: agentは内部workflow前に適切なskillを読み、read-back、rtk rg、build/test、source-of-truthでoutputをverifyします。
+  related_items: DEC-2026-05-22-GRAPHIFY-CODEGRAPH, DEC-2026-05-23-YAML-MANAGEMENT
+  notes_vi: Skill-first routing cho knowledge/source code trong PM-control.

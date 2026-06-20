@@ -1,0 +1,478 @@
+{
+  "spreadsheet_id": "1cNCS6-y0tX7hkpZ2Y26UfVVPGtFOOxQOwd5AVfUgMpA",
+  "last_synced_at": "2026-06-17T14:26:35+09:00",
+  "change_detection": "full_fetch",
+  "last_modified_time": null,
+  "change_history": [
+    {
+      "timestamp": "2026-06-16T23:52:45+09:00",
+      "changes": [
+        "[Kế hoạch liên lạc / 連絡管理] Cập nhật record: COMM-001 (Trường: communication_channel, expectations, format, frequency, notes_vi, owner, title)",
+        "[Kế hoạch liên lạc / 連絡管理] Cập nhật record: COMM-002 (Trường: communication_channel, expectations, format, frequency, notes_vi, owner, title)",
+        "[Kế hoạch liên lạc / 連絡管理] Cập nhật record: COMM-003 (Trường: communication_channel, expectations, format, frequency, notes, notes_vi, owner, title)",
+        "[Kế hoạch liên lạc / 連絡管理] Cập nhật record: COMM-004 (Trường: communication_channel, expectations, format, frequency, notes, notes_vi, owner, title)",
+        "[Kế hoạch liên lạc / 連絡管理] Cập nhật record: COMM-005 (Trường: communication_channel, expectations, format, frequency, notes, notes_vi, owner, title)",
+        "[Kế hoạch liên lạc / 連絡管理] Cập nhật record: COMM-006 (Trường: communication_channel, expectations, format, frequency, notes, notes_vi, owner, title)",
+        "[Kế hoạch liên lạc / 連絡管理] Cập nhật record: COMM-007 (Trường: communication_channel, expectations, format, frequency, notes, notes_vi, owner, title)",
+        "[Kế hoạch liên lạc / 連絡管理] Cập nhật record: COMM-008 (Trường: expectations, format, frequency, notes, notes_vi, owner, title)",
+        "[Kế hoạch liên lạc / 連絡管理] Cập nhật record: COMM-009 (Trường: communication_channel, expectations, format, frequency, notes, notes_vi, owner, title)",
+        "[Kế hoạch liên lạc / 連絡管理] Cập nhật record: COMM-010 (Trường: expectations, notes, notes_vi, owner, title)"
+      ]
+    },
+    {
+      "timestamp": "2026-06-16T23:52:38+09:00",
+      "changes": [
+        "[Bên liên quan / 関係者] Cập nhật record: SH-001 (Trường: communication_strategy, expectations, notes_vi, role)",
+        "[Bên liên quan / 関係者] Cập nhật record: SH-002 (Trường: communication_strategy, expectations, notes_vi, role)",
+        "[Bên liên quan / 関係者] Cập nhật record: SH-003 (Trường: communication_strategy, expectations, notes_vi, role)",
+        "[Bên liên quan / 関係者] Cập nhật record: SH-004 (Trường: communication_strategy, expectations, notes_vi, role)",
+        "[Bên liên quan / 関係者] Cập nhật record: SH-005 (Trường: communication_strategy, expectations, notes_vi, role)",
+        "[Bên liên quan / 関係者] Cập nhật record: SH-006 (Trường: communication_strategy, expectations, notes_vi, role)",
+        "[Bên liên quan / 関係者] Cập nhật record: SH-007 (Trường: communication_strategy, expectations, notes_vi, role)",
+        "[Bên liên quan / 関係者] Cập nhật record: SH-008 (Trường: communication_strategy, expectations, notes_vi, role)",
+        "[Bên liên quan / 関係者] Cập nhật record: SH-009 (Trường: communication_strategy, expectations, notes_vi, role)",
+        "[Bên liên quan / 関係者] Cập nhật record: SH-010 (Trường: communication_strategy, expectations, notes_vi, role)",
+        "[Bên liên quan / 関係者] Cập nhật record: SH-011 (Trường: communication_strategy, expectations, notes_vi, role)"
+      ]
+    },
+    {
+      "timestamp": "2026-06-16T23:52:31+09:00",
+      "changes": [
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-05-22-GRAPHIFY-CODEGRAPH (Trường: context, decision, impact, notes_vi, reason, title)",
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-05-23-YAML-MANAGEMENT (Trường: context, decision, impact, notes_vi, reason, title)",
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-05-21-COST-BASELINE (Trường: context, decision, impact, notes_vi, reason, title)",
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-05-21-CHANGE-CONTROL (Trường: context, decision, impact, notes_vi, reason, title)",
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-05-23-KSNEWSYS-424-STRATEGY-ADAPTER (Trường: context, decision, impact, notes_vi, reason, title)",
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-05-23-SENTRY-DSN-TEST-ONLY (Trường: context, decision, impact, notes_vi, reason, title)",
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-05-28-KSNEWSYS-215-TOOLTIP-CLICK (Trường: context, decision, impact, notes_vi, reason, title)",
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-05-28-KSNEWSYS-399-SCREEN-RESOLUTION (Trường: context, decision, impact, notes_vi, reason, title)",
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-05-28-CONFIG-JSON-DEVICE-MANAGEMENT (Trường: context, decision, impact, notes_vi, reason, title)",
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-05-28-EPSON-PRINTER-CONNECTION-TETHERING (Trường: context, decision, impact, notes_vi, reason, title)",
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-06-04-SKILL-FIRST-ROUTING (Trường: context, decision, impact, notes_vi, reason, title)"
+      ]
+    },
+    {
+      "timestamp": "2026-06-16T23:52:23+09:00",
+      "changes": [
+        "[Danh sách rủi ro / リスク] Cập nhật record: R-001 (Trường: contingency, description, mitigation, notes_vi, title)",
+        "[Danh sách rủi ro / リスク] Cập nhật record: R-002 (Trường: contingency, description, mitigation, notes_vi, title)",
+        "[Danh sách rủi ro / リスク] Cập nhật record: R-003 (Trường: contingency, description, mitigation, notes_vi, title)",
+        "[Danh sách rủi ro / リスク] Cập nhật record: R-004 (Trường: contingency, description, mitigation, notes_vi, title)",
+        "[Danh sách rủi ro / リスク] Cập nhật record: R-005 (Trường: contingency, description, mitigation, notes_vi, title)",
+        "[Danh sách rủi ro / リスク] Cập nhật record: R-006 (Trường: contingency, description, mitigation, notes_vi, title)",
+        "[Danh sách rủi ro / リスク] Cập nhật record: R-007 (Trường: contingency, description, mitigation, notes_vi, title)",
+        "[Danh sách rủi ro / リスク] Cập nhật record: R-008 (Trường: contingency, description, mitigation, notes_vi, title)",
+        "[Danh sách rủi ro / リスク] Cập nhật record: R-009 (Trường: contingency, description, mitigation, notes_vi, title)",
+        "[Danh sách rủi ro / リスク] Cập nhật record: R-010 (Trường: contingency, description, mitigation, notes_vi, title)"
+      ]
+    },
+    {
+      "timestamp": "2026-06-16T23:46:46+09:00",
+      "changes": [
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-05-22-GRAPHIFY-CODEGRAPH (Trường: date ('2026-05-22' -> '46164'))",
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-05-23-YAML-MANAGEMENT (Trường: date ('2026-05-23' -> '46165'))",
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-05-21-COST-BASELINE (Trường: date ('2026-05-21' -> '46163'))",
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-05-21-CHANGE-CONTROL (Trường: date ('2026-05-21' -> '46163'))",
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-05-23-KSNEWSYS-424-STRATEGY-ADAPTER (Trường: date ('2026-05-23' -> '46165'))",
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-05-23-SENTRY-DSN-TEST-ONLY (Trường: date ('2026-05-23' -> '46165'))",
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-05-28-KSNEWSYS-215-TOOLTIP-CLICK (Trường: date ('2026-05-28' -> '46170'))",
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-05-28-KSNEWSYS-399-SCREEN-RESOLUTION (Trường: date ('2026-05-28' -> '46170'))",
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-05-28-CONFIG-JSON-DEVICE-MANAGEMENT (Trường: date ('2026-05-28' -> '46170'))",
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-05-28-EPSON-PRINTER-CONNECTION-TETHERING (Trường: date ('2026-05-28' -> '46170'))",
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-06-04-SKILL-FIRST-ROUTING (Trường: date ('2026-06-04' -> '46177'))"
+      ]
+    },
+    {
+      "timestamp": "2026-06-16T23:34:38+09:00",
+      "changes": [
+        "[Danh sách công việc / WBS] Cập nhật record: S-424 (Trường: definition_of_done, description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: S-426 (Trường: definition_of_done, description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: S-427 (Trường: definition_of_done, description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: S-COM (Trường: definition_of_done, description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: OI-001 (Trường: description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: OI-002 (Trường: description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: OI-003 (Trường: description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: OI-004 (Trường: description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-01 (Trường: definition_of_done, description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-02 (Trường: definition_of_done, description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-03 (Trường: definition_of_done, description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-04 (Trường: definition_of_done, description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-05 (Trường: definition_of_done, description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-06 (Trường: definition_of_done, description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-07 (Trường: definition_of_done, description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-08 (Trường: definition_of_done, description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-09 (Trường: definition_of_done, description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-10 (Trường: definition_of_done, description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-11 (Trường: definition_of_done, description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-12 (Trường: definition_of_done, description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-01 (Trường: definition_of_done, description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-02 (Trường: definition_of_done, description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-03 (Trường: definition_of_done, description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-04 (Trường: definition_of_done, description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-05 (Trường: definition_of_done, description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-06 (Trường: definition_of_done, description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-07 (Trường: definition_of_done, description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-01 (Trường: definition_of_done, description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-02 (Trường: definition_of_done, description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-03 (Trường: definition_of_done, description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-04 (Trường: definition_of_done, description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-05 (Trường: definition_of_done, description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-06 (Trường: definition_of_done, description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-07 (Trường: definition_of_done, description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-C-01 (Trường: definition_of_done, description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-C-02 (Trường: definition_of_done, description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-C-03 (Trường: definition_of_done, description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-13 (Trường: definition_of_done, description, notes, notes_vi, title, type)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-442-01 (Trường: definition_of_done, description, notes, notes_vi, title, type)"
+      ]
+    },
+    {
+      "timestamp": "2026-06-16T23:31:26+09:00",
+      "changes": [
+        "[Danh sách công việc / WBS] Cập nhật record: S-424 (Trường: start_date ('2026-05-21' -> '46163'), deadline ('2026-06-30' -> '46203'))",
+        "[Danh sách công việc / WBS] Cập nhật record: S-426 (Trường: start_date ('2026-05-21' -> '46163'), deadline ('2026-06-30' -> '46203'))",
+        "[Danh sách công việc / WBS] Cập nhật record: S-427 (Trường: start_date ('2026-05-21' -> '46163'), deadline ('2026-06-30' -> '46203'))",
+        "[Danh sách công việc / WBS] Cập nhật record: S-COM (Trường: start_date ('2026-05-21' -> '46163'), deadline ('2026-07-31' -> '46234'))",
+        "[Danh sách công việc / WBS] Cập nhật record: OI-001 (Trường: start_date ('2026-05-21' -> '46163'), deadline ('2026-05-31' -> '46173'))",
+        "[Danh sách công việc / WBS] Cập nhật record: OI-002 (Trường: start_date ('2026-05-21' -> '46163'), deadline ('2026-07-01' -> '46204'), status ('Open' -> 'Not Started'))",
+        "[Danh sách công việc / WBS] Cập nhật record: OI-003 (Trường: start_date ('2026-05-23' -> '46165'), deadline ('2026-05-31' -> '46173'))",
+        "[Danh sách công việc / WBS] Cập nhật record: OI-004 (Trường: start_date ('2026-05-21' -> '46163'), deadline ('2026-07-31' -> '46234'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-01 (Trường: start_date ('2026-05-21' -> '46163'), deadline ('2026-06-30' -> '46203'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-02 (Trường: start_date ('2026-05-21' -> '46163'), deadline ('2026-06-30' -> '46203'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-03 (Trường: start_date ('2026-05-21' -> '46163'), deadline ('2026-06-30' -> '46203'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-04 (Trường: start_date ('2026-05-21' -> '46163'), deadline ('2026-06-30' -> '46203'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-05 (Trường: start_date ('2026-05-21' -> '46163'), deadline ('2026-06-30' -> '46203'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-06 (Trường: start_date ('2026-05-21' -> '46163'), deadline ('2026-06-30' -> '46203'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-07 (Trường: start_date ('2026-06-01' -> '46174'), deadline ('2026-07-31' -> '46234'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-08 (Trường: start_date ('2026-06-01' -> '46174'), deadline ('2026-06-30' -> '46203'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-09 (Trường: start_date ('2026-06-01' -> '46174'), deadline ('2026-07-31' -> '46234'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-10 (Trường: start_date ('2026-05-21' -> '46163'), deadline ('2026-06-30' -> '46203'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-11 (Trường: start_date ('2026-05-21' -> '46163'), deadline ('2026-07-31' -> '46234'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-12 (Trường: start_date ('2026-05-21' -> '46163'), deadline ('2026-07-31' -> '46234'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-01 (Trường: start_date ('2026-05-21' -> '46163'), deadline ('2026-06-30' -> '46203'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-02 (Trường: start_date ('2026-05-21' -> '46163'), deadline ('2026-06-30' -> '46203'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-03 (Trường: start_date ('2026-05-21' -> '46163'), deadline ('2026-06-30' -> '46203'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-04 (Trường: start_date ('2026-05-21' -> '46163'), deadline ('2026-06-30' -> '46203'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-05 (Trường: start_date ('2026-05-21' -> '46163'), deadline ('2026-06-30' -> '46203'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-06 (Trường: start_date ('2026-05-21' -> '46163'), deadline ('2026-07-31' -> '46234'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-07 (Trường: start_date ('2026-05-21' -> '46163'), deadline ('2026-07-31' -> '46234'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-01 (Trường: start_date ('2026-05-21' -> '46163'), deadline ('2026-06-30' -> '46203'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-02 (Trường: start_date ('2026-05-21' -> '46163'), deadline ('2026-06-30' -> '46203'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-03 (Trường: start_date ('2026-05-21' -> '46163'), deadline ('2026-06-30' -> '46203'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-04 (Trường: start_date ('2026-05-21' -> '46163'), deadline ('2026-06-30' -> '46203'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-05 (Trường: start_date ('2026-05-21' -> '46163'), deadline ('2026-06-30' -> '46203'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-06 (Trường: start_date ('2026-05-21' -> '46163'), deadline ('2026-07-31' -> '46234'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-07 (Trường: start_date ('2026-05-21' -> '46163'), deadline ('2026-07-31' -> '46234'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-C-01 (Trường: start_date ('2026-05-21' -> '46163'), deadline ('2026-07-31' -> '46234'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-C-02 (Trường: start_date ('2026-05-21' -> '46163'), deadline ('2026-07-31' -> '46234'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-C-03 (Trường: start_date ('2026-05-21' -> '46163'), deadline ('2026-07-31' -> '46234'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-13 (Trường: start_date ('2026-05-27' -> '46169'), deadline ('2026-06-30' -> '46203'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-442-01 (Trường: start_date ('2026-05-28' -> '46170'), deadline ('2026-06-30' -> '46203'))"
+      ]
+    },
+    {
+      "timestamp": "2026-06-04T11:54:45+09:00",
+      "changes": [
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-05-22-GRAPHIFY-CODEGRAPH (Trường: impact ('Không còn áp dụng từ 2026-06-04; thay bằng DEC-2026-06-04-SKILL-FIRST-HEAVY-MCP.' -> 'Tham chiếu quyết định skill-first routing cho workflow hiện tại.'))"
+      ]
+    },
+    {
+      "timestamp": "2026-06-04T11:53:31+09:00",
+      "changes": [
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-13 (Trường: notes (đã cập nhật nội dung))",
+        "[Danh sách quyết định / 決定事項] Xóa record: DEC-2026-06-04-SKILL-FIRST-HEAVY-MCP",
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-05-22-GRAPHIFY-CODEGRAPH (Trường: related_items ('DEC-2026-05-23-YAML-MANAGEMENT, DEC-2026-06-04-SKILL-FIRST-HEAVY-MCP' -> 'DEC-2026-05-23-YAML-MANAGEMENT, DEC-2026-06-04-SKILL-FIRST-ROUTING'))",
+        "[Danh sách quyết định / 決定事項] Thêm mới record: DEC-2026-06-04-SKILL-FIRST-ROUTING (Title: 'Skill-first routing cho knowledge/source code trong PM-control')"
+      ]
+    },
+    {
+      "timestamp": "2026-06-04T11:44:25+09:00",
+      "changes": [
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-13 (Trường: notes (đã cập nhật nội dung))",
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-05-22-GRAPHIFY-CODEGRAPH (Trường: status ('Confirmed' -> 'Stale'), impact ('Agent phải query Graphify khi xử lý PM-control/docs và query CodeGraph khi phân tích source code.' -> 'Không còn áp dụng từ 2026-06-04; thay bằng DEC-2026-06-04-SKILL-FIRST-HEAVY-MCP.'), related_items ('DEC-2026-05-23-YAML-MANAGEMENT' -> 'DEC-2026-05-23-YAML-MANAGEMENT, DEC-2026-06-04-SKILL-FIRST-HEAVY-MCP'))",
+        "[Danh sách quyết định / 決定事項] Thêm mới record: DEC-2026-06-04-SKILL-FIRST-HEAVY-MCP (Title: 'Chuyển memory/code/source lookup sang skill-first, disable MCP nặng')"
+      ]
+    },
+    {
+      "timestamp": "2026-05-28T18:59:00+09:00",
+      "changes": [
+        "[Danh sách rủi ro / リスク] Thêm mới record: R-010 (Title: 'Rủi ro hỏng dữ liệu hoặc xung đột phiên bản SQLite khi khôi phục sau crash')"
+      ]
+    },
+    {
+      "timestamp": "2026-05-28T18:58:34+09:00",
+      "changes": [
+        "[Danh sách rủi ro / リスク] Xóa record: R-010"
+      ]
+    },
+    {
+      "timestamp": "2026-05-28T18:58:32+09:00",
+      "changes": [
+        "[Danh sách quyết định / 決定事項] Thêm mới record: DEC-2026-05-28-KSNEWSYS-215-TOOLTIP-CLICK (Title: 'Chốt thiết kế ToolTip và Flow Sự kiện Click trên bảng thông tin')",
+        "[Danh sách quyết định / 決定事項] Thêm mới record: DEC-2026-05-28-KSNEWSYS-399-SCREEN-RESOLUTION (Title: 'Thống nhất phương án hiển thị ứng dụng theo độ phân giải màn hình')",
+        "[Danh sách quyết định / 決定事項] Thêm mới record: DEC-2026-05-28-CONFIG-JSON-DEVICE-MANAGEMENT (Title: 'Quản lý cấu hình thiết bị POS thông qua tệp config.json tập trung')",
+        "[Danh sách quyết định / 決定事項] Thêm mới record: DEC-2026-05-28-EPSON-PRINTER-CONNECTION-TETHERING (Title: 'Khắc phục lỗi kết nối máy in Epson TM-m30III/TM-m55 qua SB-H50')"
+      ]
+    },
+    {
+      "timestamp": "2026-05-28T18:47:47+09:00",
+      "changes": [
+        "[Danh sách công việc / WBS] Cập nhật record: T-442-01 (Trường: owner ('VTI_SAM' -> 'Đỗ Hoàng Nam VTI.D6'))"
+      ]
+    },
+    {
+      "timestamp": "2026-05-28T12:23:00+09:00",
+      "changes": [
+        "[Danh sách công việc / WBS] Thêm mới record: T-442-01 (Title: 'KSNEWSYS-442 Điều tra khả năng hiển thị zebra trong bảng trên Tablet POS')"
+      ]
+    },
+    {
+      "timestamp": "2026-05-28T12:22:39+09:00",
+      "changes": [
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-04 (Trường: owner ('Vu Van Canh' -> 'VTI_SAM'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-05 (Trường: owner ('Đỗ Hoàng Nam VTI.D6' -> 'Vu Van Canh'), status ('Not Started' -> 'In Progress'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-06 (Trường: owner ('VTI_SAM' -> 'Vu Van Canh'), status ('Not Started' -> 'In Progress'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-07 (Trường: start_date ('2026-05-21' -> '2026-06-01'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-08 (Trường: start_date ('2026-05-21' -> '2026-06-01'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-09 (Trường: owner ('Vu Van Canh' -> 'VTI_NHUT'), start_date ('2026-05-21' -> '2026-06-01'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-01 (Trường: owner ('VTI_SAM' -> 'Đỗ Hoàng Nam VTI.D6'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-02 (Trường: owner ('VTI_SAM' -> 'Đỗ Hoàng Nam VTI.D6'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-01 (Trường: owner ('VTI_SAM' -> 'Đỗ Hoàng Nam VTI.D6'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-02 (Trường: owner ('VTI_SAM' -> 'Đỗ Hoàng Nam VTI.D6'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-03 (Trường: status ('Not Started' -> 'In Progress'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-04 (Trường: owner ('VTI_SAM' -> 'Đỗ Hoàng Nam VTI.D6'), status ('Not Started' -> 'In Progress'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-05 (Trường: status ('Not Started' -> 'In Progress'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-06 (Trường: status ('Not Started' -> 'In Progress'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-07 (Trường: status ('Not Started' -> 'In Progress'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-C-01 (Trường: owner ('VTI_SAM' -> 'VTI_NHUT'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-C-02 (Trường: owner ('VTI_SAM' -> 'VTI_NHUT'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-13 (Trường: owner ('VTI_SAM' -> 'VTI_NHUT, VTI_ヒエップ'))"
+      ]
+    },
+    {
+      "timestamp": "2026-05-27T19:04:41+09:00",
+      "changes": [
+        "[Danh sách công việc / WBS] Thêm mới record: T-424-13 (Title: 'Thêm khung sub-view hướng dẫn lỗi máy thu tiền trong KsPos.Applications')"
+      ]
+    },
+    {
+      "timestamp": "2026-05-27T18:52:29+09:00",
+      "changes": [
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-13 (Trường: vti_backlog_id ('' -> 'SHARP_MULTI_DEVICE_POS-578'))"
+      ]
+    },
+    {
+      "timestamp": "2026-05-27T18:51:05+09:00",
+      "changes": [
+        "[Danh sách công việc / WBS] Thêm mới record: T-424-13 (Title: 'Thêm khung sub-view hướng dẫn lỗi máy thu tiền trong KsPos.Applications')",
+        "[Danh sách rủi ro / リスク] Xóa record: R-010",
+        "[Danh sách rủi ro / リスク] Xóa record: R-011",
+        "[Lộ trình dự án / ロードマップ] Cập nhật record: MS-002 (Trường: notes (đã cập nhật nội dung))",
+        "[Danh sách quyết định / 決定事項] Xóa record: DEC-2026-05-27-KSNEWSYS-245-LOCAL-SNAPSHOT",
+        "[Danh sách quyết định / 決定事項] Xóa record: DEC-2026-05-27-KSNEWSYS-245-LIFECYCLE-SAVE",
+        "[Kế hoạch liên lạc / 連絡管理] Xóa record: COMM-011"
+      ]
+    },
+    {
+      "timestamp": "2026-05-26T14:47:21+09:00",
+      "changes": [
+        "[Danh sách công việc / WBS] Cập nhật record: S-424 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: S-426 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: S-427 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: S-COM (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: OI-001 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: OI-002 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: OI-003 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: OI-004 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-01 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-02 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-03 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-04 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-05 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-06 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-07 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-08 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-09 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-10 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-11 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-12 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-01 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-02 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-03 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-04 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-05 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-06 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-07 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-01 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-02 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-03 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-04 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-05 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-06 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-07 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-C-01 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-C-02 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-C-03 (Trường: owner)"
+      ]
+    },
+    {
+      "timestamp": "2026-05-26T14:44:00+09:00",
+      "changes": [
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-11 (Trường: definition_of_done, description, title)"
+      ]
+    },
+    {
+      "timestamp": "2026-05-26T14:36:42+09:00",
+      "changes": [
+        "[Danh sách công việc / WBS] Cập nhật record: OI-001 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: OI-002 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: OI-003 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: OI-004 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-01 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-02 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-03 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-04 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-05 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-07 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-08 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-09 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-10 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-11 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-12 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-01 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-02 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-03 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-04 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-05 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-06 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-07 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-01 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-02 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-03 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-04 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-05 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-06 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-07 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-C-01 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-C-02 (Trường: owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: T-C-03 (Trường: owner)",
+        "[Bên liên quan / 関係者] Cập nhật record: SH-006 (Trường: title)",
+        "[Bên liên quan / 関係者] Cập nhật record: SH-007 (Trường: title)",
+        "[Bên liên quan / 関係者] Cập nhật record: SH-008 (Trường: title)",
+        "[Bên liên quan / 関係者] Cập nhật record: SH-009 (Trường: title)",
+        "[Bên liên quan / 関係者] Cập nhật record: SH-010 (Trường: title)",
+        "[Bên liên quan / 関係者] Cập nhật record: SH-011 (Trường: title)"
+      ]
+    },
+    {
+      "timestamp": "2026-05-25T19:01:10+09:00",
+      "changes": [
+        "[Danh sách công việc / WBS] Cập nhật record: OI-003 (Trường: notes (đã cập nhật nội dung))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-02 (Trường: status ('In Progress' -> 'Awaiting Customer Review'), notes (đã cập nhật nội dung))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-02 (Trường: notes (đã cập nhật nội dung))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-02 (Trường: status ('In Progress' -> 'Awaiting Customer Review'), notes (đã cập nhật nội dung))"
+      ]
+    },
+    {
+      "timestamp": "2026-05-25T13:44:11+09:00",
+      "changes": [
+        "[Danh sách công việc / WBS] Cập nhật record: T-C-02 (Trường: owner ('SAM' -> 'VTI'))"
+      ]
+    },
+    {
+      "timestamp": "2026-05-25T13:41:53+09:00",
+      "changes": [
+        "[Lộ trình dự án / ロードマップ] Xóa record: SCH-R-001",
+        "[Lộ trình dự án / ロードマップ] Xóa record: SCH-R-002"
+      ]
+    },
+    {
+      "timestamp": "2026-05-25T13:40:05+09:00",
+      "changes": [
+        "[Lộ trình dự án / ロードマップ] Thêm mới record: SCH-R-001 (Title: 'Độ phức tạp của thiết bị/thư viện legacy VB/OCX làm kéo dài thời gian thiết kế và triển khai hơn kế hoạch.')",
+        "[Lộ trình dự án / ロードマップ] Thêm mới record: SCH-R-002 (Title: 'Feedback đến muộn hoặc dồn vào cuối tháng 7.')"
+      ]
+    },
+    {
+      "timestamp": "2026-05-25T13:40:03+09:00",
+      "changes": [
+        "[Lộ trình dự án / ロードマップ] Cập nhật record: PH-2026-05 (Trường: notes)",
+        "[Lộ trình dự án / ロードマップ] Cập nhật record: PH-2026-07-A (Trường: notes)",
+        "[Lộ trình dự án / ロードマップ] Cập nhật record: PH-2026-07-B (Trường: notes)",
+        "[Lộ trình dự án / ロードマップ] Cập nhật record: MS-001 (Trường: dependency)",
+        "[Lộ trình dự án / ロードマップ] Cập nhật record: MS-003 (Trường: dependency)",
+        "[Lộ trình dự án / ロードマップ] Cập nhật record: MS-004 (Trường: dependency)",
+        "[Lộ trình dự án / ロードマップ] Xóa/Lưu trữ record: SCH-R-001",
+        "[Lộ trình dự án / ロードマップ] Xóa/Lưu trữ record: SCH-R-002"
+      ]
+    },
+    {
+      "timestamp": "2026-05-25T13:35:53+09:00",
+      "changes": [
+        "[Danh sách rủi ro / リスク] Cập nhật record: R-002 (Trường: mitigation, owner)",
+        "[Danh sách rủi ro / リスク] Cập nhật record: R-004 (Trường: mitigation, owner)",
+        "[Danh sách rủi ro / リスク] Cập nhật record: R-008 (Trường: owner)",
+        "[Danh sách rủi ro / リスク] Cập nhật record: R-009 (Trường: owner)",
+        "[Lộ trình dự án / ロードマップ] Cập nhật record: PH-2026-07-A (Trường: notes, owner)",
+        "[Lộ trình dự án / ロードマップ] Cập nhật record: PH-2026-07-B (Trường: notes, owner)",
+        "[Lộ trình dự án / ロードマップ] Cập nhật record: SCH-R-002 (Trường: notes, owner)"
+      ]
+    },
+    {
+      "timestamp": "2026-05-25T13:33:55+09:00",
+      "changes": [
+        "[Danh sách công việc / WBS] Cập nhật record: S-424 (Trường: definition_of_done, description, notes, title)",
+        "[Danh sách công việc / WBS] Cập nhật record: S-426 (Trường: definition_of_done, description, notes, title)",
+        "[Danh sách công việc / WBS] Cập nhật record: S-427 (Trường: definition_of_done, description, notes, title)",
+        "[Danh sách công việc / WBS] Cập nhật record: S-COM (Trường: definition_of_done, description, notes, title)",
+        "[Danh sách công việc / WBS] Cập nhật record: OI-001 (Trường: notes, owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: OI-002 (Trường: notes, owner)",
+        "[Danh sách công việc / WBS] Cập nhật record: OI-003 (Trường: owner)",
+        "[Danh sách công việc / WBS] Thêm mới record: T-424-01 (Title: 'Phân tích đặc tả tài sản VB hiện hành')",
+        "[Danh sách công việc / WBS] Thêm mới record: T-424-02 (Title: 'Thiết kế chi tiết nhóm Device')",
+        "[Danh sách công việc / WBS] Thêm mới record: T-424-03 (Title: 'Thiết kế chi tiết nhóm Receipt/Journal')",
+        "[Danh sách công việc / WBS] Thêm mới record: T-424-04 (Title: 'Triển khai C# nhóm Device')",
+        "[Danh sách công việc / WBS] Thêm mới record: T-424-05 (Title: 'Triển khai C# nhóm Receipt/Journal')",
+        "[Danh sách công việc / WBS] Thêm mới record: T-424-06 (Title: 'Kiểm tra tích hợp với terminal app cấu trúc mới')",
+        "[Danh sách công việc / WBS] Thêm mới record: T-424-07 (Title: 'Kiểm thử chức năng Device')",
+        "[Danh sách công việc / WBS] Thêm mới record: T-424-08 (Title: 'Triển khai và xác nhận Unit Test')",
+        "[Danh sách công việc / WBS] Thêm mới record: T-424-09 (Title: 'Tạo tài liệu test case')",
+        "[Danh sách công việc / WBS] Thêm mới record: T-424-10 (Title: 'Sắp xếp log và abnormal case')",
+        "[Danh sách công việc / WBS] Thêm mới record: T-424-11 (Title: 'Tạo thiết kế chi tiết và migration memo')",
+        "[Danh sách công việc / WBS] Thêm mới record: T-424-12 (Title: 'Phản hồi review và chỉnh sửa nhỏ')",
+        "[Danh sách công việc / WBS] Thêm mới record: T-426-01 (Title: 'Sắp xếp yêu cầu log')",
+        "[Danh sách công việc / WBS] Thêm mới record: T-426-02 (Title: 'Thiết kế và cấu hình liên kết Sentry')",
+        "[Danh sách công việc / WBS] Thêm mới record: T-426-03 (Title: 'Xây dựng nền tảng local operation log')",
+        "[Danh sách công việc / WBS] Thêm mới record: T-426-04 (Title: 'Liên kết BaseViewModel cho log')",
+        "[Danh sách công việc / WBS] Thêm mới record: T-426-05 (Title: 'Chuẩn bị điểm kết nối với API call foundation')",
+        "[Danh sách công việc / WBS] Thêm mới record: T-426-06 (Title: 'Test và xác nhận hoạt động log')",
+        "[Danh sách công việc / WBS] Thêm mới record: T-426-07 (Title: 'Tạo tài liệu thiết kế và quy tắc sử dụng log')",
+        "[Danh sách công việc / WBS] Thêm mới record: T-427-01 (Title: 'Sắp xếp thông tin cần khôi phục')",
+        "[Danh sách công việc / WBS] Thêm mới record: T-427-02 (Title: 'Thiết kế Service lưu và khôi phục')",
+        "[Danh sách công việc / WBS] Thêm mới record: T-427-03 (Title: 'Liên kết BaseViewModel cho lưu và khôi phục')",
+        "[Danh sách công việc / WBS] Thêm mới record: T-427-04 (Title: 'Phương châm Behavior cho custom component')",
+        "[Danh sách công việc / WBS] Thêm mới record: T-427-05 (Title: 'Triển khai lưu local')",
+        "[Danh sách công việc / WBS] Thêm mới record: T-427-06 (Title: 'Test và xác nhận hoạt động lưu/khôi phục')",
+        "[Danh sách công việc / WBS] Thêm mới record: T-427-07 (Title: 'Tạo tài liệu thiết kế và rule phát triển lưu/khôi phục')",
+        "[Danh sách công việc / WBS] Thêm mới record: T-C-01 (Title: 'Xác nhận khách hàng và Q&A đặc tả')",
+        "[Danh sách công việc / WBS] Thêm mới record: T-C-02 (Title: 'Quản lý tiến độ và vấn đề')",
+        "[Danh sách công việc / WBS] Thêm mới record: T-C-03 (Title: 'Hấp thụ task nhỏ liên quan')"
+      ]
+    },
+    {
+      "timestamp": "2026-05-25T11:30:13+09:00",
+      "changes": [
+        "[Lộ trình dự án / ロードマップ] Cập nhật record: SCH-R-001 (Trường: type)",
+        "[Lộ trình dự án / ロードマップ] Cập nhật record: SCH-R-002 (Trường: type)",
+        "[Kế hoạch liên lạc / 連絡管理] Cập nhật record: COMM-003 (Trường: type)",
+        "[Kế hoạch liên lạc / 連絡管理] Cập nhật record: COMM-004 (Trường: type)",
+        "[Kế hoạch liên lạc / 連絡管理] Cập nhật record: COMM-005 (Trường: type)",
+        "[Kế hoạch liên lạc / 連絡管理] Cập nhật record: COMM-006 (Trường: type)",
+        "[Kế hoạch liên lạc / 連絡管理] Cập nhật record: COMM-007 (Trường: type)",
+        "[Kế hoạch liên lạc / 連絡管理] Cập nhật record: COMM-008 (Trường: type)",
+        "[Kế hoạch liên lạc / 連絡管理] Cập nhật record: COMM-009 (Trường: type)",
+        "[Kế hoạch liên lạc / 連絡管理] Cập nhật record: COMM-010 (Trường: type)"
+      ]
+    }
+  ]
+}

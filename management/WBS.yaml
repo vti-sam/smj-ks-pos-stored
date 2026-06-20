@@ -1,0 +1,622 @@
+schema_version: 1
+meta:
+  source: google_sheets
+  sheet: WBS / WBS
+  source_of_truth: google_sheets
+  read_only_export: true
+  generated_at: '2026-06-17T14:26:35+09:00'
+records:
+- id: S-424
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-541
+  type: スコープ項目
+  title: KSNEWSYS-424 Device/Receiptレガシー資産のC#化とStrategy構成
+  description: Device/Receiptに関連するVB/OCXレガシー資産を、次世代Tablet POS向けのStrategy/Adapter構成へ移行します。
+  owner: VTI_SAM
+  start_date: 46163
+  end_date: ''
+  deadline: 46203
+  status: In Progress
+  priority: High
+  definition_of_done: 詳細設計、Device Adapter、Receipt/Journal Adapter、Unit Test、テストケース資料、デバイス機能確認が揃っていること。代表的な呼び出しがStrategy/Adapter経由で動作し、ログ／例外方針とテスト証跡をレビューできること。
+  risk_id: R-001, R-002
+  notes: '見積: 6.10MM。raw/次世代KSPOS_見積詳細_202605.md からのマッピング。'
+  notes_vi: C# hóa Device/Receipt legacy và cấu trúc Strategy
+- id: S-426
+  customer_task_id: KSNEWSYS-426
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-542
+  type: スコープ項目
+  title: KSNEWSYS-426 ターミナルアプリ向けログ出力基盤
+  description: Sentry、ローカル操作ログ、BaseViewModelからの自動ログ出力の仕組みを準備します。
+  owner: VTI_SAM
+  start_date: 46163
+  end_date: ''
+  deadline: 46203
+  status: In Progress
+  priority: High
+  definition_of_done: ログ基盤、Sentry設定、操作ログ仕様、APIログ連携点、利用ルールが揃っていること。Error/Warn/Info/Debugの方針、ローカルログ／Sentry確認、マスキング方針を確認できること。
+  risk_id: R-006, R-007, R-008, R-009
+  notes: '見積: 0.90MM。raw/次世代KSPOS_見積詳細_202605.md からのマッピング。'
+  notes_vi: Chuẩn bị nền tảng logging/Sentry cho terminal app
+- id: S-427
+  customer_task_id: KSNEWSYS-427
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-543
+  type: スコープ項目
+  title: KSNEWSYS-427 ターミナルアプリ向けローカル保存・復元基盤
+  description: 画面実装者の負担を減らすため、保存／復元の共通基盤を準備します。
+  owner: VTI_SAM
+  start_date: 46163
+  end_date: ''
+  deadline: 46203
+  status: In Progress
+  priority: High
+  definition_of_done: Storage service、restore hook、動作方針、テスト観点、実装ルールが揃っていること。代表画面で共通hookを使った保存／復元ができ、未保存データや破損データへの最低限の扱いがあること。
+  risk_id: R-010
+  notes: '見積: 0.90MM。raw/次世代KSPOS_見積詳細_202605.md からのマッピング。'
+  notes_vi: Chuẩn bị nền tảng lưu và khôi phục local cho terminal app
+- id: S-COM
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-544
+  type: スコープ項目
+  title: 共通管理・調整・レビュー対応
+  description: お客様確認、仕様調整、レビュー対応、関連する小規模タスクを共通管理します。
+  owner: VTI_SAM
+  start_date: 46163
+  end_date: ''
+  deadline: 46234
+  status: In Progress
+  priority: Medium
+  definition_of_done: 議事メモ、Q&A、進捗／リスク管理、軽微な修正が管理されていること。課題、決定事項、リスクを短い周期で追跡し、大きなスコープ超過がない範囲で調整できていること。
+  risk_id: R-003, R-004, R-005
+  notes: '見積: 0.50MM。raw/次世代KSPOS_見積詳細_202605.md からのマッピング。'
+  notes_vi: Quản lý chung, điều chỉnh và phản hồi review
+- id: OI-001
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-545
+  type: 依存関係
+  title: KSNEWSYS-424対象資産・デバイス・OCXの確認
+  description: 6月の手戻りを抑えるため、対象資産とIF/Adapter境界を早期に確定します。
+  owner: VTI_SAM
+  start_date: 46163
+  end_date: ''
+  deadline: 46173
+  status: Open
+  priority: High
+  risk_id: R-001, R-002
+  notes: '作成日: 2026-05-21。関連項目: S-424, R-001, R-002。お客様との確認が必要です。'
+  notes_vi: Chốt target asset/device/OCX cho KSNEWSYS-424
+- id: OI-002
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-546
+  type: 依存関係
+  title: 7月のUAT・レビュー期間確認
+  description: 2026-07-15までにUAT期間と代表デバイス／環境を確認します。
+  owner: VTI_SAM
+  start_date: 46163
+  end_date: ''
+  deadline: 46204
+  status: Not Started
+  priority: High
+  risk_id: R-004
+  notes: '作成日: 2026-05-21。関連項目: R-004, MS-003, MS-004。お客様との確認が必要です。'
+  notes_vi: Xác nhận window UAT/review tháng 7
+- id: OI-003
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-547
+  type: 確認
+  title: KSNEWSYS-426 Sentryレビュー
+  description: Sentry基盤コードとプログラム仕様書は準備済みです。基本設計、クラス設計、監視フローについてお客様レビューと合意を待っています。
+  owner: VTI_SAM
+  start_date: 46165
+  end_date: ''
+  deadline: 46173
+  status: Awaiting Customer Review
+  priority: High
+  risk_id: R-006, R-007, R-008, R-009
+  notes: Basic Design資料はJNT標準Excelテンプレートに合わせてVTIが更新中です。Sentry Team Licenseの案内手順は5月18日に送付済みです。
+  notes_vi: Chờ KH review/chốt thiết kế Sentry
+- id: OI-004
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-548
+  type: 確認
+  title: コスト・スコープベースライン管理
+  description: 8.00MM提示／8.40MM計算の範囲外となるスコープ変更が発生しないかを追跡します。
+  owner: VTI_SAM
+  start_date: 46163
+  end_date: ''
+  deadline: 46234
+  status: Open
+  priority: Medium
+  risk_id: R-003, R-005
+  notes: 大きな仕様変更は自動的に吸収しません。
+  notes_vi: Theo dõi baseline cost/scope
+- id: T-424-01
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-549
+  type: タスク
+  title: 既存VB資産の仕様分析
+  description: 移行前にDeviceServer、DeviceControls、ReceiptControlsの責務と呼び出しフローを整理します。
+  owner: VTI_SAM
+  start_date: 46163
+  end_date: ''
+  deadline: 46203
+  status: In Progress
+  priority: High
+  definition_of_done: 対象プロジェクト、依存関係、OCX/Interopの注意点が整理され、移行時の差異漏れリスクを下げられること。
+  risk_id: R-001, R-002
+  notes: '元No: 424-01。分類: 調査／設計。見積: 0.45MM。'
+  notes_vi: Phân tích đặc tả tài sản VB hiện hành
+- id: T-424-02
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-550
+  type: タスク
+  title: Deviceグループ詳細設計
+  description: Drawer、LineDisplay、MSR、PinPad、Scannerなど、デバイス種別ごとの共通IFとStrategy境界を明確にします。
+  owner: VTI_SAM
+  start_date: 46163
+  end_date: ''
+  deadline: 46203
+  status: Awaiting Customer Review
+  priority: High
+  definition_of_done: Device Strategy IF、Adapter詳細設計、例外／ログ方針、レビュー可能な処理シーケンスがあること。
+  risk_id: R-001, R-002
+  notes: LineDisplay設計資料は5月20日にSVNへ送付済みです。5月25日にKoyama様（JNT）からDeviceCtrl-Application関係図とVB -> C# -> Strategy patternの詳細説明追加依頼がありました。
+  notes_vi: Thiết kế chi tiết nhóm Device
+- id: T-424-03
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-551
+  type: タスク
+  title: Receipt/Journalグループ詳細設計
+  description: ReceiptControlsはDeviceServerと系統が異なるため、POSプリンタと電子ジャーナルの処理方針を分けて整理します。
+  owner: VTI_SAM
+  start_date: 46163
+  end_date: ''
+  deadline: 46203
+  status: In Progress
+  priority: High
+  definition_of_done: Receipt/Journal Adapter詳細設計、OCXラップ方針、処理シーケンスがあること。
+  risk_id: R-001, R-002
+  notes: '元No: 424-03。分類: 設計。見積: 0.40MM。'
+  notes_vi: Thiết kế chi tiết nhóm Receipt/Journal
+- id: T-424-04
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-552
+  type: タスク
+  title: DeviceグループC#実装
+  description: 既存OCX仕様に基づいてC#側の責務を再構成し、IF、ログ、例外方針の整合性を確認します。
+  owner: VTI_SAM
+  start_date: 46163
+  end_date: ''
+  deadline: 46203
+  status: In Progress
+  priority: High
+  definition_of_done: Device Adapter群、Strategy登録、呼び出し側との接続部分が新構成に入っていること。
+  risk_id: R-001, R-002
+  notes: '元No: 424-04。分類: 実装。見積: 1.15MM。'
+  notes_vi: Triển khai C# nhóm Device
+- id: T-424-05
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-553
+  type: タスク
+  title: Receipt/JournalグループC#実装
+  description: 印刷／ジャーナルは障害時の影響が大きいため、呼び出し順、戻り値、ログ粒度を明確にして実装します。
+  owner: Vu Van Canh
+  start_date: 46163
+  end_date: ''
+  deadline: 46203
+  status: In Progress
+  priority: High
+  definition_of_done: Receipt/Journal Adapterとプリンタ／電子ジャーナルの制御点があること。
+  risk_id: R-001, R-002
+  notes: '元No: 424-05。分類: 実装。見積: 0.70MM。'
+  notes_vi: Triển khai C# nhóm Receipt/Journal
+- id: T-424-06
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-554
+  type: タスク
+  title: 新構成ターミナルアプリとの結合確認
+  description: 各Adapterが次世代KSPOS構成の共通基盤として接続できることを確認します。
+  owner: Vu Van Canh
+  start_date: 46163
+  end_date: ''
+  deadline: 46203
+  status: In Progress
+  priority: High
+  definition_of_done: ターミナルアプリ側の接続証跡、登録／DI、代表呼び出しの確認結果があること。
+  risk_id: R-001, R-002
+  notes: '元No: 424-06。分類: 結合確認。見積: 0.45MM。'
+  notes_vi: Kiểm tra tích hợp với terminal app cấu trúc mới
+- id: T-424-07
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-555
+  type: タスク
+  title: Device機能テスト
+  description: Deviceは機器、OCX、ターミナル環境の影響を受けるため、代表機能ごとにテスト観点を整理します。
+  owner: Vu Van Canh
+  start_date: 46174
+  end_date: ''
+  deadline: 46234
+  status: Not Started
+  priority: High
+  definition_of_done: Drawer、LineDisplay、MSR、PinPad、Scannerおよび代表機能のテスト観点、実施結果、残課題一覧があること。
+  risk_id: R-001, R-002
+  notes: '元No: 424-07。分類: テスト。見積: 0.45MM。'
+  notes_vi: Kiểm thử chức năng Device
+- id: T-424-08
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-556
+  type: タスク
+  title: Unit Test実装と確認
+  description: Strategy/Adapter単位でinput、return value、異常系、ログ出力を確認し、regressionを抑えます。
+  owner: Vu Van Canh
+  start_date: 46174
+  end_date: ''
+  deadline: 46203
+  status: Not Started
+  priority: High
+  definition_of_done: Unit Testコード、実行結果、確認ログがあること。
+  risk_id: R-001, R-002
+  notes: '元No: 424-08。分類: テスト。見積: 0.45MM。'
+  notes_vi: Triển khai và xác nhận Unit Test
+- id: T-424-09
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-557
+  type: タスク
+  title: テストケース資料作成
+  description: 実装結果だけでなく、確認条件と確認内容をレビューできる形で記録します。
+  owner: VTI_NHUT
+  start_date: 46174
+  end_date: ''
+  deadline: 46234
+  status: Not Started
+  priority: High
+  definition_of_done: Unit Test case、functional test case、確認観点一覧があること。
+  risk_id: R-001, R-002
+  notes: '元No: 424-09。分類: ドキュメント。見積: 0.30MM。'
+  notes_vi: Tạo tài liệu test case
+- id: T-424-10
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-558
+  type: タスク
+  title: ログと異常系の整理
+  description: Device障害はonsite環境に依存しやすいため、後続調査に必要なログを設計します。
+  owner: Vu Van Canh
+  start_date: 46163
+  end_date: ''
+  deadline: 46203
+  status: Not Started
+  priority: High
+  definition_of_done: Error pattern一覧とログ出力観点があること。
+  risk_id: R-001, R-002
+  notes: '元No: 424-10。分類: 品質対応。見積: 0.25MM。'
+  notes_vi: Sắp xếp log và abnormal case
+- id: T-424-11
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-559
+  type: タスク
+  title: 詳細設計書・Migration Memo作成
+  description: VBレガシー資産をC#へ移行する方針を整理し、Sharp（SMJ）の懸念であるロジック漏れ防止、非OOPコードの扱い、Strategy Pattern/Clean Architectureへの接続方針を明確にします。
+  owner: Vu Van Canh
+  start_date: 46163
+  end_date: ''
+  deadline: 46234
+  status: Not Started
+  priority: High
+  definition_of_done: 詳細設計書とMigration Memoが完成し、Clean Architecture方針、GOTO等の非OOPコード対応、ロジック漏れを防ぐ確認方法が説明されていること。Sharp（SMJ）に開発方針として承認されること。
+  risk_id: R-001, R-002
+  notes: '元No: 424-11。分類: ドキュメント。見積: 0.50MM。'
+  notes_vi: Lập tài liệu thiết kế chi tiết và Migration Memo
+- id: T-424-12
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-560
+  type: タスク
+  title: レビュー対応と軽微修正
+  description: 既存仕様との整合確認の中で発生する軽微な修正に対応します。
+  owner: Vu Van Canh
+  start_date: 46163
+  end_date: ''
+  deadline: 46234
+  status: Not Started
+  priority: High
+  definition_of_done: 修正版とレビュー回答メモがあること。
+  risk_id: R-001, R-002
+  notes: '元No: 424-12。分類: 調整。見積: 0.35MM。'
+  notes_vi: Phản hồi review và chỉnh sửa nhỏ
+- id: T-426-01
+  customer_task_id: KSNEWSYS-426
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-561
+  type: タスク
+  title: ログ要件整理
+  description: Error、Warn、Info、Debugの最低限のルールを定義します。
+  owner: Đỗ Hoàng Nam VTI.D6
+  start_date: 46163
+  end_date: ''
+  deadline: 46203
+  status: In Progress
+  priority: High
+  definition_of_done: ログレベル、出力先、保持方針、個人情報マスキング方針があること。
+  risk_id: R-006, R-007, R-008, R-009
+  notes: '元No: 426-01。分類: 調査／設計。見積: 0.10MM。'
+  notes_vi: Sắp xếp yêu cầu log
+- id: T-426-02
+  customer_task_id: KSNEWSYS-426
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-562
+  type: タスク
+  title: Sentry連携設計・設定
+  description: クラッシュレポート送信に必要な最小構成を明確にします。
+  owner: Đỗ Hoàng Nam VTI.D6
+  start_date: 46163
+  end_date: ''
+  deadline: 46203
+  status: Awaiting Customer Review
+  priority: High
+  definition_of_done: Sentry初期化、環境別設定、クラッシュレポート送信方針があること。
+  risk_id: R-006, R-007, R-008, R-009
+  notes: Basic Designは5月21日に送付済みです。5月21日にKoyama様（JNT）からJNT標準Excel様式での再作成依頼があり、VTIが資料更新中です（5月25日更新）。
+  notes_vi: Thiết kế và cấu hình liên kết Sentry
+- id: T-426-03
+  customer_task_id: KSNEWSYS-426
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-563
+  type: タスク
+  title: ローカル操作ログ基盤構築
+  description: onsiteでターミナル障害が発生した際に回収できるログ形式を準備します。
+  owner: Đỗ Hoàng Nam VTI.D6
+  start_date: 46163
+  end_date: ''
+  deadline: 46203
+  status: Not Started
+  priority: High
+  definition_of_done: ローカルログサービス、出力形式、ローテーション方針があること。
+  risk_id: R-006, R-007, R-008, R-009
+  notes: '元No: 426-03。分類: 実装。見積: 0.20MM。'
+  notes_vi: Xây dựng nền tảng local operation log
+- id: T-426-04
+  customer_task_id: KSNEWSYS-426
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-564
+  type: タスク
+  title: BaseViewModelログ連携
+  description: ContentPage実装者が個別に操作ログを意識しすぎないよう、基本hookを作成します。
+  owner: Đỗ Hoàng Nam VTI.D6
+  start_date: 46163
+  end_date: ''
+  deadline: 46203
+  status: Not Started
+  priority: High
+  definition_of_done: 画面遷移と操作イベントの自動ログ出力機構があること。
+  risk_id: R-006, R-007, R-008, R-009
+  notes: '元No: 426-04。分類: 実装。見積: 0.15MM。'
+  notes_vi: Liên kết BaseViewModel cho log
+- id: T-426-05
+  customer_task_id: KSNEWSYS-426
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-565
+  type: タスク
+  title: API call foundation連携点準備
+  description: API call foundationからrequest/responseログを利用できるよう、連携点を整理します。
+  owner: Đỗ Hoàng Nam VTI.D6
+  start_date: 46163
+  end_date: ''
+  deadline: 46203
+  status: Not Started
+  priority: High
+  definition_of_done: Request/Responseログ出力IFとマスキングルールがあること。
+  risk_id: R-006, R-007, R-008, R-009
+  notes: '元No: 426-05。分類: 実装／結合。見積: 0.10MM。'
+  notes_vi: Chuẩn bị điểm kết nối với API call foundation
+- id: T-426-06
+  customer_task_id: KSNEWSYS-426
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-566
+  type: タスク
+  title: ログ動作テスト・確認
+  description: 代表パターンでログ出力とexception送信を確認します。
+  owner: Đỗ Hoàng Nam VTI.D6
+  start_date: 46163
+  end_date: ''
+  deadline: 46234
+  status: Not Started
+  priority: High
+  definition_of_done: ログ出力、Sentry送信、異常系の確認証跡があること。
+  risk_id: R-006, R-007, R-008, R-009
+  notes: '元No: 426-06。分類: テスト。見積: 0.10MM。'
+  notes_vi: Test và xác nhận hoạt động log
+- id: T-426-07
+  customer_task_id: KSNEWSYS-426
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-567
+  type: タスク
+  title: ログ設計書・利用ルール作成
+  description: 画面実装者が迷わないよう、最小限の利用ルールを文書化します。
+  owner: Đỗ Hoàng Nam VTI.D6
+  start_date: 46163
+  end_date: ''
+  deadline: 46234
+  status: Not Started
+  priority: High
+  definition_of_done: ログ利用ルールとdeveloper向け注意点があること。
+  risk_id: R-006, R-007, R-008, R-009
+  notes: '元No: 426-07。分類: ドキュメント。見積: 0.10MM。'
+  notes_vi: Tạo tài liệu thiết kế và quy tắc sử dụng log
+- id: T-427-01
+  customer_task_id: KSNEWSYS-427
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-568
+  type: タスク
+  title: 復元対象情報の整理
+  description: 保存／復元対象にする情報の最小共通ルールを定義します。
+  owner: Đỗ Hoàng Nam VTI.D6
+  start_date: 46163
+  end_date: ''
+  deadline: 46203
+  status: In Progress
+  priority: High
+  definition_of_done: 保存対象、復元タイミング、除外条件の一覧があること。
+  risk_id: R-010
+  notes: '元No: 427-01。分類: 調査／設計。見積: 0.10MM。'
+  notes_vi: Sắp xếp thông tin cần khôi phục
+- id: T-427-02
+  customer_task_id: KSNEWSYS-427
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-569
+  type: タスク
+  title: 保存・復元Service設計
+  description: 将来画面を追加しても壊れにくい共通基盤方針を決定します。
+  owner: Đỗ Hoàng Nam VTI.D6
+  start_date: 46163
+  end_date: ''
+  deadline: 46203
+  status: Awaiting Customer Review
+  priority: High
+  definition_of_done: Storage IF、key設計、version方針、delete policyがあること。
+  risk_id: R-010
+  notes: SQLite保存（snapshot & transition）方式は5月13日に提案済みです。JNTからKSNEWSYS-309/245のクラッシュ後ログイン復旧について追加参照依頼がありました（5月18日更新）。
+  notes_vi: Thiết kế Service lưu và khôi phục
+- id: T-427-03
+  customer_task_id: KSNEWSYS-427
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-570
+  type: タスク
+  title: BaseViewModel保存・復元連携
+  description: ContentPage側の負担を減らすため、共通処理をBaseViewModelへ集約します。
+  owner: Đỗ Hoàng Nam VTI.D6
+  start_date: 46163
+  end_date: ''
+  deadline: 46203
+  status: In Progress
+  priority: High
+  definition_of_done: lifecycle連携とsave/restore hookがあること。
+  risk_id: R-010
+  notes: '元No: 427-03。分類: 実装。見積: 0.20MM。'
+  notes_vi: Liên kết BaseViewModel cho lưu và khôi phục
+- id: T-427-04
+  customer_task_id: KSNEWSYS-427
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-571
+  type: タスク
+  title: カスタムコンポーネント向けBehavior方針
+  description: TextBoxなどのcomponentが別project/solutionにある可能性を考慮し、直接依存を避けます。
+  owner: Đỗ Hoàng Nam VTI.D6
+  start_date: 46163
+  end_date: ''
+  deadline: 46203
+  status: In Progress
+  priority: High
+  definition_of_done: TextBoxおよび代表componentに対するBehavior適用方針があること。
+  risk_id: R-010
+  notes: '元No: 427-04。分類: 設計／実装。見積: 0.15MM。'
+  notes_vi: Phương châm Behavior cho custom component
+- id: T-427-05
+  customer_task_id: KSNEWSYS-427
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-572
+  type: タスク
+  title: ローカル保存実装
+  description: ターミナル／アプリ再起動時を想定した基本処理を準備します。
+  owner: Đỗ Hoàng Nam VTI.D6
+  start_date: 46163
+  end_date: ''
+  deadline: 46203
+  status: In Progress
+  priority: High
+  definition_of_done: save/restore、delete、失敗時処理があること。
+  risk_id: R-010
+  notes: '元No: 427-05。分類: 実装。見積: 0.15MM。'
+  notes_vi: Triển khai lưu local
+- id: T-427-06
+  customer_task_id: KSNEWSYS-427
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-573
+  type: タスク
+  title: 保存・復元動作テスト
+  description: 代表パターンでsave/restoreが成立することを確認します。
+  owner: Đỗ Hoàng Nam VTI.D6
+  start_date: 46163
+  end_date: ''
+  deadline: 46234
+  status: In Progress
+  priority: High
+  definition_of_done: restore、破損データ、未保存データ、画面遷移の確認証跡があること。
+  risk_id: R-010
+  notes: '元No: 427-06。分類: テスト。見積: 0.10MM。'
+  notes_vi: Test và xác nhận hoạt động lưu/khôi phục
+- id: T-427-07
+  customer_task_id: KSNEWSYS-427
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-574
+  type: タスク
+  title: 保存・復元設計書・開発ルール作成
+  description: 業務画面側で必要な実装ルールを明確にします。
+  owner: Đỗ Hoàng Nam VTI.D6
+  start_date: 46163
+  end_date: ''
+  deadline: 46234
+  status: In Progress
+  priority: High
+  definition_of_done: developer向けルールと実装例があること。
+  risk_id: R-010
+  notes: '元No: 427-07。分類: ドキュメント。見積: 0.05MM。'
+  notes_vi: Tạo tài liệu thiết kế và rule phát triển lưu/khôi phục
+- id: T-C-01
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-575
+  type: タスク
+  title: お客様確認と仕様Q&A
+  description: Device、Log、Storageにまたがる範囲のため、早期確認で手戻りを減らします。
+  owner: VTI_NHUT
+  start_date: 46163
+  end_date: ''
+  deadline: 46234
+  status: In Progress
+  priority: Medium
+  definition_of_done: Q&Aと確認事項一覧があること。
+  risk_id: R-003, R-004, R-005
+  notes: '元No: C-01。分類: 管理／調整。見積: 0.15MM。お客様との確認が必要です。'
+  notes_vi: Xác nhận khách hàng và Q&A đặc tả
+- id: T-C-02
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-576
+  type: タスク
+  title: 進捗・課題管理
+  description: 最終期限が2026-07-31のため、月次だけでなく短い周期で状況を可視化します。
+  owner: VTI_NHUT
+  start_date: 46163
+  end_date: ''
+  deadline: 46234
+  status: In Progress
+  priority: Medium
+  definition_of_done: 進捗報告、課題一覧、リスク管理があること。
+  risk_id: R-003, R-004, R-005
+  notes: '元No: C-02。分類: 管理。見積: 0.15MM。'
+  notes_vi: Quản lý tiến độ và vấn đề
+- id: T-C-03
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-577
+  type: タスク
+  title: 関連する小規模タスクの吸収
+  description: レビューで発生する命名、設定、接続まわりの軽微な調整は個別見積に分けず共通枠で扱います。
+  owner: VTI_SAM
+  start_date: 46163
+  end_date: ''
+  deadline: 46234
+  status: Not Started
+  priority: Medium
+  definition_of_done: 軽微な修正または周辺調整が共通範囲で処理されていること。
+  risk_id: R-003, R-004, R-005
+  notes: '元No: C-03。分類: 調整。見積: 0.20MM。'
+  notes_vi: Hấp thụ task nhỏ liên quan
+- id: T-424-13
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-578
+  type: タスク
+  title: KsPos.Applications向け釣銭機エラーガイダンスsub-view枠追加
+  description: legacy WinForms SubFormに相当する釣銭機エラーガイダンスサブフォームを、MAUI ContentView/UserControlとしてKsPos.Applications側に作成します。対象はApplication層のみで、WinForms
+    Formは新規作成しません。
+  owner: VTI_SAM
+  start_date: 46169
+  end_date: ''
+  deadline: 46203
+  status: Not Started
+  priority: High
+  definition_of_done: Presentation/Views/UserControlsにCashChangerErrorGuidance用ContentView枠があること。既存のsub-view管理機構がある場合はそこへ登録し、ない場合はscope外のarchitecture拡張をしないこと。独立ContentPageではないためAppShell
+    routeは追加せず、詳細UI、recovery logic、DeviceCtrl呼び出しは実装しないこと。KsPos.Applicationsのbuildが通ること。
+  risk_id: R-001, R-002
+  notes: お客様の釣銭機エラーガイダンスサブフォーム要望から発生。用語は legacy SubForm -> MAUI ContentView/UserControl として扱います。source code実装時はPM-controlのskills/source-code-intel/を使い、sources/KsPosBoilerplate/KsPos.Applicationsに範囲を絞ってrtk
+    rgで確認し、build/testで検証します。
+  notes_vi: Thêm khung sub-view hướng dẫn lỗi máy thu tiền trong KsPos.Applications
+- id: T-442-01
+  customer_task_id: KSNEWSYS-442
+  vti_backlog_id: SHARP_MULTI_DEVICE_POS-620
+  type: タスク
+  title: KSNEWSYS-442 Tablet POSテーブルのzebra表示可否調査
+  description: Tablet POS上で、現在の白一色表示の代わりに青／白の交互行（zebra）を表示できるか調査します。
+  owner: Đỗ Hoàng Nam VTI.D6
+  start_date: 46170
+  end_date: ''
+  deadline: 46203
+  status: Not Started
+  priority: Medium
+  definition_of_done: zebra表示の実現可否を確認し、お客様向けの設計回答を更新していること。
+  notes: VTI Backlog ticket SHARP_MULTI_DEVICE_POS-620 から作成。お客様からのzebra表示要望です。
+  notes_vi: Điều tra khả năng hiển thị zebra trong bảng Tablet POS
