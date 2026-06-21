@@ -1,34 +1,11 @@
----
-title: POS-HOST-02 タブレットPOS ホスト 名前付きパイプデバイスホストアダプター プログラム仕様書
-project: tablet_pos_host
-type: program-spec
-status: draft
-source:
-  - sources/KsPosBoilerplate/TabetPos.Host/src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs
-tags:
-  - tablet-host
-  - named-pipe
-  - adapter
-  - program-spec
----
-
 # POS-HOST-02 タブレットPOS ホスト 名前付きパイプデバイスホストアダプター プログラム仕様書
-
-<!-- spec-evidence
-document_id: POS-HOST-02
-status: verified
-sources:
-  - path: sources/KsPosBoilerplate/TabetPos.Host/src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs
-    symbol: NamedPipeDeviceHostAdapter
-notes: CodeGraph local index and source code checked on 2026/06/21. Excel export compatibility is intentionally not preserved in this Pure Markdown rewrite.
--->
 
 ## 改訂履歴
 
 | バージョン | 更新日 | 更新者 | 変更内容 |
 | --- | --- | --- | --- |
-| 0.0.2 | 2026/06/21 | VTI-SAM | CodeGraph とソースコードに基づき、Pure Markdown 形式へ再構成し、内容を更新 |
-| 0.0.1 | 2026/06/19 | VTI-SAM | 初版作成 |
+| 0.0.2 | 2026/06/21 | VTI | クラス仕様、フィールド/プロパティ、メソッド仕様を更新 |
+| 0.0.1 | 2026/06/19 | VTI | 初版作成 |
 
 ## 基本情報
 
@@ -47,47 +24,46 @@ notes: CodeGraph local index and source code checked on 2026/06/21. Excel export
 
 | 項目 | 内容 |
 | --- | --- |
-| CodeGraph project | sources/KsPosBoilerplate/TabetPos.Host |
-| 主要ソース | sources/KsPosBoilerplate/TabetPos.Host/src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs |
-| 検証状態 | CodeGraph sync/status と source read により確認済み |
-| 対象外 | Excel workbook、Designer 自動生成部分、source code の変更 |
+| ソースファイル | sources/KsPosBoilerplate/TabetPos.Host/src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs |
+| 対象クラス | NamedPipeDeviceHostAdapter |
+| 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 
 ## クラス概要
 
-ホスト内の command handler と Named Pipe transport を接続する adapter であり、command pipe と event pipe の開始・停止、command 変換、event publish を担当する。
+ホスト内部のデバイス制御処理と名前付きパイプ通信をつなぐ中継層。アプリケーションから届くコマンドを内部処理用の要求に変換し、デバイス応答やホスト制御通知を通信路へ戻す。
 
 ### 主な責務
 
-- command request を mapper で内部 command に変換する。
-- DeviceCommandRouter によりデバイス単位で順序制御する。
-- Kill/ReStart は host action handler へ遅延通知する。
+- コマンド受信用とイベント通知用の通信路を開始・終了する。
+- 外部メッセージと内部デバイスコマンドの変換を行う。
+- デバイス単位の順序制御とホスト停止・再起動通知を仲介する。
 
 ## フィールド/プロパティ
 
-| 区分 | 可視性 | 型 | 名前 | 用途 | Evidence |
-| --- | --- | --- | --- | --- | --- |
-| フィールド | private | string | NamedPipeCommandPipeName | string 型の内部状態。 | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:9 |
-| フィールド | private | string | NamedPipeEventPipeName | string 型の内部状態。 | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:10 |
-| フィールド | private | IDeviceCommandHandler | _commandHandler | デバイスコマンド処理の委譲先。 | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:12 |
-| フィールド | private | Action<DeviceHostAction> | _hostActionHandler | Kill/ReStart などホスト制御アクションの通知先。 | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:13 |
-| フィールド | private | INamedPipeCommandMapper | _commandMapper | Named Pipe request/response と内部 command/result の変換担当。 | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:14 |
-| フィールド | private | string | _commandPipeName | string 型の内部状態。 | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:15 |
-| フィールド | private | string | _eventPipeName | string 型の内部状態。 | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:16 |
-| フィールド | private | DeviceCommandRouter | _commandRouter | デバイス単位のコマンドキュー制御。 | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:17 |
-| フィールド | private | NamedPipeCommandServer | _commandServer | コマンド受信用 Named Pipe サーバー。 | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:18 |
-| フィールド | private | NamedPipeEventPublisher | _eventPublisher | イベント送信用 Named Pipe publisher。 | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:19 |
+| 区分 | 可視性 | 型 | 名前 | 用途 |
+| --- | --- | --- | --- | --- |
+| フィールド | private | string | NamedPipeCommandPipeName | command request を受け付ける既定の Named Pipe 名。 |
+| フィールド | private | string | NamedPipeEventPipeName | device event を publish する既定の Named Pipe 名。 |
+| フィールド | private | IDeviceCommandHandler | _commandHandler | デバイスコマンド処理の委譲先。 |
+| フィールド | private | Action<DeviceHostAction> | _hostActionHandler | Kill/ReStart などホスト制御アクションの通知先。 |
+| フィールド | private | INamedPipeCommandMapper | _commandMapper | Named Pipe request/response と内部 command/result の変換担当。 |
+| フィールド | private | string | _commandPipeName | command server 起動時に使用する Named Pipe 名。 |
+| フィールド | private | string | _eventPipeName | event publisher 起動時に使用する Named Pipe 名。 |
+| フィールド | private | DeviceCommandRouter | _commandRouter | デバイス単位のコマンドキュー制御。 |
+| フィールド | private | NamedPipeCommandServer | _commandServer | コマンド受信用 Named Pipe サーバー。 |
+| フィールド | private | NamedPipeEventPublisher | _eventPublisher | イベント送信用 Named Pipe publisher。 |
 
 ## メソッド一覧
 
-| No | 可視性 | 戻り値 | メソッド名 | 概要 | Evidence |
-| --- | --- | --- | --- | --- | --- |
-| 1 | public | - | NamedPipeDeviceHostAdapter | インスタンスを初期化する。 | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:21-27 |
-| 2 | internal | - | NamedPipeDeviceHostAdapter | インスタンスを初期化する。 | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:29-36 |
-| 3 | internal | - | NamedPipeDeviceHostAdapter | インスタンスを初期化する。 | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:38-50 |
-| 4 | public | void | Start | command router、event publisher、command server を準備し、Named Pipe 通信を開始する。 | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:52-60 |
-| 5 | public | void | Dispose | command server、router、event publisher を停止・破棄し、再開始可能な状態へ戻す。 | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:62-70 |
-| 6 | public | void | PublishDeviceReply | デバイス側の非同期応答を event pipe 用の NamedPipeDeviceEvent に変換して送信する。 | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:72-84 |
-| 7 | private | NamedPipeDeviceCommandResponse | ProcessCommand | Named Pipe request を内部 command に変換し、handler 実行後に response へ戻す。 | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:86-101 |
+| No | 可視性 | 戻り値 | メソッド名 | 概要 |
+| --- | --- | --- | --- | --- |
+| 1 | public | - | NamedPipeDeviceHostAdapter | インスタンスを初期化する。 |
+| 2 | internal | - | NamedPipeDeviceHostAdapter | インスタンスを初期化する。 |
+| 3 | internal | - | NamedPipeDeviceHostAdapter | インスタンスを初期化する。 |
+| 4 | public | void | Start | command router、event publisher、command server を準備し、Named Pipe 通信を開始する。 |
+| 5 | public | void | Dispose | command server、router、event publisher を停止・破棄し、再開始可能な状態へ戻す。 |
+| 6 | public | void | PublishDeviceReply | デバイス側の非同期応答を event pipe 用の NamedPipeDeviceEvent に変換して送信する。 |
+| 7 | private | NamedPipeDeviceCommandResponse | ProcessCommand | Named Pipe request を内部 command に変換し、handler 実行後に response へ戻す。 |
 
 ## メソッド詳細
 
@@ -98,13 +74,19 @@ notes: CodeGraph local index and source code checked on 2026/06/21. Excel export
 | シグネチャ | `public NamedPipeDeviceHostAdapter( IDeviceCommandHandler commandHandler, Action<DeviceHostAction> hostActionHandler)` |
 | 可視性 | public |
 | 戻り値 | - |
-| Evidence | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:21-27 |
+
+引数:
+
+| 型 | 論理名 | 物理名 |
+| --- | --- | --- |
+| IDeviceCommandHandler | コマンドハンドラー | commandHandler |
+| Action<DeviceHostAction> | ホストアクションハンドラー | hostActionHandler |
 
 処理内容:
 
-- ① 対象 method の実行条件を確認する。
-- ② インスタンスを初期化する。
-- ③ 必要な戻り値または内部状態を更新する。
+- ① command handler と host action handler を受け取る。
+- ② LegacyMessageParser を使用する NamedPipeCommandMapper を生成する。
+- ③ command/event pipe は既定名を使用し、共通コンストラクタへ初期化を委譲する。
 
 備考: -
 
@@ -115,13 +97,20 @@ notes: CodeGraph local index and source code checked on 2026/06/21. Excel export
 | シグネチャ | `internal NamedPipeDeviceHostAdapter( IDeviceCommandHandler commandHandler, Action<DeviceHostAction> hostActionHandler, INamedPipeCommandMapper commandMapper)` |
 | 可視性 | internal |
 | 戻り値 | - |
-| Evidence | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:29-36 |
+
+引数:
+
+| 型 | 論理名 | 物理名 |
+| --- | --- | --- |
+| IDeviceCommandHandler | コマンドハンドラー | commandHandler |
+| Action<DeviceHostAction> | ホストアクションハンドラー | hostActionHandler |
+| INamedPipeCommandMapper | コマンドマッパー | commandMapper |
 
 処理内容:
 
-- ① 対象 method の実行条件を確認する。
-- ② インスタンスを初期化する。
-- ③ 必要な戻り値または内部状態を更新する。
+- ① command handler、host action handler、command mapper を受け取る。
+- ② command/event pipe は既定名を使用する。
+- ③ 共通コンストラクタへ委譲し、mapper 差し替え可能な adapter を構成する。
 
 備考: -
 
@@ -132,13 +121,22 @@ notes: CodeGraph local index and source code checked on 2026/06/21. Excel export
 | シグネチャ | `internal NamedPipeDeviceHostAdapter( IDeviceCommandHandler commandHandler, Action<DeviceHostAction> hostActionHandler, INamedPipeCommandMapper commandMapper, string commandPipeName, string eventPipeName)` |
 | 可視性 | internal |
 | 戻り値 | - |
-| Evidence | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:38-50 |
+
+引数:
+
+| 型 | 論理名 | 物理名 |
+| --- | --- | --- |
+| IDeviceCommandHandler | コマンドハンドラー | commandHandler |
+| Action<DeviceHostAction> | ホストアクションハンドラー | hostActionHandler |
+| INamedPipeCommandMapper | コマンドマッパー | commandMapper |
+| string | コマンド用パイプ名 | commandPipeName |
+| string | イベント用パイプ名 | eventPipeName |
 
 処理内容:
 
-- ① 対象 method の実行条件を確認する。
-- ② インスタンスを初期化する。
-- ③ 必要な戻り値または内部状態を更新する。
+- ① command handler、host action handler、command mapper、command/event pipe 名を受け取る。
+- ② 受け取った dependency と pipe 名を private field に保持する。
+- ③ Start 時に router、command server、event publisher を生成できる状態にする。
 
 備考: -
 
@@ -149,7 +147,6 @@ notes: CodeGraph local index and source code checked on 2026/06/21. Excel export
 | シグネチャ | `public void Start()` |
 | 可視性 | public |
 | 戻り値 | void |
-| Evidence | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:52-60 |
 
 処理内容:
 
@@ -166,7 +163,6 @@ notes: CodeGraph local index and source code checked on 2026/06/21. Excel export
 | シグネチャ | `public void Dispose()` |
 | 可視性 | public |
 | 戻り値 | void |
-| Evidence | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:62-70 |
 
 処理内容:
 
@@ -183,7 +179,15 @@ notes: CodeGraph local index and source code checked on 2026/06/21. Excel export
 | シグネチャ | `public void PublishDeviceReply(KsDeviceId deviceId, KsDeviceMethodID methodId, IntPtr handle, Dictionary<string, string> payload)` |
 | 可視性 | public |
 | 戻り値 | void |
-| Evidence | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:72-84 |
+
+引数:
+
+| 型 | 論理名 | 物理名 |
+| --- | --- | --- |
+| KsDeviceId | デバイスID | deviceId |
+| KsDeviceMethodID | デバイスメソッドID | methodId |
+| IntPtr | ウィンドウハンドル | handle |
+| Dictionary<string, string> | ペイロード | payload |
 
 処理内容:
 
@@ -200,7 +204,12 @@ notes: CodeGraph local index and source code checked on 2026/06/21. Excel export
 | シグネチャ | `private NamedPipeDeviceCommandResponse ProcessCommand(NamedPipeDeviceCommandRequest request)` |
 | 可視性 | private |
 | 戻り値 | NamedPipeDeviceCommandResponse |
-| Evidence | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:86-101 |
+
+引数:
+
+| 型 | 論理名 | 物理名 |
+| --- | --- | --- |
+| NamedPipeDeviceCommandRequest | デバイスコマンド要求 | request |
 
 処理内容:
 
@@ -210,7 +219,6 @@ notes: CodeGraph local index and source code checked on 2026/06/21. Excel export
 - ④ 処理結果を Named Pipe response へ変換して返却する。
 
 備考: -
-
 ## 処理フロー/注意事項
 
 - Start が command router、event publisher、command server を生成して開始する。

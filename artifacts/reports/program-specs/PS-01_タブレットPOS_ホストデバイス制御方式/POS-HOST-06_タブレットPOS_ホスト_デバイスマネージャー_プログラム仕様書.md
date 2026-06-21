@@ -1,33 +1,11 @@
----
-title: POS-HOST-06 タブレットPOS ホスト デバイスマネージャー プログラム仕様書
-project: tablet_pos_host
-type: program-spec
-status: draft
-source:
-  - sources/KsPosBoilerplate/TabetPos.Host/src/KsDeviceManager/KsDeviceManager.cs
-tags:
-  - tablet-host
-  - device-manager
-  - program-spec
----
-
 # POS-HOST-06 タブレットPOS ホスト デバイスマネージャー プログラム仕様書
-
-<!-- spec-evidence
-document_id: POS-HOST-06
-status: verified
-sources:
-  - path: sources/KsPosBoilerplate/TabetPos.Host/src/KsDeviceManager/KsDeviceManager.cs
-    symbol: KsDeviceManager
-notes: CodeGraph local index and source code checked on 2026/06/21. Excel export compatibility is intentionally not preserved in this Pure Markdown rewrite.
--->
 
 ## 改訂履歴
 
 | バージョン | 更新日 | 更新者 | 変更内容 |
 | --- | --- | --- | --- |
-| 0.0.2 | 2026/06/21 | VTI-SAM | CodeGraph とソースコードに基づき、Pure Markdown 形式へ再構成し、内容を更新 |
-| 0.0.1 | 2026/06/19 | VTI-SAM | 初版作成 |
+| 0.0.2 | 2026/06/21 | VTI | クラス仕様、フィールド/プロパティ、メソッド仕様を更新 |
+| 0.0.1 | 2026/06/19 | VTI | 初版作成 |
 
 ## 基本情報
 
@@ -46,42 +24,41 @@ notes: CodeGraph local index and source code checked on 2026/06/21. Excel export
 
 | 項目 | 内容 |
 | --- | --- |
-| CodeGraph project | sources/KsPosBoilerplate/TabetPos.Host |
-| 主要ソース | sources/KsPosBoilerplate/TabetPos.Host/src/KsDeviceManager/KsDeviceManager.cs |
-| 検証状態 | CodeGraph sync/status と source read により確認済み |
-| 対象外 | Excel workbook、Designer 自動生成部分、source code の変更 |
+| ソースファイル | sources/KsPosBoilerplate/TabetPos.Host/src/KsDeviceManager/KsDeviceManager.cs |
+| 対象クラス | KsDeviceManager |
+| 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 
 ## クラス概要
 
-設定からデバイスクラスを生成・起動し、起動済みデバイスの検索、停止、応答転送を管理する Singleton。
+設定に基づいて利用対象デバイスを生成・起動し、ホスト内で一元管理するデバイス管理部。起動済みデバイスの検索、停止、応答通知、稼働監視を担当する。
 
 ### 主な責務
 
-- 起動対象デバイスを設定から取得する。
-- 各デバイス起動を最大3回試行する。
-- MSR/CashChanger の keep-alive を周期監視する。
+- 設定から起動対象デバイスを取得し、初期化を試行する。
+- 起動済みデバイスの一覧を保持し、要求元から検索できるようにする。
+- 応答転送と一部デバイスの稼働監視を行う。
 
 ## フィールド/プロパティ
 
-| 区分 | 可視性 | 型 | 名前 | 用途 | Evidence |
-| --- | --- | --- | --- | --- | --- |
-| フィールド | private | IFSettingDevice | _deviceSetting | IFSettingDevice 型の内部状態。 | src/KsDeviceManager/KsDeviceManager.cs:18 |
-| フィールド | private | IFDeviceReply | _deviceReply | IFDeviceReply 型の内部状態。 | src/KsDeviceManager/KsDeviceManager.cs:19 |
-| フィールド | private | bool | _stopFlg | bool 型の内部状態。 | src/KsDeviceManager/KsDeviceManager.cs:20 |
-| フィールド | private | KsDeviceManager | _singleton | KsDeviceManager 型の内部状態。 | src/KsDeviceManager/KsDeviceManager.cs:24 |
-| フィールド | private | List<IFDevice> | _deviceList | 起動済み IFDevice の保持リスト。 | src/KsDeviceManager/KsDeviceManager.cs:32 |
-| プロパティ | public | IReadOnlyList<IFDevice> | Devices | 起動済みデバイスの読み取り専用 snapshot。 | src/KsDeviceManager/KsDeviceManager.cs:34 |
+| 区分 | 可視性 | 型 | 名前 | 用途 |
+| --- | --- | --- | --- | --- |
+| フィールド | private | IFSettingDevice | _deviceSetting | 起動対象デバイス一覧と device instance 生成を提供する設定インスタンス。 |
+| フィールド | private | IFDeviceReply | _deviceReply | デバイス処理結果を host transport へ返却するための reply 先。 |
+| フィールド | private | bool | _stopFlg | device manager の監視ループを終了させる停止フラグ。 |
+| フィールド | private | KsDeviceManager | _singleton | device manager singleton instance。 |
+| フィールド | private | List<IFDevice> | _deviceList | 起動済み IFDevice の保持リスト。 |
+| プロパティ | public | IReadOnlyList<IFDevice> | Devices | 起動済みデバイスの読み取り専用 snapshot。 |
 
 ## メソッド一覧
 
-| No | 可視性 | 戻り値 | メソッド名 | 概要 | Evidence |
-| --- | --- | --- | --- | --- | --- |
-| 1 | private | - | KsDeviceManager | インスタンスコンストラクタ | src/KsDeviceManager/KsDeviceManager.cs:27-30 |
-| 2 | public | KsDeviceManager | GetInstance | Singleton インスタンスを返却する。 | src/KsDeviceManager/KsDeviceManager.cs:38-41 |
-| 3 | public | void | StartDeviceManager | 設定から対象デバイスを生成し、起動後は停止要求まで keep-alive 監視ループを維持する。 | src/KsDeviceManager/KsDeviceManager.cs:48-110 |
-| 4 | public | void | StopDeviceManager | 停止フラグを立て、保持中の全デバイスへ StopDevice を呼び出して list を空にする。 | src/KsDeviceManager/KsDeviceManager.cs:115-126 |
-| 5 | public | IFDevice | FindDevice | 起動済みデバイス list から DeviceId が一致する IFDevice を返す。 | src/KsDeviceManager/KsDeviceManager.cs:128-131 |
-| 6 | public | void | ReplyDevice | legacy process info の client/handle/method を使い、ホストの ReplyDevice へ応答を渡す。 | src/KsDeviceManager/KsDeviceManager.cs:138-141 |
+| No | 可視性 | 戻り値 | メソッド名 | 概要 |
+| --- | --- | --- | --- | --- |
+| 1 | private | - | KsDeviceManager | インスタンスコンストラクタ |
+| 2 | public | KsDeviceManager | GetInstance | Singleton インスタンスを返却する。 |
+| 3 | public | void | StartDeviceManager | 設定から対象デバイスを生成し、起動後は停止要求まで keep-alive 監視ループを維持する。 |
+| 4 | public | void | StopDeviceManager | 停止フラグを立て、保持中の全デバイスへ StopDevice を呼び出して list を空にする。 |
+| 5 | public | IFDevice | FindDevice | 起動済みデバイス list から DeviceId が一致する IFDevice を返す。 |
+| 6 | public | void | ReplyDevice | legacy process info の client/handle/method を使い、ホストの ReplyDevice へ応答を渡す。 |
 
 ## メソッド詳細
 
@@ -92,13 +69,12 @@ notes: CodeGraph local index and source code checked on 2026/06/21. Excel export
 | シグネチャ | `private KsDeviceManager()` |
 | 可視性 | private |
 | 戻り値 | - |
-| Evidence | src/KsDeviceManager/KsDeviceManager.cs:27-30 |
 
 処理内容:
 
-- ① 対象 method の実行条件を確認する。
-- ② インスタンスを初期化する。
-- ③ 必要な戻り値または内部状態を更新する。
+- ① private constructor として生成経路を singleton に限定する。
+- ② 生成された instance を _singleton に設定する。
+- ③ GetInstance から同一 instance を返却できる状態にする。
 
 備考: -
 
@@ -109,13 +85,12 @@ notes: CodeGraph local index and source code checked on 2026/06/21. Excel export
 | シグネチャ | `public static KsDeviceManager GetInstance()` |
 | 可視性 | public |
 | 戻り値 | KsDeviceManager |
-| Evidence | src/KsDeviceManager/KsDeviceManager.cs:38-41 |
 
 処理内容:
 
-- ① 対象 method の実行条件を確認する。
-- ② Singleton インスタンスを返却する。
-- ③ 必要な戻り値または内部状態を更新する。
+- ① 現在保持している _singleton を参照する。
+- ② 新規生成は行わず、初期化済み device manager instance を返す。
+- ③ 呼出元は返却 instance 経由で device start/stop/find を実行する。
 
 備考: -
 
@@ -126,7 +101,13 @@ notes: CodeGraph local index and source code checked on 2026/06/21. Excel export
 | シグネチャ | `public void StartDeviceManager(IFSettingDevice deviceSetting, IFDeviceReply deviceReply)` |
 | 可視性 | public |
 | 戻り値 | void |
-| Evidence | src/KsDeviceManager/KsDeviceManager.cs:48-110 |
+
+引数:
+
+| 型 | 論理名 | 物理名 |
+| --- | --- | --- |
+| IFSettingDevice | デバイス設定 | deviceSetting |
+| IFDeviceReply | デバイス応答先 | deviceReply |
 
 処理内容:
 
@@ -145,7 +126,6 @@ notes: CodeGraph local index and source code checked on 2026/06/21. Excel export
 | シグネチャ | `public void StopDeviceManager()` |
 | 可視性 | public |
 | 戻り値 | void |
-| Evidence | src/KsDeviceManager/KsDeviceManager.cs:115-126 |
 
 処理内容:
 
@@ -162,13 +142,18 @@ notes: CodeGraph local index and source code checked on 2026/06/21. Excel export
 | シグネチャ | `public IFDevice FindDevice(KsDeviceId deviceId)` |
 | 可視性 | public |
 | 戻り値 | IFDevice |
-| Evidence | src/KsDeviceManager/KsDeviceManager.cs:128-131 |
+
+引数:
+
+| 型 | 論理名 | 物理名 |
+| --- | --- | --- |
+| KsDeviceId | デバイスID | deviceId |
 
 処理内容:
 
-- ① 対象 method の実行条件を確認する。
-- ② 起動済みデバイス list から DeviceId が一致する IFDevice を返す。
-- ③ 必要な戻り値または内部状態を更新する。
+- ① 起動済み device list を走査する。
+- ② 指定された KsDeviceId と一致する device を検索する。
+- ③ 該当 device が存在する場合は返却し、存在しない場合は null を返す。
 
 備考: -
 
@@ -179,16 +164,21 @@ notes: CodeGraph local index and source code checked on 2026/06/21. Excel export
 | シグネチャ | `public void ReplyDevice(ref KsProcessInfo proc, ref Dictionary<string, string> dic)` |
 | 可視性 | public |
 | 戻り値 | void |
-| Evidence | src/KsDeviceManager/KsDeviceManager.cs:138-141 |
+
+引数:
+
+| 型 | 論理名 | 物理名 |
+| --- | --- | --- |
+| KsProcessInfo | プロセス情報 | proc |
+| Dictionary<string, string> | 応答データ | dic |
 
 処理内容:
 
-- ① 対象 method の実行条件を確認する。
-- ② legacy process info の client/handle/method を使い、ホストの ReplyDevice へ応答を渡す。
-- ③ 必要な戻り値または内部状態を更新する。
+- ① KsProcessInfo と戻り値 dictionary を受け取る。
+- ② proc から client、deviceId、methodId、handle を取得する。
+- ③ _deviceReply.ReplyDevice に委譲し、client へ device 処理結果を返却する。
 
 備考: -
-
 ## 処理フロー/注意事項
 
 - StartDeviceManager が device list を構築し、停止フラグまで監視ループを維持する。

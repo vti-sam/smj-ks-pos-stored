@@ -1,35 +1,11 @@
----
-title: POS-HOST-10 タブレットPOS ホスト キャッシュドロア制御 SHARP プログラム仕様書
-project: tablet_pos_host
-type: program-spec
-status: draft
-source:
-  - sources/KsPosBoilerplate/TabetPos.Host/src/KsDevice/CashDrawer/CashDrawerBySharp/CashDrawerBySharp.cs
-tags:
-  - tablet-host
-  - cash-drawer
-  - sharp
-  - opos
-  - program-spec
----
-
 # POS-HOST-10 タブレットPOS ホスト キャッシュドロア制御 SHARP プログラム仕様書
-
-<!-- spec-evidence
-document_id: POS-HOST-10
-status: verified
-sources:
-  - path: sources/KsPosBoilerplate/TabetPos.Host/src/KsDevice/CashDrawer/CashDrawerBySharp/CashDrawerBySharp.cs
-    symbol: CashDrawerBySharp
-notes: CodeGraph local index and source code checked on 2026/06/21. Excel export compatibility is intentionally not preserved in this Pure Markdown rewrite.
--->
 
 ## 改訂履歴
 
 | バージョン | 更新日 | 更新者 | 変更内容 |
 | --- | --- | --- | --- |
-| 0.0.2 | 2026/06/21 | VTI-SAM | CodeGraph とソースコードに基づき、Pure Markdown 形式へ再構成し、内容を更新 |
-| 0.0.1 | 2026/06/19 | VTI-SAM | 初版作成 |
+| 0.0.2 | 2026/06/21 | VTI | クラス仕様、フィールド/プロパティ、メソッド仕様を更新 |
+| 0.0.1 | 2026/06/19 | VTI | 初版作成 |
 
 ## 基本情報
 
@@ -48,35 +24,34 @@ notes: CodeGraph local index and source code checked on 2026/06/21. Excel export
 
 | 項目 | 内容 |
 | --- | --- |
-| CodeGraph project | sources/KsPosBoilerplate/TabetPos.Host |
-| 主要ソース | sources/KsPosBoilerplate/TabetPos.Host/src/KsDevice/CashDrawer/CashDrawerBySharp/CashDrawerBySharp.cs |
-| 検証状態 | CodeGraph sync/status と source read により確認済み |
-| 対象外 | Excel workbook、Designer 自動生成部分、source code の変更 |
+| ソースファイル | sources/KsPosBoilerplate/TabetPos.Host/src/KsDevice/CashDrawer/CashDrawerBySharp/CashDrawerBySharp.cs |
+| 対象クラス | CashDrawerBySharp |
+| 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 
 ## クラス概要
 
-SHARP CashDrawer OCX を保持し、OpenDrawer 操作を実行するデバイス制御クラス。
+SHARP キャッシュドロアの開放操作を提供するデバイス制御部。POS 側の要求をドロア制御部品へ渡し、排他制御と実行結果の返却を行う。
 
 ### 主な責務
 
-- StartDevice がフォームと Drawer OCX を構成する。
-- DeviceMethod は OpenDrawer のみを処理対象とする。
-- 操作時に Device_Start/Device_End で排他と有効状態を制御する。
+- ドロア制御部品を準備し、操作可能な状態にする。
+- ドロア開放要求を受け付けて実機操作を実行する。
+- 操作前後の排他制御と結果通知を行う。
 
 ## フィールド/プロパティ
 
-| 区分 | 可視性 | 型 | 名前 | 用途 | Evidence |
-| --- | --- | --- | --- | --- | --- |
-| フィールド | private | CashDrawerBySharpForm | _oFrm | デバイス制御用フォーム。 | src/KsDevice/CashDrawer/CashDrawerBySharp/CashDrawerBySharp.cs:14 |
+| 区分 | 可視性 | 型 | 名前 | 用途 |
+| --- | --- | --- | --- | --- |
+| フィールド | private | CashDrawerBySharpForm | _oFrm | デバイス制御用フォーム。 |
 
 ## メソッド一覧
 
-| No | 可視性 | 戻り値 | メソッド名 | 概要 | Evidence |
-| --- | --- | --- | --- | --- | --- |
-| 1 | public | void | StartDevice | 対象デバイスIDを保持し、OCXを配置したフォームとタイマー同期先を初期化する。 | src/KsDevice/CashDrawer/CashDrawerBySharp/CashDrawerBySharp.cs:19-32 |
-| 2 | public | void | StopDevice | デバイス制御を終了し、タイマー停止とフォーム解放を実行する。 | src/KsDevice/CashDrawer/CashDrawerBySharp/CashDrawerBySharp.cs:37-40 |
-| 3 | public | int | DeviceMethod | OpenDrawer だけを処理し、実行結果を ResultCode/ResultCodeExtended として返す。 | src/KsDevice/CashDrawer/CashDrawerBySharp/CashDrawerBySharp.cs:49-67 |
-| 4 | public | void | Device_Mng | ドロアは常時監視を行わないため、周期 timer を停止する。 | src/KsDevice/CashDrawer/CashDrawerBySharp/CashDrawerBySharp.cs:70-75 |
+| No | 可視性 | 戻り値 | メソッド名 | 概要 |
+| --- | --- | --- | --- | --- |
+| 1 | public | void | StartDevice | 対象デバイスIDを保持し、OCXを配置したフォームとタイマー同期先を初期化する。 |
+| 2 | public | void | StopDevice | デバイス制御を終了し、タイマー停止とフォーム解放を実行する。 |
+| 3 | public | int | DeviceMethod | OpenDrawer だけを処理し、実行結果を ResultCode/ResultCodeExtended として返す。 |
+| 4 | public | void | Device_Mng | ドロアは常時監視を行わないため、周期 timer を停止する。 |
 
 ## メソッド詳細
 
@@ -87,7 +62,12 @@ SHARP CashDrawer OCX を保持し、OpenDrawer 操作を実行するデバイス
 | シグネチャ | `public override void StartDevice(KsDeviceId devId)` |
 | 可視性 | public |
 | 戻り値 | void |
-| Evidence | src/KsDevice/CashDrawer/CashDrawerBySharp/CashDrawerBySharp.cs:19-32 |
+
+引数:
+
+| 型 | 論理名 | 物理名 |
+| --- | --- | --- |
+| KsDeviceId | デバイスID | devId |
 
 処理内容:
 
@@ -105,7 +85,6 @@ SHARP CashDrawer OCX を保持し、OpenDrawer 操作を実行するデバイス
 | シグネチャ | `public override void StopDevice()` |
 | 可視性 | public |
 | 戻り値 | void |
-| Evidence | src/KsDevice/CashDrawer/CashDrawerBySharp/CashDrawerBySharp.cs:37-40 |
 
 処理内容:
 
@@ -121,7 +100,14 @@ SHARP CashDrawer OCX を保持し、OpenDrawer 操作を実行するデバイス
 | シグネチャ | `public override int DeviceMethod(KsDeviceMethodID methodId, Dictionary<string, string> arguments, ref Dictionary<string, string> returns)` |
 | 可視性 | public |
 | 戻り値 | int |
-| Evidence | src/KsDevice/CashDrawer/CashDrawerBySharp/CashDrawerBySharp.cs:49-67 |
+
+引数:
+
+| 型 | 論理名 | 物理名 |
+| --- | --- | --- |
+| KsDeviceMethodID | デバイスメソッドID | methodId |
+| Dictionary<string, string> | 入力引数 | arguments |
+| Dictionary<string, string> | 戻り値格納先 | returns |
 
 処理内容:
 
@@ -139,7 +125,13 @@ SHARP CashDrawer OCX を保持し、OpenDrawer 操作を実行するデバイス
 | シグネチャ | `public override void Device_Mng(object oDevice, IntPtr foreHandl)` |
 | 可視性 | public |
 | 戻り値 | void |
-| Evidence | src/KsDevice/CashDrawer/CashDrawerBySharp/CashDrawerBySharp.cs:70-75 |
+
+引数:
+
+| 型 | 論理名 | 物理名 |
+| --- | --- | --- |
+| object | デバイスオブジェクト | oDevice |
+| IntPtr | 前面ウィンドウハンドル | foreHandl |
 
 処理内容:
 
@@ -148,7 +140,6 @@ SHARP CashDrawer OCX を保持し、OpenDrawer 操作を実行するデバイス
 - ③ ドロアはイベント監視を継続しないため、追加処理は行わない。
 
 備考: -
-
 ## 処理フロー/注意事項
 
 - StartDevice が CashDrawerBySharpForm を生成する。

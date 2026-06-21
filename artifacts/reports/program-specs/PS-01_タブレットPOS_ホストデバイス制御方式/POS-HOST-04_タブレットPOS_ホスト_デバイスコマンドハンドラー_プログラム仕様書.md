@@ -1,33 +1,11 @@
----
-title: POS-HOST-04 タブレットPOS ホスト デバイスコマンドハンドラー プログラム仕様書
-project: tablet_pos_host
-type: program-spec
-status: draft
-source:
-  - sources/KsPosBoilerplate/TabetPos.Host/src/KsHost/DeviceHost/DeviceCommandCore.cs
-tags:
-  - tablet-host
-  - command-handler
-  - program-spec
----
-
 # POS-HOST-04 タブレットPOS ホスト デバイスコマンドハンドラー プログラム仕様書
-
-<!-- spec-evidence
-document_id: POS-HOST-04
-status: verified
-sources:
-  - path: sources/KsPosBoilerplate/TabetPos.Host/src/KsHost/DeviceHost/DeviceCommandCore.cs
-    symbol: DeviceCommandHandler
-notes: CodeGraph local index and source code checked on 2026/06/21. Excel export compatibility is intentionally not preserved in this Pure Markdown rewrite.
--->
 
 ## 改訂履歴
 
 | バージョン | 更新日 | 更新者 | 変更内容 |
 | --- | --- | --- | --- |
-| 0.0.2 | 2026/06/21 | VTI-SAM | CodeGraph とソースコードに基づき、Pure Markdown 形式へ再構成し、内容を更新 |
-| 0.0.1 | 2026/06/19 | VTI-SAM | 初版作成 |
+| 0.0.2 | 2026/06/21 | VTI | クラス仕様、フィールド/プロパティ、メソッド仕様を更新 |
+| 0.0.1 | 2026/06/19 | VTI | 初版作成 |
 
 ## 基本情報
 
@@ -46,36 +24,35 @@ notes: CodeGraph local index and source code checked on 2026/06/21. Excel export
 
 | 項目 | 内容 |
 | --- | --- |
-| CodeGraph project | sources/KsPosBoilerplate/TabetPos.Host |
-| 主要ソース | sources/KsPosBoilerplate/TabetPos.Host/src/KsHost/DeviceHost/DeviceCommandCore.cs |
-| 検証状態 | CodeGraph sync/status と source read により確認済み |
-| 対象外 | Excel workbook、Designer 自動生成部分、source code の変更 |
+| ソースファイル | sources/KsPosBoilerplate/TabetPos.Host/src/KsHost/DeviceHost/DeviceCommandCore.cs |
+| 対象クラス | DeviceCommandHandler |
+| 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 
 ## クラス概要
 
-内部 DeviceCommand を検証し、ホスト制御、使用開始/終了、デバイスメソッド実行へ振り分ける中核処理。
+ホストが受け取ったデバイス操作要求を判定し、実際のデバイス制御またはホスト制御へ振り分ける業務処理層。要求内容の妥当性確認、使用状態の更新、実行結果の整形を担当する。
 
 ### 主な責務
 
-- Kill/ReStart を host action として返却する。
-- DeviceUse/DeviceUnUse は process info store を更新する。
-- DeviceMethod は MethodId を検証して IFDevice へ委譲する。
+- ホスト停止・再起動などの制御要求を判定する。
+- デバイス使用開始・終了に伴う処理状態を更新する。
+- 対象デバイスと操作種別を確認して実行結果を返す。
 
 ## フィールド/プロパティ
 
-| 区分 | 可視性 | 型 | 名前 | 用途 | Evidence |
-| --- | --- | --- | --- | --- | --- |
+| 区分 | 可視性 | 型 | 名前 | 用途 |
+| --- | --- | --- | --- | --- |
 | コンストラクタ引数 | internal | IDeviceRegistry | deviceRegistry | DeviceId から IFDevice を検索する依存先。 | src/KsHost/DeviceHost/DeviceCommandCore.cs:80 |
 | コンストラクタ引数 | internal | IProcessInfoStore | processInfoStore | DeviceUse/DeviceUnUse の process info 更新先。 | src/KsHost/DeviceHost/DeviceCommandCore.cs:81 |
 
 ## メソッド一覧
 
-| No | 可視性 | 戻り値 | メソッド名 | 概要 | Evidence |
-| --- | --- | --- | --- | --- | --- |
-| 1 | internal | - | DeviceCommandHandler | registry と process info store を受け取って handler を構成する。 | src/KsHost/DeviceHost/DeviceCommandCore.cs:79-81 |
-| 2 | public | DeviceCommandResult | Handle | host action、device use/unuse、device method を判定し、対象 IFDevice へ処理を委譲する。 | src/KsHost/DeviceHost/DeviceCommandCore.cs:82-154 |
-| 3 | private static | DeviceCommandResult | Failure | 検証エラーまたは未対応 command を、legacy key を含む失敗 result に変換する。 | src/KsHost/DeviceHost/DeviceCommandCore.cs:156-174 |
-| 4 | private static | void | EnsureLegacyReturnKeys | 戻り payload に ResultCode/ReturnValue が無い場合だけ、return value で補完する。 | src/KsHost/DeviceHost/DeviceCommandCore.cs:176-183 |
+| No | 可視性 | 戻り値 | メソッド名 | 概要 |
+| --- | --- | --- | --- | --- |
+| 1 | internal | - | DeviceCommandHandler | registry と process info store を受け取って handler を構成する。 |
+| 2 | public | DeviceCommandResult | Handle | host action、device use/unuse、device method を判定し、対象 IFDevice へ処理を委譲する。 |
+| 3 | private static | DeviceCommandResult | Failure | 検証エラーまたは未対応 command を、legacy key を含む失敗 result に変換する。 |
+| 4 | private static | void | EnsureLegacyReturnKeys | 戻り payload に ResultCode/ReturnValue が無い場合だけ、return value で補完する。 |
 
 ## メソッド詳細
 
@@ -86,7 +63,13 @@ notes: CodeGraph local index and source code checked on 2026/06/21. Excel export
 | シグネチャ | `internal sealed class DeviceCommandHandler(IDeviceRegistry deviceRegistry, IProcessInfoStore processInfoStore)` |
 | 可視性 | internal |
 | 戻り値 | - |
-| Evidence | src/KsHost/DeviceHost/DeviceCommandCore.cs:79-81 |
+
+引数:
+
+| 型 | 論理名 | 物理名 |
+| --- | --- | --- |
+| IDeviceRegistry | デバイスレジストリ | deviceRegistry |
+| IProcessInfoStore | プロセス情報ストア | processInfoStore |
 
 処理内容:
 
@@ -103,7 +86,12 @@ notes: CodeGraph local index and source code checked on 2026/06/21. Excel export
 | シグネチャ | `public DeviceCommandResult Handle(DeviceCommand command)` |
 | 可視性 | public |
 | 戻り値 | DeviceCommandResult |
-| Evidence | src/KsHost/DeviceHost/DeviceCommandCore.cs:82-154 |
+
+引数:
+
+| 型 | 論理名 | 物理名 |
+| --- | --- | --- |
+| DeviceCommand | デバイスコマンド | command |
 
 処理内容:
 
@@ -123,7 +111,13 @@ notes: CodeGraph local index and source code checked on 2026/06/21. Excel export
 | シグネチャ | `private static DeviceCommandResult Failure(DeviceCommand command, string message)` |
 | 可視性 | private static |
 | 戻り値 | DeviceCommandResult |
-| Evidence | src/KsHost/DeviceHost/DeviceCommandCore.cs:156-174 |
+
+引数:
+
+| 型 | 論理名 | 物理名 |
+| --- | --- | --- |
+| DeviceCommand | デバイスコマンド | command |
+| string | メッセージ | message |
 
 処理内容:
 
@@ -140,7 +134,13 @@ notes: CodeGraph local index and source code checked on 2026/06/21. Excel export
 | シグネチャ | `private static void EnsureLegacyReturnKeys(Dictionary<string, string> payload, int returnValue)` |
 | 可視性 | private static |
 | 戻り値 | void |
-| Evidence | src/KsHost/DeviceHost/DeviceCommandCore.cs:176-183 |
+
+引数:
+
+| 型 | 論理名 | 物理名 |
+| --- | --- | --- |
+| Dictionary<string, string> | ペイロード | payload |
+| int | 戻り値 | returnValue |
 
 処理内容:
 
@@ -149,7 +149,6 @@ notes: CodeGraph local index and source code checked on 2026/06/21. Excel export
 - ③ 既に設定済みの key は上書きしない。
 
 備考: -
-
 ## 処理フロー/注意事項
 
 - Handle が message 種別を判定する。
