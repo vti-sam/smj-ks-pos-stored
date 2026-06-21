@@ -4,7 +4,7 @@ meta:
   sheet: WBS / WBS
   source_of_truth: google_sheets
   read_only_export: true
-  generated_at: '2026-06-17T14:26:35+09:00'
+  generated_at: '2026-06-21T00:32:41+09:00'
 records:
 - id: S-424
   customer_task_id: KSNEWSYS-424
@@ -13,9 +13,9 @@ records:
   title: KSNEWSYS-424 Device/Receiptレガシー資産のC#化とStrategy構成
   description: Device/Receiptに関連するVB/OCXレガシー資産を、次世代Tablet POS向けのStrategy/Adapter構成へ移行します。
   owner: VTI_SAM
-  start_date: 46163
+  start_date: '2026-05-21'
   end_date: ''
-  deadline: 46203
+  deadline: '2026-06-30'
   status: In Progress
   priority: High
   definition_of_done: 詳細設計、Device Adapter、Receipt/Journal Adapter、Unit Test、テストケース資料、デバイス機能確認が揃っていること。代表的な呼び出しがStrategy/Adapter経由で動作し、ログ／例外方針とテスト証跡をレビューできること。
@@ -29,9 +29,9 @@ records:
   title: KSNEWSYS-426 ターミナルアプリ向けログ出力基盤
   description: Sentry、ローカル操作ログ、BaseViewModelからの自動ログ出力の仕組みを準備します。
   owner: VTI_SAM
-  start_date: 46163
+  start_date: '2026-05-21'
   end_date: ''
-  deadline: 46203
+  deadline: '2026-06-30'
   status: In Progress
   priority: High
   definition_of_done: ログ基盤、Sentry設定、操作ログ仕様、APIログ連携点、利用ルールが揃っていること。Error/Warn/Info/Debugの方針、ローカルログ／Sentry確認、マスキング方針を確認できること。
@@ -45,9 +45,9 @@ records:
   title: KSNEWSYS-427 ターミナルアプリ向けローカル保存・復元基盤
   description: 画面実装者の負担を減らすため、保存／復元の共通基盤を準備します。
   owner: VTI_SAM
-  start_date: 46163
+  start_date: '2026-05-21'
   end_date: ''
-  deadline: 46203
+  deadline: '2026-06-30'
   status: In Progress
   priority: High
   definition_of_done: Storage service、restore hook、動作方針、テスト観点、実装ルールが揃っていること。代表画面で共通hookを使った保存／復元ができ、未保存データや破損データへの最低限の扱いがあること。
@@ -60,9 +60,9 @@ records:
   title: 共通管理・調整・レビュー対応
   description: お客様確認、仕様調整、レビュー対応、関連する小規模タスクを共通管理します。
   owner: VTI_SAM
-  start_date: 46163
+  start_date: '2026-05-21'
   end_date: ''
-  deadline: 46234
+  deadline: '2026-07-31'
   status: In Progress
   priority: Medium
   definition_of_done: 議事メモ、Q&A、進捗／リスク管理、軽微な修正が管理されていること。課題、決定事項、リスクを短い周期で追跡し、大きなスコープ超過がない範囲で調整できていること。
@@ -75,9 +75,9 @@ records:
   title: KSNEWSYS-424対象資産・デバイス・OCXの確認
   description: 6月の手戻りを抑えるため、対象資産とIF/Adapter境界を早期に確定します。
   owner: VTI_SAM
-  start_date: 46163
+  start_date: '2026-05-21'
   end_date: ''
-  deadline: 46173
+  deadline: '2026-05-31'
   status: Open
   priority: High
   risk_id: R-001, R-002
@@ -89,9 +89,9 @@ records:
   title: 7月のUAT・レビュー期間確認
   description: 2026-07-15までにUAT期間と代表デバイス／環境を確認します。
   owner: VTI_SAM
-  start_date: 46163
+  start_date: '2026-05-21'
   end_date: ''
-  deadline: 46204
+  deadline: '2026-07-01'
   status: Not Started
   priority: High
   risk_id: R-004
@@ -103,9 +103,9 @@ records:
   title: KSNEWSYS-426 Sentryレビュー
   description: Sentry基盤コードとプログラム仕様書は準備済みです。基本設計、クラス設計、監視フローについてお客様レビューと合意を待っています。
   owner: VTI_SAM
-  start_date: 46165
+  start_date: '2026-05-23'
   end_date: ''
-  deadline: 46173
+  deadline: '2026-05-31'
   status: Awaiting Customer Review
   priority: High
   risk_id: R-006, R-007, R-008, R-009
@@ -117,9 +117,9 @@ records:
   title: コスト・スコープベースライン管理
   description: 8.00MM提示／8.40MM計算の範囲外となるスコープ変更が発生しないかを追跡します。
   owner: VTI_SAM
-  start_date: 46163
+  start_date: '2026-05-21'
   end_date: ''
-  deadline: 46234
+  deadline: '2026-07-31'
   status: Open
   priority: Medium
   risk_id: R-003, R-005
@@ -132,9 +132,9 @@ records:
   title: 既存VB資産の仕様分析
   description: 移行前にDeviceServer、DeviceControls、ReceiptControlsの責務と呼び出しフローを整理します。
   owner: VTI_SAM
-  start_date: 46163
+  start_date: '2026-05-21'
   end_date: ''
-  deadline: 46203
+  deadline: '2026-06-30'
   status: In Progress
   priority: High
   definition_of_done: 対象プロジェクト、依存関係、OCX/Interopの注意点が整理され、移行時の差異漏れリスクを下げられること。
@@ -148,9 +148,9 @@ records:
   title: Deviceグループ詳細設計
   description: Drawer、LineDisplay、MSR、PinPad、Scannerなど、デバイス種別ごとの共通IFとStrategy境界を明確にします。
   owner: VTI_SAM
-  start_date: 46163
+  start_date: '2026-05-21'
   end_date: ''
-  deadline: 46203
+  deadline: '2026-06-30'
   status: Awaiting Customer Review
   priority: High
   definition_of_done: Device Strategy IF、Adapter詳細設計、例外／ログ方針、レビュー可能な処理シーケンスがあること。
@@ -164,9 +164,9 @@ records:
   title: Receipt/Journalグループ詳細設計
   description: ReceiptControlsはDeviceServerと系統が異なるため、POSプリンタと電子ジャーナルの処理方針を分けて整理します。
   owner: VTI_SAM
-  start_date: 46163
+  start_date: '2026-05-21'
   end_date: ''
-  deadline: 46203
+  deadline: '2026-06-30'
   status: In Progress
   priority: High
   definition_of_done: Receipt/Journal Adapter詳細設計、OCXラップ方針、処理シーケンスがあること。
@@ -180,9 +180,9 @@ records:
   title: DeviceグループC#実装
   description: 既存OCX仕様に基づいてC#側の責務を再構成し、IF、ログ、例外方針の整合性を確認します。
   owner: VTI_SAM
-  start_date: 46163
+  start_date: '2026-05-21'
   end_date: ''
-  deadline: 46203
+  deadline: '2026-06-30'
   status: In Progress
   priority: High
   definition_of_done: Device Adapter群、Strategy登録、呼び出し側との接続部分が新構成に入っていること。
@@ -196,9 +196,9 @@ records:
   title: Receipt/JournalグループC#実装
   description: 印刷／ジャーナルは障害時の影響が大きいため、呼び出し順、戻り値、ログ粒度を明確にして実装します。
   owner: Vu Van Canh
-  start_date: 46163
+  start_date: '2026-05-21'
   end_date: ''
-  deadline: 46203
+  deadline: '2026-06-30'
   status: In Progress
   priority: High
   definition_of_done: Receipt/Journal Adapterとプリンタ／電子ジャーナルの制御点があること。
@@ -212,9 +212,9 @@ records:
   title: 新構成ターミナルアプリとの結合確認
   description: 各Adapterが次世代KSPOS構成の共通基盤として接続できることを確認します。
   owner: Vu Van Canh
-  start_date: 46163
+  start_date: '2026-05-21'
   end_date: ''
-  deadline: 46203
+  deadline: '2026-06-30'
   status: In Progress
   priority: High
   definition_of_done: ターミナルアプリ側の接続証跡、登録／DI、代表呼び出しの確認結果があること。
@@ -228,9 +228,9 @@ records:
   title: Device機能テスト
   description: Deviceは機器、OCX、ターミナル環境の影響を受けるため、代表機能ごとにテスト観点を整理します。
   owner: Vu Van Canh
-  start_date: 46174
+  start_date: '2026-06-01'
   end_date: ''
-  deadline: 46234
+  deadline: '2026-07-31'
   status: Not Started
   priority: High
   definition_of_done: Drawer、LineDisplay、MSR、PinPad、Scannerおよび代表機能のテスト観点、実施結果、残課題一覧があること。
@@ -244,9 +244,9 @@ records:
   title: Unit Test実装と確認
   description: Strategy/Adapter単位でinput、return value、異常系、ログ出力を確認し、regressionを抑えます。
   owner: Vu Van Canh
-  start_date: 46174
+  start_date: '2026-06-01'
   end_date: ''
-  deadline: 46203
+  deadline: '2026-06-30'
   status: Not Started
   priority: High
   definition_of_done: Unit Testコード、実行結果、確認ログがあること。
@@ -260,9 +260,9 @@ records:
   title: テストケース資料作成
   description: 実装結果だけでなく、確認条件と確認内容をレビューできる形で記録します。
   owner: VTI_NHUT
-  start_date: 46174
+  start_date: '2026-06-01'
   end_date: ''
-  deadline: 46234
+  deadline: '2026-07-31'
   status: Not Started
   priority: High
   definition_of_done: Unit Test case、functional test case、確認観点一覧があること。
@@ -276,9 +276,9 @@ records:
   title: ログと異常系の整理
   description: Device障害はonsite環境に依存しやすいため、後続調査に必要なログを設計します。
   owner: Vu Van Canh
-  start_date: 46163
+  start_date: '2026-05-21'
   end_date: ''
-  deadline: 46203
+  deadline: '2026-06-30'
   status: Not Started
   priority: High
   definition_of_done: Error pattern一覧とログ出力観点があること。
@@ -292,9 +292,9 @@ records:
   title: 詳細設計書・Migration Memo作成
   description: VBレガシー資産をC#へ移行する方針を整理し、Sharp（SMJ）の懸念であるロジック漏れ防止、非OOPコードの扱い、Strategy Pattern/Clean Architectureへの接続方針を明確にします。
   owner: Vu Van Canh
-  start_date: 46163
+  start_date: '2026-05-21'
   end_date: ''
-  deadline: 46234
+  deadline: '2026-07-31'
   status: Not Started
   priority: High
   definition_of_done: 詳細設計書とMigration Memoが完成し、Clean Architecture方針、GOTO等の非OOPコード対応、ロジック漏れを防ぐ確認方法が説明されていること。Sharp（SMJ）に開発方針として承認されること。
@@ -308,9 +308,9 @@ records:
   title: レビュー対応と軽微修正
   description: 既存仕様との整合確認の中で発生する軽微な修正に対応します。
   owner: Vu Van Canh
-  start_date: 46163
+  start_date: '2026-05-21'
   end_date: ''
-  deadline: 46234
+  deadline: '2026-07-31'
   status: Not Started
   priority: High
   definition_of_done: 修正版とレビュー回答メモがあること。
@@ -324,9 +324,9 @@ records:
   title: ログ要件整理
   description: Error、Warn、Info、Debugの最低限のルールを定義します。
   owner: Đỗ Hoàng Nam VTI.D6
-  start_date: 46163
+  start_date: '2026-05-21'
   end_date: ''
-  deadline: 46203
+  deadline: '2026-06-30'
   status: In Progress
   priority: High
   definition_of_done: ログレベル、出力先、保持方針、個人情報マスキング方針があること。
@@ -340,9 +340,9 @@ records:
   title: Sentry連携設計・設定
   description: クラッシュレポート送信に必要な最小構成を明確にします。
   owner: Đỗ Hoàng Nam VTI.D6
-  start_date: 46163
+  start_date: '2026-05-21'
   end_date: ''
-  deadline: 46203
+  deadline: '2026-06-30'
   status: Awaiting Customer Review
   priority: High
   definition_of_done: Sentry初期化、環境別設定、クラッシュレポート送信方針があること。
@@ -356,9 +356,9 @@ records:
   title: ローカル操作ログ基盤構築
   description: onsiteでターミナル障害が発生した際に回収できるログ形式を準備します。
   owner: Đỗ Hoàng Nam VTI.D6
-  start_date: 46163
+  start_date: '2026-05-21'
   end_date: ''
-  deadline: 46203
+  deadline: '2026-06-30'
   status: Not Started
   priority: High
   definition_of_done: ローカルログサービス、出力形式、ローテーション方針があること。
@@ -372,9 +372,9 @@ records:
   title: BaseViewModelログ連携
   description: ContentPage実装者が個別に操作ログを意識しすぎないよう、基本hookを作成します。
   owner: Đỗ Hoàng Nam VTI.D6
-  start_date: 46163
+  start_date: '2026-05-21'
   end_date: ''
-  deadline: 46203
+  deadline: '2026-06-30'
   status: Not Started
   priority: High
   definition_of_done: 画面遷移と操作イベントの自動ログ出力機構があること。
@@ -388,9 +388,9 @@ records:
   title: API call foundation連携点準備
   description: API call foundationからrequest/responseログを利用できるよう、連携点を整理します。
   owner: Đỗ Hoàng Nam VTI.D6
-  start_date: 46163
+  start_date: '2026-05-21'
   end_date: ''
-  deadline: 46203
+  deadline: '2026-06-30'
   status: Not Started
   priority: High
   definition_of_done: Request/Responseログ出力IFとマスキングルールがあること。
@@ -404,9 +404,9 @@ records:
   title: ログ動作テスト・確認
   description: 代表パターンでログ出力とexception送信を確認します。
   owner: Đỗ Hoàng Nam VTI.D6
-  start_date: 46163
+  start_date: '2026-05-21'
   end_date: ''
-  deadline: 46234
+  deadline: '2026-07-31'
   status: Not Started
   priority: High
   definition_of_done: ログ出力、Sentry送信、異常系の確認証跡があること。
@@ -420,9 +420,9 @@ records:
   title: ログ設計書・利用ルール作成
   description: 画面実装者が迷わないよう、最小限の利用ルールを文書化します。
   owner: Đỗ Hoàng Nam VTI.D6
-  start_date: 46163
+  start_date: '2026-05-21'
   end_date: ''
-  deadline: 46234
+  deadline: '2026-07-31'
   status: Not Started
   priority: High
   definition_of_done: ログ利用ルールとdeveloper向け注意点があること。
@@ -436,9 +436,9 @@ records:
   title: 復元対象情報の整理
   description: 保存／復元対象にする情報の最小共通ルールを定義します。
   owner: Đỗ Hoàng Nam VTI.D6
-  start_date: 46163
+  start_date: '2026-05-21'
   end_date: ''
-  deadline: 46203
+  deadline: '2026-06-30'
   status: In Progress
   priority: High
   definition_of_done: 保存対象、復元タイミング、除外条件の一覧があること。
@@ -452,9 +452,9 @@ records:
   title: 保存・復元Service設計
   description: 将来画面を追加しても壊れにくい共通基盤方針を決定します。
   owner: Đỗ Hoàng Nam VTI.D6
-  start_date: 46163
+  start_date: '2026-05-21'
   end_date: ''
-  deadline: 46203
+  deadline: '2026-06-30'
   status: Awaiting Customer Review
   priority: High
   definition_of_done: Storage IF、key設計、version方針、delete policyがあること。
@@ -468,9 +468,9 @@ records:
   title: BaseViewModel保存・復元連携
   description: ContentPage側の負担を減らすため、共通処理をBaseViewModelへ集約します。
   owner: Đỗ Hoàng Nam VTI.D6
-  start_date: 46163
+  start_date: '2026-05-21'
   end_date: ''
-  deadline: 46203
+  deadline: '2026-06-30'
   status: In Progress
   priority: High
   definition_of_done: lifecycle連携とsave/restore hookがあること。
@@ -484,9 +484,9 @@ records:
   title: カスタムコンポーネント向けBehavior方針
   description: TextBoxなどのcomponentが別project/solutionにある可能性を考慮し、直接依存を避けます。
   owner: Đỗ Hoàng Nam VTI.D6
-  start_date: 46163
+  start_date: '2026-05-21'
   end_date: ''
-  deadline: 46203
+  deadline: '2026-06-30'
   status: In Progress
   priority: High
   definition_of_done: TextBoxおよび代表componentに対するBehavior適用方針があること。
@@ -500,9 +500,9 @@ records:
   title: ローカル保存実装
   description: ターミナル／アプリ再起動時を想定した基本処理を準備します。
   owner: Đỗ Hoàng Nam VTI.D6
-  start_date: 46163
+  start_date: '2026-05-21'
   end_date: ''
-  deadline: 46203
+  deadline: '2026-06-30'
   status: In Progress
   priority: High
   definition_of_done: save/restore、delete、失敗時処理があること。
@@ -516,9 +516,9 @@ records:
   title: 保存・復元動作テスト
   description: 代表パターンでsave/restoreが成立することを確認します。
   owner: Đỗ Hoàng Nam VTI.D6
-  start_date: 46163
+  start_date: '2026-05-21'
   end_date: ''
-  deadline: 46234
+  deadline: '2026-07-31'
   status: In Progress
   priority: High
   definition_of_done: restore、破損データ、未保存データ、画面遷移の確認証跡があること。
@@ -532,9 +532,9 @@ records:
   title: 保存・復元設計書・開発ルール作成
   description: 業務画面側で必要な実装ルールを明確にします。
   owner: Đỗ Hoàng Nam VTI.D6
-  start_date: 46163
+  start_date: '2026-05-21'
   end_date: ''
-  deadline: 46234
+  deadline: '2026-07-31'
   status: In Progress
   priority: High
   definition_of_done: developer向けルールと実装例があること。
@@ -547,9 +547,9 @@ records:
   title: お客様確認と仕様Q&A
   description: Device、Log、Storageにまたがる範囲のため、早期確認で手戻りを減らします。
   owner: VTI_NHUT
-  start_date: 46163
+  start_date: '2026-05-21'
   end_date: ''
-  deadline: 46234
+  deadline: '2026-07-31'
   status: In Progress
   priority: Medium
   definition_of_done: Q&Aと確認事項一覧があること。
@@ -562,9 +562,9 @@ records:
   title: 進捗・課題管理
   description: 最終期限が2026-07-31のため、月次だけでなく短い周期で状況を可視化します。
   owner: VTI_NHUT
-  start_date: 46163
+  start_date: '2026-05-21'
   end_date: ''
-  deadline: 46234
+  deadline: '2026-07-31'
   status: In Progress
   priority: Medium
   definition_of_done: 進捗報告、課題一覧、リスク管理があること。
@@ -577,9 +577,9 @@ records:
   title: 関連する小規模タスクの吸収
   description: レビューで発生する命名、設定、接続まわりの軽微な調整は個別見積に分けず共通枠で扱います。
   owner: VTI_SAM
-  start_date: 46163
+  start_date: '2026-05-21'
   end_date: ''
-  deadline: 46234
+  deadline: '2026-07-31'
   status: Not Started
   priority: Medium
   definition_of_done: 軽微な修正または周辺調整が共通範囲で処理されていること。
@@ -594,9 +594,9 @@ records:
   description: legacy WinForms SubFormに相当する釣銭機エラーガイダンスサブフォームを、MAUI ContentView/UserControlとしてKsPos.Applications側に作成します。対象はApplication層のみで、WinForms
     Formは新規作成しません。
   owner: VTI_SAM
-  start_date: 46169
+  start_date: '2026-05-27'
   end_date: ''
-  deadline: 46203
+  deadline: '2026-06-30'
   status: Not Started
   priority: High
   definition_of_done: Presentation/Views/UserControlsにCashChangerErrorGuidance用ContentView枠があること。既存のsub-view管理機構がある場合はそこへ登録し、ない場合はscope外のarchitecture拡張をしないこと。独立ContentPageではないためAppShell
@@ -612,9 +612,9 @@ records:
   title: KSNEWSYS-442 Tablet POSテーブルのzebra表示可否調査
   description: Tablet POS上で、現在の白一色表示の代わりに青／白の交互行（zebra）を表示できるか調査します。
   owner: Đỗ Hoàng Nam VTI.D6
-  start_date: 46170
+  start_date: '2026-05-28'
   end_date: ''
-  deadline: 46203
+  deadline: '2026-06-30'
   status: Not Started
   priority: Medium
   definition_of_done: zebra表示の実現可否を確認し、お客様向けの設計回答を更新していること。

@@ -1,9 +1,64 @@
 {
   "spreadsheet_id": "1cNCS6-y0tX7hkpZ2Y26UfVVPGtFOOxQOwd5AVfUgMpA",
-  "last_synced_at": "2026-06-17T14:26:35+09:00",
+  "last_synced_at": "2026-06-21T00:32:41+09:00",
   "change_detection": "full_fetch",
   "last_modified_time": null,
   "change_history": [
+    {
+      "timestamp": "2026-06-21T00:32:41+09:00",
+      "changes": [
+        "[Danh sách công việc / WBS] Cập nhật record: S-424 (Trường: start_date ('46163' -> '2026-05-21'), deadline ('46203' -> '2026-06-30'))",
+        "[Danh sách công việc / WBS] Cập nhật record: S-426 (Trường: start_date ('46163' -> '2026-05-21'), deadline ('46203' -> '2026-06-30'))",
+        "[Danh sách công việc / WBS] Cập nhật record: S-427 (Trường: start_date ('46163' -> '2026-05-21'), deadline ('46203' -> '2026-06-30'))",
+        "[Danh sách công việc / WBS] Cập nhật record: S-COM (Trường: start_date ('46163' -> '2026-05-21'), deadline ('46234' -> '2026-07-31'))",
+        "[Danh sách công việc / WBS] Cập nhật record: OI-001 (Trường: start_date ('46163' -> '2026-05-21'), deadline ('46173' -> '2026-05-31'))",
+        "[Danh sách công việc / WBS] Cập nhật record: OI-002 (Trường: start_date ('46163' -> '2026-05-21'), deadline ('46204' -> '2026-07-01'))",
+        "[Danh sách công việc / WBS] Cập nhật record: OI-003 (Trường: start_date ('46165' -> '2026-05-23'), deadline ('46173' -> '2026-05-31'))",
+        "[Danh sách công việc / WBS] Cập nhật record: OI-004 (Trường: start_date ('46163' -> '2026-05-21'), deadline ('46234' -> '2026-07-31'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-01 (Trường: start_date ('46163' -> '2026-05-21'), deadline ('46203' -> '2026-06-30'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-02 (Trường: start_date ('46163' -> '2026-05-21'), deadline ('46203' -> '2026-06-30'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-03 (Trường: start_date ('46163' -> '2026-05-21'), deadline ('46203' -> '2026-06-30'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-04 (Trường: start_date ('46163' -> '2026-05-21'), deadline ('46203' -> '2026-06-30'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-05 (Trường: start_date ('46163' -> '2026-05-21'), deadline ('46203' -> '2026-06-30'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-06 (Trường: start_date ('46163' -> '2026-05-21'), deadline ('46203' -> '2026-06-30'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-07 (Trường: start_date ('46174' -> '2026-06-01'), deadline ('46234' -> '2026-07-31'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-08 (Trường: start_date ('46174' -> '2026-06-01'), deadline ('46203' -> '2026-06-30'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-09 (Trường: start_date ('46174' -> '2026-06-01'), deadline ('46234' -> '2026-07-31'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-10 (Trường: start_date ('46163' -> '2026-05-21'), deadline ('46203' -> '2026-06-30'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-11 (Trường: start_date ('46163' -> '2026-05-21'), deadline ('46234' -> '2026-07-31'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-12 (Trường: start_date ('46163' -> '2026-05-21'), deadline ('46234' -> '2026-07-31'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-01 (Trường: start_date ('46163' -> '2026-05-21'), deadline ('46203' -> '2026-06-30'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-02 (Trường: start_date ('46163' -> '2026-05-21'), deadline ('46203' -> '2026-06-30'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-03 (Trường: start_date ('46163' -> '2026-05-21'), deadline ('46203' -> '2026-06-30'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-04 (Trường: start_date ('46163' -> '2026-05-21'), deadline ('46203' -> '2026-06-30'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-05 (Trường: start_date ('46163' -> '2026-05-21'), deadline ('46203' -> '2026-06-30'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-06 (Trường: start_date ('46163' -> '2026-05-21'), deadline ('46234' -> '2026-07-31'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-426-07 (Trường: start_date ('46163' -> '2026-05-21'), deadline ('46234' -> '2026-07-31'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-01 (Trường: start_date ('46163' -> '2026-05-21'), deadline ('46203' -> '2026-06-30'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-02 (Trường: start_date ('46163' -> '2026-05-21'), deadline ('46203' -> '2026-06-30'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-03 (Trường: start_date ('46163' -> '2026-05-21'), deadline ('46203' -> '2026-06-30'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-04 (Trường: start_date ('46163' -> '2026-05-21'), deadline ('46203' -> '2026-06-30'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-05 (Trường: start_date ('46163' -> '2026-05-21'), deadline ('46203' -> '2026-06-30'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-06 (Trường: start_date ('46163' -> '2026-05-21'), deadline ('46234' -> '2026-07-31'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-427-07 (Trường: start_date ('46163' -> '2026-05-21'), deadline ('46234' -> '2026-07-31'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-C-01 (Trường: start_date ('46163' -> '2026-05-21'), deadline ('46234' -> '2026-07-31'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-C-02 (Trường: start_date ('46163' -> '2026-05-21'), deadline ('46234' -> '2026-07-31'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-C-03 (Trường: start_date ('46163' -> '2026-05-21'), deadline ('46234' -> '2026-07-31'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-424-13 (Trường: start_date ('46169' -> '2026-05-27'), deadline ('46203' -> '2026-06-30'))",
+        "[Danh sách công việc / WBS] Cập nhật record: T-442-01 (Trường: start_date ('46170' -> '2026-05-28'), deadline ('46203' -> '2026-06-30'))",
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-05-22-GRAPHIFY-CODEGRAPH (Trường: date ('46164' -> '2026-05-22'))",
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-05-23-YAML-MANAGEMENT (Trường: date ('46165' -> '2026-05-23'))",
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-05-21-COST-BASELINE (Trường: date ('46163' -> '2026-05-21'))",
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-05-21-CHANGE-CONTROL (Trường: date ('46163' -> '2026-05-21'))",
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-05-23-KSNEWSYS-424-STRATEGY-ADAPTER (Trường: date ('46165' -> '2026-05-23'))",
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-05-23-SENTRY-DSN-TEST-ONLY (Trường: date ('46165' -> '2026-05-23'))",
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-05-28-KSNEWSYS-215-TOOLTIP-CLICK (Trường: date ('46170' -> '2026-05-28'))",
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-05-28-KSNEWSYS-399-SCREEN-RESOLUTION (Trường: date ('46170' -> '2026-05-28'))",
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-05-28-CONFIG-JSON-DEVICE-MANAGEMENT (Trường: date ('46170' -> '2026-05-28'))",
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-05-28-EPSON-PRINTER-CONNECTION-TETHERING (Trường: date ('46170' -> '2026-05-28'))",
+        "[Danh sách quyết định / 決定事項] Cập nhật record: DEC-2026-06-04-SKILL-FIRST-ROUTING (Trường: date ('46177' -> '2026-06-04'))"
+      ]
+    },
     {
       "timestamp": "2026-06-16T23:52:45+09:00",
       "changes": [
@@ -457,21 +512,6 @@
         "[Danh sách công việc / WBS] Thêm mới record: T-C-01 (Title: 'Xác nhận khách hàng và Q&A đặc tả')",
         "[Danh sách công việc / WBS] Thêm mới record: T-C-02 (Title: 'Quản lý tiến độ và vấn đề')",
         "[Danh sách công việc / WBS] Thêm mới record: T-C-03 (Title: 'Hấp thụ task nhỏ liên quan')"
-      ]
-    },
-    {
-      "timestamp": "2026-05-25T11:30:13+09:00",
-      "changes": [
-        "[Lộ trình dự án / ロードマップ] Cập nhật record: SCH-R-001 (Trường: type)",
-        "[Lộ trình dự án / ロードマップ] Cập nhật record: SCH-R-002 (Trường: type)",
-        "[Kế hoạch liên lạc / 連絡管理] Cập nhật record: COMM-003 (Trường: type)",
-        "[Kế hoạch liên lạc / 連絡管理] Cập nhật record: COMM-004 (Trường: type)",
-        "[Kế hoạch liên lạc / 連絡管理] Cập nhật record: COMM-005 (Trường: type)",
-        "[Kế hoạch liên lạc / 連絡管理] Cập nhật record: COMM-006 (Trường: type)",
-        "[Kế hoạch liên lạc / 連絡管理] Cập nhật record: COMM-007 (Trường: type)",
-        "[Kế hoạch liên lạc / 連絡管理] Cập nhật record: COMM-008 (Trường: type)",
-        "[Kế hoạch liên lạc / 連絡管理] Cập nhật record: COMM-009 (Trường: type)",
-        "[Kế hoạch liên lạc / 連絡管理] Cập nhật record: COMM-010 (Trường: type)"
       ]
     }
   ]
