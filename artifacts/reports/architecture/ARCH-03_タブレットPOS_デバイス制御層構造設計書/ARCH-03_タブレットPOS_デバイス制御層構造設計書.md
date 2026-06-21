@@ -1,5 +1,6 @@
 タブレットPOS
 ARCH-03 デバイス制御層構造設計書
+文書ID: ARCH-03
 第1.0.0版
 2026年6月19日
 
@@ -82,17 +83,17 @@ iOS / Android の camera、Bluetooth、Epson SDK などは platform-local strate
 |---|
 | ARCH-01_タブレットPOS_ソフトウェア構造設計書.docx |
 | ARCH-02_タブレットPOS_端末アプリケーション構造設計書.docx |
-| POS-HOST-01_タブレットPOS_ホスト_名前付きパイプコマンドサーバー_プログラム仕様書.xlsx |
-| POS-HOST-02_タブレットPOS_ホスト_名前付きパイプデバイスホストアダプター_プログラム仕様書.xlsx |
-| POS-HOST-03_タブレットPOS_ホスト_デバイスコマンドルーター_プログラム仕様書.xlsx |
-| POS-HOST-04_タブレットPOS_ホスト_デバイスコマンドハンドラー_プログラム仕様書.xlsx |
-| POS-HOST-05_タブレットPOS_ホスト_デバイスサーバーホスト_プログラム仕様書.xlsx |
-| POS-HOST-06_タブレットPOS_ホスト_デバイスマネージャー_プログラム仕様書.xlsx |
-| POS-HOST-07_タブレットPOS_ホスト_デバイスベース_プログラム仕様書.xlsx |
-| POS-HOST-08_タブレットPOS_ホスト_釣銭機制御_RT-300_プログラム仕様書.xlsx |
-| POS-HOST-09_タブレットPOS_ホスト_自動釣銭機UIスレッドフォーム_RT-300_プログラム仕様書.xlsx |
-| POS-HOST-10_タブレットPOS_ホスト_キャッシュドロア制御_SHARP_プログラム仕様書.xlsx |
-| POS-HOST-11_タブレットPOS_ホスト_カスタマーディスプレイ制御_SHARP_プログラム仕様書.xlsx |
+| PS-HOST-01_タブレットPOS_ホスト_名前付きパイプコマンドサーバー_プログラム仕様書.xlsx |
+| PS-HOST-02_タブレットPOS_ホスト_名前付きパイプデバイスホストアダプター_プログラム仕様書.xlsx |
+| PS-HOST-03_タブレットPOS_ホスト_デバイスコマンドルーター_プログラム仕様書.xlsx |
+| PS-HOST-04_タブレットPOS_ホスト_デバイスコマンドハンドラー_プログラム仕様書.xlsx |
+| PS-HOST-05_タブレットPOS_ホスト_デバイスサーバーホスト_プログラム仕様書.xlsx |
+| PS-HOST-06_タブレットPOS_ホスト_デバイスマネージャー_プログラム仕様書.xlsx |
+| PS-HOST-07_タブレットPOS_ホスト_デバイスベース_プログラム仕様書.xlsx |
+| PS-HOST-08_タブレットPOS_ホスト_釣銭機制御_RT-300_プログラム仕様書.xlsx |
+| PS-HOST-09_タブレットPOS_ホスト_自動釣銭機UIスレッドフォーム_RT-300_プログラム仕様書.xlsx |
+| PS-HOST-10_タブレットPOS_ホスト_キャッシュドロア制御_SHARP_プログラム仕様書.xlsx |
+| PS-HOST-11_タブレットPOS_ホスト_カスタマーディスプレイ制御_SHARP_プログラム仕様書.xlsx |
 
 ## 2. 基本アーキテクチャ
 
@@ -106,7 +107,7 @@ iOS / Android の camera、Bluetooth、Epson SDK などは platform-local strate
 
 ![デバイス制御層構造図](ARCH-03_タブレットPOS_デバイス制御層構造図.svg)
 
-図内の太字は class 名または仕様IDを示し、下段は基本設計レベルの責務を示す。`TabetPos.DeviceCtrl` 内の class は端末アプリケーションへ strategy interface を公開し、Windows の Host-backed device は `NamedPipeClient` から `TabetPos.Host` の POS-HOST class 群へ command を送信する。
+図内の太字は class 名または仕様IDを示し、下段は基本設計レベルの責務を示す。`TabetPos.DeviceCtrl` 内の class は端末アプリケーションへ strategy interface を公開し、Windows の Host-backed device は `NamedPipeClient` から `TabetPos.Host` の PS-HOST class 群へ command を送信する。
 
 | 設計要素 | 対象 class / file | 基本設計上の役割 |
 |---|---|---|
@@ -115,7 +116,7 @@ iOS / Android の camera、Bluetooth、Epson SDK などは platform-local strate
 | 生成管理 | `StrategyFactory<TBase>` | `strategyclass` 名に対応する strategy class を登録し、設定に基づいて生成する |
 | 共通処理 | `DeviceStrategyBase` | command 開始 / 終了、ログ出力、DeviceSpec 保持など strategy 共通処理をまとめる |
 | 公開契約 | `I*Strategy interfaces` | プリンタ、スキャナ、釣銭機、客面表示器、ドロア、キーボード操作を抽象化する |
-| Host連携 | `NamedPipeClient`, `POS-HOST-01..11` | Windows の Host-backed strategy から Named Pipe で Host 側 device class へ処理を渡す |
+| Host連携 | `NamedPipeClient`, `PS-HOST-01..11` | Windows の Host-backed strategy から Named Pipe で Host 側 device class へ処理を渡す |
 
 ### 2.2 レイヤ構成
 
