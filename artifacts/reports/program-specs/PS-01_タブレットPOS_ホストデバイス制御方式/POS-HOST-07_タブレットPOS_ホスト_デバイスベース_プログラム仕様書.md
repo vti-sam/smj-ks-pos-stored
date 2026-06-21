@@ -1,13 +1,15 @@
 ---
 title: POS-HOST-07 タブレットPOS ホスト デバイスベース プログラム仕様書
 project: tablet_pos_host
-type: architecture
+type: program-spec
 status: draft
 source:
   - sources/KsPosBoilerplate/TabetPos.Host/src/KsDevice/DeviceBase/DeviceBase.cs
 tags:
   - tablet-host
+  - device-base
   - opos
+  - program-spec
 ---
 
 # POS-HOST-07 タブレットPOS ホスト デバイスベース プログラム仕様書
@@ -17,355 +19,406 @@ document_id: POS-HOST-07
 status: verified
 sources:
   - path: sources/KsPosBoilerplate/TabetPos.Host/src/KsDevice/DeviceBase/DeviceBase.cs
-    symbol: KsOutProcess.KsDeviceServer.DeviceBase
-notes: CodeGraph とソースコードで確認済み（2026-06-19）。
+    symbol: DeviceBase
+notes: CodeGraph local index and source code checked on 2026/06/21. Excel export compatibility is intentionally not preserved in this Pure Markdown rewrite.
 -->
 
-## @meta
-作成者: VTI-SAM
-図番: -
-更新日: 2026/06/19
+## 改訂履歴
 
-## 変更履歴 {grid=21}
+| バージョン | 更新日 | 更新者 | 変更内容 |
+| --- | --- | --- | --- |
+| 0.0.2 | 2026/06/21 | VTI-SAM | CodeGraph とソースコードに基づき、Pure Markdown 形式へ再構成し、内容を更新 |
+| 0.0.1 | 2026/06/19 | VTI-SAM | 初版作成 |
 
-### 基本情報 {kv:6,15}
+## 基本情報
+
 | 項目 | 内容 |
 | --- | --- |
+| 文書ID | POS-HOST-07 |
 | プロジェクト名 | タブレットPOS |
 | 機能名 | デバイスベース |
-| バージョン | 0.0.1 |
-| 作成者 | VTI-SAM |
-| 作成日 | 2026年06月19日 |
-
-### 更新履歴 {table:3,3,3,3,3,3,3}
-| バージョン | 依頼者 | 更新者 | 更新日時 | 変更理由 | シート名 | 更新内容 |
-| --- | --- | --- | --- | --- | --- | --- |
-| 0.0.1 | SMJ様 | VTI-SAM | 2026年06月19日 | - | 全体 | 初版作成 |
-
-## 表紙 {grid=21}
-
-### {kv:6,15}
-| 項目 | 内容 |
-| --- | --- |
+| 物理クラス名 | DeviceBase |
 | 名前空間 | KsOutProcess.KsDeviceServer |
-| クラス名(論理) | デバイスベース |
-| クラス名(物理) | DeviceBase |
-| 役割/概要 | 各種周辺機器（周辺デバイス）制御クラスの基底クラスであり、OPOS制御（オープン・クローズ・排他制御・イベント処理等）の共通インターフェースおよび共通処理を提供する。 |
-| 備考 | - |
+| アクセス修飾子 | public |
+| 継承/実装 | IFDevice |
+| 更新日 | 2026/06/21 |
 
-## クラス定義 {grid=24}
+## ソース対応
 
-### {kv:6,18}
 | 項目 | 内容 |
 | --- | --- |
-| アクセス修飾子 | public |
-| 継承関係(Base/Interfaces) | IFDevice |
-| 静的/インスタンス | インスタンス |
+| CodeGraph project | sources/KsPosBoilerplate/TabetPos.Host |
+| 主要ソース | sources/KsPosBoilerplate/TabetPos.Host/src/KsDevice/DeviceBase/DeviceBase.cs |
+| 検証状態 | CodeGraph sync/status と source read により確認済み |
+| 対象外 | Excel workbook、Designer 自動生成部分、source code の変更 |
 
-### コンストラクタ引数 {table:8,8,8}
-| 型 | 論理名 | 物理名 |
-| --- | --- | --- |
-| - | - | - |
+## クラス概要
 
-### クラスプロパティ {table:5,4,3,3,3,6}
-| 型 | 論理名 | 物理名 | getter | setter | 初期値 |
+OPOS/OCX デバイス制御クラスの共通基底であり、タイマー、Open/Close、Claim/Release、読込開始/終了、keep-alive を提供する。
+
+### 主な責務
+
+- 100ms timer で Device_Mng を呼び出す。
+- OPOS の Open/Close/Claim/Release を共通化する。
+- 派生クラスが DeviceMethod/DeviceUse/DeviceUnUse を実装する前提の既定値を持つ。
+
+## フィールド/プロパティ
+
+| 区分 | 可視性 | 型 | 名前 | 用途 | Evidence |
 | --- | --- | --- | --- | --- | --- |
-| KsDeviceId | デバイス識別ID | KsDeviceId | public | public | - |
-| DateTime | 生存確認用日時 | KeepAliveDateTime | public | public | - |
+| フィールド | protected | bool | EndOrder | bool 型の内部状態。 | src/KsDevice/DeviceBase/DeviceBase.cs:34 |
+| フィールド | protected | Timer | LoopTimer | デバイス周期処理用タイマー。 | src/KsDevice/DeviceBase/DeviceBase.cs:37 |
+| フィールド | protected | Form | MyForm | OCX を保持するフォーム。 | src/KsDevice/DeviceBase/DeviceBase.cs:40 |
+| フィールド | protected | dynamic | MyDevice | OPOS/OCX デバイスインスタンス。 | src/KsDevice/DeviceBase/DeviceBase.cs:43 |
+| フィールド | protected | KsDeviceId | MyDeviceId | 対象デバイスID。 | src/KsDevice/DeviceBase/DeviceBase.cs:46 |
+| フィールド | protected | bool | IsSimulator | bool 型の内部状態。 | src/KsDevice/DeviceBase/DeviceBase.cs:49 |
+| フィールド | protected | bool | IsClaimDeviceReleaseDevice | bool 型の内部状態。 | src/KsDevice/DeviceBase/DeviceBase.cs:53 |
+| フィールド | protected | DateTime | _keepAliveDateTime | DateTime 型の内部状態。 | src/KsDevice/DeviceBase/DeviceBase.cs:56 |
+| フィールド | protected | bool | PMntRun | bool 型の内部状態。 | src/KsDevice/DeviceBase/DeviceBase.cs:59 |
+| プロパティ | public | - | KsDeviceId | - 型の内部状態。 | src/KsDevice/DeviceBase/DeviceBase.cs:406 |
+| プロパティ | public | - | KeepAliveDateTime | - 型の内部状態。 | src/KsDevice/DeviceBase/DeviceBase.cs:421 |
 
-## メソッド一覧 {grid=40}
+## メソッド一覧
 
-### {table:2,5,4,5,8,12,4}
-| No | 修飾子 | static | 戻り値 | メソッド名 | 概要 | 備考 |
-| --- | --- | --- | --- | --- | --- | --- |
-| 1 | public | - | void | timer_tick | タイマー監視による定期処理 | - |
-| 2 | public | virtual | void | Device_Mng | 周辺機器の固有制御処理 | 空実装 |
-| 3 | public | virtual | int | Data_Check | 読込データの健全性チェック | 固定で-1を返却 |
-| 4 | public | virtual | void | PutLog | デバイスログ output | - |
-| 5 | public | virtual | int | Device_Open | OPOSデバイスのオープン処理 | - |
-| 6 | public | virtual | int | Device_Close | OPOSデバイスのクローズ処理 | - |
-| 7 | public | virtual | int | Device_Claim | デバイスの排他占有権の取得 | - |
-| 8 | public | virtual | int | Device_Release | デバイスの排他占有権の解放 | - |
-| 9 | public | virtual | int | Device_Start | デバイスの読み込み開始（初期占有、有効化） | - |
-| 10 | public | virtual | int | Device_End | デバイスの読み込み終了（無効化、排他解放） | - |
-| 11 | public | virtual | int | Device_End_2 | デバイスの読み込み終了（無効化、排他解放、詳細指定） | オーバーロード |
-| 12 | public | virtual | void | StartDevice | デバイス制御の開始処理 | - |
-| 13 | public | virtual | void | StopDevice | デバイス制御の終了処理 | - |
-| 14 | public | virtual | int | DeviceMethod | デバイス固有メソッドの実行 | 基底では-1を返却 |
-| 15 | public | virtual | int | DeviceUse | デバイスの利用開始処理 | 基底では-1を返却 |
-| 16 | public | virtual | int | DeviceUnUse | デバイスの利用終了処理 | 基底では-1を返却 |
+| No | 可視性 | 戻り値 | メソッド名 | 概要 | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| 1 | public | int | GetForegroundWindow | Windows の foreground window handle を取得する。 | src/KsDevice/DeviceBase/DeviceBase.cs:30-31 |
+| 2 | protected | - | DeviceBase | 100ms timer を設定し、派生デバイス共通の周期処理基盤を初期化する。 | src/KsDevice/DeviceBase/DeviceBase.cs:62-69 |
+| 3 | public | void | timer_tick | keep-alive を更新し、timer を止めて Device_Mng を実行した後、終了指示がなければ timer を再開する。 | src/KsDevice/DeviceBase/DeviceBase.cs:72-107 |
+| 4 | public | void | Device_Mng | 基底クラスでは周期監視処理を行わず、派生クラスで必要な処理を実装する。 | src/KsDevice/DeviceBase/DeviceBase.cs:111-114 |
+| 5 | public | int | Data_Check | 基底クラスでは読込データ検証を実装せず、既定値 -1 を返す。 | src/KsDevice/DeviceBase/DeviceBase.cs:121-124 |
+| 6 | public | void | PutLog | DeviceLog.ProcessInfo へデバイスログメッセージを出力する。 | src/KsDevice/DeviceBase/DeviceBase.cs:128-131 |
+| 7 | public | int | Device_Open | OPOS デバイスを Open し、管理状態を opened に更新する。 | src/KsDevice/DeviceBase/DeviceBase.cs:136-162 |
+| 8 | public | int | Device_Close | 必要に応じて Release したうえで OPOS デバイスを Close する。 | src/KsDevice/DeviceBase/DeviceBase.cs:167-194 |
+| 9 | public | int | Device_Claim | OPOS デバイスの排他取得を実行する。 | src/KsDevice/DeviceBase/DeviceBase.cs:199-226 |
+| 10 | public | int | Device_Release | OPOS デバイスの排他を解放する。 | src/KsDevice/DeviceBase/DeviceBase.cs:231-260 |
+| 11 | public | int | Device_Start | Claim、DeviceEnabled、DataEventEnabled など読込開始状態を設定する。 | src/KsDevice/DeviceBase/DeviceBase.cs:267-328 |
+| 12 | public | int | Device_End | DataEventEnabled、DeviceEnabled、Release など読込終了状態を設定する。 | src/KsDevice/DeviceBase/DeviceBase.cs:335-363 |
+| 13 | public | int | Device_End | DataEventEnabled、DeviceEnabled、Release など読込終了状態を設定する。 | src/KsDevice/DeviceBase/DeviceBase.cs:371-401 |
+| 14 | public | void | StartDevice | 対象デバイスIDを保持し、OCXを配置したフォームとタイマー同期先を初期化する。 | src/KsDevice/DeviceBase/DeviceBase.cs:436-441 |
+| 15 | public | void | StopDevice | 終了指示を立て、実行中の Device_Mng を最大約3秒待ち、フォームを close/dispose する。 | src/KsDevice/DeviceBase/DeviceBase.cs:446-472 |
+| 16 | public | int | DeviceMethod | 基底クラスではデバイス固有メソッドを実行せず、既定値 -1 を返す。 | src/KsDevice/DeviceBase/DeviceBase.cs:481-484 |
+| 17 | public | int | DeviceUse | 基底クラスでは使用開始処理を実装せず、既定値 -1 を返す。 | src/KsDevice/DeviceBase/DeviceBase.cs:492-495 |
+| 18 | public | int | DeviceUnUse | 基底クラスでは使用終了処理を実装せず、既定値 -1 を返す。 | src/KsDevice/DeviceBase/DeviceBase.cs:503-506 |
 
-## メソッド定義 {grid=40}
+## メソッド詳細
 
-### {methoddef:2,2,6,4,4,4,4,4,6,2,2}
+### 1. GetForegroundWindow
 
-#### timer_tick
-No: 1
-戻り値: void | -
-発生例外: -
-
-引数:
-- object | イベント送信元 | sender
-- EventArgs | イベント引数 | e
-
-処理内容:
-- ① 生存確認日時 `_keepAliveDateTime` を現在日時に更新する。
-- ② `LoopTimer` を一旦停止状態にし、現在ユーザーが作業しているフォアグラウンドウィンドウのハンドルを取得する。
-- ③ 制御対象のデバイスオブジェクト `MyDevice` が存在する場合、`PMntRun`（実行中フラグ）を true に設定し、`Device_Mng(MyDevice, foreHandl)` を実行後、`PMntRun` を false に戻す。
-- ④ `Application.DoEvents()` を呼び出してキューのメッセージを処理する。
-- ⑤ 終了フラグ `EndOrder` が true の場合はタイマーを有効化せずに終了し、false の場合はタイマーを再起動する。
-- ⑥ 処理中に例外が発生した場合は、デバイスログに例外エラーを出力する。
-
-備考:
-- -
-
-#### Device_Mng
-No: 2
-戻り値: void | -
-発生例外: -
-
-引数:
-- object | デバイスインスタンス | oDevice
-- IntPtr | ウィンドウハンドル | foreHandl
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `public static extern int GetForegroundWindow();` |
+| 可視性 | public |
+| 戻り値 | int |
+| Evidence | src/KsDevice/DeviceBase/DeviceBase.cs:30-31 |
 
 処理内容:
-- ① 処理は行わない。（派生クラスにてオーバーライドする）
 
-備考:
-- -
+- ① 対象 method の実行条件を確認する。
+- ② Windows の foreground window handle を取得する。
+- ③ 必要な戻り値または内部状態を更新する。
 
-#### Data_Check
-No: 3
-戻り値: int | 結果コード（固定で -1）
-発生例外: -
+備考: -
 
-引数:
-- string | 入力データ | sInData
-- string | 出力データ（文字列） | sOutData
-- int | 出力データ（数値） | lOutData
+### 2. DeviceBase
 
-処理内容:
-- ① 固定値 -1 を返す。
-
-備考:
-- -
-
-#### PutLog
-No: 4
-戻り値: void | -
-発生例外: -
-
-引数:
-- string | ログメッセージ | sMessage
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `protected DeviceBase()` |
+| 可視性 | protected |
+| 戻り値 | - |
+| Evidence | src/KsDevice/DeviceBase/DeviceBase.cs:62-69 |
 
 処理内容:
-- ① `DeviceLog.ProcessInfo(this, sMessage)` を呼び出してデバイスの実行ログを出力する。
 
-備考:
-- -
+- ① 対象 method の実行条件を確認する。
+- ② 100ms timer を設定し、派生デバイス共通の周期処理基盤を初期化する。
+- ③ 必要な戻り値または内部状態を更新する。
 
-#### Device_Open
-No: 5
-戻り値: int | OPOSオープン結果コード（0:成功、-1:失敗）
-発生例外: -
+備考: -
 
-引数:
-- dynamic | デバイス制御COM | oDevice
+### 3. timer_tick
 
-処理内容:
-- ① デバイス情報リスト `KsDeviceInfo.KsDeviceInfoes` が存在することを確認する。
-- ② リリストから `MyDeviceId` と一致するデバイス情報を探す。
-- ③ シミュレータモードでない場合は、取得したデバイス名で `oDevice.Open(dev.DeviceName)` を実行する（シミュレータの場合は0を擬似返却）。
-- ④ オープン成功後、デバイス情報の `IsOpened` を true に設定する。
-- ⑤ 実行結果コードを返す。
-
-備考:
-- -
-
-#### Device_Close
-No: 6
-戻り値: int | OPOSクローズ結果コード（0:成功、-1:失敗）
-発生例外: -
-
-引数:
-- dynamic | デバイス制御COM | oDevice
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `public virtual void timer_tick(object sender, EventArgs e)` |
+| 可視性 | public |
+| 戻り値 | void |
+| Evidence | src/KsDevice/DeviceBase/DeviceBase.cs:72-107 |
 
 処理内容:
-- ① デバイス情報リストから `MyDeviceId` と一致するデバイス情報を探す。
-- ② デバイスがオープン状態 (`IsOpened` = true) の場合、排他占有中 (`IsClaimed` = true) であれば `Device_Release(oDevice)` を呼び出して占有を解放する。
-- ③ デバイス情報の `IsOpened` を false に更新する。
-- ④ シミュレータモードでない場合は `oDevice.Close()` を実行して接続を閉じ、実行結果を返す（シミュレータの場合は0）。
 
-備考:
-- -
+- ① keep-alive 時刻を現在時刻へ更新し、timer を一時停止する。
+- ② foreground window handle を取得し、MyDevice がある場合は PMntRun を true にして Device_Mng を呼ぶ。
+- ③ Device_Mng 終了後に PMntRun を false に戻し、DoEvents を実行する。
+- ④ EndOrder が true なら timer を再開せず終了する。
+- ⑤ 例外時はデバイスクラス内 timer 異常としてログ出力する。
 
-#### Device_Claim
-No: 7
-戻り値: int | OPOS排他結果コード（0:成功、-1:失敗）
-発生例外: -
+備考: -
 
-引数:
-- dynamic | デバイス制御COM | oDevice
+### 4. Device_Mng
 
-処理内容:
-- ① デバイス情報リストから `MyDeviceId` と一致するデバイス情報を探す。
-- ② シミュレータモードでない場合は、`IsClaimDeviceReleaseDevice` フラグに応じて `oDevice.ClaimDevice(0)` または `oDevice.Claim(0)` を実行し排他処理を行う（シミュレータの場合は0）。
-- ③ 排た取得に成功した場合 (`iRet` = 0), デバイス情報の `IsClaimed` を true に更新し, 結果を返す。
-
-備考:
-- -
-
-#### Device_Release
-No: 8
-戻り値: int | OPOS解放結果コード（0:成功、-1:失敗）
-発生例外: -
-
-引数:
-- dynamic | デバイス制御COM | oDevice
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `public virtual void Device_Mng(object oDevice, IntPtr foreHandl)` |
+| 可視性 | public |
+| 戻り値 | void |
+| Evidence | src/KsDevice/DeviceBase/DeviceBase.cs:111-114 |
 
 処理内容:
-- ① デバイス情報リストから `MyDeviceId` と一致するデバイス情報を探す。
-- ② デバイスが排他占有中 (`IsClaimed` = true) の場合、`IsClaimed` を false に更新する。
-- ③ シミュレータモードでない場合は、`IsClaimDeviceReleaseDevice` フラグに応じて `oDevice.ReleaseDevice()` または `oDevice.Release()` を実行して占有を解放し、結果を返す（シミュレータの場合は0）。
 
-備考:
-- -
+- ① 基底クラスでは処理を行わない。
+- ② 周期監視が必要な派生クラスで override する。
 
-#### Device_Start
-No: 9
-戻り値: int | 実行結果コード（0:成功、else:エラー）
-発生例外: -
+備考: -
 
-引数:
-- dynamic | デバイス制御COM | oDevice
-- bool | データイベント有効化フラグ | bEventStart
-- bool | 自動無効化フラグ | bAutoDisable
+### 5. Data_Check
+
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `public virtual int Data_Check(string sInData, ref string sOutData, int lOutData)` |
+| 可視性 | public |
+| 戻り値 | int |
+| Evidence | src/KsDevice/DeviceBase/DeviceBase.cs:121-124 |
 
 処理内容:
-- ① シミュレータモードの場合は 0 を返却する.
-- ② `Device_Claim(oDevice)` を呼び出して排他権を取得し、失敗した場合はその結果コードを返す。
-- ③ `bAutoDisable` が true の場合、`oDevice.AutoDisable = true` に設定し、`ResultCode` が 0 以外の場合はそれを返す。
-- ④ `oDevice.DeviceEnabled = true` を設定してデバイスを有効化し、`ResultCode` が 0 以外の場合はそれを返す。
-- ⑤ デバイス種別が `MSR`（磁気カードリーダー）の場合、`oDevice.ClearInput()` を実行し入力をクリアする。
-- ⑥ `bEventStart` が true の場合、`oDevice.DataEventEnabled = true` に設定する。失敗した場合は `DeviceEnabled` を false に戻してその結果コードを返す。
-- ⑦ 正常終了時は 0 を返す。
 
-備考:
-- -
+- ① 基底クラスでは入力データを検証しない。
+- ② 既定値として -1 を返す。
 
-#### Device_End
-No: 10
-戻り値: int | 実行結果コード（0:成功、else:エラー）
-発生例外: -
+備考: -
 
-引数:
-- dynamic | デバイス制御COM | oDevice
-- bool | データイベント無効化フラグ | bEventStop
-- bool | 排他解放フラグ | bRelease
+### 6. PutLog
+
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `public virtual void PutLog(string sMessage)` |
+| 可視性 | public |
+| 戻り値 | void |
+| Evidence | src/KsDevice/DeviceBase/DeviceBase.cs:128-131 |
 
 処理内容:
-- ① シミュレータモードの場合は 0 を返却する.
-- ② `bEventStop` が true の場合、`oDevice.DataEventEnabled = false` に設定する。
-- ③ `oDevice.DeviceEnabled` が true の場合、`false` に設定してデバイスを無効化する。
-- ④ `bRelease` が true の場合、`Device_Release(oDevice)` を呼び出して占有を解放し、その結果コードを返す。
 
-備考:
-- -
+- ① 設定値または呼出引数を受け取る。
+- ② 対応する OPOS プロパティ設定または低レベルメソッドを実行する。
+- ③ ResultCode/ResultCodeExtended やログ出力用状態を更新する。
 
-#### Device_End_2
-No: 11
-戻り値: int | 実行結果コード（0:成功、else:エラー）
-発生例外: -
+備考: -
 
-引数:
-- dynamic | デバイス制御COM | oDevice
-- bool | デバイス無効化フラグ | bDeviceStop
-- bool | データイベント無効化フラグ | bEventStop
-- bool | 排他解放フラグ | bRelease
+### 7. Device_Open
+
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `public virtual int Device_Open(dynamic oDevice)` |
+| 可視性 | public |
+| 戻り値 | int |
+| Evidence | src/KsDevice/DeviceBase/DeviceBase.cs:136-162 |
 
 処理内容:
-- ① シミュレータモードの場合は 0 を返却する.
-- ② `bEventStop` が true の場合、`oDevice.DataEventEnabled = false` に設定する.
-- ③ `bDeviceStop` が true で、かつ `oDevice.DeviceEnabled` が true の場合、`false` に設定してデバイスを無効化する.
-- ④ `bRelease` が true の場合、`Device_Release(oDevice)` を呼び出して占有を解放し、その結果コードを返す。
 
-備考:
-- 物理的には `Device_End` メソッドのオーバーロード。
+- ① KsDeviceInfo から MyDeviceId と一致する device info を探す。
+- ② simulator でなければ device name を指定して OPOS Open を呼ぶ。
+- ③ 対象 device info の IsOpened を true に更新し、結果コードを返す。
 
-#### StartDevice
-No: 12
-戻り値: void | -
-発生例外: -
+備考: -
 
-引数:
-- KsDeviceId | デバイスID | devId
+### 8. Device_Close
 
-処理内容:
-- ① クラス内部変数 `MyDeviceId` に指定された `devId` を保存する。
-- ② 正常終了のデバッグログを出力する。
-
-備考:
-- -
-
-#### StopDevice
-No: 13
-戻り値: void | -
-発生例外: -
-
-引数:
-- -
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `public virtual int Device_Close(dynamic oDevice)` |
+| 可視性 | public |
+| 戻り値 | int |
+| Evidence | src/KsDevice/DeviceBase/DeviceBase.cs:167-194 |
 
 処理内容:
-- ① 終了フラグ `EndOrder` を true に設定し、`LoopTimer` を停止および無効化する.
-- ② `PMntRun`（デバイス処理中）が true の間、最大 300 回（最大 3 秒間）、10ms スリープおよび `Application.DoEvents()` を呼び出して待機する。
-- ③ 管理フォーム `MyForm` の `Close()` および `Dispose()` を実行してフォームを解放する.
-- ④ 正常終了のデバッグログを出力する。
 
-備考:
-- -
+- ① 対象 device が opened か確認する。
+- ② claimed 状態なら Device_Release を先に実行する。
+- ③ IsOpened を false にし、simulator でなければ OPOS Close を呼ぶ。
 
-#### DeviceMethod
-No: 14
-戻り値: int | 結果コード（固定で -1）
-発生例外: -
+備考: -
 
-引数:
-- KsDeviceMethodID | メソッドID | methodId
-- Dictionary\<string, string\> | メソッド引数 | arguments
-- Dictionary\<string, string\> | 戻り値ディクショナリ | returns
+### 9. Device_Claim
+
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `public virtual int Device_Claim(dynamic oDevice)` |
+| 可視性 | public |
+| 戻り値 | int |
+| Evidence | src/KsDevice/DeviceBase/DeviceBase.cs:199-226 |
 
 処理内容:
-- ① 固定値 -1 を返す。（派生クラスでオーバーライドされる）
 
-備考:
-- -
+- ① 対象 device info を探し、simulator でなければ ClaimDevice または Claim を呼ぶ。
+- ② 結果が 0 の場合は IsClaimed を true にする。
+- ③ 排他取得結果コードを返す。
 
-#### DeviceUse
-No: 15
-戻り値: int | 結果コード（固定で -1）
-発生例外: -
+備考: -
 
-引数:
-- Dictionary\<string, string\> | メソッド引数 | arguments
-- Dictionary\<string, string\> | 戻り値ディクショナリ | returns
+### 10. Device_Release
 
-処理内容:
-- ① 固定値 -1 を返す。（派生クラスでオーバーライドされる）
-
-備考:
-- -
-
-#### DeviceUnUse
-No: 16
-戻り値: int | 結果コード（固定で -1）
-発生例外: -
-
-引数:
-- Dictionary\<string, string\> | メソッド引数 | arguments
-- Dictionary\<string, string\> | 戻り値ディクショナリ | returns
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `public virtual int Device_Release(dynamic oDevice)` |
+| 可視性 | public |
+| 戻り値 | int |
+| Evidence | src/KsDevice/DeviceBase/DeviceBase.cs:231-260 |
 
 処理内容:
-- ① 固定値 -1 を返す。（派生クラスでオーバーライドされる）
 
-備考:
-- -
+- ① 対象 device が claimed 状態の場合だけ release を実行する。
+- ② IsClaimed を false に更新する。
+- ③ simulator でなければ ReleaseDevice または Release を呼び、結果コードを返す。
+
+備考: -
+
+### 11. Device_Start
+
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `public virtual int Device_Start(dynamic oDevice, bool bEventStart, bool bAutoDisable)` |
+| 可視性 | public |
+| 戻り値 | int |
+| Evidence | src/KsDevice/DeviceBase/DeviceBase.cs:267-328 |
+
+処理内容:
+
+- ① simulator の場合は 0 を返す。
+- ② Device_Claim を実行し、失敗時はログ出力してその結果を返す。
+- ③ 指定があれば AutoDisable を true に設定する。
+- ④ DeviceEnabled を true にし、MSR の場合は ClearInput を実行する。
+- ⑤ 指定があれば DataEventEnabled を true にし、失敗時は DeviceEnabled を false に戻す。
+
+備考: -
+
+### 12. Device_End
+
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `public virtual int Device_End(dynamic oDevice, bool bEventStop, bool bRelease)` |
+| 可視性 | public |
+| 戻り値 | int |
+| Evidence | src/KsDevice/DeviceBase/DeviceBase.cs:335-363 |
+
+処理内容:
+
+- ① simulator の場合は 0 を返す。
+- ② 指定があれば DataEventEnabled を false にする。
+- ③ 指定または overload 条件に従って DeviceEnabled を false にする。
+- ④ release 指定がある場合は Device_Release を実行し、結果コードを返す。
+
+備考: -
+
+### 13. Device_End
+
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `public virtual int Device_End(dynamic oDevice, bool bDeviceStop, bool bEventStop, bool bRelease)` |
+| 可視性 | public |
+| 戻り値 | int |
+| Evidence | src/KsDevice/DeviceBase/DeviceBase.cs:371-401 |
+
+処理内容:
+
+- ① simulator の場合は 0 を返す。
+- ② 指定があれば DataEventEnabled を false にする。
+- ③ 指定または overload 条件に従って DeviceEnabled を false にする。
+- ④ release 指定がある場合は Device_Release を実行し、結果コードを返す。
+
+備考: -
+
+### 14. StartDevice
+
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `public virtual void StartDevice(KsDeviceId devId)` |
+| 可視性 | public |
+| 戻り値 | void |
+| Evidence | src/KsDevice/DeviceBase/DeviceBase.cs:436-441 |
+
+処理内容:
+
+- ① 起動対象と内部状態を初期化する。
+- ② 必要な transport、フォーム、デバイスインスタンス、または設定オブジェクトを生成する。
+- ③ 起動結果を内部リストまたはログに反映する。
+
+備考: -
+
+### 15. StopDevice
+
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `public virtual void StopDevice()` |
+| 可視性 | public |
+| 戻り値 | void |
+| Evidence | src/KsDevice/DeviceBase/DeviceBase.cs:446-472 |
+
+処理内容:
+
+- ① EndOrder を true にし、timer を停止する。
+- ② Device_Mng 実行中の場合は最大約3秒待つ。
+- ③ MyForm を close/dispose する。
+- ④ デバイス制御終了ログを出力する。
+
+備考: -
+
+### 16. DeviceMethod
+
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `public virtual int DeviceMethod(KsDeviceMethodID methodId, Dictionary<string, string> arguments, ref Dictionary<string, string> returns)` |
+| 可視性 | public |
+| 戻り値 | int |
+| Evidence | src/KsDevice/DeviceBase/DeviceBase.cs:481-484 |
+
+処理内容:
+
+- ① メソッドIDと引数を確認する。
+- ② 対象メソッドIDに対応する OPOS または内部処理を呼び出す。
+- ③ ResultCode と ResultCodeExtended などの戻り値を payload に設定して返却する。
+
+備考: -
+
+### 17. DeviceUse
+
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `public virtual int DeviceUse(Dictionary<string, string> arguments, ref Dictionary<string, string> returns)` |
+| 可視性 | public |
+| 戻り値 | int |
+| Evidence | src/KsDevice/DeviceBase/DeviceBase.cs:492-495 |
+
+処理内容:
+
+- ① 基底クラスではデバイス固有処理を実行しない。
+- ② 派生クラスで override する前提として -1 を返す。
+
+備考: -
+
+### 18. DeviceUnUse
+
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `public virtual int DeviceUnUse(Dictionary<string, string> arguments, ref Dictionary<string, string> returns)` |
+| 可視性 | public |
+| 戻り値 | int |
+| Evidence | src/KsDevice/DeviceBase/DeviceBase.cs:503-506 |
+
+処理内容:
+
+- ① 基底クラスではデバイス固有処理を実行しない。
+- ② 派生クラスで override する前提として -1 を返す。
+
+備考: -
+
+## 処理フロー/注意事項
+
+- constructor が timer を設定する。
+- timer_tick が keep-alive 更新と Device_Mng 呼び出しを実行する。
+- Device_Start/Device_End が OPOS 読込状態を制御する。
+- StopDevice が実行中処理待機後にフォームを閉じる。
+
+### 注意事項
+
+- 基底の DeviceMethod/DeviceUse/DeviceUnUse は -1 を返すため、実デバイスでは override が必要。

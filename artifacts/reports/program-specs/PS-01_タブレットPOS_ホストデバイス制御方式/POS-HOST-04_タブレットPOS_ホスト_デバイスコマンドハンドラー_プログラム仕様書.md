@@ -1,13 +1,14 @@
 ---
 title: POS-HOST-04 タブレットPOS ホスト デバイスコマンドハンドラー プログラム仕様書
 project: tablet_pos_host
-type: architecture
+type: program-spec
 status: draft
 source:
   - sources/KsPosBoilerplate/TabetPos.Host/src/KsHost/DeviceHost/DeviceCommandCore.cs
 tags:
   - tablet-host
-  - opos
+  - command-handler
+  - program-spec
 ---
 
 # POS-HOST-04 タブレットPOS ホスト デバイスコマンドハンドラー プログラム仕様書
@@ -17,128 +18,144 @@ document_id: POS-HOST-04
 status: verified
 sources:
   - path: sources/KsPosBoilerplate/TabetPos.Host/src/KsHost/DeviceHost/DeviceCommandCore.cs
-    symbol: KsOutProcess.KsDeviceServer.DeviceCommandHandler
-notes: CodeGraph とソースコードで確認済み（2026-06-19）。
+    symbol: DeviceCommandHandler
+notes: CodeGraph local index and source code checked on 2026/06/21. Excel export compatibility is intentionally not preserved in this Pure Markdown rewrite.
 -->
 
-## @meta
-作成者: VTI-SAM
-図番: -
-更新日: 2026/06/19
+## 改訂履歴
 
-## 変更履歴 {grid=21}
+| バージョン | 更新日 | 更新者 | 変更内容 |
+| --- | --- | --- | --- |
+| 0.0.2 | 2026/06/21 | VTI-SAM | CodeGraph とソースコードに基づき、Pure Markdown 形式へ再構成し、内容を更新 |
+| 0.0.1 | 2026/06/19 | VTI-SAM | 初版作成 |
 
-### 基本情報 {kv:6,15}
+## 基本情報
+
 | 項目 | 内容 |
 | --- | --- |
+| 文書ID | POS-HOST-04 |
 | プロジェクト名 | タブレットPOS |
 | 機能名 | デバイスコマンドハンドラー |
-| バージョン | 0.0.1 |
-| 作成者 | VTI-SAM |
-| 作成日 | 2026年06月19日 |
-
-### 更新履歴 {table:3,3,3,3,3,3,3}
-| バージョン | 依頼者 | 更新者 | 更新日時 | 変更理由 | シート名 | 更新内容 |
-| --- | --- | --- | --- | --- | --- | --- |
-| 0.0.1 | SMJ様 | VTI-SAM | 2026年06月19日 | - | 全体 | 初版作成 |
-
-## 表紙 {grid=21}
-
-### {kv:6,15}
-| 項目 | 内容 |
-| --- | --- |
+| 物理クラス名 | DeviceCommandHandler |
 | 名前空間 | KsOutProcess.KsDeviceServer |
-| クラス名(論理) | デバイスコマンドハンドラー |
-| クラス名(物理) | DeviceCommandHandler |
-| 役割/概要 | 受信したコマンドを解釈し、対応するデバイス操作メソッドの呼び出し、プロセスの起動・停止制御、プロセス情報の管理を行うコマンドハンドラークラス。 |
-| 備考 | - |
+| アクセス修飾子 | internal sealed |
+| 継承/実装 | IDeviceCommandHandler |
+| 更新日 | 2026/06/21 |
 
-## クラス定義 {grid=24}
+## ソース対応
 
-### {kv:6,18}
 | 項目 | 内容 |
 | --- | --- |
-| アクセス修飾子 | internal sealed |
-| 継承関係(Base/Interfaces) | IDeviceCommandHandler |
-| 静的/インスタンス | インスタンス |
+| CodeGraph project | sources/KsPosBoilerplate/TabetPos.Host |
+| 主要ソース | sources/KsPosBoilerplate/TabetPos.Host/src/KsHost/DeviceHost/DeviceCommandCore.cs |
+| 検証状態 | CodeGraph sync/status と source read により確認済み |
+| 対象外 | Excel workbook、Designer 自動生成部分、source code の変更 |
 
-### コンストラクタ引数 {table:8,8,8}
-| 型 | 論理名 | 物理名 |
-| --- | --- | --- |
-| IDeviceRegistry | デバイスレジストリ | deviceRegistry |
-| IProcessInfoStore | プロセス情報ストア | processInfoStore |
+## クラス概要
 
-### クラスプロパティ {table:5,4,3,3,3,6}
-| 型 | 論理名 | 物理名 | getter | setter | 初期値 |
+内部 DeviceCommand を検証し、ホスト制御、使用開始/終了、デバイスメソッド実行へ振り分ける中核処理。
+
+### 主な責務
+
+- Kill/ReStart を host action として返却する。
+- DeviceUse/DeviceUnUse は process info store を更新する。
+- DeviceMethod は MethodId を検証して IFDevice へ委譲する。
+
+## フィールド/プロパティ
+
+| 区分 | 可視性 | 型 | 名前 | 用途 | Evidence |
 | --- | --- | --- | --- | --- | --- |
-| - | - | - | - | - | - |
+| コンストラクタ引数 | internal | IDeviceRegistry | deviceRegistry | DeviceId から IFDevice を検索する依存先。 | src/KsHost/DeviceHost/DeviceCommandCore.cs:80 |
+| コンストラクタ引数 | internal | IProcessInfoStore | processInfoStore | DeviceUse/DeviceUnUse の process info 更新先。 | src/KsHost/DeviceHost/DeviceCommandCore.cs:81 |
 
-## メソッド一覧 {grid=40}
+## メソッド一覧
 
-### {table:2,5,4,5,8,12,4}
-| No | 修飾子 | static | 戻り値 | メソッド名 | 概要 | 備考 |
-| --- | --- | --- | --- | --- | --- | --- |
-| 1 | public | - | DeviceCommandResult | Handle | 受信コマンドの解析とデバイス処理の呼び出し実行 | - |
-| 2 | private | static | DeviceCommandResult | Failure | エラー応答オブジェクトの生成 | - |
-| 3 | private | static | void | EnsureLegacyReturnKeys | レガシー用応答パラメータキーの補正 | - |
+| No | 可視性 | 戻り値 | メソッド名 | 概要 | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| 1 | internal | - | DeviceCommandHandler | registry と process info store を受け取って handler を構成する。 | src/KsHost/DeviceHost/DeviceCommandCore.cs:79-81 |
+| 2 | public | DeviceCommandResult | Handle | host action、device use/unuse、device method を判定し、対象 IFDevice へ処理を委譲する。 | src/KsHost/DeviceHost/DeviceCommandCore.cs:82-154 |
+| 3 | private static | DeviceCommandResult | Failure | 検証エラーまたは未対応 command を、legacy key を含む失敗 result に変換する。 | src/KsHost/DeviceHost/DeviceCommandCore.cs:156-174 |
+| 4 | private static | void | EnsureLegacyReturnKeys | 戻り payload に ResultCode/ReturnValue が無い場合だけ、return value で補完する。 | src/KsHost/DeviceHost/DeviceCommandCore.cs:176-183 |
 
-## メソッド定義 {grid=40}
+## メソッド詳細
 
-### {methoddef:2,2,6,4,4,4,4,4,6,2,2}
+### 1. DeviceCommandHandler
 
-#### Handle
-No: 1
-戻り値: DeviceCommandResult | コマンドの実行結果情報
-発生例外:
-- ArgumentNullException | 引数 `command` が null の場合
-
-引数:
-- DeviceCommand | 実行コマンドオブジェクト | command
-
-処理内容:
-- ① `command` が null の場合、ArgumentNullException をスローする。
-- ② 戻り値オブジェクト `DeviceCommandResult` を正常初期値で生成する。
-- ③ コマンドメッセージ `command.Message` が "Kill" の場合はホスト制御アクションに `Kill` を、"ReStart" の場合は `Restart` を設定して即座に結果を返す。
-- ④ コマンドのターゲットデバイスID `command.DeviceId` が未指定の場合、`Failure` を呼び出してエラー応答を返す。
-- ⑤ デバイスレジストリ `deviceRegistry` からデバイスを検索し、見つからない場合は `Failure` を返す。
-- ⑥ コマンドメッセージが "DeviceUse" の場合はプロセス情報ストアに新しい `KsProcessInfo` を追加登録し、デバイスの `DeviceUse` メソッドを実行する。
-- ⑦ コマンドメッセージが "DeviceUnUse" の場合はストア内の該当プロセスを未使用（Unuse）に更新し、デバイスの `DeviceUnUse` を実行する。
-- ⑧ コマンドメッセージが "DeviceUnUseComplete" の場合はストアからプロセス情報を削除し、デバイスの `DeviceUnUse` を実行する。
-- ⑨ コマンドメッセージが "DeviceMethod" の場合は `command.MethodId` が指定されていることを確認し、デバイスの `DeviceMethod` を実行する。
-- ⑩ 上記以外のメッセージの場合はサポート外エラーとして `Failure` を返す。
-- ⑪ 応答ペイロードにレガシーキーが存在することを確認し (`EnsureLegacyReturnKeys`)、結果を返す。
-
-備考:
-- -
-
-#### Failure
-No: 2
-戻り値: DeviceCommandResult | エラー結果オブジェクト
-発生例外: -
-
-引数:
-- DeviceCommand | 実行コマンドオブジェクト | command
-- string | エラーメッセージ | message
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `internal sealed class DeviceCommandHandler(IDeviceRegistry deviceRegistry, IProcessInfoStore processInfoStore)` |
+| 可視性 | internal |
+| 戻り値 | - |
+| Evidence | src/KsHost/DeviceHost/DeviceCommandCore.cs:79-81 |
 
 処理内容:
-- ① 実行結果が失敗 (`Success = false`)、戻り値が -1、指定されたエラーメッセージ `message` を含む `DeviceCommandResult` を生成する。
-- ② 応答の Payload にレガシー互換用の戻り値キー（"ResultCode" = "-1"、"ReturnValue" = "-1"）を格納して返す。
 
-備考:
-- -
+- ① IDeviceRegistry を保持し、DeviceId から IFDevice を検索できるようにする。
+- ② IProcessInfoStore を保持し、DeviceUse/DeviceUnUse の legacy process info 更新先にする。
+- ③ Handle 実行時はこの2つの依存先だけを通して device と process info を操作する。
 
-#### EnsureLegacyReturnKeys
-No: 3
-戻り値: void | -
-発生例外: -
+備考: -
 
-引数:
-- Dictionary\<string, string\> | 応答ペイロード | payload
-- int | 実行戻り値 | returnValue
+### 2. Handle
+
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `public DeviceCommandResult Handle(DeviceCommand command)` |
+| 可視性 | public |
+| 戻り値 | DeviceCommandResult |
+| Evidence | src/KsHost/DeviceHost/DeviceCommandCore.cs:82-154 |
 
 処理内容:
-- ① 応答ディクショナリ `payload` に "ResultCode" キーが存在しない場合、`returnValue` の文字列値を登録する。
-- ② 応答ディクショナリ `payload` に "ReturnValue" キーが存在しない場合、`returnValue` の文字列値を登録する。
 
-備考:
-- -
+- ① command が null の場合は ArgumentNullException を送出する。
+- ② Kill/ReStart は host action を設定して即時返却する。
+- ③ DeviceId 未指定または device 未登録の場合は Failure を返す。
+- ④ DeviceUse/DeviceUnUse/DeviceUnUseComplete では process info を更新し、対象 device の use/unuse を呼ぶ。
+- ⑤ DeviceMethod では MethodId を必須確認し、対象 device の DeviceMethod を呼ぶ。
+- ⑥ 戻り値、成功判定、payload を result に設定し、legacy key を補完する。
+
+備考: -
+
+### 3. Failure
+
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `private static DeviceCommandResult Failure(DeviceCommand command, string message)` |
+| 可視性 | private static |
+| 戻り値 | DeviceCommandResult |
+| Evidence | src/KsHost/DeviceHost/DeviceCommandCore.cs:156-174 |
+
+処理内容:
+
+- ① command から request/device/method/handle 情報を可能な範囲で引き継ぐ。
+- ② Success=false、ReturnValue=-1、Message=エラー内容を設定する。
+- ③ Payload に ResultCode=-1 と ReturnValue=-1 を入れ、legacy response と互換にする。
+
+備考: -
+
+### 4. EnsureLegacyReturnKeys
+
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `private static void EnsureLegacyReturnKeys(Dictionary<string, string> payload, int returnValue)` |
+| 可視性 | private static |
+| 戻り値 | void |
+| Evidence | src/KsHost/DeviceHost/DeviceCommandCore.cs:176-183 |
+
+処理内容:
+
+- ① payload に ResultCode が無い場合は returnValue を文字列化して追加する。
+- ② payload に ReturnValue が無い場合も同じ returnValue を追加する。
+- ③ 既に設定済みの key は上書きしない。
+
+備考: -
+
+## 処理フロー/注意事項
+
+- Handle が message 種別を判定する。
+- deviceRegistry から対象 IFDevice を取得する。
+- 実行結果を DeviceCommandResult と legacy payload key へ反映する。
+
+### 注意事項
+
+- 同一ファイル内の `DeviceCommand`、`DeviceCommandResult`、`DeviceManagerRegistry`、`LegacyProcessInfoStore` は関連 DTO/adapter として参照する。

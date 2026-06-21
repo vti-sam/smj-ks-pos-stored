@@ -1,13 +1,15 @@
 ---
 title: POS-HOST-02 タブレットPOS ホスト 名前付きパイプデバイスホストアダプター プログラム仕様書
 project: tablet_pos_host
-type: architecture
+type: program-spec
 status: draft
 source:
   - sources/KsPosBoilerplate/TabetPos.Host/src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs
 tags:
   - tablet-host
-  - opos
+  - named-pipe
+  - adapter
+  - program-spec
 ---
 
 # POS-HOST-02 タブレットPOS ホスト 名前付きパイプデバイスホストアダプター プログラム仕様書
@@ -17,141 +19,205 @@ document_id: POS-HOST-02
 status: verified
 sources:
   - path: sources/KsPosBoilerplate/TabetPos.Host/src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs
-    symbol: KsOutProcess.KsDeviceServer.NamedPipeDeviceHostAdapter
-notes: CodeGraph とソースコードで確認済み（2026-06-19）。
+    symbol: NamedPipeDeviceHostAdapter
+notes: CodeGraph local index and source code checked on 2026/06/21. Excel export compatibility is intentionally not preserved in this Pure Markdown rewrite.
 -->
 
-## @meta
-作成者: VTI-SAM
-図番: -
-更新日: 2026/06/19
+## 改訂履歴
 
-## 変更履歴 {grid=21}
+| バージョン | 更新日 | 更新者 | 変更内容 |
+| --- | --- | --- | --- |
+| 0.0.2 | 2026/06/21 | VTI-SAM | CodeGraph とソースコードに基づき、Pure Markdown 形式へ再構成し、内容を更新 |
+| 0.0.1 | 2026/06/19 | VTI-SAM | 初版作成 |
 
-### 基本情報 {kv:6,15}
+## 基本情報
+
 | 項目 | 内容 |
 | --- | --- |
+| 文書ID | POS-HOST-02 |
 | プロジェクト名 | タブレットPOS |
-| 機能名 | Named Pipeデバイスホストアダプター |
-| バージョン | 0.0.1 |
-| 作成者 | VTI-SAM |
-| 作成日 | 2026年06月19日 |
-
-### 更新履歴 {table:3,3,3,3,3,3,3}
-| バージョン | 依頼者 | 更新者 | 更新日時 | 変更理由 | シート名 | 更新内容 |
-| --- | --- | --- | --- | --- | --- | --- |
-| 0.0.1 | SMJ様 | VTI-SAM | 2026年06月19日 | - | 全体 | 初版作成 |
-
-## 表紙 {grid=21}
-
-### {kv:6,15}
-| 項目 | 内容 |
-| --- | --- |
+| 機能名 | 名前付きパイプデバイスホストアダプター |
+| 物理クラス名 | NamedPipeDeviceHostAdapter |
 | 名前空間 | KsOutProcess.KsDeviceServer |
-| クラス名(論理) | Named Pipeデバイスホストアダプター |
-| クラス名(物理) | NamedPipeDeviceHostAdapter |
-| 役割/概要 | Named Pipe通信を管理し、受信コマンドをコマンドルーターに中継し、非同期のデバイスイベントをクライアントへ配信するアダプタークラス。 |
-| 備考 | - |
+| アクセス修飾子 | internal sealed |
+| 継承/実装 | IDisposable |
+| 更新日 | 2026/06/21 |
 
-## クラス定義 {grid=24}
+## ソース対応
 
-### {kv:6,18}
 | 項目 | 内容 |
 | --- | --- |
-| アクセス修飾子 | internal sealed |
-| 継承関係(Base/Interfaces) | IDisposable |
-| 静的/インスタンス | インスタンス |
+| CodeGraph project | sources/KsPosBoilerplate/TabetPos.Host |
+| 主要ソース | sources/KsPosBoilerplate/TabetPos.Host/src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs |
+| 検証状態 | CodeGraph sync/status と source read により確認済み |
+| 対象外 | Excel workbook、Designer 自動生成部分、source code の変更 |
 
-### コンストラクタ引数 {table:8,8,8}
-| 型 | 論理名 | 物理名 |
-| --- | --- | --- |
-| IDeviceCommandHandler | コマンドハンドラ | commandHandler |
-| Action\<DeviceHostAction\> | ホストアクションハンドラ | hostActionHandler |
+## クラス概要
 
-### クラスプロパティ {table:5,4,3,3,3,6}
-| 型 | 論理名 | 物理名 | getter | setter | 初期値 |
+ホスト内の command handler と Named Pipe transport を接続する adapter であり、command pipe と event pipe の開始・停止、command 変換、event publish を担当する。
+
+### 主な責務
+
+- command request を mapper で内部 command に変換する。
+- DeviceCommandRouter によりデバイス単位で順序制御する。
+- Kill/ReStart は host action handler へ遅延通知する。
+
+## フィールド/プロパティ
+
+| 区分 | 可視性 | 型 | 名前 | 用途 | Evidence |
 | --- | --- | --- | --- | --- | --- |
-| - | - | - | - | - | - |
+| フィールド | private | string | NamedPipeCommandPipeName | string 型の内部状態。 | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:9 |
+| フィールド | private | string | NamedPipeEventPipeName | string 型の内部状態。 | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:10 |
+| フィールド | private | IDeviceCommandHandler | _commandHandler | デバイスコマンド処理の委譲先。 | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:12 |
+| フィールド | private | Action<DeviceHostAction> | _hostActionHandler | Kill/ReStart などホスト制御アクションの通知先。 | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:13 |
+| フィールド | private | INamedPipeCommandMapper | _commandMapper | Named Pipe request/response と内部 command/result の変換担当。 | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:14 |
+| フィールド | private | string | _commandPipeName | string 型の内部状態。 | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:15 |
+| フィールド | private | string | _eventPipeName | string 型の内部状態。 | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:16 |
+| フィールド | private | DeviceCommandRouter | _commandRouter | デバイス単位のコマンドキュー制御。 | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:17 |
+| フィールド | private | NamedPipeCommandServer | _commandServer | コマンド受信用 Named Pipe サーバー。 | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:18 |
+| フィールド | private | NamedPipeEventPublisher | _eventPublisher | イベント送信用 Named Pipe publisher。 | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:19 |
 
-## メソッド一覧 {grid=40}
+## メソッド一覧
 
-### {table:2,5,4,5,8,12,4}
-| No | 修飾子 | static | 戻り値 | メソッド名 | 概要 | 備考 |
-| --- | --- | --- | --- | --- | --- | --- |
-| 1 | public | - | void | Start | Named Pipeサービス（受信・イベント配信）の開始 | - |
-| 2 | public | - | void | Dispose | リソース解放処理 | - |
-| 3 | public | - | void | PublishDeviceReply | デバイス応答イベントのクライアント配信 | - |
-| 4 | private | - | NamedPipeDeviceCommandResponse | ProcessCommand | 受信コマンドの処理とルーティング | - |
+| No | 可視性 | 戻り値 | メソッド名 | 概要 | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| 1 | public | - | NamedPipeDeviceHostAdapter | インスタンスを初期化する。 | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:21-27 |
+| 2 | internal | - | NamedPipeDeviceHostAdapter | インスタンスを初期化する。 | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:29-36 |
+| 3 | internal | - | NamedPipeDeviceHostAdapter | インスタンスを初期化する。 | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:38-50 |
+| 4 | public | void | Start | command router、event publisher、command server を準備し、Named Pipe 通信を開始する。 | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:52-60 |
+| 5 | public | void | Dispose | command server、router、event publisher を停止・破棄し、再開始可能な状態へ戻す。 | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:62-70 |
+| 6 | public | void | PublishDeviceReply | デバイス側の非同期応答を event pipe 用の NamedPipeDeviceEvent に変換して送信する。 | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:72-84 |
+| 7 | private | NamedPipeDeviceCommandResponse | ProcessCommand | Named Pipe request を内部 command に変換し、handler 実行後に response へ戻す。 | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:86-101 |
 
-## メソッド定義 {grid=40}
+## メソッド詳細
 
-### {methoddef:2,2,6,4,4,4,4,4,6,2,2}
+### 1. NamedPipeDeviceHostAdapter
 
-#### Start
-No: 1
-戻り値: void | -
-発生例外: -
-
-引数:
-- -
-
-処理内容:
-- ① コマンドルーター `_commandRouter` が未作成の場合、`ProcessCommand` メソッドを登録してインスタンス化する。
-- ② イベント配信サーバー `_eventPublisher` が未作成の場合、パイプ名 `_eventPipeName` を指定してインスタンス化する。
-- ③ コマンド受信サーバー `_commandServer` が未作成の場合、パイプ名 `_commandPipeName` とルーターのキュー登録処理 `_commandRouter.EnqueueAsync` を指定してインスタンス化する。
-- ④ イベント配信サーバー `_eventPublisher.Start()` を開始する。
-- ⑤ コマンド受信サーバー `_commandServer.Start()` を開始する。
-
-備考:
-- -
-
-#### Dispose
-No: 2
-戻り値: void | -
-発生例外: -
-
-引数:
-- -
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `public NamedPipeDeviceHostAdapter( IDeviceCommandHandler commandHandler, Action<DeviceHostAction> hostActionHandler)` |
+| 可視性 | public |
+| 戻り値 | - |
+| Evidence | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:21-27 |
 
 処理内容:
-- ① コマンド受信サーバー `_commandServer` の `Dispose()` を実行し、null クリアする。
-- ② コマンドルーター `_commandRouter` の `Dispose()` を実行し、null クリアする。
-- ③ イベント配信サーバー `_eventPublisher` の `Dispose()` を実行し、null クリアする。
 
-備考:
-- -
+- ① 対象 method の実行条件を確認する。
+- ② インスタンスを初期化する。
+- ③ 必要な戻り値または内部状態を更新する。
 
-#### PublishDeviceReply
-No: 3
-戻り値: void | -
-発生例外: -
+備考: -
 
-引数:
-- KsDeviceId | デバイスID | deviceId
-- KsDeviceMethodID | メソッドID | methodId
-- IntPtr | ウィンドウハンドル | handle
-- Dictionary\<string, string\> | 応答ペイロード | payload
+### 2. NamedPipeDeviceHostAdapter
+
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `internal NamedPipeDeviceHostAdapter( IDeviceCommandHandler commandHandler, Action<DeviceHostAction> hostActionHandler, INamedPipeCommandMapper commandMapper)` |
+| 可視性 | internal |
+| 戻り値 | - |
+| Evidence | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:29-36 |
 
 処理内容:
-- ① 新しい `NamedPipeDeviceEvent` オブジェクトを構築し、`EventId` に一意の GUID 文字列、`DeviceId` と `MethodId` に引数の文字列、`EventType` と `Message` に "ReplyDevice"、`Payload` に引数の `payload`（null の場合は空のディクショナリ）を設定する。
-- ② イベント配信サーバー `_eventPublisher` を通じて、構築したイベントをクライアントへ非同期配信 (`Publish`) する。
 
-備考:
-- -
+- ① 対象 method の実行条件を確認する。
+- ② インスタンスを初期化する。
+- ③ 必要な戻り値または内部状態を更新する。
 
-#### ProcessCommand
-No: 4
-戻り値: NamedPipeDeviceCommandResponse | クライアントへのコマンド応答データ
-発生例外: -
+備考: -
 
-引数:
-- NamedPipeDeviceCommandRequest | 受信リクエスト | request
+### 3. NamedPipeDeviceHostAdapter
+
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `internal NamedPipeDeviceHostAdapter( IDeviceCommandHandler commandHandler, Action<DeviceHostAction> hostActionHandler, INamedPipeCommandMapper commandMapper, string commandPipeName, string eventPipeName)` |
+| 可視性 | internal |
+| 戻り値 | - |
+| Evidence | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:38-50 |
 
 処理内容:
-- ① リクエストマッパー `_commandMapper` を用いて、受信したパイプリクエスト `request` を内部コマンドオブジェクト `DeviceCommand` に変換する。
-- ② コマンドハンドラ `_commandHandler.Handle(command)` を呼び出してコマンドを実行し、実行結果 `DeviceCommandResult` を得る。
-- ③ 実行結果のホスト制御アクション `result.HostAction` が `None` 以外の場合、非同期タスク (`Task.Run`) を立ち上げ、500ミリ秒待機 (`Task.Delay`) した後、`_hostActionHandler(result.HostAction)` を呼び出してホストプロセスの終了または再起動を実行する。
-- ④ `_commandMapper.ToResponse` を呼び出して、実行結果をパイプ応答 `NamedPipeDeviceCommandResponse` に変換して返す。
 
-備考:
-- -
+- ① 対象 method の実行条件を確認する。
+- ② インスタンスを初期化する。
+- ③ 必要な戻り値または内部状態を更新する。
+
+備考: -
+
+### 4. Start
+
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `public void Start()` |
+| 可視性 | public |
+| 戻り値 | void |
+| Evidence | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:52-60 |
+
+処理内容:
+
+- ① 未生成の DeviceCommandRouter、NamedPipeEventPublisher、NamedPipeCommandServer を作成する。
+- ② event pipe publisher を開始する。
+- ③ command pipe server を開始し、request を router の enqueue に接続する。
+
+備考: -
+
+### 5. Dispose
+
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `public void Dispose()` |
+| 可視性 | public |
+| 戻り値 | void |
+| Evidence | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:62-70 |
+
+処理内容:
+
+- ① command server を dispose し、参照を null にする。
+- ② router を dispose して worker queue を停止する。
+- ③ event publisher を dispose し、参照を null にする。
+
+備考: -
+
+### 6. PublishDeviceReply
+
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `public void PublishDeviceReply(KsDeviceId deviceId, KsDeviceMethodID methodId, IntPtr handle, Dictionary<string, string> payload)` |
+| 可視性 | public |
+| 戻り値 | void |
+| Evidence | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:72-84 |
+
+処理内容:
+
+- ① deviceId、methodId、payload から NamedPipeDeviceEvent を生成する。
+- ② EventId を GUID で採番し、EventType/Message に ReplyDevice を設定する。
+- ③ event publisher が存在する場合のみ publish する。
+
+備考: -
+
+### 7. ProcessCommand
+
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `private NamedPipeDeviceCommandResponse ProcessCommand(NamedPipeDeviceCommandRequest request)` |
+| 可視性 | private |
+| 戻り値 | NamedPipeDeviceCommandResponse |
+| Evidence | src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs:86-101 |
+
+処理内容:
+
+- ① request を command mapper で内部 DeviceCommand に変換する。
+- ② DeviceCommandHandler.Handle を呼び、処理結果を取得する。
+- ③ Kill/Restart の場合は 500ms 遅延して host action handler を実行する。
+- ④ 処理結果を Named Pipe response へ変換して返却する。
+
+備考: -
+
+## 処理フロー/注意事項
+
+- Start が command router、event publisher、command server を生成して開始する。
+- ProcessCommand が request -> command -> result -> response を変換する。
+- PublishDeviceReply が device event を event pipe へ送信する。
+- Dispose が transport 関連リソースを解放する。
+
+### 注意事項
+
+- 既定 pipe 名は `TabetPos.Host.Command` と `TabetPos.Host.Event`。

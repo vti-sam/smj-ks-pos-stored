@@ -1,13 +1,16 @@
 ---
 title: POS-HOST-11 タブレットPOS ホスト カスタマーディスプレイ制御 SHARP プログラム仕様書
 project: tablet_pos_host
-type: architecture
+type: program-spec
 status: draft
 source:
   - sources/KsPosBoilerplate/TabetPos.Host/src/KsDevice/CustomerDisplay/CustomerDisplayBySharp/CustomerDisplayBySharp.cs
 tags:
   - tablet-host
+  - customer-display
+  - sharp
   - opos
+  - program-spec
 ---
 
 # POS-HOST-11 タブレットPOS ホスト カスタマーディスプレイ制御 SHARP プログラム仕様書
@@ -16,169 +19,161 @@ tags:
 document_id: POS-HOST-11
 status: verified
 sources:
-  - symbol: CustomerDisplayBySharp
-notes: CodeGraph とソースコードで確認済み（2026-06-19）。
+  - path: sources/KsPosBoilerplate/TabetPos.Host/src/KsDevice/CustomerDisplay/CustomerDisplayBySharp/CustomerDisplayBySharp.cs
+    symbol: CustomerDisplayBySharp
+notes: CodeGraph local index and source code checked on 2026/06/21. Excel export compatibility is intentionally not preserved in this Pure Markdown rewrite.
 -->
 
-## @meta
-作成者: VTI-SAM
-図番: -
-更新日: 2026/06/19
+## 改訂履歴
 
-## 変更履歴 {grid=21}
+| バージョン | 更新日 | 更新者 | 変更内容 |
+| --- | --- | --- | --- |
+| 0.0.2 | 2026/06/21 | VTI-SAM | CodeGraph とソースコードに基づき、Pure Markdown 形式へ再構成し、内容を更新 |
+| 0.0.1 | 2026/06/19 | VTI-SAM | 初版作成 |
 
-### 基本情報 {kv:6,15}
+## 基本情報
+
 | 項目 | 内容 |
 | --- | --- |
+| 文書ID | POS-HOST-11 |
 | プロジェクト名 | タブレットPOS |
-| 機能名 | カスタマーディスプレイ制御(Sharp) |
-| バージョン | 0.0.1 |
-| 作成者 | VTI-SAM |
-| 作成日 | 2026年06月19日 |
-
-### 更新履歴 {table:3,3,3,3,3,3,3}
-| バージョン | 依頼者 | 更新者 | 更新日時 | 変更理由 | シート名 | 更新内容 |
-| --- | --- | --- | --- | --- | --- | --- |
-| 0.0.1 | SMJ様 | VTI-SAM | 2026年06月19日 | - | 全体 | 初版作成 |
-
-## 表紙 {grid=21}
-
-### {kv:6,15}
-| 項目 | 内容 |
-| --- | --- |
+| 機能名 | カスタマーディスプレイ制御 SHARP |
+| 物理クラス名 | CustomerDisplayBySharp |
 | 名前空間 | KsOutProcess.KsDeviceServer |
-| クラス名(論理) | カスタマーディスプレイ制御(Sharp) |
-| クラス名(物理) | CustomerDisplayBySharp |
-| 役割/概要 | OPOSインターフェースを介してSharp製カスタマーディスプレイ（Customer Display）へのテキスト表示およびクリア操作を制御するクラス。 |
-| 備考 | - |
+| アクセス修飾子 | public |
+| 継承/実装 | DeviceBase |
+| 更新日 | 2026/06/21 |
 
-## クラス定義 {grid=24}
+## ソース対応
 
-### {kv:6,18}
 | 項目 | 内容 |
 | --- | --- |
-| アクセス修飾子 | public |
-| 継承関係(Base/Interfaces) | DeviceBase |
-| 静的/インスタンス | インスタンス |
+| CodeGraph project | sources/KsPosBoilerplate/TabetPos.Host |
+| 主要ソース | sources/KsPosBoilerplate/TabetPos.Host/src/KsDevice/CustomerDisplay/CustomerDisplayBySharp/CustomerDisplayBySharp.cs |
+| 検証状態 | CodeGraph sync/status と source read により確認済み |
+| 対象外 | Excel workbook、Designer 自動生成部分、source code の変更 |
 
-### コンストラクタ引数 {table:8,8,8}
-| 型 | 論理名 | 物理名 |
-| --- | --- | --- |
-| - | - | - |
+## クラス概要
 
-### クラスプロパティ {table:5,4,3,3,3,6}
-| 型 | 論理名 | 物理名 | getter | setter | 初期値 |
+SHARP CustomerDisplay OCX を保持し、表示クリア、テキスト表示、スクロール、DirectIO 表示を実行するデバイス制御クラス。
+
+### 主な責務
+
+- 命令ごとに Device_Start/Device_End で排他制御する。
+- ClearDescriptors/ClearText/DisplayText/DisplayTextAt/ScrollText/LinDsp/LinDspTelop を処理する。
+- LinDsp は DirectIO 用データを構築して送信する。
+
+## フィールド/プロパティ
+
+| 区分 | 可視性 | 型 | 名前 | 用途 | Evidence |
 | --- | --- | --- | --- | --- | --- |
-| - | - | - | - | - | - |
+| フィールド | private | CustomerDisplayBySharpForm | _oFrm | デバイス制御用フォーム。 | src/KsDevice/CustomerDisplay/CustomerDisplayBySharp/CustomerDisplayBySharp.cs:20 |
 
-## メソッド一覧 {grid=40}
+## メソッド一覧
 
-### {table:2,5,4,5,8,12,4}
-| No | 修飾子 | static | 戻り値 | メソッド名 | 概要 | 備考 |
-| --- | --- | --- | --- | --- | --- | --- |
-| 1 | public | - | override void | StartDevice | デバイスの制御を開始します。 | - |
-| 2 | public | - | override void | StopDevice | デバイスの制御を終了します。 | - |
-| 3 | public | - | override int | DeviceMethod | デバイスのメソッドを実行します。 | - |
-| 4 | public | - | override void | Device_Mng | ラインディスプレイ処理を行います。 | - |
-| 5 | private | - | int | LinDsp | ラインディスプレイ処理を行います（文字成形とDirectIO送信）。 | - |
+| No | 可視性 | 戻り値 | メソッド名 | 概要 | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| 1 | public | void | StartDevice | 対象デバイスIDを保持し、OCXを配置したフォームとタイマー同期先を初期化する。 | src/KsDevice/CustomerDisplay/CustomerDisplayBySharp/CustomerDisplayBySharp.cs:25-38 |
+| 2 | public | void | StopDevice | デバイス制御を終了し、タイマー停止とフォーム解放を実行する。 | src/KsDevice/CustomerDisplay/CustomerDisplayBySharp/CustomerDisplayBySharp.cs:43-47 |
+| 3 | public | int | DeviceMethod | 表示クリア、文字表示、スクロール、DirectIO 表示を methodId と引数に応じて実行する。 | src/KsDevice/CustomerDisplay/CustomerDisplayBySharp/CustomerDisplayBySharp.cs:56-157 |
+| 4 | public | void | Device_Mng | カスタマーディスプレイは常時監視を行わないため、周期 timer を停止する。 | src/KsDevice/CustomerDisplay/CustomerDisplayBySharp/CustomerDisplayBySharp.cs:160-165 |
+| 5 | private | int | LinDsp | 区分0では表示文字列を DirectIO 用データへ変換し、それ以外では表示をクリアする。 | src/KsDevice/CustomerDisplay/CustomerDisplayBySharp/CustomerDisplayBySharp.cs:167-190 |
 
-## メソッド定義 {grid=40}
+## メソッド詳細
 
-### {methoddef:2,2,6,4,4,4,4,4,6,2,2}
+### 1. StartDevice
 
-#### StartDevice
-No: 1
-戻り値: override void | -
-発生例外: -
-
-引数:
-- KsDeviceId | - | devId
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `public override void StartDevice(KsDeviceId devId)` |
+| 可視性 | public |
+| 戻り値 | void |
+| Evidence | src/KsDevice/CustomerDisplay/CustomerDisplayBySharp/CustomerDisplayBySharp.cs:25-38 |
 
 処理内容:
-- ① 基底クラスのStartDeviceメソッドを呼び出す。
-- ② デバイスIDをMyDeviceIdに設定する。
-- ③ CustomerDisplayBySharpFormのインスタンスを生成して_oFrmに設定する。
-- ④ ログ出力処理「_oFrm.Name + "のロード終了"」を実行する。
-- ⑤ MyFormに_oFrmを設定する。
-- ⑥ MyDeviceに_oFrm.AxCustomerDisplay1を設定する。
-- ⑦ _oFrm.Deviceに自身（this）を設定する。
-- ⑧ _oFrm.DeviceIdにdevIdを設定する。
-- ⑨ LoopTimer.SynchronizingObjectに_oFrmを設定する。
-- ⑩ _oFrm.Showメソッドを呼び出してフォームを表示する。
 
-備考:
-- -
+- ① 基底 StartDevice を呼び、対象 DeviceId を保持する。
+- ② CustomerDisplayBySharpForm を生成し、MyForm と MyDevice に CustomerDisplay OCX を設定する。
+- ③ フォーム側へ Device と DeviceId を渡す。
+- ④ timer の SynchronizingObject をフォームへ設定し、フォームを表示する。
 
-#### StopDevice
-No: 2
-戻り値: override void | -
-発生例外: -
+備考: -
 
-引数:
-- -
+### 2. StopDevice
+
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `public override void StopDevice()` |
+| 可視性 | public |
+| 戻り値 | void |
+| Evidence | src/KsDevice/CustomerDisplay/CustomerDisplayBySharp/CustomerDisplayBySharp.cs:43-47 |
 
 処理内容:
-- ① 終了要求フラグEndOrderをTrueに設定する。
-- ② 基底クラスのStopDeviceメソッドを呼び出す。
 
-備考:
-- -
+- ① EndOrder を true に設定する。
+- ② 基底 StopDevice を呼び、timer 停止、処理中待機、フォーム解放を実行する。
 
-#### DeviceMethod
-No: 3
-戻り値: override int | -
-発生例外: -
+備考: -
 
-引数:
-- KsDeviceMethodID | - | methodId
-- Dictionary<string, string> | - | arguments
-- ref Dictionary<string, string> | - | returns
+### 3. DeviceMethod
 
-処理内容:
-- ① 戻り値resultCodeを-1、resultCodeExtendedを-1で初期化する。
-- ② Device_Startメソッドを呼び出して、_oFrm.AxCustomerDisplay1の排他制御と有効化を開始する。
-- ③ methodIdがClearDescriptorsと等しい場合、_oFrm.AxCustomerDisplay1.ClearDescriptorsメソッドを実行し、結果をresultCodeおよびresultCodeExtendedに設定する。
-- ④ methodIdがClearTextと等しい場合、_oFrm.AxCustomerDisplay1.ClearTextメソッドを実行し、結果をresultCodeおよびresultCodeExtendedに設定する。
-- ⑤ methodIdがDisplayTextと等しい場合、引数からDataとAttributeを取得し、_oFrm.AxCustomerDisplay1.DisplayTextメソッドを実行して結果を設定する。
-- ⑥ methodIdがDisplayTextAtと等しい場合、引数からRow、Column、Data、Attributeを取得し、_oFrm.AxCustomerDisplay1.DisplayTextAtメソッドを実行して結果を設定する。
-- ⑦ methodIdがScrollTextと等しい場合、引数からDirectionとUnitsを取得し、_oFrm.AxCustomerDisplay1.ScrollTextメソッドを実行して結果を設定する。
-- ⑧ methodIdがLinDspと等しい場合、引数からCommandとDataを取得し、内部メソッドLinDspを実行して結果を設定する。
-- ⑨ methodIdがLinDspTelopと等しい場合、引数からCommand、Speed、Dataを取得し、_oFrm.AxCustomerDisplay1.DirectIOメソッドを実行して結果を設定する。
-- ⑩ Device_Endメソッドを呼び出して、_oFrm.AxCustomerDisplay1の排他制御を開放し無効化する。
-- ⑪ 引数のreturnsにResultCodeとResultCodeExtendedを追加し、resultCodeを戻り値として返す。
-
-備考:
-- -
-
-#### Device_Mng
-No: 4
-戻り値: override void | -
-発生例外: -
-
-引数:
-- object | - | oDevice
-- IntPtr | - | foreHandl
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `public override int DeviceMethod(KsDeviceMethodID methodId, Dictionary<string, string> arguments, ref Dictionary<string, string> returns)` |
+| 可視性 | public |
+| 戻り値 | int |
+| Evidence | src/KsDevice/CustomerDisplay/CustomerDisplayBySharp/CustomerDisplayBySharp.cs:56-157 |
 
 処理内容:
-- ① LoopTimerを停止（Stop）する。
-- ② LoopTimerのEnabledをFalseに設定する。
 
-備考:
-- -
+- ① 命令ごとに Device_Start を実行し、ディスプレイを有効化する。
+- ② methodId に応じて ClearDescriptors、ClearText、DisplayText、DisplayTextAt、ScrollText、LinDsp、LinDspTelop を実行する。
+- ③ 必要な引数が不足する場合は初期値 ResultCode=-1 のまま返す。
+- ④ Device_End で排他を解放し、ResultCode/ResultCodeExtended を returns に設定する。
 
-#### LinDsp
-No: 5
-戻り値: int | -
-発生例外: -
+備考: -
 
-引数:
-- ref int | - | kbn
-- string | - | data
+### 4. Device_Mng
+
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `public override void Device_Mng(object oDevice, IntPtr foreHandl)` |
+| 可視性 | public |
+| 戻り値 | void |
+| Evidence | src/KsDevice/CustomerDisplay/CustomerDisplayBySharp/CustomerDisplayBySharp.cs:160-165 |
 
 処理内容:
-- ① kbnが0と等しい場合、dataのUnicodeバイト配列を取得し、指定サイズ分の文字成形処理（空き領域は0x20で補完）を行ってString型の変数sに復元する。
-- ② _oFrm.AxCustomerDisplay1.DirectIO(0, ref 0, ref s)メソッドを実行した戻り値を返す。
-- ③ kbnが0以外の場合、_oFrm.AxCustomerDisplay1.ClearDescriptors()メソッドを実行した戻り値を返す。
 
-備考:
-- -
+- ① 周期 timer を停止する。
+- ② timer enabled を false にする。
+- ③ カスタマーディスプレイはイベント監視を継続しないため、追加処理は行わない。
+
+備考: -
+
+### 5. LinDsp
+
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `private int LinDsp(ref int kbn, string data)` |
+| 可視性 | private |
+| 戻り値 | int |
+| Evidence | src/KsDevice/CustomerDisplay/CustomerDisplayBySharp/CustomerDisplayBySharp.cs:167-190 |
+
+処理内容:
+
+- ① kbn が 0 の場合は文字列を Unicode byte 配列から DirectIO 用文字列へ組み立てる。
+- ② command=0、pData=0 で DirectIO を実行する。
+- ③ kbn が 0 以外の場合は ClearDescriptors を呼んで表示をクリアする。
+
+備考: -
+
+## 処理フロー/注意事項
+
+- StartDevice が CustomerDisplayBySharpForm を生成する。
+- DeviceMethod が methodId と必要引数を確認して OCX 操作を実行する。
+- Device_Mng はタイマーを停止する。
+- LinDsp が DirectIO 用文字列または ClearDescriptors を実行する。
+
+### 注意事項
+
+- 引数不足時は該当操作を実行せず、初期値 resultCode=-1 を返す。

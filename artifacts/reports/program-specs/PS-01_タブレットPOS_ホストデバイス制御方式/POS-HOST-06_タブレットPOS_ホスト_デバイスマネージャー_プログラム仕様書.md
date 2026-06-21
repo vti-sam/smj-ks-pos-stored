@@ -1,13 +1,14 @@
 ---
 title: POS-HOST-06 タブレットPOS ホスト デバイスマネージャー プログラム仕様書
 project: tablet_pos_host
-type: architecture
+type: program-spec
 status: draft
 source:
   - sources/KsPosBoilerplate/TabetPos.Host/src/KsDeviceManager/KsDeviceManager.cs
 tags:
   - tablet-host
-  - opos
+  - device-manager
+  - program-spec
 ---
 
 # POS-HOST-06 タブレットPOS ホスト デバイスマネージャー プログラム仕様書
@@ -17,151 +18,183 @@ document_id: POS-HOST-06
 status: verified
 sources:
   - path: sources/KsPosBoilerplate/TabetPos.Host/src/KsDeviceManager/KsDeviceManager.cs
-    symbol: KsOutProcess.KsDeviceServer.KsDeviceManager
-notes: CodeGraph とソースコードで確認済み（2026-06-19）。
+    symbol: KsDeviceManager
+notes: CodeGraph local index and source code checked on 2026/06/21. Excel export compatibility is intentionally not preserved in this Pure Markdown rewrite.
 -->
 
-## @meta
-作成者: VTI-SAM
-図番: -
-更新日: 2026/06/19
+## 改訂履歴
 
-## 変更履歴 {grid=21}
+| バージョン | 更新日 | 更新者 | 変更内容 |
+| --- | --- | --- | --- |
+| 0.0.2 | 2026/06/21 | VTI-SAM | CodeGraph とソースコードに基づき、Pure Markdown 形式へ再構成し、内容を更新 |
+| 0.0.1 | 2026/06/19 | VTI-SAM | 初版作成 |
 
-### 基本情報 {kv:6,15}
+## 基本情報
+
 | 項目 | 内容 |
 | --- | --- |
+| 文書ID | POS-HOST-06 |
 | プロジェクト名 | タブレットPOS |
 | 機能名 | デバイスマネージャー |
-| バージョン | 0.0.1 |
-| 作成者 | VTI-SAM |
-| 作成日 | 2026年06月19日 |
-
-### 更新履歴 {table:3,3,3,3,3,3,3}
-| バージョン | 依頼者 | 更新者 | 更新日時 | 変更理由 | シート名 | 更新内容 |
-| --- | --- | --- | --- | --- | --- | --- |
-| 0.0.1 | SMJ様 | VTI-SAM | 2026年06月19日 | - | 全体 | 初版作成 |
-
-## 表紙 {grid=21}
-
-### {kv:6,15}
-| 項目 | 内容 |
-| --- | --- |
+| 物理クラス名 | KsDeviceManager |
 | 名前空間 | KsOutProcess.KsDeviceServer |
-| クラス名(論理) | デバイスマネージャー |
-| クラス名(物理) | KsDeviceManager |
-| 役割/概要 | 設定に基づいて各種デバイスクラスを動的にロード・起動し、実行時のデバイス状態の監視（応答確認）およびアンロード処理を制御するクラス。 |
-| 備考 | - |
+| アクセス修飾子 | public |
+| 継承/実装 | - |
+| 更新日 | 2026/06/21 |
 
-## クラス定義 {grid=24}
+## ソース対応
 
-### {kv:6,18}
 | 項目 | 内容 |
 | --- | --- |
-| アクセス修飾子 | public |
-| 継承関係(Base/Interfaces) | - |
-| 静的/インスタンス | インスタンス |
+| CodeGraph project | sources/KsPosBoilerplate/TabetPos.Host |
+| 主要ソース | sources/KsPosBoilerplate/TabetPos.Host/src/KsDeviceManager/KsDeviceManager.cs |
+| 検証状態 | CodeGraph sync/status と source read により確認済み |
+| 対象外 | Excel workbook、Designer 自動生成部分、source code の変更 |
 
-### コンストラクタ引数 {table:8,8,8}
-| 型 | 論理名 | 物理名 |
-| --- | --- | --- |
-| - | - | - |
+## クラス概要
 
-### クラスプロパティ {table:5,4,3,3,3,6}
-| 型 | 論理名 | 物理名 | getter | setter | 初期値 |
+設定からデバイスクラスを生成・起動し、起動済みデバイスの検索、停止、応答転送を管理する Singleton。
+
+### 主な責務
+
+- 起動対象デバイスを設定から取得する。
+- 各デバイス起動を最大3回試行する。
+- MSR/CashChanger の keep-alive を周期監視する。
+
+## フィールド/プロパティ
+
+| 区分 | 可視性 | 型 | 名前 | 用途 | Evidence |
 | --- | --- | --- | --- | --- | --- |
-| IReadOnlyList\<IFDevice\> | デバイスリスト | Devices | public | - | - |
+| フィールド | private | IFSettingDevice | _deviceSetting | IFSettingDevice 型の内部状態。 | src/KsDeviceManager/KsDeviceManager.cs:18 |
+| フィールド | private | IFDeviceReply | _deviceReply | IFDeviceReply 型の内部状態。 | src/KsDeviceManager/KsDeviceManager.cs:19 |
+| フィールド | private | bool | _stopFlg | bool 型の内部状態。 | src/KsDeviceManager/KsDeviceManager.cs:20 |
+| フィールド | private | KsDeviceManager | _singleton | KsDeviceManager 型の内部状態。 | src/KsDeviceManager/KsDeviceManager.cs:24 |
+| フィールド | private | List<IFDevice> | _deviceList | 起動済み IFDevice の保持リスト。 | src/KsDeviceManager/KsDeviceManager.cs:32 |
+| プロパティ | public | IReadOnlyList<IFDevice> | Devices | 起動済みデバイスの読み取り専用 snapshot。 | src/KsDeviceManager/KsDeviceManager.cs:34 |
 
-## メソッド一覧 {grid=40}
+## メソッド一覧
 
-### {table:2,5,4,5,8,12,4}
-| No | 修飾子 | static | 戻り値 | メソッド名 | 概要 | 備考 |
-| --- | --- | --- | --- | --- | --- | --- |
-| 1 | public | static | KsDeviceManager | GetInstance | Singleton インスタンスを取得 | - |
-| 2 | public | - | void | StartDeviceManager | デバイスマネージャーの開始とデバイスロード・監視処理 | - |
-| 3 | public | - | void | StopDeviceManager | ロード済みデバイスの一括停止とアンロード | - |
-| 4 | public | - | IFDevice | FindDevice | デバイスIDによるロード済みデバイスの検索 | - |
-| 5 | public | - | void | ReplyDevice | クライアントへの応答処理の中継 | - |
+| No | 可視性 | 戻り値 | メソッド名 | 概要 | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| 1 | private | - | KsDeviceManager | インスタンスコンストラクタ | src/KsDeviceManager/KsDeviceManager.cs:27-30 |
+| 2 | public | KsDeviceManager | GetInstance | Singleton インスタンスを返却する。 | src/KsDeviceManager/KsDeviceManager.cs:38-41 |
+| 3 | public | void | StartDeviceManager | 設定から対象デバイスを生成し、起動後は停止要求まで keep-alive 監視ループを維持する。 | src/KsDeviceManager/KsDeviceManager.cs:48-110 |
+| 4 | public | void | StopDeviceManager | 停止フラグを立て、保持中の全デバイスへ StopDevice を呼び出して list を空にする。 | src/KsDeviceManager/KsDeviceManager.cs:115-126 |
+| 5 | public | IFDevice | FindDevice | 起動済みデバイス list から DeviceId が一致する IFDevice を返す。 | src/KsDeviceManager/KsDeviceManager.cs:128-131 |
+| 6 | public | void | ReplyDevice | legacy process info の client/handle/method を使い、ホストの ReplyDevice へ応答を渡す。 | src/KsDeviceManager/KsDeviceManager.cs:138-141 |
 
-## メソッド定義 {grid=40}
+## メソッド詳細
 
-### {methoddef:2,2,6,4,4,4,4,4,6,2,2}
+### 1. KsDeviceManager
 
-#### GetInstance
-No: 1
-戻り値: KsDeviceManager | Singleton オブジェクト
-発生例外: -
-
-引数:
-- -
-
-処理内容:
-- ① 内部静的変数 `_singleton` に格納されているインスタンスを返す。
-
-備考:
-- -
-
-#### StartDeviceManager
-No: 2
-戻り値: void | -
-発生例外: -
-
-引数:
-- IFSettingDevice | デバイス設定インスタンス | deviceSetting
-- IFDeviceReply | デバイス応答用インスタンス | deviceReply
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `private KsDeviceManager()` |
+| 可視性 | private |
+| 戻り値 | - |
+| Evidence | src/KsDeviceManager/KsDeviceManager.cs:27-30 |
 
 処理内容:
-- ① 停止フラグ `_stopFlg` を false に初期化し、引数の `deviceSetting` と `deviceReply` をクラス変数に保持する。
-- ② `deviceSetting.GetDeviceSettingList()` を呼び出して、起動対象のデバイス設定情報のリストを取得する。
-- ③ 取得した各デバイス情報に対して、最大3回のリトライループを実行し、デバイスのインスタンス化 (`CreateDevice`) と起動 (`StartDevice`) を試みる。
-- ④ 起動に成功したデバイスは `_deviceList` に追加され、失敗した場合は例外処理を行いリトライするか、3回失敗時にログ出力を行う。
-- ⑤ 開始時刻 `timeStart` を現在時刻に設定し、`_stopFlg` が true になるまでループ（10ms スリープ、`Application.DoEvents()` 実行）を開始する。
-- ⑥ ループ内において、60秒ごとに登録されたデバイス（Msr または CashChanger）の状態監視を行い、最終応答日時から30秒以上経過している場合に状態異常ログを出力する。
 
-備考:
-- -
+- ① 対象 method の実行条件を確認する。
+- ② インスタンスを初期化する。
+- ③ 必要な戻り値または内部状態を更新する。
 
-#### StopDeviceManager
-No: 3
-戻り値: void | -
-発生例外: -
+備考: -
 
-引数:
-- -
+### 2. GetInstance
+
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `public static KsDeviceManager GetInstance()` |
+| 可視性 | public |
+| 戻り値 | KsDeviceManager |
+| Evidence | src/KsDeviceManager/KsDeviceManager.cs:38-41 |
 
 処理内容:
-- ① 停止フラグ `_stopFlg` を true に設定し、監視ループを終了させる。
-- ② `_deviceList` に登録されているすべてのデバイスに対して `dev.StopDevice()` を実行し、終了処理を行う。
-- ③ `_deviceList` をクリアする。
 
-備考:
-- -
+- ① 対象 method の実行条件を確認する。
+- ② Singleton インスタンスを返却する。
+- ③ 必要な戻り値または内部状態を更新する。
 
-#### FindDevice
-No: 4
-戻り値: IFDevice | 検索されたデバイスインスタンス（存在しない場合は null）
-発生例外: -
+備考: -
 
-引数:
-- KsDeviceId | デバイスID | deviceId
+### 3. StartDeviceManager
 
-処理内容:
-- ① `_deviceList` から `KsDeviceId` が一致する最初のデバイスを検索して返す。
-
-備考:
-- -
-
-#### ReplyDevice
-No: 5
-戻り値: void | -
-発生例外: -
-
-引数:
-- KsProcessInfo | クライアントプロセス情報 | proc
-- Dictionary\<string, string\> | 応答パラメータ | dic
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `public void StartDeviceManager(IFSettingDevice deviceSetting, IFDeviceReply deviceReply)` |
+| 可視性 | public |
+| 戻り値 | void |
+| Evidence | src/KsDeviceManager/KsDeviceManager.cs:48-110 |
 
 処理内容:
-- ① `_deviceReply.ReplyDevice(proc.Client, proc.KsDeviceId, proc.MethodId, proc.Handle, dic)` を呼び出して、クライアントに処理結果を応答する。
 
-備考:
-- -
+- ① 停止フラグを false にし、設定と応答先を保持する。
+- ② 設定から起動対象 DeviceId list を取得する。
+- ③ 各 device を最大3回まで生成・StartDevice し、成功したものを list に追加する。
+- ④ 停止要求まで 10ms 間隔で DoEvents し、60秒ごとに MSR/CashChanger の keep-alive を確認する。
+- ⑤ 30秒以上応答がない対象は状態監視ログへ出力する。
+
+備考: -
+
+### 4. StopDeviceManager
+
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `public void StopDeviceManager()` |
+| 可視性 | public |
+| 戻り値 | void |
+| Evidence | src/KsDeviceManager/KsDeviceManager.cs:115-126 |
+
+処理内容:
+
+- ① 停止フラグを true にする。
+- ② list 内の各 IFDevice へ StopDevice を呼ぶ。
+- ③ device list を clear する。
+
+備考: -
+
+### 5. FindDevice
+
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `public IFDevice FindDevice(KsDeviceId deviceId)` |
+| 可視性 | public |
+| 戻り値 | IFDevice |
+| Evidence | src/KsDeviceManager/KsDeviceManager.cs:128-131 |
+
+処理内容:
+
+- ① 対象 method の実行条件を確認する。
+- ② 起動済みデバイス list から DeviceId が一致する IFDevice を返す。
+- ③ 必要な戻り値または内部状態を更新する。
+
+備考: -
+
+### 6. ReplyDevice
+
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `public void ReplyDevice(ref KsProcessInfo proc, ref Dictionary<string, string> dic)` |
+| 可視性 | public |
+| 戻り値 | void |
+| Evidence | src/KsDeviceManager/KsDeviceManager.cs:138-141 |
+
+処理内容:
+
+- ① 対象 method の実行条件を確認する。
+- ② legacy process info の client/handle/method を使い、ホストの ReplyDevice へ応答を渡す。
+- ③ 必要な戻り値または内部状態を更新する。
+
+備考: -
+
+## 処理フロー/注意事項
+
+- StartDeviceManager が device list を構築し、停止フラグまで監視ループを維持する。
+- StopDeviceManager が全デバイス StopDevice を実行して list をクリアする。
+- FindDevice が command handler からの検索口になる。
+
+### 注意事項
+
+- `Devices` は内部 list の配列コピーを返す。
