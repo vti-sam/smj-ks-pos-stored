@@ -1,5 +1,5 @@
 ---
-title: Tablet Host DeviceCommandRouter Program Specification
+title: POS-HOST-03 タブレットPOS ホスト デバイスコマンドルーター プログラム仕様書
 project: tablet_pos_host
 type: architecture
 status: draft
@@ -10,7 +10,7 @@ tags:
   - opos
 ---
 
-# プログラム仕様書 DeviceCommandRouter
+# POS-HOST-03 タブレットPOS ホスト デバイスコマンドルーター プログラム仕様書
 
 <!-- spec-evidence
 document_id: POS-HOST-03

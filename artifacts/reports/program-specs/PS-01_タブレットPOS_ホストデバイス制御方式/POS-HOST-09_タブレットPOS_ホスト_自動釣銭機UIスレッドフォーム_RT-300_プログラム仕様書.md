@@ -1,5 +1,5 @@
 ---
-title: Tablet Host CashChangerByRT300Form Program Specification
+title: POS-HOST-09 タブレットPOS ホスト 自動釣銭機UIスレッドフォーム RT-300 プログラム仕様書
 project: tablet_pos_host
 type: architecture
 status: draft
@@ -10,7 +10,7 @@ tags:
   - opos
 ---
 
-# プログラム仕様書 CashChangerByRt300Form
+# POS-HOST-09 タブレットPOS ホスト 自動釣銭機UIスレッドフォーム RT-300 プログラム仕様書
 
 <!-- spec-evidence
 document_id: POS-HOST-09

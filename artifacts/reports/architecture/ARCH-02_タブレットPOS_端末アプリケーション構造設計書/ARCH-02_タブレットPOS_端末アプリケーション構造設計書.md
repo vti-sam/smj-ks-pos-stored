@@ -78,17 +78,17 @@ ARCH-02 端末アプリケーション構造設計書
 |---|
 | ARCH-01_タブレットPOS_ソフトウェア構造設計書.docx |
 | ARCH-03_タブレットPOS_デバイス制御層構造設計書.docx |
-| プログラム仕様書_POS-HOST-01_タブレットPOS_HOST_NamedPipeCommandServer.xlsx |
-| プログラム仕様書_POS-HOST-02_タブレットPOS_HOST_NamedPipeDeviceHostAdapter.xlsx |
-| プログラム仕様書_POS-HOST-03_タブレットPOS_HOST_DeviceCommandRouter.xlsx |
-| プログラム仕様書_POS-HOST-04_タブレットPOS_HOST_DeviceCommandCore.xlsx |
-| プログラム仕様書_POS-HOST-05_タブレットPOS_HOST_KsHost.xlsx |
-| プログラム仕様書_POS-HOST-06_タブレットPOS_HOST_KsDeviceManager.xlsx |
-| プログラム仕様書_POS-HOST-07_タブレットPOS_HOST_DeviceBase.xlsx |
-| プログラム仕様書_POS-HOST-08_タブレットPOS_HOST_CashChangerByRT300.xlsx |
-| プログラム仕様書_POS-HOST-09_タブレットPOS_HOST_CashChangerByRT300Form.xlsx |
-| プログラム仕様書_POS-HOST-10_タブレットPOS_HOST_CashDrawerBySharp.xlsx |
-| プログラム仕様書_POS-HOST-11_タブレットPOS_HOST_CustomerDisplayBySharp.xlsx |
+| POS-HOST-01_タブレットPOS_ホスト_名前付きパイプコマンドサーバー_プログラム仕様書.xlsx |
+| POS-HOST-02_タブレットPOS_ホスト_名前付きパイプデバイスホストアダプター_プログラム仕様書.xlsx |
+| POS-HOST-03_タブレットPOS_ホスト_デバイスコマンドルーター_プログラム仕様書.xlsx |
+| POS-HOST-04_タブレットPOS_ホスト_デバイスコマンドハンドラー_プログラム仕様書.xlsx |
+| POS-HOST-05_タブレットPOS_ホスト_デバイスサーバーホスト_プログラム仕様書.xlsx |
+| POS-HOST-06_タブレットPOS_ホスト_デバイスマネージャー_プログラム仕様書.xlsx |
+| POS-HOST-07_タブレットPOS_ホスト_デバイスベース_プログラム仕様書.xlsx |
+| POS-HOST-08_タブレットPOS_ホスト_釣銭機制御_RT-300_プログラム仕様書.xlsx |
+| POS-HOST-09_タブレットPOS_ホスト_自動釣銭機UIスレッドフォーム_RT-300_プログラム仕様書.xlsx |
+| POS-HOST-10_タブレットPOS_ホスト_キャッシュドロア制御_SHARP_プログラム仕様書.xlsx |
+| POS-HOST-11_タブレットPOS_ホスト_カスタマーディスプレイ制御_SHARP_プログラム仕様書.xlsx |
 
 ## 2. 基本アーキテクチャ
 

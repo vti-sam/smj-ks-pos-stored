@@ -1,5 +1,5 @@
 ---
-title: Tablet Host DeviceCommandCore Program Specification
+title: POS-HOST-04 タブレットPOS ホスト デバイスコマンドハンドラー プログラム仕様書
 project: tablet_pos_host
 type: architecture
 status: draft
@@ -10,7 +10,7 @@ tags:
   - opos
 ---
 
-# プログラム仕様書 DeviceCommandHandler
+# POS-HOST-04 タブレットPOS ホスト デバイスコマンドハンドラー プログラム仕様書
 
 <!-- spec-evidence
 document_id: POS-HOST-04

@@ -1,5 +1,5 @@
 ---
-title: Tablet Host NamedPipeDeviceHostAdapter Program Specification
+title: POS-HOST-02 タブレットPOS ホスト 名前付きパイプデバイスホストアダプター プログラム仕様書
 project: tablet_pos_host
 type: architecture
 status: draft
@@ -10,7 +10,7 @@ tags:
   - opos
 ---
 
-# プログラム仕様書 NamedPipeDeviceHostAdapter
+# POS-HOST-02 タブレットPOS ホスト 名前付きパイプデバイスホストアダプター プログラム仕様書
 
 <!-- spec-evidence
 document_id: POS-HOST-02

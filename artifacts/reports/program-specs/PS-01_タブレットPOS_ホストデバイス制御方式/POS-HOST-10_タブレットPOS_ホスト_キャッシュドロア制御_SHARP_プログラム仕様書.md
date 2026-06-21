@@ -1,5 +1,5 @@
 ---
-title: Tablet Host CashDrawerBySharp Program Specification
+title: POS-HOST-10 タブレットPOS ホスト キャッシュドロア制御 SHARP プログラム仕様書
 project: tablet_pos_host
 type: architecture
 status: draft
@@ -10,7 +10,7 @@ tags:
   - opos
 ---
 
-# プログラム仕様書 CashDrawerBySharp
+# POS-HOST-10 タブレットPOS ホスト キャッシュドロア制御 SHARP プログラム仕様書
 
 <!-- spec-evidence
 document_id: POS-HOST-10

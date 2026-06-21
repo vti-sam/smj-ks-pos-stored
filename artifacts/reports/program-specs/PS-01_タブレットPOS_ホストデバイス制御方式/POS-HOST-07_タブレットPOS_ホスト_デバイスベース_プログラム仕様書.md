@@ -1,5 +1,5 @@
 ---
-title: Tablet Host DeviceBase Program Specification
+title: POS-HOST-07 タブレットPOS ホスト デバイスベース プログラム仕様書
 project: tablet_pos_host
 type: architecture
 status: draft
@@ -10,7 +10,7 @@ tags:
   - opos
 ---
 
-# プログラム仕様書 DeviceBase
+# POS-HOST-07 タブレットPOS ホスト デバイスベース プログラム仕様書
 
 <!-- spec-evidence
 document_id: POS-HOST-07

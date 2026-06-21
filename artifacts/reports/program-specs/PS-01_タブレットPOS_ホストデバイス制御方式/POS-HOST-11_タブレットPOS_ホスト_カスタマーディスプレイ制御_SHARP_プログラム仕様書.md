@@ -1,5 +1,5 @@
 ---
-title: Tablet Host CustomerDisplayBySharp Program Specification
+title: POS-HOST-11 タブレットPOS ホスト カスタマーディスプレイ制御 SHARP プログラム仕様書
 project: tablet_pos_host
 type: architecture
 status: draft
@@ -10,7 +10,7 @@ tags:
   - opos
 ---
 
-# プログラム仕様書 CustomerDisplayBySharp
+# POS-HOST-11 タブレットPOS ホスト カスタマーディスプレイ制御 SHARP プログラム仕様書
 
 <!-- spec-evidence
 document_id: POS-HOST-11
