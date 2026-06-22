@@ -1,112 +1,113 @@
+<?xml version='1.0' encoding='utf-8'?>
 <mxfile host="65bd71144e">
     <diagram name="StateSavingFlow" id="state_saving_flow">
         <mxGraphModel dx="922" dy="784" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#ffffff" math="0" shadow="0">
             <root>
-                <mxCell id="0"/>
-                <mxCell id="1" parent="0"/>
+                <mxCell id="0" />
+                <mxCell id="1" parent="0" />
                 <mxCell id="A" value="画面操作中&lt;br/&gt;入力値・選択状態が発生" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B82F6;strokeWidth=2;fontStyle=1;fontColor=#1E3A8A;" parent="1" vertex="1">
-                    <mxGeometry x="320" y="40" width="200" height="60" as="geometry"/>
+                    <mxGeometry x="320" y="40" width="200" height="60" as="geometry" />
                 </mxCell>
                 <mxCell id="B" value="保存対象か？" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#475569;strokeWidth=2;fontStyle=1;fontColor=#0F172A;" parent="1" vertex="1">
-                    <mxGeometry x="360" y="140" width="120" height="80" as="geometry"/>
+                    <mxGeometry x="360" y="140" width="120" height="80" as="geometry" />
                 </mxCell>
                 <mxCell id="C" value="端末内SQLiteへ保存&lt;br/&gt;画面の一時状態として保持" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#94A3B8;strokeWidth=2;fontStyle=1;fontColor=#1E293B;" parent="1" vertex="1">
-                    <mxGeometry x="200" y="270" width="220" height="60" as="geometry"/>
+                    <mxGeometry x="200" y="270" width="220" height="60" as="geometry" />
                 </mxCell>
                 <mxCell id="D" value="保存しない&lt;br/&gt;機密情報・正式な業務データは対象外" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9CA3AF;strokeWidth=2;fontStyle=1;fontColor=#1F2937;" parent="1" vertex="1">
-                    <mxGeometry x="560" y="270" width="240" height="60" as="geometry"/>
+                    <mxGeometry x="560" y="270" width="240" height="60" as="geometry" />
                 </mxCell>
                 <mxCell id="E" value="復元契機が発生？" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#475569;strokeWidth=2;fontStyle=1;fontColor=#0F172A;" parent="1" vertex="1">
-                    <mxGeometry x="120" y="380" width="140" height="80" as="geometry"/>
+                    <mxGeometry x="120" y="380" width="140" height="80" as="geometry" />
                 </mxCell>
                 <mxCell id="I" value="異常終了した場合" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#475569;strokeWidth=2;fontStyle=1;fontColor=#0F172A;" parent="1" vertex="1">
-                    <mxGeometry x="420" y="380" width="140" height="80" as="geometry"/>
+                    <mxGeometry x="420" y="380" width="140" height="80" as="geometry" />
                 </mxCell>
                 <mxCell id="F" value="保存済み状態を読み込み" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#94A3B8;strokeWidth=2;fontStyle=1;fontColor=#1E293B;" parent="1" vertex="1">
-                    <mxGeometry x="80" y="540" width="220" height="60" as="geometry"/>
+                    <mxGeometry x="80" y="540" width="220" height="60" as="geometry" />
                 </mxCell>
                 <mxCell id="G" value="ViewModelへ反映" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#94A3B8;strokeWidth=2;fontStyle=1;fontColor=#1E293B;" parent="1" vertex="1">
-                    <mxGeometry x="80" y="630" width="220" height="60" as="geometry"/>
+                    <mxGeometry x="80" y="630" width="220" height="60" as="geometry" />
                 </mxCell>
                 <mxCell id="H" value="画面状態を復元" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#94A3B8;strokeWidth=2;fontStyle=1;fontColor=#1E293B;" parent="1" vertex="1">
-                    <mxGeometry x="80" y="720" width="220" height="60" as="geometry"/>
+                    <mxGeometry x="80" y="720" width="220" height="60" as="geometry" />
                 </mxCell>
                 <mxCell id="J" value="保存済み状態を復元可能" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#94A3B8;strokeWidth=2;fontStyle=1;fontColor=#1E293B;" parent="1" vertex="1">
-                    <mxGeometry x="350" y="620" width="200" height="60" as="geometry"/>
+                    <mxGeometry x="350" y="620" width="200" height="60" as="geometry" />
                 </mxCell>
                 <mxCell id="K" value="直前状態は保証不可&lt;br/&gt;最後に保存された状態まで復元" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#EF4444;strokeWidth=2;fontStyle=1;fontColor=#991B1B;" parent="1" vertex="1">
-                    <mxGeometry x="570" y="530" width="240" height="60" as="geometry"/>
+                    <mxGeometry x="570" y="530" width="240" height="60" as="geometry" />
                 </mxCell>
-                <mxCell id="edge_A_B" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#475569;strokeWidth=2;" parent="1" source="A" target="B" edge="1">
-                    <mxGeometry relative="1" as="geometry"/>
+                <mxCell id="edge_A_B" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#475569;strokeWidth=2;dashed=1;" parent="1" source="A" target="B" edge="1">
+                    <mxGeometry relative="1" as="geometry" />
                 </mxCell>
-                <mxCell id="edge_B_C" value="&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;はい&lt;/span&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#475569;strokeWidth=2;fontColor=#475569;" parent="1" source="B" target="C" edge="1">
+                <mxCell id="edge_B_C" value="&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;はい&lt;/span&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#475569;strokeWidth=2;fontColor=#475569;dashed=1;" parent="1" source="B" target="C" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
-                            <mxPoint x="310" y="180"/>
+                            <mxPoint x="310" y="180" />
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="edge_B_D" value="&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;いいえ&lt;/span&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#475569;strokeWidth=2;fontColor=#475569;" parent="1" source="B" target="D" edge="1">
+                <mxCell id="edge_B_D" value="&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;いいえ&lt;/span&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#475569;strokeWidth=2;fontColor=#475569;dashed=1;" parent="1" source="B" target="D" edge="1">
                     <mxGeometry x="0.0528" y="10" relative="1" as="geometry">
-                        <mxPoint as="offset"/>
+                        <mxPoint as="offset" />
                         <Array as="points">
-                            <mxPoint x="680" y="180"/>
+                            <mxPoint x="680" y="180" />
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="edge_C_E" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#475569;strokeWidth=2;" parent="1" source="C" target="E" edge="1">
+                <mxCell id="edge_C_E" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#475569;strokeWidth=2;dashed=1;" parent="1" source="C" target="E" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
-                            <mxPoint x="255" y="350"/>
-                            <mxPoint x="190" y="350"/>
+                            <mxPoint x="255" y="350" />
+                            <mxPoint x="190" y="350" />
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="edge_C_I" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#475569;strokeWidth=2;" parent="1" source="C" target="I" edge="1">
+                <mxCell id="edge_C_I" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#475569;strokeWidth=2;dashed=1;" parent="1" source="C" target="I" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
-                            <mxPoint x="365" y="350"/>
-                            <mxPoint x="490" y="350"/>
+                            <mxPoint x="365" y="350" />
+                            <mxPoint x="490" y="350" />
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="edge_E_F_1" value="&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;画面再表示&lt;/span&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;strokeColor=#475569;strokeWidth=2;fontColor=#475569;" parent="1" source="E" target="F" edge="1">
+                <mxCell id="edge_E_F_1" value="&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;画面再表示&lt;/span&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;strokeColor=#475569;strokeWidth=2;fontColor=#475569;dashed=1;" parent="1" source="E" target="F" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
-                            <mxPoint x="80" y="420"/>
-                            <mxPoint x="80" y="520"/>
+                            <mxPoint x="80" y="420" />
+                            <mxPoint x="80" y="520" />
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="edge_E_F_2" value="&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;アプリ復帰&lt;/span&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;strokeColor=#475569;strokeWidth=2;fontColor=#475569;" parent="1" source="E" target="F" edge="1">
+                <mxCell id="edge_E_F_2" value="&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;アプリ復帰&lt;/span&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;strokeColor=#475569;strokeWidth=2;fontColor=#475569;dashed=1;" parent="1" source="E" target="F" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
-                            <mxPoint x="280" y="420"/>
-                            <mxPoint x="280" y="520"/>
+                            <mxPoint x="280" y="420" />
+                            <mxPoint x="280" y="520" />
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="edge_F_G" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#475569;strokeWidth=2;" parent="1" source="F" target="G" edge="1">
-                    <mxGeometry relative="1" as="geometry"/>
+                <mxCell id="edge_F_G" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#475569;strokeWidth=2;dashed=1;" parent="1" source="F" target="G" edge="1">
+                    <mxGeometry relative="1" as="geometry" />
                 </mxCell>
-                <mxCell id="edge_G_H" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#475569;strokeWidth=2;" parent="1" source="G" target="H" edge="1">
-                    <mxGeometry relative="1" as="geometry"/>
+                <mxCell id="edge_G_H" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#475569;strokeWidth=2;dashed=1;" parent="1" source="G" target="H" edge="1">
+                    <mxGeometry relative="1" as="geometry" />
                 </mxCell>
-                <mxCell id="edge_I_J" value="&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;通常停止・画面遷移&lt;/span&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#475569;strokeWidth=2;fontColor=#475569;" parent="1" source="I" target="J" edge="1">
+                <mxCell id="edge_I_J" value="&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;通常停止・画面遷移&lt;/span&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#475569;strokeWidth=2;fontColor=#475569;dashed=1;" parent="1" source="I" target="J" edge="1">
                     <mxGeometry x="0.0001" relative="1" as="geometry">
-                        <mxPoint as="offset"/>
+                        <mxPoint as="offset" />
                         <Array as="points">
-                            <mxPoint x="400" y="420"/>
-                            <mxPoint x="400" y="560"/>
+                            <mxPoint x="400" y="420" />
+                            <mxPoint x="400" y="560" />
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="edge_I_K" value="&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;クラッシュ・強制終了・電源断&lt;/span&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#475569;strokeWidth=2;fontColor=#475569;" parent="1" source="I" target="K" edge="1">
+                <mxCell id="edge_I_K" value="&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;クラッシュ・強制終了・電源断&lt;/span&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#475569;strokeWidth=2;fontColor=#475569;dashed=1;" parent="1" source="I" target="K" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
-                            <mxPoint x="580" y="420"/>
-                            <mxPoint x="700" y="420"/>
+                            <mxPoint x="580" y="420" />
+                            <mxPoint x="700" y="420" />
                         </Array>
                     </mxGeometry>
                 </mxCell>

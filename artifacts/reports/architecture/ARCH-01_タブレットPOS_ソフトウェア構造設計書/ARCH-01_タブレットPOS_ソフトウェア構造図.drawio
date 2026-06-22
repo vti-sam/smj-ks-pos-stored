@@ -1,11 +1,11 @@
 <mxfile host="65bd71144e">
     <diagram name="Page-1" id="Z4Sh8gLlnnpiLH3Jqw6z">
-        <mxGraphModel dx="1078" dy="699" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#ffffff" math="0" shadow="0">
+        <mxGraphModel dx="1428" dy="1144" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#ffffff" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
                 <mxCell id="client_container" value="Windows POS 端末 / クライアント PC ＆ タブレット" style="swimlane;html=1;whiteSpace=wrap;fontStyle=1;align=center;verticalAlign=top;fillColor=#E2E8F0;swimlaneFillColor=#F8FAFC;strokeColor=#475569;strokeWidth=2;rounded=1;arcSize=6;collapsible=0;recursiveResize=0;startSize=35;fontColor=#0F172A;fontSize=12;" parent="1" vertex="1">
-                    <mxGeometry x="70" y="380" width="760" height="420" as="geometry"/>
+                    <mxGeometry x="70" y="390" width="760" height="420" as="geometry"/>
                 </mxCell>
                 <mxCell id="node_utils" value="&lt;b&gt;TabetPos.ApplicationUtils&lt;/b&gt;&lt;br/&gt;共通ユーティリティ" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#FFFFFF;strokeColor=#94A3B8;strokeWidth=2;fontStyle=1;fontColor=#1E293B;align=center;fontSize=10;" parent="client_container" vertex="1">
                     <mxGeometry x="400" y="160" width="150" height="50" as="geometry"/>
@@ -25,7 +25,7 @@
                 <mxCell id="node_localdb" value="&lt;b&gt;SQLite&lt;/b&gt;&lt;br/&gt;ローカル状態DB" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#FFFFFF;strokeColor=#10B981;strokeWidth=2;fontStyle=1;fontColor=#065F46;align=center;spacingLeft=0;fontSize=11;" parent="client_container" vertex="1">
                     <mxGeometry x="200" y="315" width="130" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="edge_core_sentry" style="rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=classic;" parent="client_container" source="node_core" target="CQK1rFZQlDdQnh2cZtMR-23" edge="1">
+                <mxCell id="edge_core_sentry" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=classic;dashed=1;" parent="client_container" source="node_core" target="CQK1rFZQlDdQnh2cZtMR-23" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="CQK1rFZQlDdQnh2cZtMR-23" value="&lt;b&gt;Sentry&lt;/b&gt;&lt;br/&gt;エラー監視サービス" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#FFFFFF;strokeColor=#EF4444;strokeWidth=2;fontStyle=1;fontColor=#991B1B;align=center;fontSize=11;" parent="client_container" vertex="1">
@@ -34,13 +34,13 @@
                 <mxCell id="node_app" value="&lt;b&gt;TabetPos.Applications&lt;/b&gt;&lt;br/&gt;端末アプリ (.NET MAUI)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#FFFFFF;strokeColor=#94A3B8;strokeWidth=2;fontStyle=1;fontColor=#1E293B;align=center;fontSize=10;" parent="client_container" vertex="1">
                     <mxGeometry x="295" y="50" width="150" height="50" as="geometry"/>
                 </mxCell>
-                <mxCell id="edge_app_controls" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;exitX=0.35;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=classic;" parent="client_container" source="node_app" target="node_controls" edge="1">
+                <mxCell id="edge_app_controls" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;exitX=0.35;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=classic;dashed=1;" parent="client_container" source="node_app" target="node_controls" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="edge_app_utils" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;exitX=0.65;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=classic;" parent="client_container" source="node_app" target="node_utils" edge="1">
+                <mxCell id="edge_app_utils" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;exitX=0.65;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=classic;dashed=1;" parent="client_container" source="node_app" target="node_utils" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="edge_app_core" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;exitX=0.1;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=classic;" parent="client_container" source="node_app" target="node_core" edge="1">
+                <mxCell id="edge_app_core" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;exitX=0.1;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=classic;dashed=1;" parent="client_container" source="node_app" target="node_core" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="310" y="120"/>
@@ -48,10 +48,10 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="edge_app_devicectrl" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;exitX=0.9;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=classic;" parent="client_container" source="node_app" target="node_devicectrl" edge="1">
+                <mxCell id="edge_app_devicectrl" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;exitX=0.9;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=classic;dashed=1;" parent="client_container" source="node_app" target="node_devicectrl" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="edge_devicectrl_core" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;endArrow=classic;" parent="client_container" source="node_devicectrl" target="node_core" edge="1">
+                <mxCell id="edge_devicectrl_core" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;endArrow=classic;dashed=1;" parent="client_container" source="node_devicectrl" target="node_core" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="560" y="153"/>
@@ -61,17 +61,39 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="edge_devicectrl_binding" style="rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=classic;endArrow=classic;" parent="client_container" source="node_devicectrl" target="node_binding" edge="1">
+                <mxCell id="edge_devicectrl_binding" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=classic;endArrow=classic;dashed=1;" parent="client_container" source="node_devicectrl" target="node_binding" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="3" style="rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=1;exitDx=0;exitDy=0;endArrow=classic;" edge="1" parent="client_container" source="node_core" target="node_localdb">
+                <mxCell id="3" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=1;exitDx=0;exitDy=0;endArrow=classic;dashed=1;" parent="client_container" source="node_core" target="node_localdb" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="110" y="200" as="sourcePoint"/>
                         <mxPoint x="45" y="350" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
+                <mxCell id="peripheral_container" value="周辺機器・ベンダー制御層 (Peripheral Layer)" style="swimlane;html=1;whiteSpace=wrap;fontStyle=1;align=center;verticalAlign=top;fillColor=#E7E5E4;swimlaneFillColor=#FAF9F6;strokeColor=#78716C;strokeWidth=2;rounded=1;arcSize=6;collapsible=0;recursiveResize=0;startSize=35;fontColor=#1C1917;fontSize=12;connectable=0;" parent="1" vertex="1">
+                    <mxGeometry x="200" y="830" width="220" height="250" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_device" value="&lt;b&gt;IFDevice実装クラス&lt;/b&gt;&lt;br/&gt;客面/ドロア/釣銭機" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#FFFFFF;strokeColor=#A8A29E;strokeWidth=2;fontStyle=1;fontColor=#292524;align=center;fontSize=10;" parent="peripheral_container" vertex="1">
+                    <mxGeometry x="30" y="50" width="170" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="node_opos" value="&lt;b&gt;OPOS / OCX / ActiveX&lt;/b&gt;&lt;br/&gt;ベンダーDLL" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#FFFFFF;strokeColor=#A8A29E;strokeWidth=2;fontStyle=1;fontColor=#292524;align=center;fontSize=11;" parent="peripheral_container" vertex="1">
+                    <mxGeometry x="30" y="160" width="170" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_device_opos" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=classic;endArrow=classic;dashed=1;" parent="peripheral_container" source="node_device" target="node_opos" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_user_app" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;exitX=0.5;exitY=1;entryX=0;entryY=0.5;exitDx=0;exitDy=0;entryDx=0;entryDy=0;endArrow=classic;strokeColor=#000000;dashed=1;" parent="1" source="node_user" target="node_app" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="225" y="465"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="node_user" value="POS 利用者" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#FFFFFF;strokeColor=#3B82F6;strokeWidth=2;align=center;fontSize=11;fontColor=#1E3A8A;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="160" y="300" width="130" height="50" as="geometry"/>
+                </mxCell>
                 <mxCell id="hostprocess_container" value="外部ホストプロセス (Host Process)" style="swimlane;html=1;whiteSpace=wrap;fontStyle=1;align=center;verticalAlign=top;fillColor=#F3F4F6;swimlaneFillColor=#F9FAFB;strokeColor=#4B5563;strokeWidth=2;rounded=1;arcSize=6;collapsible=0;recursiveResize=0;startSize=35;fontColor=#111827;fontSize=12;" parent="1" vertex="1">
-                    <mxGeometry x="890" y="350" width="220" height="250" as="geometry"/>
+                    <mxGeometry x="510" y="830" width="220" height="250" as="geometry"/>
                 </mxCell>
                 <mxCell id="node_host" value="&lt;b&gt;TabetPos.Host&lt;/b&gt;&lt;br/&gt;Named Pipeホスト" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#FFFFFF;strokeColor=#9CA3AF;strokeWidth=2;fontStyle=1;fontColor=#1F2937;align=center;fontSize=11;" parent="hostprocess_container" vertex="1">
                     <mxGeometry x="30" y="60" width="170" height="50" as="geometry"/>
@@ -79,41 +101,22 @@
                 <mxCell id="node_devicemanager" value="&lt;b&gt;KsDeviceManager&lt;/b&gt;&lt;br/&gt;デバイスマネージャー" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#FFFFFF;strokeColor=#9CA3AF;strokeWidth=2;fontStyle=1;fontColor=#1F2937;align=center;fontSize=11;" parent="hostprocess_container" vertex="1">
                     <mxGeometry x="30" y="150" width="170" height="50" as="geometry"/>
                 </mxCell>
-                <mxCell id="edge_host_devicemanager" style="rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#4B5563;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=classic;endArrow=classic;" parent="hostprocess_container" source="node_host" target="node_devicemanager" edge="1">
+                <mxCell id="edge_host_devicemanager" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#4B5563;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=classic;endArrow=classic;dashed=1;" parent="hostprocess_container" source="node_host" target="node_devicemanager" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="peripheral_container" value="周辺機器・ベンダー制御層 (Peripheral Layer)" style="swimlane;html=1;whiteSpace=wrap;fontStyle=1;align=center;verticalAlign=top;fillColor=#E7E5E4;swimlaneFillColor=#FAF9F6;strokeColor=#78716C;strokeWidth=2;rounded=1;arcSize=6;collapsible=0;recursiveResize=0;startSize=35;fontColor=#1C1917;fontSize=12;connectable=0;" parent="1" vertex="1">
-                    <mxGeometry x="480" y="840" width="220" height="210" as="geometry"/>
-                </mxCell>
-                <mxCell id="node_device" value="&lt;b&gt;IFDevice実装クラス&lt;/b&gt;&lt;br/&gt;客面/ドロア/釣銭機" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#FFFFFF;strokeColor=#A8A29E;strokeWidth=2;fontStyle=1;fontColor=#292524;align=center;fontSize=10;" parent="peripheral_container" vertex="1">
-                    <mxGeometry x="30" y="50" width="170" height="50" as="geometry"/>
-                </mxCell>
-                <mxCell id="node_opos" value="&lt;b&gt;OPOS / OCX / ActiveX&lt;/b&gt;&lt;br/&gt;ベンダーDLL" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#FFFFFF;strokeColor=#A8A29E;strokeWidth=2;fontStyle=1;fontColor=#292524;align=center;fontSize=11;" parent="peripheral_container" vertex="1">
-                    <mxGeometry x="30" y="140" width="170" height="50" as="geometry"/>
-                </mxCell>
-                <mxCell id="edge_device_opos" style="rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=classic;endArrow=classic;" parent="peripheral_container" source="node_device" target="node_opos" edge="1">
-                    <mxGeometry relative="1" as="geometry"/>
-                </mxCell>
-                <mxCell id="edge_user_app" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;exitX=0.5;exitY=1;entryX=0;entryY=0.5;exitDx=0;exitDy=0;entryDx=0;entryDy=0;endArrow=classic;strokeColor=#000000;" parent="1" source="node_user" target="node_app" edge="1">
+                <mxCell id="edge_devicemanager_device" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=2;startArrow=none;endArrow=classic;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" target="node_device" edge="1" source="node_devicemanager">
                     <mxGeometry relative="1" as="geometry">
-                        <Array as="points">
-                            <mxPoint x="-40" y="380"/>
-                        </Array>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="edge_devicectrl_host" value="Named Pipe通信&lt;br/&gt;(コマンド / イベント)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=2;fontColor=#334155;fontSize=10;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.399;exitDx=0;exitDy=0;startArrow=classic;endArrow=classic;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="node_devicectrl" target="node_host" edge="1">
-                    <mxGeometry relative="1" as="geometry"/>
-                </mxCell>
-                <mxCell id="edge_devicemanager_device" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=2;startArrow=classic;endArrow=classic;entryX=0.996;entryY=0.36;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" target="node_device" edge="1">
-                    <mxGeometry relative="1" as="geometry">
-                        <Array as="points">
-                            <mxPoint x="1005" y="908"/>
-                        </Array>
                         <mxPoint x="1005" y="551" as="sourcePoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="node_user" value="POS 利用者" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#FFFFFF;strokeColor=#3B82F6;strokeWidth=2;align=center;fontSize=11;fontColor=#1E3A8A;fontStyle=1;" parent="1" vertex="1">
-                    <mxGeometry x="-80" y="370" width="130" height="50" as="geometry"/>
+                <mxCell id="edge_devicectrl_host" value="&lt;b&gt;&lt;font color=&quot;#ff0000&quot;&gt;Named Pipe通信&lt;br&gt;(コマンド / イベント)&lt;/font&gt;&lt;/b&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=2;fontColor=#334155;fontSize=10;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;startArrow=classic;endArrow=classic;entryDx=0;entryDy=0;dashed=1;" parent="1" source="node_devicectrl" target="node_host" edge="1">
+                    <mxGeometry x="0.2407" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="850" y="555"/>
+                            <mxPoint x="850" y="915"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
                 </mxCell>
             </root>
         </mxGraphModel>
