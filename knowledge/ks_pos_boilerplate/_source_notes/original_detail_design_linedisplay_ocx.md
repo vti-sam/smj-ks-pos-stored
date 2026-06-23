@@ -18,8 +18,8 @@ tags: [ks_host, architecture, ks_pos_boilerplate, source_notes, original_detail_
   - Thiết bị đích: LineDisplay ngoại vi.
   - OCX: `AxLineDisplay` (`AxInterop.LINEDISPLAYLib.dll`) để điều khiển OPOS.
   - Host (`DeviceServer`): Nhận lệnh từ Named Pipe và ủy quyền cho lớp điều khiển LineDisplay.
-  - Pipe lệnh: `KsPos.Host.Command` (POS/App -> Host) nhận yêu cầu dạng JSON 1 dòng (đồng bộ).
-  - Pipe sự kiện: `KsPos.Host.Event` (Host -> POS/App) thông báo phản hồi bất đồng bộ (LineDisplay không dùng Stream Pipe).
+  - Pipe lệnh: `TabetPos.Host.Command` (POS/App -> Host) nhận yêu cầu dạng JSON 1 dòng (đồng bộ).
+  - Pipe sự kiện: `TabetPos.Host.Event` (Host -> POS/App) thông báo phản hồi bất đồng bộ (LineDisplay không dùng Stream Pipe).
   - Cấu hình `DEVICE.INI`: Nằm tại `..\PRM2\DEVICE.INI`, định cấu hình `Name`, `Visible`, `ClassID`, `Parameters`.
   - Kết quả & Log: Trả về `ResultCode` / `ResultCodeExtended` và ghi log cục bộ qua `KsLogControls`.
 - **Thông tin OCX**:

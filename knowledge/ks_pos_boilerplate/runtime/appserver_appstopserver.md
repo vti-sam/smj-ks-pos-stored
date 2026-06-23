@@ -29,12 +29,16 @@ tags: [ks_host, runtime, ks_pos_boilerplate, appserver_appstopserver]
 ## AppStopServer
 
 - Tiến trình ngắn hạn yêu cầu host DeviceServer đang chạy dừng lại.
-- Gửi payload văn bản WindowMessage:
-  ```text
-  Message\tKill
+- Gửi JSON 1 dòng qua Named Pipe `TabetPos.Host.Command`:
+  ```json
+  {
+    "requestId": "AppStopServer-<guid>",
+    "message": "Kill",
+    "handle": "0"
+  }
   ```
-- Đích gửi là tên WindowMessage của DeviceServer, không phải kill tiến trình trực tiếp.
-- `KsHost.OnReceiveMessage` xử lý `Kill` bằng cách gọi `StopHost()` và thiết lập `IsEndOrder = true`.
+- Đích gửi là command pipe của DeviceServer, không phải kill tiến trình trực tiếp.
+- `KsHost` xử lý `Kill` qua command handler chung, gọi `StopHost()` và thiết lập `IsEndOrder = true`.
 
 ## Logging / Cấu hình
 

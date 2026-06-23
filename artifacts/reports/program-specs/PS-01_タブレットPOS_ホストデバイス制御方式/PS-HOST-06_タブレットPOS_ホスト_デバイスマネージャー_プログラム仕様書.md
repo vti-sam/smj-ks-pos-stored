@@ -14,8 +14,8 @@
 | 文書ID | PS-HOST-06 |
 | プロジェクト名 | タブレットPOS |
 | 機能名 | デバイスマネージャー |
-| 物理クラス名 | KsDeviceManager |
-| 名前空間 | KsOutProcess.KsDeviceServer |
+| 物理クラス名 | TabletDeviceManager |
+| 名前空間 | TabletOutProcess.TabletDeviceServer |
 | アクセス修飾子 | public |
 | 継承/実装 | - |
 | 更新日 | 2026/06/21 |
@@ -24,8 +24,8 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/KsPosBoilerplate/TabetPos.Host/src/KsDeviceManager/KsDeviceManager.cs |
-| 対象クラス | KsDeviceManager |
+| ソースファイル | sources/tabletposboilerplate/TabetPos.Host/src/TabletDeviceManager/TabletDeviceManager.cs |
+| 対象クラス | TabletDeviceManager |
 | 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 
 ## クラス概要
@@ -45,7 +45,7 @@
 | フィールド | private | IFSettingDevice | _deviceSetting | 起動対象デバイス一覧と device instance 生成を提供する設定インスタンス。 |
 | フィールド | private | IFDeviceReply | _deviceReply | デバイス処理結果を host transport へ返却するための reply 先。 |
 | フィールド | private | bool | _stopFlg | device manager の監視ループを終了させる停止フラグ。 |
-| フィールド | private | KsDeviceManager | _singleton | device manager singleton instance。 |
+| フィールド | private | TabletDeviceManager | _singleton | device manager singleton instance。 |
 | フィールド | private | List<IFDevice> | _deviceList | 起動済み IFDevice の保持リスト。 |
 | プロパティ | public | IReadOnlyList<IFDevice> | Devices | 起動済みデバイスの読み取り専用 snapshot。 |
 
@@ -53,8 +53,8 @@
 
 | No | 可視性 | 戻り値 | メソッド名 | 概要 |
 | --- | --- | --- | --- | --- |
-| 1 | private | - | KsDeviceManager | インスタンスコンストラクタ |
-| 2 | public | KsDeviceManager | GetInstance | Singleton インスタンスを返却する。 |
+| 1 | private | - | TabletDeviceManager | インスタンスコンストラクタ |
+| 2 | public | TabletDeviceManager | GetInstance | Singleton インスタンスを返却する。 |
 | 3 | public | void | StartDeviceManager | 設定から対象デバイスを生成し、起動後は停止要求まで keep-alive 監視ループを維持する。 |
 | 4 | public | void | StopDeviceManager | 停止フラグを立て、保持中の全デバイスへ StopDevice を呼び出して list を空にする。 |
 | 5 | public | IFDevice | FindDevice | 起動済みデバイス list から DeviceId が一致する IFDevice を返す。 |
@@ -62,11 +62,11 @@
 
 ## メソッド詳細
 
-### 1. KsDeviceManager
+### 1. TabletDeviceManager
 
 | 項目 | 内容 |
 | --- | --- |
-| シグネチャ | `private KsDeviceManager()` |
+| シグネチャ | `private TabletDeviceManager()` |
 | 可視性 | private |
 | 戻り値 | - |
 
@@ -82,9 +82,9 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| シグネチャ | `public static KsDeviceManager GetInstance()` |
+| シグネチャ | `public static TabletDeviceManager GetInstance()` |
 | 可視性 | public |
-| 戻り値 | KsDeviceManager |
+| 戻り値 | TabletDeviceManager |
 
 処理内容:
 
@@ -139,7 +139,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| シグネチャ | `public IFDevice FindDevice(KsDeviceId deviceId)` |
+| シグネチャ | `public IFDevice FindDevice(TabletDeviceId deviceId)` |
 | 可視性 | public |
 | 戻り値 | IFDevice |
 
@@ -147,12 +147,12 @@
 
 | 型 | 論理名 | 物理名 |
 | --- | --- | --- |
-| KsDeviceId | デバイスID | deviceId |
+| TabletDeviceId | デバイスID | deviceId |
 
 処理内容:
 
 - ① 起動済み device list を走査する。
-- ② 指定された KsDeviceId と一致する device を検索する。
+- ② 指定された TabletDeviceId と一致する device を検索する。
 - ③ 該当 device が存在する場合は返却し、存在しない場合は null を返す。
 
 備考: -
@@ -161,7 +161,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| シグネチャ | `public void ReplyDevice(ref KsProcessInfo proc, ref Dictionary<string, string> dic)` |
+| シグネチャ | `public void ReplyDevice(ref TabletProcessInfo proc, ref Dictionary<string, string> dic)` |
 | 可視性 | public |
 | 戻り値 | void |
 
@@ -169,12 +169,12 @@
 
 | 型 | 論理名 | 物理名 |
 | --- | --- | --- |
-| KsProcessInfo | プロセス情報 | proc |
+| TabletProcessInfo | プロセス情報 | proc |
 | Dictionary<string, string> | 応答データ | dic |
 
 処理内容:
 
-- ① KsProcessInfo と戻り値 dictionary を受け取る。
+- ① TabletProcessInfo と戻り値 dictionary を受け取る。
 - ② proc から client、deviceId、methodId、handle を取得する。
 - ③ _deviceReply.ReplyDevice に委譲し、client へ device 処理結果を返却する。
 

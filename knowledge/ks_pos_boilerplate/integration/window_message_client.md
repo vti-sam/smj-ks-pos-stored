@@ -22,7 +22,7 @@ tags: [ks_host, integration, ks_pos_boilerplate, window_message_client]
 - Comment gốc `ClientにMessageが届かない場合があるため、Replyを用意`: có trường hợp message không đến client nên cần cơ chế reply lại.
 - Host xử lý `ReplyMessage` bằng cách lấy response đã lưu theo `CommunicationName` và gửi lại cho destination đó.
 - Host hiện cô lập WindowMessage trong adapter; đây là legacy compatibility layer, không phải đường chính cho code mới.
-- `_wmStock` là state phục vụ resend; không xóa khi còn `KsClient` hoặc AppStopServer dùng WindowMessage.
+- `_wmStock` là state phục vụ resend; không xóa khi còn `KsClient` hoặc consumer legacy khác dùng WindowMessage.
 
 ## Event handler đặc biệt
 

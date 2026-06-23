@@ -275,8 +275,8 @@ device_controller_config 更新時は JSON parse、DeviceManager 再初期化、
 
 ## 7. 関連資料
 
-- `sources/POS 開発用ベースプロジェクト/TabetPos.Applications/MauiProgram.cs`
-- `sources/POS 開発用ベースプロジェクト/TabetPos.Applications/AppShell.xaml.cs`
-- `sources/POS 開発用ベースプロジェクト/TabetPos.Applications/Presentation/ViewModels/Base/BaseViewModel.cs`
-- `sources/POS 開発用ベースプロジェクト/TabetPos.Applications/Application/Devices/DeviceControllerConfigService.cs`
-- `sources/POS 開発用ベースプロジェクト/TabetPos.DeviceCtrl/Interfaces/`
+- `sources/tabletposboilerplate/TabetPos.Applications/MauiProgram.cs`
+- `sources/tabletposboilerplate/TabetPos.Applications/AppShell.xaml.cs`
+- `sources/tabletposboilerplate/TabetPos.Applications/Presentation/ViewModels/Base/BaseViewModel.cs`
+- `sources/tabletposboilerplate/TabetPos.Applications/Application/Devices/DeviceControllerConfigService.cs`
+- `sources/tabletposboilerplate/TabetPos.DeviceCtrl/Interfaces/`

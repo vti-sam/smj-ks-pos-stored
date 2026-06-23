@@ -41,6 +41,9 @@
 | IT-DEVICE-028 | Cash Changer RT-300 | Event bất thường | Thiết bị báo lỗi trong lúc giao dịch | Có thể tạo tình huống lỗi như cửa mở, kẹt tiền hoặc offline theo quy trình onsite. | 1. Tạo lỗi thiết bị trong lúc deposit hoặc dispense\n2. Quan sát event/log\n3. Gửi GuidanceError nếu cần | Host ghi nhận event/status, app nhận lỗi/guidance có ý nghĩa, không treo giao dịch. | A |
 | IT-DEVICE-029 | App UI + Local State | Kill app và restore | App đang ở màn hình nghiệp vụ có trạng thái cần giữ | App chạy bản thực tế, local database dùng file thật. | 1. Nhập dữ liệu trên màn hình\n2. Kill app process\n3. Mở lại app | Trạng thái đã đánh dấu persist được khôi phục, dữ liệu không persist không bị phục hồi sai. | N |
 | IT-DEVICE-030 | Monitoring thực tế | Sentry/log tích hợp | Có cấu hình DSN/log endpoint của môi trường test | App và host chạy luồng gây message/exception test. | 1. Gây lỗi có kiểm soát\n2. Kiểm tra log local\n3. Kiểm tra Sentry hoặc sink test nếu bật | Log/event được gửi hoặc lưu đúng, dữ liệu nhạy cảm đã bị mask trước khi ra ngoài. | N |
+| IT-DEVICE-031 | App + Host | NamedPipe lifecycle | Host stop bằng AppStopServer | App đang mở, Host đang chạy, app đã gửi thành công ít nhất một command qua `TabetPos.Host.Command`. | 1. Từ app gửi command nhẹ như CustomerDisplay hoặc CashDrawer\n2. Chạy `TabletDeviceServer.AppStopServer.exe` để stop Host\n3. Từ app gửi lại command sau khi Host đã dừng | App không treo UI. Command sau khi Host dừng trả lỗi kết nối hoặc timeout rõ ràng, log app ghi pipe `TabetPos.Host.Command` không kết nối được. | A |
+| IT-DEVICE-032 | App + Host | NamedPipe lifecycle | Host restart sau AppStopServer | Host đã được dừng bằng AppStopServer, app vẫn đang chạy hoặc vừa được mở lại. | 1. Khởi động lại Host\n2. Từ app gửi lại command CustomerDisplay hoặc CashDrawer\n3. Kiểm tra response app và log hai phía | App kết nối lại được tới `TabetPos.Host.Command` sau khi Host restart. Command mới xử lý thành công, không cần restart Windows. | N |
+| IT-DEVICE-033 | App + Host | NamedPipe lifecycle | Stop trong lúc command đang xử lý | App và Host đang chạy, có thể tạo command mất thời gian hoặc command liên tiếp. | 1. Từ app gửi command thiết bị\n2. Trong lúc hoặc ngay sau đó chạy AppStopServer\n3. Quan sát app response, Host log, rồi restart Host và gửi lại command | Command đang xử lý hoặc command kế tiếp kết thúc bằng success hoặc lỗi có kiểm soát. App không treo, sau khi Host restart có thể gửi command lại bình thường. | B |
 
 ## 基本情報
 | 項目 | 内容 |
@@ -57,3 +60,4 @@
 | バージョン | 依頼者 | 更新者 | 更新日時 | 変更理由 | シート名 | 更新内容 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1.0.0 | - | VTI-SAM | 2026/06/19 | 新規作成 | デバイス制御結合テスト | UT không cover được phần runtime, liên process, OPOS và phần cứng thực tế |
+| 1.1.0 | - | VTI-SAM | 2026/06/23 | テスト追加 | デバイス制御結合テスト | AppStopServerでHostを停止した場合のApp側timeout、再接続、処理中停止の確認を追加 |

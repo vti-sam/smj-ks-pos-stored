@@ -23,7 +23,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/KsPosBoilerplate/TabetPos.Core/State/LocalStateDbContext.cs |
+| ソースファイル | sources/tabletposboilerplate/TabetPos.Core/State/LocalStateDbContext.cs |
 | 対象クラス | LocalStateDbContext |
 | 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 

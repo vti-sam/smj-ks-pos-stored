@@ -21,8 +21,8 @@ Guide này dùng khi VTI đọc hoặc tiếp tục cleanup `KsPos.Host`. Mục 
 
 ## Luồng chính cần nhớ
 
-- Application mới đi qua Named Pipe `KsPos.Host.Command`; event thường dùng `KsPos.Host.Event`, scanner dùng `KsPos.Host.Stream`.
-- WindowMessage vẫn là compatibility path cho `KsClient` và một số tool legacy. Không xóa khi chưa migrate hết consumer.
+- Application mới đi qua Named Pipe `TabetPos.Host.Command`; event thường dùng `TabetPos.Host.Event`, scanner dùng `TabetPos.Host.Stream`.
+- WindowMessage vẫn là compatibility path cho `KsClient` và một số consumer legacy còn lại. `AppStopServer` đã chuyển sang gửi `Kill` qua Named Pipe, không còn dùng WindowMessage.
 - CashChanger RT300 là device rủi ro nhất vì phụ thuộc OPOS OCX, WinForms message pump, shared memory/file bridge và retry `ReplyMessage`.
 - File bridge CashChanger dùng `TURIREQ/TURIANS` để bù cho nhánh `AfterDeposit3` thread hóa mà WindowMessage không ổn định.
 
@@ -63,4 +63,4 @@ Guide này dùng khi VTI đọc hoặc tiếp tục cleanup `KsPos.Host`. Mục 
 
 - Chạy `rtk codegraph sync sources/KsPosBoilerplate` trước và sau stage cleanup.
 - Build `rtk dotnet build sources/KsPosBoilerplate/KsPos.Host/KsPos.Host.slnx -v:m`.
-- Nếu đụng transport/AppStopServer, smoke Named Pipe invalid command và `Kill`.
+- Nếu đụng transport/AppStopServer, smoke Named Pipe invalid command và `Kill` qua `TabetPos.Host.Command`.

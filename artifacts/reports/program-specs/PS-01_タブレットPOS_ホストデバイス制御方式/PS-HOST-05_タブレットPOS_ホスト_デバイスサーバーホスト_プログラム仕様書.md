@@ -14,8 +14,8 @@
 | 文書ID | PS-HOST-05 |
 | プロジェクト名 | タブレットPOS |
 | 機能名 | デバイスサーバーホスト |
-| 物理クラス名 | KsHost |
-| 名前空間 | KsOutProcess.KsDeviceServer |
+| 物理クラス名 | TabletHost |
+| 名前空間 | TabletOutProcess.TabletDeviceServer |
 | アクセス修飾子 | public sealed partial |
 | 継承/実装 | IFDeviceReply |
 | 更新日 | 2026/06/21 |
@@ -24,8 +24,8 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/KsPosBoilerplate/TabetPos.Host/src/KsHost/DeviceHost/KsHost.cs |
-| 対象クラス | KsHost |
+| ソースファイル | sources/tabletposboilerplate/TabetPos.Host/src/TabletHost/DeviceHost/TabletHost.cs |
+| 対象クラス | TabletHost |
 | 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 
 ## クラス概要
@@ -42,9 +42,9 @@
 
 | 区分 | 可視性 | 型 | 名前 | 用途 |
 | --- | --- | --- | --- | --- |
-| フィールド | private | IDeviceHostTransport | _transport | WindowMessage/Named Pipe transport の抽象化。 |
+| フィールド | private | IDeviceHostTransport | _transport | Named Pipe transport のライフサイクルとイベント配信を抽象化する。 |
 | フィールド | private | IDeviceSettingFactory | _deviceSettingFactory | 起動対象デバイス設定を生成する factory。 |
-| フィールド | private | KsDeviceManager | _mDevmanager | 起動済みデバイスを管理するマネージャー。 |
+| フィールド | private | TabletDeviceManager | _mDevmanager | 起動済みデバイスを管理するマネージャー。 |
 | フィールド | private | IDeviceCommandHandler | _commandHandler | デバイスコマンド処理の委譲先。 |
 | フィールド | private | int | _mMode | 起動対象デバイスの種別を切り替えるモード値（0: 全デバイス、1: POSPrinter/EJournal、2: その他）。 |
 | プロパティ | public | bool | IsEndOrder | 終了命令受付状態。 |
@@ -53,20 +53,20 @@
 
 | No | 可視性 | 戻り値 | メソッド名 | 概要 |
 | --- | --- | --- | --- | --- |
-| 1 | public | - | KsHost | インスタンスを初期化する。 |
-| 2 | public | - | KsHost | インスタンスを初期化する。 |
-| 3 | public | void | StartHost | transport と command handler を初期化し、設定に基づいて KsDeviceManager を起動する。 |
-| 4 | public | void | StopHost | transport を停止し、起動済みデバイスを KsDeviceManager 経由で終了する。 |
+| 1 | public | - | TabletHost | インスタンスを初期化する。 |
+| 2 | public | - | TabletHost | インスタンスを初期化する。 |
+| 3 | public | void | StartHost | transport と command handler を初期化し、設定に基づいて TabletDeviceManager を起動する。 |
+| 4 | public | void | StopHost | transport を停止し、起動済みデバイスを TabletDeviceManager 経由で終了する。 |
 | 5 | private | void | HandleHostAction | Kill は停止後に終了フラグを立て、Restart は停止後に再起動する。 |
 | 6 | public | void | ReplyDevice | デバイスからの応答 payload を transport の publish 処理へ渡す。 |
 
 ## メソッド詳細
 
-### 1. KsHost
+### 1. TabletHost
 
 | 項目 | 内容 |
 | --- | --- |
-| シグネチャ | `public KsHost()` |
+| シグネチャ | `public TabletHost()` |
 | 可視性 | public |
 | 戻り値 | - |
 
@@ -78,11 +78,11 @@
 
 備考: -
 
-### 2. KsHost
+### 2. TabletHost
 
 | 項目 | 内容 |
 | --- | --- |
-| シグネチャ | `public KsHost(int mode)` |
+| シグネチャ | `public TabletHost(int mode)` |
 | 可視性 | public |
 | 戻り値 | - |
 
@@ -110,7 +110,7 @@
 
 処理内容:
 
-- ① 開始ログを出力し、KsDeviceManager singleton を取得する。
+- ① 開始ログを出力し、TabletDeviceManager singleton を取得する。
 - ② DeviceCommandHandler を DeviceManagerRegistry と LegacyProcessInfoStore で構成する。
 - ③ transport を開始し、command handler を通信経路へ接続する。
 - ④ mode に応じた device setting を作成し、device manager を起動する。
@@ -160,7 +160,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| シグネチャ | `public void ReplyDevice(IDeviceServiceCallBack client, KsDeviceId deviceId, KsDeviceMethodID ksDeviceMethodId, IntPtr handle, Dictionary<string, string> dic)` |
+| シグネチャ | `public void ReplyDevice(IDeviceServiceCallBack client, TabletDeviceId deviceId, TabletDeviceMethodID tabletDeviceMethodId, IntPtr handle, Dictionary<string, string> dic)` |
 | 可視性 | public |
 | 戻り値 | void |
 
@@ -169,8 +169,8 @@
 | 型 | 論理名 | 物理名 |
 | --- | --- | --- |
 | IDeviceServiceCallBack | コールバッククライアント | client |
-| KsDeviceId | デバイスID | deviceId |
-| KsDeviceMethodID | デバイスメソッドID | ksDeviceMethodId |
+| TabletDeviceId | デバイスID | deviceId |
+| TabletDeviceMethodID | デバイスメソッドID | tabletDeviceMethodId |
 | IntPtr | ウィンドウハンドル | handle |
 | Dictionary<string, string> | 応答データ | dic |
 
@@ -183,7 +183,7 @@
 備考: -
 ## 処理フロー/注意事項
 
-- StartHost が transport を開始し、KsDeviceManager.StartDeviceManager を呼び出す。
+- StartHost が transport を開始し、TabletDeviceManager.StartDeviceManager を呼び出す。
 - StopHost が transport と device manager を停止する。
 - ReplyDevice が transport へ device event publish を委譲する。
 

@@ -23,7 +23,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/KsPosBoilerplate/TabetPos.Core/State/ViewModelSnapshotEntity.cs |
+| ソースファイル | sources/tabletposboilerplate/TabetPos.Core/State/ViewModelSnapshotEntity.cs |
 | 対象クラス | ViewModelSnapshotEntity |
 | 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 

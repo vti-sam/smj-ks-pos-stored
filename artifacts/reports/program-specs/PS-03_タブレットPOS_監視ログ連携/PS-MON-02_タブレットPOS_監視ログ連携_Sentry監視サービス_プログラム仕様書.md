@@ -23,7 +23,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/KsPosBoilerplate/TabetPos.Core/Monitoring/SentryMonitoringService.cs |
+| ソースファイル | sources/tabletposboilerplate/TabetPos.Core/Monitoring/SentryMonitoringService.cs |
 | 対象クラス | SentryMonitoringService |
 | 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 

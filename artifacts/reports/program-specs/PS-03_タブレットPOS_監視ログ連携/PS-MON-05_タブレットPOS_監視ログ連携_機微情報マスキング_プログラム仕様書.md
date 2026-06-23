@@ -23,7 +23,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/KsPosBoilerplate/TabetPos.Core/Monitoring/SensitiveDataMasker.cs |
+| ソースファイル | sources/tabletposboilerplate/TabetPos.Core/Monitoring/SensitiveDataMasker.cs |
 | 対象クラス | SensitiveDataMasker |
 | 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 

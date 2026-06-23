@@ -23,7 +23,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/KsPosBoilerplate/TabetPos.Core/Monitoring/IMonitoringService.cs |
+| ソースファイル | sources/tabletposboilerplate/TabetPos.Core/Monitoring/IMonitoringService.cs |
 | 対象クラス | IMonitoringService |
 | 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 

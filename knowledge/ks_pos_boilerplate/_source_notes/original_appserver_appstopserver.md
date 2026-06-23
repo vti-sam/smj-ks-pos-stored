@@ -21,8 +21,9 @@ tags: [ks_host, architecture, ks_pos_boilerplate, source_notes, original_appserv
   - Có các nút Start (chạy `StartHost()`) và Stop (chạy `StopHost()`).
   - Đăng ký sự kiện trong code-behind (không dùng designer) do chuyển đổi từ VB.
 - **AppStopServer** (tiến trình ngắn hạn để dừng DeviceServer):
-  - Gửi WindowMessage với nội dung `Message\tKill` tới `WINDOWMESSAGE_DeviceServer`.
-  - `KsHost.OnReceiveMessage` nhận lệnh `Kill`, gọi `StopHost()` và đặt `IsEndOrder = true`.
+  - Bản gốc gửi WindowMessage với nội dung `Message\tKill` tới `WINDOWMESSAGE_DeviceServer`.
+  - Bản hiện tại đã chuyển sang gửi JSON `Kill` qua Named Pipe `TabetPos.Host.Command`.
+  - `KsHost` nhận lệnh `Kill`, gọi `StopHost()` và đặt `IsEndOrder = true`.
 
 ## Ngoại lệ & Ghi log
 
@@ -42,10 +43,11 @@ tags: [ks_host, architecture, ks_pos_boilerplate, source_notes, original_appserv
 
 ## Liên kết với KsHost
 
-- `KsHost` điều phối WindowMessage service:
+- `KsHost` điều phối Host transport:
   - `StartHost()`: khởi động named pipe, đăng ký xử lý nhận tin nhắn, khởi động `KsDeviceManager`.
   - `StopHost()`: dừng named pipe host, dừng device manager, hủy đăng ký nhận tin nhắn.
-  - `OnReceiveMessage()`: xử lý tin nhắn định dạng key/value phân tách bằng Tab. Nhận lệnh `Kill` (dừng) hoặc `ReStart` (khởi động lại). Có cơ chế gửi lại phản hồi (`ReplyMessage`) để tránh mất tin nhắn.
+  - Named Pipe command handler nhận `Kill` (dừng) hoặc `ReStart` (khởi động lại).
+  - WindowMessage adapter vẫn xử lý tin nhắn key/value phân tách bằng Tab cho client legacy, gồm cơ chế gửi lại phản hồi (`ReplyMessage`) để tránh mất tin nhắn.
 
 ## Tactical Notes (Ghi chú thực chiến)
 
@@ -54,7 +56,7 @@ tags: [ks_host, architecture, ks_pos_boilerplate, source_notes, original_appserv
 - Không tự ý xóa cấu hình runtime/probing legacy trong `app.config`.
 - Tránh sửa file designer trực tiếp khi làm việc với code WinForms được convert; ưu tiên code-behind.
 - `DEBUG` là tham số dòng lệnh để hiển thị UI debug, không phải build configuration.
-- `AppStopServer` dừng host thông qua tin nhắn giao thức, không kill tiến trình trực tiếp.
+- `AppStopServer` dừng host thông qua Named Pipe command, không kill tiến trình trực tiếp.
 
 ## Các chú thích gốc đáng chú ý trong code
 

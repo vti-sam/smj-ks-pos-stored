@@ -23,7 +23,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/KsPosBoilerplate/TabetPos.Core/State/IViewModelSnapshotService.cs |
+| ソースファイル | sources/tabletposboilerplate/TabetPos.Core/State/IViewModelSnapshotService.cs |
 | 対象クラス | IViewModelSnapshotService |
 | 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 

@@ -42,6 +42,9 @@
 | IT-HOST-029 | ホストデバイス制御 | Cash Changer | エラーガイダンス取得 | Cash Changer の使用開始が完了している。エラー状態を発生させる場合は現場責任者の承認を得る。 | 1. デバイス戦略からエラーガイダンス取得操作を実行する。<br>2. ホスト応答、返却されたガイダンス情報、ホストログを確認する。<br>3. 実機表示またはログを証跡として保存する。 | 現在状態に応じたガイダンス情報が取得でき、デバイス戦略へ正常結果が返る。 | N |
 | IT-HOST-030 | ホストデバイス制御 | Cash Changer | 精査データ取得 | Cash Changer の使用開始が完了し、精査操作を実施できる状態である。 | 1. デバイス戦略から精査データ取得操作を実行する。<br>2. ホスト応答、返却された収納庫・回収ボックス別データ、ホストログを確認する。<br>3. 管理画面またはログを証跡として保存する。 | 精査データが取得でき、デバイス戦略へ正常結果が返る。 | N |
 | IT-HOST-031 | ホストデバイス制御 | Cash Changer | 使用終了 | Cash Changer の使用開始が完了し、デバイス戦略からホストへ使用終了要求を送信できる状態である。 | 1. デバイス戦略から Cash Changer の使用終了操作を実行する。<br>2. ホスト応答、ホストログ、OPOSログを確認する。<br>3. 実行結果ログを証跡として保存する。 | ホスト経由で Cash Changer の使用終了が正常終了し、デバイス使用状態が解除される。 | N |
+| IT-HOST-032 | ホストデバイス制御 | Host制御 | AppStopServerによる終了 | Host が起動済みで、`TabetPos.Host.Command` が接続可能である。`TabletDeviceServer.AppStopServer.exe` が同じ端末に配置済みである。 | 1. Host 起動ログと command pipe の待受状態を確認する。<br>2. `TabletDeviceServer.AppStopServer.exe` を実行する。<br>3. AppStopServerログ、Hostログ、プロセス終了状態を確認する。 | AppStopServer からの Named Pipe 終了要求により Host が正常終了する。Host 側で device stop と pipe close が行われ、pipe handle や接続待ち状態が残らない。 | N |
+| IT-HOST-033 | ホストデバイス制御 | Host制御 | Host未起動時のAppStopServer | Host プロセスが起動しておらず、`TabetPos.Host.Command` が存在しない状態である。 | 1. Host が停止していることを確認する。<br>2. `TabletDeviceServer.AppStopServer.exe` を実行する。<br>3. 5秒程度待機し、AppStopServerログとプロセス状態を確認する。 | AppStopServer はハングせず異常ログを出力して終了する。不要なHostプロセスや接続待ち状態は残らない。 | A |
+| IT-HOST-034 | ホストデバイス制御 | Host制御 | 終了後の再起動 | IT-HOST-032 または同等の手順で Host を正常終了済みである。 | 1. Host を再起動する。<br>2. `TabetPos.Host.Command` へ接続できることを確認する。<br>3. Customer Display または Cash Drawer の軽い確認コマンドを送信し、Host応答とログを確認する。 | AppStopServer終了後でも Host は再起動できる。再起動後の Named Pipe command が正常に処理され、前回停止時の pipe handle は残らない。 | N |
 
 ## 基本情報
 | 項目 | 内容 |
@@ -54,7 +57,7 @@
 | 作成者 | VTI-SAM |
 | 作成日 | 2026/06/21 |
 | 環境 | ローカル |
-| 件数 | 31件 |
+| 件数 | 34件 |
 | 対象デバイス | Customer Display / Cash Drawer / Cash Changer |
 | 確認範囲 | デバイス戦略からホストへの要求送信、ホスト側ルーティング、Device/OPOS処理、デバイス戦略への結果返却 |
 | 証跡 | レジストリ確認結果、設定確認結果、ホストログ、OPOSログ、実行画面、スクリーンショット、写真または動画 |
@@ -65,3 +68,4 @@
 | 1.0.0 | - | VTI-SAM | 2026/06/21 | 新規作成 | ホストデバイス制御結合テスト | OPOSランタイムおよび実機接続確認を結合テストとして分離 |
 | 1.1.0 | - | VTI-SAM | 2026/06/21 | テスト追加 | ホストデバイス制御結合テスト | 対象デバイス別のサポート済みコマンド確認を追加 |
 | 1.2.0 | - | VTI-SAM | 2026/06/21 | 記載改善 | ホストデバイス制御結合テスト | デバイス戦略からホスト経由で実機・OPOS処理結果を確認する範囲を明確化 |
+| 1.3.0 | - | VTI-SAM | 2026/06/23 | テスト追加 | ホストデバイス制御結合テスト | AppStopServerのNamed Pipe終了要求、未起動時異常系、終了後再起動確認を追加 |

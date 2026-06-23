@@ -42,10 +42,10 @@ DeviceMethod
 
 ## Named Pipe
 
-- LineDisplay nhận lệnh thông qua `KsPos.Host.Command`.
+- LineDisplay nhận lệnh thông qua `TabetPos.Host.Command`.
 - Thường phản hồi đồng bộ trên kết nối lệnh.
-- `KsPos.Host.Event` chỉ dành cho các sự kiện không đồng bộ nếu chúng xảy ra.
-- `KsPos.Host.Stream` chủ yếu dành cho thiết bị tần suất cao như Scanner; LineDisplay không phải là mục tiêu stream mặc định.
+- `TabetPos.Host.Event` chỉ dành cho các sự kiện không đồng bộ nếu chúng xảy ra.
+- `TabetPos.Host.Stream` chủ yếu dành cho thiết bị tần suất cao như Scanner; LineDisplay không phải là mục tiêu stream mặc định.
 
 ## Thận trọng
 

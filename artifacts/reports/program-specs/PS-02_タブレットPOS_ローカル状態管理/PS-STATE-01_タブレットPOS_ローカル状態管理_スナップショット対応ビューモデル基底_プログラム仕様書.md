@@ -23,7 +23,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/KsPosBoilerplate/TabetPos.Applications/Presentation/ViewModels/Base/SnapshotViewModelBase.cs |
+| ソースファイル | sources/tabletposboilerplate/TabetPos.Applications/Presentation/ViewModels/Base/SnapshotViewModelBase.cs |
 | 対象クラス | SnapshotViewModelBase |
 | 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 

@@ -15,7 +15,7 @@
 | プロジェクト名 | タブレットPOS |
 | 機能名 | 名前付きパイプコマンドサーバー |
 | 物理クラス名 | NamedPipeCommandServer |
-| 名前空間 | KsOutProcess.KsDeviceServer |
+| 名前空間 | TabletOutProcess.TabletDeviceServer |
 | アクセス修飾子 | internal |
 | 継承/実装 | IDisposable |
 | 更新日 | 2026/06/21 |
@@ -24,7 +24,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/KsPosBoilerplate/TabetPos.Host/src/KsHost/DeviceHost/NamedPipeCommandServer.cs |
+| ソースファイル | sources/tabletposboilerplate/TabetPos.Host/src/TabletHost/DeviceHost/NamedPipeCommandServer.cs |
 | 対象クラス | NamedPipeCommandServer |
 | 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 

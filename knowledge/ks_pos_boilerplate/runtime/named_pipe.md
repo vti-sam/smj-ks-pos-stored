@@ -12,13 +12,13 @@ tags: [ks_host, runtime, ks_pos_boilerplate, named_pipe]
 
 ## Các Pipe
 
-- Command pipe: `KsPos.Host.Command`
+- Command pipe: `TabetPos.Host.Command`
   - Đường dẫn yêu cầu POS/App -> Host.
   - Yêu cầu dạng JSON 1 dòng, phản hồi đồng bộ trên cùng kết nối.
-- Event pipe: `KsPos.Host.Event`
+- Event pipe: `TabetPos.Host.Event`
   - Đường dẫn publish sự kiện Host -> POS/App.
   - Thông báo thiết bị bất đồng bộ thông thường.
-- Stream pipe: `KsPos.Host.Stream`
+- Stream pipe: `TabetPos.Host.Stream`
   - Đường dẫn publish tần suất cao Host -> POS/App.
   - Dành cho luồng dữ liệu như Scanner; LineDisplay thường không phải đối tượng stream.
 
@@ -57,10 +57,11 @@ tags: [ks_host, runtime, ks_pos_boilerplate, named_pipe]
 - `DeviceCommandRouter` xếp hàng công việc theo từng khóa thiết bị, bảo toàn thứ tự bên trong thiết bị trong khi cho phép các thiết bị khác chạy độc lập.
 - `Kill` và `ReStart` được chấp nhận và thực thi bất đồng bộ sau một khoảng trễ ngắn.
 - Các tin nhắn không hỗ trợ sẽ trả về thất bại thay vì chuyển tiếp đến code thiết bị.
+- `AppStopServer` là legacy executable nhưng hiện gửi `Kill` qua command pipe `TabetPos.Host.Command`, không còn dùng WindowMessage.
 
 ## Khả năng tương thích
 
 - Giữ tên lệnh cũ: `DeviceUse`, `DeviceUnUse`, `DeviceUnUseComplete`, `DeviceMethod`, `Kill`, `ReStart`.
 - Giữ các key trả về cũ: `ResultCode`, `ReturnValue` và các key payload đặc thù thiết bị.
 - Không expose Host concrete class cho `KsPos.DeviceCtrl`; DeviceCtrl chỉ nên giao tiếp bằng Named Pipe.
-- Khi migrate tool legacy như AppStopServer, dùng Named Pipe trước nhưng giữ WindowMessage fallback cho tới khi xác nhận không còn runtime consumer cũ.
+- WindowMessage compatibility vẫn giữ cho client legacy còn lại; tool nào đã migrate sang Named Pipe thì không thêm fallback WindowMessage mới.

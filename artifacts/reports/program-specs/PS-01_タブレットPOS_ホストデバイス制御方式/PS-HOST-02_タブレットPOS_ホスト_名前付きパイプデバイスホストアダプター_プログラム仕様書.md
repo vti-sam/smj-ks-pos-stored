@@ -15,7 +15,7 @@
 | プロジェクト名 | タブレットPOS |
 | 機能名 | 名前付きパイプデバイスホストアダプター |
 | 物理クラス名 | NamedPipeDeviceHostAdapter |
-| 名前空間 | KsOutProcess.KsDeviceServer |
+| 名前空間 | TabletOutProcess.TabletDeviceServer |
 | アクセス修飾子 | internal sealed |
 | 継承/実装 | IDisposable |
 | 更新日 | 2026/06/21 |
@@ -24,7 +24,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/KsPosBoilerplate/TabetPos.Host/src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs |
+| ソースファイル | sources/tabletposboilerplate/TabetPos.Host/src/TabletHost/DeviceHost/NamedPipeDeviceHostAdapter.cs |
 | 対象クラス | NamedPipeDeviceHostAdapter |
 | 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 
@@ -176,7 +176,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| シグネチャ | `public void PublishDeviceReply(KsDeviceId deviceId, KsDeviceMethodID methodId, IntPtr handle, Dictionary<string, string> payload)` |
+| シグネチャ | `public void PublishDeviceReply(TabletDeviceId deviceId, TabletDeviceMethodID methodId, IntPtr handle, Dictionary<string, string> payload)` |
 | 可視性 | public |
 | 戻り値 | void |
 
@@ -184,8 +184,8 @@
 
 | 型 | 論理名 | 物理名 |
 | --- | --- | --- |
-| KsDeviceId | デバイスID | deviceId |
-| KsDeviceMethodID | デバイスメソッドID | methodId |
+| TabletDeviceId | デバイスID | deviceId |
+| TabletDeviceMethodID | デバイスメソッドID | methodId |
 | IntPtr | ウィンドウハンドル | handle |
 | Dictionary<string, string> | ペイロード | payload |
 

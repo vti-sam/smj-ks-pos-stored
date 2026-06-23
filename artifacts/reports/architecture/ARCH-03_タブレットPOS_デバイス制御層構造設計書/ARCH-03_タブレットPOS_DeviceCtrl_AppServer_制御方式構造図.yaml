@@ -1,0 +1,394 @@
+layout: manual
+
+canvas:
+  title: "タブレットPOS デバイス制御方式構造図"
+  show_title: false
+  width: 1600
+  height: 1180
+
+layout_rules:
+  max_unbundled_parallel_edges: 99
+
+frames:
+  - id: upper
+    title: " "
+    kind: outer
+    level: parent
+    title_size: 20
+    x: 20
+    y: 20
+    w: 1560
+    h: 880
+  - id: appserver
+    title: "デバイス接続サーバー（AppServer / 既存資産活用機器向け）"
+    level: parent
+    title_size: 20
+    x: 45
+    y: 210
+    w: 830
+    h: 660
+  - id: terminal
+    title: "端末"
+    level: parent
+    title_size: 20
+    x: 910
+    y: 35
+    w: 620
+    h: 500
+  - id: tablet_app
+    title: "タブレットPOSアプリ"
+    title_size: 16
+    x: 1125
+    y: 60
+    w: 350
+    h: 125
+  - id: device_ctrl
+    title: "DeviceCtrl"
+    title_size: 16
+    x: 925
+    y: 225
+    w: 580
+    h: 285
+  - id: control_route
+    title: "制御方式"
+    title_size: 16
+    x: 945
+    y: 380
+    w: 540
+    h: 105
+  - id: appserver_runtime
+    title: " "
+    title_size: 16
+    x: 65
+    y: 730
+    w: 420
+    h: 130
+  - id: appserver_core
+    title: " "
+    title_size: 16
+    x: 505
+    y: 600
+    w: 350
+    h: 250
+  - id: devices
+    title: "周辺機器"
+    kind: outer
+    level: parent
+    title_size: 20
+    x: 20
+    y: 925
+    w: 1560
+    h: 225
+  - id: server_devices
+    title: "AppServer経由で制御する機器"
+    title_size: 16
+    x: 55
+    y: 975
+    w: 440
+    h: 120
+  - id: direct_devices
+    title: "DeviceCtrlから直接制御する機器"
+    title_size: 16
+    x: 1010
+    y: 975
+    w: 520
+    h: 120
+
+nodes:
+  - id: pos_app
+    title: "タブレットPOSアプリ"
+    body: "機器操作を要求する"
+    x: 1155
+    y: 85
+    w: 170
+    h: 70
+  - id: tabletclient_removed
+    title: "TabletClient"
+    body: "旧方式\n削除済み\n現行処理では未使用"
+    status: removed
+    x: 1340
+    y: 70
+    w: 120
+    h: 95
+
+  - id: device_setup
+    title: "DeviceManager / Config / Factory"
+    body: "設定を読み込み\n機器ごとの制御方式を決定する"
+    x: 1115
+    y: 250
+    w: 230
+    h: 105
+  - id: namedpipe_client
+    title: "NamedPipeClient"
+    body: "AppServer経由が必要な機器のみ\nHostへ要求を送信する"
+    x: 965
+    y: 405
+    w: 180
+    h: 85
+  - id: direct_control
+    title: "直接制御"
+    body: "AppServerを経由せず\nDeviceCtrl内で制御する"
+    x: 1245
+    y: 405
+    w: 185
+    h: 85
+
+  - id: app_server
+    title: "AppServer.exe"
+    body: "Hostの起動・停止を管理する"
+    x: 260
+    y: 260
+    w: 190
+    h: 75
+  - id: tablethost
+    title: "TabletHost / DeviceHostTransport"
+    body: "Hostライフサイクルと\nNamed Pipeを管理する"
+    x: 260
+    y: 430
+    w: 190
+    h: 90
+  - id: command_server
+    title: "NamedPipeCommandServer"
+    body: "TabletPos.Host.Commandで\n要求を受け付ける"
+    x: 530
+    y: 625
+    w: 190
+    h: 80
+  - id: mapper_handler
+    title: "CommandMapper / Handler"
+    body: "要求を内部処理へ変換し\n機器操作を実行する"
+    x: 530
+    y: 765
+    w: 190
+    h: 80
+  - id: event_publisher
+    title: "NamedPipeEventPublisher"
+    body: "ReplyDeviceなどを通知する"
+    x: 665
+    y: 850
+    w: 185
+    h: 70
+  - id: host_config
+    title: "host_device_config.json"
+    body: "機器構成と実装クラスを定義する"
+    x: 150
+    y: 745
+    w: 210
+    h: 75
+  - id: device_manager
+    title: "TabletDeviceManager"
+    body: "機器IDとメソッドIDを解決し\n対象機器を呼び出す"
+    x: 150
+    y: 845
+    w: 210
+    h: 80
+
+  - id: cash_changer
+    title: "釣銭機"
+    body: "CashChangerByRT300\n既存実装を継続利用"
+    x: 70
+    y: 1010
+    w: 130
+    h: 65
+  - id: cash_drawer
+    title: "キャッシュドロア"
+    body: "CashDrawerBySharp\nSHARP既存実装を利用"
+    x: 215
+    y: 1010
+    w: 130
+    h: 65
+  - id: customer_display
+    title: "カスタマーディスプレイ"
+    body: "CustomerDisplayBySharp\nSHARP既存実装を利用"
+    x: 360
+    y: 1010
+    w: 130
+    h: 65
+  - id: scanner
+    title: "スキャナー"
+    body: "USB / Bluetooth"
+    x: 1030
+    y: 1010
+    w: 120
+    h: 65
+  - id: camera
+    title: "カメラ"
+    body: "バーコード読取"
+    x: 1160
+    y: 1010
+    w: 120
+    h: 65
+  - id: printer
+    title: "プリンター"
+    body: "レシート / A4"
+    x: 1290
+    y: 1010
+    w: 120
+    h: 65
+  - id: payment_terminal
+    title: "決済端末"
+    body: "決済連携"
+    x: 1420
+    y: 1010
+    w: 95
+    h: 65
+
+edges:
+  - id: edge-pos-device-setup
+    from: pos_app
+    to: device_setup
+    label: "機器操作要求"
+    label_pos: [1110, 220]
+    points:
+      - [1240, 155]
+      - [1240, 250]
+
+  - id: edge-setup-direct
+    from: device_setup
+    to: direct_control
+    label: "直接制御可能な機器"
+    label_pos: [1325, 380]
+    points:
+      - [1230, 355]
+      - [1230, 380]
+      - [1338, 380]
+      - [1338, 405]
+  - id: edge-setup-namedpipe
+    from: device_setup
+    to: namedpipe_client
+    label: "AppServer経由が必要な機器"
+    label_pos: [1045, 380]
+    points:
+      - [1185, 355]
+      - [1185, 380]
+      - [1055, 380]
+      - [1055, 405]
+
+  - id: edge-namedpipe-command
+    from: namedpipe_client
+    to: command_server
+    label: "機器利用要求 / メソッド実行要求"
+    label_format: technical
+    label_pos: [745, 600]
+    points:
+      - [965, 448]
+      - [890, 448]
+      - [890, 665]
+      - [720, 665]
+  - id: edge-event-namedpipe
+    from: event_publisher
+    to: namedpipe_client
+    label: "ReplyDevice通知"
+    dashed: true
+    label_pos: [800, 740]
+    points:
+      - [665, 885]
+      - [890, 885]
+      - [890, 720]
+      - [890, 470]
+      - [965, 470]
+
+  - id: edge-appserver-tablethost
+    from: app_server
+    to: tablethost
+    points:
+      - [355, 335]
+      - [355, 430]
+  - id: edge-tablethost-command
+    from: tablethost
+    to: command_server
+    points:
+      - [450, 475]
+      - [530, 475]
+      - [530, 665]
+  - id: edge-command-mapper
+    from: command_server
+    to: mapper_handler
+    points:
+      - [625, 705]
+      - [625, 765]
+  - id: edge-mapper-device-manager
+    from: mapper_handler
+    to: device_manager
+    points:
+      - [530, 805]
+      - [480, 805]
+      - [480, 885]
+      - [360, 885]
+  - id: edge-mapper-event
+    from: mapper_handler
+    to: event_publisher
+    points:
+      - [625, 845]
+      - [625, 885]
+      - [665, 885]
+  - id: edge-tablethost-host-config
+    from: tablethost
+    to: host_config
+    points:
+      - [355, 520]
+      - [355, 745]
+  - id: edge-host-config-device-manager
+    from: host_config
+    to: device_manager
+    points:
+      - [255, 820]
+      - [255, 845]
+
+  - id: edge-direct-scanner
+    from: direct_control
+    to: scanner
+    points:
+      - [1270, 490]
+      - [1270, 950]
+      - [1090, 950]
+      - [1090, 1010]
+  - id: edge-direct-camera
+    from: direct_control
+    to: camera
+    points:
+      - [1310, 490]
+      - [1310, 950]
+      - [1220, 950]
+      - [1220, 1010]
+  - id: edge-direct-printer
+    from: direct_control
+    to: printer
+    points:
+      - [1360, 490]
+      - [1360, 950]
+      - [1350, 950]
+      - [1350, 1010]
+  - id: edge-direct-payment
+    from: direct_control
+    to: payment_terminal
+    points:
+      - [1410, 490]
+      - [1410, 950]
+      - [1468, 950]
+      - [1468, 1010]
+
+  - id: edge-device-manager-cash-changer
+    from: device_manager
+    to: cash_changer
+    points:
+      - [190, 925]
+      - [190, 970]
+      - [135, 970]
+      - [135, 1010]
+  - id: edge-device-manager-cash-drawer
+    from: device_manager
+    to: cash_drawer
+    points:
+      - [230, 925]
+      - [230, 970]
+      - [280, 970]
+      - [280, 1010]
+  - id: edge-device-manager-customer-display
+    from: device_manager
+    to: customer_display
+    points:
+      - [310, 925]
+      - [310, 970]
+      - [425, 970]
+      - [425, 1010]

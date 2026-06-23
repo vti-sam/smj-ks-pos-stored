@@ -23,7 +23,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/KsPosBoilerplate/TabetPos.Core/State/LocalStateSessionConfiguration.cs |
+| ソースファイル | sources/tabletposboilerplate/TabetPos.Core/State/LocalStateSessionConfiguration.cs |
 | 対象クラス | LocalStateSessionConfiguration |
 | 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 

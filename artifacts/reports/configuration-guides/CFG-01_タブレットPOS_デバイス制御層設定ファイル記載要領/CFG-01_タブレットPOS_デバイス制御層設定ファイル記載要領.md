@@ -6,8 +6,8 @@ type: architecture
 status: draft
 source:
   - chat:2026-06-11
-  - sources/POS 開発用ベースプロジェクト/TabetPos.Applications/Resources/Raw/device_controller_config.json
-  - sources/POS 開発用ベースプロジェクト/TabetPos.Host/src/AppServer/Resources/host_device_config.json
+  - sources/tabletposboilerplate/TabetPos.Applications/Resources/Raw/device_controller_config.json
+  - sources/tabletposboilerplate/TabetPos.Host/src/AppServer/Resources/host_device_config.json
 tags:
   - タブレットPOS
   - device-controller
@@ -269,7 +269,7 @@ tags:
 | 分類 | キー | 型 | 必須 | 内容 | 備考 |
 |---|---|---|---|---|---|
 | appSettings | `namedPipe` | object | 任意 | Windows Host-backed device 用の Named Pipe 設定 | iOS / Android では通常使用しない |
-| appSettings.namedPipe | `pipeName` | string | 任意 | Windows Host へ接続するための pipe 名 | 例: `KsPOSPipeMessage` |
+| appSettings.namedPipe | `pipeName` | string | 任意 | Windows Host へ接続するための pipe 名 | 例: `TabetPos.Host.Command`。旧既定値 `TabletPOSPipeMessage` は起動時に現行 pipe 名へ移行される |
 | appSettings.namedPipe | `connectionTimeoutMs` | number | 任意 | Named Pipe 接続タイムアウト(ms) | 例: `5000` |
 
 ### 3.9 記載値一覧
@@ -916,7 +916,7 @@ Windows の Raw Keyboard listener を使用する場合は、`strategyclass` を
   },
   "appSettings": {
     "namedPipe": {
-      "pipeName": "KsPOSPipeMessage",
+      "pipeName": "TabetPos.Host.Command",
       "connectionTimeoutMs": 5000
     }
   }
