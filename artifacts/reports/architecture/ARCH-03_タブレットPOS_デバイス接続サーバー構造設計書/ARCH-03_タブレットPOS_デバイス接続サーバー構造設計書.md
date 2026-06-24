@@ -8,8 +8,8 @@ ARCH-03 デバイス接続サーバー構造設計書
 
 | 改訂日 | 版数 | 内容 | 改訂者 | 承認者 |
 | :----- | :--- | :--- | :----- | :----- |
-| 2026/06/24 | 1.0.1 | デバイス接続サーバーを中心とする構造に見直し、DeviceCtrl は呼び出し境界として整理 | VTI | - |
-| 2026/06/19 | 1.0.0 | タブレットPOS ソフトウェア全体構造設計書の構成に合わせ、DeviceManager / DeviceCtrl / Strategy / Factory / Device Interface の構成と責務を定義 | VTI | - |
+| 2026/06/24 | 1.0.1 | デバイス接続サーバーを中心とする構造に見直し、DeviceCtrl は呼び出し境界として整理 | VTI サム | - |
+| 2026/06/19 | 1.0.0 | タブレットPOS ソフトウェア全体構造設計書の構成に合わせ、DeviceManager / DeviceCtrl / Strategy / Factory / Device Interface の構成と責務を定義 | VTI サム | - |
 
 ## 目次
 
@@ -253,15 +253,3 @@ Host 経由のデバイスでは `appSettings.namedPipe.pipeName` に `TabetPos.
 | デバイス操作 | `DeviceUse`、`DeviceUnUse`、`DeviceMethod` が対象 `IFDevice` に渡ること |
 | 停止 | `StopHost` または `Kill` により pipe と起動済みデバイスが終了すること |
 
-## 8. 関連資料
-
-- `sources/tabletposboilerplate/TabetPos.Host/README.md`
-- `sources/tabletposboilerplate/TabetPos.Host/src/TabletHost/DeviceHost/TabletHost.cs`
-- `sources/tabletposboilerplate/TabetPos.Host/src/TabletHost/DeviceHost/NamedPipeDeviceHostAdapter.cs`
-- `sources/tabletposboilerplate/TabetPos.Host/src/TabletHost/DeviceHost/NamedPipeCommandServer.cs`
-- `sources/tabletposboilerplate/TabetPos.Host/src/TabletHost/DeviceHost/DeviceCommandRouter.cs`
-- `sources/tabletposboilerplate/TabetPos.Host/src/TabletHost/DeviceHost/DeviceCommandCore.cs`
-- `sources/tabletposboilerplate/TabetPos.Host/src/TabletDeviceManager/TabletDeviceManager.cs`
-- `sources/tabletposboilerplate/TabetPos.Host/src/TabletDevice/DeviceBase/DeviceBase.cs`
-- `sources/tabletposboilerplate/TabetPos.Host/src/AppServer/Resources/host_device_config.json`
-- `sources/tabletposboilerplate/TabetPos.Applications/Resources/Raw/device_controller_config.json`
