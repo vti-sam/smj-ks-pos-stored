@@ -10,25 +10,25 @@
         <mxCell id="node_check" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#475569;strokeWidth=2;fontColor=#0F172A;fontStyle=1;fontSize=10;verticalAlign=middle;" value="端末別の設定ファイルがあるか" vertex="1">
           <mxGeometry height="80" width="300" x="220" y="195" as="geometry" />
         </mxCell>
-        <mxCell id="node_runtime" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#94A3B8;strokeWidth=2;fontColor=#1E293B;fontStyle=0;fontSize=10;" value="端末別の設定を使用する&lt;br/&gt;&lt;font color=&quot;#6B7280&quot;&gt;AppData/device_controller_config.json&lt;/font&gt;" vertex="1">
-          <mxGeometry height="54" width="230" x="50" y="330" as="geometry" />
+        <mxCell id="node_runtime" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#94A3B8;strokeWidth=2;fontColor=#1E293B;fontStyle=0;fontSize=10;" value="端末別の設定を使用する&lt;br/&gt;&lt;font color=&quot;#6B7280&quot;&gt;device_controller_config.json&lt;/font&gt;" vertex="1">
+          <mxGeometry height="54" width="240" x="45" y="330" as="geometry" />
         </mxCell>
-        <mxCell id="node_default" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#94A3B8;strokeWidth=2;fontColor=#1E293B;fontStyle=0;fontSize=10;" value="アプリ同梱の初期設定を使用する&lt;br/&gt;&lt;font color=&quot;#6B7280&quot;&gt;Resources/Raw/device_controller_config.json&lt;/font&gt;" vertex="1">
+        <mxCell id="node_default" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#94A3B8;strokeWidth=2;fontColor=#1E293B;fontStyle=0;fontSize=10;" value="同梱の初期設定を使用する&lt;br/&gt;&lt;font color=&quot;#6B7280&quot;&gt;device_controller_config.json&lt;/font&gt;" vertex="1">
           <mxGeometry height="54" width="240" x="460" y="330" as="geometry" />
         </mxCell>
         <mxCell id="node_read" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#94A3B8;strokeWidth=2;fontColor=#1E293B;fontStyle=0;fontSize=11;" value="端末側の設定内容を読み取る" vertex="1">
           <mxGeometry height="44" width="250" x="245" y="440" as="geometry" />
         </mxCell>
-        <mxCell id="node_validate" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#94A3B8;strokeWidth=2;fontColor=#1E293B;fontStyle=0;fontSize=11;" value="使用する機器候補と有効デバイスを確認する" vertex="1">
+        <mxCell id="node_validate" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#94A3B8;strokeWidth=2;fontColor=#1E293B;fontStyle=0;fontSize=11;" value="機器候補と有効デバイスを確認する" vertex="1">
           <mxGeometry height="44" width="250" x="245" y="530" as="geometry" />
         </mxCell>
-        <mxCell id="node_apply" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#94A3B8;strokeWidth=2;fontColor=#1E293B;fontStyle=0;fontSize=11;" value="デバイス制御で使用できる状態にする" vertex="1">
+        <mxCell id="node_apply" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#94A3B8;strokeWidth=2;fontColor=#1E293B;fontStyle=0;fontSize=11;" value="デバイス制御へ反映する" vertex="1">
           <mxGeometry height="44" width="250" x="245" y="620" as="geometry" />
         </mxCell>
-        <mxCell id="node_ready" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#FFFFFF;strokeColor=#10B981;strokeWidth=2;fontColor=#065F46;fontStyle=1;fontSize=11;" value="端末側のデバイス制御準備完了" vertex="1">
+        <mxCell id="node_ready" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#FFFFFF;strokeColor=#10B981;strokeWidth=2;fontColor=#065F46;fontStyle=1;fontSize=11;" value="デバイス制御準備完了" vertex="1">
           <mxGeometry height="44" width="250" x="245" y="710" as="geometry" />
         </mxCell>
-        <mxCell id="node_error" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#EF4444;strokeWidth=2;fontColor=#991B1B;fontStyle=0;fontSize=10;" value="設定に問題がある場合&lt;br/&gt;調査用ログを出力する" vertex="1">
+        <mxCell id="node_error" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#FFFFFF;strokeColor=#EF4444;strokeWidth=2;fontColor=#991B1B;fontStyle=0;fontSize=10;" value="設定不備を記録する" vertex="1">
           <mxGeometry height="54" width="190" x="595" y="478" as="geometry" />
         </mxCell>
         <mxCell id="e_start_check" edge="1" parent="1" source="node_start" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;" target="node_check">

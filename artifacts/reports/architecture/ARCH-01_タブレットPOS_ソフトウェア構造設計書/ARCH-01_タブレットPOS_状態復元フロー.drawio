@@ -6,27 +6,27 @@
                 <mxCell id="0" />
                 <mxCell id="1" parent="0" />
                 <mxCell id="A" value="画面操作中&lt;br/&gt;入力値・選択状態が発生" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B82F6;strokeWidth=2;fontStyle=1;fontColor=#1E3A8A;" parent="1" vertex="1">
-                    <mxGeometry x="320" y="40" width="200" height="60" as="geometry" />
+                    <mxGeometry x="300" y="40" width="240" height="64" as="geometry" />
                 </mxCell>
                 <mxCell id="B" value="保存対象か？" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#475569;strokeWidth=2;fontStyle=1;fontColor=#0F172A;" parent="1" vertex="1">
                     <mxGeometry x="360" y="140" width="120" height="80" as="geometry" />
                 </mxCell>
-                <mxCell id="C" value="端末内SQLiteへ保存&lt;br/&gt;画面の一時状態として保持" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#94A3B8;strokeWidth=2;fontStyle=1;fontColor=#1E293B;" parent="1" vertex="1">
-                    <mxGeometry x="200" y="270" width="220" height="60" as="geometry" />
+                <mxCell id="C" value="画面状態を保存&lt;br/&gt;端末内SQLiteへ保持" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#94A3B8;strokeWidth=2;fontStyle=1;fontColor=#1E293B;" parent="1" vertex="1">
+                    <mxGeometry x="190" y="270" width="240" height="64" as="geometry" />
                 </mxCell>
                 <mxCell id="D" value="保存しない&lt;br/&gt;機密情報・正式な業務データは対象外" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9CA3AF;strokeWidth=2;fontStyle=1;fontColor=#1F2937;" parent="1" vertex="1">
-                    <mxGeometry x="560" y="270" width="240" height="60" as="geometry" />
+                    <mxGeometry x="550" y="270" width="260" height="64" as="geometry" />
                 </mxCell>
                 <mxCell id="E" value="復元契機が発生？" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#475569;strokeWidth=2;fontStyle=1;fontColor=#0F172A;" parent="1" vertex="1">
                     <mxGeometry x="120" y="380" width="140" height="80" as="geometry" />
                 </mxCell>
-                <mxCell id="I" value="異常終了した場合" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#475569;strokeWidth=2;fontStyle=1;fontColor=#0F172A;" parent="1" vertex="1">
+                <mxCell id="I" value="終了種別を判定" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#475569;strokeWidth=2;fontStyle=1;fontColor=#0F172A;" parent="1" vertex="1">
                     <mxGeometry x="420" y="380" width="140" height="80" as="geometry" />
                 </mxCell>
                 <mxCell id="F" value="保存済み状態を読み込み" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#94A3B8;strokeWidth=2;fontStyle=1;fontColor=#1E293B;" parent="1" vertex="1">
                     <mxGeometry x="80" y="540" width="220" height="60" as="geometry" />
                 </mxCell>
-                <mxCell id="G" value="ViewModelへ反映" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#94A3B8;strokeWidth=2;fontStyle=1;fontColor=#1E293B;" parent="1" vertex="1">
+                <mxCell id="G" value="保存対象へ反映" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#94A3B8;strokeWidth=2;fontStyle=1;fontColor=#1E293B;" parent="1" vertex="1">
                     <mxGeometry x="80" y="630" width="220" height="60" as="geometry" />
                 </mxCell>
                 <mxCell id="H" value="画面状態を復元" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#94A3B8;strokeWidth=2;fontStyle=1;fontColor=#1E293B;" parent="1" vertex="1">
