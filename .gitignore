@@ -14,6 +14,8 @@ Thumbs.db
 # Temporary files
 tmp/
 temp/
+output/
+**/output/
 *.tmp
 *.bak
 *.orig

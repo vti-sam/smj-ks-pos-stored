@@ -11,11 +11,10 @@
 }}%%
 
 flowchart TB
-    classDef removed fill:#FEF2F2,stroke:#EF4444,color:#991B1B,stroke-width:2px;
     classDef direct fill:#F0FDF4,stroke:#22C55E,color:#14532D,stroke-width:1.5px;
     classDef server fill:#EFF6FF,stroke:#3B82F6,color:#1E3A8A,stroke-width:1.5px;
     classDef core fill:#F8FAFC,stroke:#64748B,color:#0F172A,stroke-width:1.5px;
-    classDef memo fill:#FFFFFF,stroke:#EF4444,color:#B91C1C,stroke-width:1px,font-size:11px;
+    classDef memo fill:#FFFBEB,stroke:#F59E0B,color:#78350F,stroke-width:1px,font-size:11px;
 
     subgraph upper[" "]
         direction LR
@@ -25,7 +24,7 @@ flowchart TB
 
             app_layer["アプリケーション層\n機器操作を要求する"]
 
-            subgraph device_ctrl["デバイス制御層"]
+            subgraph device_ctrl["デバイス制御層（DeviceCtrl）"]
                 direction TB
                 device_setup["DeviceManager / Config / Factory\n機器ごとの制御方式を決定する"]
 
@@ -41,10 +40,8 @@ flowchart TB
             device_setup -->|"サーバー経由"| namedpipe_client
         end
 
-        subgraph appserver["デバイス接続サーバー"]
+        subgraph appserver["デバイス接続サーバー（Host）"]
             direction TB
-
-            old_dll_removed["旧DLL連携\n(KsClient)\n旧方式・削除済み"]
 
             host_main["デバイスサーバーホスト\n(TabletHost)\n起動・停止を管理する"]
             host_adapter["名前付きパイプデバイスホストアダプター\n(NamedPipeDeviceHostAdapter)\n通信を管理する"]
@@ -95,7 +92,7 @@ flowchart TB
             payment_terminal["決済端末\n決済連携"]
         end
 
-        subgraph server_devices["デバイス接続サーバー経由の実機"]
+        subgraph server_devices["デバイス接続サーバー（Host）経由の実機\n現行POSの対象機器"]
             direction TB
             cash_changer_device["釣銭機"]
             cash_drawer_device["キャッシュドロア"]
@@ -103,8 +100,7 @@ flowchart TB
         end
     end
 
-    old_dll_removed -.->|"旧方式"| app_layer
-    namedpipe_client -->|"現行方式"| command_server
+    namedpipe_client -->|"Host経由"| command_server
 
     direct_control --> scanner
     direct_control --> camera
@@ -115,10 +111,9 @@ flowchart TB
     cash_drawer --> cash_drawer_device
     customer_display --> customer_display_device
 
-    memo["＊ 旧DLL連携（KsClient）は、Device Connect App の DLL SDK を旧Tablet POSへ組み込むための旧方式です。現行方式では Named Pipe を使用するため削除済みです。\n＊ 自動釣銭機UIスレッドフォーム RT-300 は、内部フォームとしてOPOS/OCXをUIスレッド上で保持し、共有メモリ・要求/応答ファイル連携を処理します。"]
+    memo["＊ 通常運用時は、タブレットPOSアプリのライフサイクルに合わせてデバイス接続サーバー（Host）を自動起動します。Start/Stop画面はデバッグ／開発者向けに限定し、通常運用時には表示しません。\n＊ Host経由は現行POSの対象機器を継続利用するための経路です。機種追加時は原則として直接制御で対応します。\n＊ 自動釣銭機UIスレッドフォーム RT-300 は、内部フォームとしてOPOS/OCXをUIスレッド上で保持し、共有メモリ・要求/応答ファイル連携を処理します。"]
 
     class app_layer,device_setup,namedpipe_client,direct_control,host_main,host_adapter,command_server,command_router,command_handler,device_manager,device_base core;
-    class old_dll_removed removed;
     class scanner,camera,printer,payment_terminal,cash_changer_device,cash_drawer_device,customer_display_device core;
     class cash_changer,cash_changer_form,cash_drawer,customer_display server;
     class memo memo;

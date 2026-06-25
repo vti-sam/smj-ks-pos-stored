@@ -4,6 +4,7 @@
 
 | バージョン | 更新日 | 更新者 | 変更内容 |
 | --- | --- | --- | --- |
+| 0.0.3 | 2026/06/25 | VTI サム | 通常運用時の自動起動方針とデバッグ用Start/Stop画面の扱いを追記 |
 | 0.0.2 | 2026/06/21 | VTI サム | クラス仕様、フィールド/プロパティ、メソッド仕様を更新 |
 | 0.0.1 | 2026/06/19 | VTI サム | 初版作成 |
 
@@ -18,7 +19,7 @@
 | 名前空間 | KsOutProcess.KsDeviceServer |
 | アクセス修飾子 | public sealed partial |
 | 継承/実装 | IFDeviceReply |
-| 更新日 | 2026/06/21 |
+| 更新日 | 2026/06/25 |
 
 ## ソース対応
 
@@ -30,7 +31,7 @@
 
 ## クラス概要
 
-デバイス制御ホストプロセス全体を起動し、通信層、設定読込、デバイス管理をまとめて構成する常駐制御部。停止や再起動要求を受けた場合は、管理対象を安全に終了させる。
+デバイス接続サーバー（Host）内で、通信層、設定読込、デバイス管理をまとめて構成する常駐制御部。通常運用時は起動処理から自動的に開始され、停止や再起動要求を受けた場合は、管理対象を安全に終了させる。
 
 ### 主な責務
 
@@ -42,7 +43,7 @@
 
 | 区分 | 可視性 | 型 | 名前 | 用途 |
 | --- | --- | --- | --- | --- |
-| フィールド | private | IDeviceHostTransport | _transport | WindowMessage/Named Pipe transport の抽象化。 |
+| フィールド | private | IDeviceHostTransport | _transport | Named Pipe transport の抽象化。 |
 | フィールド | private | IDeviceSettingFactory | _deviceSettingFactory | 起動対象デバイス設定を生成する factory。 |
 | フィールド | private | KsDeviceManager | _mDevmanager | 起動済みデバイスを管理するマネージャー。 |
 | フィールド | private | IDeviceCommandHandler | _commandHandler | デバイスコマンド処理の委譲先。 |
@@ -189,4 +190,6 @@
 
 ### 注意事項
 
+- 通常運用時は、タブレットPOSアプリのライフサイクルに合わせてデバイス接続サーバー（Host）の起動処理から StartHost が呼ばれる。ユーザーによる Start 操作を前提としない。
+- Start/Stop 画面からの操作はデバッグ／開発者向けに限定する。
 - `StartDeviceManager` は停止要求までループするため、ホスト起動フローのブロッキング要素である。
