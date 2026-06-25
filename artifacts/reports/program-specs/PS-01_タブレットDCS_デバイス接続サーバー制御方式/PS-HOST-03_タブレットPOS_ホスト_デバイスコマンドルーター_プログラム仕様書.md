@@ -73,9 +73,9 @@
 
 処理内容:
 
-- ① Named Pipe command を処理する processor delegate を受け取る。
-- ② device key ごとの worker を管理する dictionary と排他 lock を初期化する。
-- ③ EnqueueAsync で device 単位の worker queue へ request を投入できる状態にする。
+- ① Named Pipe コマンドを処理する関数を受け取る。
+- ② デバイスキーごとのワーカーを管理する辞書と排他ロックを初期化する。
+- ③ EnqueueAsync でデバイス単位のワーカーキューへ要求を投入できる状態にする。
 
 備考: -
 
@@ -95,9 +95,9 @@
 
 処理内容:
 
-- ① request から queue key を決定する。
-- ② key に対応する worker を取得または生成する。
-- ③ request を worker queue に追加し、response task を返す。
+- ① 要求からキューキーを決定する。
+- ② キーに対応するワーカーを取得または生成する。
+- ③ 要求をワーカーキューに追加し、応答タスクを返す。
 
 備考: -
 
@@ -117,9 +117,9 @@
 
 処理内容:
 
-- ① worker dictionary を lock する。
-- ② key が未登録の場合は processor を持つ Worker を生成して登録する。
-- ③ 登録済み worker を返す。
+- ① ワーカー辞書をロックする。
+- ② キーが未登録の場合は processor を持つ Worker を生成して登録する。
+- ③ 登録済みワーカーを返す。
 
 備考: -
 
@@ -139,9 +139,9 @@
 
 処理内容:
 
-- ① request が null の場合は host command として `Host` を返す。
-- ② DeviceId が設定されている場合は DeviceId を routing key とする。
-- ③ DeviceId が空の場合は host command として `Host` を返す。
+- ① 要求が null の場合はホスト制御コマンドとして `Host` を返す。
+- ② DeviceId が設定されている場合は DeviceId をルーティングキーとする。
+- ③ DeviceId が空の場合はホスト制御コマンドとして `Host` を返す。
 
 備考: -
 
@@ -155,17 +155,17 @@
 
 処理内容:
 
-- ① worker dictionary を lock する。
-- ② すべての worker へ dispose を呼び、queue の受け付けを終了する。
-- ③ worker dictionary を clear する。
+- ① ワーカー辞書をロックする。
+- ② すべてのワーカーへ dispose を呼び、キューの受け付けを終了する。
+- ③ ワーカー辞書をクリアする。
 
 備考: -
 ## 処理フロー/注意事項
 
-- EnqueueAsync が device key を決定して Worker に投入する。
-- Worker が BlockingCollection を STA thread で順次処理する。
+- EnqueueAsync がデバイスキーを決定して Worker に投入する。
+- Worker が BlockingCollection を STA スレッドで順次処理する。
 - Dispose が全 Worker を停止する。
 
 ### 注意事項
 
-- 内部クラス `Worker` と `WorkItem` は実装詳細として扱い、メイン method 一覧からは分離する。
+- 内部クラス `Worker` と `WorkItem` は実装詳細として扱い、メインメソッド一覧からは分離する。

@@ -14,6 +14,7 @@ flowchart TB
     classDef direct fill:#F0FDF4,stroke:#22C55E,color:#14532D,stroke-width:1.5px;
     classDef server fill:#EFF6FF,stroke:#3B82F6,color:#1E3A8A,stroke-width:1.5px;
     classDef core fill:#F8FAFC,stroke:#64748B,color:#0F172A,stroke-width:1.5px;
+    classDef lifecycle fill:#FEF3C7,stroke:#D97706,color:#78350F,stroke-width:2px,font-size:12px;
     classDef memo fill:#FFFBEB,stroke:#F59E0B,color:#78350F,stroke-width:1px,font-size:11px;
 
     subgraph upper[" "]
@@ -23,6 +24,7 @@ flowchart TB
             direction TB
 
             app_layer["アプリケーション層\n機器操作を要求する"]
+            app_lifecycle["通常運用時のライフサイクル連携\n起動・画面作成・復帰：Host自動起動\n停止・終了：KillでHost停止\nStart/Stop画面：デバッグ用途のみ"]
 
             subgraph device_ctrl["デバイス制御層（DeviceCtrl）"]
                 direction TB
@@ -36,6 +38,7 @@ flowchart TB
             end
 
             app_layer -->|"機器操作要求"| device_setup
+            app_layer -.->|"起動・終了制御"| app_lifecycle
             device_setup -->|"直接制御"| direct_control
             device_setup -->|"サーバー経由"| namedpipe_client
         end
@@ -43,7 +46,7 @@ flowchart TB
         subgraph appserver["デバイス接続サーバー（Host）"]
             direction TB
 
-            host_main["デバイスサーバーホスト\n(TabletHost)\n起動・停止を管理する"]
+            host_main["デバイスサーバーホスト\n(TabletHost)\n起動・停止を管理する\nアプリライフサイクルで自動制御"]
             host_adapter["名前付きパイプデバイスホストアダプター\n(NamedPipeDeviceHostAdapter)\n通信を管理する"]
 
             subgraph appserver_core["制御基盤"]
@@ -101,6 +104,7 @@ flowchart TB
     end
 
     namedpipe_client -->|"Host経由"| command_server
+    app_lifecycle ==>|"自動起動／停止要求"| host_main
 
     direct_control --> scanner
     direct_control --> camera
@@ -111,10 +115,11 @@ flowchart TB
     cash_drawer --> cash_drawer_device
     customer_display --> customer_display_device
 
-    memo["＊ 通常運用時は、タブレットPOSアプリのライフサイクルに合わせてデバイス接続サーバー（Host）を自動起動します。Start/Stop画面はデバッグ／開発者向けに限定し、通常運用時には表示しません。\n＊ Host経由は現行POSの対象機器を継続利用するための経路です。機種追加時は原則として直接制御で対応します。\n＊ 自動釣銭機UIスレッドフォーム RT-300 は、内部フォームとしてOPOS/OCXをUIスレッド上で保持し、共有メモリ・要求/応答ファイル連携を処理します。"]
+    memo["＊ 通常運用時は、タブレットPOSアプリのライフサイクルに合わせてデバイス接続サーバー（Host）を自動起動・停止します。Start/Stop画面はデバッグ／開発者向けに限定し、通常運用時には表示しません。\n＊ Host経由は現行POSの対象機器を継続利用するための経路です。機種追加時は原則として直接制御で対応します。\n＊ 自動釣銭機UIスレッドフォーム RT-300 は、内部フォームとしてOPOS/OCXをUIスレッド上で保持し、共有メモリ・要求/応答ファイル連携を処理します。"]
 
     class app_layer,device_setup,namedpipe_client,direct_control,host_main,host_adapter,command_server,command_router,command_handler,device_manager,device_base core;
     class scanner,camera,printer,payment_terminal,cash_changer_device,cash_drawer_device,customer_display_device core;
     class cash_changer,cash_changer_form,cash_drawer,customer_display server;
+    class app_lifecycle lifecycle;
     class memo memo;
 ```

@@ -41,3 +41,10 @@ Verification performed:
 - DOCX rebuilt from markdown.
 - Microsoft Word PDF render produced 12 pages for visual QA because bundled LibreOffice headless was blocked by a missing `little-cms2` dylib.
 - Searches confirmed old terms such as `旧方式`, `KsClient`, `旧DLL`, `TabletPOSPipeMessage`, and `old_dll` were removed from the updated report sources/DOCX.
+
+Follow-up program spec alignment:
+
+- `PS-HOST-05` was updated to state that Host starts automatically with the Tablet POS app lifecycle, user Start operation is not assumed, and Start/Stop UI is debug/developer-only.
+- `PS-HOST-05` removed the old `WindowMessage/Named Pipe transport` wording and keeps `Named Pipe transport`.
+- `PS-HOST-09` was updated to state that `CashChangerByRt300Form` is an internal OPOS/OCX UI-thread form, not a management screen, and is not operated by users in normal operation.
+- Both specs were validated with `program-spec-excel` and rendered to their `output/` workbooks.

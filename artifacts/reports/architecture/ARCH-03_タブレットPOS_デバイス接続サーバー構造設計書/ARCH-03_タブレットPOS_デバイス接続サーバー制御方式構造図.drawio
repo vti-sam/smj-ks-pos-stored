@@ -1,6 +1,6 @@
 <mxfile host="Electron">
   <diagram name="Page-1" id="0">
-    <mxGraphModel dx="1786" dy="1044" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1680" pageHeight="1320" math="0" shadow="0">
+    <mxGraphModel dx="1212" dy="684" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1680" pageHeight="1320" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -31,10 +31,19 @@
         <mxCell id="host_adapter" parent="frame-appserver" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontColor=#1E293B;fillColor=#FFFFFF;strokeColor=#475569;" value="&lt;b&gt;名前付きパイプデバイスホストアダプター&lt;/b&gt;&lt;br&gt;(NamedPipeDeviceHostAdapter)&lt;br&gt;通信を管理する" vertex="1">
           <mxGeometry height="105" width="270" x="620" y="55" as="geometry" />
         </mxCell>
-        <mxCell id="host_main" parent="frame-appserver" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontColor=#1E293B;fillColor=#FFFFFF;strokeColor=#475569;" value="&lt;b&gt;デバイスサーバーホスト&lt;/b&gt;&lt;br&gt;(TabletHost)&lt;br&gt;起動・停止を管理する" vertex="1">
+        <mxCell id="host_main" parent="frame-appserver" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontColor=#1E293B;fillColor=#FFFFFF;strokeColor=#475569;" value="&lt;b&gt;デバイスサーバーホスト&lt;/b&gt;&lt;br&gt;(TabletHost)&lt;br&gt;起動・停止を管理する&lt;br&gt;アプリライフサイクルで自動制御" vertex="1">
           <mxGeometry height="105" width="250" x="310" y="55" as="geometry" />
         </mxCell>
         <mxCell id="e_host_main_to_adapter" edge="1" parent="frame-appserver" source="host_main" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;strokeColor=#475569;strokeWidth=1;labelBackgroundColor=#FFFFFF;labelBorderColor=none;" target="host_adapter" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lifecycle_callout" parent="frame-appserver" style="rounded=1;whiteSpace=wrap;html=1;fontSize=13;fontColor=#78350F;fillColor=#FEF3C7;strokeColor=#D97706;strokeWidth=3;shadow=1;align=left;spacingLeft=12;spacingRight=10;" value="&lt;b&gt;通常運用時のライフサイクル連携&lt;/b&gt;&lt;br&gt;起動・画面作成・復帰：Host自動起動&lt;br&gt;停止・終了：KillでHost停止&lt;br&gt;Start/Stop画面：デバッグ用途のみ" vertex="1">
+          <mxGeometry height="115" width="265" x="-85" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="e_lifecycle_to_host_main" edge="1" parent="frame-appserver" source="lifecycle_callout" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;strokeColor=#D97706;strokeWidth=3;labelBackgroundColor=#FEF3C7;labelBorderColor=none;fontColor=#78350F;" target="host_main" value="自動起動／停止要求">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_app_to_lifecycle" edge="1" parent="1" source="app_layer" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;dashed=1;strokeColor=#D97706;strokeWidth=2;labelBackgroundColor=#FEF3C7;labelBorderColor=none;fontColor=#78350F;" target="lifecycle_callout" value="起動・終了制御">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="frame-appserver_core" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;fontColor=#475569;fillColor=#FFFFFF;strokeColor=#CBD5E1;container=1;recursiveResize=0;collapsible=0;verticalAlign=top;align=center;spacingTop=4;" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;制御基盤&lt;/b&gt;&lt;/font&gt;" vertex="1">
@@ -112,7 +121,7 @@
         <mxCell id="customer_display_device" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontColor=#1E293B;fillColor=#FFFFFF;strokeColor=#475569;" value="カスタマーディスプレイ" vertex="1">
           <mxGeometry height="70" width="195" x="1350" y="1015" as="geometry" />
         </mxCell>
-        <mxCell id="memo" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontColor=#78350F;fillColor=#FFFBEB;strokeColor=#F59E0B;strokeWidth=1;align=left;" value="＊1 通常運用時は、タブレットPOSアプリのライフサイクルに合わせてデバイス接続サーバー（Host）を自動起動します。Start/Stop画面はデバッグ／開発者向けに限定し、通常運用時には表示しません。&lt;br&gt;＊2 Host経由は現行POSの対象機器を継続利用するための経路です。機種追加時は原則として直接制御で対応します。&lt;br&gt;＊3 自動釣銭機UIスレッドフォーム RT-300 は、内部フォームとしてOPOS/OCXをUIスレッド上で保持し、共有メモリ・要求/応答ファイル連携を処理します。" vertex="1">
+        <mxCell id="memo" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontColor=#78350F;fillColor=#FFFBEB;strokeColor=#F59E0B;strokeWidth=1;align=left;" value="＊1 通常運用時は、タブレットPOSアプリのライフサイクルに合わせてデバイス接続サーバー（Host）を自動起動・停止します。Start/Stop画面はデバッグ／開発者向けに限定し、通常運用時には表示しません。&lt;br&gt;＊2 Host経由は現行POSの対象機器を継続利用するための経路です。機種追加時は原則として直接制御で対応します。&lt;br&gt;＊3 自動釣銭機UIスレッドフォーム RT-300 は、内部フォームとしてOPOS/OCXをUIスレッド上で保持し、共有メモリ・要求/応答ファイル連携を処理します。" vertex="1">
           <mxGeometry height="115" width="1500" x="65" y="1165" as="geometry" />
         </mxCell>
         <mxCell id="e_app_to_setup" edge="1" parent="1" source="app_layer" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;strokeColor=#475569;strokeWidth=1;labelBackgroundColor=#FFFFFF;labelBorderColor=none;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" target="device_setup" value="">

@@ -43,16 +43,16 @@
 | 区分 | 可視性 | 型 | 名前 | 用途 |
 | --- | --- | --- | --- | --- |
 | コンストラクタ引数 | internal | IDeviceRegistry | deviceRegistry | DeviceId から IFDevice を検索する依存先。 | src/KsHost/DeviceHost/DeviceCommandCore.cs:80 |
-| コンストラクタ引数 | internal | IProcessInfoStore | processInfoStore | DeviceUse/DeviceUnUse の process info 更新先。 | src/KsHost/DeviceHost/DeviceCommandCore.cs:81 |
+| コンストラクタ引数 | internal | IProcessInfoStore | processInfoStore | DeviceUse/DeviceUnUse のプロセス情報更新先。 | src/KsHost/DeviceHost/DeviceCommandCore.cs:81 |
 
 ## メソッド一覧
 
 | No | 可視性 | 戻り値 | メソッド名 | 概要 |
 | --- | --- | --- | --- | --- |
-| 1 | internal | - | DeviceCommandHandler | registry と process info store を受け取って handler を構成する。 |
-| 2 | public | DeviceCommandResult | Handle | host action、device use/unuse、device method を判定し、対象 IFDevice へ処理を委譲する。 |
-| 3 | private static | DeviceCommandResult | Failure | 検証エラーまたは未対応 command を、legacy key を含む失敗 result に変換する。 |
-| 4 | private static | void | EnsureLegacyReturnKeys | 戻り payload に ResultCode/ReturnValue が無い場合だけ、return value で補完する。 |
+| 1 | internal | - | DeviceCommandHandler | レジストリとプロセス情報ストアを受け取ってハンドラーを構成する。 |
+| 2 | public | DeviceCommandResult | Handle | ホスト制御アクション、デバイス利用開始/終了、デバイスメソッドを判定し、対象 IFDevice へ処理を委譲する。 |
+| 3 | private static | DeviceCommandResult | Failure | 検証エラーまたは未対応コマンドを、既存互換キーを含む失敗結果に変換する。 |
+| 4 | private static | void | EnsureLegacyReturnKeys | 戻りペイロードに ResultCode/ReturnValue が無い場合だけ、戻り値で補完する。 |
 
 ## メソッド詳細
 
@@ -74,8 +74,8 @@
 処理内容:
 
 - ① IDeviceRegistry を保持し、DeviceId から IFDevice を検索できるようにする。
-- ② IProcessInfoStore を保持し、DeviceUse/DeviceUnUse の legacy process info 更新先にする。
-- ③ Handle 実行時はこの2つの依存先だけを通して device と process info を操作する。
+- ② IProcessInfoStore を保持し、DeviceUse/DeviceUnUse の既存互換プロセス情報更新先にする。
+- ③ Handle 実行時はこの2つの依存先だけを通してデバイスとプロセス情報を操作する。
 
 備考: -
 
@@ -95,12 +95,12 @@
 
 処理内容:
 
-- ① command が null の場合は ArgumentNullException を送出する。
-- ② Kill/ReStart は host action を設定して即時返却する。
-- ③ DeviceId 未指定または device 未登録の場合は Failure を返す。
-- ④ DeviceUse/DeviceUnUse/DeviceUnUseComplete では process info を更新し、対象 device の use/unuse を呼ぶ。
+- ① コマンドが null の場合は ArgumentNullException を送出する。
+- ② Kill/ReStart はホスト制御アクションを設定して即時返却する。
+- ③ DeviceId 未指定またはデバイス未登録の場合は Failure を返す。
+- ④ DeviceUse/DeviceUnUse/DeviceUnUseComplete ではプロセス情報を更新し、対象デバイスの use/unuse を呼ぶ。
 - ⑤ DeviceMethod では MethodId を必須確認し、対象 device の DeviceMethod を呼ぶ。
-- ⑥ 戻り値、成功判定、payload を result に設定し、legacy key を補完する。
+- ⑥ 戻り値、成功判定、ペイロードを結果に設定し、既存互換キーを補完する。
 
 備考: -
 
@@ -121,9 +121,9 @@
 
 処理内容:
 
-- ① command から request/device/method/handle 情報を可能な範囲で引き継ぐ。
+- ① コマンドから要求/デバイス/メソッド/ハンドル情報を可能な範囲で引き継ぐ。
 - ② Success=false、ReturnValue=-1、Message=エラー内容を設定する。
-- ③ Payload に ResultCode=-1 と ReturnValue=-1 を入れ、legacy response と互換にする。
+- ③ Payload に ResultCode=-1 と ReturnValue=-1 を入れ、既存形式応答と互換にする。
 
 備考: -
 
@@ -144,17 +144,17 @@
 
 処理内容:
 
-- ① payload に ResultCode が無い場合は returnValue を文字列化して追加する。
-- ② payload に ReturnValue が無い場合も同じ returnValue を追加する。
-- ③ 既に設定済みの key は上書きしない。
+- ① ペイロードに ResultCode が無い場合は戻り値を文字列化して追加する。
+- ② ペイロードに ReturnValue が無い場合も同じ戻り値を追加する。
+- ③ 既に設定済みのキーは上書きしない。
 
 備考: -
 ## 処理フロー/注意事項
 
-- Handle が message 種別を判定する。
+- Handle がメッセージ種別を判定する。
 - deviceRegistry から対象 IFDevice を取得する。
-- 実行結果を DeviceCommandResult と legacy payload key へ反映する。
+- 実行結果を DeviceCommandResult と既存互換ペイロードキーへ反映する。
 
 ### 注意事項
 
-- 同一ファイル内の `DeviceCommand`、`DeviceCommandResult`、`DeviceManagerRegistry`、`LegacyProcessInfoStore` は関連 DTO/adapter として参照する。
+- 同一ファイル内の `DeviceCommand`、`DeviceCommandResult`、`DeviceManagerRegistry`、`LegacyProcessInfoStore` は関連 DTO/アダプターとして参照する。

@@ -42,12 +42,12 @@
 
 | 区分 | 可視性 | 型 | 名前 | 用途 |
 | --- | --- | --- | --- | --- |
-| フィールド | private | IFSettingDevice | _deviceSetting | 起動対象デバイス一覧と device instance 生成を提供する設定インスタンス。 |
-| フィールド | private | IFDeviceReply | _deviceReply | デバイス処理結果を host transport へ返却するための reply 先。 |
-| フィールド | private | bool | _stopFlg | device manager の監視ループを終了させる停止フラグ。 |
-| フィールド | private | KsDeviceManager | _singleton | device manager singleton instance。 |
+| フィールド | private | IFSettingDevice | _deviceSetting | 起動対象デバイス一覧とデバイスインスタンス生成を提供する設定インスタンス。 |
+| フィールド | private | IFDeviceReply | _deviceReply | デバイス処理結果を Host 通信部へ返却するための応答先。 |
+| フィールド | private | bool | _stopFlg | デバイス管理部の監視ループを終了させる停止フラグ。 |
+| フィールド | private | KsDeviceManager | _singleton | デバイス管理部のシングルトンインスタンス。 |
 | フィールド | private | List<IFDevice> | _deviceList | 起動済み IFDevice の保持リスト。 |
-| プロパティ | public | IReadOnlyList<IFDevice> | Devices | 起動済みデバイスの読み取り専用 snapshot。 |
+| プロパティ | public | IReadOnlyList<IFDevice> | Devices | 起動済みデバイスの読み取り専用スナップショット。 |
 
 ## メソッド一覧
 
@@ -56,9 +56,9 @@
 | 1 | private | - | KsDeviceManager | インスタンスコンストラクタ |
 | 2 | public | KsDeviceManager | GetInstance | Singleton インスタンスを返却する。 |
 | 3 | public | void | StartDeviceManager | 設定から対象デバイスを生成し、起動後は停止要求まで keep-alive 監視ループを維持する。 |
-| 4 | public | void | StopDeviceManager | 停止フラグを立て、保持中の全デバイスへ StopDevice を呼び出して list を空にする。 |
-| 5 | public | IFDevice | FindDevice | 起動済みデバイス list から DeviceId が一致する IFDevice を返す。 |
-| 6 | public | void | ReplyDevice | legacy process info の client/handle/method を使い、ホストの ReplyDevice へ応答を渡す。 |
+| 4 | public | void | StopDeviceManager | 停止フラグを立て、保持中の全デバイスへ StopDevice を呼び出してリストを空にする。 |
+| 5 | public | IFDevice | FindDevice | 起動済みデバイスリストから DeviceId が一致する IFDevice を返す。 |
+| 6 | public | void | ReplyDevice | 既存互換プロセス情報のクライアント/ハンドル/メソッドを使い、Host の ReplyDevice へ応答を渡す。 |
 
 ## メソッド詳細
 
@@ -72,9 +72,9 @@
 
 処理内容:
 
-- ① private constructor として生成経路を singleton に限定する。
-- ② 生成された instance を _singleton に設定する。
-- ③ GetInstance から同一 instance を返却できる状態にする。
+- ① private constructor として生成経路をシングルトンに限定する。
+- ② 生成されたインスタンスを _singleton に設定する。
+- ③ GetInstance から同一インスタンスを返却できる状態にする。
 
 備考: -
 
@@ -89,8 +89,8 @@
 処理内容:
 
 - ① 現在保持している _singleton を参照する。
-- ② 新規生成は行わず、初期化済み device manager instance を返す。
-- ③ 呼出元は返却 instance 経由で device start/stop/find を実行する。
+- ② 新規生成は行わず、初期化済みデバイス管理部インスタンスを返す。
+- ③ 呼出元は返却インスタンス経由でデバイスの開始/停止/検索を実行する。
 
 備考: -
 
@@ -112,8 +112,8 @@
 処理内容:
 
 - ① 停止フラグを false にし、設定と応答先を保持する。
-- ② 設定から起動対象 DeviceId list を取得する。
-- ③ 各 device を最大3回まで生成・StartDevice し、成功したものを list に追加する。
+- ② 設定から起動対象 DeviceId リストを取得する。
+- ③ 各デバイスを最大3回まで生成・StartDevice し、成功したものをリストに追加する。
 - ④ 停止要求まで 10ms 間隔で DoEvents し、60秒ごとに MSR/CashChanger の keep-alive を確認する。
 - ⑤ 30秒以上応答がない対象は状態監視ログへ出力する。
 
@@ -130,8 +130,8 @@
 処理内容:
 
 - ① 停止フラグを true にする。
-- ② list 内の各 IFDevice へ StopDevice を呼ぶ。
-- ③ device list を clear する。
+- ② リスト内の各 IFDevice へ StopDevice を呼ぶ。
+- ③ デバイスリストをクリアする。
 
 備考: -
 
@@ -151,9 +151,9 @@
 
 処理内容:
 
-- ① 起動済み device list を走査する。
-- ② 指定された KsDeviceId と一致する device を検索する。
-- ③ 該当 device が存在する場合は返却し、存在しない場合は null を返す。
+- ① 起動済みデバイスリストを走査する。
+- ② 指定された KsDeviceId と一致するデバイスを検索する。
+- ③ 該当デバイスが存在する場合は返却し、存在しない場合は null を返す。
 
 備考: -
 
@@ -174,17 +174,17 @@
 
 処理内容:
 
-- ① KsProcessInfo と戻り値 dictionary を受け取る。
+- ① KsProcessInfo と戻り値辞書を受け取る。
 - ② proc から client、deviceId、methodId、handle を取得する。
-- ③ _deviceReply.ReplyDevice に委譲し、client へ device 処理結果を返却する。
+- ③ _deviceReply.ReplyDevice に委譲し、クライアントへデバイス処理結果を返却する。
 
 備考: -
 ## 処理フロー/注意事項
 
-- StartDeviceManager が device list を構築し、停止フラグまで監視ループを維持する。
-- StopDeviceManager が全デバイス StopDevice を実行して list をクリアする。
-- FindDevice が command handler からの検索口になる。
+- StartDeviceManager がデバイスリストを構築し、停止フラグまで監視ループを維持する。
+- StopDeviceManager が全デバイス StopDevice を実行してリストをクリアする。
+- FindDevice がコマンド処理ハンドラーからの検索口になる。
 
 ### 注意事項
 
-- `Devices` は内部 list の配列コピーを返す。
+- `Devices` は内部リストの配列コピーを返す。
