@@ -16,10 +16,10 @@
         <mxCell id="pos_app" value="POSアプリ&lt;br&gt;機器操作を依頼する" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=0;fontColor=#1E293B;fillColor=#FFFFFF;strokeColor=#475569;" vertex="1" parent="app">
   <mxGeometry x="28" y="50" width="180" height="86" as="geometry" />
 </mxCell>
-        <mxCell id="tabletclient_removed" value="TabletClient&lt;br&gt;旧方式の中継DLL&lt;br&gt;削除済み" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=0;fontColor=#991B1B;fillColor=#FEF2F2;strokeColor=#EF4444;strokeWidth=2;" vertex="1" parent="app">
+        <mxCell id="tabletclient_removed" value="ライフサイクル管理&lt;br&gt;Hostを自動起動・停止" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=0;fontColor=#1E293B;fillColor=#FFFFFF;strokeColor=#475569;strokeWidth=2;" vertex="1" parent="app">
   <mxGeometry x="244" y="50" width="290" height="86" as="geometry" />
 </mxCell>
-        <mxCell id="device_ctrl" value="DeviceCtrl" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=1;fontColor=#334155;fillColor=#FFFFFF;strokeColor=#94A3B8;container=1;recursiveResize=0;collapsible=0;" vertex="1" parent="terminal">
+        <mxCell id="device_ctrl" value="デバイス制御層（DeviceCtrl）" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=1;fontColor=#334155;fillColor=#FFFFFF;strokeColor=#94A3B8;container=1;recursiveResize=0;collapsible=0;" vertex="1" parent="terminal">
   <mxGeometry x="618" y="50" width="635" height="190" as="geometry" />
 </mxCell>
         <mxCell id="device_setup" value="DeviceManager / 設定 / 生成&lt;br&gt;利用機器と制御方式を決定する" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=0;fontColor=#1E293B;fillColor=#FFFFFF;strokeColor=#475569;" vertex="1" parent="device_ctrl">
@@ -28,28 +28,28 @@
         <mxCell id="namedpipe_client" value="Named Pipeクライアント&lt;br&gt;Hostへ要求を送信する" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=0;fontColor=#1E293B;fillColor=#FFFFFF;strokeColor=#475569;" vertex="1" parent="device_ctrl">
   <mxGeometry x="374" y="50" width="235" height="86" as="geometry" />
 </mxCell>
-        <mxCell id="host" value="TabetPos.Host" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=1;fontColor=#334155;fillColor=#FFFFFF;strokeColor=#94A3B8;container=1;recursiveResize=0;collapsible=0;" vertex="1" parent="architecture">
+        <mxCell id="host" value="コネクタサーバー（Host）" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=1;fontColor=#334155;fillColor=#FFFFFF;strokeColor=#94A3B8;container=1;recursiveResize=0;collapsible=0;" vertex="1" parent="architecture">
   <mxGeometry x="1240" y="55" width="1922" height="210" as="geometry" />
 </mxCell>
-        <mxCell id="app_server" value="AppServer&lt;br&gt;Hostの起動・停止を管理する" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=0;fontColor=#1E293B;fillColor=#FFFFFF;strokeColor=#475569;" vertex="1" parent="host">
+        <mxCell id="app_server" value="AppServer&lt;br&gt;Hostを起動する" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=0;fontColor=#1E293B;fillColor=#FFFFFF;strokeColor=#475569;" vertex="1" parent="host">
   <mxGeometry x="28" y="50" width="305" height="86" as="geometry" />
 </mxCell>
-        <mxCell id="app_stop" value="AppStopServer&lt;br&gt;外部からHost停止を依頼する" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=0;fontColor=#1E293B;fillColor=#FFFFFF;strokeColor=#475569;" vertex="1" parent="host">
+        <mxCell id="app_stop" value="AppStopServer&lt;br&gt;Host停止を依頼する" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=0;fontColor=#1E293B;fillColor=#FFFFFF;strokeColor=#475569;" vertex="1" parent="host">
   <mxGeometry x="361" y="50" width="205" height="86" as="geometry" />
 </mxCell>
-        <mxCell id="tablethost" value="Host制御&lt;br&gt;ライフサイクルと通信を管理する" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=0;fontColor=#1E293B;fillColor=#FFFFFF;strokeColor=#475569;" vertex="1" parent="host">
+        <mxCell id="tablethost" value="TabletHost&lt;br&gt;ライフサイクルと通信を管理する" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=0;fontColor=#1E293B;fillColor=#FFFFFF;strokeColor=#475569;" vertex="1" parent="host">
   <mxGeometry x="598" y="50" width="300" height="86" as="geometry" />
 </mxCell>
         <mxCell id="command_flow" value="Command受付・振分&lt;br&gt;要求を処理する" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=0;fontColor=#1E293B;fillColor=#FFFFFF;strokeColor=#475569;" vertex="1" parent="host">
   <mxGeometry x="934" y="50" width="330" height="86" as="geometry" />
 </mxCell>
-        <mxCell id="device_runtime" value="Host設定・機器管理&lt;br&gt;機器を生成し実行する" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=0;fontColor=#1E293B;fillColor=#FFFFFF;strokeColor=#475569;" vertex="1" parent="host">
+        <mxCell id="device_runtime" value="サーバー設定・機器管理&lt;br&gt;機器を生成し実行する" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=0;fontColor=#1E293B;fillColor=#FFFFFF;strokeColor=#475569;" vertex="1" parent="host">
   <mxGeometry x="1300" y="50" width="330" height="86" as="geometry" />
 </mxCell>
-        <mxCell id="legacy_devices" value="既存デバイス実装&lt;br&gt;釣銭機・ドロア・客面表示器" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=0;fontColor=#1E293B;fillColor=#FFFFFF;strokeColor=#475569;" vertex="1" parent="host">
+        <mxCell id="legacy_devices" value="既存デバイス資源&lt;br&gt;釣銭機・ドロア・客面表示器" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=0;fontColor=#1E293B;fillColor=#FFFFFF;strokeColor=#475569;" vertex="1" parent="host">
   <mxGeometry x="1666" y="50" width="320" height="86" as="geometry" />
 </mxCell>
-        <mxCell id="edge_1_tabletclient_removed_namedpipe_client" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;strokeColor=#EF4444;strokeWidth=1;dashed=1;dashPattern=8 6;fontColor=#991B1B;" edge="1" parent="1" source="tabletclient_removed" target="namedpipe_client">
+        <mxCell id="edge_1_lifecycle_appserver" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;strokeColor=#475569;strokeWidth=1;fontColor=#475569;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="tabletclient_removed" target="app_server">
   <mxGeometry relative="1" as="geometry" />
 </mxCell>
         <mxCell id="edge_2_app_server_tablethost" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;strokeColor=#475569;strokeWidth=1;" edge="1" parent="1" source="app_server" target="tablethost">
@@ -76,7 +76,7 @@
         <mxCell id="edge_9_namedpipe_client_command_flow" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;strokeColor=#475569;strokeWidth=1;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="namedpipe_client" target="command_flow" value="機器利用要求">
   <mxGeometry relative="1" as="geometry" />
 </mxCell>
-        <mxCell id="edge_10_command_flow_namedpipe_client" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;strokeColor=#EF4444;strokeWidth=1;dashed=1;dashPattern=8 6;fontColor=#991B1B;" edge="1" parent="1" source="command_flow" target="namedpipe_client">
+        <mxCell id="edge_10_command_flow_namedpipe_client" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;strokeColor=#475569;strokeWidth=1;fontColor=#475569;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="command_flow" target="namedpipe_client">
   <mxGeometry relative="1" as="geometry" />
 </mxCell>
       </root>

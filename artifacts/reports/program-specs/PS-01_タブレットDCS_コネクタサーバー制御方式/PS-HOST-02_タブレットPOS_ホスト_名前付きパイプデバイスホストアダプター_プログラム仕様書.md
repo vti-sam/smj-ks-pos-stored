@@ -14,8 +14,8 @@
 | 文書ID | PS-HOST-02 |
 | プロジェクト名 | タブレットPOS |
 | 機能名 | 名前付きパイプデバイスホストアダプター |
-| 物理クラス名 | NamedPipeDeviceHostAdapter |
-| 名前空間 | KsOutProcess.KsDeviceServer |
+| 物理クラス名 | NamedPipeConnectionAdapter |
+| 名前空間 | TabletOutProcess.TabletDeviceServer |
 | アクセス修飾子 | internal sealed |
 | 継承/実装 | IDisposable |
 | 更新日 | 2026/06/21 |
@@ -24,8 +24,8 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/KsPosBoilerplate/TabetPos.Host/src/KsHost/DeviceHost/NamedPipeDeviceHostAdapter.cs |
-| 対象クラス | NamedPipeDeviceHostAdapter |
+| ソースファイル | sources/tabletposboilerplate/TabetPos.Host/src/TabletHost/DeviceHost/NamedPipeDeviceHostAdapter.cs |
+| 対象クラス | NamedPipeConnectionAdapter |
 | 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 
 ## クラス概要
@@ -57,9 +57,9 @@
 
 | No | 可視性 | 戻り値 | メソッド名 | 概要 |
 | --- | --- | --- | --- | --- |
-| 1 | public | - | NamedPipeDeviceHostAdapter | インスタンスを初期化する。 |
-| 2 | internal | - | NamedPipeDeviceHostAdapter | インスタンスを初期化する。 |
-| 3 | internal | - | NamedPipeDeviceHostAdapter | インスタンスを初期化する。 |
+| 1 | public | - | NamedPipeConnectionAdapter | インスタンスを初期化する。 |
+| 2 | internal | - | NamedPipeConnectionAdapter | インスタンスを初期化する。 |
+| 3 | internal | - | NamedPipeConnectionAdapter | インスタンスを初期化する。 |
 | 4 | public | void | Start | コマンドルーター、イベント送信用 publisher、コマンド受信用サーバーを準備し、Named Pipe 通信を開始する。 |
 | 5 | public | void | Dispose | コマンド受信用サーバー、ルーター、イベント送信用 publisher を停止・破棄し、再開始可能な状態へ戻す。 |
 | 6 | public | void | PublishDeviceReply | デバイス側の非同期応答をイベント用 NamedPipeDeviceEvent に変換して送信する。 |
@@ -67,11 +67,11 @@
 
 ## メソッド詳細
 
-### 1. NamedPipeDeviceHostAdapter
+### 1. NamedPipeConnectionAdapter
 
 | 項目 | 内容 |
 | --- | --- |
-| シグネチャ | `public NamedPipeDeviceHostAdapter( IDeviceCommandHandler commandHandler, Action<DeviceHostAction> hostActionHandler)` |
+| シグネチャ | `public NamedPipeConnectionAdapter( IDeviceCommandHandler commandHandler, Action<DeviceHostAction> hostActionHandler)` |
 | 可視性 | public |
 | 戻り値 | - |
 
@@ -90,11 +90,11 @@
 
 備考: -
 
-### 2. NamedPipeDeviceHostAdapter
+### 2. NamedPipeConnectionAdapter
 
 | 項目 | 内容 |
 | --- | --- |
-| シグネチャ | `internal NamedPipeDeviceHostAdapter( IDeviceCommandHandler commandHandler, Action<DeviceHostAction> hostActionHandler, INamedPipeCommandMapper commandMapper)` |
+| シグネチャ | `internal NamedPipeConnectionAdapter( IDeviceCommandHandler commandHandler, Action<DeviceHostAction> hostActionHandler, INamedPipeCommandMapper commandMapper)` |
 | 可視性 | internal |
 | 戻り値 | - |
 
@@ -114,11 +114,11 @@
 
 備考: -
 
-### 3. NamedPipeDeviceHostAdapter
+### 3. NamedPipeConnectionAdapter
 
 | 項目 | 内容 |
 | --- | --- |
-| シグネチャ | `internal NamedPipeDeviceHostAdapter( IDeviceCommandHandler commandHandler, Action<DeviceHostAction> hostActionHandler, INamedPipeCommandMapper commandMapper, string commandPipeName, string eventPipeName)` |
+| シグネチャ | `internal NamedPipeConnectionAdapter( IDeviceCommandHandler commandHandler, Action<DeviceHostAction> hostActionHandler, INamedPipeCommandMapper commandMapper, string commandPipeName, string eventPipeName)` |
 | 可視性 | internal |
 | 戻り値 | - |
 
@@ -176,7 +176,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| シグネチャ | `public void PublishDeviceReply(KsDeviceId deviceId, KsDeviceMethodID methodId, IntPtr handle, Dictionary<string, string> payload)` |
+| シグネチャ | `public void PublishDeviceReply(TabletDeviceId deviceId, TabletDeviceMethodID methodId, IntPtr handle, Dictionary<string, string> payload)` |
 | 可視性 | public |
 | 戻り値 | void |
 
@@ -184,8 +184,8 @@
 
 | 型 | 論理名 | 物理名 |
 | --- | --- | --- |
-| KsDeviceId | デバイスID | deviceId |
-| KsDeviceMethodID | デバイスメソッドID | methodId |
+| TabletDeviceId | デバイスID | deviceId |
+| TabletDeviceMethodID | デバイスメソッドID | methodId |
 | IntPtr | ウィンドウハンドル | handle |
 | Dictionary<string, string> | ペイロード | payload |
 

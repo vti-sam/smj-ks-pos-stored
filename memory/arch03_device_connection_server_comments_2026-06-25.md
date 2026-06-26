@@ -47,4 +47,6 @@ Follow-up program spec alignment:
 - `PS-HOST-05` was updated to state that Host starts automatically with the Tablet POS app lifecycle, user Start operation is not assumed, and Start/Stop UI is debug/developer-only.
 - `PS-HOST-05` removed the old `WindowMessage/Named Pipe transport` wording and keeps `Named Pipe transport`.
 - `PS-HOST-09` was updated to state that `CashChangerByRt300Form` is an internal OPOS/OCX UI-thread form, not a management screen, and is not operated by users in normal operation.
-- Both specs were validated with `program-spec-excel` and rendered to their `output/` workbooks.
+- `PS-HOST-08`, `PS-HOST-10`, and `PS-HOST-11` were updated so `StartDevice` describes internal form setup and display controlled by internal form settings, instead of simply saying the form is displayed.
+- `PS-HOST-09` method list wording was tightened from screen display judgment to internal form display availability judgment.
+- Affected specs were validated with `program-spec-excel` and rendered to their `output/` workbooks.

@@ -16,6 +16,8 @@ tmp/
 temp/
 output/
 **/output/
+draft/
+**/draft/
 *.tmp
 *.bak
 *.orig

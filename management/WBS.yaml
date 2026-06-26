@@ -4,619 +4,1221 @@ meta:
   sheet: WBS / WBS
   source_of_truth: google_sheets
   read_only_export: true
-  generated_at: '2026-06-21T00:32:41+09:00'
+  generated_at: '2026-06-25T17:38:25+09:00'
 records:
-- id: S-424
-  customer_task_id: KSNEWSYS-424
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-541
-  type: スコープ項目
-  title: KSNEWSYS-424 Device/Receiptレガシー資産のC#化とStrategy構成
-  description: Device/Receiptに関連するVB/OCXレガシー資産を、次世代Tablet POS向けのStrategy/Adapter構成へ移行します。
+- id: EST-000
+  customer_task_id: ''
+  vti_backlog_id: ''
+  type: 見積サマリ
+  title: 5月〜7月 見積ガント全体
+  description: 本シートは詳細WBSではなく、5月から7月末までの見積対象、成果物、レビュー期間をGantt形式で見える化するための見積スケジュールです。
   owner: VTI_SAM
-  start_date: '2026-05-21'
-  end_date: ''
-  deadline: '2026-06-30'
-  status: In Progress
-  priority: High
-  definition_of_done: 詳細設計、Device Adapter、Receipt/Journal Adapter、Unit Test、テストケース資料、デバイス機能確認が揃っていること。代表的な呼び出しがStrategy/Adapter経由で動作し、ログ／例外方針とテスト証跡をレビューできること。
-  risk_id: R-001, R-002
-  notes: '見積: 6.10MM。raw/次世代KSPOS_見積詳細_202605.md からのマッピング。'
-  notes_vi: C# hóa Device/Receipt legacy và cấu trúc Strategy
-- id: S-426
-  customer_task_id: KSNEWSYS-426
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-542
-  type: スコープ項目
-  title: KSNEWSYS-426 ターミナルアプリ向けログ出力基盤
-  description: Sentry、ローカル操作ログ、BaseViewModelからの自動ログ出力の仕組みを準備します。
-  owner: VTI_SAM
-  start_date: '2026-05-21'
-  end_date: ''
-  deadline: '2026-06-30'
-  status: In Progress
-  priority: High
-  definition_of_done: ログ基盤、Sentry設定、操作ログ仕様、APIログ連携点、利用ルールが揃っていること。Error/Warn/Info/Debugの方針、ローカルログ／Sentry確認、マスキング方針を確認できること。
-  risk_id: R-006, R-007, R-008, R-009
-  notes: '見積: 0.90MM。raw/次世代KSPOS_見積詳細_202605.md からのマッピング。'
-  notes_vi: Chuẩn bị nền tảng logging/Sentry cho terminal app
-- id: S-427
-  customer_task_id: KSNEWSYS-427
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-543
-  type: スコープ項目
-  title: KSNEWSYS-427 ターミナルアプリ向けローカル保存・復元基盤
-  description: 画面実装者の負担を減らすため、保存／復元の共通基盤を準備します。
-  owner: VTI_SAM
-  start_date: '2026-05-21'
-  end_date: ''
-  deadline: '2026-06-30'
-  status: In Progress
-  priority: High
-  definition_of_done: Storage service、restore hook、動作方針、テスト観点、実装ルールが揃っていること。代表画面で共通hookを使った保存／復元ができ、未保存データや破損データへの最低限の扱いがあること。
-  risk_id: R-010
-  notes: '見積: 0.90MM。raw/次世代KSPOS_見積詳細_202605.md からのマッピング。'
-  notes_vi: Chuẩn bị nền tảng lưu và khôi phục local cho terminal app
-- id: S-COM
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-544
-  type: スコープ項目
-  title: 共通管理・調整・レビュー対応
-  description: お客様確認、仕様調整、レビュー対応、関連する小規模タスクを共通管理します。
-  owner: VTI_SAM
-  start_date: '2026-05-21'
+  start_date: '2026-05-01'
   end_date: ''
   deadline: '2026-07-31'
   status: In Progress
-  priority: Medium
-  definition_of_done: 議事メモ、Q&A、進捗／リスク管理、軽微な修正が管理されていること。課題、決定事項、リスクを短い周期で追跡し、大きなスコープ超過がない範囲で調整できていること。
+  priority: High
+  definition_of_done: 見積範囲、成果物、確認観点が整理され、お客様がスケジュールと対象範囲を確認できること。
   risk_id: R-003, R-004, R-005
-  notes: '見積: 0.50MM。raw/次世代KSPOS_見積詳細_202605.md からのマッピング。'
-  notes_vi: Quản lý chung, điều chỉnh và phản hồi review
-- id: OI-001
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-545
-  type: 依存関係
-  title: KSNEWSYS-424対象資産・デバイス・OCXの確認
-  description: 6月の手戻りを抑えるため、対象資産とIF/Adapter境界を早期に確定します。
+  notes: ''
+  notes_vi: Tổng thể estimate gantt từ đầu tháng 5 đến cuối tháng 7
+- id: EST-SCOPE-01
+  customer_task_id: ''
+  vti_backlog_id: ''
+  type: 見積サマリ
+  title: 対象範囲・前提条件整理
+  description: KSNEWSYS-424、426、427を中心に、コード移行、資料化、レビュー対応、軽微な関連作業を見積対象として整理します。
   owner: VTI_SAM
-  start_date: '2026-05-21'
+  start_date: '2026-05-01'
   end_date: ''
   deadline: '2026-05-31'
-  status: Open
+  status: In Progress
   priority: High
-  risk_id: R-001, R-002
-  notes: '作成日: 2026-05-21。関連項目: S-424, R-001, R-002。お客様との確認が必要です。'
-  notes_vi: Chốt target asset/device/OCX cho KSNEWSYS-424
-- id: OI-002
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-546
-  type: 依存関係
-  title: 7月のUAT・レビュー期間確認
-  description: 2026-07-15までにUAT期間と代表デバイス／環境を確認します。
+  definition_of_done: 見積範囲、成果物、確認観点が整理され、お客様がスケジュールと対象範囲を確認できること。
+  risk_id: ''
+  notes: ''
+  notes_vi: Làm rõ phạm vi và giả định estimate
+- id: EST-SCOPE-02
+  customer_task_id: ''
+  vti_backlog_id: ''
+  type: 見積サマリ
+  title: コード移行作業の見積整理
+  description: 既存VB/OCX資産、Device Connection Server、ローカル状態管理、監視ログ基盤を小さい作業単位で整理します。
   owner: VTI_SAM
-  start_date: '2026-05-21'
+  start_date: '2026-05-01'
   end_date: ''
-  deadline: '2026-07-01'
+  deadline: '2026-06-30'
+  status: In Progress
+  priority: High
+  definition_of_done: 見積範囲、成果物、確認観点が整理され、お客様がスケジュールと対象範囲を確認できること。
+  risk_id: ''
+  notes: ''
+  notes_vi: Tổng hợp estimate cho các mục migration code
+- id: EST-SCOPE-03
+  customer_task_id: ''
+  vti_backlog_id: ''
+  type: 見積サマリ
+  title: 資料作成作業の見積整理
+  description: report配下の構造設計書、設定要領、プログラム仕様書、テストケースを1文書1行で整理します。
+  owner: VTI_SAM
+  start_date: '2026-05-15'
+  end_date: ''
+  deadline: '2026-07-31'
+  status: In Progress
+  priority: High
+  definition_of_done: 見積範囲、成果物、確認観点が整理され、お客様がスケジュールと対象範囲を確認できること。
+  risk_id: ''
+  notes: ''
+  notes_vi: Tổng hợp estimate tạo tài liệu theo từng document
+- id: EST-REVIEW-01
+  customer_task_id: ''
+  vti_backlog_id: ''
+  type: レビュー・調整
+  title: お客様レビュー・調整期間
+  description: 7月末までのレビュー、Q&A、軽微修正、スコープ確認を見積期間に含めます。
+  owner: VTI_SAM
+  start_date: '2026-07-01'
+  end_date: ''
+  deadline: '2026-07-31'
   status: Not Started
   priority: High
-  risk_id: R-004
-  notes: '作成日: 2026-05-21。関連項目: R-004, MS-003, MS-004。お客様との確認が必要です。'
-  notes_vi: Xác nhận window UAT/review tháng 7
-- id: OI-003
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-547
-  type: 確認
-  title: KSNEWSYS-426 Sentryレビュー
-  description: Sentry基盤コードとプログラム仕様書は準備済みです。基本設計、クラス設計、監視フローについてお客様レビューと合意を待っています。
+  definition_of_done: 見積範囲、成果物、確認観点が整理され、お客様がスケジュールと対象範囲を確認できること。
+  risk_id: R-004, R-005
+  notes: ''
+  notes_vi: Giai đoạn review/chỉnh nhẹ với KH đến cuối tháng 7
+- id: EST-CODE-HOST-01
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: ''
+  type: コード移行
+  title: 名前付きパイプコマンドサーバー移行
+  description: Named Pipe経由で端末アプリとデバイス接続サーバーを接続するコマンド受付部を整理します。
   owner: VTI_SAM
-  start_date: '2026-05-23'
+  start_date: '2026-05-01'
   end_date: ''
-  deadline: '2026-05-31'
-  status: Awaiting Customer Review
+  deadline: '2026-06-20'
+  status: In Progress
   priority: High
-  risk_id: R-006, R-007, R-008, R-009
-  notes: Basic Design資料はJNT標準Excelテンプレートに合わせてVTIが更新中です。Sentry Team Licenseの案内手順は5月18日に送付済みです。
-  notes_vi: Chờ KH review/chốt thiết kế Sentry
-- id: OI-004
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-548
-  type: 確認
-  title: コスト・スコープベースライン管理
-  description: 8.00MM提示／8.40MM計算の範囲外となるスコープ変更が発生しないかを追跡します。
+  definition_of_done: 対象コードの移行方針、代表処理、単体確認観点、資料化対象が整理され、見積上の作業範囲として確認できること。
+  risk_id: R-001, R-002
+  notes: コードは概ね実装済み。5月〜7月の見積上は確認、資料化、レビュー反映を含めて表現する。
+  notes_vi: Named Pipe command server migration
+- id: EST-CODE-HOST-02
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: ''
+  type: コード移行
+  title: 名前付きパイプデバイスホストアダプター移行
+  description: 端末アプリ側からデバイスホストへ接続するAdapter境界を整理します。
   owner: VTI_SAM
-  start_date: '2026-05-21'
+  start_date: '2026-05-01'
+  end_date: ''
+  deadline: '2026-06-20'
+  status: In Progress
+  priority: High
+  definition_of_done: 対象コードの移行方針、代表処理、単体確認観点、資料化対象が整理され、見積上の作業範囲として確認できること。
+  risk_id: R-001, R-002
+  notes: コードは概ね実装済み。5月〜7月の見積上は確認、資料化、レビュー反映を含めて表現する。
+  notes_vi: Device host adapter migration
+- id: EST-CODE-HOST-03
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: ''
+  type: コード移行
+  title: デバイスコマンドルーター移行
+  description: デバイス単位のコマンドキューと非同期処理経路を整理します。
+  owner: VTI_SAM
+  start_date: '2026-05-06'
+  end_date: ''
+  deadline: '2026-06-24'
+  status: In Progress
+  priority: High
+  definition_of_done: 対象コードの移行方針、代表処理、単体確認観点、資料化対象が整理され、見積上の作業範囲として確認できること。
+  risk_id: R-001, R-002
+  notes: コードは概ね実装済み。5月〜7月の見積上は確認、資料化、レビュー反映を含めて表現する。
+  notes_vi: Device command router migration
+- id: EST-CODE-HOST-04
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: ''
+  type: コード移行
+  title: デバイスコマンドハンドラー移行
+  description: Start/Stop/Method実行などのコマンド解釈と結果返却を整理します。
+  owner: VTI_SAM
+  start_date: '2026-05-06'
+  end_date: ''
+  deadline: '2026-06-24'
+  status: In Progress
+  priority: High
+  definition_of_done: 対象コードの移行方針、代表処理、単体確認観点、資料化対象が整理され、見積上の作業範囲として確認できること。
+  risk_id: R-001, R-002
+  notes: コードは概ね実装済み。5月〜7月の見積上は確認、資料化、レビュー反映を含めて表現する。
+  notes_vi: Device command handler migration
+- id: EST-CODE-HOST-05
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: ''
+  type: コード移行
+  title: デバイスサーバーホスト移行
+  description: Device Connection Serverの起動、停止、接続Adapter制御を整理します。
+  owner: VTI_SAM
+  start_date: '2026-05-12'
+  end_date: ''
+  deadline: '2026-06-26'
+  status: In Progress
+  priority: High
+  definition_of_done: 対象コードの移行方針、代表処理、単体確認観点、資料化対象が整理され、見積上の作業範囲として確認できること。
+  risk_id: R-001, R-002
+  notes: コードは概ね実装済み。5月〜7月の見積上は確認、資料化、レビュー反映を含めて表現する。
+  notes_vi: Device server host migration
+- id: EST-CODE-HOST-06
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: ''
+  type: コード移行
+  title: デバイスマネージャー移行
+  description: 対象デバイスの登録、状態管理、呼び出し制御を整理します。
+  owner: VTI_SAM
+  start_date: '2026-05-12'
+  end_date: ''
+  deadline: '2026-06-26'
+  status: In Progress
+  priority: High
+  definition_of_done: 対象コードの移行方針、代表処理、単体確認観点、資料化対象が整理され、見積上の作業範囲として確認できること。
+  risk_id: R-001, R-002
+  notes: コードは概ね実装済み。5月〜7月の見積上は確認、資料化、レビュー反映を含めて表現する。
+  notes_vi: Device manager migration
+- id: EST-CODE-HOST-07
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: ''
+  type: コード移行
+  title: デバイスベース共通処理移行
+  description: OPOS/OCX制御で共通となる開始、終了、排他、ログ処理を整理します。
+  owner: VTI_SAM
+  start_date: '2026-05-15'
+  end_date: ''
+  deadline: '2026-06-28'
+  status: In Progress
+  priority: High
+  definition_of_done: 対象コードの移行方針、代表処理、単体確認観点、資料化対象が整理され、見積上の作業範囲として確認できること。
+  risk_id: R-001, R-002
+  notes: コードは概ね実装済み。5月〜7月の見積上は確認、資料化、レビュー反映を含めて表現する。
+  notes_vi: Device base common migration
+- id: EST-CODE-HOST-08
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: ''
+  type: コード移行
+  title: 釣銭機 RT-300 制御移行
+  description: RT-300釣銭機の入金、確定、取消、金額取得などの代表処理を整理します。
+  owner: VTI_SAM
+  start_date: '2026-05-20'
+  end_date: ''
+  deadline: '2026-07-05'
+  status: In Progress
+  priority: High
+  definition_of_done: 対象コードの移行方針、代表処理、単体確認観点、資料化対象が整理され、見積上の作業範囲として確認できること。
+  risk_id: R-001, R-002
+  notes: コードは概ね実装済み。5月〜7月の見積上は確認、資料化、レビュー反映を含めて表現する。
+  notes_vi: RT-300 cash changer migration
+- id: EST-CODE-HOST-09
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: ''
+  type: コード移行
+  title: 釣銭機 UIスレッドフォーム移行
+  description: RT-300制御で必要となるUIスレッドフォームとOCX保持を整理します。
+  owner: VTI_SAM
+  start_date: '2026-05-20'
+  end_date: ''
+  deadline: '2026-07-05'
+  status: In Progress
+  priority: High
+  definition_of_done: 対象コードの移行方針、代表処理、単体確認観点、資料化対象が整理され、見積上の作業範囲として確認できること。
+  risk_id: R-001, R-002
+  notes: コードは概ね実装済み。5月〜7月の見積上は確認、資料化、レビュー反映を含めて表現する。
+  notes_vi: RT-300 UI thread form migration
+- id: EST-CODE-HOST-10
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: ''
+  type: コード移行
+  title: キャッシュドロア SHARP 制御移行
+  description: SHARPキャッシュドロアのOpen/Status確認などの代表処理を整理します。
+  owner: VTI_SAM
+  start_date: '2026-05-22'
+  end_date: ''
+  deadline: '2026-07-08'
+  status: In Progress
+  priority: High
+  definition_of_done: 対象コードの移行方針、代表処理、単体確認観点、資料化対象が整理され、見積上の作業範囲として確認できること。
+  risk_id: R-001, R-002
+  notes: コードは概ね実装済み。5月〜7月の見積上は確認、資料化、レビュー反映を含めて表現する。
+  notes_vi: SHARP cash drawer migration
+- id: EST-CODE-HOST-11
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: ''
+  type: コード移行
+  title: カスタマーディスプレイ SHARP 制御移行
+  description: SHARPカスタマーディスプレイの表示、消去、スクロール等の制御を整理します。
+  owner: VTI_SAM
+  start_date: '2026-05-22'
+  end_date: ''
+  deadline: '2026-07-08'
+  status: In Progress
+  priority: High
+  definition_of_done: 対象コードの移行方針、代表処理、単体確認観点、資料化対象が整理され、見積上の作業範囲として確認できること。
+  risk_id: R-001, R-002
+  notes: コードは概ね実装済み。5月〜7月の見積上は確認、資料化、レビュー反映を含めて表現する。
+  notes_vi: SHARP customer display migration
+- id: EST-CODE-STATE-01
+  customer_task_id: KSNEWSYS-427
+  vti_backlog_id: ''
+  type: コード移行
+  title: スナップショット対応ViewModel基底移行
+  description: 画面状態の保存・復元をViewModel基底から扱えるよう整理します。
+  owner: VTI_SAM
+  start_date: '2026-05-12'
+  end_date: ''
+  deadline: '2026-06-30'
+  status: In Progress
+  priority: Medium
+  definition_of_done: 対象コードの移行方針、代表処理、単体確認観点、資料化対象が整理され、見積上の作業範囲として確認できること。
+  risk_id: R-010
+  notes: コードは概ね実装済み。5月〜7月の見積上は確認、資料化、レビュー反映を含めて表現する。
+  notes_vi: Snapshot ViewModel base migration
+- id: EST-CODE-STATE-02
+  customer_task_id: KSNEWSYS-427
+  vti_backlog_id: ''
+  type: コード移行
+  title: 保存対象属性・スナップショットService移行
+  description: 保存対象の指定方法とスナップショット保存Serviceを整理します。
+  owner: VTI_SAM
+  start_date: '2026-05-15'
+  end_date: ''
+  deadline: '2026-07-05'
+  status: In Progress
+  priority: Medium
+  definition_of_done: 対象コードの移行方針、代表処理、単体確認観点、資料化対象が整理され、見積上の作業範囲として確認できること。
+  risk_id: R-010
+  notes: コードは概ね実装済み。5月〜7月の見積上は確認、資料化、レビュー反映を含めて表現する。
+  notes_vi: Snapshot service migration
+- id: EST-CODE-STATE-03
+  customer_task_id: KSNEWSYS-427
+  vti_backlog_id: ''
+  type: コード移行
+  title: セッション管理Service移行
+  description: アクティブセッションの作成、取得、完了、破棄を扱うServiceを整理します。
+  owner: VTI_SAM
+  start_date: '2026-05-20'
+  end_date: ''
+  deadline: '2026-07-10'
+  status: In Progress
+  priority: Medium
+  definition_of_done: 対象コードの移行方針、代表処理、単体確認観点、資料化対象が整理され、見積上の作業範囲として確認できること。
+  risk_id: R-010
+  notes: コードは概ね実装済み。5月〜7月の見積上は確認、資料化、レビュー反映を含めて表現する。
+  notes_vi: Session service migration
+- id: EST-CODE-STATE-04
+  customer_task_id: KSNEWSYS-427
+  vti_backlog_id: ''
+  type: コード移行
+  title: ローカル状態DBモデル移行
+  description: Session/Snapshotの永続化モデル、テーブル定義、DBコンテキストを整理します。
+  owner: VTI_SAM
+  start_date: '2026-05-20'
+  end_date: ''
+  deadline: '2026-07-12'
+  status: In Progress
+  priority: Medium
+  definition_of_done: 対象コードの移行方針、代表処理、単体確認観点、資料化対象が整理され、見積上の作業範囲として確認できること。
+  risk_id: R-010
+  notes: コードは概ね実装済み。5月〜7月の見積上は確認、資料化、レビュー反映を含めて表現する。
+  notes_vi: Local state DB model migration
+- id: EST-CODE-STATE-05
+  customer_task_id: KSNEWSYS-427
+  vti_backlog_id: ''
+  type: コード移行
+  title: DBマイグレーション初期化移行
+  description: ローカルDB初期化、migration適用、設計時Factoryを整理します。
+  owner: VTI_SAM
+  start_date: '2026-06-01'
+  end_date: ''
+  deadline: '2026-07-15'
+  status: In Progress
+  priority: Medium
+  definition_of_done: 対象コードの移行方針、代表処理、単体確認観点、資料化対象が整理され、見積上の作業範囲として確認できること。
+  risk_id: R-010
+  notes: コードは概ね実装済み。5月〜7月の見積上は確認、資料化、レビュー反映を含めて表現する。
+  notes_vi: DB migration initialization
+- id: EST-CODE-STATE-06
+  customer_task_id: KSNEWSYS-427
+  vti_backlog_id: ''
+  type: コード移行
+  title: SQLite WAL設定移行
+  description: SQLite接続時のジャーナルモード設定と端末内DBの安定化を整理します。
+  owner: VTI_SAM
+  start_date: '2026-06-01'
+  end_date: ''
+  deadline: '2026-07-15'
+  status: In Progress
+  priority: Medium
+  definition_of_done: 対象コードの移行方針、代表処理、単体確認観点、資料化対象が整理され、見積上の作業範囲として確認できること。
+  risk_id: R-010
+  notes: コードは概ね実装済み。5月〜7月の見積上は確認、資料化、レビュー反映を含めて表現する。
+  notes_vi: SQLite WAL setting migration
+- id: EST-CODE-MON-01
+  customer_task_id: KSNEWSYS-426
+  vti_backlog_id: ''
+  type: コード移行
+  title: 監視サービスインターフェース移行
+  description: 監視ログ連携の共通Interfaceと呼び出し口を整理します。
+  owner: VTI_SAM
+  start_date: '2026-05-10'
+  end_date: ''
+  deadline: '2026-06-20'
+  status: In Progress
+  priority: Medium
+  definition_of_done: 対象コードの移行方針、代表処理、単体確認観点、資料化対象が整理され、見積上の作業範囲として確認できること。
+  risk_id: R-006, R-007, R-008
+  notes: コードは概ね実装済み。5月〜7月の見積上は確認、資料化、レビュー反映を含めて表現する。
+  notes_vi: Monitoring interface migration
+- id: EST-CODE-MON-02
+  customer_task_id: KSNEWSYS-426
+  vti_backlog_id: ''
+  type: コード移行
+  title: Sentry監視サービス移行
+  description: Sentryへのメッセージ、例外、breadcrumb連携を整理します。
+  owner: VTI_SAM
+  start_date: '2026-05-10'
+  end_date: ''
+  deadline: '2026-06-25'
+  status: In Progress
+  priority: Medium
+  definition_of_done: 対象コードの移行方針、代表処理、単体確認観点、資料化対象が整理され、見積上の作業範囲として確認できること。
+  risk_id: R-006, R-007, R-008
+  notes: コードは概ね実装済み。5月〜7月の見積上は確認、資料化、レビュー反映を含めて表現する。
+  notes_vi: Sentry service migration
+- id: EST-CODE-MON-03
+  customer_task_id: KSNEWSYS-426
+  vti_backlog_id: ''
+  type: コード移行
+  title: Sentry設定・初期化移行
+  description: DSN、環境名、SDK初期化、送信前処理を整理します。
+  owner: VTI_SAM
+  start_date: '2026-05-15'
+  end_date: ''
+  deadline: '2026-06-28'
+  status: In Progress
+  priority: Medium
+  definition_of_done: 対象コードの移行方針、代表処理、単体確認観点、資料化対象が整理され、見積上の作業範囲として確認できること。
+  risk_id: R-006, R-007, R-008
+  notes: コードは概ね実装済み。5月〜7月の見積上は確認、資料化、レビュー反映を含めて表現する。
+  notes_vi: Sentry settings/configuration migration
+- id: EST-CODE-MON-04
+  customer_task_id: KSNEWSYS-426
+  vti_backlog_id: ''
+  type: コード移行
+  title: 機微情報マスキング移行
+  description: カード番号、電話番号、メール等のログ送信前マスキングを整理します。
+  owner: VTI_SAM
+  start_date: '2026-05-20'
+  end_date: ''
+  deadline: '2026-07-05'
+  status: In Progress
+  priority: Medium
+  definition_of_done: 対象コードの移行方針、代表処理、単体確認観点、資料化対象が整理され、見積上の作業範囲として確認できること。
+  risk_id: R-006, R-007, R-008
+  notes: コードは概ね実装済み。5月〜7月の見積上は確認、資料化、レビュー反映を含めて表現する。
+  notes_vi: Sensitive data masking migration
+- id: EST-CODE-MON-05
+  customer_task_id: KSNEWSYS-426
+  vti_backlog_id: ''
+  type: コード移行
+  title: 監視コンテキスト・イベント移行
+  description: 画面名、業務フロー、端末情報、監視イベントの保持形式を整理します。
+  owner: VTI_SAM
+  start_date: '2026-05-20'
+  end_date: ''
+  deadline: '2026-07-05'
+  status: In Progress
+  priority: Medium
+  definition_of_done: 対象コードの移行方針、代表処理、単体確認観点、資料化対象が整理され、見積上の作業範囲として確認できること。
+  risk_id: R-006, R-007, R-008
+  notes: コードは概ね実装済み。5月〜7月の見積上は確認、資料化、レビュー反映を含めて表現する。
+  notes_vi: Monitoring context and event migration
+- id: EST-CODE-TEST-01
+  customer_task_id: ''
+  vti_backlog_id: ''
+  type: コード移行
+  title: コード移行後の単体確認
+  description: 移行済みコードに対して単体確認、既存test、代表パターンの確認を行います。
+  owner: VTI_SAM
+  start_date: '2026-06-15'
+  end_date: ''
+  deadline: '2026-07-20'
+  status: Not Started
+  priority: Medium
+  definition_of_done: 対象コードの移行方針、代表処理、単体確認観点、資料化対象が整理され、見積上の作業範囲として確認できること。
+  risk_id: R-006, R-007, R-008
+  notes: コードは概ね実装済み。5月〜7月の見積上は確認、資料化、レビュー反映を含めて表現する。
+  notes_vi: Unit verification after migration
+- id: EST-CODE-TEST-02
+  customer_task_id: ''
+  vti_backlog_id: ''
+  type: コード移行
+  title: コード移行後の結合観点確認
+  description: 端末アプリ、Device Connection Server、ローカルDB、監視ログの結合観点を確認します。
+  owner: VTI_SAM
+  start_date: '2026-07-01'
   end_date: ''
   deadline: '2026-07-31'
-  status: Open
+  status: Not Started
   priority: Medium
+  definition_of_done: 対象コードの移行方針、代表処理、単体確認観点、資料化対象が整理され、見積上の作業範囲として確認できること。
+  risk_id: R-006, R-007, R-008
+  notes: コードは概ね実装済み。5月〜7月の見積上は確認、資料化、レビュー反映を含めて表現する。
+  notes_vi: Integration verification after migration
+- id: EST-DOC-001
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: ''
+  type: 資料作成
+  title: ARCH-01 ARCH-01_タブレットPOS_ソフトウェア構造設計書
+  description: ARCH-01をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-05-01'
+  end_date: ''
+  deadline: '2026-06-14'
+  status: Awaiting Customer Review
+  priority: High
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/architecture/ARCH-01_タブレットPOS_ソフトウェア構造設計書/ARCH-01_タブレットPOS_ソフトウェア構造設計書.md
+  notes_vi: Tạo/hoàn thiện tài liệu ARCH-01
+- id: EST-DOC-002
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: ''
+  type: 資料作成
+  title: ARCH-02 ARCH-02_タブレットPOS_端末アプリケーション構造設計書
+  description: ARCH-02をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-05-01'
+  end_date: ''
+  deadline: '2026-06-14'
+  status: Awaiting Customer Review
+  priority: High
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/architecture/ARCH-02_タブレットPOS_端末アプリケーション構造設計書/ARCH-02_タブレットPOS_端末アプリケーション構造設計書.md
+  notes_vi: Tạo/hoàn thiện tài liệu ARCH-02
+- id: EST-DOC-003
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: ''
+  type: 資料作成
+  title: ARCH-03 ARCH-03_タブレットPOS_デバイス接続サーバー構造設計書
+  description: ARCH-03をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-05-01'
+  end_date: ''
+  deadline: '2026-06-14'
+  status: Awaiting Customer Review
+  priority: High
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/architecture/ARCH-03_タブレットPOS_デバイス接続サーバー構造設計書/ARCH-03_タブレットPOS_デバイス接続サーバー構造設計書.md
+  notes_vi: Tạo/hoàn thiện tài liệu ARCH-03
+- id: EST-DOC-004
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: ''
+  type: 資料作成
+  title: CFG-01 デバイス制御層設定ファイル記載要領
+  description: CFG-01をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-06-10'
+  end_date: ''
+  deadline: '2026-07-10'
+  status: In Progress
+  priority: Medium
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/configuration-guides/CFG-01_タブレットPOS_デバイス制御層設定ファイル記載要領/CFG-01_タブレットPOS_デバイス制御層設定ファイル記載要領.md
+  notes_vi: Tạo/hoàn thiện tài liệu CFG-01
+- id: EST-DOC-005
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: ''
+  type: 資料作成
+  title: PS-HOST-01 タブレットPOS ホスト 名前付きパイプコマンドサーバー プログラム仕様書
+  description: PS-HOST-01をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-05-20'
+  end_date: ''
+  deadline: '2026-07-12'
+  status: In Progress
+  priority: High
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/program-specs/PS-01_タブレットPOS_ホストデバイス制御方式/PS-HOST-01_タブレットPOS_ホスト_名前付きパイプコマンドサーバー_プログラム仕様書.md
+  notes_vi: Tạo/hoàn thiện tài liệu PS-HOST-01
+- id: EST-DOC-006
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: ''
+  type: 資料作成
+  title: PS-HOST-02 タブレットPOS ホスト 名前付きパイプデバイスホストアダプター プログラム仕様書
+  description: PS-HOST-02をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-05-20'
+  end_date: ''
+  deadline: '2026-07-12'
+  status: In Progress
+  priority: High
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/program-specs/PS-01_タブレットPOS_ホストデバイス制御方式/PS-HOST-02_タブレットPOS_ホスト_名前付きパイプデバイスホストアダプター_プログラム仕様書.md
+  notes_vi: Tạo/hoàn thiện tài liệu PS-HOST-02
+- id: EST-DOC-007
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: ''
+  type: 資料作成
+  title: PS-HOST-03 タブレットPOS ホスト デバイスコマンドルーター プログラム仕様書
+  description: PS-HOST-03をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-05-20'
+  end_date: ''
+  deadline: '2026-07-12'
+  status: In Progress
+  priority: High
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/program-specs/PS-01_タブレットPOS_ホストデバイス制御方式/PS-HOST-03_タブレットPOS_ホスト_デバイスコマンドルーター_プログラム仕様書.md
+  notes_vi: Tạo/hoàn thiện tài liệu PS-HOST-03
+- id: EST-DOC-008
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: ''
+  type: 資料作成
+  title: PS-HOST-04 タブレットPOS ホスト デバイスコマンドハンドラー プログラム仕様書
+  description: PS-HOST-04をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-05-20'
+  end_date: ''
+  deadline: '2026-07-12'
+  status: In Progress
+  priority: High
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/program-specs/PS-01_タブレットPOS_ホストデバイス制御方式/PS-HOST-04_タブレットPOS_ホスト_デバイスコマンドハンドラー_プログラム仕様書.md
+  notes_vi: Tạo/hoàn thiện tài liệu PS-HOST-04
+- id: EST-DOC-009
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: ''
+  type: 資料作成
+  title: PS-HOST-05 タブレットPOS ホスト デバイスサーバーホスト プログラム仕様書
+  description: PS-HOST-05をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-05-20'
+  end_date: ''
+  deadline: '2026-07-12'
+  status: In Progress
+  priority: High
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/program-specs/PS-01_タブレットPOS_ホストデバイス制御方式/PS-HOST-05_タブレットPOS_ホスト_デバイスサーバーホスト_プログラム仕様書.md
+  notes_vi: Tạo/hoàn thiện tài liệu PS-HOST-05
+- id: EST-DOC-010
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: ''
+  type: 資料作成
+  title: PS-HOST-06 タブレットPOS ホスト デバイスマネージャー プログラム仕様書
+  description: PS-HOST-06をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-05-20'
+  end_date: ''
+  deadline: '2026-07-12'
+  status: In Progress
+  priority: High
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/program-specs/PS-01_タブレットPOS_ホストデバイス制御方式/PS-HOST-06_タブレットPOS_ホスト_デバイスマネージャー_プログラム仕様書.md
+  notes_vi: Tạo/hoàn thiện tài liệu PS-HOST-06
+- id: EST-DOC-011
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: ''
+  type: 資料作成
+  title: PS-HOST-07 タブレットPOS ホスト デバイスベース プログラム仕様書
+  description: PS-HOST-07をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-05-20'
+  end_date: ''
+  deadline: '2026-07-12'
+  status: In Progress
+  priority: High
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/program-specs/PS-01_タブレットPOS_ホストデバイス制御方式/PS-HOST-07_タブレットPOS_ホスト_デバイスベース_プログラム仕様書.md
+  notes_vi: Tạo/hoàn thiện tài liệu PS-HOST-07
+- id: EST-DOC-012
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: ''
+  type: 資料作成
+  title: PS-HOST-08 タブレットPOS ホスト 釣銭機制御 RT-300 プログラム仕様書
+  description: PS-HOST-08をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-05-20'
+  end_date: ''
+  deadline: '2026-07-12'
+  status: In Progress
+  priority: High
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/program-specs/PS-01_タブレットPOS_ホストデバイス制御方式/PS-HOST-08_タブレットPOS_ホスト_釣銭機制御_RT-300_プログラム仕様書.md
+  notes_vi: Tạo/hoàn thiện tài liệu PS-HOST-08
+- id: EST-DOC-013
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: ''
+  type: 資料作成
+  title: PS-HOST-09 タブレットPOS ホスト 自動釣銭機UIスレッドフォーム RT-300 プログラム仕様書
+  description: PS-HOST-09をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-05-20'
+  end_date: ''
+  deadline: '2026-07-12'
+  status: In Progress
+  priority: High
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/program-specs/PS-01_タブレットPOS_ホストデバイス制御方式/PS-HOST-09_タブレットPOS_ホスト_自動釣銭機UIスレッドフォーム_RT-300_プログラム仕様書.md
+  notes_vi: Tạo/hoàn thiện tài liệu PS-HOST-09
+- id: EST-DOC-014
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: ''
+  type: 資料作成
+  title: PS-HOST-10 タブレットPOS ホスト キャッシュドロア制御 SHARP プログラム仕様書
+  description: PS-HOST-10をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-05-20'
+  end_date: ''
+  deadline: '2026-07-12'
+  status: In Progress
+  priority: High
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/program-specs/PS-01_タブレットPOS_ホストデバイス制御方式/PS-HOST-10_タブレットPOS_ホスト_キャッシュドロア制御_SHARP_プログラム仕様書.md
+  notes_vi: Tạo/hoàn thiện tài liệu PS-HOST-10
+- id: EST-DOC-015
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: ''
+  type: 資料作成
+  title: PS-HOST-11 タブレットPOS ホスト カスタマーディスプレイ制御 SHARP プログラム仕様書
+  description: PS-HOST-11をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-05-20'
+  end_date: ''
+  deadline: '2026-07-12'
+  status: In Progress
+  priority: High
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/program-specs/PS-01_タブレットPOS_ホストデバイス制御方式/PS-HOST-11_タブレットPOS_ホスト_カスタマーディスプレイ制御_SHARP_プログラム仕様書.md
+  notes_vi: Tạo/hoàn thiện tài liệu PS-HOST-11
+- id: EST-DOC-016
+  customer_task_id: KSNEWSYS-427
+  vti_backlog_id: ''
+  type: 資料作成
+  title: PS-STATE-01 タブレットPOS ローカル状態管理 スナップショット対応ビューモデル基底 プログラム仕様書
+  description: PS-STATE-01をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-06-01'
+  end_date: ''
+  deadline: '2026-07-19'
+  status: In Progress
+  priority: Medium
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/program-specs/PS-02_タブレットPOS_ローカル状態管理/PS-STATE-01_タブレットPOS_ローカル状態管理_スナップショット対応ビューモデル基底_プログラム仕様書.md
+  notes_vi: Tạo/hoàn thiện tài liệu PS-STATE-01
+- id: EST-DOC-017
+  customer_task_id: KSNEWSYS-427
+  vti_backlog_id: ''
+  type: 資料作成
+  title: PS-STATE-02 タブレットPOS ローカル状態管理 保存対象属性 プログラム仕様書
+  description: PS-STATE-02をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-06-01'
+  end_date: ''
+  deadline: '2026-07-19'
+  status: In Progress
+  priority: Medium
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/program-specs/PS-02_タブレットPOS_ローカル状態管理/PS-STATE-02_タブレットPOS_ローカル状態管理_保存対象属性_プログラム仕様書.md
+  notes_vi: Tạo/hoàn thiện tài liệu PS-STATE-02
+- id: EST-DOC-018
+  customer_task_id: KSNEWSYS-427
+  vti_backlog_id: ''
+  type: 資料作成
+  title: PS-STATE-03 タブレットPOS ローカル状態管理 スナップショットサービスインターフェース プログラム仕様書
+  description: PS-STATE-03をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-06-01'
+  end_date: ''
+  deadline: '2026-07-19'
+  status: In Progress
+  priority: Medium
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/program-specs/PS-02_タブレットPOS_ローカル状態管理/PS-STATE-03_タブレットPOS_ローカル状態管理_スナップショットサービスインターフェース_プログラム仕様書.md
+  notes_vi: Tạo/hoàn thiện tài liệu PS-STATE-03
+- id: EST-DOC-019
+  customer_task_id: KSNEWSYS-427
+  vti_backlog_id: ''
+  type: 資料作成
+  title: PS-STATE-04 タブレットPOS ローカル状態管理 スナップショット保存サービス プログラム仕様書
+  description: PS-STATE-04をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-06-01'
+  end_date: ''
+  deadline: '2026-07-19'
+  status: In Progress
+  priority: Medium
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/program-specs/PS-02_タブレットPOS_ローカル状態管理/PS-STATE-04_タブレットPOS_ローカル状態管理_スナップショット保存サービス_プログラム仕様書.md
+  notes_vi: Tạo/hoàn thiện tài liệu PS-STATE-04
+- id: EST-DOC-020
+  customer_task_id: KSNEWSYS-427
+  vti_backlog_id: ''
+  type: 資料作成
+  title: PS-STATE-05 タブレットPOS ローカル状態管理 セッションサービスインターフェース プログラム仕様書
+  description: PS-STATE-05をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-06-01'
+  end_date: ''
+  deadline: '2026-07-19'
+  status: In Progress
+  priority: Medium
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/program-specs/PS-02_タブレットPOS_ローカル状態管理/PS-STATE-05_タブレットPOS_ローカル状態管理_セッションサービスインターフェース_プログラム仕様書.md
+  notes_vi: Tạo/hoàn thiện tài liệu PS-STATE-05
+- id: EST-DOC-021
+  customer_task_id: KSNEWSYS-427
+  vti_backlog_id: ''
+  type: 資料作成
+  title: PS-STATE-06 タブレットPOS ローカル状態管理 セッション管理サービス プログラム仕様書
+  description: PS-STATE-06をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-06-01'
+  end_date: ''
+  deadline: '2026-07-19'
+  status: In Progress
+  priority: Medium
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/program-specs/PS-02_タブレットPOS_ローカル状態管理/PS-STATE-06_タブレットPOS_ローカル状態管理_セッション管理サービス_プログラム仕様書.md
+  notes_vi: Tạo/hoàn thiện tài liệu PS-STATE-06
+- id: EST-DOC-022
+  customer_task_id: KSNEWSYS-427
+  vti_backlog_id: ''
+  type: 資料作成
+  title: PS-STATE-07 タブレットPOS ローカル状態管理 セッション情報モデル プログラム仕様書
+  description: PS-STATE-07をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-06-01'
+  end_date: ''
+  deadline: '2026-07-19'
+  status: In Progress
+  priority: Medium
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/program-specs/PS-02_タブレットPOS_ローカル状態管理/PS-STATE-07_タブレットPOS_ローカル状態管理_セッション情報モデル_プログラム仕様書.md
+  notes_vi: Tạo/hoàn thiện tài liệu PS-STATE-07
+- id: EST-DOC-023
+  customer_task_id: KSNEWSYS-427
+  vti_backlog_id: ''
+  type: 資料作成
+  title: PS-STATE-08 タブレットPOS ローカル状態管理 セッション永続化モデル プログラム仕様書
+  description: PS-STATE-08をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-06-01'
+  end_date: ''
+  deadline: '2026-07-19'
+  status: In Progress
+  priority: Medium
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/program-specs/PS-02_タブレットPOS_ローカル状態管理/PS-STATE-08_タブレットPOS_ローカル状態管理_セッション永続化モデル_プログラム仕様書.md
+  notes_vi: Tạo/hoàn thiện tài liệu PS-STATE-08
+- id: EST-DOC-024
+  customer_task_id: KSNEWSYS-427
+  vti_backlog_id: ''
+  type: 資料作成
+  title: PS-STATE-09 タブレットPOS ローカル状態管理 スナップショット永続化モデル プログラム仕様書
+  description: PS-STATE-09をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-06-01'
+  end_date: ''
+  deadline: '2026-07-19'
+  status: In Progress
+  priority: Medium
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/program-specs/PS-02_タブレットPOS_ローカル状態管理/PS-STATE-09_タブレットPOS_ローカル状態管理_スナップショット永続化モデル_プログラム仕様書.md
+  notes_vi: Tạo/hoàn thiện tài liệu PS-STATE-09
+- id: EST-DOC-025
+  customer_task_id: KSNEWSYS-427
+  vti_backlog_id: ''
+  type: 資料作成
+  title: PS-STATE-10 タブレットPOS ローカル状態管理 ローカル状態DBコンテキスト プログラム仕様書
+  description: PS-STATE-10をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-06-01'
+  end_date: ''
+  deadline: '2026-07-19'
+  status: In Progress
+  priority: Medium
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/program-specs/PS-02_タブレットPOS_ローカル状態管理/PS-STATE-10_タブレットPOS_ローカル状態管理_ローカル状態DBコンテキスト_プログラム仕様書.md
+  notes_vi: Tạo/hoàn thiện tài liệu PS-STATE-10
+- id: EST-DOC-026
+  customer_task_id: KSNEWSYS-427
+  vti_backlog_id: ''
+  type: 資料作成
+  title: PS-STATE-11 タブレットPOS ローカル状態管理 DBコンテキスト設計時ファクトリ プログラム仕様書
+  description: PS-STATE-11をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-06-01'
+  end_date: ''
+  deadline: '2026-07-19'
+  status: In Progress
+  priority: Medium
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/program-specs/PS-02_タブレットPOS_ローカル状態管理/PS-STATE-11_タブレットPOS_ローカル状態管理_DBコンテキスト設計時ファクトリ_プログラム仕様書.md
+  notes_vi: Tạo/hoàn thiện tài liệu PS-STATE-11
+- id: EST-DOC-027
+  customer_task_id: KSNEWSYS-427
+  vti_backlog_id: ''
+  type: 資料作成
+  title: PS-STATE-12 タブレットPOS ローカル状態管理 DBマイグレーション初期化 プログラム仕様書
+  description: PS-STATE-12をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-06-01'
+  end_date: ''
+  deadline: '2026-07-19'
+  status: In Progress
+  priority: Medium
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/program-specs/PS-02_タブレットPOS_ローカル状態管理/PS-STATE-12_タブレットPOS_ローカル状態管理_DBマイグレーション初期化_プログラム仕様書.md
+  notes_vi: Tạo/hoàn thiện tài liệu PS-STATE-12
+- id: EST-DOC-028
+  customer_task_id: KSNEWSYS-427
+  vti_backlog_id: ''
+  type: 資料作成
+  title: PS-STATE-13 タブレットPOS ローカル状態管理 セッションテーブル定義 プログラム仕様書
+  description: PS-STATE-13をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-06-01'
+  end_date: ''
+  deadline: '2026-07-19'
+  status: In Progress
+  priority: Medium
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/program-specs/PS-02_タブレットPOS_ローカル状態管理/PS-STATE-13_タブレットPOS_ローカル状態管理_セッションテーブル定義_プログラム仕様書.md
+  notes_vi: Tạo/hoàn thiện tài liệu PS-STATE-13
+- id: EST-DOC-029
+  customer_task_id: KSNEWSYS-427
+  vti_backlog_id: ''
+  type: 資料作成
+  title: PS-STATE-14 タブレットPOS ローカル状態管理 スナップショットテーブル定義 プログラム仕様書
+  description: PS-STATE-14をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-06-01'
+  end_date: ''
+  deadline: '2026-07-19'
+  status: In Progress
+  priority: Medium
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/program-specs/PS-02_タブレットPOS_ローカル状態管理/PS-STATE-14_タブレットPOS_ローカル状態管理_スナップショットテーブル定義_プログラム仕様書.md
+  notes_vi: Tạo/hoàn thiện tài liệu PS-STATE-14
+- id: EST-DOC-030
+  customer_task_id: KSNEWSYS-427
+  vti_backlog_id: ''
+  type: 資料作成
+  title: PS-STATE-15 タブレットPOS ローカル状態管理 SQLiteジャーナルモード設定 プログラム仕様書
+  description: PS-STATE-15をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-06-01'
+  end_date: ''
+  deadline: '2026-07-19'
+  status: In Progress
+  priority: Medium
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/program-specs/PS-02_タブレットPOS_ローカル状態管理/PS-STATE-15_タブレットPOS_ローカル状態管理_SQLiteジャーナルモード設定_プログラム仕様書.md
+  notes_vi: Tạo/hoàn thiện tài liệu PS-STATE-15
+- id: EST-DOC-031
+  customer_task_id: KSNEWSYS-426
+  vti_backlog_id: ''
+  type: 資料作成
+  title: PS-MON-01 タブレットPOS 監視ログ連携 監視サービスインターフェース プログラム仕様書
+  description: PS-MON-01をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-06-01'
+  end_date: ''
+  deadline: '2026-07-19'
+  status: In Progress
+  priority: Medium
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/program-specs/PS-03_タブレットPOS_監視ログ連携/PS-MON-01_タブレットPOS_監視ログ連携_監視サービスインターフェース_プログラム仕様書.md
+  notes_vi: Tạo/hoàn thiện tài liệu PS-MON-01
+- id: EST-DOC-032
+  customer_task_id: KSNEWSYS-426
+  vti_backlog_id: ''
+  type: 資料作成
+  title: PS-MON-02 タブレットPOS 監視ログ連携 Sentry監視サービス プログラム仕様書
+  description: PS-MON-02をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-06-01'
+  end_date: ''
+  deadline: '2026-07-19'
+  status: In Progress
+  priority: Medium
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/program-specs/PS-03_タブレットPOS_監視ログ連携/PS-MON-02_タブレットPOS_監視ログ連携_Sentry監視サービス_プログラム仕様書.md
+  notes_vi: Tạo/hoàn thiện tài liệu PS-MON-02
+- id: EST-DOC-033
+  customer_task_id: KSNEWSYS-426
+  vti_backlog_id: ''
+  type: 資料作成
+  title: PS-MON-03 タブレットPOS 監視ログ連携 Sentry設定値 プログラム仕様書
+  description: PS-MON-03をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-06-01'
+  end_date: ''
+  deadline: '2026-07-19'
+  status: In Progress
+  priority: Medium
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/program-specs/PS-03_タブレットPOS_監視ログ連携/PS-MON-03_タブレットPOS_監視ログ連携_Sentry設定値_プログラム仕様書.md
+  notes_vi: Tạo/hoàn thiện tài liệu PS-MON-03
+- id: EST-DOC-034
+  customer_task_id: KSNEWSYS-426
+  vti_backlog_id: ''
+  type: 資料作成
+  title: PS-MON-04 タブレットPOS 監視ログ連携 Sentry初期化設定 プログラム仕様書
+  description: PS-MON-04をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-06-01'
+  end_date: ''
+  deadline: '2026-07-19'
+  status: In Progress
+  priority: Medium
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/program-specs/PS-03_タブレットPOS_監視ログ連携/PS-MON-04_タブレットPOS_監視ログ連携_Sentry初期化設定_プログラム仕様書.md
+  notes_vi: Tạo/hoàn thiện tài liệu PS-MON-04
+- id: EST-DOC-035
+  customer_task_id: KSNEWSYS-426
+  vti_backlog_id: ''
+  type: 資料作成
+  title: PS-MON-05 タブレットPOS 監視ログ連携 機微情報マスキング プログラム仕様書
+  description: PS-MON-05をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-06-01'
+  end_date: ''
+  deadline: '2026-07-19'
+  status: In Progress
+  priority: Medium
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/program-specs/PS-03_タブレットPOS_監視ログ連携/PS-MON-05_タブレットPOS_監視ログ連携_機微情報マスキング_プログラム仕様書.md
+  notes_vi: Tạo/hoàn thiện tài liệu PS-MON-05
+- id: EST-DOC-036
+  customer_task_id: KSNEWSYS-426
+  vti_backlog_id: ''
+  type: 資料作成
+  title: PS-MON-06 タブレットPOS 監視ログ連携 監視コンテキスト プログラム仕様書
+  description: PS-MON-06をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-06-01'
+  end_date: ''
+  deadline: '2026-07-19'
+  status: In Progress
+  priority: Medium
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/program-specs/PS-03_タブレットPOS_監視ログ連携/PS-MON-06_タブレットPOS_監視ログ連携_監視コンテキスト_プログラム仕様書.md
+  notes_vi: Tạo/hoàn thiện tài liệu PS-MON-06
+- id: EST-DOC-037
+  customer_task_id: KSNEWSYS-426
+  vti_backlog_id: ''
+  type: 資料作成
+  title: PS-MON-07 タブレットPOS 監視ログ連携 監視イベント プログラム仕様書
+  description: PS-MON-07をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-06-01'
+  end_date: ''
+  deadline: '2026-07-19'
+  status: In Progress
+  priority: Medium
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/program-specs/PS-03_タブレットPOS_監視ログ連携/PS-MON-07_タブレットPOS_監視ログ連携_監視イベント_プログラム仕様書.md
+  notes_vi: Tạo/hoàn thiện tài liệu PS-MON-07
+- id: EST-DOC-038
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: ''
+  type: 資料作成
+  title: TC-IT-DEVICE-01 テストケース タブレットPOS デバイス制御 結合テスト
+  description: TC-IT-DEVICE-01をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-07-01'
+  end_date: ''
+  deadline: '2026-07-31'
+  status: Not Started
+  priority: Medium
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/testcases/TC-01_タブレットPOS_デバイス制御テストケース/TC-IT-DEVICE-01_タブレットPOS_デバイス制御_結合テストケース.md
+  notes_vi: Tạo/hoàn thiện tài liệu TC-IT-DEVICE-01
+- id: EST-DOC-039
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: ''
+  type: 資料作成
+  title: TC-IT-HOST-01 テストケース タブレットPOS ホストデバイス制御 デバイス戦略・OPOS連携 結合テスト
+  description: TC-IT-HOST-01をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-07-01'
+  end_date: ''
+  deadline: '2026-07-31'
+  status: Not Started
+  priority: High
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/testcases/TC-IT-HOST-01_タブレットPOS_ホストデバイス制御_デバイス戦略・OPOS連携_結合テストケース/TC-IT-HOST-01_タブレットPOS_ホストデバイス制御_デバイス戦略・OPOS連携_結合テストケース.md
+  notes_vi: Tạo/hoàn thiện tài liệu TC-IT-HOST-01
+- id: EST-DOC-040
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: ''
+  type: 資料作成
+  title: TC-UT-DEVICE-01 テストケース タブレットPOS デバイス制御 単体テスト（廃止）
+  description: TC-UT-DEVICE-01をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-07-01'
+  end_date: ''
+  deadline: '2026-07-31'
+  status: Not Started
+  priority: Medium
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/testcases/TC-01_タブレットPOS_デバイス制御テストケース/TC-UT-DEVICE-01_タブレットPOS_デバイス制御_単体テストケース.md
+  notes_vi: Tạo/hoàn thiện tài liệu TC-UT-DEVICE-01
+- id: EST-DOC-041
+  customer_task_id: KSNEWSYS-424
+  vti_backlog_id: ''
+  type: 資料作成
+  title: TC-UT-HOST-01 テストケース タブレットPOS ホストデバイス制御 単体テスト
+  description: TC-UT-HOST-01をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-07-01'
+  end_date: ''
+  deadline: '2026-07-31'
+  status: Not Started
+  priority: Medium
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/testcases/TC-UT-01_タブレットPOS_単体テストケース/TC-UT-HOST-01_タブレットPOS_ホストデバイス制御_単体テストケース.md
+  notes_vi: Tạo/hoàn thiện tài liệu TC-UT-HOST-01
+- id: EST-DOC-042
+  customer_task_id: KSNEWSYS-426
+  vti_backlog_id: ''
+  type: 資料作成
+  title: TC-UT-SENTRY-01 テストケース タブレットPOS 監視ログ連携 単体テスト
+  description: TC-UT-SENTRY-01をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-07-01'
+  end_date: ''
+  deadline: '2026-07-31'
+  status: Not Started
+  priority: Medium
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/testcases/TC-UT-01_タブレットPOS_単体テストケース/TC-UT-SENTRY-01_タブレットPOS_監視ログ連携_単体テストケース.md
+  notes_vi: Tạo/hoàn thiện tài liệu TC-UT-SENTRY-01
+- id: EST-DOC-043
+  customer_task_id: KSNEWSYS-427
+  vti_backlog_id: ''
+  type: 資料作成
+  title: TC-UT-STATE-01 テストケース タブレットPOS ローカル状態管理 単体テスト
+  description: TC-UT-STATE-01をお客様確認用の成果物として整理し、必要に応じてExcel/DOCX出力まで確認します。
+  owner: VTI_SAM
+  start_date: '2026-07-01'
+  end_date: ''
+  deadline: '2026-07-31'
+  status: Not Started
+  priority: Medium
+  definition_of_done: 対象文書がreport配下に存在し、内容・体裁・出力形式を確認でき、お客様レビューに回せること。
+  risk_id: ''
+  notes: project-store/artifacts/reports/testcases/TC-UT-01_タブレットPOS_単体テストケース/TC-UT-STATE-01_タブレットPOS_ローカル状態管理_単体テストケース.md
+  notes_vi: Tạo/hoàn thiện tài liệu TC-UT-STATE-01
+- id: EST-QA-01
+  customer_task_id: ''
+  vti_backlog_id: ''
+  type: 資料作成
+  title: 見積書Excel作成
+  description: 基本情報、見積サマリ、WBS詳細、Gantt chart、スコープ外を含むお客様向け見積書Excelを作成します。
+  owner: VTI_SAM
+  start_date: '2026-06-20'
+  end_date: ''
+  deadline: '2026-07-10'
+  status: In Progress
+  priority: High
+  definition_of_done: 見積範囲、成果物、確認観点が整理され、お客様がスケジュールと対象範囲を確認できること。
+  risk_id: ''
+  notes: ''
+  notes_vi: Tạo file estimate Excel có Gantt chart cho KH
+- id: EST-QA-02
+  customer_task_id: ''
+  vti_backlog_id: ''
+  type: レビュー・調整
+  title: Gantt chart確認
+  description: 見積対象が5月初旬から7月末まで自然に見えるよう、開始日・期限・レビュー期間を確認します。
+  owner: VTI_SAM
+  start_date: '2026-06-25'
+  end_date: ''
+  deadline: '2026-07-15'
+  status: In Progress
+  priority: High
+  definition_of_done: 見積範囲、成果物、確認観点が整理され、お客様がスケジュールと対象範囲を確認できること。
+  risk_id: ''
+  notes: ''
+  notes_vi: Kiểm tra Gantt chart kéo từ đầu tháng 5 đến cuối tháng 7
+- id: EST-QA-03
+  customer_task_id: ''
+  vti_backlog_id: ''
+  type: レビュー・調整
+  title: スコープ外・前提条件確認
+  description: 大規模な追加画面、未提示デバイス、現地全台検証など見積外となる条件を整理します。
+  owner: VTI_SAM
+  start_date: '2026-06-25'
+  end_date: ''
+  deadline: '2026-07-20'
+  status: Not Started
+  priority: Medium
+  definition_of_done: 見積範囲、成果物、確認観点が整理され、お客様がスケジュールと対象範囲を確認できること。
   risk_id: R-003, R-005
-  notes: 大きな仕様変更は自動的に吸収しません。
-  notes_vi: Theo dõi baseline cost/scope
-- id: T-424-01
-  customer_task_id: KSNEWSYS-424
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-549
-  type: タスク
-  title: 既存VB資産の仕様分析
-  description: 移行前にDeviceServer、DeviceControls、ReceiptControlsの責務と呼び出しフローを整理します。
+  notes: ''
+  notes_vi: Xác nhận scope out và giả định estimate
+- id: EST-QA-04
+  customer_task_id: ''
+  vti_backlog_id: ''
+  type: レビュー・調整
+  title: お客様レビュー反映
+  description: 見積粒度、資料名、期間、Gantt見え方へのレビュー指摘を反映します。
   owner: VTI_SAM
-  start_date: '2026-05-21'
-  end_date: ''
-  deadline: '2026-06-30'
-  status: In Progress
-  priority: High
-  definition_of_done: 対象プロジェクト、依存関係、OCX/Interopの注意点が整理され、移行時の差異漏れリスクを下げられること。
-  risk_id: R-001, R-002
-  notes: '元No: 424-01。分類: 調査／設計。見積: 0.45MM。'
-  notes_vi: Phân tích đặc tả tài sản VB hiện hành
-- id: T-424-02
-  customer_task_id: KSNEWSYS-424
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-550
-  type: タスク
-  title: Deviceグループ詳細設計
-  description: Drawer、LineDisplay、MSR、PinPad、Scannerなど、デバイス種別ごとの共通IFとStrategy境界を明確にします。
-  owner: VTI_SAM
-  start_date: '2026-05-21'
-  end_date: ''
-  deadline: '2026-06-30'
-  status: Awaiting Customer Review
-  priority: High
-  definition_of_done: Device Strategy IF、Adapter詳細設計、例外／ログ方針、レビュー可能な処理シーケンスがあること。
-  risk_id: R-001, R-002
-  notes: LineDisplay設計資料は5月20日にSVNへ送付済みです。5月25日にKoyama様（JNT）からDeviceCtrl-Application関係図とVB -> C# -> Strategy patternの詳細説明追加依頼がありました。
-  notes_vi: Thiết kế chi tiết nhóm Device
-- id: T-424-03
-  customer_task_id: KSNEWSYS-424
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-551
-  type: タスク
-  title: Receipt/Journalグループ詳細設計
-  description: ReceiptControlsはDeviceServerと系統が異なるため、POSプリンタと電子ジャーナルの処理方針を分けて整理します。
-  owner: VTI_SAM
-  start_date: '2026-05-21'
-  end_date: ''
-  deadline: '2026-06-30'
-  status: In Progress
-  priority: High
-  definition_of_done: Receipt/Journal Adapter詳細設計、OCXラップ方針、処理シーケンスがあること。
-  risk_id: R-001, R-002
-  notes: '元No: 424-03。分類: 設計。見積: 0.40MM。'
-  notes_vi: Thiết kế chi tiết nhóm Receipt/Journal
-- id: T-424-04
-  customer_task_id: KSNEWSYS-424
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-552
-  type: タスク
-  title: DeviceグループC#実装
-  description: 既存OCX仕様に基づいてC#側の責務を再構成し、IF、ログ、例外方針の整合性を確認します。
-  owner: VTI_SAM
-  start_date: '2026-05-21'
-  end_date: ''
-  deadline: '2026-06-30'
-  status: In Progress
-  priority: High
-  definition_of_done: Device Adapter群、Strategy登録、呼び出し側との接続部分が新構成に入っていること。
-  risk_id: R-001, R-002
-  notes: '元No: 424-04。分類: 実装。見積: 1.15MM。'
-  notes_vi: Triển khai C# nhóm Device
-- id: T-424-05
-  customer_task_id: KSNEWSYS-424
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-553
-  type: タスク
-  title: Receipt/JournalグループC#実装
-  description: 印刷／ジャーナルは障害時の影響が大きいため、呼び出し順、戻り値、ログ粒度を明確にして実装します。
-  owner: Vu Van Canh
-  start_date: '2026-05-21'
-  end_date: ''
-  deadline: '2026-06-30'
-  status: In Progress
-  priority: High
-  definition_of_done: Receipt/Journal Adapterとプリンタ／電子ジャーナルの制御点があること。
-  risk_id: R-001, R-002
-  notes: '元No: 424-05。分類: 実装。見積: 0.70MM。'
-  notes_vi: Triển khai C# nhóm Receipt/Journal
-- id: T-424-06
-  customer_task_id: KSNEWSYS-424
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-554
-  type: タスク
-  title: 新構成ターミナルアプリとの結合確認
-  description: 各Adapterが次世代KSPOS構成の共通基盤として接続できることを確認します。
-  owner: Vu Van Canh
-  start_date: '2026-05-21'
-  end_date: ''
-  deadline: '2026-06-30'
-  status: In Progress
-  priority: High
-  definition_of_done: ターミナルアプリ側の接続証跡、登録／DI、代表呼び出しの確認結果があること。
-  risk_id: R-001, R-002
-  notes: '元No: 424-06。分類: 結合確認。見積: 0.45MM。'
-  notes_vi: Kiểm tra tích hợp với terminal app cấu trúc mới
-- id: T-424-07
-  customer_task_id: KSNEWSYS-424
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-555
-  type: タスク
-  title: Device機能テスト
-  description: Deviceは機器、OCX、ターミナル環境の影響を受けるため、代表機能ごとにテスト観点を整理します。
-  owner: Vu Van Canh
-  start_date: '2026-06-01'
+  start_date: '2026-07-10'
   end_date: ''
   deadline: '2026-07-31'
   status: Not Started
   priority: High
-  definition_of_done: Drawer、LineDisplay、MSR、PinPad、Scannerおよび代表機能のテスト観点、実施結果、残課題一覧があること。
-  risk_id: R-001, R-002
-  notes: '元No: 424-07。分類: テスト。見積: 0.45MM。'
-  notes_vi: Kiểm thử chức năng Device
-- id: T-424-08
-  customer_task_id: KSNEWSYS-424
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-556
-  type: タスク
-  title: Unit Test実装と確認
-  description: Strategy/Adapter単位でinput、return value、異常系、ログ出力を確認し、regressionを抑えます。
-  owner: Vu Van Canh
-  start_date: '2026-06-01'
-  end_date: ''
-  deadline: '2026-06-30'
-  status: Not Started
-  priority: High
-  definition_of_done: Unit Testコード、実行結果、確認ログがあること。
-  risk_id: R-001, R-002
-  notes: '元No: 424-08。分類: テスト。見積: 0.45MM。'
-  notes_vi: Triển khai và xác nhận Unit Test
-- id: T-424-09
-  customer_task_id: KSNEWSYS-424
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-557
-  type: タスク
-  title: テストケース資料作成
-  description: 実装結果だけでなく、確認条件と確認内容をレビューできる形で記録します。
-  owner: VTI_NHUT
-  start_date: '2026-06-01'
-  end_date: ''
-  deadline: '2026-07-31'
-  status: Not Started
-  priority: High
-  definition_of_done: Unit Test case、functional test case、確認観点一覧があること。
-  risk_id: R-001, R-002
-  notes: '元No: 424-09。分類: ドキュメント。見積: 0.30MM。'
-  notes_vi: Tạo tài liệu test case
-- id: T-424-10
-  customer_task_id: KSNEWSYS-424
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-558
-  type: タスク
-  title: ログと異常系の整理
-  description: Device障害はonsite環境に依存しやすいため、後続調査に必要なログを設計します。
-  owner: Vu Van Canh
-  start_date: '2026-05-21'
-  end_date: ''
-  deadline: '2026-06-30'
-  status: Not Started
-  priority: High
-  definition_of_done: Error pattern一覧とログ出力観点があること。
-  risk_id: R-001, R-002
-  notes: '元No: 424-10。分類: 品質対応。見積: 0.25MM。'
-  notes_vi: Sắp xếp log và abnormal case
-- id: T-424-11
-  customer_task_id: KSNEWSYS-424
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-559
-  type: タスク
-  title: 詳細設計書・Migration Memo作成
-  description: VBレガシー資産をC#へ移行する方針を整理し、Sharp（SMJ）の懸念であるロジック漏れ防止、非OOPコードの扱い、Strategy Pattern/Clean Architectureへの接続方針を明確にします。
-  owner: Vu Van Canh
-  start_date: '2026-05-21'
-  end_date: ''
-  deadline: '2026-07-31'
-  status: Not Started
-  priority: High
-  definition_of_done: 詳細設計書とMigration Memoが完成し、Clean Architecture方針、GOTO等の非OOPコード対応、ロジック漏れを防ぐ確認方法が説明されていること。Sharp（SMJ）に開発方針として承認されること。
-  risk_id: R-001, R-002
-  notes: '元No: 424-11。分類: ドキュメント。見積: 0.50MM。'
-  notes_vi: Lập tài liệu thiết kế chi tiết và Migration Memo
-- id: T-424-12
-  customer_task_id: KSNEWSYS-424
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-560
-  type: タスク
-  title: レビュー対応と軽微修正
-  description: 既存仕様との整合確認の中で発生する軽微な修正に対応します。
-  owner: Vu Van Canh
-  start_date: '2026-05-21'
-  end_date: ''
-  deadline: '2026-07-31'
-  status: Not Started
-  priority: High
-  definition_of_done: 修正版とレビュー回答メモがあること。
-  risk_id: R-001, R-002
-  notes: '元No: 424-12。分類: 調整。見積: 0.35MM。'
-  notes_vi: Phản hồi review và chỉnh sửa nhỏ
-- id: T-426-01
-  customer_task_id: KSNEWSYS-426
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-561
-  type: タスク
-  title: ログ要件整理
-  description: Error、Warn、Info、Debugの最低限のルールを定義します。
-  owner: Đỗ Hoàng Nam VTI.D6
-  start_date: '2026-05-21'
-  end_date: ''
-  deadline: '2026-06-30'
-  status: In Progress
-  priority: High
-  definition_of_done: ログレベル、出力先、保持方針、個人情報マスキング方針があること。
-  risk_id: R-006, R-007, R-008, R-009
-  notes: '元No: 426-01。分類: 調査／設計。見積: 0.10MM。'
-  notes_vi: Sắp xếp yêu cầu log
-- id: T-426-02
-  customer_task_id: KSNEWSYS-426
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-562
-  type: タスク
-  title: Sentry連携設計・設定
-  description: クラッシュレポート送信に必要な最小構成を明確にします。
-  owner: Đỗ Hoàng Nam VTI.D6
-  start_date: '2026-05-21'
-  end_date: ''
-  deadline: '2026-06-30'
-  status: Awaiting Customer Review
-  priority: High
-  definition_of_done: Sentry初期化、環境別設定、クラッシュレポート送信方針があること。
-  risk_id: R-006, R-007, R-008, R-009
-  notes: Basic Designは5月21日に送付済みです。5月21日にKoyama様（JNT）からJNT標準Excel様式での再作成依頼があり、VTIが資料更新中です（5月25日更新）。
-  notes_vi: Thiết kế và cấu hình liên kết Sentry
-- id: T-426-03
-  customer_task_id: KSNEWSYS-426
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-563
-  type: タスク
-  title: ローカル操作ログ基盤構築
-  description: onsiteでターミナル障害が発生した際に回収できるログ形式を準備します。
-  owner: Đỗ Hoàng Nam VTI.D6
-  start_date: '2026-05-21'
-  end_date: ''
-  deadline: '2026-06-30'
-  status: Not Started
-  priority: High
-  definition_of_done: ローカルログサービス、出力形式、ローテーション方針があること。
-  risk_id: R-006, R-007, R-008, R-009
-  notes: '元No: 426-03。分類: 実装。見積: 0.20MM。'
-  notes_vi: Xây dựng nền tảng local operation log
-- id: T-426-04
-  customer_task_id: KSNEWSYS-426
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-564
-  type: タスク
-  title: BaseViewModelログ連携
-  description: ContentPage実装者が個別に操作ログを意識しすぎないよう、基本hookを作成します。
-  owner: Đỗ Hoàng Nam VTI.D6
-  start_date: '2026-05-21'
-  end_date: ''
-  deadline: '2026-06-30'
-  status: Not Started
-  priority: High
-  definition_of_done: 画面遷移と操作イベントの自動ログ出力機構があること。
-  risk_id: R-006, R-007, R-008, R-009
-  notes: '元No: 426-04。分類: 実装。見積: 0.15MM。'
-  notes_vi: Liên kết BaseViewModel cho log
-- id: T-426-05
-  customer_task_id: KSNEWSYS-426
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-565
-  type: タスク
-  title: API call foundation連携点準備
-  description: API call foundationからrequest/responseログを利用できるよう、連携点を整理します。
-  owner: Đỗ Hoàng Nam VTI.D6
-  start_date: '2026-05-21'
-  end_date: ''
-  deadline: '2026-06-30'
-  status: Not Started
-  priority: High
-  definition_of_done: Request/Responseログ出力IFとマスキングルールがあること。
-  risk_id: R-006, R-007, R-008, R-009
-  notes: '元No: 426-05。分類: 実装／結合。見積: 0.10MM。'
-  notes_vi: Chuẩn bị điểm kết nối với API call foundation
-- id: T-426-06
-  customer_task_id: KSNEWSYS-426
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-566
-  type: タスク
-  title: ログ動作テスト・確認
-  description: 代表パターンでログ出力とexception送信を確認します。
-  owner: Đỗ Hoàng Nam VTI.D6
-  start_date: '2026-05-21'
-  end_date: ''
-  deadline: '2026-07-31'
-  status: Not Started
-  priority: High
-  definition_of_done: ログ出力、Sentry送信、異常系の確認証跡があること。
-  risk_id: R-006, R-007, R-008, R-009
-  notes: '元No: 426-06。分類: テスト。見積: 0.10MM。'
-  notes_vi: Test và xác nhận hoạt động log
-- id: T-426-07
-  customer_task_id: KSNEWSYS-426
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-567
-  type: タスク
-  title: ログ設計書・利用ルール作成
-  description: 画面実装者が迷わないよう、最小限の利用ルールを文書化します。
-  owner: Đỗ Hoàng Nam VTI.D6
-  start_date: '2026-05-21'
-  end_date: ''
-  deadline: '2026-07-31'
-  status: Not Started
-  priority: High
-  definition_of_done: ログ利用ルールとdeveloper向け注意点があること。
-  risk_id: R-006, R-007, R-008, R-009
-  notes: '元No: 426-07。分類: ドキュメント。見積: 0.10MM。'
-  notes_vi: Tạo tài liệu thiết kế và quy tắc sử dụng log
-- id: T-427-01
-  customer_task_id: KSNEWSYS-427
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-568
-  type: タスク
-  title: 復元対象情報の整理
-  description: 保存／復元対象にする情報の最小共通ルールを定義します。
-  owner: Đỗ Hoàng Nam VTI.D6
-  start_date: '2026-05-21'
-  end_date: ''
-  deadline: '2026-06-30'
-  status: In Progress
-  priority: High
-  definition_of_done: 保存対象、復元タイミング、除外条件の一覧があること。
-  risk_id: R-010
-  notes: '元No: 427-01。分類: 調査／設計。見積: 0.10MM。'
-  notes_vi: Sắp xếp thông tin cần khôi phục
-- id: T-427-02
-  customer_task_id: KSNEWSYS-427
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-569
-  type: タスク
-  title: 保存・復元Service設計
-  description: 将来画面を追加しても壊れにくい共通基盤方針を決定します。
-  owner: Đỗ Hoàng Nam VTI.D6
-  start_date: '2026-05-21'
-  end_date: ''
-  deadline: '2026-06-30'
-  status: Awaiting Customer Review
-  priority: High
-  definition_of_done: Storage IF、key設計、version方針、delete policyがあること。
-  risk_id: R-010
-  notes: SQLite保存（snapshot & transition）方式は5月13日に提案済みです。JNTからKSNEWSYS-309/245のクラッシュ後ログイン復旧について追加参照依頼がありました（5月18日更新）。
-  notes_vi: Thiết kế Service lưu và khôi phục
-- id: T-427-03
-  customer_task_id: KSNEWSYS-427
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-570
-  type: タスク
-  title: BaseViewModel保存・復元連携
-  description: ContentPage側の負担を減らすため、共通処理をBaseViewModelへ集約します。
-  owner: Đỗ Hoàng Nam VTI.D6
-  start_date: '2026-05-21'
-  end_date: ''
-  deadline: '2026-06-30'
-  status: In Progress
-  priority: High
-  definition_of_done: lifecycle連携とsave/restore hookがあること。
-  risk_id: R-010
-  notes: '元No: 427-03。分類: 実装。見積: 0.20MM。'
-  notes_vi: Liên kết BaseViewModel cho lưu và khôi phục
-- id: T-427-04
-  customer_task_id: KSNEWSYS-427
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-571
-  type: タスク
-  title: カスタムコンポーネント向けBehavior方針
-  description: TextBoxなどのcomponentが別project/solutionにある可能性を考慮し、直接依存を避けます。
-  owner: Đỗ Hoàng Nam VTI.D6
-  start_date: '2026-05-21'
-  end_date: ''
-  deadline: '2026-06-30'
-  status: In Progress
-  priority: High
-  definition_of_done: TextBoxおよび代表componentに対するBehavior適用方針があること。
-  risk_id: R-010
-  notes: '元No: 427-04。分類: 設計／実装。見積: 0.15MM。'
-  notes_vi: Phương châm Behavior cho custom component
-- id: T-427-05
-  customer_task_id: KSNEWSYS-427
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-572
-  type: タスク
-  title: ローカル保存実装
-  description: ターミナル／アプリ再起動時を想定した基本処理を準備します。
-  owner: Đỗ Hoàng Nam VTI.D6
-  start_date: '2026-05-21'
-  end_date: ''
-  deadline: '2026-06-30'
-  status: In Progress
-  priority: High
-  definition_of_done: save/restore、delete、失敗時処理があること。
-  risk_id: R-010
-  notes: '元No: 427-05。分類: 実装。見積: 0.15MM。'
-  notes_vi: Triển khai lưu local
-- id: T-427-06
-  customer_task_id: KSNEWSYS-427
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-573
-  type: タスク
-  title: 保存・復元動作テスト
-  description: 代表パターンでsave/restoreが成立することを確認します。
-  owner: Đỗ Hoàng Nam VTI.D6
-  start_date: '2026-05-21'
-  end_date: ''
-  deadline: '2026-07-31'
-  status: In Progress
-  priority: High
-  definition_of_done: restore、破損データ、未保存データ、画面遷移の確認証跡があること。
-  risk_id: R-010
-  notes: '元No: 427-06。分類: テスト。見積: 0.10MM。'
-  notes_vi: Test và xác nhận hoạt động lưu/khôi phục
-- id: T-427-07
-  customer_task_id: KSNEWSYS-427
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-574
-  type: タスク
-  title: 保存・復元設計書・開発ルール作成
-  description: 業務画面側で必要な実装ルールを明確にします。
-  owner: Đỗ Hoàng Nam VTI.D6
-  start_date: '2026-05-21'
-  end_date: ''
-  deadline: '2026-07-31'
-  status: In Progress
-  priority: High
-  definition_of_done: developer向けルールと実装例があること。
-  risk_id: R-010
-  notes: '元No: 427-07。分類: ドキュメント。見積: 0.05MM。'
-  notes_vi: Tạo tài liệu thiết kế và rule phát triển lưu/khôi phục
-- id: T-C-01
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-575
-  type: タスク
-  title: お客様確認と仕様Q&A
-  description: Device、Log、Storageにまたがる範囲のため、早期確認で手戻りを減らします。
-  owner: VTI_NHUT
-  start_date: '2026-05-21'
-  end_date: ''
-  deadline: '2026-07-31'
-  status: In Progress
-  priority: Medium
-  definition_of_done: Q&Aと確認事項一覧があること。
-  risk_id: R-003, R-004, R-005
-  notes: '元No: C-01。分類: 管理／調整。見積: 0.15MM。お客様との確認が必要です。'
-  notes_vi: Xác nhận khách hàng và Q&A đặc tả
-- id: T-C-02
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-576
-  type: タスク
-  title: 進捗・課題管理
-  description: 最終期限が2026-07-31のため、月次だけでなく短い周期で状況を可視化します。
-  owner: VTI_NHUT
-  start_date: '2026-05-21'
-  end_date: ''
-  deadline: '2026-07-31'
-  status: In Progress
-  priority: Medium
-  definition_of_done: 進捗報告、課題一覧、リスク管理があること。
-  risk_id: R-003, R-004, R-005
-  notes: '元No: C-02。分類: 管理。見積: 0.15MM。'
-  notes_vi: Quản lý tiến độ và vấn đề
-- id: T-C-03
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-577
-  type: タスク
-  title: 関連する小規模タスクの吸収
-  description: レビューで発生する命名、設定、接続まわりの軽微な調整は個別見積に分けず共通枠で扱います。
-  owner: VTI_SAM
-  start_date: '2026-05-21'
-  end_date: ''
-  deadline: '2026-07-31'
-  status: Not Started
-  priority: Medium
-  definition_of_done: 軽微な修正または周辺調整が共通範囲で処理されていること。
-  risk_id: R-003, R-004, R-005
-  notes: '元No: C-03。分類: 調整。見積: 0.20MM。'
-  notes_vi: Hấp thụ task nhỏ liên quan
-- id: T-424-13
-  customer_task_id: KSNEWSYS-424
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-578
-  type: タスク
-  title: KsPos.Applications向け釣銭機エラーガイダンスsub-view枠追加
-  description: legacy WinForms SubFormに相当する釣銭機エラーガイダンスサブフォームを、MAUI ContentView/UserControlとしてKsPos.Applications側に作成します。対象はApplication層のみで、WinForms
-    Formは新規作成しません。
-  owner: VTI_SAM
-  start_date: '2026-05-27'
-  end_date: ''
-  deadline: '2026-06-30'
-  status: Not Started
-  priority: High
-  definition_of_done: Presentation/Views/UserControlsにCashChangerErrorGuidance用ContentView枠があること。既存のsub-view管理機構がある場合はそこへ登録し、ない場合はscope外のarchitecture拡張をしないこと。独立ContentPageではないためAppShell
-    routeは追加せず、詳細UI、recovery logic、DeviceCtrl呼び出しは実装しないこと。KsPos.Applicationsのbuildが通ること。
-  risk_id: R-001, R-002
-  notes: お客様の釣銭機エラーガイダンスサブフォーム要望から発生。用語は legacy SubForm -> MAUI ContentView/UserControl として扱います。source code実装時はPM-controlのskills/source-code-intel/を使い、sources/KsPosBoilerplate/KsPos.Applicationsに範囲を絞ってrtk
-    rgで確認し、build/testで検証します。
-  notes_vi: Thêm khung sub-view hướng dẫn lỗi máy thu tiền trong KsPos.Applications
-- id: T-442-01
-  customer_task_id: KSNEWSYS-442
-  vti_backlog_id: SHARP_MULTI_DEVICE_POS-620
-  type: タスク
-  title: KSNEWSYS-442 Tablet POSテーブルのzebra表示可否調査
-  description: Tablet POS上で、現在の白一色表示の代わりに青／白の交互行（zebra）を表示できるか調査します。
-  owner: Đỗ Hoàng Nam VTI.D6
-  start_date: '2026-05-28'
-  end_date: ''
-  deadline: '2026-06-30'
-  status: Not Started
-  priority: Medium
-  definition_of_done: zebra表示の実現可否を確認し、お客様向けの設計回答を更新していること。
-  notes: VTI Backlog ticket SHARP_MULTI_DEVICE_POS-620 から作成。お客様からのzebra表示要望です。
-  notes_vi: Điều tra khả năng hiển thị zebra trong bảng Tablet POS
+  definition_of_done: 見積範囲、成果物、確認観点が整理され、お客様がスケジュールと対象範囲を確認できること。
+  risk_id: R-004
+  notes: ''
+  notes_vi: Phản ánh feedback KH cho estimate/Gantt

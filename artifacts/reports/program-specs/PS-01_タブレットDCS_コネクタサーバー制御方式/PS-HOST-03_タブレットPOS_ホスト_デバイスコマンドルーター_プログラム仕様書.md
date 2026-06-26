@@ -15,7 +15,7 @@
 | プロジェクト名 | タブレットPOS |
 | 機能名 | デバイスコマンドルーター |
 | 物理クラス名 | DeviceCommandRouter |
-| 名前空間 | KsOutProcess.KsDeviceServer |
+| 名前空間 | TabletOutProcess.TabletDeviceServer |
 | アクセス修飾子 | internal partial |
 | 継承/実装 | IDisposable |
 | 更新日 | 2026/06/21 |
@@ -24,7 +24,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/KsPosBoilerplate/TabetPos.Host/src/KsHost/DeviceHost/DeviceCommandRouter.cs |
+| ソースファイル | sources/tabletposboilerplate/TabetPos.Host/src/TabletHost/DeviceHost/DeviceCommandRouter.cs |
 | 対象クラス | DeviceCommandRouter |
 | 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 

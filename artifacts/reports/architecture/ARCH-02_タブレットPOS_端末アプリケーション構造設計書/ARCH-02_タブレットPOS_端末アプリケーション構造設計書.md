@@ -78,7 +78,7 @@ ARCH-02 端末アプリケーション構造設計書
 | ファイル名 |
 |---|
 | ARCH-01_タブレットPOS_ソフトウェア構造設計書.docx |
-| ARCH-03_タブレットPOS_デバイス接続サーバー構造設計書.docx |
+| コネクタサーバー構造設計書 |
 | PS-HOST-01_タブレットPOS_ホスト_名前付きパイプコマンドサーバー_プログラム仕様書.xlsx |
 | PS-HOST-02_タブレットPOS_ホスト_名前付きパイプデバイスホストアダプター_プログラム仕様書.xlsx |
 | PS-HOST-03_タブレットPOS_ホスト_デバイスコマンドルーター_プログラム仕様書.xlsx |
@@ -111,7 +111,7 @@ ARCH-02 端末アプリケーション構造設計書
 | 画面遷移 | `AppShell`, `IRouteRegistry`, `INavigationService` | Shell route 登録、route 名の一元管理、ViewModel からの画面遷移要求を扱う |
 | 画面構成 | `MainPage`, `MainPageViewModel` | 画面表示、入力状態、command、navigation / device service 呼び出しを分離する |
 | デバイス設定 | `DeviceControllerConfigService` | `device_controller_config.json` を読み込み、`DeviceManager` へ設定を反映する |
-| デバイス境界 | `DeviceManager`, `NamedPipeClient` | strategy 解決と Host 連携を担当し、端末アプリケーションから通信詳細を隠蔽する |
+| デバイス境界 | `DeviceManager`, `NamedPipeClient` | strategy 解決とコネクタサーバー（Host）連携を担当し、端末アプリケーションから通信詳細を隠蔽する |
 
 ### 2.2 レイヤ構成
 

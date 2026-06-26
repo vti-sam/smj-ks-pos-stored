@@ -1,4 +1,4 @@
-# タブレットPOS デバイス接続サーバー制御方式構造図 Mermaid 原文
+# タブレットPOS コネクタサーバー制御方式構造図 Mermaid 原文
 
 ```mermaid
 %%{init: {
@@ -24,7 +24,7 @@ flowchart TB
             direction TB
 
             app_layer["アプリケーション層\n機器操作を要求する"]
-            app_lifecycle["通常運用時のライフサイクル連携\n起動・画面作成・復帰：Host自動起動\n停止・終了：KillでHost停止\nStart/Stop画面：デバッグ用途のみ"]
+            app_lifecycle["通常運用時のライフサイクル連携\n起動・画面作成・復帰：サーバー自動起動\n停止・終了：Killでサーバー停止\nStart/Stop画面：デバッグ用途のみ"]
 
             subgraph device_ctrl["デバイス制御層（DeviceCtrl）"]
                 direction TB
@@ -33,7 +33,7 @@ flowchart TB
                 subgraph control_route["制御方式"]
                     direction LR
                     direct_control["直接制御\nアプリ内で制御する"]
-                    namedpipe_client["NamedPipeClient\nサーバー経由が必要な機器を送信する"]
+                namedpipe_client["NamedPipeClient\nコネクタサーバー経由の機器を送信する"]
                 end
             end
 
@@ -43,7 +43,7 @@ flowchart TB
             device_setup -->|"サーバー経由"| namedpipe_client
         end
 
-        subgraph appserver["デバイス接続サーバー（Host）"]
+        subgraph appserver["コネクタサーバー（Host）"]
             direction TB
 
             host_main["デバイスサーバーホスト\n(TabletHost)\n起動・停止を管理する\nアプリライフサイクルで自動制御"]
@@ -56,7 +56,7 @@ flowchart TB
                 command_handler["デバイスコマンドハンドラー\n(DeviceCommandHandler)\n機器操作を実行する"]
             end
 
-            subgraph appserver_runtime["Host内デバイス実装"]
+            subgraph appserver_runtime["コネクタサーバー内デバイス実装"]
                 direction TB
                 device_manager["デバイスマネージャー\n(TabletDeviceManager)\n対象機器を呼び出す"]
                 device_base["デバイスベース\n(DeviceBase)\n共通処理を提供する"]
@@ -95,7 +95,7 @@ flowchart TB
             payment_terminal["決済端末\n決済連携"]
         end
 
-        subgraph server_devices["デバイス接続サーバー（Host）経由の実機\n現行POSの対象機器"]
+        subgraph server_devices["コネクタサーバー（Host）経由の実機\n現行POSの対象機器"]
             direction TB
             cash_changer_device["釣銭機"]
             cash_drawer_device["キャッシュドロア"]
@@ -103,7 +103,7 @@ flowchart TB
         end
     end
 
-    namedpipe_client -->|"Host経由"| command_server
+    namedpipe_client -->|"コネクタサーバー経由"| command_server
     app_lifecycle ==>|"自動起動／停止要求"| host_main
 
     direct_control --> scanner
@@ -115,7 +115,7 @@ flowchart TB
     cash_drawer --> cash_drawer_device
     customer_display --> customer_display_device
 
-    memo["＊ 通常運用時は、タブレットPOSアプリのライフサイクルに合わせてデバイス接続サーバー（Host）を自動起動・停止します。Start/Stop画面はデバッグ／開発者向けに限定し、通常運用時には表示しません。\n＊ Host経由は現行POSの対象機器を継続利用するための経路です。機種追加時は原則として直接制御で対応します。\n＊ 自動釣銭機UIスレッドフォーム RT-300 は、内部フォームとしてOPOS/OCXをUIスレッド上で保持し、共有メモリ・要求/応答ファイル連携を処理します。"]
+    memo["＊ 通常運用時は、タブレットPOSアプリのライフサイクルに合わせてコネクタサーバー（Host）を自動起動・停止します。Start/Stop画面はデバッグ／開発者向けに限定し、通常運用時には表示しません。\n＊ コネクタサーバー（Host）経由は現行POSの対象機器を継続利用するための経路です。機種追加時は原則として直接制御で対応します。\n＊ 自動釣銭機UIスレッドフォーム RT-300 は、内部フォームとしてOPOS/OCXをUIスレッド上で保持し、共有メモリ・要求/応答ファイル連携を処理します。"]
 
     class app_layer,device_setup,namedpipe_client,direct_control,host_main,host_adapter,command_server,command_router,command_handler,device_manager,device_base core;
     class scanner,camera,printer,payment_terminal,cash_changer_device,cash_drawer_device,customer_display_device core;

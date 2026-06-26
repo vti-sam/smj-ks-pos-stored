@@ -1,8 +1,8 @@
 ---
-title: CFG-01 デバイス制御層設定ファイル記載要領
+title: デバイス制御層設定ファイル記載要領
 document_id: CFG-01
 project: tablet_pos
-type: architecture
+type: configuration-guide
 status: draft
 source:
   - chat:2026-06-11
@@ -15,7 +15,7 @@ tags:
   - writing-guide
 ---
 
-# CFG-01 デバイス制御層設定ファイル記載要領
+# デバイス制御層設定ファイル記載要領
 
 文書ID: CFG-01
 
@@ -26,6 +26,7 @@ tags:
 | 2026/06/11 | 0.1.0 | `device_controller_config.json` および `host_device_config.json` の記載要領を新規作成 | VTI-サム | - |
 | 2026/06/12 | 0.1.1 | デバイス種類ごとの `device_controller_config.json` 記載例を追加 | VTI-サム | - |
 | 2026/06/15 | 0.1.2 | `device_controller_config.json` の全体記載例を追加 | VTI-サム | - |
+| 2026/06/25 | 0.1.3 | 設定ファイル名、配置先、Named Pipe 名を現行構成に合わせて更新 | VTI-サム | - |
 
 ## 目次
 
@@ -79,7 +80,7 @@ tags:
 
 対象読者は、端末ごとの周辺機器設定を作成・確認する開発者、テスト担当者、導入担当者である。
 
-本書では、端末アプリケーション側の設定である `device_controller_config.json` と、Windows Host 側の設定である `host_device_config.json` を分けて説明する。
+本書では、端末アプリケーション側の設定である `device_controller_config.json` と、コネクタサーバー（Host）側の設定である `host_device_config.json` を分けて説明する。
 
 ### 1.2 対象ファイル
 
@@ -87,15 +88,15 @@ tags:
 |---|---|---|
 | `device_controller_config.json` | `TabetPos.Applications/Resources/Raw/device_controller_config.json` | アプリに同梱する初期設定 |
 | `device_controller_config.json` | `FileSystem.AppDataDirectory/device_controller_config.json` | 起動後に編集・保存する端末別設定 |
-| `host_device_config.json` | `TabetPos.Host/src/AppServer/Resources/host_device_config.json` | Host 側に同梱するデバイス実装設定 |
-| `host_device_config.json` | `Host実行フォルダ\Resources\host_device_config.json` | ビルド後に Host が実際に読み込む設定 |
+| `host_device_config.json` | `TabetPos.Host/src/AppServer/Resources/host_device_config.json` | コネクタサーバー（Host）側に同梱するデバイス実装設定 |
+| `host_device_config.json` | `コネクタサーバー実行フォルダ\Resources\host_device_config.json` | ビルド後にコネクタサーバー（Host）が実際に読み込む設定 |
 
 ### 1.3 前提事項
 
 - `device_controller_config.json` は、端末アプリケーション側で使用するデバイス設定である。
-- `host_device_config.json` は、Windows Host 側で使用するデバイス設定である。
-- `device_controller_config.json` は、Host 側のデバイス読込設定を置き換えない。
-- Windows の OPOS / OCX / ActiveX lifecycle は Host 側に閉じ込める。
+- `host_device_config.json` は、コネクタサーバー（Host）側で使用するデバイス設定である。
+- `device_controller_config.json` は、コネクタサーバー（Host）側のデバイス読込設定を置き換えない。
+- Windows の OPOS / OCX / ActiveX lifecycle はコネクタサーバー（Host）側に閉じ込める。
 - 端末アプリケーションは OPOS / OCX / ActiveX を直接呼び出さない。
 
 ### 1.4 関連ドキュメント
@@ -104,7 +105,7 @@ tags:
 |---|
 | ARCH-01_タブレットPOS_ソフトウェア構造設計書.docx |
 | ARCH-02_タブレットPOS_端末アプリケーション構造設計書.docx |
-| ARCH-03_タブレットPOS_デバイス接続サーバー構造設計書.docx |
+| コネクタサーバー構造設計書 |
 | PS-HOST-01_タブレットPOS_ホスト_名前付きパイプコマンドサーバー_プログラム仕様書.xlsx |
 | PS-HOST-02_タブレットPOS_ホスト_名前付きパイプデバイスホストアダプター_プログラム仕様書.xlsx |
 | PS-HOST-03_タブレットPOS_ホスト_デバイスコマンドルーター_プログラム仕様書.xlsx |
@@ -128,9 +129,9 @@ tags:
 | POS 利用者 | タブレットPOSアプリを操作する | - |
 | タブレットPOSアプリ | 売上、会計、周辺機器操作を行う端末アプリケーション | `device_controller_config.json` |
 | 端末側デバイス設定 | 端末で使用するデバイス候補、有効デバイス、接続情報を定義する | `device_controller_config.json` |
-| Windows Host | Windows 端末で OPOS / OCX / ActiveX 機器を制御する外部プロセス | `host_device_config.json` |
-| Host 側デバイス設定 | Host が起動・保持する legacy device 実装を定義する | `host_device_config.json` |
-| Windows 端末の外部機器 | カスタマーディスプレイ、キャッシュドロワー、自動釣銭機など | 端末側設定 + Host 側設定 |
+| コネクタサーバー（Host） | Windows 端末で OPOS / OCX / ActiveX 機器を制御する外部プロセス | `host_device_config.json` |
+| コネクタサーバー（Host）側デバイス設定 | コネクタサーバー（Host）が起動・保持する既存デバイス資源を定義する | `host_device_config.json` |
+| Windows 端末の外部機器 | カスタマーディスプレイ、キャッシュドロワー、自動釣銭機など | 端末側設定 + コネクタサーバー（Host）側設定 |
 | iOS / Android 端末の外部機器 | カメラ、Bluetooth、SDK 経由のプリンターなど | 主に端末側設定 |
 
 ### 2.2 設定ファイルの役割サマリ
@@ -138,11 +139,11 @@ tags:
 | 設定ファイル | 管轄 | 目的 | 主な構成 | 読込タイミング |
 |---|---|---|---|---|
 | `device_controller_config.json` | 端末アプリケーション側 | 端末で使用するデバイス候補と有効デバイスを定義する | `devices`, `activeDevices`, `appSettings` | タブレットPOSアプリ起動時 |
-| `host_device_config.json` | Windows Host 側 | Host がロードする legacy device 実装を定義する | `devices` | Windows Host 起動時 |
+| `host_device_config.json` | コネクタサーバー（Host）側 | コネクタサーバー（Host）がロードする既存デバイス資源を定義する | `devices` | コネクタサーバー（Host）起動時 |
 
 補足:
 
-- Windows 端末で OPOS / OCX / ActiveX を利用する機器は、端末側設定と Host 側設定の両方を確認する。
+- Windows 端末で OPOS / OCX / ActiveX を利用する機器は、端末側設定とコネクタサーバー（Host）側設定の両方を確認する。
 - iOS / Android 端末で端末内のカメラ、Bluetooth、SDK を利用する機器は、主に `device_controller_config.json` を確認する。
 - 2 つの設定ファイルは役割が異なるため、一方のファイルでもう一方を置き換えない。
 
@@ -171,18 +172,20 @@ tags:
 
 ### 3.2 起動時設定読込フロー
 
-![device_controller_config 起動時設定読込フロー](device_controller_config_flow.svg)
+![device_controller_config 起動時設定読込フロー](CFG-01_タブレットPOS_デバイス制御層設定ファイル起動時読込フロー.svg)
 
 ### 3.3 起動時処理概要
 
 | 処理順 | 処理 | 内容 | 備考 |
 |---|---|---|---|
-| 1 | 設定ファイル確認 | AppData 配下に端末別の `device_controller_config.json` が存在するか確認する | 存在する場合は端末別設定を優先する |
-| 2 | 初期設定確認 | 端末別設定がない場合、アプリに同梱された初期設定を使用する | 初期導入時の標準設定として使用する |
-| 3 | 設定内容読込 | JSON の内容を読み取り、デバイス設定として扱える形にする | JSON syntax error は設定不備として扱う |
-| 4 | デバイス候補反映 | `devices[]` に記載されたデバイス候補を保持する | 後続処理で `activeDevices` から参照する |
-| 5 | 有効デバイス反映 | OS ごとに使用するデバイスを `activeDevices` から判定する | 対象 OS の定義がない場合、そのデバイス種別は使用しない |
-| 6 | 共通設定反映 | `appSettings.namedPipe` などの共通設定を保持する | Windows Host-backed device で使用する |
+| 1 | タブレットPOSアプリ起動 | タブレットPOSアプリの起動時に設定読込処理を開始する | - |
+| 2 | 端末別設定ファイル確認 | AppData 配下に端末別の `device_controller_config.json` が存在するか確認する | 存在する場合は端末別設定を優先する |
+| 3 | 初期設定使用 | 端末別設定がない場合、アプリに同梱された初期設定を使用する | 初期導入時の標準設定として使用する |
+| 4 | 設定ファイル読込 | 選択した `device_controller_config.json` を読み込む | JSON が読めない場合は設定不備として扱う |
+| 5 | 設定内容確認 | `devices`, `activeDevices`, `appSettings` の内容を確認する | 参照先 device ID が存在しない場合は設定不備として扱う |
+| 6 | 使用デバイス決定 | 現在の OS に応じて使用するデバイスを `activeDevices` から判定する | 対象 OS の定義が不整合な場合は設定不備として扱う |
+| 7 | 共通設定保持 | `appSettings.namedPipe` などの共通設定を保持する | コネクタサーバー（Host）経由デバイスで使用する |
+| 8 | 利用準備完了 | デバイス制御層（DeviceCtrl）で利用できる状態にする | - |
 
 ### 3.4 ルート項目
 
@@ -199,7 +202,7 @@ tags:
 | 分類 | キー | 型 | 必須 | 内容 | 備考 |
 |---|---|---|---|---|---|
 | devices 配列 | `id` | string | 必須 | 設定内で一意な device ID | `activeDevices` から参照するため重複不可 |
-| devices 配列 | `name` | string | 必須 | デバイス名または論理名 | Windows Host-backed device では OPOS 論理名と対応させる |
+| devices 配列 | `name` | string | 必須 | デバイス名または論理名 | コネクタサーバー（Host）経由デバイスでは OPOS 論理名と対応させる |
 | devices 配列 | `type` | string | 必須 | デバイス種別 | `activeDevices` のキーと一致させる |
 | devices 配列 | `vendor` | string | 任意 | ベンダー名 | 例: `sharp`, `epson` |
 | devices 配列 | `series` | string | 任意 | 機種・シリーズ識別 | 導入・保守時に識別しやすい値にする |
@@ -264,12 +267,12 @@ tags:
 
 ### 3.8 appSettings.namedPipe
 
-`appSettings.namedPipe` は、Windows 端末から Host へ機器制御を依頼する際の共通設定である。
+`appSettings.namedPipe` は、Windows 端末からコネクタサーバー（Host）へ機器制御を依頼する際の共通設定である。
 
 | 分類 | キー | 型 | 必須 | 内容 | 備考 |
 |---|---|---|---|---|---|
-| appSettings | `namedPipe` | object | 任意 | Windows Host-backed device 用の Named Pipe 設定 | iOS / Android では通常使用しない |
-| appSettings.namedPipe | `pipeName` | string | 任意 | Windows Host へ接続するための pipe 名 | 例: `TabetPos.Host.Command`。旧既定値 `TabletPOSPipeMessage` は起動時に現行 pipe 名へ移行される |
+| appSettings | `namedPipe` | object | 任意 | コネクタサーバー（Host）経由デバイス用の Named Pipe 設定 | iOS / Android では通常使用しない |
+| appSettings.namedPipe | `pipeName` | string | 任意 | コネクタサーバー（Host）へ接続するための pipe 名 | 例: `TabetPos.Host.Command` |
 | appSettings.namedPipe | `connectionTimeoutMs` | number | 任意 | Named Pipe 接続タイムアウト(ms) | 例: `5000` |
 
 ### 3.9 記載値一覧
@@ -297,13 +300,13 @@ tags:
 
 | OS | strategyclass | 用途 |
 |---|---|---|
-| windows | `OposPrinterStrategy` | Host-backed printer |
-| windows | `OposScannerStrategy` | Host-backed scanner |
+| windows | `OposPrinterStrategy` | コネクタサーバー（Host）経由プリンター |
+| windows | `OposScannerStrategy` | コネクタサーバー（Host）経由スキャナー |
 | windows | `SerialHandyScannerStrategy` | Windows serial scanner |
-| windows | `OposCashChangerStrategy` | Host-backed cash changer |
+| windows | `OposCashChangerStrategy` | コネクタサーバー（Host）経由自動釣銭機 |
 | windows | `SerialCashChangerStrategy` | Windows serial cash changer |
-| windows | `OposCustomerDisplayStrategy` | Host-backed customer display |
-| windows | `OposDrawerStrategy` | Host-backed drawer |
+| windows | `OposCustomerDisplayStrategy` | コネクタサーバー（Host）経由カスタマーディスプレイ |
+| windows | `OposDrawerStrategy` | コネクタサーバー（Host）経由キャッシュドロワー |
 | windows | `OposKeyboardStrategy` | OPOS keyboard |
 | windows | `WindowsRawKeyboardStrategy` | Windows raw keyboard listener |
 | ios | `IosEpsonPrinterStrategy` | iOS Epson printer |
@@ -322,71 +325,76 @@ tags:
 
 | 観点 | 内容 |
 |---|---|
-| 目的 | Windows Host がロードする legacy device 実装を定義する |
+| 目的 | コネクタサーバー（Host）がロードする既存デバイス資源を定義する |
 | 対象 | OPOS / OCX / ActiveX / ベンダー提供 DLL で制御する周辺機器 |
-| 使用者 | Windows Host |
-| 主な判断 | Host 内でどの device ID をどの class ID で生成するか |
+| 使用者 | コネクタサーバー（Host） |
+| 主な判断 | コネクタサーバー（Host）内でどの device ID をどの class ID で生成するか |
 | 配置元 | `TabetPos.Host/src/AppServer/Resources/host_device_config.json` |
-| ビルド後配置先 | `Host実行フォルダ\Resources\host_device_config.json` |
+| ビルド後配置先 | `コネクタサーバー実行フォルダ\Resources\host_device_config.json` |
 | 実行時参照先 | `AppContext.BaseDirectory\Resources\host_device_config.json` |
 
 ### 4.2 起動時設定読込フロー
 
-![host_device_config 起動時設定読込フロー](host_device_config_flow.svg)
+![host_device_config 起動時設定読込フロー](CFG-01_タブレットPOS_コネクタサーバー設定ファイル起動時読込フロー.svg)
 
 ### 4.3 起動時処理概要
 
 | 処理順 | 処理 | 内容 | 備考 |
 |---|---|---|---|
-| 1 | Host 側設定確認 | Host 実行フォルダ配下の `Resources\host_device_config.json` を確認する | ビルド時に `src\AppServer\Resources` から出力先へコピーされる |
-| 2 | Host 側設定読込 | `devices` 配列を上から順に読み取る | Host が起動する対象機器の一覧として使用する |
-| 3 | 起動対象判定 | `id`, `name`, `classId` をもとに起動対象機器を確認する | `id` が未定義、`name` が空、`classId` が不正な場合は起動対象から外れる |
-| 4 | 外部機器起動 | Host 側で対象機器を生成し、外部機器制御を開始する | OPOS / OCX / ActiveX / Vendor DLL を Host 側から呼び出す |
+| 1 | コネクタサーバー（Host）起動 | 通常運用時はタブレットPOSアプリのライフサイクルに合わせて起動する | ユーザーによる手動の開始操作は前提としない |
+| 2 | コネクタサーバー（Host）側設定ファイル確認 | コネクタサーバー実行フォルダ配下の `Resources\host_device_config.json` を確認する | ビルド時に `src\AppServer\Resources` から出力先へコピーされる |
+| 3 | 設定ファイル読込 | `host_device_config.json` を読み込む | JSON が読めない場合は設定不備として扱う |
+| 4 | devices 配列確認 | `devices` 配列を確認する | コネクタサーバー（Host）が起動・保持する対象機器の一覧として使用する |
+| 5 | device 定義確認 | `id`, `name`, `classId` を確認する | `id` が未定義、`name` が空、`classId` が不正な場合は設定不備として扱う |
+| 6 | 起動対象決定 | 有効な定義だけを起動対象にする | 不備がある定義は起動対象から外す |
+| 7 | 対象デバイス実装生成 | `classId` をもとにコネクタサーバー（Host）側の実装を生成する | - |
+| 8 | 外部機器制御開始 | OPOS / OCX / ActiveX / Vendor DLL をコネクタサーバー（Host）側から呼び出す | 端末アプリケーション側からは直接呼び出さない |
+| 9 | 利用準備完了 | コネクタサーバー（Host）側で利用できる状態にする | - |
 
 ### 4.4 ルート項目
 
 | 分類 | キー | 型 | 必須 | 内容 | 備考 |
 |---|---|---|---|---|---|
-| ルート項目 | `devices` | array | 必須 | Host がロードする device 実装一覧 | 各要素は `devices 配列` の定義に従う |
+| ルート項目 | `devices` | array | 必須 | コネクタサーバー（Host）がロードするデバイス実装一覧 | 各要素は `devices 配列` の定義に従う |
 
 ### 4.5 devices 配列
 
 | 分類 | キー | 型 | 必須 | 内容 | 備考 |
 |---|---|---|---|---|---|
-| devices 配列 | `id` | string | 必須 | Host 内の device ID | Host 内で制御対象の機器を識別するために使用 |
-| devices 配列 | `name` | string | 必須 | Host 内で使用する表示名または論理名 | OPOS 論理名または表示名 |
-| devices 配列 | `classId` | string | 必須 | Host 側の実装識別 ID | Host 側で生成可能な値を指定 |
+| devices 配列 | `id` | string | 必須 | コネクタサーバー（Host）内の device ID | コネクタサーバー（Host）内で制御対象の機器を識別するために使用 |
+| devices 配列 | `name` | string | 必須 | コネクタサーバー（Host）内で使用する表示名または論理名 | OPOS 論理名または表示名 |
+| devices 配列 | `classId` | string | 必須 | コネクタサーバー（Host）側の実装識別 ID | コネクタサーバー（Host）側で生成可能な値を指定 |
 | devices 配列 | `visible` | boolean | 任意 | device form の表示有無 | 通常は `false` |
 | devices 配列 | `productName` | string | 任意 | 製品名・機種識別 | 保守時に device を識別するために使用 |
 | devices 配列 | `parameters` | string / object | 任意 | device-specific parameter | device 実装により参照内容が異なる |
 
 記載ルール:
 
-- `classId` は Host 側で生成可能な値を指定する。
-- `id` は Host 内で制御対象の機器を識別するため、重複させない。
+- `classId` はコネクタサーバー（Host）側で生成可能な値を指定する。
+- `id` はコネクタサーバー（Host）内で制御対象の機器を識別するため、重複させない。
 - `device_controller_config.json` 側の `devices[].name` / `devices[].id` と完全一致が必要な項目ではないが、運用上は対応関係が追跡できる命名にする。
 
 ### 4.6 現行定義一覧
 
-本節では、Host 側でロード対象となる主要 device 定義を示す。
+本節では、コネクタサーバー（Host）側でロード対象となる主要 device 定義を示す。
 
 | device ID | name | classId | visible | productName | 用途 |
 |---|---|---|---|---|---|
-| `LineDisplay` | `SHARPRZ4DP1B` | `LineDisplay1` | `false` | `SHARPRZ4DP1B` | カスタマーディスプレイ |
+| `CustomerDisplay` | `SHARPRZ4DP1B` | `LineDisplay1` | `false` | `SHARPRZ4DP1B` | カスタマーディスプレイ |
 | `CashDrawer` | `SHARPUPJ36DW3` | `CashDrawer1` | `false` | `SHARPUPJ36DW3` | キャッシュドロワー |
 | `CashChanger` | `CASHCHANGER` | `CashChanger1` | `false` | - | 自動釣銭機 |
 
 ### 4.7 端末側設定との対応関係
 
-`host_device_config.json` は Host がロードする device implementation を定義する。一方、`device_controller_config.json` は端末アプリケーション側で有効にする制御方式と接続設定を定義する。
+`host_device_config.json` はコネクタサーバー（Host）がロードするデバイス実装を定義する。一方、`device_controller_config.json` は端末アプリケーション側で有効にする制御方式と接続設定を定義する。
 
 | 観点 | `device_controller_config.json` | `host_device_config.json` |
 |---|---|---|
-| 管轄 | 端末アプリケーション側 | Windows Host 側 |
+| 管轄 | 端末アプリケーション側 | コネクタサーバー（Host）側 |
 | 主キー | `devices[].id` | `devices[].id` |
 | 実装選択 | `strategyclass` | `classId` |
-| 接続設定 | `devices[].config` | `parameters` / Host device 実装内設定 |
-| 参照タイミング | タブレットPOSアプリ起動時、デバイス制御時 | Windows Host 起動時 |
+| 接続設定 | `devices[].config` | `parameters` / コネクタサーバー（Host）内デバイス実装設定 |
+| 参照タイミング | タブレットPOSアプリ起動時、デバイス制御時 | コネクタサーバー（Host）起動時 |
 
 両ファイルの ID は必ずしも同一である必要はない。ただし、導入・保守時に追跡しやすいよう、device type、製品名、論理名の対応関係が分かる命名にする。
 
@@ -410,10 +418,10 @@ tags:
 | 処理 | 内容 | 関連設定 |
 |---|---|---|
 | 使用デバイス選択 | 端末側設定から使用する device ID と制御方式を決定する | `device_controller_config.json` |
-| Host 連携 | Windows Host へ機器制御を依頼する | `appSettings.namedPipe` |
-| Host 側 device 判定 | Host 側設定から対象 device 実装を取得する | `host_device_config.json` |
-| 外部機器制御 | Host 側から OPOS / OCX / ActiveX / Vendor DLL を呼び出す | `classId`, `name`, `parameters` |
-| 結果返却 | Host から端末アプリケーションへ制御結果を返却する | Host からの処理結果 |
+| コネクタサーバー連携 | コネクタサーバー（Host）へ機器制御を依頼する | `appSettings.namedPipe` |
+| コネクタサーバー（Host）側デバイス判定 | コネクタサーバー（Host）側設定から対象デバイス実装を取得する | `host_device_config.json` |
+| 外部機器制御 | コネクタサーバー（Host）側から OPOS / OCX / ActiveX / Vendor DLL を呼び出す | `classId`, `name`, `parameters` |
+| 結果返却 | コネクタサーバー（Host）から端末アプリケーションへ制御結果を返却する | コネクタサーバー（Host）からの処理結果 |
 
 ### 5.3 iOS / Android 端末の外部機器制御
 
@@ -434,10 +442,10 @@ tags:
 | 4 | OS | `os` が `windows`, `ios`, `android` のいずれかであること |
 | 5 | device type | `type` が `activeDevices` のキーと一致すること |
 | 6 | strategyclass | アプリ内で使用可能な制御方式の識別名であること |
-| 7 | Windows Host-backed | `appSettings.namedPipe.pipeName` が Host 側の pipe 設定と一致すること |
+| 7 | コネクタサーバー（Host）経由設定 | `appSettings.namedPipe.pipeName` がコネクタサーバー（Host）側の pipe 設定と一致すること |
 | 8 | Serial device | `comport`, `baudrate`, `parity`, `databits`, `stopbits` が端末環境と一致すること |
 | 9 | Network device | `ipaddress`, `port` が実機環境と一致すること |
-| 10 | Host config | Host-backed device の場合、Host 側 `host_device_config.json` に対応 device が定義されていること |
+| 10 | サーバー設定 | コネクタサーバー（Host）経由デバイスの場合、コネクタサーバー（Host）側 `host_device_config.json` に対応 device が定義されていること |
 | 11 | Runtime override | AppData 側に古い `device_controller_config.json` が残っていないこと |
 | 12 | Encoding | UTF-8 で保存されていること |
 
@@ -449,7 +457,7 @@ tags:
 
 - 本章の例は、`devices` 配列に追加する 1 要素の例である。
 - 実際に使用する device は、`activeDevices` 側で `os` と `id` を指定して有効化する。
-- Windows Host-backed device の場合、`device_controller_config.json` では端末アプリケーション側の device type、strategy、接続方式を定義する。Host 側でロードする device implementation は `host_device_config.json` に定義する。
+- コネクタサーバー（Host）経由デバイスの場合、`device_controller_config.json` では端末アプリケーション側の device type、strategy、接続方式を定義する。コネクタサーバー（Host）側でロードするデバイス実装は `host_device_config.json` に定義する。
 - `id`, `name`, `ipaddress`, `comport`, `macaddress` などは、導入先端末および実機環境に合わせて変更する。
 
 ### 7.2 プリンター
@@ -923,4 +931,4 @@ Windows の Raw Keyboard listener を使用する場合は、`strategyclass` を
 }
 ```
 
-上記は Windows Host-backed device を使用する端末の記載例である。導入先で使用する機器に合わせて、`devices[].id`、`devices[].name`、`devices[].strategyclass`、`devices[].config`、および `activeDevices` の参照 ID を変更する。
+上記はコネクタサーバー（Host）経由デバイスを使用する端末の記載例である。導入先で使用する機器に合わせて、`devices[].id`、`devices[].name`、`devices[].strategyclass`、`devices[].config`、および `activeDevices` の参照 ID を変更する。

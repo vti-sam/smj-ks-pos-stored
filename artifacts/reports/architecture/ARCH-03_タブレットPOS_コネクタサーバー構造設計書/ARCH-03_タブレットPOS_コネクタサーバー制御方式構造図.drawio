@@ -25,7 +25,7 @@
         <mxCell id="frame-control_route" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;fontColor=#475569;fillColor=#FFFFFF;strokeColor=#CBD5E1;container=1;recursiveResize=0;collapsible=0;verticalAlign=top;align=center;spacingTop=4;" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;制御方式&lt;/b&gt;&lt;/font&gt;" vertex="1">
           <mxGeometry height="150" width="515" x="100" y="400" as="geometry" />
         </mxCell>
-        <mxCell id="frame-appserver" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=20;fontColor=#475569;fillColor=#FFFFFF;strokeColor=#CBD5E1;container=1;recursiveResize=0;collapsible=0;verticalAlign=top;align=center;spacingTop=4;" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;&lt;b&gt;デバイス接続サーバー（Host）&lt;/b&gt;&lt;/font&gt;" vertex="1">
+        <mxCell id="frame-appserver" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=20;fontColor=#475569;fillColor=#FFFFFF;strokeColor=#CBD5E1;container=1;recursiveResize=0;collapsible=0;verticalAlign=top;align=center;spacingTop=4;" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;&lt;b&gt;コネクタサーバー（Host）&lt;/b&gt;&lt;/font&gt;" vertex="1">
           <mxGeometry height="810" width="925" x="705" y="50" as="geometry" />
         </mxCell>
         <mxCell id="host_adapter" parent="frame-appserver" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontColor=#1E293B;fillColor=#FFFFFF;strokeColor=#475569;" value="&lt;b&gt;名前付きパイプデバイスホストアダプター&lt;/b&gt;&lt;br&gt;(NamedPipeDeviceHostAdapter)&lt;br&gt;通信を管理する" vertex="1">
@@ -37,7 +37,7 @@
         <mxCell id="e_host_main_to_adapter" edge="1" parent="frame-appserver" source="host_main" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;strokeColor=#475569;strokeWidth=1;labelBackgroundColor=#FFFFFF;labelBorderColor=none;" target="host_adapter" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="lifecycle_callout" parent="frame-appserver" style="rounded=1;whiteSpace=wrap;html=1;fontSize=13;fontColor=#78350F;fillColor=#FEF3C7;strokeColor=#D97706;strokeWidth=3;shadow=1;align=left;spacingLeft=12;spacingRight=10;" value="&lt;b&gt;通常運用時のライフサイクル連携&lt;/b&gt;&lt;br&gt;起動・画面作成・復帰：Host自動起動&lt;br&gt;停止・終了：KillでHost停止&lt;br&gt;Start/Stop画面：デバッグ用途のみ" vertex="1">
+        <mxCell id="lifecycle_callout" parent="frame-appserver" style="rounded=1;whiteSpace=wrap;html=1;fontSize=13;fontColor=#78350F;fillColor=#FEF3C7;strokeColor=#D97706;strokeWidth=3;shadow=1;align=left;spacingLeft=12;spacingRight=10;" value="&lt;b&gt;通常運用時のライフサイクル連携&lt;/b&gt;&lt;br&gt;起動・画面作成・復帰：サーバー自動起動&lt;br&gt;停止・終了：Killでサーバー停止&lt;br&gt;Start/Stop画面：デバッグ用途のみ" vertex="1">
           <mxGeometry height="115" width="265" x="-85" y="45" as="geometry" />
         </mxCell>
         <mxCell id="e_lifecycle_to_host_main" edge="1" parent="frame-appserver" source="lifecycle_callout" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;strokeColor=#D97706;strokeWidth=3;labelBackgroundColor=#FEF3C7;labelBorderColor=none;fontColor=#78350F;" target="host_main" value="自動起動／停止要求">
@@ -49,7 +49,7 @@
         <mxCell id="frame-appserver_core" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;fontColor=#475569;fillColor=#FFFFFF;strokeColor=#CBD5E1;container=1;recursiveResize=0;collapsible=0;verticalAlign=top;align=center;spacingTop=4;" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;制御基盤&lt;/b&gt;&lt;/font&gt;" vertex="1">
           <mxGeometry height="155" width="865" x="735" y="285" as="geometry" />
         </mxCell>
-        <mxCell id="frame-appserver_runtime" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;fontColor=#475569;fillColor=#FFFFFF;strokeColor=#CBD5E1;container=1;recursiveResize=0;collapsible=0;verticalAlign=top;align=center;spacingTop=4;" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;Host内デバイス実装&lt;/b&gt;&lt;/font&gt;" vertex="1">
+        <mxCell id="frame-appserver_runtime" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;fontColor=#475569;fillColor=#FFFFFF;strokeColor=#CBD5E1;container=1;recursiveResize=0;collapsible=0;verticalAlign=top;align=center;spacingTop=4;" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;コネクタサーバー内デバイス実装&lt;/b&gt;&lt;/font&gt;" vertex="1">
           <mxGeometry height="345" width="865" x="735" y="475" as="geometry" />
         </mxCell>
         <mxCell id="frame-cash_changer_group" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;fontColor=#475569;fillColor=#FFFFFF;strokeColor=#CBD5E1;container=1;recursiveResize=0;collapsible=0;verticalAlign=top;align=center;spacingTop=4;" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;自動釣銭機&lt;/b&gt;&lt;/font&gt;" vertex="1">
@@ -64,7 +64,7 @@
         <mxCell id="frame-direct_devices" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;fontColor=#475569;fillColor=#FFFFFF;strokeColor=#CBD5E1;container=1;recursiveResize=0;collapsible=0;verticalAlign=top;align=center;spacingTop=4;" value="&lt;font style=&quot;&quot;&gt;&lt;b style=&quot;font-size: 16px;&quot;&gt;アプリ内で直接制御する機器&lt;/b&gt;&lt;/font&gt;" vertex="1">
           <mxGeometry height="125" width="720" x="70" y="970" as="geometry" />
         </mxCell>
-        <mxCell id="frame-server_devices" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;fontColor=#475569;fillColor=#FFFFFF;strokeColor=#CBD5E1;container=1;recursiveResize=0;collapsible=0;verticalAlign=top;align=center;spacingTop=4;" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;デバイス接続サーバー（Host）経由の実機&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size: 12px;&quot;&gt;現行POSの対象機器&lt;/font&gt;" vertex="1">
+        <mxCell id="frame-server_devices" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;fontColor=#475569;fillColor=#FFFFFF;strokeColor=#CBD5E1;container=1;recursiveResize=0;collapsible=0;verticalAlign=top;align=center;spacingTop=4;" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;コネクタサーバー（Host）経由の実機&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size: 12px;&quot;&gt;現行POSの対象機器&lt;/font&gt;" vertex="1">
           <mxGeometry height="125" width="690" x="890" y="970" as="geometry" />
         </mxCell>
         <mxCell id="device_setup" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontColor=#1E293B;fillColor=#FFFFFF;strokeColor=#475569;" value="&lt;b&gt;DeviceManager / Config / Factory&lt;/b&gt;&lt;br&gt;機器ごとの制御方式を決定する" vertex="1">
@@ -73,7 +73,7 @@
         <mxCell id="direct_control" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontColor=#1E293B;fillColor=#FFFFFF;strokeColor=#475569;" value="&lt;b&gt;直接制御&lt;/b&gt;&lt;br&gt;アプリ内で制御する" vertex="1">
           <mxGeometry height="88" width="215" x="130" y="445" as="geometry" />
         </mxCell>
-        <mxCell id="namedpipe_client" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontColor=#1E293B;fillColor=#FFFFFF;strokeColor=#475569;" value="&lt;b&gt;NamedPipeClient&lt;/b&gt;&lt;br&gt;サーバー経由が必要な機器を送信する" vertex="1">
+        <mxCell id="namedpipe_client" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontColor=#1E293B;fillColor=#FFFFFF;strokeColor=#475569;" value="&lt;b&gt;NamedPipeClient&lt;/b&gt;&lt;br&gt;コネクタサーバー経由の機器を送信する" vertex="1">
           <mxGeometry height="88" width="215" x="375" y="445" as="geometry" />
         </mxCell>
         <mxCell id="command_server" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontColor=#1E293B;fillColor=#FFFFFF;strokeColor=#475569;" value="&lt;b&gt;名前付きパイプコマンドサーバー&lt;/b&gt;&lt;br&gt;(NamedPipeCommandServer)&lt;br&gt;要求を受け付ける" vertex="1">
@@ -121,7 +121,7 @@
         <mxCell id="customer_display_device" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontColor=#1E293B;fillColor=#FFFFFF;strokeColor=#475569;" value="カスタマーディスプレイ" vertex="1">
           <mxGeometry height="70" width="195" x="1350" y="1015" as="geometry" />
         </mxCell>
-        <mxCell id="memo" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontColor=#78350F;fillColor=#FFFBEB;strokeColor=#F59E0B;strokeWidth=1;align=left;" value="＊1 通常運用時は、タブレットPOSアプリのライフサイクルに合わせてデバイス接続サーバー（Host）を自動起動・停止します。Start/Stop画面はデバッグ／開発者向けに限定し、通常運用時には表示しません。&lt;br&gt;＊2 Host経由は現行POSの対象機器を継続利用するための経路です。機種追加時は原則として直接制御で対応します。&lt;br&gt;＊3 自動釣銭機UIスレッドフォーム RT-300 は、内部フォームとしてOPOS/OCXをUIスレッド上で保持し、共有メモリ・要求/応答ファイル連携を処理します。" vertex="1">
+        <mxCell id="memo" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontColor=#78350F;fillColor=#FFFBEB;strokeColor=#F59E0B;strokeWidth=1;align=left;" value="＊1 通常運用時は、タブレットPOSアプリのライフサイクルに合わせてコネクタサーバー（Host）を自動起動・停止します。Start/Stop画面はデバッグ／開発者向けに限定し、通常運用時には表示しません。&lt;br&gt;＊2 コネクタサーバー（Host）経由は現行POSの対象機器を継続利用するための経路です。機種追加時は原則として直接制御で対応します。&lt;br&gt;＊3 自動釣銭機UIスレッドフォーム RT-300 は、内部フォームとしてOPOS/OCXをUIスレッド上で保持し、共有メモリ・要求/応答ファイル連携を処理します。" vertex="1">
           <mxGeometry height="115" width="1500" x="65" y="1165" as="geometry" />
         </mxCell>
         <mxCell id="e_app_to_setup" edge="1" parent="1" source="app_layer" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;strokeColor=#475569;strokeWidth=1;labelBackgroundColor=#FFFFFF;labelBorderColor=none;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" target="device_setup" value="">
@@ -137,7 +137,7 @@
         <mxCell id="e_setup_to_namedpipe" edge="1" parent="1" source="device_setup" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;strokeColor=#475569;strokeWidth=1;labelBackgroundColor=#FFFFFF;labelBorderColor=none;fontColor=#000000;" target="namedpipe_client" value="サーバー経由">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_namedpipe_to_server" edge="1" parent="1" source="namedpipe_client" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;strokeColor=#475569;strokeWidth=1;labelBackgroundColor=#FFFFFF;labelBorderColor=none;fontColor=#000000;" target="command_server" value="Host経由">
+        <mxCell id="e_namedpipe_to_server" edge="1" parent="1" source="namedpipe_client" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;strokeColor=#475569;strokeWidth=1;labelBackgroundColor=#FFFFFF;labelBorderColor=none;fontColor=#000000;" target="command_server" value="コネクタサーバー経由">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="675" y="489" />

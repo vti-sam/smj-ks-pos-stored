@@ -4,6 +4,7 @@
 
 | バージョン | 更新日 | 更新者 | 変更内容 |
 | --- | --- | --- | --- |
+| 0.0.4 | 2026/06/25 | VTI サム | 内部フォームの表示可否判定の表現を明確化 |
 | 0.0.3 | 2026/06/25 | VTI サム | UIスレッドフォームの位置づけを追記 |
 | 0.0.2 | 2026/06/21 | VTI サム | クラス仕様、フィールド/プロパティ、メソッド仕様を更新 |
 | 0.0.1 | 2026/06/19 | VTI サム | 初版作成 |
@@ -16,7 +17,7 @@
 | プロジェクト名 | タブレットPOS |
 | 機能名 | 自動釣銭機UIスレッドフォーム RT-300 |
 | 物理クラス名 | CashChangerByRt300Form |
-| 名前空間 | KsOutProcess.KsDeviceServer |
+| 名前空間 | TabletOutProcess.TabletDeviceServer |
 | アクセス修飾子 | public partial |
 | 継承/実装 | Form |
 | 更新日 | 2026/06/25 |
@@ -25,7 +26,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/KsPosBoilerplate/TabetPos.Host/src/KsDevice/CashChanger/CashChangerByRT300/CashChangerByRT300Form.cs |
+| ソースファイル | sources/tabletposboilerplate/TabetPos.Host/src/TabletDevice/CashChanger/CashChangerByRT300/CashChangerByRT300Form.cs |
 | 対象クラス | CashChangerByRt300Form |
 | 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 
@@ -44,7 +45,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | 区分 | 可視性 | 型 | 名前 | 用途 |
 | --- | --- | --- | --- | --- |
 | フィールド | public | CashChangerBase | Device | フォームから参照するデバイス制御インスタンス。 |
-| フィールド | public | KsDeviceId | DeviceId | フォームに紐づくデバイスID。 |
+| フィールド | public | TabletDeviceId | DeviceId | フォームに紐づくデバイスID。 |
 | フィールド | public | int | DiStatus | OPOS 釣銭機イベントの DI_STATUS 値。 |
 | フィールド | public | int | DiEvent | OPOS 釣銭機イベントの DI_EVENT 値。 |
 | フィールド | public | int | EnqStatus | OPOS 釣銭機イベントの ENQ_STATUS 値。 |
@@ -74,7 +75,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | --- | --- | --- | --- | --- |
 | 1 | public | - | CashChangerByRt300Form | インスタンスを初期化する。 |
 | 2 | private | void | DevForm_Load | 例外ハンドラー、非表示配置、共有メモリ、要求/応答ファイルパス、タイマー初期値を設定する。 |
-| 3 | private | void | DevForm_Shown | KsDeviceInfo 登録、OPOS Open/Claim/DeviceEnabled、画面表示判定、監視タイマー起動を行う。 |
+| 3 | private | void | DevForm_Shown | TabletDeviceInfo 登録、OPOS Open/Claim/DeviceEnabled、内部フォームの表示可否判定、監視タイマー起動を行う。 |
 | 4 | private | void | DevForm_FormClosing | 共有メモリを破棄し、対象 OPOS CashChanger が opened の場合は close する。 |
 | 5 | private | void | OnThreadException | COM 呼び出し競合の既知 ExternalException は無視し、それ以外は再throwする。 |
 | 6 | private | void | OnUnhandledThreadException | 未処理例外でも同じ COM 競合だけを無視し、それ以外は再throwする。 |
@@ -186,7 +187,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 処理内容:
 
 - ① 初回表示だけ処理し、フォームを hide する。
-- ② DeviceId/DeviceName を KsDeviceInfo に登録し、Device_Open を実行する。
+- ② DeviceId/DeviceName を TabletDeviceInfo に登録し、Device_Open を実行する。
 - ③ Visible 設定に応じて taskbar 表示とフォーム位置を調整する。
 - ④ Claim、PowerNotify、DeviceEnabled を順に実行し、初回排他エラーはログに残す。
 - ⑤ 釣銭機監視タイマーとファイル連携タイマーを開始する。
@@ -212,7 +213,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 - ① 終了ログを出力する。
 - ② 共有メモリ TURIREQ/TURIANS を破棄する。
-- ③ KsDeviceInfo から対象 DeviceId を探す。
+- ③ TabletDeviceInfo から対象 DeviceId を探す。
 - ④ 対象 OPOS CashChanger が opened の場合は Device_Close を実行する。
 
 備考: -
@@ -798,7 +799,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 | 項目 | 内容 |
 | --- | --- |
-| シグネチャ | `private int File_Method(KsDeviceMethodID methodId, Dictionary<string, string> arguments, ref Dictionary<string, string> returns)` |
+| シグネチャ | `private int File_Method(TabletDeviceMethodID methodId, Dictionary<string, string> arguments, ref Dictionary<string, string> returns)` |
 | 可視性 | private |
 | 戻り値 | int |
 
@@ -806,7 +807,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 | 型 | 論理名 | 物理名 |
 | --- | --- | --- |
-| KsDeviceMethodID | デバイスメソッドID | methodId |
+| TabletDeviceMethodID | デバイスメソッドID | methodId |
 | Dictionary<string, string> | 入力引数 | arguments |
 | Dictionary<string, string> | 戻り値格納先 | returns |
 
