@@ -58,6 +58,7 @@
 | シグネチャ | `public static async Task ApplyMigrationsAsync(IDbContextFactory<LocalStateDbContext> dbFactory)` |
 | 可視性 | public static |
 | 戻り値 | Task |
+| 戻り値内容 | 非同期処理の完了を表すタスク。 |
 
 引数:
 

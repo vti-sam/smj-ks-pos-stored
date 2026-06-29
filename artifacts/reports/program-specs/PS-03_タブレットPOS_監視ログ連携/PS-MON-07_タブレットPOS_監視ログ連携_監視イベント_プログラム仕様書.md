@@ -61,6 +61,7 @@
 | シグネチャ | `public MonitoringEvent(string Category, string Message, MonitoringLevel Level = MonitoringLevel.Info, IReadOnlyDictionary<string, string>? Data = null)` |
 | 可視性 | public |
 | 戻り値 | - |
+| 戻り値内容 | - |
 
 引数:
 

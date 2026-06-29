@@ -71,6 +71,7 @@
 | シグネチャ | `protected override async Task OnAppearingAsync()` |
 | 可視性 | protected override |
 | 戻り値 | Task |
+| 戻り値内容 | 非同期処理の完了を表すタスク。 |
 
 処理内容:
 
@@ -86,6 +87,7 @@
 | シグネチャ | `protected override async Task OnDisappearingAsync()` |
 | 可視性 | protected override |
 | 戻り値 | Task |
+| 戻り値内容 | 非同期処理の完了を表すタスク。 |
 
 処理内容:
 
@@ -101,6 +103,7 @@
 | シグネチャ | `protected override async Task OnResumingAsync()` |
 | 可視性 | protected override |
 | 戻り値 | Task |
+| 戻り値内容 | 非同期処理の完了を表すタスク。 |
 
 処理内容:
 
@@ -116,6 +119,7 @@
 | シグネチャ | `protected override async Task OnStoppingAsync()` |
 | 可視性 | protected override |
 | 戻り値 | Task |
+| 戻り値内容 | 非同期処理の完了を表すタスク。 |
 
 処理内容:
 
@@ -131,6 +135,7 @@
 | シグネチャ | `private async Task SavePropertiesToSnapshotAsync()` |
 | 可視性 | private |
 | 戻り値 | Task |
+| 戻り値内容 | 非同期処理の完了を表すタスク。 |
 
 処理内容:
 
@@ -148,6 +153,7 @@
 | シグネチャ | `private async Task SavePropertiesToSnapshotCoreAsync()` |
 | 可視性 | private |
 | 戻り値 | Task |
+| 戻り値内容 | 非同期処理の完了を表すタスク。 |
 
 処理内容:
 
@@ -165,6 +171,7 @@
 | シグネチャ | `private async Task RestorePropertiesFromSnapshotAsync()` |
 | 可視性 | private |
 | 戻り値 | Task |
+| 戻り値内容 | 非同期処理の完了を表すタスク。 |
 
 処理内容:
 
@@ -182,6 +189,7 @@
 | シグネチャ | `private PropertyInfo[] GetPersistableProperties()` |
 | 可視性 | private |
 | 戻り値 | PropertyInfo[] |
+| 戻り値内容 | 保存対象として指定された項目を抽出してキャッシュした結果。 |
 
 処理内容:
 
@@ -199,6 +207,7 @@
 | シグネチャ | `private static object? ConvertSnapshotValue(object? value, Type targetType)` |
 | 可視性 | private static |
 | 戻り値 | object? |
+| 戻り値内容 | 保存済み値を復元先の型へ変換した結果。該当しない場合は null。 |
 
 引数:
 

@@ -71,6 +71,7 @@
 | シグネチャ | `public TabletHost()` |
 | 可視性 | public |
 | 戻り値 | - |
+| 戻り値内容 | - |
 
 処理内容:
 
@@ -87,6 +88,7 @@
 | シグネチャ | `public TabletHost(int mode)` |
 | 可視性 | public |
 | 戻り値 | - |
+| 戻り値内容 | - |
 
 引数:
 
@@ -109,6 +111,7 @@
 | シグネチャ | `public void StartHost()` |
 | 可視性 | public |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 処理内容:
 
@@ -127,6 +130,7 @@
 | シグネチャ | `public void StopHost()` |
 | 可視性 | public |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 処理内容:
 
@@ -143,6 +147,7 @@
 | シグネチャ | `private void HandleHostAction(DeviceHostAction action)` |
 | 可視性 | private |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 
@@ -165,6 +170,7 @@
 | シグネチャ | `public void ReplyDevice(IDeviceServiceCallBack client, TabletDeviceId deviceId, TabletDeviceMethodID ksDeviceMethodId, IntPtr handle, Dictionary<string, string> dic)` |
 | 可視性 | public |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 

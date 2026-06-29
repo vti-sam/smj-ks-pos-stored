@@ -62,6 +62,7 @@
 | シグネチャ | `void SetContext(MonitoringContext context)` |
 | 可視性 | public |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 
@@ -83,6 +84,7 @@
 | シグネチャ | `void AddBreadcrumb(MonitoringEvent monitoringEvent)` |
 | 可視性 | public |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 
@@ -104,6 +106,7 @@
 | シグネチャ | `string CaptureMessage(MonitoringEvent monitoringEvent)` |
 | 可視性 | public |
 | 戻り値 | string |
+| 戻り値内容 | 調査対象メッセージをイベントとして送信した結果。 |
 
 引数:
 
@@ -125,6 +128,7 @@
 | シグネチャ | `string CaptureException(Exception exception, MonitoringEvent? monitoringEvent = null)` |
 | 可視性 | public |
 | 戻り値 | string |
+| 戻り値内容 | 例外をイベントとして送信した結果。 |
 
 引数:
 
@@ -148,6 +152,7 @@
 | シグネチャ | `Task FlushAsync(TimeSpan timeout)` |
 | 可視性 | public |
 | 戻り値 | Task |
+| 戻り値内容 | 非同期処理の完了を表すタスク。 |
 
 引数:
 

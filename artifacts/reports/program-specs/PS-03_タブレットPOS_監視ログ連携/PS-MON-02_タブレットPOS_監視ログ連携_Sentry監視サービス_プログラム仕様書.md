@@ -67,6 +67,7 @@
 | シグネチャ | `public void SetContext(MonitoringContext context)` |
 | 可視性 | public |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 
@@ -90,6 +91,7 @@
 | シグネチャ | `public void AddBreadcrumb(MonitoringEvent monitoringEvent)` |
 | 可視性 | public |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 
@@ -113,6 +115,7 @@
 | シグネチャ | `public string CaptureMessage(MonitoringEvent monitoringEvent)` |
 | 可視性 | public |
 | 戻り値 | string |
+| 戻り値内容 | 監視イベントのメッセージをSentryイベントとして送信した結果。 |
 
 引数:
 
@@ -136,6 +139,7 @@
 | シグネチャ | `public string CaptureException(Exception exception, MonitoringEvent? monitoringEvent = null)` |
 | 可視性 | public |
 | 戻り値 | string |
+| 戻り値内容 | 例外をSentryイベントとして送信した結果。 |
 
 引数:
 
@@ -159,6 +163,7 @@
 | シグネチャ | `public Task FlushAsync(TimeSpan timeout)` |
 | 可視性 | public |
 | 戻り値 | Task |
+| 戻り値内容 | 非同期処理の完了を表すタスク。 |
 
 引数:
 
@@ -181,6 +186,7 @@
 | シグネチャ | `private static void SetTag(Scope scope, string key, string? value)` |
 | 可視性 | private static |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 
@@ -205,6 +211,7 @@
 | シグネチャ | `private static string Mask(string value)` |
 | 可視性 | private static |
 | 戻り値 | string |
+| 戻り値内容 | 文字列をマスキングし、nullの場合も空文字として扱った結果。 |
 
 引数:
 
@@ -227,6 +234,7 @@
 | シグネチャ | `private static Dictionary<string, string>? MaskData(IReadOnlyDictionary<string, string>? data)` |
 | 可視性 | private static |
 | 戻り値 | Dictionary<string, string>? |
+| 戻り値内容 | 補足データの値をマスキングした結果。該当しない場合は null。 |
 
 引数:
 
@@ -250,6 +258,7 @@
 | シグネチャ | `private static BreadcrumbLevel ToBreadcrumbLevel(MonitoringLevel level)` |
 | 可視性 | private static |
 | 戻り値 | BreadcrumbLevel |
+| 戻り値内容 | 監視レベルを操作履歴レベルへ変換した結果。 |
 
 引数:
 
@@ -273,6 +282,7 @@
 | シグネチャ | `private static SentryLevel ToSentryLevel(MonitoringLevel level)` |
 | 可視性 | private static |
 | 戻り値 | SentryLevel |
+| 戻り値内容 | 監視レベルをSentryイベントレベルへ変換した結果。 |
 
 引数:
 

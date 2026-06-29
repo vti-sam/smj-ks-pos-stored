@@ -136,6 +136,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `public CashChangerByRt300Form()` |
 | 可視性 | public |
 | 戻り値 | - |
+| 戻り値内容 | - |
 
 処理内容:
 
@@ -152,6 +153,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private void DevForm_Load(object sender, EventArgs e)` |
 | 可視性 | private |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 
@@ -176,6 +178,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private void DevForm_Shown(object sender, EventArgs e)` |
 | 可視性 | private |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 
@@ -201,6 +204,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private void DevForm_FormClosing(object sender, FormClosingEventArgs e)` |
 | 可視性 | private |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 
@@ -225,6 +229,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private void OnThreadException(object sender, ThreadExceptionEventArgs t)` |
 | 可視性 | private |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 
@@ -248,6 +253,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private void OnUnhandledThreadException(object sender, UnhandledExceptionEventArgs t)` |
 | 可視性 | private |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 
@@ -271,6 +277,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private void AxOPOSCashChanger1_DataEvent(object sender, _IOPOSCashChangerEvents_DataEventEvent e)` |
 | 可視性 | private |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 
@@ -295,6 +302,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private void AxOPOSCashChanger1_DirectIOEvent(object sender, _IOPOSCashChangerEvents_DirectIOEventEvent e)` |
 | 可視性 | private |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 
@@ -319,6 +327,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private void AxOPOSCashChanger1_StatusUpdateEvent(object sender, _IOPOSCashChangerEvents_StatusUpdateEventEvent e)` |
 | 可視性 | private |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 
@@ -343,6 +352,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `public bool IsArrayEx(ref string[] sPrm)` |
 | 可視性 | public |
 | 戻り値 | bool |
+| 戻り値内容 | 非同期イベント配列が利用可能な状態か確認した結果。 |
 
 引数:
 
@@ -365,6 +375,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `public void OposCashMng()` |
 | 可視性 | public |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 処理内容:
 
@@ -381,6 +392,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private void Timer1_Tick(object sender, EventArgs e)` |
 | 可視性 | private |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 
@@ -405,6 +417,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private int OPOSCash_DepositAmount(ref int lDepositAmount, ref string sDepostCounts, ref int lErr, ref string sErr, [Optional, DefaultParameterValue(true)] ref bool bLogPut)` |
 | 可視性 | private |
 | 戻り値 | int |
+| 戻り値内容 | BeginDeposit 後の入金額と金種別枚数を取得した結果。 |
 
 引数:
 
@@ -433,6 +446,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private int OPOSCash_DirectIO(int lCommand, ref int pData, ref string pString, ref int lErr, ref string sErr)` |
 | 可視性 | private |
 | 戻り値 | int |
+| 戻り値内容 | 指定 command、pData、pString で CashChanger DirectIO を同期実行した結果。 |
 
 引数:
 
@@ -461,6 +475,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private void PDirectIo(int lCmd, ref int pData, ref string pString)` |
 | 可視性 | private |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 
@@ -485,6 +500,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private int OPOSCash_Seisa(ref string sSeisaData, ref int lErr, ref string sErr)` |
 | 可視性 | private |
 | 戻り値 | int |
+| 戻り値内容 | 精査 DirectIO を実行し、収納庫・回収ボックス別の収納データ。 |
 
 引数:
 
@@ -511,6 +527,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private string OposCashResltMsg(ref int lRlt, ref int lRsltEx)` |
 | 可視性 | private |
 | 戻り値 | string |
+| 戻り値内容 | ResultCode/ResultCodeExtended とデバイス状態から表示用エラーメッセージを決定した結果。 |
 
 引数:
 
@@ -534,6 +551,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private void PReleaseDevice()` |
 | 可視性 | private |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 処理内容:
 
@@ -550,6 +568,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private string PGetDepositCounts(bool bLogPut)` |
 | 可視性 | private |
 | 戻り値 | string |
+| 戻り値内容 | DepositCounts を取得し、ログ出力した結果。 |
 
 引数:
 
@@ -572,6 +591,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private int PGetDepositAmount(bool bLogPut)` |
 | 可視性 | private |
 | 戻り値 | int |
+| 戻り値内容 | DepositAmount を取得し、ログ出力した結果。 |
 
 引数:
 
@@ -594,6 +614,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private void PDeviceEnabled2(bool bVal, [Optional, DefaultParameterValue(true)] ref bool bLogPut)` |
 | 可視性 | private |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 
@@ -617,6 +638,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private void PFreezeEvents(bool bVal)` |
 | 可視性 | private |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 
@@ -639,6 +661,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private void PDataEventEnabled(bool bVal)` |
 | 可視性 | private |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 
@@ -661,6 +684,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private void PDeviceEnabled(bool bVal, [Optional, DefaultParameterValue(true)] ref bool bLogPut)` |
 | 可視性 | private |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 
@@ -684,6 +708,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private void PClaimDevice([Optional, DefaultParameterValue(true)] ref bool bLogPut)` |
 | 可視性 | private |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 
@@ -706,6 +731,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private int OPOSCash_FullStatus([Optional, DefaultParameterValue(true)] ref bool bLogPut)` |
 | 可視性 | private |
 | 戻り値 | int |
+| 戻り値内容 | CashChanger の FullStatus を取得した結果。 |
 
 引数:
 
@@ -730,6 +756,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private int PGetFullStatus([Optional, DefaultParameterValue(true)] ref bool bLogPut)` |
 | 可視性 | private |
 | 戻り値 | int |
+| 戻り値内容 | FullStatus を取得し、ログ出力した結果。 |
 
 引数:
 
@@ -752,6 +779,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private void TmrErrGuide_Tick(object sender, EventArgs e)` |
 | 可視性 | private |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 
@@ -776,6 +804,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private void TimFile_Tick(object sender, EventArgs e)` |
 | 可視性 | private |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 
@@ -802,6 +831,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private int File_Method(TabletDeviceMethodID methodId, Dictionary<string, string> arguments, ref Dictionary<string, string> returns)` |
 | 可視性 | private |
 | 戻り値 | int |
+| 戻り値内容 | ファイル/メモリ連携から来た釣銭機コマンドを DeviceMethod と同等の分岐で実行した結果。 |
 
 引数:
 
@@ -829,6 +859,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private int OPOSCash_EndDeposit_FlagON()` |
 | 可視性 | private |
 | 戻り値 | int |
+| 戻り値内容 | EndDeposit 完了フラグを立て、入金終了処理が完了した状態を記録した結果。 |
 
 処理内容:
 
@@ -847,6 +878,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private int OPOSCash_EndDeposit(int lSuccess, ref int lErr, ref string sErr)` |
 | 可視性 | private |
 | 戻り値 | int |
+| 戻り値内容 | 入金終了区分に従って EndDeposit を実行し、Begin/End 間の排他状態を解除した結果。 |
 
 引数:
 
@@ -873,6 +905,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private void PEndDeposit(int success)` |
 | 可視性 | private |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 
@@ -895,6 +928,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private int OPOSCash_FixDeposit(ref int lErr, ref string sErr, ref int lDepositAmount, ref string sDepositCounts)` |
 | 可視性 | private |
 | 戻り値 | int |
+| 戻り値内容 | 入金を確定し、確定金額と金種別枚数を取得した結果。 |
 
 引数:
 
@@ -921,6 +955,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private void PFixDeposit()` |
 | 可視性 | private |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 処理内容:
 
@@ -937,6 +972,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private int OPOSCash_DispenseCashAsync(int lCurrentExit, string sCashCounts, ref int lErr, ref string sErr)` |
 | 可視性 | private |
 | 戻り値 | int |
+| 戻り値内容 | 非同期モードで金種別払出を実行し、結果を async result として受け取った結果。 |
 
 引数:
 
@@ -964,6 +1000,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private int OPOSCash_DispenseCash(int lCurrentExit, string sCashCounts, ref int lErr, ref string sErr)` |
 | 可視性 | private |
 | 戻り値 | int |
+| 戻り値内容 | 払出口と金種別枚数を指定して払出を実行した結果。 |
 
 引数:
 
@@ -991,6 +1028,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private void PDispenseCash(string cashCounts)` |
 | 可視性 | private |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 
@@ -1013,6 +1051,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private int OPOSCash_DispenseChange(int lCurrentExit, int lAmount, ref int lErr, ref string sErr)` |
 | 可視性 | private |
 | 戻り値 | int |
+| 戻り値内容 | 払出口と金額を指定して払出を実行した結果。 |
 
 引数:
 
@@ -1040,6 +1079,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private void PDispenseChange(int amount)` |
 | 可視性 | private |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 
@@ -1062,6 +1102,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private void PCurrentExit(int lVal)` |
 | 可視性 | private |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 
@@ -1084,6 +1125,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private int OPOSCash_DepositDataRead(ref string sDepositData, ref int lErr, ref string sErr)` |
 | 可視性 | private |
 | 戻り値 | int |
+| 戻り値内容 | 計数中データを DirectIO で取得し、金種別の枚数文字列へ整形した結果。 |
 
 引数:
 
@@ -1110,6 +1152,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private int OPOSCash_CoinStatus(ref string sStatus, ref int lErr, ref string sErr)` |
 | 可視性 | private |
 | 戻り値 | int |
+| 戻り値内容 | 硬貨部の収納状態を DirectIO で取得し、金種別 status 文字列へ整形した結果。 |
 
 引数:
 
@@ -1136,6 +1179,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private string Read_IconFile(string sKey)` |
 | 可視性 | private |
 | 戻り値 | string |
+| 戻り値内容 | 外部連携用の INI またはアイコン状態ファイルを読み書きした結果。 |
 
 引数:
 
@@ -1158,6 +1202,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private string GetIni(string apName, string keyName, string defaults, string filename)` |
 | 可視性 | private |
 | 戻り値 | string |
+| 戻り値内容 | 外部連携用の INI またはアイコン状態ファイルを読み書きした結果。 |
 
 引数:
 
@@ -1183,6 +1228,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private int OPOSCash_Enq(ref int lErr, ref string sErr)` |
 | 可視性 | private |
 | 戻り値 | int |
+| 戻り値内容 | 釣銭機全体の状態を取得し、状態コードとエラー情報を更新した結果。 |
 
 引数:
 
@@ -1208,6 +1254,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private int OPOSCash_ClearInput(ref int lErr, ref string sErr)` |
 | 可視性 | private |
 | 戻り値 | int |
+| 戻り値内容 | 釣銭機の入力状態を ClearInput でクリアした結果。 |
 
 引数:
 
@@ -1233,6 +1280,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private void PClearInput()` |
 | 可視性 | private |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 処理内容:
 
@@ -1249,6 +1297,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private int OPOSCash_ErrGuidance(int hwnd, int lControl, string sPointer, ref int lErr, ref string sErr)` |
 | 可視性 | private |
 | 戻り値 | int |
+| 戻り値内容 | エラーガイダンス表示コマンドを実行し、必要に応じてガイダンスウィンドウを前面へ出した結果。 |
 
 引数:
 
@@ -1276,6 +1325,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private void pDirectIO_Async(int lCmd, ref int pData, ref string pString, bool bErrGuide = false)` |
 | 可視性 | private |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 
@@ -1302,6 +1352,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private void PAsyncMode(bool bVal)` |
 | 可視性 | private |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 
@@ -1324,6 +1375,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private long OPOSCash_AsyncEnd()` |
 | 可視性 | private |
 | 戻り値 | long |
+| 戻り値内容 | 非同期処理を終了し、DeviceEnabled を無効化して排他を解放した結果。 |
 
 処理内容:
 
@@ -1341,6 +1393,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | シグネチャ | `private void PPowerNotify(int lVal)` |
 | 可視性 | private |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 

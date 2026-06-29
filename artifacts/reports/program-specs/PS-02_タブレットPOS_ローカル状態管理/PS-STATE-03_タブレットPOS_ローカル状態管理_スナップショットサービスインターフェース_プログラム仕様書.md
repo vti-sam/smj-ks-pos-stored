@@ -61,6 +61,7 @@
 | シグネチャ | `Task SaveSnapshotAsync(string sessionKey, string snapshotKey, string viewModelType, IReadOnlyDictionary<string, object?> properties, string? route = null, CancellationToken cancellationToken = default)` |
 | 可視性 | public |
 | 戻り値 | Task |
+| 戻り値内容 | 非同期処理の完了を表すタスク。 |
 
 引数:
 
@@ -88,6 +89,7 @@
 | シグネチャ | `Task<Dictionary<string, object?>?> GetSnapshotAsync(string sessionKey, string snapshotKey, CancellationToken cancellationToken = default)` |
 | 可視性 | public |
 | 戻り値 | Task<Dictionary<string, object?>?> |
+| 戻り値内容 | 指定された画面状態を取得した結果。 |
 
 引数:
 
@@ -112,6 +114,7 @@
 | シグネチャ | `Task ClearSnapshotAsync(string sessionKey, string snapshotKey, CancellationToken cancellationToken = default)` |
 | 可視性 | public |
 | 戻り値 | Task |
+| 戻り値内容 | 非同期処理の完了を表すタスク。 |
 
 引数:
 
@@ -135,6 +138,7 @@
 | シグネチャ | `Task ClearSessionSnapshotsAsync(string sessionKey, CancellationToken cancellationToken = default)` |
 | 可視性 | public |
 | 戻り値 | Task |
+| 戻り値内容 | 非同期処理の完了を表すタスク。 |
 
 引数:
 

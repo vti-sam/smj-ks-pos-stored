@@ -63,6 +63,7 @@
 | シグネチャ | `public async Task SaveSnapshotAsync(string sessionKey, string snapshotKey, string viewModelType, IReadOnlyDictionary<string, object?> properties, string? route = null, CancellationToken cancellationToken = default)` |
 | 可視性 | public |
 | 戻り値 | Task |
+| 戻り値内容 | 非同期処理の完了を表すタスク。 |
 
 引数:
 
@@ -92,6 +93,7 @@
 | シグネチャ | `public async Task<Dictionary<string, object?>?> GetSnapshotAsync(string sessionKey, string snapshotKey, CancellationToken cancellationToken = default)` |
 | 可視性 | public |
 | 戻り値 | Task<Dictionary<string, object?>?> |
+| 戻り値内容 | 画面状態をキャッシュまたはDBから取得した結果。 |
 
 引数:
 
@@ -118,6 +120,7 @@
 | シグネチャ | `public async Task ClearSnapshotAsync(string sessionKey, string snapshotKey, CancellationToken cancellationToken = default)` |
 | 可視性 | public |
 | 戻り値 | Task |
+| 戻り値内容 | 非同期処理の完了を表すタスク。 |
 
 引数:
 
@@ -142,6 +145,7 @@
 | シグネチャ | `public async Task ClearSessionSnapshotsAsync(string sessionKey, CancellationToken cancellationToken = default)` |
 | 可視性 | public |
 | 戻り値 | Task |
+| 戻り値内容 | 非同期処理の完了を表すタスク。 |
 
 引数:
 
@@ -165,6 +169,7 @@
 | シグネチャ | `private static string BuildCacheKey(string sessionKey, string snapshotKey)` |
 | 可視性 | private static |
 | 戻り値 | string |
+| 戻り値内容 | メモリキャッシュ用のキーを組み立てた結果。 |
 
 引数:
 

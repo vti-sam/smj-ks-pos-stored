@@ -70,6 +70,7 @@
 | シグネチャ | `public LocalStateSessionEntity()` |
 | 可視性 | public |
 | 戻り値 | - |
+| 戻り値内容 | - |
 
 処理内容:
 

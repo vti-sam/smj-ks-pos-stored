@@ -64,6 +64,7 @@
 | シグネチャ | `public async Task<LocalStateSession> GetOrCreateActiveSessionAsync(string sessionKey, string? businessFlow = null, CancellationToken cancellationToken = default)` |
 | 可視性 | public |
 | 戻り値 | Task<LocalStateSession> |
+| 戻り値内容 | 有効セッションを取得し、未作成または非有効の場合は利用可能な状態にした結果。 |
 
 引数:
 
@@ -90,6 +91,7 @@
 | シグネチャ | `public async Task<IReadOnlyList<LocalStateSession>> GetActiveSessionsAsync(CancellationToken cancellationToken = default)` |
 | 可視性 | public |
 | 戻り値 | Task<IReadOnlyList<LocalStateSession>> |
+| 戻り値内容 | 有効期限内の有効セッションを更新日時の新しい順で取得した結果。 |
 
 引数:
 
@@ -113,6 +115,7 @@
 | シグネチャ | `public Task MarkCompletedAsync(string sessionKey, CancellationToken cancellationToken = default)` |
 | 可視性 | public |
 | 戻り値 | Task |
+| 戻り値内容 | 非同期処理の完了を表すタスク。 |
 
 引数:
 
@@ -135,6 +138,7 @@
 | シグネチャ | `public Task MarkAbandonedAsync(string sessionKey, CancellationToken cancellationToken = default)` |
 | 可視性 | public |
 | 戻り値 | Task |
+| 戻り値内容 | 非同期処理の完了を表すタスク。 |
 
 引数:
 
@@ -157,6 +161,7 @@
 | シグネチャ | `public async Task UpdateLastRouteAsync(string sessionKey, string? lastRoute, CancellationToken cancellationToken = default)` |
 | 可視性 | public |
 | 戻り値 | Task |
+| 戻り値内容 | 非同期処理の完了を表すタスク。 |
 
 引数:
 
@@ -182,6 +187,7 @@
 | シグネチャ | `private async Task MarkAsync(string sessionKey, string status, CancellationToken cancellationToken)` |
 | 可視性 | private |
 | 戻り値 | Task |
+| 戻り値内容 | 非同期処理の完了を表すタスク。 |
 
 引数:
 
@@ -207,6 +213,7 @@
 | シグネチャ | `private static LocalStateSession ToModel(LocalStateSessionEntity entity)` |
 | 可視性 | private static |
 | 戻り値 | LocalStateSession |
+| 戻り値内容 | DB行を外部返却用モデルへ変換した結果。 |
 
 引数:
 

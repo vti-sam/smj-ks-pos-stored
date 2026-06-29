@@ -64,6 +64,7 @@
 | シグネチャ | `internal partial class DeviceCommandRouter(Func<NamedPipeDeviceCommandRequest, NamedPipeDeviceCommandResponse> processor)` |
 | 可視性 | internal |
 | 戻り値 | - |
+| 戻り値内容 | - |
 
 引数:
 
@@ -86,6 +87,7 @@
 | シグネチャ | `public Task<NamedPipeDeviceCommandResponse> EnqueueAsync(NamedPipeDeviceCommandRequest request)` |
 | 可視性 | public |
 | 戻り値 | Task<NamedPipeDeviceCommandResponse> |
+| 戻り値内容 | リクエストを対象デバイスのワーカーへ投入した結果。 |
 
 引数:
 
@@ -108,6 +110,7 @@
 | シグネチャ | `private Worker GetWorker(string key)` |
 | 可視性 | private |
 | 戻り値 | Worker |
+| 戻り値内容 | デバイスキーに対応する Worker を取得または生成した結果。 |
 
 引数:
 
@@ -130,6 +133,7 @@
 | シグネチャ | `private static string GetDeviceKey(NamedPipeDeviceCommandRequest request)` |
 | 可視性 | private static |
 | 戻り値 | string |
+| 戻り値内容 | DeviceId があればそれを、未指定なら Host をキューキーにした結果。 |
 
 引数:
 
@@ -152,6 +156,7 @@
 | シグネチャ | `public void Dispose()` |
 | 可視性 | public |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 処理内容:
 

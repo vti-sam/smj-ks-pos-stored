@@ -58,6 +58,7 @@
 | シグネチャ | `public LocalStateDbContext CreateDbContext(string[] args)` |
 | 可視性 | public |
 | 戻り値 | LocalStateDbContext |
+| 戻り値内容 | 設計時DB接続設定を持つコンテキストを生成した結果。 |
 
 引数:
 

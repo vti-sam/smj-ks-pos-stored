@@ -63,6 +63,7 @@
 | シグネチャ | `internal sealed class DeviceCommandHandler(IDeviceRegistry deviceRegistry, IProcessInfoStore processInfoStore)` |
 | 可視性 | internal |
 | 戻り値 | - |
+| 戻り値内容 | - |
 
 引数:
 
@@ -86,6 +87,7 @@
 | シグネチャ | `public DeviceCommandResult Handle(DeviceCommand command)` |
 | 可視性 | public |
 | 戻り値 | DeviceCommandResult |
+| 戻り値内容 | ホスト制御アクション、デバイス利用開始/終了、デバイスメソッドを判定し、対象 IFDevice へ処理を委譲した結果。 |
 
 引数:
 
@@ -111,6 +113,7 @@
 | シグネチャ | `private static DeviceCommandResult Failure(DeviceCommand command, string message)` |
 | 可視性 | private static |
 | 戻り値 | DeviceCommandResult |
+| 戻り値内容 | 検証エラーまたは未対応コマンドを、既存互換キーを含む失敗結果に変換した結果。 |
 
 引数:
 
@@ -134,6 +137,7 @@
 | シグネチャ | `private static void EnsureLegacyReturnKeys(Dictionary<string, string> payload, int returnValue)` |
 | 可視性 | private static |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 

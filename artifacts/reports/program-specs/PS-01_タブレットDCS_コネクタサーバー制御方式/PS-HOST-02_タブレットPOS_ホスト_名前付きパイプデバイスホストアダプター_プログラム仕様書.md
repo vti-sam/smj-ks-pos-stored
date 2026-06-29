@@ -74,6 +74,7 @@
 | シグネチャ | `public NamedPipeConnectionAdapter( IDeviceCommandHandler commandHandler, Action<DeviceHostAction> hostActionHandler)` |
 | 可視性 | public |
 | 戻り値 | - |
+| 戻り値内容 | - |
 
 引数:
 
@@ -97,6 +98,7 @@
 | シグネチャ | `internal NamedPipeConnectionAdapter( IDeviceCommandHandler commandHandler, Action<DeviceHostAction> hostActionHandler, INamedPipeCommandMapper commandMapper)` |
 | 可視性 | internal |
 | 戻り値 | - |
+| 戻り値内容 | - |
 
 引数:
 
@@ -121,6 +123,7 @@
 | シグネチャ | `internal NamedPipeConnectionAdapter( IDeviceCommandHandler commandHandler, Action<DeviceHostAction> hostActionHandler, INamedPipeCommandMapper commandMapper, string commandPipeName, string eventPipeName)` |
 | 可視性 | internal |
 | 戻り値 | - |
+| 戻り値内容 | - |
 
 引数:
 
@@ -147,6 +150,7 @@
 | シグネチャ | `public void Start()` |
 | 可視性 | public |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 処理内容:
 
@@ -163,6 +167,7 @@
 | シグネチャ | `public void Dispose()` |
 | 可視性 | public |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 処理内容:
 
@@ -179,6 +184,7 @@
 | シグネチャ | `public void PublishDeviceReply(TabletDeviceId deviceId, TabletDeviceMethodID methodId, IntPtr handle, Dictionary<string, string> payload)` |
 | 可視性 | public |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 
@@ -204,6 +210,7 @@
 | シグネチャ | `private NamedPipeDeviceCommandResponse ProcessCommand(NamedPipeDeviceCommandRequest request)` |
 | 可視性 | private |
 | 戻り値 | NamedPipeDeviceCommandResponse |
+| 戻り値内容 | Named Pipe 要求を内部コマンドに変換し、ハンドラー実行後に応答へ戻した結果。 |
 
 引数:
 

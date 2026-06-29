@@ -69,6 +69,7 @@
 | シグネチャ | `private TabletDeviceManager()` |
 | 可視性 | private |
 | 戻り値 | - |
+| 戻り値内容 | - |
 
 処理内容:
 
@@ -85,6 +86,7 @@
 | シグネチャ | `public static TabletDeviceManager GetInstance()` |
 | 可視性 | public |
 | 戻り値 | TabletDeviceManager |
+| 戻り値内容 | Singleton インスタンス。 |
 
 処理内容:
 
@@ -101,6 +103,7 @@
 | シグネチャ | `public void StartDeviceManager(IFSettingDevice deviceSetting, IFDeviceReply deviceReply)` |
 | 可視性 | public |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 
@@ -126,6 +129,7 @@
 | シグネチャ | `public void StopDeviceManager()` |
 | 可視性 | public |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 処理内容:
 
@@ -142,6 +146,7 @@
 | シグネチャ | `public IFDevice FindDevice(TabletDeviceId deviceId)` |
 | 可視性 | public |
 | 戻り値 | IFDevice |
+| 戻り値内容 | 起動済みデバイスリストから DeviceId が一致する IFDevice。 |
 
 引数:
 
@@ -164,6 +169,7 @@
 | シグネチャ | `public void ReplyDevice(ref KsProcessInfo proc, ref Dictionary<string, string> dic)` |
 | 可視性 | public |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 

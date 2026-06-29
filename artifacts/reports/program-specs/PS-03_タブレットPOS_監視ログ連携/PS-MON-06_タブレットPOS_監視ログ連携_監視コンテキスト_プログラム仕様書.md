@@ -64,6 +64,7 @@
 | シグネチャ | `public MonitoringContext(string? ScreenName = null, string? BusinessFlow = null, string? StoreCode = null, string? TerminalId = null, string? DeviceType = null, string? ApiEndpoint = null, IReadOnlyDictionary<string, string>? Tags = null)` |
 | 可視性 | public |
 | 戻り値 | - |
+| 戻り値内容 | - |
 
 引数:
 

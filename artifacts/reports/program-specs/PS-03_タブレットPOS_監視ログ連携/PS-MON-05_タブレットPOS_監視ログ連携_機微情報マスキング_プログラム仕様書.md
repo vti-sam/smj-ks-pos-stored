@@ -65,6 +65,7 @@
 | シグネチャ | `public static string? Mask(string? value)` |
 | 可視性 | public static |
 | 戻り値 | string? |
+| 戻り値内容 | 対象文字列に含まれる機微情報候補をマスキングした結果。該当しない場合は null。 |
 
 引数:
 
@@ -89,6 +90,7 @@
 | シグネチャ | `private static string MaskAllButLastFour(Match match)` |
 | 可視性 | private static |
 | 戻り値 | string |
+| 戻り値内容 | カード番号候補を末尾4桁だけ残して伏字化した結果。 |
 
 引数:
 
@@ -111,6 +113,7 @@
 | シグネチャ | `private static string MaskMemberCard(Match match)` |
 | 可視性 | private static |
 | 戻り値 | string |
+| 戻り値内容 | 会員番号候補を先頭と末尾だけ残して伏字化した結果。 |
 
 引数:
 
@@ -133,6 +136,7 @@
 | シグネチャ | `private static partial Regex CreditCardRegex()` |
 | 可視性 | private static partial |
 | 戻り値 | Regex |
+| 戻り値内容 | カード番号候補を検出する正規表現。 |
 
 処理内容:
 
@@ -148,6 +152,7 @@
 | シグネチャ | `private static partial Regex MemberCardRegex()` |
 | 可視性 | private static partial |
 | 戻り値 | Regex |
+| 戻り値内容 | 会員番号候補を検出する正規表現。 |
 
 処理内容:
 
@@ -162,6 +167,7 @@
 | シグネチャ | `private static partial Regex PhoneRegex()` |
 | 可視性 | private static partial |
 | 戻り値 | Regex |
+| 戻り値内容 | 電話番号候補を検出する正規表現。 |
 
 処理内容:
 
@@ -177,6 +183,7 @@
 | シグネチャ | `private static partial Regex EmailRegex()` |
 | 可視性 | private static partial |
 | 戻り値 | Regex |
+| 戻り値内容 | メールアドレスを検出する正規表現。 |
 
 処理内容:
 
@@ -191,6 +198,7 @@
 | シグネチャ | `private static partial Regex DigitsRegex()` |
 | 可視性 | private static partial |
 | 戻り値 | Regex |
+| 戻り値内容 | 数字以外を検出する正規表現。 |
 
 処理内容:
 

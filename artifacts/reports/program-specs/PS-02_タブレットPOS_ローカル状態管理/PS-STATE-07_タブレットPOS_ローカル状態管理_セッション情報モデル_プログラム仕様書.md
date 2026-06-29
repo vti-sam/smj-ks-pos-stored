@@ -65,6 +65,7 @@
 | シグネチャ | `public LocalStateSession(Guid Id, string SessionKey, string Status, string? BusinessFlow, string? LastRoute, DateTime CreatedAtUtc, DateTime UpdatedAtUtc, DateTime? ExpiresAtUtc)` |
 | 可視性 | public |
 | 戻り値 | - |
+| 戻り値内容 | - |
 
 引数:
 

@@ -58,6 +58,7 @@
 | シグネチャ | `public void Configure(EntityTypeBuilder<ViewModelSnapshotEntity> builder)` |
 | 可視性 | public |
 | 戻り値 | void |
+| 戻り値内容 | - |
 
 引数:
 
