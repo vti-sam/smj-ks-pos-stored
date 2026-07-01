@@ -1,0 +1,9 @@
+screen,scope,mean_abs,rms,over_8,over_24,over_48
+01-staff-entry,full,7.6125,51.4457,0.137975,0.056894,0.046457
+01-staff-entry,content_no_system_bars,6.3289,48.8642,0.084500,0.053099,0.044675
+02-choice-dialog,full,11.9853,61.7407,0.140768,0.118334,0.101999
+02-choice-dialog,content_no_system_bars,5.6102,39.5336,0.086373,0.062723,0.045447
+03-product-entry,full,16.1248,73.0987,0.269852,0.153099,0.106902
+03-product-entry,content_no_system_bars,15.4283,72.5979,0.225472,0.155938,0.109288
+04-search-dialog,full,28.2372,108.1672,0.284799,0.236764,0.218492
+04-search-dialog,content_no_system_bars,23.6509,101.5076,0.241320,0.195383,0.176084
