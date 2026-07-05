@@ -13,12 +13,12 @@
 |            |       |                                                                                                                                                                          |        |        |
 | :--------- | :---- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----- | :----- |
 | 改訂日     | 版数  | 内容                                                                                                                                                                     | 改訂者 | 承認者 |
-| 2026/06/04 | 1.0.0 | タブレットPOS の構成に合わせ、端末アプリケーション、デバイス制御層（DeviceCtrl）、コネクタサーバー（Host）、Named Pipe 連携、ローカル状態保持、監視方式を中心とした構造設計として改訂 | VTI    | -      |
+| 2026/06/04 | 1.0.0 | タブレットPOS の構成に合わせ、端末アプリケーション、デバイス制御層（DeviceCtrl）、デバイスコネクタ（Host）、Named Pipe 連携、ローカル状態保持、監視方式を中心とした構造設計として改訂 | VTI    | -      |
 | 2026/06/09 | 1.0.0 | Domain / Application / Ports の役割説明を補足し、Host refactor 後の command core、transport adapter、process state 構造を反映 | VTI    | -      |
 | 2026/06/11 | 1.0.0 | Host / DeviceCtrl の設定ファイル名と配置方針を整理し、`host_device_config.json` / `device_controller_config.json` 前提へ更新 | VTI    | -      |
-| 2026/06/18 | 1.0.0 | CustomerDisplay 契約、Scanner / Keyboard のローカル制御、コネクタサーバー（Host）command mapping、イベント未実装範囲、テスト実績を現行ソースに合わせて更新 | VTI    | -      |
-| 2026/06/23 | 1.0.0 | 停止要求とコネクタサーバー（Host）構成図を現行方式に合わせて更新 | VTI    | -      |
-| 2026/06/25 | 1.0.1 | 設定ファイル名、Named Pipe 名、コネクタサーバー（Host）の通常運用時の自動起動・停止方針を現行構成に合わせて更新 | VTI    | -      |
+| 2026/06/18 | 1.0.0 | CustomerDisplay 契約、Scanner / Keyboard のローカル制御、デバイスコネクタ（Host）command mapping、イベント未実装範囲、テスト実績を現行ソースに合わせて更新 | VTI    | -      |
+| 2026/06/23 | 1.0.0 | 停止要求とデバイスコネクタ（Host）構成図を現行方式に合わせて更新 | VTI    | -      |
+| 2026/06/25 | 1.0.1 | 設定ファイル名、Named Pipe 名、デバイスコネクタ（Host）の通常運用時の自動起動・停止方針を現行構成に合わせて更新 | VTI    | -      |
 |            |       |                                                                                                                                                                          |        |        |
 
 ## 目次
@@ -48,17 +48,17 @@
   - [4.1 位置づけ](#41-位置づけ)
   - [4.2 レイヤ構成](#42-レイヤ構成)
   - [4.3 設計要素](#43-設計要素)
-  - [4.4 コネクタサーバー（Host）連携方式](#44-コネクタサーバーhost連携方式)
-  - [4.5 Windows strategy とコネクタサーバー（Host）コマンドの対応](#45-windows-strategy-とコネクタサーバーhostコマンドの対応)
-    - [4.5.1 コネクタサーバー（Host）経由デバイス一覧](#451-コネクタサーバーhost経由デバイス一覧)
+  - [4.4 デバイスコネクタ（Host）連携方式](#44-デバイスコネクタhost連携方式)
+  - [4.5 Windows strategy とデバイスコネクタ（Host）コマンドの対応](#45-windows-strategy-とデバイスコネクタhostコマンドの対応)
+    - [4.5.1 デバイスコネクタ（Host）経由デバイス一覧](#451-デバイスコネクタhost経由デバイス一覧)
     - [4.5.2 Customer display](#452-customer-display)
     - [4.5.3 CashDrawer](#453-cashdrawer)
     - [4.5.4 CashChanger](#454-cashchanger)
     - [4.5.5 Platform-local strategy model](#455-platform-local-strategy-model)
   - [4.6 設定方針](#46-設定方針)
   - [4.7 実装段階](#47-実装段階)
-- [5. コネクタサーバー（Host）・アーキテクチャ](#5-コネクタサーバー（Host）アーキテクチャ)
-  - [5.1 コネクタサーバー（Host）の役割](#51-host-の役割)
+- [5. デバイスコネクタ（Host）・アーキテクチャ](#5-デバイスコネクタ（Host）アーキテクチャ)
+  - [5.1 デバイスコネクタ（Host）の役割](#51-host-の役割)
   - [5.2 起動フロー](#52-起動フロー)
   - [5.3 停止フロー](#53-停止フロー)
   - [5.4 host_device_config.json](#54-host-device-config)
@@ -66,7 +66,7 @@
   - [5.6 DeviceCommandRouter](#56-devicecommandrouter)
   - [5.7 OPOS / OCX / ActiveX 境界](#57-opos--ocx--activex-境界)
   - [5.8 デバイス別制約](#58-デバイス別制約)
-- [6. 端末アプリケーション・コネクタサーバー連携方式](#6-端末アプリケーションホスト連携方式)
+- [6. 端末アプリケーション・デバイスコネクタ連携方式](#6-端末アプリケーションホスト連携方式)
   - [6.1 基本方針](#61-基本方針)
   - [6.2 Pipe 一覧](#62-pipe-一覧)
   - [6.3 Command request 形式](#63-command-request-形式)
@@ -103,7 +103,7 @@
 - [9. 配備・設定方式](#9-配備設定方式)
   - [9.1 端末アプリケーション](#91-端末アプリケーション)
   - [9.2 デバイス制御層（DeviceCtrl）](#92-デバイス制御層（DeviceCtrl）)
-  - [9.3 コネクタサーバー（Host）](#93-コネクタサーバー（Host）)
+  - [9.3 デバイスコネクタ（Host）](#93-デバイスコネクタ（Host）)
   - [9.4 設定ファイル](#94-設定ファイル)
 - [10. テスト・検証方式](#10-テスト検証方式)
   - [10.1 ビルド確認](#101-ビルド確認)
@@ -125,11 +125,11 @@
 ### 1.2 前提事項
 
 - 端末アプリケーションは `TabetPos.Applications` を中心とする .NET MAUI アプリケーションである。
-- Windows の CustomerDisplay、CashDrawer、CashChanger は `TabetPos.Host` を経由して制御する。Scanner と Keyboard はコネクタサーバー（Host）を経由せず `TabetPos.DeviceCtrl` 内でローカル制御する。
-- `TabetPos.Host` は OPOS / OCX / ActiveX を利用するコネクタサーバー（Host）経由デバイスを扱う Windows Forms プロセスである。
-- Windows Printer はコネクタサーバー（Host）への統合を予定しているが、現時点では未統合であり、既存 strategy を維持する。
-- Application とコネクタサーバー（Host）の通信経路は `TabetPos.DeviceCtrl` から Named Pipe で `TabetPos.Host` を呼び出す方式とする。
-- Application はデバイス制御層（DeviceCtrl）を経由してコネクタサーバー（Host）へ要求を送信する。
+- Windows の CustomerDisplay、CashDrawer、CashChanger は `TabetPos.Host` を経由して制御する。Scanner と Keyboard はデバイスコネクタ（Host）を経由せず `TabetPos.DeviceCtrl` 内でローカル制御する。
+- `TabetPos.Host` は OPOS / OCX / ActiveX を利用するデバイスコネクタ（Host）経由デバイスを扱う Windows Forms プロセスである。
+- Windows Printer はデバイスコネクタ（Host）への統合を予定しているが、現時点では未統合であり、既存 strategy を維持する。
+- Application とデバイスコネクタ（Host）の通信経路は `TabetPos.DeviceCtrl` から Named Pipe で `TabetPos.Host` を呼び出す方式とする。
+- Application はデバイス制御層（DeviceCtrl）を経由してデバイスコネクタ（Host）へ要求を送信する。
 - 現時点で `TabetPos.Applications` に業務 Domain、API client、Named Pipe client は未実装である。追加時は抽象境界と実装境界の分離方針に従って実装する。
 - 現時点で server WebAPI、SQL Server repository、batch job は タブレットPOS の対象構成には含めない。
 
@@ -147,7 +147,7 @@
 | ファイル名 |
 |---|
 | ARCH-02_タブレットPOS_端末アプリケーション構造設計書.docx |
-| コネクタサーバー構造設計書 |
+| デバイスコネクタ構造設計書 |
 | PS-HOST-01_タブレットPOS_ホスト_名前付きパイプコマンドサーバー_プログラム仕様書.xlsx |
 | PS-HOST-02_タブレットPOS_ホスト_名前付きパイプデバイスホストアダプター_プログラム仕様書.xlsx |
 | PS-HOST-03_タブレットPOS_ホスト_デバイスコマンドルーター_プログラム仕様書.xlsx |
@@ -164,15 +164,15 @@
 
 ### 2.1 システム全体構成
 
-タブレットPOS は、端末アプリケーションとコネクタサーバー（Host）を分離する構成を基本とする。
+タブレットPOS は、端末アプリケーションとデバイスコネクタ（Host）を分離する構成を基本とする。
 
 ![System architecture](ARCH-01_タブレットPOS_ソフトウェア構造図.svg)
 
 ### 2.2 基本方針
 
 - 端末アプリケーションは UI、画面状態、業務ユースケースの呼び出しを担当する。
-- コネクタサーバー（Host）経由デバイスの open / claim / enable / release / close はコネクタサーバー（Host）側に閉じ込める。
-- 端末アプリケーションからコネクタサーバー（Host）経由デバイスの OPOS / OCX / ActiveX を直接呼び出さない。
+- デバイスコネクタ（Host）経由デバイスの open / claim / enable / release / close はデバイスコネクタ（Host）側に閉じ込める。
+- 端末アプリケーションからデバイスコネクタ（Host）経由デバイスの OPOS / OCX / ActiveX を直接呼び出さない。
 - Application層は UIフレームワーク、IPC実装、Sentry SDK、SQLite実装へ直接依存しない。監視・ローカル状態は `TabetPos.Core` の抽象サービスを経由する。
 - `TabetPos.Core` は logging、monitoring、SQLite local state の共通基盤であり、業務 service / API client / domain model を含めない。
 - デバイスstrategy / factory / config は `TabetPos.DeviceCtrl` レイヤに分離し、`TabetPos.Applications` へ直接埋め込まない。
@@ -180,8 +180,8 @@
 - iOS / Android の Epson SDK binding は `TabetPos.BindingLibrary` に分離する。
 - `Composition` で DI 登録を行う。
 - `TabetPos.Host` は MAUI application の内部レイヤではなく、別プロセスとして起動する Named Pipe host である。
-- コネクタサーバー（Host）は Named Pipe command経路とコネクタサーバー（Host）側Event publisherを提供する。DeviceCtrl側Event listenerは未実装である。
-- 既存デバイス資源はコネクタサーバー（Host）側の `host_device_config.json` により動的ロードする。
+- デバイスコネクタ（Host）は Named Pipe command経路とデバイスコネクタ（Host）側Event publisherを提供する。DeviceCtrl側Event listenerは未実装である。
+- 既存デバイス資源はデバイスコネクタ（Host）側の `host_device_config.json` により動的ロードする。
 
 ### 2.3 採用技術
 
@@ -195,7 +195,7 @@
 | ローカル状態 | Microsoft.EntityFrameworkCore.Sqlite | ViewModelスナップショット保持 |
 | Monitoring | Sentry / Sentry.Maui | クラッシュ / エラー / Breadcrumb監視 |
 | Logging | Serilog | IAppLogger / 保守ログ・収集ログ / log sync |
-| コネクタサーバー（Host）UI / message pump | Windows Forms | OPOS / OCX host form |
+| デバイスコネクタ（Host）UI / message pump | Windows Forms | OPOS / OCX host form |
 | IPC | Named Pipe | Application-Host間のコマンド / イベント経路 |
 | Device control | OPOS / OCX / ActiveX | POS peripheral control |
 
@@ -211,9 +211,9 @@
 | `TabetPos.DeviceCtrl` | .NET class library / MAUI互換デバイス制御層（DeviceCtrl） |
 | `TabetPos.BindingLibrary` | iOS / Android Epson SDK binding |
 | `TabetPos.ApplicationControls` | MAUIコントロールプロジェクト |
-| `TabetPos.Host` | Windows Forms / 外部Named Pipeコネクタサーバー（Host）プロセス |
+| `TabetPos.Host` | Windows Forms / 外部Named Pipeデバイスコネクタ（Host）プロセス |
 
-Windows POS 端末での実行を主対象とする。OPOS / OCX / ActiveX を扱う コネクタサーバー（Host）は Windows 前提である。
+Windows POS 端末での実行を主対象とする。OPOS / OCX / ActiveX を扱う デバイスコネクタ（Host）は Windows 前提である。
 
 ### 2.5 構成要素
 
@@ -225,7 +225,7 @@ Windows POS 端末での実行を主対象とする。OPOS / OCX / ActiveX を�
 | デバイスSDK binding | `TabetPos.BindingLibrary` | Epson iOS / Android SDK binding |
 | UIコントロール | `TabetPos.ApplicationControls` | POS 向け共通コントロール / スタイル |
 | アプリ共通ユーティリティ | `TabetPos.ApplicationUtils` | 日付 / 文字列 / ログ / 検証などのユーティリティ |
-| コネクタサーバー（Host）プロセス | `TabetPos.Host` | MAUI app とは別プロセスで起動する Named Pipe host。device manager、OPOS / OCX adapter を保持する |
+| デバイスコネクタ（Host）プロセス | `TabetPos.Host` | MAUI app とは別プロセスで起動する Named Pipe host。device manager、OPOS / OCX adapter を保持する |
 | 既存バイナリ | `TabetPos.Host/legacyBin` | vendor / device interop DLL |
 
 ## 3. 端末アプリケーション・アーキテクチャ
@@ -269,8 +269,8 @@ monitoring / local state / snapshot は `TabetPos.Applications` 内ではなく�
 | `Application` | `Presentation`, `Infrastructure` | 不可 | UI / implementation へ依存しない |
 | `Infrastructure` | `Ports` | 可 | port implementation |
 | `Composition` | 全レイヤ | 可 | DI登録のため |
-| `TabetPos.Applications` | `TabetPos.Host` concrete device class | 不可 | コネクタサーバー（Host）とは `TabetPos.DeviceCtrl` 経由で連携する |
-| `TabetPos.DeviceCtrl` | `TabetPos.Host` concrete device class | 不可 | コネクタサーバー（Host）とは Named Pipe 契約のみで連携する |
+| `TabetPos.Applications` | `TabetPos.Host` concrete device class | 不可 | デバイスコネクタ（Host）とは `TabetPos.DeviceCtrl` 経由で連携する |
+| `TabetPos.DeviceCtrl` | `TabetPos.Host` concrete device class | 不可 | デバイスコネクタ（Host）とは Named Pipe 契約のみで連携する |
 
 ### 3.3 プレゼンテーション層
 
@@ -380,7 +380,7 @@ Port は Application から外部機能を呼び出すための interface 境界
 | `TabetPos.Core.State.IViewModelSnapshotService` | `TabetPos.Core.State.EfCoreViewModelSnapshotService` | ViewModel snapshot persistence |
 | `TabetPos.Core.State.ILocalStateSessionService` | `TabetPos.Core.State.EfCoreLocalStateSessionService` | ローカル状態セッション管理 |
 
-Monitoring / logging / local state は `TabetPos.Core` の責務である。Device strategy / コネクタサーバー（Host）IPC は `TabetPos.DeviceCtrl` の責務である。`TabetPos.Applications` には Sentry SDK adapter、EF Core DbContext、デバイス固有の通信実装を置かない。
+Monitoring / logging / local state は `TabetPos.Core` の責務である。Device strategy / デバイスコネクタ（Host）IPC は `TabetPos.DeviceCtrl` の責務である。`TabetPos.Applications` には Sentry SDK adapter、EF Core DbContext、デバイス固有の通信実装を置かない。
 
 SQLite local state が `TabetPos.Applications/Infrastructure` ではなく `TabetPos.Core` に置かれる理由は、local state、logging、monitoring をアプリ全体で共通利用する基盤として扱うためである。Application層からは `TabetPos.Core.State.IViewModelSnapshotService` や `ILocalStateSessionService` などの抽象サービスを利用し、EF Core / SQLite の実装詳細へ直接依存しない。
 
@@ -408,7 +408,7 @@ SQLite local state が `TabetPos.Applications/Infrastructure` ではなく `Tabe
 
 `BaseViewModel` は画面表示・非表示時に監視コンテキストとライフサイクルBreadcrumbを記録する。
 
-コネクタサーバー（Host）は、通常運用時にはユーザー操作ではなくアプリのライフサイクルに合わせて制御する。アプリ起動、画面作成、復帰時は アプリ側の起動制御処理がコネクタサーバー（Host）の起動状態を確認し、未起動の場合はバックグラウンドプロセスとして自動起動する。アプリ停止、終了時はコネクタサーバー（Host）へ `Kill` を送信し、コネクタサーバー（Host）側の停止処理で Named Pipe と対象デバイスを終了する。Start/Stop 画面を残す場合も、デバッグ／開発者向けの確認用途に限定する。
+デバイスコネクタ（Host）は、通常運用時にはユーザー操作ではなくアプリのライフサイクルに合わせて制御する。アプリ起動、画面作成、復帰時は アプリ側の起動制御処理がデバイスコネクタ（Host）の起動状態を確認し、未起動の場合はバックグラウンドプロセスとして自動起動する。アプリ停止、終了時はデバイスコネクタ（Host）へ `Kill` を送信し、デバイスコネクタ（Host）側の停止処理で Named Pipe と対象デバイスを終了する。Start/Stop 画面を残す場合も、デバッグ／開発者向けの確認用途に限定する。
 
 ### 3.9 UI コントロール / スタイル
 
@@ -526,8 +526,8 @@ sources/tabletposboilerplate/
 | `StrategyFactory<TBase>` | `StrategyClass` 名から strategy を生成する。DI container 経由の `ActivatorUtilities` を優先する |
 | `DeviceStrategyBase` | command start / completed / failed hook、共通 lifecycle、`IAppLogger` の保持を提供する |
 | `TabetPos.Core.Logging.IAppLogger` | DeviceCtrl 共通ログ出力に使用する |
-| `INamedPipeClient` | Windows strategy から コネクタサーバー（Host）named pipe へ command を送信する通信ポート |
-| `Interfaces/*Strategy` | Application から見た device capability contract を定義する。Windows / コネクタサーバー（Host）固有 command 名を共通 interface としない |
+| `INamedPipeClient` | Windows strategy から デバイスコネクタ（Host）named pipe へ command を送信する通信ポート |
+| `Interfaces/*Strategy` | Application から見た device capability contract を定義する。Windows / デバイスコネクタ（Host）固有 command 名を共通 interface としない |
 | `Models/Config`, `Models/Device` | `DeviceSpec`, `DeviceConfig`, `ActiveDevice`, `NamedPipeSettings` を管理する |
 | `Models/PrinterLayout` | Epson SDK printer の receipt model として使用する |
 | `Platforms/Windows` | `TabetPos.Host` 連携および Windows ローカルデバイスを扱う |
@@ -535,17 +535,17 @@ sources/tabletposboilerplate/
 | `Platforms/Android` | Camera / Bluetooth / Epson SDK を用いた platform-local strategy を扱う |
 | `TabetPos.BindingLibrary` | Epson iOS / Android SDK binding を提供する |
 
-### 4.4 コネクタサーバー（Host）連携方式
+### 4.4 デバイスコネクタ（Host）連携方式
 
-`TabetPos.DeviceCtrl` の strategy interface は Application から見た capability contract である。Windows / コネクタサーバー（Host）固有の methodId、DirectIO、OPOS command 名は common interface に露出せず、Windows strategy 内の adapter mapping として扱う。
+`TabetPos.DeviceCtrl` の strategy interface は Application から見た capability contract である。Windows / デバイスコネクタ（Host）固有の methodId、DirectIO、OPOS command 名は common interface に露出せず、Windows strategy 内の adapter mapping として扱う。
 
-`TabetPos.DeviceCtrl` の Windows strategy のうち、コネクタサーバー（Host）経由デバイスは `INamedPipeClient` を通じて `TabetPos.Host` へ command を送信する。`NamedPipeClient` は `INamedPipeClient` の実装であり、strategy からは DI で注入して使用する。
+`TabetPos.DeviceCtrl` の Windows strategy のうち、デバイスコネクタ（Host）経由デバイスは `INamedPipeClient` を通じて `TabetPos.Host` へ command を送信する。`NamedPipeClient` は `INamedPipeClient` の実装であり、strategy からは DI で注入して使用する。
 
 Scanner と Keyboard は `TabetPos.Host` を経由しない。Scanner は `TabetPos.DeviceCtrl` 内のplatform-local strategy、Keyboard はWindowsローカルKeyboard listener strategyとして扱う。
 
 ```text
 I*Strategy
-  -> コネクタサーバー（Host）経由 Opos*Strategy
+  -> デバイスコネクタ（Host）経由 Opos*Strategy
     -> NamedPipeClient
       -> TabetPos.Host.Command
         -> NamedPipeCommandServer
@@ -560,21 +560,21 @@ I*Strategy
 - `NamedPipeSettings` から pipe name / timeout を取得する。
 - UTF-8 JSON request を named pipe へ送信し、1行responseを受信する。
 - response の `success`, `resultCode`, `message`, `payload` を strategy の結果へmapする。タイムアウト / 接続エラーは通信エラーとして呼出元へ通知する。
-- コネクタサーバー（Host）の Event publisher は実装済みだが、`TabetPos.DeviceCtrl` 側の Event listener は未実装である。
+- デバイスコネクタ（Host）の Event publisher は実装済みだが、`TabetPos.DeviceCtrl` 側の Event listener は未実装である。
 
-### 4.5 Windows strategy とコネクタサーバー（Host）コマンドの対応
+### 4.5 Windows strategy とデバイスコネクタ（Host）コマンドの対応
 
-本節の対応表は Windows のコネクタサーバー（Host）経由 strategy の adapter mapping を示す。iOS / Android strategy は同じdevice capabilityをCamera / BLE / Epson SDKで実現するが、コネクタサーバー（Host）の methodId への準拠は要求しない。
+本節の対応表は Windows のデバイスコネクタ（Host）経由 strategy の adapter mapping を示す。iOS / Android strategy は同じdevice capabilityをCamera / BLE / Epson SDKで実現するが、デバイスコネクタ（Host）の methodId への準拠は要求しない。
 
-#### 4.5.1 コネクタサーバー（Host）経由デバイス一覧
+#### 4.5.1 デバイスコネクタ（Host）経由デバイス一覧
 
-| Device | コネクタサーバー（Host）deviceId | コネクタサーバー（Host）実装 | DeviceCtrl strategy |
+| Device | デバイスコネクタ（Host）deviceId | デバイスコネクタ（Host）実装 | DeviceCtrl strategy |
 |---|---|---|---|
 | Customer display | `CustomerDisplay` | `LineDisplayBySharp`（物理実装名称） | `OposCustomerDisplayStrategy` |
 | Cash drawer | `CashDrawer` | `CashDrawerBySharp` | `OposDrawerStrategy` / `OposSharpDrawerStrategy` |
 | Cash changer | `CashChanger` | `CashChangerByRT300` | `OposCashChangerStrategy` |
 
-`SerialCashChangerStrategy` はローカル接続であり、コネクタサーバー（Host）経由 mapping には含めない。Printer はコネクタサーバー（Host）への統合予定で、現時点の mapping には含めない。
+`SerialCashChangerStrategy` はローカル接続であり、デバイスコネクタ（Host）経由 mapping には含めない。Printer はデバイスコネクタ（Host）への統合予定で、現時点の mapping には含めない。
 
 #### 4.5.2 Customer display
 
@@ -588,7 +588,7 @@ I*Strategy
 | `DisplayTextAt` | `DeviceMethod` | `CustomerDisplay` | `DisplayTextAt` | `Row`, `Column`, `Data`, `Attribute` | `ResultCode`, `ResultCodeExtended` | 指定位置へ表示 |
 | `ScrollText` | `DeviceMethod` | `CustomerDisplay` | `ScrollText` | `Direction`, `Units` | `ResultCode`, `ResultCodeExtended` | スクロール表示 |
 
-コネクタサーバー（Host）は `LinDsp` / `LinDspTelop` も処理できるが、現行の `ICustomerDisplayStrategy` からは公開していない。`SetDescriptor`, `CreateWindow`, `DestroyWindow`, `RefreshWindow`, `DirectIo` は interface に存在するが、Windows strategy では `NotSupportedException` とする。
+デバイスコネクタ（Host）は `LinDsp` / `LinDspTelop` も処理できるが、現行の `ICustomerDisplayStrategy` からは公開していない。`SetDescriptor`, `CreateWindow`, `DestroyWindow`, `RefreshWindow`, `DirectIo` は interface に存在するが、Windows strategy では `NotSupportedException` とする。
 
 #### 4.5.3 CashDrawer
 
@@ -632,9 +632,9 @@ Platform-local device は `TabetPos.Host` の methodId へ対応させず、devi
 | Capability | iOS implementation model | Android implementation model | Windows local model |
 |---|---|---|---|
 | Scanner | Camera strategy または BLE scanner service | Camera strategy または Bluetooth scanner service | Serial / local event strategy |
-| Printer | Epson SDK strategy | Epson SDK strategy | 現行strategyを維持する。コネクタサーバー（Host）への統合は将来対応 |
-| Customer display | Epson SDK customer display strategy | Epson SDK customer display strategy | コネクタサーバー（Host）経由 CustomerDisplay adapter mapping に従う |
-| Drawer | Epson printer pulse または drawer strategy | - | コネクタサーバー（Host）経由 CashDrawer adapter mapping に従う |
+| Printer | Epson SDK strategy | Epson SDK strategy | 現行strategyを維持する。デバイスコネクタ（Host）への統合は将来対応 |
+| Customer display | Epson SDK customer display strategy | Epson SDK customer display strategy | デバイスコネクタ（Host）経由 CustomerDisplay adapter mapping に従う |
+| Drawer | Epson printer pulse または drawer strategy | - | デバイスコネクタ（Host）経由 CashDrawer adapter mapping に従う |
 | Keyboard | - | - | platform keyboard listener strategy |
 
 Platform-local strategy は以下の方針で実装する。
@@ -659,35 +659,35 @@ Platform-local strategy は以下の方針で実装する。
 
 `device_controller_config.json` は `TabetPos.DeviceCtrl` の設定ファイルである。package default は `TabetPos.Applications/Resources/Raw/device_controller_config.json` に配置し、runtime 編集後の設定は `FileSystem.AppDataDirectory/device_controller_config.json` に保存する。起動時は runtime 設定を優先し、存在しない場合のみ package default を読み込む。
 
-`host_device_config.json` は `TabetPos.Host` のデバイス読込source-of-truthである。`TabetPos.DeviceCtrl` の `device_controller_config.json` は Application から見た有効strategy選択であり、コネクタサーバー（Host）の device loading 設定を置き換えない。
+`host_device_config.json` は `TabetPos.Host` のデバイス読込source-of-truthである。`TabetPos.DeviceCtrl` の `device_controller_config.json` は Application から見た有効strategy選択であり、デバイスコネクタ（Host）の device loading 設定を置き換えない。
 
 ### 4.7 実装段階
 
 | 項目 | 実装範囲 | 確認観点 |
 |---|---|---|
 | Strategy基盤 | interfaces / models / strategy base / factory / DeviceManager | Windows build、strategy生成 |
-| Windows コネクタサーバー（Host）経由デバイス | CustomerDisplay、CashDrawer、CashChanger | Named Pipe command、Host応答、result mapping |
-| Windows Printer | 既存strategyを維持。コネクタサーバー（Host）への統合は将来対応 | 現時点では コネクタサーバー（Host）command mapping の対象外 |
+| Windows デバイスコネクタ（Host）経由デバイス | CustomerDisplay、CashDrawer、CashChanger | Named Pipe command、Host応答、result mapping |
+| Windows Printer | 既存strategyを維持。デバイスコネクタ（Host）への統合は将来対応 | 現時点では デバイスコネクタ（Host）command mapping の対象外 |
 | Windows local device | Scanner、Keyboard | local event、scan / key入力通知 |
 | iOS platform-local device | Camera scanner、BLE scanner、Epson printer、Epson customer display | camera / BLE / Epson SDK lifecycle |
 | Android platform-local device | Camera scanner、Bluetooth printer / customer display | platform-local strategy 起動確認 |
 | Binding library | Epson iOS / Android binding | target framework別 build、SDK symbol解決 |
 | Application integration | Applicationユースケース / facade 経由の呼び出し | アプリコマンド結合確認 |
 
-Android は platform-local strategy の実装枠を持つが、Windows と同じコネクタサーバー（Host）コマンド対応を要求しない。
+Android は platform-local strategy の実装枠を持つが、Windows と同じデバイスコネクタ（Host）コマンド対応を要求しない。
 
-## 5. コネクタサーバー（Host）・アーキテクチャ
+## 5. デバイスコネクタ（Host）・アーキテクチャ
 
-### 5.1 コネクタサーバー（Host）の役割
+### 5.1 デバイスコネクタ（Host）の役割
 
-`TabetPos.Host` はCustomerDisplay、CashDrawer、CashChangerなどのコネクタサーバー（Host）経由デバイスを制御するWindows device host processであり、MAUI applicationとは別プロセスとして起動する。
+`TabetPos.Host` はCustomerDisplay、CashDrawer、CashChangerなどのデバイスコネクタ（Host）経由デバイスを制御するWindows device host processであり、MAUI applicationとは別プロセスとして起動する。
 
 `TabetPos.Host` は Application層でもデバイスstrategy層でもない。実行時は `TabetPos.DeviceCtrl` から接続される Named Pipe hostプロセスであり、Hostプロセス内で WinForms message pump、device manager、OPOS / OCX adapter を保持する。
 
 主な責務:
 
 - Named Pipeコマンド / イベントの起動・停止。
-- AppStopServer またはアプリライフサイクルから送信されるコネクタサーバー（Host）停止要求の受付。
+- AppStopServer またはアプリライフサイクルから送信されるデバイスコネクタ（Host）停止要求の受付。
 - `host_device_config.json` に基づくデバイスクラスの動的ロード。
 - `IFDevice` 実装へのコマンドdispatch。
 - OPOS / OCX / ActiveX のライフサイクル管理。
@@ -726,11 +726,11 @@ TabletHost.StopHost()
      -> loaded device snapshot をclear
 ```
 
-コネクタサーバー（Host）終了時は WinForms message pump、device form、OCX の状態が関係するため、単純な process kill ではなくコネクタサーバー（Host）の停止処理を通す。
+デバイスコネクタ（Host）終了時は WinForms message pump、device form、OCX の状態が関係するため、単純な process kill ではなくデバイスコネクタ（Host）の停止処理を通す。
 
 ### 5.4 host_device_config.json
 
-Device loading は `host_device_config.json` で制御する。汎用的な設定名は使用せず、コネクタサーバー（Host）側の設定であることをファイル名で明示する。
+Device loading は `host_device_config.json` で制御する。汎用的な設定名は使用せず、デバイスコネクタ（Host）側の設定であることをファイル名で明示する。
 
 Expected path:
 
@@ -756,7 +756,7 @@ Example:
 
 | Key | 内容 |
 |---|---|
-| `devices[].id` | コネクタサーバー（Host）内で扱う論理device ID。Customer display は `CustomerDisplay` を使用する |
+| `devices[].id` | デバイスコネクタ（Host）内で扱う論理device ID。Customer display は `CustomerDisplay` を使用する |
 | `devices[].name` | runtime device display name |
 | `devices[].visible` | device form visibility |
 | `devices[].classId` | 既存 `KsClassFactory` で生成する runtime class ID |
@@ -770,9 +770,9 @@ Example:
 
 #### 概要
 
-`IFDevice` 境界は、コネクタサーバー（Host）プロセス内のデバイス制御実装を統一的に呼び出すためのインターフェース境界である。各デバイス実装は `IFDevice` を実装し、コネクタサーバー（Host）はデバイスID、利用開始、利用終了、メソッド実行を同一の契約で扱う。
+`IFDevice` 境界は、デバイスコネクタ（Host）プロセス内のデバイス制御実装を統一的に呼び出すためのインターフェース境界である。各デバイス実装は `IFDevice` を実装し、デバイスコネクタ（Host）はデバイスID、利用開始、利用終了、メソッド実行を同一の契約で扱う。
 
-Windows 環境のコネクタサーバー（Host）経由デバイスでは、端末アプリケーションからの操作要求は `TabetPos.DeviceCtrl`、Named Pipe、`TabetPos.Host` を経由し、最終的にコネクタサーバー（Host）内の `IFDevice` 実装へ委譲される。Scanner / Keyboard はこの経路を使用しない。Printer はコネクタサーバー（Host）への統合予定であり、現時点ではこの経路へ未統合である。
+Windows 環境のデバイスコネクタ（Host）経由デバイスでは、端末アプリケーションからの操作要求は `TabetPos.DeviceCtrl`、Named Pipe、`TabetPos.Host` を経由し、最終的にデバイスコネクタ（Host）内の `IFDevice` 実装へ委譲される。Scanner / Keyboard はこの経路を使用しない。Printer はデバイスコネクタ（Host）への統合予定であり、現時点ではこの経路へ未統合である。
 
 | メンバー | 概要 |
 |---|---|
@@ -784,18 +784,18 @@ Windows 環境のコネクタサーバー（Host）経由デバイスでは、�
 | `DeviceUse(Dictionary<string,string>, ref Dictionary<string,string>)` | デバイス利用開始 |
 | `DeviceUnUse(Dictionary<string,string>, ref Dictionary<string,string>)` | デバイス利用終了 |
 
-コネクタサーバー（Host）境界では当面、要求値および応答値を辞書形式で保持する。標準化されたデバイス結果モデルは、`TabetPos.DeviceCtrl` 側のストラテジー結果モデルとして別途定義する。
+デバイスコネクタ（Host）境界では当面、要求値および応答値を辞書形式で保持する。標準化されたデバイス結果モデルは、`TabetPos.DeviceCtrl` 側のストラテジー結果モデルとして別途定義する。
 
 ### 5.6 DeviceCommandRouter
 
-コネクタサーバー（Host）内部では、Named Pipe transport と device command handling を分離する。Named Pipe request は `NamedPipeCommandMapper` で内部コマンドへ変換し、`DeviceCommandHandler` へ渡す。
+デバイスコネクタ（Host）内部では、Named Pipe transport と device command handling を分離する。Named Pipe request は `NamedPipeCommandMapper` で内部コマンドへ変換し、`DeviceCommandHandler` へ渡す。
 
 主な内部要素:
 
 | 要素 | 役割 |
 |---|---|
 | `DeviceCommandHandler` | `DeviceUse`, `DeviceUnUse`, `DeviceUnUseComplete`, `DeviceMethod`, `Kill`, `ReStart` の共通処理 |
-| `NamedPipeCommandMapper` | Named Pipe request / response とコネクタサーバー（Host）内部コマンドの相互変換 |
+| `NamedPipeCommandMapper` | Named Pipe request / response とデバイスコネクタ（Host）内部コマンドの相互変換 |
 | `DeviceHostTransport` | Named Pipe command server と event publisher の起動・停止を集約 |
 | `NamedPipeCommandServer` | `TabetPos.Host.Command` のrequest / responseを扱う |
 | `NamedPipeEventPublisher` | `TabetPos.Host.Event` へ device event をpublishする |
@@ -810,7 +810,7 @@ Named Pipe command は `DeviceCommandRouter` により device key ごとの work
 
 STA worker は OCX / COMデバイス呼び出しのスレッド制約を考慮した構造である。
 
-`TabletDeviceManager` は loaded device の snapshot を公開し、device lookup は `FindDevice(TabletDeviceId)` 経由で行う。コネクタサーバー（Host）command handler はこの registry interface を通じて `IFDevice` を取得し、mutable list へ直接依存しない。
+`TabletDeviceManager` は loaded device の snapshot を公開し、device lookup は `FindDevice(TabletDeviceId)` 経由で行う。デバイスコネクタ（Host）command handler はこの registry interface を通じて `IFDevice` を取得し、mutable list へ直接依存しない。
 
 `TabletProcessInfo` は `(deviceId, handle)` をkeyにした thread-safe store として保持する。CashChanger などの既存デバイス資源がstatic facadeを参照するため、`ProcessInfoes` などの既存 API は当面互換として残す。
 
@@ -837,7 +837,7 @@ Device class は WinForms form 上に OCX control を保持する。多くのデ
 #### CashDrawer Sharp
 
 - 主なコマンドは `OpenDrawer`。
-- デバイス境界は比較的小さいが、OPOS / OCX lifecycle はコネクタサーバー（Host）側に保持する。
+- デバイス境界は比較的小さいが、OPOS / OCX lifecycle はデバイスコネクタ（Host）側に保持する。
 
 #### CashChanger RT300
 
@@ -846,22 +846,22 @@ Device class は WinForms form 上に OCX control を保持する。多くのデ
 - 既存ファイル連携として `TURIREQ.DAT`, `TURIANS.DAT`, `TURIREQ_OK.DAT`, `TURIANS_OK.DAT`, `TURIANS_NG.DAT` を扱う経路が残る。
 - 特殊な結果コードやvendor固有ガイダンスはadapter側に閉じ込める。
 
-## 6. 端末アプリケーション・コネクタサーバー連携方式
+## 6. 端末アプリケーション・デバイスコネクタ連携方式
 
 ### 6.1 基本方針
 
-端末アプリケーションは `TabetPos.DeviceCtrl` を経由してコネクタサーバー（Host）経由デバイスコマンドを送信し、同期レスポンスを受け取る。このcommand経路は実装済みである。コネクタサーバー（Host）側のEvent publisherも実装済みだが、`TabetPos.DeviceCtrl` 側のEvent listenerは未実装のため、コネクタサーバー（Host）からのcallbackをApplicationユースケースへ通知する処理は今後の対応となる。
+端末アプリケーションは `TabetPos.DeviceCtrl` を経由してデバイスコネクタ（Host）経由デバイスコマンドを送信し、同期レスポンスを受け取る。このcommand経路は実装済みである。デバイスコネクタ（Host）側のEvent publisherも実装済みだが、`TabetPos.DeviceCtrl` 側のEvent listenerは未実装のため、デバイスコネクタ（Host）からのcallbackをApplicationユースケースへ通知する処理は今後の対応となる。
 
-端末アプリケーションはコネクタサーバー（Host）の `IFDevice` 実装、OPOS / OCX、Named Pipe実装を知らない。Application service は `TabetPos.DeviceCtrl` の strategy / service abstraction を呼び出す。
+端末アプリケーションはデバイスコネクタ（Host）の `IFDevice` 実装、OPOS / OCX、Named Pipe実装を知らない。Application service は `TabetPos.DeviceCtrl` の strategy / service abstraction を呼び出す。
 
-Keyboard と Scanner はコネクタサーバー（Host）経由デバイスコマンドの対象外であり、`TabetPos.DeviceCtrl` 内のローカルstrategy / listenerからApplicationユースケースへ通知する。コネクタサーバー（Host）にScanner実装とScanner専用pipeは持たせない。Printerはコネクタサーバー（Host）への統合を予定しているが、現時点では未統合である。
+Keyboard と Scanner はデバイスコネクタ（Host）経由デバイスコマンドの対象外であり、`TabetPos.DeviceCtrl` 内のローカルstrategy / listenerからApplicationユースケースへ通知する。デバイスコネクタ（Host）にScanner実装とScanner専用pipeは持たせない。Printerはデバイスコネクタ（Host）への統合を予定しているが、現時点では未統合である。
 
 ### 6.2 Pipe 一覧
 
 | Pipe | 方向 | 用途 |
 |---|---|---|
 | `TabetPos.Host.Command` | DeviceCtrl client -> Host process -> DeviceCtrl client | コマンド要求 / 同期レスポンス |
-| `TabetPos.Host.Event` | Host process -> DeviceCtrl listener | コネクタサーバー（Host）側publisherは実装済み。DeviceCtrl側listenerは未実装 |
+| `TabetPos.Host.Event` | Host process -> DeviceCtrl listener | デバイスコネクタ（Host）側publisherは実装済み。DeviceCtrl側listenerは未実装 |
 
 ### 6.3 Command request 形式
 
@@ -881,7 +881,7 @@ Named Pipeコマンドは UTF-8 JSON 1行で送信する。
 }
 ```
 
-コネクタサーバー（Host）は `message`, `deviceId`, `methodId`, `handle`, `payload` をもとに内部コマンドを組み立てる。
+デバイスコネクタ（Host）は `message`, `deviceId`, `methodId`, `handle`, `payload` をもとに内部コマンドを組み立てる。
 
 ### 6.4 Command response 形式
 
@@ -898,7 +898,7 @@ Named Pipeコマンドは UTF-8 JSON 1行で送信する。
 }
 ```
 
-コネクタサーバー（Host）は device return dictionary に `ResultCode` と `ReturnValue` が無い場合、`returnValue` から補完する。
+デバイスコネクタ（Host）は device return dictionary に `ResultCode` と `ReturnValue` が無い場合、`returnValue` から補完する。
 
 ### 6.5 対応 message
 
@@ -915,7 +915,7 @@ Named Pipeコマンドは UTF-8 JSON 1行で送信する。
 
 ### 6.6 Event 方式
 
-デバイス側が `ReplyDevice(...)` を呼び出すと、コネクタサーバー（Host）は `TabetPos.Host.Event` へNamed Pipeイベントをpublishする。現時点ではDeviceCtrl側listenerが未実装のため、イベントのend-to-end受信は成立していない。
+デバイス側が `ReplyDevice(...)` を呼び出すと、デバイスコネクタ（Host）は `TabetPos.Host.Event` へNamed Pipeイベントをpublishする。現時点ではDeviceCtrl側listenerが未実装のため、イベントのend-to-end受信は成立していない。
 
 イベント例:
 
@@ -935,13 +935,13 @@ Named Pipeコマンドは UTF-8 JSON 1行で送信する。
 
 ### 6.7 DeviceCtrl 呼び出し構造
 
-`TabetPos.DeviceCtrl` からコネクタサーバー（Host）を呼び出す場合は、以下を原則とする。
+`TabetPos.DeviceCtrl` からデバイスコネクタ（Host）を呼び出す場合は、以下を原則とする。
 
 ```text
 Presentation/ViewModels
   -> Application/<Module>/Commands or Queries
     -> TabetPos.DeviceCtrl/Interfaces/I*Strategy
-      -> Windows Opos*Strategy（コネクタサーバー（Host）経由）
+      -> Windows Opos*Strategy（デバイスコネクタ（Host）経由）
         -> NamedPipeClient
           -> TabetPos.Host.Command
 ```
@@ -1079,7 +1079,7 @@ DI 登録は `TabetPos.Applications/Composition/DependencyInjection.cs`、`Tabet
 | Debug | 開発中または調査時のみ必要な内部情報。本番環境では原則送信しない | ルート対応付け、strategy対応付け、内部変換結果 |
 | Info | 業務上意味のある正常イベント、またはシステム処理の流れを追跡するための情報 | 画面表示、画面非表示、アプリ復帰、デバイスコマンド開始 / 完了 |
 | Warning | 想定外だが処理継続できる状態 | リトライ成功、設定不足に対する既定値適用、状態保存の間隔制御による抑止 |
-| Error | 業務が正常完了できないエラー、重大エラー、またはクラッシュ | 画面遷移失敗、コネクタサーバー（Host）commandタイムアウト、デバイスエラー、未処理例外 |
+| Error | 業務が正常完了できないエラー、重大エラー、またはクラッシュ | 画面遷移失敗、デバイスコネクタ（Host）commandタイムアウト、デバイスエラー、未処理例外 |
 
 #### 7.3.3 Sentry 送信方針
 
@@ -1184,10 +1184,10 @@ DSN が未設定または空の場合、アプリは通常通り動作し、Sent
 |---|---|---|
 | `TabetPos.Applications` | `TabetPos.Core.Monitoring` 経由の Sentry Breadcrumb / Event | 画面遷移、ライフサイクル、エラー、ローカル状態操作の追跡 |
 | `TabetPos.Applications` | `TabetPos.Core.Logging.IAppLogger` 経由のローカルログ | アプリ側の保守ログ・収集ログ |
-| `TabetPos.DeviceCtrl` | `TabetPos.Core.Logging.IAppLogger` 経由のローカルログ | strategyコマンド、コネクタサーバー（Host）command、platform-local deviceイベントの追跡 |
+| `TabetPos.DeviceCtrl` | `TabetPos.Core.Logging.IAppLogger` 経由のローカルログ | strategyコマンド、デバイスコネクタ（Host）command、platform-local deviceイベントの追跡 |
 | `TabetPos.Host` | 既存 `KsLogControls` ローカルログ | デバイスアダプタ、OPOS / OCX、Hostプロセス内部処理の調査 |
 
-Named Pipe response はデバイス応答の通信経路であり、ローカルログの代替ではない。コネクタサーバー（Host）のデバイス固有調査にはコネクタサーバーローカルログを保持する。
+Named Pipe response はデバイス応答の通信経路であり、ローカルログの代替ではない。デバイスコネクタ（Host）のデバイス固有調査にはデバイスコネクタローカルログを保持する。
 
 ログレベルごとの扱いは以下とする。
 
@@ -1211,9 +1211,9 @@ Named Pipe response はデバイス応答の通信経路であり、ローカル
 | 状態保存成功 | Info | LocalState | Sentry Breadcrumb、ローカルログ | `session_key`, `snapshot_key`, プロパティ件数 |
 | 状態復元成功 | Info | LocalState | Sentry Breadcrumb、ローカルログ | `session_key`, `snapshot_key`, プロパティ件数 |
 | 状態保存データのserialize / deserialize失敗 | Error | LocalState | Sentry Event、ローカルログ | `snapshot_key`, プロパティ名、マスク済みエラーメッセージ |
-| コネクタサーバー（Host）command送信 | Info | DeviceCtrl | Sentry Breadcrumb、ローカルログ | requestId、deviceId、methodId |
-| コネクタサーバー（Host）command応答 | Info | DeviceCtrl | Sentry Breadcrumb、ローカルログ | requestId、deviceId、methodId、resultCode、処理時間(ms) |
-| コネクタサーバー（Host）commandタイムアウト | Error | DeviceCtrl | Sentry Event、ローカルログ | requestId、deviceId、methodId、timeout |
+| デバイスコネクタ（Host）command送信 | Info | DeviceCtrl | Sentry Breadcrumb、ローカルログ | requestId、deviceId、methodId |
+| デバイスコネクタ（Host）command応答 | Info | DeviceCtrl | Sentry Breadcrumb、ローカルログ | requestId、deviceId、methodId、resultCode、処理時間(ms) |
+| デバイスコネクタ（Host）commandタイムアウト | Error | DeviceCtrl | Sentry Event、ローカルログ | requestId、deviceId、methodId、timeout |
 | ローカルScannerデータ受信 | Info | DeviceCtrl | Sentry Breadcrumb、ローカルログ | デバイス名、データ長、symbology。raw barcode は記録しない |
 | ローカルKeyboardイベント受信 | Info | DeviceCtrl | Sentry Breadcrumb、ローカルログ | key label / key code。業務入力値そのものは記録しない |
 | ログ同期開始 | Info | LogSync | ローカルログ | 対象ファイル、端末情報 |
@@ -1246,7 +1246,7 @@ Hostログにデバイス固有の保存データを出力する場合、機密�
 `TabetPos.DeviceCtrl`:
 
 - `NamedPipeClient` は Hostレスポンスをstrategy結果へmapする。
-- strategy は コネクタサーバー（Host）command契約に従って device 操作を送信する。
+- strategy は デバイスコネクタ（Host）command契約に従って device 操作を送信する。
 - Host接続タイムアウト / payload不足はデバイス制御層（DeviceCtrl）のエラーとしてログ / 監視へ渡す。
 
 `TabetPos.Host`:
@@ -1300,7 +1300,7 @@ sources/tabletposboilerplate/
 | `TabletDevice/*` | 実OPOS / OCXデバイスadapter |
 | `legacyBin` | interop / vendor / 既存共通DLL |
 
-commit `b484ac1` 以降、コネクタサーバー（Host）側の自社管理クラス / assembly 名は Tablet prefix に統一する。一方、`legacyBin` が提供する `KsUtility`, `KsLogControls`, `KsClassID`, `KsClassFactory`, `KsMemoryMappedFile`, `KsApplicationControls`, `KSINIED` などは外部 binary API 名であり、build / runtime reference のため変更しない。
+commit `b484ac1` 以降、デバイスコネクタ（Host）側の自社管理クラス / assembly 名は Tablet prefix に統一する。一方、`legacyBin` が提供する `KsUtility`, `KsLogControls`, `KsClassID`, `KsClassFactory`, `KsMemoryMappedFile`, `KsApplicationControls`, `KSINIED` などは外部 binary API 名であり、build / runtime reference のため変更しない。
 
 ### 8.3 境界整理
 
@@ -1309,7 +1309,7 @@ commit `b484ac1` 以降、コネクタサーバー（Host）側の自社管理�
 | UI -> Device | UI からデバイスを直接呼び出さない |
 | App -> Core | 監視、ローカル状態、共通ログ基盤を `TabetPos.Core` 経由で扱う |
 | Application -> DeviceCtrl | デバイスstrategy / service abstraction 経由で呼び出す |
-| DeviceCtrl -> Host | `NamedPipeClient` と コネクタサーバー（Host）named pipe 経由で接続する |
+| DeviceCtrl -> Host | `NamedPipeClient` と デバイスコネクタ（Host）named pipe 経由で接続する |
 | DeviceCtrl -> Core | `TabetPos.Core.Logging.IAppLogger` を利用する |
 | DeviceCtrl -> BindingLibrary | Epson SDK binding を platform strategy 内で利用する |
 | DeviceCtrl -> Platform local | Camera / BLE / Epson SDK は platform strategy 内に閉じ込める |
@@ -1345,7 +1345,7 @@ commit `b484ac1` 以降、コネクタサーバー（Host）側の自社管理�
 
 `TabetPos.Host.Event` のDeviceCtrl listener設定と再接続ポリシーは未実装であり、今後の対応範囲とする。
 
-### 9.3 コネクタサーバー（Host）
+### 9.3 デバイスコネクタ（Host）
 
 `TabetPos.Host` は Windows Forms hostプロセスとして配備する。
 
@@ -1362,7 +1362,7 @@ commit `b484ac1` 以降、コネクタサーバー（Host）側の自社管理�
 
 | 設定 | 所在 | 用途 |
 |---|---|---|
-| `host_device_config.json` | `AppServer/Resources/host_device_config.json` | コネクタサーバー（Host）側のデバイス読込、runtime class ID、device-specific parameter |
+| `host_device_config.json` | `AppServer/Resources/host_device_config.json` | デバイスコネクタ（Host）側のデバイス読込、runtime class ID、device-specific parameter |
 | `device_controller_config.json` | `TabetPos.Applications/Resources/Raw/device_controller_config.json` / `FileSystem.AppDataDirectory/device_controller_config.json` | デバイス制御層（DeviceCtrl）側の有効strategy選択、接続設定、Named Pipe 設定 |
 | Sentry config | app config / environment variable | `TabetPos.Core.Monitoring` の監視設定 |
 | Log sync config | app config / environment variable | `TabetPos.Core.Logging` の保守ログ・収集ログ同期設定 |
@@ -1420,7 +1420,7 @@ dotnet build sources/tabletposboilerplate/TabetPos.DeviceCtrl/TabetPos.DeviceCtr
 |---|---|
 | Sentry疎通確認 | Event IDが返る、マスキング済みメッセージが送信される |
 | ローカル状態 | app stop / resume 後に `[PersistSnapshot]` プロパティが復元される |
-| DeviceCtrl strategy | strategy method が コネクタサーバー（Host）command へ正しく変換される |
+| DeviceCtrl strategy | strategy method が デバイスコネクタ（Host）command へ正しく変換される |
 | Named Pipe command | request / response が 1 line で成立する |
 | Event pipe | Host publisherの出力を確認する。DeviceCtrl listener実装後にend-to-end受信を追加する |
 | Scannerローカルイベント | Scannerデータが DeviceCtrlローカルstrategyから Applicationユースケースへ通知される |
@@ -1439,7 +1439,7 @@ dotnet build sources/tabletposboilerplate/TabetPos.DeviceCtrl/TabetPos.DeviceCtr
 - `ResultCode`, `ResultCodeExtended`, `ErrorMessage`, `ReturnValue` の既存 keyを削除しない。
 - OCX form / timer / message pump boundary を削除しない。
 - Hostローカルログを Named Pipeレスポンスで置き換えない。
-- DeviceCtrl の コネクタサーバー（Host）command mapping を Application UI へ露出しない。
+- DeviceCtrl の デバイスコネクタ（Host）command mapping を Application UI へ露出しない。
 
 ## 11. 関連資料
 

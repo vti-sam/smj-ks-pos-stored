@@ -28,7 +28,7 @@
         <mxCell id="namedpipe_client" value="Named Pipeクライアント&lt;br&gt;Hostへ要求を送信する" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=0;fontColor=#1E293B;fillColor=#FFFFFF;strokeColor=#475569;" vertex="1" parent="device_ctrl">
   <mxGeometry x="374" y="50" width="235" height="86" as="geometry" />
 </mxCell>
-        <mxCell id="host" value="コネクタサーバー（Host）" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=1;fontColor=#334155;fillColor=#FFFFFF;strokeColor=#94A3B8;container=1;recursiveResize=0;collapsible=0;" vertex="1" parent="architecture">
+        <mxCell id="host" value="デバイスコネクタ（Host）" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=1;fontColor=#334155;fillColor=#FFFFFF;strokeColor=#94A3B8;container=1;recursiveResize=0;collapsible=0;" vertex="1" parent="architecture">
   <mxGeometry x="1240" y="55" width="1922" height="210" as="geometry" />
 </mxCell>
         <mxCell id="app_server" value="AppServer&lt;br&gt;Hostを起動する" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=0;fontColor=#1E293B;fillColor=#FFFFFF;strokeColor=#475569;" vertex="1" parent="host">

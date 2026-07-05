@@ -5,7 +5,7 @@ type: gotcha
 status: archived
 source:
   - Codex session 2026-06-26 report alignment task
-  - project-store/artifacts/reports/architecture/ARCH-03_タブレットPOS_コネクタサーバー構造設計書/
+  - project-store/artifacts/reports/architecture/ARCH-03_タブレットPOS_デバイスコネクタ構造設計書/
   - project-store/artifacts/reports/configuration-guides/CFG-01_タブレットPOS_デバイス制御層設定ファイル記載要領/
 tags:
   - reports
@@ -22,13 +22,13 @@ promote_to_knowledge: false
 
 After the source code was reverted, report text must map back to the current source identifiers:
 
-- Business term: `コネクタサーバー（Host）`
+- Business term: `デバイスコネクタ（Host）`
 - Device control layer: `デバイス制御層（DeviceCtrl）`
 - Source projects/configs: `TabetPos.DeviceCtrl`, `TabetPos.Host`, `device_controller_config.json`, `host_device_config.json`
 - Host code names: `TabletHost`, `AppServer`, `ServerAppForm`, `HostProcessRuntime`
 - Pipe names: `TabetPos.Host.Command`, `TabetPos.Host.Event`
 
-Avoid stale generated names in reports: `デバイス接続サーバー`, `DeviceConnectionServer`, `DeviceControl`, `device_control_config.json`, `device_connection_server_config.json`.
+Avoid stale generated names in reports: `コネクタサーバー`, `デバイス接続サーバー`, `DeviceConnectionServer`, `DeviceControl`, `device_control_config.json`, `device_connection_server_config.json`.
 
 When regenerating report assets, update both official outputs and draft outputs. CFG draft SVG files may remain stale if only the official drawio is exported; export the `.structured.drawio` files to both `.structured.svg` and the draft non-structured SVG/PNG names. DOCX text should be checked by extracting the internal XML, not only by searching Markdown.
 

@@ -20,13 +20,15 @@ Report artifacts were aligned to use `コネクタサーバー` as the main Japa
 
 Use `コネクタサーバー（Host）` only when mapping to code or diagrams needs the `Host` alias. Do not reintroduce `デバイス接続サーバー` in report text, drawio labels, SVG output, DOCX display text, or official report artifact names.
 
+Superseded on 2026-07-02: report artifacts now use `デバイスコネクタ（Host）` as the official customer-facing term. `コネクタサーバー` remains historical context only.
+
 Important touched areas:
 
 - `project-store/artifacts/reports/architecture/ARCH-01_タブレットPOS_ソフトウェア構造設計書/`
 - `project-store/artifacts/reports/architecture/ARCH-02_タブレットPOS_端末アプリケーション構造設計書/`
-- `project-store/artifacts/reports/architecture/ARCH-03_タブレットPOS_コネクタサーバー構造設計書/`
+- `project-store/artifacts/reports/architecture/ARCH-03_タブレットPOS_デバイスコネクタ構造設計書/`
 - `project-store/artifacts/reports/configuration-guides/CFG-01_タブレットPOS_デバイス制御層設定ファイル記載要領/`
-- `project-store/artifacts/reports/program-specs/PS-01_タブレットDCS_コネクタサーバー制御方式/`
+- `project-store/artifacts/reports/program-specs/PS-01_タブレットDCS_デバイスコネクタ制御方式/`
 
 Verification performed during the session:
 
