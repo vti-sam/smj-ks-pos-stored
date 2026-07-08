@@ -108,7 +108,7 @@ Các thiết bị bổ sung trong tương lai như máy in, máy quét (scanner)
 | ARCH-01 | Tài liệu thiết kế cấu trúc phần mềm Tablet POS | Tài liệu tiền đề về cấu trúc tổng thể của Tablet POS. |
 | ARCH-02 | Tài liệu thiết kế cấu trúc ứng dụng terminal Tablet POS | Tài liệu tiền đề về cấu trúc phía ứng dụng terminal. |
 | ARCH-03 | Tài liệu thiết kế cấu trúc Bộ kết nối thiết bị Tablet POS | Tài liệu tiền đề về cấu trúc, trách nhiệm và các component chính của Host. |
-| CFG-01 | Tài liệu hướng dẫn ghi file cấu hình lớp điều khiển thiết bị Tablet POS | Tài liệu hướng dẫn ghi file `device_controller_config.json` và `host_device_config.json`. |
+| CFG-01 | Tài liệu hướng dẫn ghi file cấu hình lớp điều khiển thiết bị Tablet POS | Tài liệu hướng dẫn ghi file `device_controller_config.json` and `host_device_config.json`. |
 | PS-HOST-01 | Named Pipe Command Server | Đặc tả chương trình cho bộ phận nhận lệnh (Command Receiver). |
 | PS-HOST-02 | Named Pipe Device Host Adapter | Đặc tả chương trình cho adapter giao tiếp Host (Host Communication Adapter). |
 | PS-HOST-03 | Device Command Router | Đặc tả chương trình kiểm soát thứ tự xử lý theo từng `DeviceId`. |
@@ -187,28 +187,60 @@ flowchart LR
 Ứng dụng Tablet POS yêu cầu thao tác thiết bị dựa trên thao tác màn hình hoặc xử lý nghiệp vụ. `DeviceCtrl` dựa trên cấu hình để phán đoán xem sẽ điều khiển trực tiếp hay thông qua Host. Trong trường hợp thông qua Host, yêu cầu sẽ được gửi tới Host bằng Named Pipe, và trong Host sẽ thực hiện kiểm soát thứ tự, phân phối yêu cầu, tìm kiếm thiết bị và điều khiển thiết bị thực tế.
 
 ① **Ứng dụng Tablet POS** chịu trách nhiệm về màn hình và xử lý nghiệp vụ. Ứng dụng không nắm giữ chi tiết điều khiển thiết bị thực tế mà chỉ chuyển yêu cầu thao tác cần thiết tới `DeviceCtrl`.  
-*Bảng liên quan:* 02_Tổng quan, 06_Luồng xử lý yêu cầu thao tác thiết bị_02, 09_Vòng đời_02, 15_Thiết kế file cấu hình, 17_Xử lý lỗi.
+*Bảng liên quan:* 02_Tổng quan, 06_Luồng xử lý yêu cầu thao tác thiết bị_02, 09_Vòng đời_02
+
+  - **Thao tác màn hình:** Tạo yêu cầu thao tác thiết bị dựa trên các thao tác của người dùng.  
+    *Bảng liên quan:* 06_Luồng xử lý yêu cầu thao tác thiết bị_02, 11_Định nghĩa hạng mục yêu cầu
+  - **Xử lý nghiệp vụ:** Yêu cầu `DeviceCtrl` thực hiện thao tác thiết bị cần thiết cho nghiệp vụ.  
+    *Bảng liên quan:* 06_Luồng xử lý yêu cầu thao tác thiết bị_02, 14_Danh sách thông điệp
+  - **Khởi động, Phục hồi, Dừng:** Kích hoạt việc xác nhận khởi động Host và yêu cầu dừng Host.  
+    *Bảng liên quan:* 09_Vòng đời_02
 
 ② **DeviceCtrl** thực hiện phán đoán thiết bị sử dụng và phương thức điều khiển. Đối với các đối tượng xử lý qua Host, nó gửi yêu cầu thông qua Named Pipe.  
-*Bảng liên quan:* 03_Phạm vi đối tượng, 10_Danh sách giao diện, 11_Định nghĩa hạng mục yêu cầu, 12_Định nghĩa hạng mục phản hồi, 13_Định nghĩa hạng mục sự kiện, 15_Thiết kế file cấu hình.
+*Bảng liên quan:* 03_Phạm vi đối tượng, 10_Danh sách giao diện, 15_Thiết kế file cấu hình
 
-③ **Bộ phận nhận giao tiếp** tiếp nhận yêu cầu lệnh từ `DeviceCtrl` và trả về phản hồi đồng bộ trên cùng một kết nối. Đường truyền này tách biệt với luồng thông báo sự kiện.  
-*Bảng liên quan:* 06_Luồng xử lý yêu cầu thao tác thiết bị_02, 10_Danh sách giao diện, 11_Định nghĩa hạng mục yêu cầu, 12_Định nghĩa hạng mục phản hồi, 17_Xử lý lỗi, 18_Thiết kế Log.
+  - **Tham chiếu cấu hình:** Đọc các thiết lập cần thiết để phán đoán phương thức điều khiển và thiết bị đối tượng.  
+    *Bảng liên quan:* 15_Thiết kế file cấu hình
+  - **Phán đoán thiết bị sử dụng:** Quyết định điều khiển trực tiếp trong ứng dụng hay thông qua Host.  
+    *Bảng liên quan:* 06_Luồng xử lý yêu cầu thao tác thiết bị_02, 15_Thiết kế file cấu hình
+  - **Tạo yêu cầu:** Tạo yêu cầu lệnh để gửi tới Host.  
+    *Bảng liên quan:* 11_Định nghĩa hạng mục yêu cầu, 14_Danh sách thông điệp
+  - **Nhận phản hồi:** Nhận phản hồi đồng bộ từ Host và trả về cho bên gọi.  
+    *Bảng liên quan:* 12_Định nghĩa hạng mục phản hồi, 17_Xử lý lỗi
+  - **Nhận sự kiện:** Nhận thông báo bất đồng bộ từ Host.  
+    *Bảng liên quan:* 13_Định nghĩa hạng mục sự kiện, 09_Vòng đời_02
 
-④ **Bộ phận kiểm soát thứ tự** đảm bảo thứ tự xử lý của các yêu cầu có cùng `DeviceId`. Việc này giúp tránh tình trạng thao tác đồng thời nhiều lần hoặc bị đảo lộn thứ tự trên cùng một thiết bị thực tế.  
-*Bảng liên quan:* 06_Luồng xử lý yêu cầu thao tác thiết bị_02, 07_Danh sách chức năng, 08_Chi tiết chức năng, 18_Thiết kế Log.
+③ **Bộ kết nối thiết bị (Host)** tiếp nhận yêu cầu từ `DeviceCtrl`, tiến hành kiểm soát thứ tự, phân phối yêu cầu, tìm kiếm thiết bị, gọi điều khiển thiết bị thực tế, và trả về phản hồi.  
+*Bảng liên quan:* 06_Luồng xử lý yêu cầu thao tác thiết bị_02, 07_Danh sách chức năng, 08_Chi tiết chức năng, 20_Bảng đối chiếu triển khai thực tế
 
-⑤ **Bộ phận xử lý lệnh** phân phối yêu cầu thành yêu cầu kiểm soát Host hoặc yêu cầu thao tác thiết bị. Trong trường hợp thao tác thiết bị, nó sẽ chuyển sang bước tìm kiếm thiết bị và thực thi.  
-*Bảng liên quan:* 07_Danh sách chức năng, 08_Chi tiết chức năng, 14_Danh sách thông điệp, 17_Xử lý lỗi.
+  - **Đọc cấu hình:** Đọc file `host_device_config.json` để xác định các thiết bị cần khởi động trong Host.  
+    *Bảng liên quan:* 15_Thiết kế file cấu hình, 16_Thiết kế theo từng thiết bị
+  - **Bộ phận nhận giao tiếp:** Tiếp nhận yêu cầu lệnh từ `DeviceCtrl` và trả về phản hồi đồng bộ trên cùng một kết nối.  
+    *Bảng liên quan:* 06_Luồng xử lý yêu cầu thao tác thiết bị_02, 10_Danh sách giao diện, 11_Định nghĩa hạng mục yêu cầu, 12_Định nghĩa hạng mục phản hồi
+  - **Bộ phận kiểm soát thứ tự:** Đảm bảo thứ tự xử lý của các yêu cầu có cùng `DeviceId`, tránh việc đảo lộn thứ tự.  
+    *Bảng liên quan:* 06_Luồng xử lý yêu cầu thao tác thiết bị_02, 07_Danh sách chức năng, 08_Chi tiết chức năng, 18_Thiết kế Log
+  - **Bộ phận xử lý lệnh:** Phân phối yêu cầu thành yêu cầu kiểm soát Host hoặc yêu cầu thao tác thiết bị.  
+    *Bảng liên quan:* 07_Danh sách chức năng, 08_Chi tiết chức năng, 14_Danh sách thông điệp, 17_Xử lý lỗi
+  - **Bộ phận quản lý thiết bị:** Tạo, duy trì, tìm kiếm và dừng các thiết bị chạy trong Host.  
+    *Bảng liên quan:* 15_Thiết kế file cấu hình, 16_Thiết kế theo từng thiết bị, 17_Xử lý lỗi, 18_Thiết kế Log
+  - **Bộ phận thông báo sự kiện:** Gửi phản hồi tiếp theo từ phía thiết bị dưới dạng thông báo bất đồng bộ.  
+    *Bảng liên quan:* 10_Danh sách giao diện, 13_Định nghĩa hạng mục sự kiện, 18_Thiết kế Log
+  - **Phản hồi lỗi:** Chuyển đổi thông tin nhập không hợp lệ, thiết bị chưa đăng ký, hoặc ngoại lệ thành phản hồi thất bại.  
+    *Bảng liên quan:* 12_Định nghĩa hạng mục phản hồi, 17_Xử lý lỗi, 18_Thiết kế Log
+  - **Ghi log:** Ghi lại để theo dõi các hoạt động: khởi động, giao tiếp, kiểm soát thứ tự, xử lý lệnh, xử lý thiết bị, và các bất thường.  
+    *Bảng liên quan:* 18_Thiết kế Log
 
-⑥ **Bộ phận quản lý thiết bị** đọc file `host_device_config.json` để tạo, duy trì, tìm kiếm và dừng các triển khai thiết bị chạy trong Host.  
-*Bảng liên quan:* 15_Thiết kế file cấu hình, 16_Thiết kế theo từng thiết bị, 17_Xử lý lỗi, 18_Thiết kế Log.
+④ **Thiết bị ngoại vi** là các thiết bị thực tế sử dụng tại cửa hàng. Đối tượng ban đầu gồm 3 loại: Máy thối tiền tự động (RT-300), Két tiền (SHARP) và Màn hình hiển thị khách hàng (SHARP).  
+*Bảng liên quan:* 03_Phạm vi đối tượng, 16_Thiết kế theo từng thiết bị, 17_Xử lý lỗi
 
-⑦ **Triển khai thiết bị cụ thể** sử dụng các tài nguyên có sẵn như OPOS, OCX, DLL, bộ nhớ chia sẻ, hoặc liên kết file yêu cầu/phản hồi để điều khiển thiết bị thực tế.  
-*Bảng liên quan:* 16_Thiết kế theo từng thiết bị, 20_Bảng đối chiếu triển khai thực tế.
-
-⑧ **Thiết bị thực tế** là các thiết bị ngoại vi sử dụng tại cửa hàng. Đối tượng ban đầu gồm 3 loại: Máy thối tiền tự động (RT-300), Két tiền (SHARP) và Màn hình hiển thị khách hàng (SHARP).  
-*Bảng liên quan:* 03_Phạm vi đối tượng, 16_Thiết kế theo từng thiết bị, 17_Xử lý lỗi, 18_Thiết kế Log.
+  - **Triển khai thiết bị cụ thể:** Sử dụng các tài nguyên có sẵn như OPOS, OCX, DLL, bộ nhớ chia sẻ, hoặc liên kết file yêu cầu/phản hồi để điều khiển thiết bị thực tế.  
+    *Bảng liên quan:* 16_Thiết kế theo từng thiết bị, 20_Bảng đối chiếu triển khai thực tế
+  - **Máy thối tiền (RT-300):** Điều khiển thông qua các tài nguyên hiện có dành cho máy thối tiền.  
+    *Bảng liên quan:* 16_Thiết kế theo từng thiết bị, 17_Xử lý lỗi
+  - **Két tiền (SHARP):** Điều khiển thông qua các tài nguyên hiện có dành cho két tiền.  
+    *Bảng liên quan:* 16_Thiết kế theo từng thiết bị, 17_Xử lý lỗi
+  - **Màn hình hiển thị khách hàng (SHARP):** Điều khiển thông qua các tài nguyên hiện có dành cho màn hình hiển thị khách hàng.  
+    *Bảng liên quan:* 16_Thiết kế theo từng thiết bị, 17_Xử lý lỗi
 
 ## 06_デバイス操作要求処理フロー_01
 
@@ -534,7 +566,7 @@ Việc giữ lại màn hình Start/Stop (nếu có) chỉ nhằm mục đích k
 | E-HOST-007 | Xử lý lệnh | Chưa chỉ định `methodId` trong `DeviceMethod`. | Kiểm tra đầu vào. | Trả về kết quả thất bại mà không gọi thiết bị đối tượng. | `ResultCode=-1`, `ReturnValue=-1` | Log kiểm tra đầu vào. | Kiểm tra quan hệ tương ứng của method phía gọi. |
 | E-HOST-008 | Xử lý lệnh | `message` không được hỗ trợ. | Phán đoán `message`. | Trả về kết quả thất bại dưới dạng lệnh chưa được hỗ trợ. | `ResultCode=-1`, `ReturnValue=-1` | Log `message` chưa hỗ trợ. | Kiểm tra tên `message` và danh sách tương ứng. |
 | E-HOST-009 | Thực thi thiết bị | `DeviceMethod` trả về kết quả không bình thường. | Giá trị trả về từ thiết bị. | Không xử lý thành công mà trả về mã kết quả. | `success=false`, `resultCode=<giá trị trả về>` | Log kết quả thiết bị. | Kiểm tra trạng thái thiết bị thực tế, trạng thái OPOS, và các đối số. |
-| E-HOST-010 | Kiểm soát thứ tự | Phát sinh ngoại lệ trong quá trình xử lý. | Ngoại lệ bên trong đơn vị xử lý. | Chuyển đổi ngoại lệ thành phản hồi thất bại. | `success=false`, `resultCode=-1` | Log ngoại lệ. | Kiểm tra log của Host bắt dung từ `requestId`. |
+| E-HOST-010 | Kiểm soát thứ tự | Phát sinh ngoại lệ trong quá trình xử lý. | Ngoại lệ bên trong đơn vị xử lý. | Chuyển đổi ngoại lệ thành phản hồi thất bại. | `success=false`, `resultCode=-1` | Log ngoại lệ. | Kiểm tra log của Host bắt đầu từ `requestId`. |
 | E-HOST-011 | Khởi động thiết bị | Thất bại khi tạo hoặc bắt đầu thiết bị. | Ngoại lệ hoặc giá trị trả về khi khởi động. | Không thêm vào danh sách thiết bị đã khởi động. | Trả lỗi chưa đăng ký khi yêu cầu `DeviceId` đó. | Log khởi động bất thường. | Kiểm tra cấu hình OPOS, đăng ký OCX, và kết nối thiết bị. |
 | E-HOST-012 | Giám sát | Không có phản hồi từ thiết bị trong một khoảng thời gian nhất định. | Thời gian giám sát. | Xuất log giám sát trạng thái bất thường. | Không có phản hồi trực tiếp nếu không trong quá trình yêu cầu. | Log giám sát bất thường. | Kiểm tra kết nối thiết bị thực tế và trạng thái tiến trình thiết bị. |
 | E-HOST-013 | Gửi sự kiện | Nơi nhận sự kiện chưa kết nối. | Kiểm tra trạng thái của xử lý gửi. | Không gửi mà ghi lại log. | Xử lý độc lập với phản hồi lệnh. | Log gửi sự kiện. | Kiểm tra trạng thái nhận sự kiện phía ứng dụng. |
