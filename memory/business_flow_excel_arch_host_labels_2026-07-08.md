@@ -25,7 +25,7 @@ Updated `skills/business-flow-excel` for ARCH-HOST overview rendering:
 - Mermaid edges with labels such as `A -->|Host経由要求| B` are now parsed dynamically and used as Excel connector labels.
 - Architecture overview sheets combine local icons, process blocks, connector labels, and optional waypoints.
 - Lifecycle overview sheets use horizontal `step` nodes with icons, not heavy process boxes.
-- ARCH-HOST `5.3 全体像` now has meaningful line labels in the source Markdown.
+- Superseded: ARCH-HOST no longer keeps a separate `5.3 全体像` heading. The short overview text belongs under `5.2 構成要素`.
 - Generated output verified at `project-store/artifacts/reports/architecture/ARCH-HOST-01_タブレットPOS_デバイスコネクタ基本設計書/draft/ARCH-HOST-01_構成ブロック横型フロー.xlsx`.
 
 Verification from the final run:
