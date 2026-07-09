@@ -127,29 +127,33 @@ Các thiết bị bổ sung trong tương lai như máy in, máy quét (scanner)
 ```mermaid
 flowchart LR
     subgraph APP["① Ứng dụng Tablet POS"]
+        direction TB
         UI["Thao tác màn hình"]
         Biz["Xử lý nghiệp vụ"]
         Life["Khởi động - Phục hồi - Dừng"]
-    end
-    subgraph CTRL["② Lớp điều khiển thiết bị (DeviceCtrl)"]
-        Config["Tham chiếu cấu hình"]
-        Select["Phán đoán thiết bị sử dụng"]
-        Request["Tạo yêu cầu"]
         Response["Nhận phản hồi"]
         EventIn["Nhận sự kiện"]
     end
+    subgraph CTRL["② Lớp điều khiển thiết bị (DeviceCtrl)"]
+        direction TB
+        Request["Tạo yêu cầu"]
+        Config["Tham chiếu cấu hình"]
+        Select["Phán đoán thiết bị sử dụng"]
+    end
     subgraph HOST["③ Bộ kết nối thiết bị (Host)"]
+        direction TB
         HostConfig["Đọc cấu hình"]
         Pipe["Bộ phận nhận giao tiếp"]
         Order["Bộ phận kiểm soát thứ tự"]
         Command["Bộ phận xử lý lệnh"]
         Manager["Bộ phận quản lý thiết bị"]
-        EventOut["Bộ phận thông báo sự kiện"]
+        Impl["Triển khai thiết bị cụ thể"]
+        EventOut["Tạo phản hồi / thông báo sự kiện"]
         Error["Phản hồi lỗi"]
         Log["Ghi log"]
     end
     subgraph DEVICE["④ Thiết bị ngoại vi"]
-        Impl["Triển khai thiết bị cụ thể"]
+        direction TB
         CashChanger["Máy thối tiền (RT-300)"]
         CashDrawer["Két tiền (SHARP)"]
         CustomerDisplay["Màn hình hiển thị khách hàng (SHARP)"]
@@ -157,20 +161,20 @@ flowchart LR
     UI -->|Yêu cầu thao tác| Request
     Biz -->|Yêu cầu nghiệp vụ| Request
     Life -->|Xác nhận khởi động - Yêu cầu dừng| Request
+    Request -->|Nội dung yêu cầu| Config
     Config -->|Phương thức điều khiển| Select
-    Request -->|Đối tượng phán đoán| Select
     Select -->|Yêu cầu qua Host| Pipe
     Pipe -->|Sau khi nhận yêu cầu| Order
     Order -->|Sau khi kiểm soát thứ tự| Command
     Command -->|Tìm kiếm thiết bị| Manager
     Command -->|Thông tin không hợp lệ / Chưa hỗ trợ| Error
     HostConfig -->|Đối tượng khởi động| Manager
-    Manager -->|Gọi triển khai có sẵn| Impl
+    Manager -->|Lấy triển khai có sẵn| Impl
     Impl -->|Điều khiển thiết bị thực tế| CashChanger
     Impl -->|Điều khiển thiết bị thực tế| CashDrawer
     Impl -->|Điều khiển thiết bị thực tế| CustomerDisplay
-    Impl -->|Phản hồi tiếp theo| EventOut
-    EventOut -->|Thông báo bất đồng bộ| EventIn
+    Impl -.->|Chuyển kết quả bất đồng bộ| EventOut
+    EventOut -->|Thông báo ReplyDevice| EventIn
     Pipe -->|Phản hồi đồng bộ| Response
     Error -->|Phản hồi thất bại| Response
     Pipe -.->|Log nhận yêu cầu| Log
@@ -223,8 +227,10 @@ flowchart LR
     *Bảng liên quan:* 07_Danh sách chức năng, 08_Chi tiết chức năng, 14_Danh sách thông điệp, 17_Xử lý lỗi
   - **Bộ phận quản lý thiết bị:** Tạo, duy trì, tìm kiếm và dừng các thiết bị chạy trong Host.  
     *Bảng liên quan:* 15_Thiết kế file cấu hình, 16_Thiết kế theo từng thiết bị, 17_Xử lý lỗi, 18_Thiết kế Log
-  - **Bộ phận thông báo sự kiện:** Gửi phản hồi tiếp theo từ phía thiết bị dưới dạng thông báo bất đồng bộ.  
-    *Bảng liên quan:* 10_Danh sách giao diện, 13_Định nghĩa hạng mục sự kiện, 18_Thiết kế Log
+  - **Triển khai thiết bị cụ thể:** Nằm trong Host, sử dụng các tài nguyên có sẵn như OPOS, OCX, DLL, bộ nhớ chia sẻ, hoặc liên kết file yêu cầu/phản hồi để điều khiển thiết bị thực tế.  
+    *Bảng liên quan:* 16_Thiết kế theo từng thiết bị, 20_Bảng đối chiếu triển khai thực tế
+  - **Tạo phản hồi / thông báo sự kiện:** Trả phản hồi đồng bộ qua đường giao tiếp command và gửi thông báo ReplyDevice qua event pipe khi có thông báo tiếp theo trong Host.  
+    *Bảng liên quan:* 10_Danh sách giao diện, 12_Định nghĩa hạng mục phản hồi, 13_Định nghĩa hạng mục sự kiện, 18_Thiết kế Log
   - **Phản hồi lỗi:** Chuyển đổi thông tin nhập không hợp lệ, thiết bị chưa đăng ký, hoặc ngoại lệ thành phản hồi thất bại.  
     *Bảng liên quan:* 12_Định nghĩa hạng mục phản hồi, 17_Xử lý lỗi, 18_Thiết kế Log
   - **Ghi log:** Ghi lại để theo dõi các hoạt động: khởi động, giao tiếp, kiểm soát thứ tự, xử lý lệnh, xử lý thiết bị, và các bất thường.  
@@ -233,13 +239,11 @@ flowchart LR
 ④ **Thiết bị ngoại vi** là các thiết bị thực tế sử dụng tại cửa hàng. Đối tượng ban đầu gồm 3 loại: Máy thối tiền tự động (RT-300), Két tiền (SHARP) và Màn hình hiển thị khách hàng (SHARP).  
 *Bảng liên quan:* 03_Phạm vi đối tượng, 16_Thiết kế theo từng thiết bị, 17_Xử lý lỗi
 
-  - **Triển khai thiết bị cụ thể:** Sử dụng các tài nguyên có sẵn như OPOS, OCX, DLL, bộ nhớ chia sẻ, hoặc liên kết file yêu cầu/phản hồi để điều khiển thiết bị thực tế.  
-    *Bảng liên quan:* 16_Thiết kế theo từng thiết bị, 20_Bảng đối chiếu triển khai thực tế
-  - **Máy thối tiền (RT-300):** Điều khiển thông qua các tài nguyên hiện có dành cho máy thối tiền.  
+  - **Máy thối tiền (RT-300):** Được điều khiển từ bộ phận điều khiển máy thối tiền trong Host.  
     *Bảng liên quan:* 16_Thiết kế theo từng thiết bị, 17_Xử lý lỗi
-  - **Két tiền (SHARP):** Điều khiển thông qua các tài nguyên hiện có dành cho két tiền.  
+  - **Két tiền (SHARP):** Được điều khiển từ bộ phận điều khiển két tiền trong Host.  
     *Bảng liên quan:* 16_Thiết kế theo từng thiết bị, 17_Xử lý lỗi
-  - **Màn hình hiển thị khách hàng (SHARP):** Điều khiển thông qua các tài nguyên hiện có dành cho màn hình hiển thị khách hàng.  
+  - **Màn hình hiển thị khách hàng (SHARP):** Được điều khiển từ bộ phận điều khiển màn hình hiển thị khách hàng trong Host.  
     *Bảng liên quan:* 16_Thiết kế theo từng thiết bị, 17_Xử lý lỗi
 
 ## 06_デバイス操作要求処理フロー_01
@@ -260,11 +264,12 @@ flowchart LR
         S5["Kiểm soát thứ tự"]
         S6["Phân phối yêu cầu"]
         S7["Tìm kiếm thiết bị"]
+        S8["Thực thi triển khai thiết bị"]
         S9["Trả về phản hồi đồng bộ"]
         S10["Thông báo bất đồng bộ"]
     end
     subgraph DEVICE["④ Thiết bị ngoại vi"]
-        S8["Thực thi trên thiết bị"]
+        S11["Thiết bị thực tế"]
     end
     S1 -->|Yêu cầu| S2
     S2 -->|Qua Host| S3
@@ -273,15 +278,16 @@ flowchart LR
     S5 -->|Sau khi kiểm soát thứ tự| S6
     S6 -->|Thao tác thiết bị| S7
     S7 -->|Lấy đối tượng| S8
-    S8 -->|Phản hồi| S9
-    S8 -.->|Sự kiện| S10
+    S8 -->|Điều khiển thực tế| S11
+    S8 -->|Kết quả thực thi| S9
+    S8 -.->|ReplyDevice| S10
 ```
 
 ## 06_デバイス操作要求処理フロー_02
 
 ### 6.2 Xử lý thông thường
 
-Một thao tác thiết bị thông thường bắt đầu từ yêu cầu phía ứng dụng và được chuyển đến thiết bị đối tượng trong Host. Phản hồi đồng bộ được trả về qua đường ống lệnh (command pipe), và các phản hồi phát sinh sau đó từ phía thiết bị sẽ được thông báo qua đường ống sự kiện (event pipe).
+Một thao tác thiết bị thông thường bắt đầu từ yêu cầu phía ứng dụng và được chuyển đến triển khai thiết bị cụ thể trong Host. Phản hồi đồng bộ được trả về qua đường ống lệnh (command pipe), và các thông báo ReplyDevice phát sinh trong Host sẽ được thông báo qua đường ống sự kiện (event pipe).
 
 ① Ứng dụng Tablet POS tạo yêu cầu thao tác thiết bị từ các thao tác màn hình hoặc xử lý nghiệp vụ.
 
@@ -297,11 +303,11 @@ Một thao tác thiết bị thông thường bắt đầu từ yêu cầu phía
 
 ⑦ Trong trường hợp là yêu cầu thao tác thiết bị, hệ thống sẽ tìm kiếm thiết bị tương ứng từ Bộ phận quản lý thiết bị.
 
-⑧ Triển khai thiết bị cụ thể thực hiện điều khiển thiết bị thực tế dựa trên `message`, `methodId` và `payload`.
+⑧ Triển khai thiết bị cụ thể trong Host thực hiện điều khiển thiết bị thực tế dựa trên `message`, `methodId` và `payload`.
 
 ⑨ Bộ phận nhận giao tiếp trả về kết quả thực thi đồng bộ dưới dạng JSON phản hồi lệnh.
 
-⑩ Khi có phản hồi tiếp theo phát sinh từ phía thiết bị, Bộ phận thông báo sự kiện sẽ thông báo bất đồng bộ tới `TabetPos.Host.Event`.
+⑩ Khi có thông báo ReplyDevice phát sinh trong Host, Bộ phận thông báo sự kiện sẽ thông báo bất đồng bộ tới `TabetPos.Host.Event`.
 
 ## 07_機能一覧
 
@@ -312,7 +318,7 @@ Một thao tác thiết bị thông thường bắt đầu từ yêu cầu phía
 | F-HOST-001 | Xác nhận khởi động Host | Xác nhận trạng thái khởi động của Host khi khởi chạy ứng dụng, tạo màn hình, hoặc khi phục hồi ứng dụng. | Sự kiện vòng đời ứng dụng | Có cần khởi động Host không | Xử lý khởi động phía ứng dụng | Vận hành thông thường không giả định việc khởi động thủ công. |
 | F-HOST-002 | Khởi động Host tự động | Nếu Host chưa khởi động, tiến hành khởi động nó dưới dạng tiến trình chạy ẩn (background process). | Có cần khởi động Host không | Tiến trình Host | Chính bộ Host | Tránh khởi động trùng lặp nhiều tiến trình. |
 | F-HOST-003 | Tiếp nhận lệnh | Tiếp nhận yêu cầu đồng bộ qua đường ống `TabetPos.Host.Command`. | Yêu cầu qua Named Pipe | Thông tin yêu cầu xử lý nội bộ Host | Bộ phận nhận giao tiếp | Trả về phản hồi cho từng yêu cầu. |
-| F-HOST-004 | Thông báo sự kiện | Gửi phản hồi tiếp theo phát sinh từ phía thiết bị dưới dạng sự kiện. | Phản hồi phía thiết bị | JSON thông báo sự kiện | Bộ phận thông báo sự kiện | Đường truyền độc lập với phản hồi đồng bộ. |
+| F-HOST-004 | Thông báo sự kiện | Gửi thông báo ReplyDevice phát sinh trong Host dưới dạng sự kiện. | Dữ liệu thông báo ReplyDevice | JSON thông báo sự kiện | Bộ phận thông báo sự kiện | Đường truyền độc lập với phản hồi đồng bộ. |
 | F-HOST-005 | Chuyển đổi lệnh | Chuyển đổi yêu cầu bên ngoài thành định dạng xử lý nội bộ của Host. | Yêu cầu JSON hoặc yêu cầu định dạng tương thích cũ | Thông tin yêu cầu xử lý nội bộ Host | Bộ phận chuyển đổi lệnh | Duy trì các hạng mục tương thích cũ. |
 | F-HOST-006 | Kiểm soát thứ tự theo DeviceId | Xử lý các yêu cầu có cùng `DeviceId` theo thứ tự gửi đến. | Thông tin yêu cầu xử lý nội bộ Host | Yêu cầu xử lý sau khi kiểm soát thứ tự | Bộ phận kiểm soát thứ tự | Các `DeviceId` khác nhau có thể được xử lý độc lập. |
 | F-HOST-007 | Kiểm soát Host | Xử lý các yêu cầu `Kill`, `ReStart` như là các yêu cầu kiểm soát Host. | Thông điệp (message) kiểm soát Host | Chỉ thị dừng hoặc khởi động lại Host | Bộ phận xử lý lệnh, chính bộ Host | Không thực hiện tìm kiếm thiết bị. |
@@ -330,7 +336,7 @@ Một thao tác thiết bị thông thường bắt đầu từ yêu cầu phía
 | F-HOST-002 | 1 | Khởi động tiến trình Host dưới dạng chạy ẩn. | Host sẵn sàng tiếp nhận lệnh. | Ghi lại lỗi khởi động vào log phía ứng dụng, thực hiện thử lại hoặc xử lý dưới dạng lỗi. | Chính bộ Host |
 | F-HOST-003 | 1 | Chờ nhận kết nối trên Named Pipe của lệnh. | Tiếp nhận yêu cầu. | Nếu không bắt đầu tiếp nhận được thì xử lý như lỗi khởi động Host. | Bộ phận nhận giao tiếp |
 | F-HOST-003 | 2 | Phân tích yêu cầu 1 dòng nhận được. | Chuyển đổi thành cấu trúc thông tin yêu cầu xử lý nội bộ Host. | Trả về phản hồi thất bại nếu dòng trống hoặc định dạng không hợp lệ. | Bộ phận nhận giao tiếp |
-| F-HOST-004 | 1 | Nhận phản hồi tiếp theo từ phía thiết bị. | Tạo dữ liệu thông báo sự kiện. | Nếu không có nơi nhận thì ghi log và xử lý độc lập với phản hồi đồng bộ. | Bộ phận thông báo sự kiện |
+| F-HOST-004 | 1 | Nhận dữ liệu thông báo ReplyDevice. | Tạo dữ liệu thông báo sự kiện. | Nếu không có nơi nhận thì ghi log và xử lý độc lập với phản hồi đồng bộ. | Bộ phận thông báo sự kiện |
 | F-HOST-005 | 1 | Chuyển đổi yêu cầu JSON hoặc yêu cầu định dạng tương thích cũ thành định dạng nội bộ Host. | Thiết lập các trường `message`, `deviceId`, `methodId`, `handle`, `payload`. | Trường hợp thiếu thông tin bắt buộc sẽ xử lý thất bại ở bước kiểm tra thông tin đầu vào sau đó. | Bộ phận chuyển đổi lệnh |
 | F-HOST-006 | 1 | Quyết định đơn vị xử lý cho từng `DeviceId`. | Đưa các yêu cầu có cùng `DeviceId` vào cùng một đơn vị xử lý (queue). | Trường hợp không chỉ định `DeviceId` sẽ xử lý như đơn vị dùng chung của Host. | Bộ phận kiểm soát thứ tự |
 | F-HOST-006 | 2 | Thực hiện xử lý theo thứ tự đưa vào. | Thứ tự xử lý được đảm bảo cho cùng một `DeviceId`. | Chuyển đổi ngoại lệ phát sinh trong quá trình xử lý thành phản hồi thất bại. | Bộ phận kiểm soát thứ tự |
@@ -396,7 +402,7 @@ Việc giữ lại màn hình Start/Stop (nếu có) chỉ nhằm mục đích k
 |---|---|---|---|---|---|---|---|---|
 | IF-HOST-001 | Yêu cầu lệnh | DeviceCtrl | Bộ kết nối thiết bị (Host) | `TabetPos.Host.Command` | JSON hoặc tương thích cũ | JSON | Đồng bộ | Xử lý yêu cầu thao tác thiết bị và yêu cầu kiểm soát Host. |
 | IF-HOST-002 | Phản hồi lệnh | Bộ kết nối thiết bị (Host) | DeviceCtrl | `TabetPos.Host.Command` | - | JSON | Đồng bộ | Trả kết quả về trên cùng một kết nối. |
-| IF-HOST-003 | Thông báo sự kiện | Bộ kết nối thiết bị (Host) | DeviceCtrl hoặc ứng dụng | `TabetPos.Host.Event` | JSON | - | Bất đồng bộ | Xử lý các phản hồi phát sinh sau đó từ phía thiết bị. |
+| IF-HOST-003 | Thông báo sự kiện | Bộ kết nối thiết bị (Host) | DeviceCtrl hoặc ứng dụng | `TabetPos.Host.Event` | JSON | - | Bất đồng bộ | Xử lý thông báo ReplyDevice phát sinh trong Host. |
 
 ## 11_要求項目定義
 
@@ -482,7 +488,7 @@ Việc giữ lại màn hình Start/Stop (nếu có) chỉ nhằm mục đích k
 | EVT-HOST-004 | methodId | string | Tùy chọn | ID phương thức đối tượng. | Thiết lập dựa trên nội dung phản hồi của thiết bị. |
 | EVT-HOST-005 | handle | string | Tùy chọn | Handle dùng cho tương thích cũ. | Thiết lập khi cần thiết. |
 | EVT-HOST-006 | message | string | Tùy chọn | Thông điệp thông báo. | Giữ lại nhằm mục đích tương thích cũ. |
-| EVT-HOST-007 | payload | object | Tùy chọn | Dữ liệu trả về từ phía thiết bị. | Thông tin cá nhân hoặc thông tin thanh toán nhạy cảm sẽ không được ghi trực tiếp vào log. |
+| EVT-HOST-007 | payload | object | Tùy chọn | Dữ liệu trả về được Host đóng gói vào thông báo ReplyDevice. | Thông tin cá nhân hoặc thông tin thanh toán nhạy cảm sẽ không được ghi trực tiếp vào log. |
 
 ## 14_メッセージ一覧
 
@@ -535,9 +541,9 @@ Việc giữ lại màn hình Start/Stop (nếu có) chỉ nhằm mục đích k
 
 | ID Thiết bị | Tên thiết bị | Phương thức điều khiển | Vai trò chính | Xử lý chính | Điều kiện khởi động | Điều kiện kết thúc | Ràng buộc chính | Ghi chú |
 |---|---|---|---|---|---|---|---|---|
-| DEV-HOST-001 | Máy thối tiền RT-300 | Qua Host | Bộ phận điều khiển máy thối tiền | Nhận tiền, thối tiền, xác nhận trạng thái, xác nhận lỗi. | Được định nghĩa trong `host_device_config.json` và trở thành đối tượng khi Host khởi động. | Khi Host dừng hoặc khi có xử lý dừng thiết bị. | OPOS, OCX, UI thread, bộ nhớ chia sẻ, liên kết file yêu cầu/phản hồi. | Xử lý tách biệt phản hồi đồng bộ và phản hồi bất đồng bộ. |
-| DEV-HOST-002 | Két tiền SHARP | Qua Host | Bộ phận điều khiển két tiền | Mở két tiền, xác nhận trạng thái. | Được định nghĩa trong `host_device_config.json` và trở thành đối tượng khi Host khởi động. | Khi Host dừng hoặc khi có xử lý dừng thiết bị. | Triển khai hiện có của SHARP, OPOS, OCX. | Trả mã kết quả về cho bên gọi. |
-| DEV-HOST-003 | Màn hình hiển thị khách hàng SHARP | Qua Host | Bộ phận điều khiển màn hình hiển thị | Hiển thị, xóa hiển thị, cuộn, hiển thị tại vị trí chỉ định. | Được định nghĩa trong `host_device_config.json` và trở thành đối tượng khi Host khởi động. | Khi Host dừng hoặc khi có xử lý dừng thiết bị. | Triển khai hiện có của SHARP, OPOS, OCX, chuỗi ký tự tiếng Nhật. | Named pipe giả định xử lý với UTF-8. |
+| DEV-HOST-001 | Máy thối tiền RT-300 | Qua Host | Bộ phận điều khiển máy thối tiền | Nhận tiền, thối tiền, xác nhận trạng thái, xác nhận lỗi. | Được định nghĩa trong `host_device_config.json` và trở thành đối tượng khi Host khởi động. | Khi Host dừng hoặc khi có xử lý dừng thiết bị. | OPOS trong Host, OCX trong Host, UI thread, bộ nhớ chia sẻ, liên kết file yêu cầu/phản hồi. | Xử lý tách biệt phản hồi đồng bộ và phản hồi bất đồng bộ. |
+| DEV-HOST-002 | Két tiền SHARP | Qua Host | Bộ phận điều khiển két tiền | Mở két tiền, xác nhận trạng thái. | Được định nghĩa trong `host_device_config.json` và trở thành đối tượng khi Host khởi động. | Khi Host dừng hoặc khi có xử lý dừng thiết bị. | Triển khai SHARP trong Host, OPOS trong Host, OCX trong Host. | Trả mã kết quả về cho bên gọi. |
+| DEV-HOST-003 | Màn hình hiển thị khách hàng SHARP | Qua Host | Bộ phận điều khiển màn hình hiển thị | Hiển thị, xóa hiển thị, cuộn, hiển thị tại vị trí chỉ định. | Được định nghĩa trong `host_device_config.json` và trở thành đối tượng khi Host khởi động. | Khi Host dừng hoặc khi có xử lý dừng thiết bị. | Triển khai SHARP trong Host, OPOS trong Host, OCX trong Host, chuỗi ký tự tiếng Nhật. | Named pipe giả định xử lý với UTF-8. |
 
 ## 17_エラー処理
 

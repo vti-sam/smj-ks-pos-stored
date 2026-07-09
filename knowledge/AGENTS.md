@@ -1,7 +1,17 @@
 # AGENTS.md
 
 - `project-store/knowledge/` là nơi lưu tri thức dài hạn của project: requirement, decision, gotcha, runbook, architecture và lesson learned.
-- Không bắt buộc đọc `project-store/knowledge/` trước mọi task. Chỉ đọc file liên quan, dùng `rtk rg` trong `project-store/knowledge/`, hoặc dùng `skills/knowledge-memory-sync/` khi task cần ngữ cảnh bền, có link cụ thể, hoặc User yêu cầu.
+
+## Commands
+
+- Tìm tri thức theo keyword: `rtk rg "<keyword>" project-store/knowledge`.
+- Query semantic search: `rtk uv run skills/knowledge-code/knowledge-memory-sync/scripts/sync_qdrant.py query "<keyword>" --scope knowledge`.
+- Lint frontmatter/link: `rtk uv run skills/knowledge-code/knowledge-memory-sync/scripts/lint_knowledge.py`.
+- Sync index sau khi sửa: `rtk uv run skills/knowledge-code/knowledge-memory-sync/scripts/sync_qdrant.py`.
+
+## Workflow
+
+- Không bắt buộc đọc `project-store/knowledge/` trước mọi task. Chỉ đọc file liên quan, dùng `rtk rg` trong `project-store/knowledge/`, hoặc dùng `skills/knowledge-code/knowledge-memory-sync/` khi task cần ngữ cảnh bền, có link cụ thể, hoặc User yêu cầu.
 - Index/cache tìm kiếm nếu có (ví dụ: Qdrant) chỉ phục vụ tra cứu nội dung nằm trong `project-store/knowledge/`; bắt buộc sử dụng cơ chế Local Storage (lưu trữ SQLite/file cục bộ) thay vì Qdrant server ngoài để đảm bảo tính độc lập. Source-of-truth dài hạn của repo vẫn là `project-store/knowledge/`.
 - Bố cục canonical cho tri thức mới là project-first: `project-store/knowledge/<project_or_domain>/<area>/...`. `type` trong YAML frontmatter dùng để phân loại requirement/decision/gotcha/runbook/architecture/lesson.
 - Chọn `<project_or_domain>` theo tên chính thức trong source-of-truth hoặc folder/task đang xử lý; không hardcode danh sách solution/domain vào rule nếu không phải boundary kỹ thuật bắt buộc.
@@ -24,3 +34,8 @@ tags:
 - Dùng `type` trong frontmatter để phân loại tài liệu.
 - Khi di chuyển/đổi tên/chỉnh sửa file trong `project-store/knowledge/`: cập nhật markdown link nội bộ liên quan.
 - Viết ghi chú cô đọng, ưu tiên invariant, pitfall, verify command và nguồn xác minh. Ghi nhãn song ngữ Việt/Nhật nếu có thuật ngữ Nhật quan trọng.
+
+## Examples
+
+- Đúng: ghi quyết định đã xác minh vào `project-store/knowledge/<project_or_domain>/runbooks/...` với `source` và `status` rõ.
+- Sai: copy log phiên dài, nháp chưa xác minh hoặc note historical vào knowledge; những nội dung đó thuộc `project-store/memory/`.

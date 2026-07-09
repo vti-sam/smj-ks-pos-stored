@@ -24,7 +24,7 @@ The `汎用` descriptions must be short and direct. Do not generate meta explana
 
 Render `memo` as one unframed merged row below the diagram. Put `■メモ` on the first line and each memo item as a `- ...` line in the same row. Do not use a large bordered memo box.
 
-Icon nodes that need connectors, especially peripheral devices, should have a small transparent wrapper block behind the icon and label. Connectors attach to the wrapper shape, not to the embedded PNG.
+For Basic Design and architecture diagram sheets, do not use icons or embedded PNG labels for components. Render every component as a compact text block shape so connectors attach directly to the text block with `a:stCxn` and `a:endCxn`.
 
 When a Mermaid source uses dotted edges such as `-.->` for log or secondary paths, render the matching Excel edge with `dashed: true`.
 
