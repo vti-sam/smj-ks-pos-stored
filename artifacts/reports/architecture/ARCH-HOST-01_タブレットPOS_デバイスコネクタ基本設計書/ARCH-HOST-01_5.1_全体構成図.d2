@@ -8,114 +8,93 @@ terminal: {
   style.stroke-dash: 4
 
   app: {
-    label: "（1）アプリケーション層"
-    grid-rows: 5
+    label: "（1） アプリケーション層"
+    grid-rows: 3
     style.fill: "#DDEBF7"
     style.stroke: "#5B9BD5"
 
-    ui: "① 画面操作\n操作起点"
-    biz: "② 業務処理\n業務要求を作成"
-    lifecycle: "③ 起動・復帰・停止\nHost確認/停止要求"
-    response: "④ 応答受信\n同期結果"
-    event: "⑤ イベント受信\n非同期通知"
+    business: "① 画面・業務処理\nデバイス操作を依頼"
+    lifecycle: "② アプリライフサイクル\n起動・再開・停止"
+    host_manager: "③ デバイスコネクタプロセス管理\n存在確認・起動・停止・終了待機"
 
-    ui -> biz: "操作内容"
+    lifecycle -> host_manager
   }
 
   ctrl: {
-    label: "（2）デバイス制御層\nDeviceCtrl"
+    label: "（2） デバイス制御"
     grid-rows: 5
     style.fill: "#E2F0D9"
     style.stroke: "#70AD47"
 
-    config: "① 設定参照\n制御方式を確認"
-    select: {
-      label: "② 使用デバイス判定\n制御方式を分岐"
-      shape: diamond
-      style.fill: "#FFF2CC"
-      style.stroke: "#BF9000"
+    config: "④ 設定参照・読込\nデバイス・パイプ設定"
+    strategy: "⑤ 使用ストラテジー判定"
+    request: "⑥ 要求生成"
+    client: "⑦ 名前付きパイプクライアント\nJSON要求・同期応答"
+    result: "⑧ 応答変換・返却\nアプリ層へ返却"
+
+    config -> strategy {
+      style.stroke-dash: 4
     }
-    request: "③ 要求生成\nHost経由要求"
-    response: "④ 応答受信・返却\nアプリ層へ返却"
-    event: "⑤ イベント受信・通知\nアプリ層へ通知"
-    direct: {
-      label: "直接制御\n本書対象外"
+    config -> client {
+      style.stroke-dash: 4
+    }
+    strategy -> request
+    request -> client
+    client -> result
+  }
+
+  app.business -> ctrl.strategy: "操作要求"
+  ctrl.result -> app.business: "処理結果"
+}
+
+host: {
+  label: "（3） デバイスコネクタ"
+  grid-columns: 2
+  style.fill: "#FCE4D6"
+  style.stroke: "#ED7D31"
+
+  support: {
+    label: "起動・停止／イベント"
+    grid-rows: 3
+    style.fill: "#FFF7F2"
+    style.stroke: "#F4B183"
+
+    host_control: "⑨ デバイスコネクタ起動・停止管理\n通信・デバイス管理を開始／停止"
+    publisher: "⑯ イベント配信\n非同期通知"
+    event_pipe: {
+      label: "イベント通知用パイプ\n（TabetPos.Host.Event）\n受信側：確認事項"
       style.fill: "#F2F2F2"
       style.stroke-dash: 4
     }
 
-    config -> select
-    select -> request
-    select -> direct {
+    publisher -> event_pipe {
       style.stroke-dash: 4
     }
   }
 
-  app.biz <-> ctrl.config: "要求 / 結果"
-  app.lifecycle <-> ctrl.config: "起動停止 / 状態"
-  ctrl.response -> app.response
-  ctrl.event -> app.event {
-    style.stroke-dash: 4
-  }
-}
+  command: {
+    label: "デバイス操作要求処理"
+    grid-rows: 6
+    style.fill: "#FFF7F2"
+    style.stroke: "#F4B183"
 
-host: {
-  label: "（3） デバイスコネクタ\nHost"
-  grid-rows: 13
-  style.fill: "#FCE4D6"
-  style.stroke: "#ED7D31"
+    server: "⑩ コマンド受付\n要求受付・同期応答"
+    router: "⑪ デバイスID別順序制御\n同一デバイスIDを投入順に処理"
+    mapper: "⑫ 要求・応答変換\nJSON／デバイスコネクタ内部形式"
+    handler: "⑬ コマンド判定・実行\n要求種別を判定"
+    manager: "⑭ デバイス管理\n生成・保持・検索・停止"
+    impl: "⑮ 個別デバイス実装\nOPOS・OCX等で実機制御"
 
-  host_config: "① 設定読込\nhost_device_config.json"
-  adapter: "通信アダプター\n要求/応答を変換"
-  command_pipe: "② コマンド用パイプ\n同期要求/応答"
-  event_pipe: "イベント用パイプ\nReplyDevice通知"
-  router: "③ 順序制御部\nDeviceId単位"
-  handler: {
-    label: "④ コマンド処理部\n要求種別を判定"
-    shape: diamond
-    style.fill: "#FFF2CC"
-    style.stroke: "#BF9000"
-  }
-  host_action: "Host制御\n停止/再起動"
-  use_flow: "利用開始/終了\nDeviceUse/UnUse"
-  method_flow: "デバイス操作\nDeviceMethod"
-  manager: "⑤ デバイス管理部\n生成・保持・検索・停止"
-  base: "デバイス共通基底\nOpen/Claim/Release"
-  impl: "⑥ 個別デバイス実装\nOPOS・OCX・DLL等"
-  error: {
-    label: "⑧ エラー応答\n入力不備・未対応"
-    style.fill: "#F4CCCC"
-    style.stroke: "#C00000"
-  }
-  log: {
-    label: "⑨ ログ出力\n受付・処理・実行"
-    style.fill: "#FFFFFF"
-    style.stroke-dash: 4
+    server -> router
+    router -> mapper
+    mapper -> handler
+    handler <-> manager
+    manager <-> impl
   }
 
-  command_pipe <-> adapter
-  adapter <-> router
-  router <-> handler
-  handler -> host_action
-  handler -> use_flow
-  handler -> method_flow
-  handler -> error
-  use_flow <-> manager
-  method_flow <-> manager
-  host_config -> manager
-  manager <-> base
-  base <-> impl
-  manager -> event_pipe {
-    style.stroke-dash: 4
-  }
-  error -> adapter
-  adapter -> log {
-    style.stroke-dash: 4
-  }
-  handler -> log {
-    style.stroke-dash: 4
-  }
-  impl -> log {
+  support.host_control -> command.server
+  support.host_control -> command.manager
+  command.impl -> support.publisher {
     style.stroke-dash: 4
   }
 }
@@ -126,23 +105,20 @@ device: {
   style.fill: "#E4DFEC"
   style.stroke: "#8064A2"
 
-  cash_changer: "① 釣銭機\nRT-300"
-  cash_drawer: "② キャッシュドロア\nSHARP"
-  customer_display: "③ カスタマーディスプレイ\nSHARP"
+  cash_changer: "⑰ 釣銭機\nRT-300"
+  cash_drawer: "⑱ キャッシュドロア\nSHARP"
+  customer_display: "⑲ カスタマーディスプレイ\nSHARP"
 }
 
 terminal -> host: "" {
   style.opacity: 0
 }
+terminal -> host.support.host_control: "デバイスコネクタプロセス管理"
 host -> device: "" {
   style.opacity: 0
 }
 
-terminal.ctrl.request <-> host.command_pipe: "要求 / 同期応答"
-host.command_pipe -> terminal.ctrl.response
-host.event_pipe -> terminal.ctrl.event {
-  style.stroke-dash: 4
-}
-host.impl <-> device.cash_changer: "制御 / 結果"
-host.impl <-> device.cash_drawer: "制御 / 結果"
-host.impl <-> device.customer_display: "制御 / 結果"
+terminal.ctrl.client <-> host.command.server: "要求 / 応答"
+host.command.impl <-> device.cash_changer
+host.command.impl <-> device.cash_drawer
+host.command.impl <-> device.customer_display
