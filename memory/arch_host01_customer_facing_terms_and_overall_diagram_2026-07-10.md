@@ -129,3 +129,51 @@ The three review-level flows were rendered together under the ARCH-HOST draft bu
 - `9.1 ライフサイクル`: vertical flowchart with startup and ten-second termination decisions; 12 nodes and 13 edges.
 
 Each flow has a D2 source, rendered SVG/PNG preview, positioned layout JSON, and two validated Office Scripts (graph and connector-label display). The scripts use the Basic Design-compatible A:X grid and contain graph content only; `汎用` and `メモ` remain owned by the Basic Design worksheet renderer.
+
+The final review layout keeps `6.1` as a compact left-to-right flow and `9.1` as two readable flowchart groups placed side by side (`起動・再開` and `停止・終了`). A single long horizontal lifecycle line was rejected during visual QA because its labels became too small.
+
+## Diagram typography contract
+
+`business-flow-excel` now owns one typography contract for every generated Office Script: level-1 and level-2 lane/container headings are 13pt bold; component blocks are 10pt bold; connector labels are 9pt normal. The generator no longer inherits font size or font weight from D2/SVG geometry, and the Office Script validator rejects output that does not contain the three required styles. The 5.1, 6.1, and 9.1 Office Script pairs were regenerated and passed the strengthened validator.
+
+## Compact Excel box and placement contract
+
+The Office Script generator now sizes each functional component from its displayed fixed 10pt label, within a compact 56–108pt width and 22–36pt height range. It preserves the component center derived from reviewed D2 geometry, so only excess SVG padding is removed. If a nested D2 container would otherwise pull a functional component into the reserved worksheet margin, the complete diagram is shifted just enough to begin inside the graph region. Connector labels are compact 9pt normal transparent text placed immediately above the connector, rather than white bordered boxes. The 5.1, 6.1, and 9.1 Office Script pairs and the duplicate intermediate flow outputs were regenerated and passed Office Script validation; the reusable `business-flow-excel` skill, D2 layout guidance, and skill-quality evidence test were updated to enforce the contract.
+
+## Excel-native auto-fit and full reflow correction
+
+The earlier center-preserving box contract above is superseded. Microsoft Office Scripts supports `ExcelScript.ShapeAutoSize.autoSizeShapeToFitText`, so component and connector-label shapes now apply the final Meiryo UI font first and then let Excel fit the shape to the text. The former `autoSizeTextToFitShape` path is forbidden because it shrinks text to an arbitrary box.
+
+The generator no longer emits D2/SVG component positions as final Excel positions. It uses the parsed diagram only for containment, lane order, and processing order; wraps long labels at semantic Japanese boundaries while keeping code identifiers intact; allocates A:X lane widths; creates all component shapes at a neutral origin; auto-fits them; then places each group again with a fixed vertical gap and lane-centered alignment. Connector geometry is created from the newly positioned Excel shapes rather than from old SVG endpoints. Runtime validation rejects generated component calls that retain non-zero source coordinates, rejects `autoSizeTextToFitShape`, requires `autoSizeShapeToFitText` and `placeVerticalGroup`, and checks estimated wrapped width against lane capacity.
+
+The canonical 5.1, 6.1, and 9.1 Office Script pairs plus the two duplicate intermediate flow pairs were regenerated with the new contract. All Office Script validators, skill quick validation, skill-quality evaluation, rule lint, knowledge lint, and workspace verification passed.
+
+## Expandable canvas and unified 1.5pt stroke contract
+
+The diagram renderer is no longer limited to A:X. Normal diagram sheets keep a 23-content-column baseline, but each lane receives at least 210pt and the end column expands from the number of lanes and the widest fitted component. Column A remains a margin; content columns from B onward use a repeatable 36pt width. Components use at least 80×28pt, 12pt lane inset, larger text-frame margins, and an 18pt vertical gap.
+
+All native connectors, component borders, text-box borders, connector-label borders, and lane/table borders now share `#1F4E79`. Native shape and connector weights resolve through one `diagramLineWeight()` function returning exactly 1.5pt. The adaptive `safeLineWeight` path, hidden connector-label borders, `#0D32B2` Office Script borders, and fixed `A1:X80` layout code are rejected by validation.
+
+The canonical outputs now allocate through column AE for 5.1, Y for 6.1, and X for 9.1. The `business-flow-excel`, `basic-design-d2-diagram`, and `basic-design-excel` rules were updated so the same content-driven sizing and stroke contract can be reused across projects and document types instead of depending on ARCH-HOST coordinates or a fixed canvas.
+
+## Runtime-safe integer stroke correction
+
+The earlier 1.5pt stroke contract is superseded. An Excel Office Scripts runtime rejected the fractional value at `ShapeLineFormat.setWeight` with an invalid-argument error. All generated native connectors, component borders, text-box borders, and connector-label borders now resolve through `diagramLineWeight()` to the integer value 2pt while keeping the shared color `#1F4E79`.
+
+The reusable validator now requires `return 2;` and rejects fractional literals both in direct `setWeight(...)` calls and in the centralized `diagramLineWeight()` helper. This runtime-safe rule applies across diagram types and projects rather than only to the current ARCH-HOST document.
+
+## Runtime-sized lane table and spacing correction
+
+The earlier 210pt lane, 12pt inset, and 18pt component-gap contract is superseded. Excel applies `autoSizeShapeToFitText` at runtime, so a lane table sized only from pre-fit estimates can end above the lowest component. The reusable renderer now allocates at least 252pt per lane, uses 24pt horizontal/top padding, a 28pt vertical component gap, and a 96pt minimum component width.
+
+`placeVerticalGroup()` now returns the actual bottom edge of each group after Excel auto-fit. The script derives `bodyEndRow` from the lowest returned edge plus 36pt bottom padding, then creates the merged lane table to that runtime row. The validator rejects the old fixed `addCellLaneTable(sheet)` call and placements below the 252pt/28pt minimum. `basic-design-excel` must preserve the generated end column, `bodyEndRow`, and bottom padding when the diagram region is copied into a Basic Design sheet.
+
+The canonical 5.1, 6.1, and 9.1 Office Script pairs plus the intermediate duplicate-name pairs were regenerated. The 5.1 canvas now expands through column AJ and its five lane bodies all terminate at the shared runtime-calculated bottom row.
+
+## D2-relative component placement correction
+
+The topological single-column placement behavior is superseded. Large responsibility areas remain merged-cell lane tables, but small shapes must preserve the reviewed D2 layout: nearby source `y` centers form one row, nodes within a row keep source `x` order and normalized horizontal offsets, and diagrams without containers use the whole canvas as one placement region. Excel may resize shapes for Meiryo UI, but it must not reorder same-level nodes or remove deliberate left/right branch offsets.
+
+The renderer now emits `placeD2Row()` calls instead of `placeVerticalGroup()`. Each row resolves overlap with 24pt lane inset and 28pt horizontal gap, returns its runtime bottom after auto-fit, and feeds the dynamic table-height calculation. Generated connectors receive D2 `fromSide` and `toSide`; relative-center inference is only a fallback when a source side is missing. Exact D2 bend points remain outside the stable Office Scripts API, so connectors stay as single editable native Excel connectors.
+
+For ARCH-HOST, 6.1 now keeps four D2 rows with node counts `1 / 2 / 2 / 2`; 9.1 lifecycle flow keeps the D2 vertical order and the right-offset launch/init and force branches; 5.1 retains the reviewed vertical sequences within each of its five leaf lanes. The canonical and duplicate-name Office Script pairs were regenerated, and validation rejects the old single-column helper.
