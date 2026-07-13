@@ -2,7 +2,7 @@
   "sheetName": "06_運用シナリオ_01",
   "anchorAddress": "B7",
   "diagramTitle": "6.1 運用シナリオ図",
-  "description": "起動フェーズは、アプリ設定、デバイスコネクタプロセス、デバイスコネクタ内部の順に準備する。運用設定を使用できない場合だけ初期設定へ切り替える。\nデバイス開始は50ミリ秒間隔で最大3回試行する。最終失敗したデバイスだけを起動済み一覧から除外し、他のデバイスで起動処理を継続する。\n稼働確認は最大10秒、500ミリ秒間隔で行う。実行ファイル、必須設定、プロセス起動、または稼働確認に失敗した場合は運用を開始しない。\nコマンド接続は要求送信前に限り500ミリ秒間隔で最大3回試行する。送信後に同期結果を確定できない場合は、二重実行防止のため同一要求を自動再送しない。\n失敗応答はデバイスコネクタが異常結果を返せた状態、通信失敗は同期応答を確定できない状態を示す。アプリケーション層は両者を区別する。\n非同期イベントは同期応答を変更しない。イベント通知用パイプが切断された場合は1秒間隔で再接続する。\n停止要求、終了監視、および強制終了は所有プロセスだけを対象とする。停止要求に失敗しても最大10秒の終了監視を継続する。",
+  "description": "起動フェーズは、設定、デバイスコネクタプロセス、通信、およびデバイスを順に準備する。運用設定を使用できない場合だけ初期設定へ切り替え、起動準備が完了しない場合は運用を開始しない。\nデバイス開始は50ミリ秒間隔で最大3回試行する。最終失敗したデバイスだけを起動済み一覧から除外し、他のデバイスで起動処理を継続する。\n稼働確認は最大10秒、500ミリ秒間隔で行う。実行ファイル、必須設定、プロセス起動、または稼働確認に失敗した場合は運用を開始しない。\nコマンド接続は要求送信前に限り500ミリ秒間隔で最大3回試行する。送信後に同期結果を確定できない場合は、二重実行防止のため同一要求を自動再送しない。\n失敗応答はデバイスコネクタが異常結果を返せた状態、通信失敗は同期応答を確定できない状態を示す。アプリケーション層は両者を区別する。\n非同期イベントは同期応答を変更しない。イベント通知用パイプが切断された場合は1秒間隔で再接続する。\n終了フェーズは所有プロセスだけを対象とする。停止要求に失敗しても最大10秒の終了監視を継続し、終了しない場合は所有プロセスツリーを強制終了する。",
   "colors": {
     "connector": "#1F4E79",
     "guide": "#D9D9D9",
@@ -16,13 +16,13 @@
     {
       "id": "OPERATION",
       "text": "デバイス操作フェーズ",
-      "x": 311.4331706717117,
-      "y": 323.12462243572816,
-      "width": 285.7515654221666,
-      "height": 605.8490176998514,
+      "x": 262.6002313030069,
+      "y": 260.0,
+      "width": 295.2679259830378,
+      "height": 589.5836545875096,
       "fill": "#FFFFFF",
       "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
+      "lineWeight": 0.9868928296067849,
       "dashed": false,
       "shape": "rectangle",
       "role": "container",
@@ -32,33 +32,15 @@
       "strokeWidth": 2
     },
     {
-      "id": "START",
-      "text": "起動フェーズ",
-      "x": 60.0,
-      "y": 260.0,
-      "width": 231.02303187275498,
-      "height": 732.0982625713077,
-      "fill": "#FFFFFF",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
-      "dashed": false,
-      "shape": "rectangle",
-      "role": "container",
-      "sourceOrder": 0,
-      "direction": "TB",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2
-    },
-    {
       "id": "STOP",
       "text": "終了フェーズ",
-      "x": 634.4860242436959,
-      "y": 382.28213411082936,
-      "width": 185.5139757563042,
-      "height": 487.53399434964894,
+      "x": 610.1734772552044,
+      "y": 264.5373939861218,
+      "width": 209.82652274479568,
+      "height": 580.508866615266,
       "fill": "#FFFFFF",
       "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
+      "lineWeight": 0.9868928296067849,
       "dashed": false,
       "shape": "rectangle",
       "role": "container",
@@ -68,135 +50,33 @@
       "strokeWidth": 2
     },
     {
-      "id": "OPERATION.O3",
-      "text": "③ 送信前に接続できたか\n最大3回／500ミリ秒",
-      "x": 461.61154379022076,
-      "y": 388.60806748588317,
-      "width": 91.08134407454702,
-      "height": 91.08134407454702,
-      "fill": "#FFF2CC",
+      "id": "START",
+      "text": "起動フェーズ",
+      "x": 60.0,
+      "y": 331.3030069390902,
+      "width": 173.98033924441017,
+      "height": 446.97764070932925,
+      "fill": "#FFFFFF",
       "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
+      "lineWeight": 0.9868928296067849,
       "dashed": false,
-      "shape": "diamond",
-      "role": "node",
-      "sourceOrder": 12,
-      "direction": "",
+      "shape": "rectangle",
+      "role": "container",
+      "sourceOrder": 0,
+      "direction": "TB",
       "sourceFormat": "mermaid",
-      "strokeWidth": 2,
-      "comment": "送信前に接続可否を確認します。\n接続は500ミリ秒間隔で\n最大3回試行します。",
-      "commentPriority": 100
-    },
-    {
-      "id": "START.S5",
-      "text": "③ デバイスコネクタが\n起動済みか",
-      "x": 164.3902721356663,
-      "y": 536.6035674623702,
-      "width": 84.66468675278449,
-      "height": 84.66468675278449,
-      "fill": "#FFF2CC",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
-      "dashed": false,
-      "shape": "diamond",
-      "role": "node",
-      "sourceOrder": 4,
-      "direction": "",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2,
-      "comment": "",
-      "commentPriority": 0
-    },
-    {
-      "id": "START.S8",
-      "text": "⑥ 10秒以内に\n稼働確認できたか",
-      "x": 108.79023885574965,
-      "y": 803.6563776257674,
-      "width": 72.49118263077742,
-      "height": 72.49118263077742,
-      "fill": "#FFF2CC",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
-      "dashed": false,
-      "shape": "diamond",
-      "role": "node",
-      "sourceOrder": 7,
-      "direction": "",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2,
-      "comment": "起動後10秒以内に稼働確認で\nきない場合は、起動異常として扱います。",
-      "commentPriority": 96
+      "strokeWidth": 2
     },
     {
       "id": "STOP.T2",
       "text": "② 所有プロセスか",
-      "x": 719.512232178062,
-      "y": 412.22378573521485,
-      "width": 65.74462004825588,
-      "height": 65.74462004825588,
+      "x": 692.6233616037009,
+      "y": 306.52274479568234,
+      "width": 92.18966846569006,
+      "height": 92.18966846569006,
       "fill": "#FFF2CC",
       "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
-      "dashed": false,
-      "shape": "diamond",
-      "role": "node",
-      "sourceOrder": 23,
-      "direction": "",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2,
-      "comment": "アプリが起動した所有\nプロセスだけを停止対象とします。\n既存プロセスは停止しません。",
-      "commentPriority": 92
-    },
-    {
-      "id": "OPERATION.O8",
-      "text": "運用を継続するか",
-      "x": 381.3785843736322,
-      "y": 818.3014219929606,
-      "width": 64.04560795534704,
-      "height": 64.04560795534704,
-      "fill": "#FFF2CC",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
-      "dashed": false,
-      "shape": "diamond",
-      "role": "node",
-      "sourceOrder": 18,
-      "direction": "",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2,
-      "comment": "",
-      "commentPriority": 0
-    },
-    {
-      "id": "STOP.T5",
-      "text": "⑤ 10秒以内に\n終了したか",
-      "x": 741.0399250478399,
-      "y": 647.0943377115716,
-      "width": 63.20434954041159,
-      "height": 63.20434954041159,
-      "fill": "#FFF2CC",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
-      "dashed": false,
-      "shape": "diamond",
-      "role": "node",
-      "sourceOrder": 26,
-      "direction": "",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2,
-      "comment": "",
-      "commentPriority": 0
-    },
-    {
-      "id": "OPERATION.O6",
-      "text": "⑥ 同期結果を\n確定できたか",
-      "x": 452.18312635877925,
-      "y": 653.1755913515626,
-      "width": 62.92942848977909,
-      "height": 62.92942848977909,
-      "fill": "#FFF2CC",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
+      "lineWeight": 0.9868928296067849,
       "dashed": false,
       "shape": "diamond",
       "role": "node",
@@ -204,23 +84,63 @@
       "direction": "",
       "sourceFormat": "mermaid",
       "strokeWidth": 2,
+      "comment": "アプリが起動した所有\nプロセスだけを停止対象とします。\n既存プロセスは停止しません。",
+      "commentPriority": 92
+    },
+    {
+      "id": "OPERATION.O6",
+      "text": "運用を継続するか",
+      "x": 432.5327679259831,
+      "y": 694.3947571318427,
+      "width": 89.80724749421744,
+      "height": 89.80724749421744,
+      "fill": "#FFF2CC",
+      "stroke": "#1F4E79",
+      "lineWeight": 0.9868928296067849,
+      "dashed": false,
+      "shape": "diamond",
+      "role": "node",
+      "sourceOrder": 12,
+      "direction": "",
+      "sourceFormat": "mermaid",
+      "strokeWidth": 2,
+      "comment": "失敗応答と通信失敗を区別します。\n同期結果を確定できない\n要求は自動再送しません。",
+      "commentPriority": 88
+    },
+    {
+      "id": "STOP.T4",
+      "text": "④ 10秒以内に\n終了したか",
+      "x": 726.869699306091,
+      "y": 532.7370855821125,
+      "width": 88.62760215882807,
+      "height": 88.62760215882807,
+      "fill": "#FFF2CC",
+      "stroke": "#1F4E79",
+      "lineWeight": 0.9868928296067849,
+      "dashed": false,
+      "shape": "diamond",
+      "role": "node",
+      "sourceOrder": 17,
+      "direction": "",
+      "sourceFormat": "mermaid",
+      "strokeWidth": 2,
       "comment": "",
       "commentPriority": 0
     },
     {
-      "id": "START.S2",
-      "text": "② 運用設定を\n使用できるか",
-      "x": 189.95518063398242,
-      "y": 291.3492474036239,
-      "width": 62.92942848977909,
-      "height": 62.92942848977909,
+      "id": "OPERATION.O4",
+      "text": "④ 同期結果を\n確定できたか",
+      "x": 364.62798766383963,
+      "y": 474.6915959907479,
+      "width": 88.24209714726292,
+      "height": 88.24209714726292,
       "fill": "#FFF2CC",
       "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
+      "lineWeight": 0.9868928296067849,
       "dashed": false,
       "shape": "diamond",
       "role": "node",
-      "sourceOrder": 1,
+      "sourceOrder": 9,
       "direction": "",
       "sourceFormat": "mermaid",
       "strokeWidth": 2,
@@ -229,14 +149,14 @@
     },
     {
       "id": "START.S4",
-      "text": "初期設定を\n使用できるか",
-      "x": 251.18559703085265,
-      "y": 449.43709914882993,
-      "width": 61.23041639687025,
-      "height": 61.23041639687025,
+      "text": "④ 起動準備が\n完了したか",
+      "x": 144.08828064764842,
+      "y": 534.1518889745566,
+      "width": 88.24209714726292,
+      "height": 88.24209714726292,
       "fill": "#FFF2CC",
       "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
+      "lineWeight": 0.9868928296067849,
       "dashed": false,
       "shape": "diamond",
       "role": "node",
@@ -248,175 +168,15 @@
       "commentPriority": 0
     },
     {
-      "id": "START.S7",
-      "text": "⑤ 通信・デバイス初期化\nデバイス開始：最大3回／50ミリ秒",
-      "x": 126.73708504103921,
-      "y": 757.9095148005194,
-      "width": 80.9367573062078,
-      "height": 35.89369237057911,
+      "id": "STOP.T3",
+      "text": "③ 停止要求を送信して\n終了を監視",
+      "x": 679.0362374710871,
+      "y": 497.6060138781804,
+      "width": 95.66692367000772,
+      "height": 38.48882035466461,
       "fill": "#F8FBFD",
       "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
-      "dashed": false,
-      "shape": "roundRect",
-      "role": "node",
-      "sourceOrder": 6,
-      "direction": "",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2,
-      "comment": "",
-      "commentPriority": 0
-    },
-    {
-      "id": "OPERATION.O5",
-      "text": "⑤ 順序制御・コマンド実行\n対象デバイスを制御",
-      "x": 450.277923477896,
-      "y": 619.5390008066763,
-      "width": 79.82057784063984,
-      "height": 27.44811769514873,
-      "fill": "#F8FBFD",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
-      "dashed": false,
-      "shape": "roundRect",
-      "role": "node",
-      "sourceOrder": 14,
-      "direction": "",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2,
-      "comment": "",
-      "commentPriority": 0
-    },
-    {
-      "id": "OPERATION.COMM_ERROR",
-      "text": "通信失敗を返却\n送信後は自動再送なし",
-      "x": 347.94818461672025,
-      "y": 785.2229211808583,
-      "width": 66.86079951382384,
-      "height": 27.44811769514873,
-      "fill": "#F4CCCC",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
-      "dashed": false,
-      "shape": "roundRect",
-      "role": "node",
-      "sourceOrder": 17,
-      "direction": "",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2,
-      "comment": "",
-      "commentPriority": 0
-    },
-    {
-      "id": "STOP.T6",
-      "text": "所有プロセスツリーを\n強制終了",
-      "x": 744.0516851575189,
-      "y": 779.5540491168161,
-      "width": 66.69584688344433,
-      "height": 27.44811769514873,
-      "fill": "#F4CCCC",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
-      "dashed": false,
-      "shape": "roundRect",
-      "role": "node",
-      "sourceOrder": 27,
-      "direction": "",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2,
-      "comment": "",
-      "commentPriority": 0
-    },
-    {
-      "id": "STOP.T4",
-      "text": "④ 受付応答後に停止\n500ミリ秒待機",
-      "x": 673.256765409144,
-      "y": 613.5952076920016,
-      "width": 62.92942848977909,
-      "height": 27.44811769514873,
-      "fill": "#F8FBFD",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
-      "dashed": false,
-      "shape": "roundRect",
-      "role": "node",
-      "sourceOrder": 25,
-      "direction": "",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2,
-      "comment": "",
-      "commentPriority": 0
-    },
-    {
-      "id": "STOP.STOP_ERROR",
-      "text": "停止要求失敗を記録\n終了監視を継続",
-      "x": 746.7431622432111,
-      "y": 613.5952076920016,
-      "width": 61.23041639687025,
-      "height": 27.44811769514873,
-      "fill": "#F4CCCC",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
-      "dashed": false,
-      "shape": "roundRect",
-      "role": "node",
-      "sourceOrder": 29,
-      "direction": "",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2,
-      "comment": "",
-      "commentPriority": 0
-    },
-    {
-      "id": "OPERATION.RECONNECT",
-      "text": "切断時は1秒間隔で再接続",
-      "x": 490.0658725306845,
-      "y": 872.8457584384485,
-      "width": 75.44383471457046,
-      "height": 19.002543019718352,
-      "fill": "#F8FBFD",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
-      "dashed": false,
-      "shape": "roundRect",
-      "role": "node",
-      "sourceOrder": 21,
-      "direction": "",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2,
-      "comment": "",
-      "commentPriority": 0
-    },
-    {
-      "id": "OPERATION.O2",
-      "text": "② 設定・制御方式を選択",
-      "x": 424.51644642837766,
-      "y": 385.9385840842416,
-      "width": 74.19019472368626,
-      "height": 19.002543019718352,
-      "fill": "#F8FBFD",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
-      "dashed": false,
-      "shape": "roundRect",
-      "role": "node",
-      "sourceOrder": 11,
-      "direction": "",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2,
-      "comment": "",
-      "commentPriority": 0
-    },
-    {
-      "id": "OPERATION.O7",
-      "text": "正常応答または\n失敗応答を返却",
-      "x": 427.1983012772977,
-      "y": 785.2229211808583,
-      "width": 49.96965016296307,
-      "height": 27.44811769514873,
-      "fill": "#F8FBFD",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
+      "lineWeight": 0.9868928296067849,
       "dashed": false,
       "shape": "roundRect",
       "role": "node",
@@ -428,175 +188,15 @@
       "commentPriority": 0
     },
     {
-      "id": "START.START_ERROR",
-      "text": "起動を中止して\n異常を記録",
-      "x": 170.5402560383153,
-      "y": 950.0463386665606,
-      "width": 49.634246481191425,
-      "height": 27.44811769514873,
-      "fill": "#F4CCCC",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
-      "dashed": false,
-      "shape": "roundRect",
-      "role": "node",
-      "sourceOrder": 9,
-      "direction": "",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2,
-      "comment": "",
-      "commentPriority": 0
-    },
-    {
-      "id": "OPERATION.O4",
-      "text": "④ コマンド要求を送信",
-      "x": 455.9083065948496,
-      "y": 562.8832706923308,
-      "width": 68.55981160673268,
-      "height": 19.002543019718352,
-      "fill": "#F8FBFD",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
-      "dashed": false,
-      "shape": "roundRect",
-      "role": "node",
-      "sourceOrder": 13,
-      "direction": "",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2,
-      "comment": "",
-      "commentPriority": 0
-    },
-    {
-      "id": "STOP.T3",
-      "text": "③ Host停止要求を送信",
-      "x": 706.7820129285242,
-      "y": 548.4939029022257,
-      "width": 68.51582423863148,
-      "height": 19.002543019718352,
-      "fill": "#F8FBFD",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
-      "dashed": false,
-      "shape": "roundRect",
-      "role": "node",
-      "sourceOrder": 24,
-      "direction": "",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2,
-      "comment": "",
-      "commentPriority": 0
-    },
-    {
-      "id": "OPERATION.O1",
-      "text": "① デバイス操作を依頼",
-      "x": 398.78658529968203,
-      "y": 337.7284286453265,
-      "width": 67.93849003230322,
-      "height": 19.002543019718352,
-      "fill": "#F8FBFD",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
-      "dashed": false,
-      "shape": "roundRect",
-      "role": "node",
-      "sourceOrder": 10,
-      "direction": "",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2,
-      "comment": "",
-      "commentPriority": 0
-    },
-    {
-      "id": "OPERATION.NOTIFY",
-      "text": "アプリ購読処理へ通知",
-      "x": 515.4713268196338,
-      "y": 789.4457085185735,
-      "width": 66.86079951382384,
-      "height": 19.002543019718352,
-      "fill": "#F8FBFD",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
-      "dashed": false,
-      "shape": "roundRect",
-      "role": "node",
-      "sourceOrder": 20,
-      "direction": "",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2,
-      "comment": "",
-      "commentPriority": 0
-    },
-    {
-      "id": "OPERATION.EVENT",
-      "text": "非同期イベントを配信",
-      "x": 494.6103174976397,
-      "y": 706.6037483314824,
-      "width": 66.35494478066003,
-      "height": 19.002543019718352,
-      "fill": "#F8FBFD",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
-      "dashed": false,
-      "shape": "roundRect",
-      "role": "node",
-      "sourceOrder": 19,
-      "direction": "",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2,
-      "comment": "",
-      "commentPriority": 0
-    },
-    {
-      "id": "STOP.T1",
-      "text": "① アプリ停止・破棄",
-      "x": 688.0475179331725,
-      "y": 396.8859403204277,
-      "width": 62.92942848977909,
-      "height": 19.002543019718352,
-      "fill": "#F8FBFD",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
-      "dashed": false,
-      "shape": "roundRect",
-      "role": "node",
-      "sourceOrder": 22,
-      "direction": "",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2,
-      "comment": "",
-      "commentPriority": 0
-    },
-    {
-      "id": "START.S6",
-      "text": "④ 別プロセスで起動",
-      "x": 163.10501622395935,
-      "y": 701.253784686174,
-      "width": 62.92942848977909,
-      "height": 19.002543019718352,
-      "fill": "#F8FBFD",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
-      "dashed": false,
-      "shape": "roundRect",
-      "role": "node",
-      "sourceOrder": 5,
-      "direction": "",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2,
-      "comment": "",
-      "commentPriority": 0
-    },
-    {
       "id": "START.S3",
-      "text": "初期設定へ切替",
-      "x": 226.20077194937113,
-      "y": 423.39657723291964,
-      "width": 49.96965016296307,
-      "height": 19.002543019718352,
+      "text": "③ デバイスコネクタと\n通信・デバイスを準備",
+      "x": 96.57093292212798,
+      "y": 498.82806476484194,
+      "width": 95.03469545104086,
+      "height": 38.48882035466461,
       "fill": "#F8FBFD",
       "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
+      "lineWeight": 0.9868928296067849,
       "dashed": false,
       "shape": "roundRect",
       "role": "node",
@@ -608,15 +208,215 @@
       "commentPriority": 0
     },
     {
-      "id": "START.S1",
-      "text": "① アプリ起動",
-      "x": 166.93604106452324,
-      "y": 274.60380620959836,
-      "width": 46.038279138918334,
-      "height": 19.002543019718352,
+      "id": "OPERATION.COMM_ERROR",
+      "text": "通信失敗を返却\n送信後は自動再送なし",
+      "x": 366.1083269082498,
+      "y": 659.8535080956053,
+      "width": 93.75481881264457,
+      "height": 38.48882035466461,
+      "fill": "#F4CCCC",
+      "stroke": "#1F4E79",
+      "lineWeight": 0.9868928296067849,
+      "dashed": false,
+      "shape": "roundRect",
+      "role": "node",
+      "sourceOrder": 11,
+      "direction": "",
+      "sourceFormat": "mermaid",
+      "strokeWidth": 2,
+      "comment": "",
+      "commentPriority": 0
+    },
+    {
+      "id": "STOP.T5",
+      "text": "所有プロセスツリーを\n強制終了",
+      "x": 713.6044718581342,
+      "y": 718.4772552043177,
+      "width": 93.52351580570547,
+      "height": 38.48882035466461,
+      "fill": "#F4CCCC",
+      "stroke": "#1F4E79",
+      "lineWeight": 0.9868928296067849,
+      "dashed": false,
+      "shape": "roundRect",
+      "role": "node",
+      "sourceOrder": 18,
+      "direction": "",
+      "sourceFormat": "mermaid",
+      "strokeWidth": 2,
+      "comment": "",
+      "commentPriority": 0
+    },
+    {
+      "id": "START.S2",
+      "text": "② 設定を準備\n運用設定 → 初期設定",
+      "x": 98.7798766383963,
+      "y": 419.38319198149577,
+      "width": 90.61680801850424,
+      "height": 38.48882035466461,
       "fill": "#F8FBFD",
       "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
+      "lineWeight": 0.9868928296067849,
+      "dashed": false,
+      "shape": "roundRect",
+      "role": "node",
+      "sourceOrder": 1,
+      "direction": "",
+      "sourceFormat": "mermaid",
+      "strokeWidth": 2,
+      "comment": "",
+      "commentPriority": 0
+    },
+    {
+      "id": "OPERATION.O2",
+      "text": "② 接続を確認して\nコマンド要求を送信",
+      "x": 370.47417116422514,
+      "y": 348.08018504240556,
+      "width": 85.85967617579028,
+      "height": 38.48882035466461,
+      "fill": "#F8FBFD",
+      "stroke": "#1F4E79",
+      "lineWeight": 0.9868928296067849,
+      "dashed": false,
+      "shape": "roundRect",
+      "role": "node",
+      "sourceOrder": 7,
+      "direction": "",
+      "sourceFormat": "mermaid",
+      "strokeWidth": 2,
+      "comment": "",
+      "commentPriority": 0
+    },
+    {
+      "id": "OPERATION.O3",
+      "text": "③ 順序制御して\n対象デバイスを制御",
+      "x": 370.9059367771781,
+      "y": 427.52505782575173,
+      "width": 84.99614494988435,
+      "height": 38.48882035466461,
+      "fill": "#F8FBFD",
+      "stroke": "#1F4E79",
+      "lineWeight": 0.9868928296067849,
+      "dashed": false,
+      "shape": "roundRect",
+      "role": "node",
+      "sourceOrder": 8,
+      "direction": "",
+      "sourceFormat": "mermaid",
+      "strokeWidth": 2,
+      "comment": "設計上の役割：デバイス操作フェーズ。\n入力は② 接続を確認して、出力先は④\n同期結果を、非同期イベントをです。",
+      "commentPriority": 100
+    },
+    {
+      "id": "OPERATION.EVENT",
+      "text": "非同期イベントを\nアプリへ通知",
+      "x": 427.2590593677718,
+      "y": 543.6892829606785,
+      "width": 77.25520431765614,
+      "height": 38.48882035466461,
+      "fill": "#F8FBFD",
+      "stroke": "#1F4E79",
+      "lineWeight": 0.9868928296067849,
+      "dashed": false,
+      "shape": "roundRect",
+      "role": "node",
+      "sourceOrder": 13,
+      "direction": "",
+      "sourceFormat": "mermaid",
+      "strokeWidth": 2,
+      "comment": "",
+      "commentPriority": 0
+    },
+    {
+      "id": "OPERATION.O5",
+      "text": "正常応答または\n失敗応答を返却",
+      "x": 281.2355435620663,
+      "y": 659.8535080956053,
+      "width": 70.06939090208174,
+      "height": 38.48882035466461,
+      "fill": "#F8FBFD",
+      "stroke": "#1F4E79",
+      "lineWeight": 0.9868928296067849,
+      "dashed": false,
+      "shape": "roundRect",
+      "role": "node",
+      "sourceOrder": 10,
+      "direction": "",
+      "sourceFormat": "mermaid",
+      "strokeWidth": 2,
+      "comment": "",
+      "commentPriority": 0
+    },
+    {
+      "id": "START.START_ERROR",
+      "text": "起動を中止して\n異常を記録",
+      "x": 145.68619892058598,
+      "y": 719.3138010794141,
+      "width": 69.59907478797224,
+      "height": 38.48882035466461,
+      "fill": "#F4CCCC",
+      "stroke": "#1F4E79",
+      "lineWeight": 0.9868928296067849,
+      "dashed": false,
+      "shape": "roundRect",
+      "role": "node",
+      "sourceOrder": 5,
+      "direction": "",
+      "sourceFormat": "mermaid",
+      "strokeWidth": 2,
+      "comment": "",
+      "commentPriority": 0
+    },
+    {
+      "id": "OPERATION.O1",
+      "text": "① デバイス操作を依頼",
+      "x": 393.4040092521203,
+      "y": 280.4780262143408,
+      "width": 95.26599845797996,
+      "height": 26.646106399383193,
+      "fill": "#F8FBFD",
+      "stroke": "#1F4E79",
+      "lineWeight": 0.9868928296067849,
+      "dashed": false,
+      "shape": "roundRect",
+      "role": "node",
+      "sourceOrder": 6,
+      "direction": "",
+      "sourceFormat": "mermaid",
+      "strokeWidth": 2,
+      "comment": "",
+      "commentPriority": 0
+    },
+    {
+      "id": "STOP.T1",
+      "text": "① アプリ停止・破棄",
+      "x": 648.5023130300694,
+      "y": 285.0154202004626,
+      "width": 88.24209714726292,
+      "height": 26.646106399383193,
+      "fill": "#F8FBFD",
+      "stroke": "#1F4E79",
+      "lineWeight": 0.9868928296067849,
+      "dashed": false,
+      "shape": "roundRect",
+      "role": "node",
+      "sourceOrder": 14,
+      "direction": "",
+      "sourceFormat": "mermaid",
+      "strokeWidth": 2,
+      "comment": "",
+      "commentPriority": 0
+    },
+    {
+      "id": "START.S1",
+      "text": "① アプリ起動",
+      "x": 111.80994602929837,
+      "y": 351.781033153431,
+      "width": 64.55666923670007,
+      "height": 26.646106399383193,
+      "fill": "#F8FBFD",
+      "stroke": "#1F4E79",
+      "lineWeight": 0.9868928296067849,
       "dashed": false,
       "shape": "roundRect",
       "role": "node",
@@ -628,19 +428,19 @@
       "commentPriority": 0
     },
     {
-      "id": "STOP.T7",
+      "id": "STOP.T6",
       "text": "終了処理完了",
-      "x": 675.5138672348369,
-      "y": 836.2097792311616,
-      "width": 44.33926704600949,
-      "height": 19.002543019718352,
+      "x": 661.5362374710871,
+      "y": 797.9221279876639,
+      "width": 62.17424826522745,
+      "height": 26.646106399383193,
       "fill": "#F8FBFD",
       "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
+      "lineWeight": 0.9868928296067849,
       "dashed": false,
       "shape": "roundRect",
       "role": "node",
-      "sourceOrder": 28,
+      "sourceOrder": 19,
       "direction": "",
       "sourceFormat": "mermaid",
       "strokeWidth": 2,
@@ -648,19 +448,19 @@
       "commentPriority": 0
     },
     {
-      "id": "START.S9",
+      "id": "START.S5",
       "text": "運用開始",
-      "x": 81.69402010541052,
-      "y": 954.2691260042758,
-      "width": 33.07850081210231,
-      "height": 19.002543019718352,
+      "x": 84.4988434849653,
+      "y": 725.2351580570548,
+      "width": 46.38396299151889,
+      "height": 26.646106399383193,
       "fill": "#F8FBFD",
       "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
+      "lineWeight": 0.9868928296067849,
       "dashed": false,
       "shape": "roundRect",
       "role": "node",
-      "sourceOrder": 8,
+      "sourceOrder": 4,
       "direction": "",
       "sourceFormat": "mermaid",
       "strokeWidth": 2,
@@ -670,33 +470,33 @@
   ],
   "edges": [
     {
-      "from": "OPERATION.O8",
+      "from": "OPERATION.O6",
       "to": "STOP.T1",
       "fromSide": "right",
       "toSide": "left",
       "connectorType": "elbow",
       "stroke": "#548235",
-      "lineWeight": 0.6334181006572784,
+      "lineWeight": 0.8882035466461065,
       "start": {
-        "x": 597.1846481191421,
-        "y": 626.0491532793378
+        "x": 557.8681881264456,
+        "y": 554.791796453354
       },
       "end": {
-        "x": 633.0783404897212,
-        "y": 626.0491532793378
+        "x": 608.1997224363917,
+        "y": 554.791796453354
       },
       "points": [
         {
-          "x": 597.1846481191421,
-          "y": 626.0491532793378
+          "x": 557.8681881264456,
+          "y": 554.791796453354
         },
         {
-          "x": 615.8352921940509,
-          "y": 626.0491532793378
+          "x": 584.0208481110254,
+          "y": 554.791796453354
         },
         {
-          "x": 633.0783404897212,
-          "y": 626.0491532793378
+          "x": 608.1997224363917,
+          "y": 554.791796453354
         }
       ],
       "dashed": false,
@@ -705,33 +505,33 @@
       "visibleLabel": true
     },
     {
-      "from": "START.S9",
+      "from": "START.S5",
       "to": "OPERATION.O1",
       "fromSide": "right",
       "toSide": "left",
       "connectorType": "elbow",
       "stroke": "#548235",
-      "lineWeight": 0.6334181006572784,
+      "lineWeight": 0.8882035466461065,
       "start": {
-        "x": 291.0230648632811,
-        "y": 626.0491532793378
+        "x": 233.9803238242097,
+        "y": 554.791796453354
       },
       "end": {
-        "x": 310.0256078829994,
-        "y": 626.0491532793378
+        "x": 260.62643022359293,
+        "y": 554.791796453354
       },
       "points": [
         {
-          "x": 291.0230648632811,
-          "y": 626.0491532793378
+          "x": 233.9803238242097,
+          "y": 554.791796453354
         },
         {
-          "x": 301.22813426275945,
-          "y": 626.0491532793378
+          "x": 248.2902698535081,
+          "y": 554.791796453354
         },
         {
-          "x": 310.0256078829994,
-          "y": 626.0491532793378
+          "x": 260.62643022359293,
+          "y": 554.791796453354
         }
       ],
       "dashed": false,
@@ -744,27 +544,27 @@
       "toSide": "left",
       "connectorType": "elbow",
       "stroke": "#548235",
-      "lineWeight": 0.6334181006572784,
+      "lineWeight": 0.8882035466461065,
       "start": {
-        "x": 719.512199187536,
-        "y": 415.8884833401461
+        "x": 692.6234387047032,
+        "y": 311.6615265998458
       },
       "end": {
-        "x": 719.512199187536,
-        "y": 443.68849998010444
+        "x": 692.6234387047032,
+        "y": 350.6437933693138
       },
       "points": [
         {
-          "x": 719.512199187536,
-          "y": 415.8884833401461
+          "x": 692.6234387047032,
+          "y": 311.6615265998458
         },
         {
-          "x": 719.512199187536,
-          "y": 430.49228954974444
+          "x": 692.6234387047032,
+          "y": 332.1395528141866
         },
         {
-          "x": 719.512199187536,
-          "y": 443.68849998010444
+          "x": 692.6234387047032,
+          "y": 350.6437933693138
         }
       ],
       "dashed": false,
@@ -772,64 +572,56 @@
     },
     {
       "from": "STOP.T2",
-      "to": "STOP.T7",
-      "fromSide": "bottom",
+      "to": "STOP.T6",
+      "fromSide": "left",
       "toSide": "top",
       "connectorType": "elbow",
       "stroke": "#548235",
-      "lineWeight": 0.6334181006572784,
+      "lineWeight": 0.8882035466461065,
       "start": {
-        "x": 702.3539585375647,
-        "y": 493.6824311702593
+        "x": 675.6182883577486,
+        "y": 427.80203546646106
       },
       "end": {
-        "x": 682.8823342244152,
-        "y": 835.4055141927993
+        "x": 674.3762837316884,
+        "y": 796.6912259059368
       },
       "points": [
         {
-          "x": 702.3539585375647,
-          "y": 493.6824311702593
+          "x": 675.6182883577486,
+          "y": 427.80203546646106
         },
         {
-          "x": 663.062681854849,
-          "y": 529.6672653675441
+          "x": 650.2447802621434,
+          "y": 471.20656900539706
         },
         {
-          "x": 663.062681854849,
-          "y": 557.9951304247169
+          "x": 650.2447802621434,
+          "y": 516.8503623747108
         },
         {
-          "x": 663.062681854849,
-          "y": 590.5457828196047
+          "x": 650.2447802621434,
+          "y": 556.572798766384
         },
         {
-          "x": 663.062681854849,
-          "y": 627.3192225522079
+          "x": 650.2447802621434,
+          "y": 621.3647802621434
         },
         {
-          "x": 663.062681854849,
-          "y": 659.8698749470958
+          "x": 650.2447802621434,
+          "y": 692.0781187355435
         },
         {
-          "x": 663.062681854849,
-          "y": 710.2987532330354
+          "x": 650.2447802621434,
+          "y": 737.7219121048574
         },
         {
-          "x": 663.062681854849,
-          "y": 760.727631518975
+          "x": 650.2447802621434,
+          "y": 777.4443484965306
         },
         {
-          "x": 663.062681854849,
-          "y": 793.278283913863
-        },
-        {
-          "x": 663.062681854849,
-          "y": 821.6061489710357
-        },
-        {
-          "x": 682.8823342244152,
-          "y": 835.4055141927993
+          "x": 674.3762837316884,
+          "y": 796.6912259059368
         }
       ],
       "dashed": false,
@@ -844,27 +636,27 @@
       "toSide": "top",
       "connectorType": "elbow",
       "stroke": "#548235",
-      "lineWeight": 0.6334181006572784,
+      "lineWeight": 0.8882035466461065,
       "start": {
-        "x": 729.176399908842,
-        "y": 501.1768229978694
+        "x": 707.4125212027757,
+        "y": 430.0181033153431
       },
       "end": {
-        "x": 741.0399690352081,
-        "y": 547.0862631356192
+        "x": 726.8696067848882,
+        "y": 495.632166538165
       },
       "points": [
         {
-          "x": 729.176399908842,
-          "y": 501.1768229978694
+          "x": 707.4125212027757,
+          "y": 430.0181033153431
         },
         {
-          "x": 741.0399690352081,
-          "y": 529.6672653675441
+          "x": 726.8696067848882,
+          "y": 471.20656900539706
         },
         {
-          "x": 741.0399690352081,
-          "y": 547.0862631356192
+          "x": 726.8696067848882,
+          "y": 495.632166538165
         }
       ],
       "dashed": false,
@@ -876,174 +668,71 @@
       "from": "STOP.T3",
       "to": "STOP.T4",
       "fromSide": "bottom",
-      "toSide": "top",
+      "toSide": "left",
       "connectorType": "elbow",
       "stroke": "#548235",
-      "lineWeight": 0.6334181006572784,
+      "lineWeight": 0.8882035466461065,
       "start": {
-        "x": 730.4390133228188,
-        "y": 567.496401934576
+        "x": 726.8696067848882,
+        "y": 536.0947725520432
       },
       "end": {
-        "x": 704.7215346382437,
-        "y": 612.1875679253951
+        "x": 726.8696067848882,
+        "y": 575.0770393215112
       },
       "points": [
         {
-          "x": 730.4390133228188,
-          "y": 567.496401934576
+          "x": 726.8696067848882,
+          "y": 536.0947725520432
         },
         {
-          "x": 704.7215346382437,
-          "y": 590.5457828196047
+          "x": 726.8696067848882,
+          "y": 556.572798766384
         },
         {
-          "x": 704.7215346382437,
-          "y": 612.1875679253951
+          "x": 726.8696067848882,
+          "y": 575.0770393215112
         }
       ],
       "dashed": false,
-      "bidirectional": false,
-      "label": "受付成功",
-      "visibleLabel": true
+      "bidirectional": false
     },
     {
       "from": "STOP.T4",
-      "to": "STOP.T5",
-      "fromSide": "bottom",
-      "toSide": "left",
-      "connectorType": "elbow",
-      "stroke": "#548235",
-      "lineWeight": 0.6334181006572784,
-      "start": {
-        "x": 704.7215346382437,
-        "y": 641.0432813997822
-      },
-      "end": {
-        "x": 726.9865327752918,
-        "y": 690.7852529454535
-      },
-      "points": [
-        {
-          "x": 704.7215346382437,
-          "y": 641.0432813997822
-        },
-        {
-          "x": 704.7215346382437,
-          "y": 659.8698749470958
-        },
-        {
-          "x": 726.9865327752918,
-          "y": 690.7852529454535
-        }
-      ],
-      "dashed": false,
-      "bidirectional": false
-    },
-    {
-      "from": "STOP.T3",
-      "to": "STOP.STOP_ERROR",
-      "fromSide": "bottom",
-      "toSide": "top",
-      "connectorType": "elbow",
-      "stroke": "#C00000",
-      "lineWeight": 0.6334181006572784,
-      "start": {
-        "x": 751.6409247475972,
-        "y": 567.496401934576
-      },
-      "end": {
-        "x": 777.3584034321723,
-        "y": 612.1875679253951
-      },
-      "points": [
-        {
-          "x": 751.6409247475972,
-          "y": 567.496401934576
-        },
-        {
-          "x": 777.3584034321723,
-          "y": 590.5457828196047
-        },
-        {
-          "x": 777.3584034321723,
-          "y": 612.1875679253951
-        }
-      ],
-      "dashed": true,
-      "bidirectional": false,
-      "label": "接続失敗／応答タイムアウト",
-      "visibleLabel": true
-    },
-    {
-      "from": "STOP.STOP_ERROR",
-      "to": "STOP.T5",
-      "fromSide": "bottom",
-      "toSide": "left",
-      "connectorType": "elbow",
-      "stroke": "#C00000",
-      "lineWeight": 0.6334181006572784,
-      "start": {
-        "x": 777.3584034321723,
-        "y": 641.0432813997822
-      },
-      "end": {
-        "x": 755.0934052951242,
-        "y": 690.7852529454535
-      },
-      "points": [
-        {
-          "x": 777.3584034321723,
-          "y": 641.0432813997822
-        },
-        {
-          "x": 777.3584034321723,
-          "y": 659.8698749470958
-        },
-        {
-          "x": 755.0934052951242,
-          "y": 690.7852529454535
-        }
-      ],
-      "dashed": false,
-      "bidirectional": false
-    },
-    {
-      "from": "STOP.T5",
-      "to": "STOP.T7",
+      "to": "STOP.T6",
       "fromSide": "left",
       "toSide": "top",
       "connectorType": "elbow",
       "stroke": "#548235",
-      "lineWeight": 0.6334181006572784,
+      "lineWeight": 0.8882035466461065,
       "start": {
-        "x": 725.5131318933741,
-        "y": 726.3742008298275
+        "x": 712.6257825751735,
+        "y": 651.4344178874326
       },
       "end": {
-        "x": 695.2691770817131,
-        "y": 834.8357898011525
+        "x": 692.9624363916731,
+        "y": 795.9485890516578
       },
       "points": [
         {
-          "x": 725.5131318933741,
-          "y": 726.3742008298275
+          "x": 712.6257825751735,
+          "y": 651.4344178874326
         },
         {
-          "x": 692.3322284883321,
-          "y": 760.727631518975
+          "x": 693.3729838087895,
+          "y": 692.0781187355435
         },
         {
-          "x": 692.3322284883321,
-          "y": 793.278283913863
+          "x": 693.3729838087895,
+          "y": 737.7219121048574
         },
         {
-          "x": 692.3322284883321,
-          "y": 821.6061489710357
+          "x": 693.3729838087895,
+          "y": 777.4443484965306
         },
         {
-          "x": 695.2691770817131,
-          "y": 834.8357898011525
+          "x": 692.9624363916731,
+          "y": 795.9485890516578
         }
       ],
       "dashed": false,
@@ -1052,33 +741,33 @@
       "visibleLabel": true
     },
     {
-      "from": "STOP.T5",
-      "to": "STOP.T6",
+      "from": "STOP.T4",
+      "to": "STOP.T5",
       "fromSide": "left",
       "toSide": "top",
       "connectorType": "elbow",
       "stroke": "#C00000",
-      "lineWeight": 0.6334181006572784,
+      "lineWeight": 0.8882035466461065,
       "start": {
-        "x": 754.2794630357796,
-        "y": 728.661192072145
+        "x": 741.1134309946029,
+        "y": 651.4344178874326
       },
       "end": {
-        "x": 777.399575608715,
-        "y": 778.1466292870502
+        "x": 760.3662297609869,
+        "y": 716.5037162683116
       },
       "points": [
         {
-          "x": 754.2794630357796,
-          "y": 728.661192072145
+          "x": 741.1134309946029,
+          "y": 651.4344178874326
         },
         {
-          "x": 777.399575608715,
-          "y": 760.727631518975
+          "x": 760.3662297609869,
+          "y": 692.0781187355435
         },
         {
-          "x": 777.399575608715,
-          "y": 778.1466292870502
+          "x": 760.3662297609869,
+          "y": 716.5037162683116
         }
       ],
       "dashed": true,
@@ -1087,33 +776,33 @@
       "visibleLabel": true
     },
     {
-      "from": "STOP.T6",
-      "to": "STOP.T7",
+      "from": "STOP.T5",
+      "to": "STOP.T6",
       "fromSide": "bottom",
-      "toSide": "right",
+      "toSide": "top",
       "connectorType": "elbow",
       "stroke": "#C00000",
-      "lineWeight": 0.6334181006572784,
+      "lineWeight": 0.8882035466461065,
       "start": {
-        "x": 777.399575608715,
-        "y": 807.0023427614373
+        "x": 760.3662297609869,
+        "y": 756.9663222821897
       },
       "end": {
-        "x": 721.2006103247325,
-        "y": 838.599700914836
+        "x": 721.0908558211257,
+        "y": 797.0410794140324
       },
       "points": [
         {
-          "x": 777.399575608715,
-          "y": 807.0023427614373
+          "x": 760.3662297609869,
+          "y": 756.9663222821897
         },
         {
-          "x": 777.399575608715,
-          "y": 821.6061489710357
+          "x": 760.3662297609869,
+          "y": 777.4443484965306
         },
         {
-          "x": 721.2006103247325,
-          "y": 838.599700914836
+          "x": 721.0908558211257,
+          "y": 797.0410794140324
         }
       ],
       "dashed": false,
@@ -1125,28 +814,28 @@
       "fromSide": "bottom",
       "toSide": "top",
       "connectorType": "elbow",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
+      "stroke": "#548235",
+      "lineWeight": 0.8882035466461065,
       "start": {
-        "x": 444.129688073129,
-        "y": 356.7309716650449
+        "x": 430.1450269853508,
+        "y": 307.124132613724
       },
       "end": {
-        "x": 461.61167575232514,
-        "y": 384.53098830500323
+        "x": 413.4038704703162,
+        "y": 346.10639938319196
       },
       "points": [
         {
-          "x": 444.129688073129,
-          "y": 356.7309716650449
+          "x": 430.1450269853508,
+          "y": 307.124132613724
         },
         {
-          "x": 461.61167575232514,
-          "y": 371.33477787464324
+          "x": 413.4038704703162,
+          "y": 327.6021588280648
         },
         {
-          "x": 461.61167575232514,
-          "y": 384.53098830500323
+          "x": 413.4038704703162,
+          "y": 346.10639938319196
         }
       ],
       "dashed": false,
@@ -1156,30 +845,30 @@
       "from": "OPERATION.O2",
       "to": "OPERATION.O3",
       "fromSide": "bottom",
-      "toSide": "left",
+      "toSide": "top",
       "connectorType": "elbow",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
+      "stroke": "#548235",
+      "lineWeight": 0.8882035466461065,
       "start": {
-        "x": 461.61167575232514,
-        "y": 404.94112710395996
+        "x": 413.4038704703162,
+        "y": 386.56900539707016
       },
       "end": {
-        "x": 461.61167575232514,
-        "y": 432.7411437439183
+        "x": 413.4038704703162,
+        "y": 425.5512721665382
       },
       "points": [
         {
-          "x": 461.61167575232514,
-          "y": 404.94112710395996
+          "x": 413.4038704703162,
+          "y": 386.56900539707016
         },
         {
-          "x": 461.61167575232514,
-          "y": 419.5449333135583
+          "x": 413.4038704703162,
+          "y": 407.04703161141094
         },
         {
-          "x": 461.61167575232514,
-          "y": 432.7411437439183
+          "x": 413.4038704703162,
+          "y": 425.5512721665382
         }
       ],
       "dashed": false,
@@ -1188,259 +877,132 @@
     {
       "from": "OPERATION.O3",
       "to": "OPERATION.O4",
-      "fromSide": "left",
-      "toSide": "top",
+      "fromSide": "bottom",
+      "toSide": "left",
       "connectorType": "elbow",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
+      "stroke": "#548235",
+      "lineWeight": 0.8882035466461065,
       "start": {
-        "x": 475.61338286735423,
-        "y": 511.22798059636165
+        "x": 392.83899768696995,
+        "y": 466.0138781804163
       },
       "end": {
-        "x": 490.1883333634782,
-        "y": 561.4756309257243
+        "x": 364.62817270624515,
+        "y": 516.8388589051658
       },
       "points": [
         {
-          "x": 475.61338286735423,
-          "y": 511.22798059636165
+          "x": 392.83899768696995,
+          "y": 466.0138781804163
         },
         {
-          "x": 490.1883333634782,
-          "y": 544.0566331576491
+          "x": 364.62817270624515,
+          "y": 492.41326137239787
         },
         {
-          "x": 490.1883333634782,
-          "y": 561.4756309257243
+          "x": 364.62817270624515,
+          "y": 516.8388589051658
+        }
+      ],
+      "dashed": false,
+      "bidirectional": false
+    },
+    {
+      "from": "OPERATION.O4",
+      "to": "OPERATION.O5",
+      "fromSide": "left",
+      "toSide": "top",
+      "connectorType": "elbow",
+      "stroke": "#548235",
+      "lineWeight": 0.8882035466461065,
+      "start": {
+        "x": 346.6800462606014,
+        "y": 589.1070470316115
+      },
+      "end": {
+        "x": 316.2704240555127,
+        "y": 657.8796607555898
+      },
+      "points": [
+        {
+          "x": 346.6800462606014,
+          "y": 589.1070470316115
+        },
+        {
+          "x": 316.2704240555127,
+          "y": 633.4540632228219
+        },
+        {
+          "x": 316.2704240555127,
+          "y": 657.8796607555898
         }
       ],
       "dashed": false,
       "bidirectional": false,
       "label": "はい",
       "visibleLabel": true
-    },
-    {
-      "from": "OPERATION.O4",
-      "to": "OPERATION.O5",
-      "fromSide": "bottom",
-      "toSide": "top",
-      "connectorType": "elbow",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
-      "start": {
-        "x": 490.1883333634782,
-        "y": 581.885769724681
-      },
-      "end": {
-        "x": 490.1883333634782,
-        "y": 618.1313610400698
-      },
-      "points": [
-        {
-          "x": 490.1883333634782,
-          "y": 581.885769724681
-        },
-        {
-          "x": 490.1883333634782,
-          "y": 600.7123632719946
-        },
-        {
-          "x": 490.1883333634782,
-          "y": 618.1313610400698
-        }
-      ],
-      "dashed": false,
-      "bidirectional": false
     },
     {
       "from": "OPERATION.O5",
       "to": "OPERATION.O6",
       "fromSide": "bottom",
-      "toSide": "left",
+      "toSide": "bottom",
       "connectorType": "elbow",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
+      "stroke": "#548235",
+      "lineWeight": 0.8882035466461065,
       "start": {
-        "x": 474.16461491157315,
-        "y": 646.9870745144569
+        "x": 316.2704240555127,
+        "y": 698.342266769468
       },
       "end": {
-        "x": 452.1832473240415,
-        "y": 683.2326658298456
+        "x": 402.07138010794137,
+        "y": 767.0719506553586
       },
       "points": [
         {
-          "x": 474.16461491157315,
-          "y": 646.9870745144569
+          "x": 316.2704240555127,
+          "y": 698.342266769468
         },
         {
-          "x": 452.1832473240415,
-          "y": 665.8136680617704
+          "x": 316.2704240555127,
+          "y": 718.8202929838087
         },
         {
-          "x": 452.1832473240415,
-          "y": 683.2326658298456
+          "x": 402.07138010794137,
+          "y": 767.0719506553586
         }
       ],
       "dashed": false,
       "bidirectional": false
     },
     {
-      "from": "OPERATION.O3",
+      "from": "OPERATION.O4",
       "to": "OPERATION.COMM_ERROR",
-      "fromSide": "bottom",
-      "toSide": "top",
-      "connectorType": "elbow",
-      "stroke": "#C00000",
-      "lineWeight": 0.6334181006572784,
-      "start": {
-        "x": 437.4897068835167,
-        "y": 501.1080707415272
-      },
-      "end": {
-        "x": 384.9684374717392,
-        "y": 783.853594411868
-      },
-      "points": [
-        {
-          "x": 437.4897068835167,
-          "y": 501.1080707415272
-        },
-        {
-          "x": 389.12049312154767,
-          "y": 544.0566331576491
-        },
-        {
-          "x": 389.12049312154767,
-          "y": 572.3844982148219
-        },
-        {
-          "x": 389.12049312154767,
-          "y": 600.7123632719946
-        },
-        {
-          "x": 389.12049312154767,
-          "y": 633.2630156668824
-        },
-        {
-          "x": 389.12049312154767,
-          "y": 665.8136680617704
-        },
-        {
-          "x": 389.12049312154767,
-          "y": 716.1049538602895
-        },
-        {
-          "x": 389.12049312154767,
-          "y": 766.3962396588086
-        },
-        {
-          "x": 384.9684374717392,
-          "y": 783.853594411868
-        }
-      ],
-      "dashed": true,
-      "bidirectional": false,
-      "label": "いいえ",
-      "visibleLabel": true
-    },
-    {
-      "from": "OPERATION.O6",
-      "to": "OPERATION.O7",
       "fromSide": "left",
       "toSide": "top",
       "connectorType": "elbow",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
-      "start": {
-        "x": 452.1832473240415,
-        "y": 747.5696461114949
-      },
-      "end": {
-        "x": 452.1832473240415,
-        "y": 783.8152374268836
-      },
-      "points": [
-        {
-          "x": 452.1832473240415,
-          "y": 747.5696461114949
-        },
-        {
-          "x": 452.1832473240415,
-          "y": 766.3962396588086
-        },
-        {
-          "x": 452.1832473240415,
-          "y": 783.8152374268836
-        }
-      ],
-      "dashed": false,
-      "bidirectional": false,
-      "label": "はい",
-      "visibleLabel": true
-    },
-    {
-      "from": "OPERATION.O7",
-      "to": "OPERATION.O8",
-      "fromSide": "bottom",
-      "toSide": "bottom",
-      "connectorType": "elbow",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
-      "start": {
-        "x": 452.1832473240415,
-        "y": 812.6709509012708
-      },
-      "end": {
-        "x": 401.1596598213737,
-        "y": 868.1407815716079
-      },
-      "points": [
-        {
-          "x": 452.1832473240415,
-          "y": 812.6709509012708
-        },
-        {
-          "x": 452.1832473240415,
-          "y": 831.4975444485843
-        },
-        {
-          "x": 401.1596598213737,
-          "y": 868.1407815716079
-        }
-      ],
-      "dashed": false,
-      "bidirectional": false
-    },
-    {
-      "from": "OPERATION.O6",
-      "to": "OPERATION.COMM_ERROR",
-      "fromSide": "bottom",
-      "toSide": "top",
-      "connectorType": "elbow",
       "stroke": "#C00000",
-      "lineWeight": 0.6334181006572784,
+      "lineWeight": 0.8882035466461065,
       "start": {
-        "x": 432.4864076862138,
-        "y": 727.8728064736673
+        "x": 382.5758057054742,
+        "y": 589.1070470316115
       },
       "end": {
-        "x": 375.2057050458865,
-        "y": 783.9208071103266
+        "x": 412.9859213569777,
+        "y": 657.8796607555898
       },
       "points": [
         {
-          "x": 432.4864076862138,
-          "y": 727.8728064736673
+          "x": 382.5758057054742,
+          "y": 589.1070470316115
         },
         {
-          "x": 368.0065564329717,
-          "y": 766.3962396588086
+          "x": 412.9859213569777,
+          "y": 633.4540632228219
         },
         {
-          "x": 375.2057050458865,
-          "y": 783.9208071103266
+          "x": 412.9859213569777,
+          "y": 657.8796607555898
         }
       ],
       "dashed": true,
@@ -1450,113 +1012,97 @@
     },
     {
       "from": "OPERATION.COMM_ERROR",
-      "to": "OPERATION.O8",
+      "to": "OPERATION.O6",
       "fromSide": "bottom",
       "toSide": "left",
       "connectorType": "elbow",
       "stroke": "#C00000",
-      "lineWeight": 0.6334181006572784,
+      "lineWeight": 0.8882035466461065,
       "start": {
-        "x": 381.3787163357365,
-        "y": 812.6709509012708
+        "x": 412.9859213569777,
+        "y": 698.342266769468
       },
       "end": {
-        "x": 381.3787163357365,
-        "y": 848.9165422166595
+        "x": 421.63258288357747,
+        "y": 747.7421742482652
       },
       "points": [
         {
-          "x": 381.3787163357365,
-          "y": 812.6709509012708
+          "x": 412.9859213569777,
+          "y": 698.342266769468
         },
         {
-          "x": 381.3787163357365,
-          "y": 831.4975444485843
+          "x": 412.9859213569777,
+          "y": 718.8202929838087
         },
         {
-          "x": 381.3787163357365,
-          "y": 848.9165422166595
+          "x": 421.63258288357747,
+          "y": 747.7421742482652
         }
       ],
       "dashed": false,
       "bidirectional": false
     },
     {
-      "from": "OPERATION.O8",
+      "from": "OPERATION.O6",
       "to": "OPERATION.O1",
-      "fromSide": "left",
+      "fromSide": "bottom",
       "toSide": "bottom",
       "connectorType": "elbow",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.7037978896191982,
+      "stroke": "#548235",
+      "lineWeight": 0.8882035466461065,
       "start": {
-        "x": 366.8502165003274,
-        "y": 864.852637831307
+        "x": 458.10222050886665,
+        "y": 764.8682189668466
       },
       "end": {
-        "x": 397.42354872433015,
-        "y": 356.3283992721827
+        "x": 473.5786738627602,
+        "y": 307.90920585967615
       },
       "points": [
         {
-          "x": 366.8502165003274,
-          "y": 864.852637831307
+          "x": 458.10222050886665,
+          "y": 764.8682189668466
         },
         {
-          "x": 339.1508429585846,
-          "y": 831.4975444485843
+          "x": 519.0014032382421,
+          "y": 718.8202929838087
         },
         {
-          "x": 339.1508429585846,
-          "y": 798.9468920536964
+          "x": 519.0014032382421,
+          "y": 679.0978565921357
         },
         {
-          "x": 339.1508429585846,
-          "y": 766.3962396588086
+          "x": 519.0014032382421,
+          "y": 633.4540632228219
         },
         {
-          "x": 339.1508429585846,
-          "y": 716.1049538602895
+          "x": 519.0014032382421,
+          "y": 562.9336622976099
         },
         {
-          "x": 339.1508429585846,
-          "y": 665.8136680617704
+          "x": 519.0014032382421,
+          "y": 492.41326137239787
         },
         {
-          "x": 339.1508429585846,
-          "y": 633.2630156668824
+          "x": 519.0014032382421,
+          "y": 446.76946800308406
         },
         {
-          "x": 339.1508429585846,
-          "y": 600.7123632719946
+          "x": 519.0014032382421,
+          "y": 407.04703161141094
         },
         {
-          "x": 339.1508429585846,
-          "y": 572.3844982148219
+          "x": 519.0014032382421,
+          "y": 367.32459521973783
         },
         {
-          "x": 339.1508429585846,
-          "y": 544.0566331576491
+          "x": 519.0014032382421,
+          "y": 327.6021588280648
         },
         {
-          "x": 339.1508429585846,
-          "y": 479.6893895667462
-        },
-        {
-          "x": 339.1508429585846,
-          "y": 419.5449333135583
-        },
-        {
-          "x": 339.1508429585846,
-          "y": 395.4398555941008
-        },
-        {
-          "x": 339.1508429585846,
-          "y": 371.33477787464324
-        },
-        {
-          "x": 397.42354872433015,
-          "y": 356.3283992721827
+          "x": 473.5786738627602,
+          "y": 307.90920585967615
         }
       ],
       "dashed": false,
@@ -1565,33 +1111,33 @@
       "visibleLabel": true
     },
     {
-      "from": "OPERATION.O5",
+      "from": "OPERATION.O3",
       "to": "OPERATION.EVENT",
       "fromSide": "bottom",
       "toSide": "top",
       "connectorType": "elbow",
       "stroke": "#C65911",
-      "lineWeight": 0.6334181006572784,
+      "lineWeight": 0.8882035466461065,
       "start": {
-        "x": 506.04102892820583,
-        "y": 646.9870745144569
+        "x": 435.53198149575945,
+        "y": 466.0138781804163
       },
       "end": {
-        "x": 527.7876799195494,
-        "y": 705.1960865711919
+        "x": 465.8868311488049,
+        "y": 541.715466461064
       },
       "points": [
         {
-          "x": 506.04102892820583,
-          "y": 646.9870745144569
+          "x": 435.53198149575945,
+          "y": 466.0138781804163
         },
         {
-          "x": 527.7876799195494,
-          "y": 665.8136680617704
+          "x": 465.8868311488049,
+          "y": 492.41326137239787
         },
         {
-          "x": 527.7876799195494,
-          "y": 705.1960865711919
+          "x": 465.8868311488049,
+          "y": 541.715466461064
         }
       ],
       "dashed": true,
@@ -1600,197 +1146,37 @@
       "visibleLabel": true
     },
     {
-      "from": "OPERATION.EVENT",
-      "to": "OPERATION.NOTIFY",
-      "fromSide": "bottom",
-      "toSide": "top",
-      "connectorType": "elbow",
-      "stroke": "#C65911",
-      "lineWeight": 0.6334181006572784,
-      "start": {
-        "x": 531.776806357911,
-        "y": 725.6062253701486
-      },
-      "end": {
-        "x": 548.9016166081254,
-        "y": 788.0380247645988
-      },
-      "points": [
-        {
-          "x": 531.776806357911,
-          "y": 725.6062253701486
-        },
-        {
-          "x": 548.9016166081254,
-          "y": 766.3962396588086
-        },
-        {
-          "x": 548.9016166081254,
-          "y": 788.0380247645988
-        }
-      ],
-      "dashed": true,
-      "bidirectional": false
-    },
-    {
-      "from": "OPERATION.NOTIFY",
-      "to": "OPERATION.RECONNECT",
-      "fromSide": "bottom",
-      "toSide": "top",
-      "connectorType": "elbow",
-      "stroke": "#C65911",
-      "lineWeight": 0.6334181006572784,
-      "start": {
-        "x": 548.9016166081254,
-        "y": 808.4481635635556
-      },
-      "end": {
-        "x": 532.2726319711478,
-        "y": 871.5457557615856
-      },
-      "points": [
-        {
-          "x": 548.9016166081254,
-          "y": 808.4481635635556
-        },
-        {
-          "x": 548.9016166081254,
-          "y": 831.4975444485843
-        },
-        {
-          "x": 532.2726319711478,
-          "y": 871.5457557615856
-        }
-      ],
-      "dashed": true,
-      "bidirectional": false,
-      "label": "イベント接続切断",
-      "visibleLabel": true
-    },
-    {
-      "from": "OPERATION.RECONNECT",
-      "to": "OPERATION.EVENT",
-      "fromSide": "top",
-      "toSide": "bottom",
-      "connectorType": "elbow",
-      "stroke": "#C65911",
-      "lineWeight": 0.6334181006572784,
-      "start": {
-        "x": 523.842540849289,
-        "y": 872.8456704637123
-      },
-      "end": {
-        "x": 523.2538139146227,
-        "y": 726.9040286786064
-      },
-      "points": [
-        {
-          "x": 523.842540849289,
-          "y": 872.8456704637123
-        },
-        {
-          "x": 506.67374323097357,
-          "y": 831.4975444485843
-        },
-        {
-          "x": 506.67374323097357,
-          "y": 798.9468920536964
-        },
-        {
-          "x": 506.67374323097357,
-          "y": 766.3962396588086
-        },
-        {
-          "x": 523.2538139146227,
-          "y": 726.9040286786064
-        }
-      ],
-      "dashed": true,
-      "bidirectional": false
-    },
-    {
       "from": "START.S1",
       "to": "START.S2",
       "fromSide": "bottom",
-      "toSide": "left",
+      "toSide": "top",
       "connectorType": "elbow",
       "stroke": "#548235",
-      "lineWeight": 0.6334181006572784,
+      "lineWeight": 0.8882035466461065,
       "start": {
-        "x": 189.95522462135054,
-        "y": 293.6063492293167
+        "x": 144.08820354664613,
+        "y": 378.4271395528142
       },
       "end": {
-        "x": 189.95522462135054,
-        "y": 321.406365869275
+        "x": 144.08820354664613,
+        "y": 417.40940632228217
       },
       "points": [
         {
-          "x": 189.95522462135054,
-          "y": 293.6063492293167
+          "x": 144.08820354664613,
+          "y": 378.4271395528142
         },
         {
-          "x": 189.95522462135054,
-          "y": 308.2101554389151
+          "x": 144.08820354664613,
+          "y": 398.905165767155
         },
         {
-          "x": 189.95522462135054,
-          "y": 321.406365869275
+          "x": 144.08820354664613,
+          "y": 417.40940632228217
         }
       ],
       "dashed": false,
       "bidirectional": false
-    },
-    {
-      "from": "START.S2",
-      "to": "START.S5",
-      "fromSide": "bottom",
-      "toSide": "bottom",
-      "connectorType": "elbow",
-      "stroke": "#548235",
-      "lineWeight": 0.6334181006572784,
-      "start": {
-        "x": 169.15729318521358,
-        "y": 364.9454147147875
-      },
-      "end": {
-        "x": 140.35366075465828,
-        "y": 600.9890218236671
-      },
-      "points": [
-        {
-          "x": 169.15729318521358,
-          "y": 364.9454147147875
-        },
-        {
-          "x": 91.89893554910054,
-          "y": 404.56993969823793
-        },
-        {
-          "x": 91.89893554910054,
-          "y": 432.8978047554107
-        },
-        {
-          "x": 91.89893554910054,
-          "y": 461.2256698125834
-        },
-        {
-          "x": 91.89893554910054,
-          "y": 510.66747155833207
-        },
-        {
-          "x": 91.89893554910054,
-          "y": 560.1092733040807
-        },
-        {
-          "x": 140.35366075465828,
-          "y": 600.9890218236671
-        }
-      ],
-      "dashed": false,
-      "bidirectional": false,
-      "label": "はい",
-      "visibleLabel": true
     },
     {
       "from": "START.S2",
@@ -1799,33 +1185,31 @@
       "toSide": "top",
       "connectorType": "elbow",
       "stroke": "#548235",
-      "lineWeight": 0.6334181006572784,
+      "lineWeight": 0.8882035466461065,
       "start": {
-        "x": 207.23064761994337,
-        "y": 368.4679231523316
+        "x": 144.08820354664613,
+        "y": 457.87201233616037
       },
       "end": {
-        "x": 251.18564101822076,
-        "y": 421.98893746631313
+        "x": 144.08820354664613,
+        "y": 496.8542791056284
       },
       "points": [
         {
-          "x": 207.23064761994337,
-          "y": 368.4679231523316
+          "x": 144.08820354664613,
+          "y": 457.87201233616037
         },
         {
-          "x": 251.18564101822076,
-          "y": 404.56993969823793
+          "x": 144.08820354664613,
+          "y": 478.35003855050115
         },
         {
-          "x": 251.18564101822076,
-          "y": 421.98893746631313
+          "x": 144.08820354664613,
+          "y": 496.8542791056284
         }
       ],
       "dashed": false,
-      "bidirectional": false,
-      "label": "いいえ",
-      "visibleLabel": true
+      "bidirectional": false
     },
     {
       "from": "START.S3",
@@ -1834,27 +1218,27 @@
       "toSide": "left",
       "connectorType": "elbow",
       "stroke": "#548235",
-      "lineWeight": 0.6334181006572784,
+      "lineWeight": 0.8882035466461065,
       "start": {
-        "x": 251.18564101822076,
-        "y": 442.39907626526985
+        "x": 144.08820354664613,
+        "y": 537.3168851195065
       },
       "end": {
-        "x": 251.18564101822076,
-        "y": 478.6446675806586
+        "x": 144.08820354664613,
+        "y": 576.2991518889746
       },
       "points": [
         {
-          "x": 251.18564101822076,
-          "y": 442.39907626526985
+          "x": 144.08820354664613,
+          "y": 537.3168851195065
         },
         {
-          "x": 251.18564101822076,
-          "y": 461.2256698125834
+          "x": 144.08820354664613,
+          "y": 557.7949113338473
         },
         {
-          "x": 251.18564101822076,
-          "y": 478.6446675806586
+          "x": 144.08820354664613,
+          "y": 576.2991518889746
         }
       ],
       "dashed": false,
@@ -1864,30 +1248,30 @@
       "from": "START.S4",
       "to": "START.S5",
       "fromSide": "left",
-      "toSide": "bottom",
+      "toSide": "top",
       "connectorType": "elbow",
       "stroke": "#548235",
-      "lineWeight": 0.6334181006572784,
+      "lineWeight": 0.8882035466461065,
       "start": {
-        "x": 240.75078160778173,
-        "y": 530.8478203463281
+        "x": 129.06818812644565,
+        "y": 651.4949575944488
       },
       "end": {
-        "x": 186.56467828811003,
-        "y": 599.1197346288385
+        "x": 107.69060909791827,
+        "y": 723.2613107170394
       },
       "points": [
         {
-          "x": 240.75078160778173,
-          "y": 530.8478203463281
+          "x": 129.06818812644565,
+          "y": 651.4949575944488
         },
         {
-          "x": 225.6205345767482,
-          "y": 560.1092733040807
+          "x": 107.69060909791827,
+          "y": 692.9143562066307
         },
         {
-          "x": 186.56467828811003,
-          "y": 599.1197346288385
+          "x": 107.69060909791827,
+          "y": 723.2613107170394
         }
       ],
       "dashed": false,
@@ -1902,390 +1286,42 @@
       "toSide": "top",
       "connectorType": "elbow",
       "stroke": "#C00000",
-      "lineWeight": 0.6334181006572784,
+      "lineWeight": 0.8882035466461065,
       "start": {
-        "x": 257.1506800316883,
-        "y": 535.3176407432998
+        "x": 159.10821896684655,
+        "y": 651.4949575944488
       },
       "end": {
-        "x": 221.44349410185828,
-        "y": 951.245302358895
+        "x": 180.48579799537396,
+        "y": 717.3399537393987
       },
       "points": [
         {
-          "x": 257.1506800316883,
-          "y": 535.3176407432998
+          "x": 159.10821896684655,
+          "y": 651.4949575944488
         },
         {
-          "x": 263.15020514174716,
-          "y": 560.1092733040807
+          "x": 180.48579799537396,
+          "y": 692.9143562066307
         },
         {
-          "x": 263.15020514174716,
-          "y": 621.2682542151547
-        },
-        {
-          "x": 263.15020514174716,
-          "y": 682.4272351262287
-        },
-        {
-          "x": 263.15020514174716,
-          "y": 710.7551001834013
-        },
-        {
-          "x": 263.15020514174716,
-          "y": 739.082965240574
-        },
-        {
-          "x": 263.15020514174716,
-          "y": 775.8564049731772
-        },
-        {
-          "x": 263.15020514174716,
-          "y": 816.8526320434954
-        },
-        {
-          "x": 263.15020514174716,
-          "y": 876.1476042439128
-        },
-        {
-          "x": 263.15020514174716,
-          "y": 931.2197891066152
-        },
-        {
-          "x": 221.44349410185828,
-          "y": 951.245302358895
+          "x": 180.48579799537396,
+          "y": 717.3399537393987
         }
       ],
       "dashed": true,
       "bidirectional": false,
       "label": "いいえ",
-      "visibleLabel": true
-    },
-    {
-      "from": "START.S5",
-      "to": "START.S8",
-      "fromSide": "bottom",
-      "toSide": "left",
-      "connectorType": "elbow",
-      "stroke": "#548235",
-      "lineWeight": 0.6334181006572784,
-      "start": {
-        "x": 141.42941582894122,
-        "y": 640.6395873290335
-      },
-      "end": {
-        "x": 100.36879125172278,
-        "y": 846.5842219915137
-      },
-      "points": [
-        {
-          "x": 141.42941582894122,
-          "y": 640.6395873290335
-        },
-        {
-          "x": 91.89893554910054,
-          "y": 682.4272351262287
-        },
-        {
-          "x": 91.89893554910054,
-          "y": 710.7551001834013
-        },
-        {
-          "x": 91.89893554910054,
-          "y": 739.082965240574
-        },
-        {
-          "x": 91.89893554910054,
-          "y": 775.8564049731772
-        },
-        {
-          "x": 91.89893554910054,
-          "y": 816.8526320434954
-        },
-        {
-          "x": 100.36879125172278,
-          "y": 846.5842219915137
-        }
-      ],
-      "dashed": false,
-      "bidirectional": false,
-      "label": "はい",
-      "visibleLabel": true
-    },
-    {
-      "from": "START.S5",
-      "to": "START.S6",
-      "fromSide": "left",
-      "toSide": "top",
-      "connectorType": "elbow",
-      "stroke": "#548235",
-      "lineWeight": 0.6334181006572784,
-      "start": {
-        "x": 178.3773974381699,
-        "y": 649.6133623206231
-      },
-      "end": {
-        "x": 194.5696754846388,
-        "y": 699.8462328943037
-      },
-      "points": [
-        {
-          "x": 178.3773974381699,
-          "y": 649.6133623206231
-        },
-        {
-          "x": 194.5696754846388,
-          "y": 682.4272351262287
-        },
-        {
-          "x": 194.5696754846388,
-          "y": 699.8462328943037
-        }
-      ],
-      "dashed": false,
-      "bidirectional": false,
-      "label": "いいえ",
-      "visibleLabel": true
-    },
-    {
-      "from": "START.S6",
-      "to": "START.S7",
-      "fromSide": "bottom",
-      "toSide": "top",
-      "connectorType": "elbow",
-      "stroke": "#548235",
-      "lineWeight": 0.6334181006572784,
-      "start": {
-        "x": 185.39179910505965,
-        "y": 720.2563716932605
-      },
-      "end": {
-        "x": 167.20530973835474,
-        "y": 756.5019630086492
-      },
-      "points": [
-        {
-          "x": 185.39179910505965,
-          "y": 720.2563716932605
-        },
-        {
-          "x": 167.20530973835474,
-          "y": 739.082965240574
-        },
-        {
-          "x": 167.20530973835474,
-          "y": 756.5019630086492
-        }
-      ],
-      "dashed": false,
-      "bidirectional": false
-    },
-    {
-      "from": "START.S7",
-      "to": "START.S8",
-      "fromSide": "bottom",
-      "toSide": "left",
-      "connectorType": "elbow",
-      "stroke": "#548235",
-      "lineWeight": 0.6334181006572784,
-      "start": {
-        "x": 153.64910668745455,
-        "y": 793.8032511584667
-      },
-      "end": {
-        "x": 120.85071743542068,
-        "y": 850.0937101680997
-      },
-      "points": [
-        {
-          "x": 153.64910668745455,
-          "y": 793.8032511584667
-        },
-        {
-          "x": 136.23820259511,
-          "y": 816.8526320434954
-        },
-        {
-          "x": 120.85071743542068,
-          "y": 850.0937101680997
-        }
-      ],
-      "dashed": false,
-      "bidirectional": false
-    },
-    {
-      "from": "START.S8",
-      "to": "START.S9",
-      "fromSide": "left",
-      "toSide": "top",
-      "connectorType": "elbow",
-      "stroke": "#548235",
-      "lineWeight": 0.6334181006572784,
-      "start": {
-        "x": 102.95982318235586,
-        "y": 906.5629338416961
-      },
-      "end": {
-        "x": 98.23311655567332,
-        "y": 952.8615742124055
-      },
-      "points": [
-        {
-          "x": 102.95982318235586,
-          "y": 906.5629338416961
-        },
-        {
-          "x": 98.23311655567332,
-          "y": 931.2197891066152
-        },
-        {
-          "x": 98.23311655567332,
-          "y": 952.8615742124055
-        }
-      ],
-      "dashed": false,
-      "bidirectional": false,
-      "label": "はい",
-      "visibleLabel": true
-    },
-    {
-      "from": "START.S8",
-      "to": "START.START_ERROR",
-      "fromSide": "left",
-      "toSide": "top",
-      "connectorType": "elbow",
-      "stroke": "#C00000",
-      "lineWeight": 0.6334181006572784,
-      "start": {
-        "x": 119.54165336072897,
-        "y": 901.6416270985338
-      },
-      "end": {
-        "x": 169.28819959268276,
-        "y": 950.3736486726017
-      },
-      "points": [
-        {
-          "x": 119.54165336072897,
-          "y": 901.6416270985338
-        },
-        {
-          "x": 132.01541525739484,
-          "y": 931.2197891066152
-        },
-        {
-          "x": 169.28819959268276,
-          "y": 950.3736486726017
-        }
-      ],
-      "dashed": true,
-      "bidirectional": false,
-      "label": "いいえ",
-      "visibleLabel": true
-    },
-    {
-      "from": "START.S6",
-      "to": "START.START_ERROR",
-      "fromSide": "bottom",
-      "toSide": "top",
-      "connectorType": "elbow",
-      "stroke": "#C00000",
-      "lineWeight": 0.6334181006572784,
-      "start": {
-        "x": 201.91556595753917,
-        "y": 720.2563716932605
-      },
-      "end": {
-        "x": 205.02529693282162,
-        "y": 948.8654097951477
-      },
-      "points": [
-        {
-          "x": 201.91556595753917,
-          "y": 720.2563716932605
-        },
-        {
-          "x": 216.47116201169862,
-          "y": 739.082965240574
-        },
-        {
-          "x": 216.47116201169862,
-          "y": 775.8564049731772
-        },
-        {
-          "x": 216.47116201169862,
-          "y": 816.8526320434954
-        },
-        {
-          "x": 216.47116201169862,
-          "y": 876.1476042439128
-        },
-        {
-          "x": 216.47116201169862,
-          "y": 931.2197891066152
-        },
-        {
-          "x": 205.02529693282162,
-          "y": 948.8654097951477
-        }
-      ],
-      "dashed": true,
-      "bidirectional": false,
-      "label": "実行ファイルなし／起動例外",
-      "visibleLabel": true
-    },
-    {
-      "from": "START.S7",
-      "to": "START.START_ERROR",
-      "fromSide": "bottom",
-      "toSide": "top",
-      "connectorType": "elbow",
-      "stroke": "#C00000",
-      "lineWeight": 0.6334181006572784,
-      "start": {
-        "x": 168.74592331873117,
-        "y": 793.8032511584667
-      },
-      "end": {
-        "x": 184.1221477121866,
-        "y": 948.9238250199861
-      },
-      "points": [
-        {
-          "x": 168.74592331873117,
-          "y": 793.8032511584667
-        },
-        {
-          "x": 170.72429918645076,
-          "y": 816.8526320434954
-        },
-        {
-          "x": 170.72429918645076,
-          "y": 876.1476042439128
-        },
-        {
-          "x": 170.72429918645076,
-          "y": 931.2197891066152
-        },
-        {
-          "x": 184.1221477121866,
-          "y": 948.9238250199861
-        }
-      ],
-      "dashed": true,
-      "bidirectional": false,
-      "label": "必須設定異常",
       "visibleLabel": true
     }
   ],
   "audit": {
     "sourceSvg": "/Users/vti-sam/pm-control/smj-ks-pos/project-store/artifacts/reports/architecture/ARCH-HOST-01_タブレットPOS_デバイスコネクタ基本設計書/ARCH-HOST-01_6.1_運用シナリオ図.mermaid-rendered.svg",
-    "sourceShapeCount": 33,
-    "renderedNodeCount": 33,
-    "sourceEdgeCount": 41,
-    "renderedEdgeCount": 41,
-    "scale": 0.3518989448095991,
+    "sourceShapeCount": 23,
+    "renderedNodeCount": 23,
+    "sourceEdgeCount": 23,
+    "renderedEdgeCount": 23,
+    "scale": 0.49344641480339246,
     "minX": 8.0,
     "minY": 8.0,
     "sourceTopLevelContainerCount": 3,
@@ -2327,8 +1363,7 @@
       {
         "display": "補足コメント（吹き出し・半透明）",
         "color": "#FFF2CC",
-        "meaning": "対象要素を指し示し、図だけでは判断しにくい設計意図、運用条件、または制約を補足する。",
-        "transparency": 0.7
+        "meaning": "70%透過の吹き出しで対象要素を指し示し、図だけでは判断しにくい設計意図、運用条件、または制約を補足する。"
       },
       {
         "display": "異常処理",

@@ -1,20 +1,29 @@
-function main(workbook: ExcelScript.Workbook, sheetName: string = "05_全体構成_01", anchorAddress: string = "B68", pdfReviewMode: boolean = false) {
-  const sheet = workbook.getWorksheet(sheetName);
-  if (!sheet) {
-    throw new Error("Worksheet not found: " + sheetName);
-  }
-  const anchor = sheet.getRange(anchorAddress);
+function main(workbook: ExcelScript.Workbook) {
+  const anchor = workbook.getActiveCell();
+  const sheet = anchor.getWorksheet();
+  const pdfReviewMode = false;
   const originTop = anchor.getTop();
+  const shapePrefix = "shape_d512_";
+  const edgePrefix = "edge_d512_";
+  const sectionPrefix = "section_bg_d512_";
+  const canvasColumnCount = 25;
+  const baselineCanvasRowCount = 38;
+  const canvasLeft = anchor.getLeft();
+  const canvasTop = anchor.getTop();
+  const canvasRight = canvasLeft + canvasColumnCount * 36;
+  const canvasBottom = canvasTop + baselineCanvasRowCount * 18;
 
   const oldShapes = sheet.getShapes();
   for (let i = 0; i < oldShapes.length; i++) {
     const name = oldShapes[i].getName();
-    if (name.indexOf("shape_") === 0 || name.indexOf("edge_") === 0 || name.indexOf("section_bg_") === 0) {
+    const legacyGenerated = (name.indexOf("shape_") === 0 && name.indexOf("shape_d") !== 0) || (name.indexOf("edge_") === 0 && name.indexOf("edge_d") !== 0) || (name.indexOf("section_bg_") === 0 && name.indexOf("section_bg_d") !== 0);
+    const centerX = oldShapes[i].getLeft() + oldShapes[i].getWidth() / 2;
+    const centerY = oldShapes[i].getTop() + oldShapes[i].getHeight() / 2;
+    const insideCanvas = centerX >= canvasLeft && centerX <= canvasRight && centerY >= canvasTop && centerY <= canvasBottom;
+    if (name.indexOf(shapePrefix) === 0 || name.indexOf(edgePrefix) === 0 || name.indexOf(sectionPrefix) === 0 || (legacyGenerated && insideCanvas)) {
       oldShapes[i].delete();
     }
   }
-  const canvasColumnCount = 25;
-  const baselineCanvasRowCount = 38;
   const canvasRange = getAnchoredRange(anchor, 0, 0, baselineCanvasRowCount, canvasColumnCount);
   unmergeLaneRange(canvasRange);
   canvasRange.clear(ExcelScript.ClearApplyTo.all);
@@ -26,67 +35,67 @@ function main(workbook: ExcelScript.Workbook, sheetName: string = "05_全体構�
 
   addCellLaneTable(anchor, baselineCanvasRowCount - 1);
 
-  const shape_DEVICE_DRAWER = addTextShape(sheet, "shape_DEVICE_DRAWER", "② キャッシュドロア（SHARP）", 0, 0, 162.15, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
-  setShapeAltText(shape_DEVICE_DRAWER, "② キャッシュドロア（SHARP）", "");
-  const shape_DEVICE_DISPLAY = addTextShape(sheet, "shape_DEVICE_DISPLAY", "③ カスタマーディスプレイ（SHARP）", 0, 0, 193.65, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
-  setShapeAltText(shape_DEVICE_DISPLAY, "③ カスタマーディスプレイ（SHARP）", "");
-  const shape_HOST_HOST_EXEC_CONTROL = addTextShape(sheet, "shape_HOST_HOST_EXEC_CONTROL", "②-2 要求変換・コマンド制御", 0, 0, 155.325, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
-  setShapeAltText(shape_HOST_HOST_EXEC_CONTROL, "②-2 要求変換・コマンド制御", "");
-  const shape_APP_APP_COORD_PROCESS = addTextShape(sheet, "shape_APP_APP_COORD_PROCESS", "①-3 デバイスコネクタ\nプロセス管理", 0, 0, 123.825, 36, 10, true, "#F8FBFD", true, "center", "roundRect", false);
-  setShapeAltText(shape_APP_APP_COORD_PROCESS, "①-3 デバイスコネクタ プロセス管理", "デバイスコネクタはアプリと\nは別プロセスで管理します。\n起動・停止はアプリのライフサイクルに\n合わせて制御します。");
-  const shape_APP_APP_COORD_LIFECYCLE = addTextShape(sheet, "shape_APP_APP_COORD_LIFECYCLE", "①-2 アプリライフサイクル", 0, 0, 144.825, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
-  setShapeAltText(shape_APP_APP_COORD_LIFECYCLE, "①-2 アプリライフサイクル", "");
-  const shape_HOST_HOST_EXEC_ORDER = addTextShape(sheet, "shape_HOST_HOST_EXEC_ORDER", "②-1 デバイスID別順序制御", 0, 0, 145.875, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
-  setShapeAltText(shape_HOST_HOST_EXEC_ORDER, "②-1 デバイスID別順序制御", "同一デバイスへの要求は\nデバイスID単位で順序制御し、\n並行実行による競合を防止します。");
-  const shape_APP_APP_ACCESS_SELECT = addTextShape(sheet, "shape_APP_APP_ACCESS_SELECT", "②-1 設定・制御方式選択", 0, 0, 134.325, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
-  setShapeAltText(shape_APP_APP_ACCESS_SELECT, "②-1 設定・制御方式選択", "");
-  const shape_APP_APP_ACCESS_RESULT = addTextShape(sheet, "shape_APP_APP_ACCESS_RESULT", "②-3 結果・イベント連携", 0, 0, 134.325, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
-  setShapeAltText(shape_APP_APP_ACCESS_RESULT, "②-3 結果・イベント連携", "");
-  const shape_HOST_HOST_EXEC_HOST_SETTING = addTextShape(sheet, "shape_HOST_HOST_EXEC_HOST_SETTING", "デバイスコネクタ側設定", 0, 0, 127.5, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
-  setShapeAltText(shape_HOST_HOST_EXEC_HOST_SETTING, "デバイスコネクタ側設定", "");
-  const shape_HOST_HOST_ADAPTER_ADAPTER = addTextShape(sheet, "shape_HOST_HOST_ADAPTER_ADAPTER", "③-1 個別デバイス実装", 0, 0, 123.825, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
-  setShapeAltText(shape_HOST_HOST_ADAPTER_ADAPTER, "③-1 個別デバイス実装", "");
-  const shape_DEVICE_CASH = addTextShape(sheet, "shape_DEVICE_CASH", "① 釣銭機（RT-300）", 0, 0, 115.425, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
-  setShapeAltText(shape_DEVICE_CASH, "① 釣銭機（RT-300）", "");
-  const shape_HOST_HOST_SERVICE_RUNTIME = addTextShape(sheet, "shape_HOST_HOST_SERVICE_RUNTIME", "①-1 起動・停止管理", 0, 0, 113.325, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
-  setShapeAltText(shape_HOST_HOST_SERVICE_RUNTIME, "①-1 起動・停止管理", "");
-  const shape_APP_APP_COORD_BUSINESS = addTextShape(sheet, "shape_APP_APP_COORD_BUSINESS", "①-1 画面・業務処理", 0, 0, 113.325, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
-  setShapeAltText(shape_APP_APP_COORD_BUSINESS, "①-1 画面・業務処理", "");
-  const shape_HOST_HOST_SERVICE_SERVER = addTextShape(sheet, "shape_HOST_HOST_SERVICE_SERVER", "①-2 コマンド受付", 0, 0, 102.825, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
-  setShapeAltText(shape_HOST_HOST_SERVICE_SERVER, "①-2 コマンド受付", "");
-  const shape_APP_APP_ACCESS_COMMAND = addTextShape(sheet, "shape_APP_APP_ACCESS_COMMAND", "②-2 コマンド通信", 0, 0, 102.825, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
-  setShapeAltText(shape_APP_APP_ACCESS_COMMAND, "②-2 コマンド通信", "");
-  const shape_HOST_HOST_SERVICE_EVENT = addTextShape(sheet, "shape_HOST_HOST_SERVICE_EVENT", "①-3 イベント配信", 0, 0, 102.825, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
-  setShapeAltText(shape_HOST_HOST_SERVICE_EVENT, "①-3 イベント配信", "デバイス処理結果は同期応答と\nは別経路で配信し、\nアプリの購読処理へ通知します。");
-  const shape_HOST_HOST_EXEC_MANAGER = addTextShape(sheet, "shape_HOST_HOST_EXEC_MANAGER", "②-3 デバイス管理", 0, 0, 102.825, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
-  setShapeAltText(shape_HOST_HOST_EXEC_MANAGER, "②-3 デバイス管理", "");
-  const shape_APP_APP_ACCESS_APP_SETTING = addTextShape(sheet, "shape_APP_APP_ACCESS_APP_SETTING", "アプリ側設定", 0, 0, 96, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
-  setShapeAltText(shape_APP_APP_ACCESS_APP_SETTING, "アプリ側設定", "");
+  const shape_d512_DEVICE_DRAWER = addTextShape(sheet, "shape_d512_DEVICE_DRAWER", "② キャッシュドロア（SHARP）", 0, 0, 162.15, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
+  setShapeAltText(shape_d512_DEVICE_DRAWER, "② キャッシュドロア（SHARP）", "");
+  const shape_d512_DEVICE_DISPLAY = addTextShape(sheet, "shape_d512_DEVICE_DISPLAY", "③ カスタマーディスプレイ（SHARP）", 0, 0, 193.65, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
+  setShapeAltText(shape_d512_DEVICE_DISPLAY, "③ カスタマーディスプレイ（SHARP）", "");
+  const shape_d512_HOST_HOST_EXEC_CONTROL = addTextShape(sheet, "shape_d512_HOST_HOST_EXEC_CONTROL", "②-2 要求変換・コマンド制御", 0, 0, 155.325, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
+  setShapeAltText(shape_d512_HOST_HOST_EXEC_CONTROL, "②-2 要求変換・コマンド制御", "");
+  const shape_d512_APP_APP_COORD_PROCESS = addTextShape(sheet, "shape_d512_APP_APP_COORD_PROCESS", "①-3 デバイスコネクタ\nプロセス管理", 0, 0, 123.825, 36, 10, true, "#F8FBFD", true, "center", "roundRect", false);
+  setShapeAltText(shape_d512_APP_APP_COORD_PROCESS, "①-3 デバイスコネクタ プロセス管理", "デバイスコネクタはアプリと\nは別プロセスで管理します。\n起動・停止はアプリのライフサイクルに\n合わせて制御します。");
+  const shape_d512_APP_APP_COORD_LIFECYCLE = addTextShape(sheet, "shape_d512_APP_APP_COORD_LIFECYCLE", "①-2 アプリライフサイクル", 0, 0, 144.825, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
+  setShapeAltText(shape_d512_APP_APP_COORD_LIFECYCLE, "①-2 アプリライフサイクル", "");
+  const shape_d512_HOST_HOST_EXEC_ORDER = addTextShape(sheet, "shape_d512_HOST_HOST_EXEC_ORDER", "②-1 デバイスID別順序制御", 0, 0, 145.875, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
+  setShapeAltText(shape_d512_HOST_HOST_EXEC_ORDER, "②-1 デバイスID別順序制御", "同一デバイスへの要求は\nデバイスID単位で順序制御し、\n並行実行による競合を防止します。");
+  const shape_d512_APP_APP_ACCESS_SELECT = addTextShape(sheet, "shape_d512_APP_APP_ACCESS_SELECT", "②-1 設定・制御方式選択", 0, 0, 134.325, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
+  setShapeAltText(shape_d512_APP_APP_ACCESS_SELECT, "②-1 設定・制御方式選択", "");
+  const shape_d512_APP_APP_ACCESS_RESULT = addTextShape(sheet, "shape_d512_APP_APP_ACCESS_RESULT", "②-3 結果・イベント連携", 0, 0, 134.325, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
+  setShapeAltText(shape_d512_APP_APP_ACCESS_RESULT, "②-3 結果・イベント連携", "");
+  const shape_d512_HOST_HOST_EXEC_HOST_SETTING = addTextShape(sheet, "shape_d512_HOST_HOST_EXEC_HOST_SETTING", "デバイスコネクタ側設定", 0, 0, 127.5, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
+  setShapeAltText(shape_d512_HOST_HOST_EXEC_HOST_SETTING, "デバイスコネクタ側設定", "");
+  const shape_d512_HOST_HOST_ADAPTER_ADAPTER = addTextShape(sheet, "shape_d512_HOST_HOST_ADAPTER_ADAPTER", "③-1 個別デバイス実装", 0, 0, 123.825, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
+  setShapeAltText(shape_d512_HOST_HOST_ADAPTER_ADAPTER, "③-1 個別デバイス実装", "");
+  const shape_d512_DEVICE_CASH = addTextShape(sheet, "shape_d512_DEVICE_CASH", "① 釣銭機（RT-300）", 0, 0, 115.425, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
+  setShapeAltText(shape_d512_DEVICE_CASH, "① 釣銭機（RT-300）", "");
+  const shape_d512_HOST_HOST_SERVICE_RUNTIME = addTextShape(sheet, "shape_d512_HOST_HOST_SERVICE_RUNTIME", "①-1 起動・停止管理", 0, 0, 113.325, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
+  setShapeAltText(shape_d512_HOST_HOST_SERVICE_RUNTIME, "①-1 起動・停止管理", "");
+  const shape_d512_APP_APP_COORD_BUSINESS = addTextShape(sheet, "shape_d512_APP_APP_COORD_BUSINESS", "①-1 画面・業務処理", 0, 0, 113.325, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
+  setShapeAltText(shape_d512_APP_APP_COORD_BUSINESS, "①-1 画面・業務処理", "");
+  const shape_d512_HOST_HOST_SERVICE_SERVER = addTextShape(sheet, "shape_d512_HOST_HOST_SERVICE_SERVER", "①-2 コマンド受付", 0, 0, 102.825, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
+  setShapeAltText(shape_d512_HOST_HOST_SERVICE_SERVER, "①-2 コマンド受付", "");
+  const shape_d512_APP_APP_ACCESS_COMMAND = addTextShape(sheet, "shape_d512_APP_APP_ACCESS_COMMAND", "②-2 コマンド通信", 0, 0, 102.825, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
+  setShapeAltText(shape_d512_APP_APP_ACCESS_COMMAND, "②-2 コマンド通信", "");
+  const shape_d512_HOST_HOST_SERVICE_EVENT = addTextShape(sheet, "shape_d512_HOST_HOST_SERVICE_EVENT", "①-3 イベント配信", 0, 0, 102.825, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
+  setShapeAltText(shape_d512_HOST_HOST_SERVICE_EVENT, "①-3 イベント配信", "デバイス処理結果は同期応答と\nは別経路で配信し、\nアプリの購読処理へ通知します。");
+  const shape_d512_HOST_HOST_EXEC_MANAGER = addTextShape(sheet, "shape_d512_HOST_HOST_EXEC_MANAGER", "②-3 デバイス管理", 0, 0, 102.825, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
+  setShapeAltText(shape_d512_HOST_HOST_EXEC_MANAGER, "②-3 デバイス管理", "");
+  const shape_d512_APP_APP_ACCESS_APP_SETTING = addTextShape(sheet, "shape_d512_APP_APP_ACCESS_APP_SETTING", "アプリ側設定", 0, 0, 96, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
+  setShapeAltText(shape_d512_APP_APP_ACCESS_APP_SETTING, "アプリ側設定", "");
 
-  let groupBottom1 = placeD2Row([shape_APP_APP_COORD_BUSINESS], [0.5], laneRange1.getLeft(), originTop + 90, laneRange1.getWidth(), 30, 28);
-  groupBottom1 = placeD2Row([shape_APP_APP_COORD_LIFECYCLE], [0.5], laneRange1.getLeft(), groupBottom1 + 24, laneRange1.getWidth(), 30, 28);
-  groupBottom1 = placeD2Row([shape_APP_APP_COORD_PROCESS], [0.5], laneRange1.getLeft(), groupBottom1 + 24, laneRange1.getWidth(), 30, 28);
-  groupBottom1 = placeD2Row([shape_APP_APP_ACCESS_APP_SETTING], [0.5], laneRange1.getLeft(), groupBottom1 + 96, laneRange1.getWidth(), 30, 28);
-  groupBottom1 = placeD2Row([shape_APP_APP_ACCESS_SELECT], [0.5], laneRange1.getLeft(), groupBottom1 + 24, laneRange1.getWidth(), 30, 28);
-  groupBottom1 = placeD2Row([shape_APP_APP_ACCESS_COMMAND], [0.5], laneRange1.getLeft(), groupBottom1 + 24, laneRange1.getWidth(), 30, 28);
-  groupBottom1 = placeD2Row([shape_APP_APP_ACCESS_RESULT], [0.5], laneRange1.getLeft(), groupBottom1 + 24, laneRange1.getWidth(), 30, 28);
-  let groupBottom2 = placeD2Row([shape_HOST_HOST_SERVICE_RUNTIME], [0.5], laneRange2.getLeft(), originTop + 90, laneRange2.getWidth(), 30, 28);
-  groupBottom2 = placeD2Row([shape_HOST_HOST_SERVICE_SERVER], [0.5], laneRange2.getLeft(), groupBottom2 + 24, laneRange2.getWidth(), 30, 28);
-  groupBottom2 = placeD2Row([shape_HOST_HOST_SERVICE_EVENT], [0.5], laneRange2.getLeft(), groupBottom2 + 24, laneRange2.getWidth(), 30, 28);
-  groupBottom2 = placeD2Row([shape_HOST_HOST_EXEC_HOST_SETTING], [0.5], laneRange2.getLeft(), groupBottom2 + 96, laneRange2.getWidth(), 30, 28);
-  groupBottom2 = placeD2Row([shape_HOST_HOST_EXEC_ORDER], [0.5], laneRange2.getLeft(), groupBottom2 + 24, laneRange2.getWidth(), 30, 28);
-  groupBottom2 = placeD2Row([shape_HOST_HOST_EXEC_CONTROL], [0.5], laneRange2.getLeft(), groupBottom2 + 24, laneRange2.getWidth(), 30, 28);
-  groupBottom2 = placeD2Row([shape_HOST_HOST_EXEC_MANAGER], [0.5], laneRange2.getLeft(), groupBottom2 + 24, laneRange2.getWidth(), 30, 28);
-  groupBottom2 = placeD2Row([shape_HOST_HOST_ADAPTER_ADAPTER], [0.5], laneRange2.getLeft(), groupBottom2 + 96, laneRange2.getWidth(), 30, 28);
-  let groupBottom3 = placeD2Row([shape_DEVICE_CASH], [0.5], laneRange3.getLeft(), originTop + 90, laneRange3.getWidth(), 30, 28);
-  groupBottom3 = placeD2Row([shape_DEVICE_DRAWER], [0.5], laneRange3.getLeft(), groupBottom3 + 24, laneRange3.getWidth(), 30, 28);
-  groupBottom3 = placeD2Row([shape_DEVICE_DISPLAY], [0.5], laneRange3.getLeft(), groupBottom3 + 24, laneRange3.getWidth(), 30, 28);
+  let groupBottom1 = placeD2Row([shape_d512_APP_APP_COORD_BUSINESS], [0.5], laneRange1.getLeft(), originTop + 90, laneRange1.getWidth(), 30, 28);
+  groupBottom1 = placeD2Row([shape_d512_APP_APP_COORD_LIFECYCLE], [0.5], laneRange1.getLeft(), groupBottom1 + 24, laneRange1.getWidth(), 30, 28);
+  groupBottom1 = placeD2Row([shape_d512_APP_APP_COORD_PROCESS], [0.5], laneRange1.getLeft(), groupBottom1 + 24, laneRange1.getWidth(), 30, 28);
+  groupBottom1 = placeD2Row([shape_d512_APP_APP_ACCESS_APP_SETTING], [0.5], laneRange1.getLeft(), groupBottom1 + 96, laneRange1.getWidth(), 30, 28);
+  groupBottom1 = placeD2Row([shape_d512_APP_APP_ACCESS_SELECT], [0.5], laneRange1.getLeft(), groupBottom1 + 24, laneRange1.getWidth(), 30, 28);
+  groupBottom1 = placeD2Row([shape_d512_APP_APP_ACCESS_COMMAND], [0.5], laneRange1.getLeft(), groupBottom1 + 24, laneRange1.getWidth(), 30, 28);
+  groupBottom1 = placeD2Row([shape_d512_APP_APP_ACCESS_RESULT], [0.5], laneRange1.getLeft(), groupBottom1 + 24, laneRange1.getWidth(), 30, 28);
+  let groupBottom2 = placeD2Row([shape_d512_HOST_HOST_SERVICE_RUNTIME], [0.5], laneRange2.getLeft(), originTop + 90, laneRange2.getWidth(), 30, 28);
+  groupBottom2 = placeD2Row([shape_d512_HOST_HOST_SERVICE_SERVER], [0.5], laneRange2.getLeft(), groupBottom2 + 24, laneRange2.getWidth(), 30, 28);
+  groupBottom2 = placeD2Row([shape_d512_HOST_HOST_SERVICE_EVENT], [0.5], laneRange2.getLeft(), groupBottom2 + 24, laneRange2.getWidth(), 30, 28);
+  groupBottom2 = placeD2Row([shape_d512_HOST_HOST_EXEC_HOST_SETTING], [0.5], laneRange2.getLeft(), groupBottom2 + 96, laneRange2.getWidth(), 30, 28);
+  groupBottom2 = placeD2Row([shape_d512_HOST_HOST_EXEC_ORDER], [0.5], laneRange2.getLeft(), groupBottom2 + 24, laneRange2.getWidth(), 30, 28);
+  groupBottom2 = placeD2Row([shape_d512_HOST_HOST_EXEC_CONTROL], [0.5], laneRange2.getLeft(), groupBottom2 + 24, laneRange2.getWidth(), 30, 28);
+  groupBottom2 = placeD2Row([shape_d512_HOST_HOST_EXEC_MANAGER], [0.5], laneRange2.getLeft(), groupBottom2 + 24, laneRange2.getWidth(), 30, 28);
+  groupBottom2 = placeD2Row([shape_d512_HOST_HOST_ADAPTER_ADAPTER], [0.5], laneRange2.getLeft(), groupBottom2 + 96, laneRange2.getWidth(), 30, 28);
+  let groupBottom3 = placeD2Row([shape_d512_DEVICE_CASH], [0.5], laneRange3.getLeft(), originTop + 90, laneRange3.getWidth(), 30, 28);
+  groupBottom3 = placeD2Row([shape_d512_DEVICE_DRAWER], [0.5], laneRange3.getLeft(), groupBottom3 + 24, laneRange3.getWidth(), 30, 28);
+  groupBottom3 = placeD2Row([shape_d512_DEVICE_DISPLAY], [0.5], laneRange3.getLeft(), groupBottom3 + 24, laneRange3.getWidth(), 30, 28);
 
-  addSectionBackground(sheet, "section_bg_1_1", "① 業務・プロセス管理", [shape_APP_APP_COORD_PROCESS, shape_APP_APP_COORD_LIFECYCLE, shape_APP_APP_COORD_BUSINESS], laneRange1.getLeft(), laneRange1.getWidth(), "#FFFFFF");
-  addSectionBackground(sheet, "section_bg_1_2", "② デバイスアクセス", [shape_APP_APP_ACCESS_SELECT, shape_APP_APP_ACCESS_RESULT, shape_APP_APP_ACCESS_COMMAND, shape_APP_APP_ACCESS_APP_SETTING], laneRange1.getLeft(), laneRange1.getWidth(), "#FFFFFF");
-  addSectionBackground(sheet, "section_bg_2_1", "① プロセス・通信サービス", [shape_HOST_HOST_SERVICE_RUNTIME, shape_HOST_HOST_SERVICE_SERVER, shape_HOST_HOST_SERVICE_EVENT], laneRange2.getLeft(), laneRange2.getWidth(), "#FFFFFF");
-  addSectionBackground(sheet, "section_bg_2_2", "② コマンド実行", [shape_HOST_HOST_EXEC_CONTROL, shape_HOST_HOST_EXEC_ORDER, shape_HOST_HOST_EXEC_HOST_SETTING, shape_HOST_HOST_EXEC_MANAGER], laneRange2.getLeft(), laneRange2.getWidth(), "#FFFFFF");
-  addSectionBackground(sheet, "section_bg_2_3", "③ デバイスアダプター", [shape_HOST_HOST_ADAPTER_ADAPTER], laneRange2.getLeft(), laneRange2.getWidth(), "#FFFFFF");
+  addSectionBackground(sheet, "section_bg_d512_1_1", "① アプリケーション層（業務・プロセス管理）", [shape_d512_APP_APP_COORD_PROCESS, shape_d512_APP_APP_COORD_LIFECYCLE, shape_d512_APP_APP_COORD_BUSINESS], laneRange1.getLeft(), laneRange1.getWidth(), "#FFFFFF");
+  addSectionBackground(sheet, "section_bg_d512_1_2", "② デバイス制御層", [shape_d512_APP_APP_ACCESS_SELECT, shape_d512_APP_APP_ACCESS_RESULT, shape_d512_APP_APP_ACCESS_COMMAND, shape_d512_APP_APP_ACCESS_APP_SETTING], laneRange1.getLeft(), laneRange1.getWidth(), "#FFFFFF");
+  addSectionBackground(sheet, "section_bg_d512_2_1", "① プロセス・通信サービス", [shape_d512_HOST_HOST_SERVICE_RUNTIME, shape_d512_HOST_HOST_SERVICE_SERVER, shape_d512_HOST_HOST_SERVICE_EVENT], laneRange2.getLeft(), laneRange2.getWidth(), "#FFFFFF");
+  addSectionBackground(sheet, "section_bg_d512_2_2", "② コマンド実行", [shape_d512_HOST_HOST_EXEC_CONTROL, shape_d512_HOST_HOST_EXEC_ORDER, shape_d512_HOST_HOST_EXEC_HOST_SETTING, shape_d512_HOST_HOST_EXEC_MANAGER], laneRange2.getLeft(), laneRange2.getWidth(), "#FFFFFF");
+  addSectionBackground(sheet, "section_bg_d512_2_3", "③ デバイスアダプター", [shape_d512_HOST_HOST_ADAPTER_ADAPTER], laneRange2.getLeft(), laneRange2.getWidth(), "#FFFFFF");
   const diagramBottom = Math.max(originTop + 90, groupBottom1, groupBottom2, groupBottom3);
   const bodyEndRowOffset = Math.max(11, Math.ceil((diagramBottom - originTop + 48) / 18) - 1);
   const canvasRowCount = Math.max(baselineCanvasRowCount, bodyEndRowOffset + 1);
@@ -95,25 +104,25 @@ function main(workbook: ExcelScript.Workbook, sheetName: string = "05_全体構�
     addCellLaneTable(anchor, bodyEndRowOffset);
   }
 
-  addConnector(sheet, "edge_01_DEVICE_CASH_to_HOST_HOST_ADAPTER_ADAPTER", shape_DEVICE_CASH, shape_HOST_HOST_ADAPTER_ADAPTER, false, true, "制御／結果", "elbow", "left", "right", "#7030A0");
-  addConnector(sheet, "edge_02_DEVICE_DRAWER_to_HOST_HOST_ADAPTER_ADAPTER", shape_DEVICE_DRAWER, shape_HOST_HOST_ADAPTER_ADAPTER, false, true, "制御／結果", "elbow", "left", "right", "#7030A0");
-  addConnector(sheet, "edge_03_DEVICE_DISPLAY_to_HOST_HOST_ADAPTER_ADAPTER", shape_DEVICE_DISPLAY, shape_HOST_HOST_ADAPTER_ADAPTER, false, true, "制御／結果", "elbow", "left", "right", "#7030A0");
-  addConnector(sheet, "edge_04_APP_APP_COORD_PROCESS_to_HOST_HOST_SERVICE_RUNTIME", shape_APP_APP_COORD_PROCESS, shape_HOST_HOST_SERVICE_RUNTIME, false, false, "OSプロセス制御", "elbow", "right", "left", "#548235");
-  addConnector(sheet, "edge_05_APP_APP_ACCESS_COMMAND_to_HOST_HOST_SERVICE_SERVER", shape_APP_APP_ACCESS_COMMAND, shape_HOST_HOST_SERVICE_SERVER, false, true, "コマンド通信用パイプ\n要求／同期応答", "elbow", "right", "left", "#1F4E79");
-  addConnector(sheet, "edge_06_HOST_HOST_SERVICE_EVENT_to_APP_APP_ACCESS_RESULT", shape_HOST_HOST_SERVICE_EVENT, shape_APP_APP_ACCESS_RESULT, true, false, "イベント通知用パイプ\n非同期イベント", "elbow", "left", "right", "#C65911");
-  addConnector(sheet, "edge_07_HOST_HOST_EXEC_MANAGER_to_HOST_HOST_ADAPTER_ADAPTER", shape_HOST_HOST_EXEC_MANAGER, shape_HOST_HOST_ADAPTER_ADAPTER, false, false, "", "elbow", "", "", "#7030A0");
-  addConnector(sheet, "edge_08_HOST_HOST_SERVICE_SERVER_to_HOST_HOST_EXEC_ORDER", shape_HOST_HOST_SERVICE_SERVER, shape_HOST_HOST_EXEC_ORDER, false, false, "", "elbow", "left", "left", "#1F4E79");
-  addConnector(sheet, "edge_09_HOST_HOST_EXEC_MANAGER_to_HOST_HOST_SERVICE_EVENT", shape_HOST_HOST_EXEC_MANAGER, shape_HOST_HOST_SERVICE_EVENT, true, false, "デバイス処理結果", "elbow", "right", "right", "#C65911");
-  addConnector(sheet, "edge_10_HOST_HOST_EXEC_HOST_SETTING_to_HOST_HOST_EXEC_MANAGER", shape_HOST_HOST_EXEC_HOST_SETTING, shape_HOST_HOST_EXEC_MANAGER, true, false, "", "elbow", "left", "left", "#7F7F7F");
-  addConnector(sheet, "edge_11_HOST_HOST_EXEC_ORDER_to_HOST_HOST_EXEC_CONTROL", shape_HOST_HOST_EXEC_ORDER, shape_HOST_HOST_EXEC_CONTROL, false, false, "", "elbow", "", "", "#1F4E79");
-  addConnector(sheet, "edge_12_HOST_HOST_EXEC_CONTROL_to_HOST_HOST_EXEC_MANAGER", shape_HOST_HOST_EXEC_CONTROL, shape_HOST_HOST_EXEC_MANAGER, false, false, "", "elbow", "", "", "#1F4E79");
-  addConnector(sheet, "edge_13_HOST_HOST_SERVICE_RUNTIME_to_HOST_HOST_SERVICE_SERVER", shape_HOST_HOST_SERVICE_RUNTIME, shape_HOST_HOST_SERVICE_SERVER, false, false, "", "elbow", "", "", "#1F4E79");
-  addConnector(sheet, "edge_14_APP_APP_COORD_BUSINESS_to_APP_APP_ACCESS_SELECT", shape_APP_APP_COORD_BUSINESS, shape_APP_APP_ACCESS_SELECT, false, false, "", "elbow", "left", "left", "#1F4E79");
-  addConnector(sheet, "edge_15_APP_APP_ACCESS_RESULT_to_APP_APP_COORD_BUSINESS", shape_APP_APP_ACCESS_RESULT, shape_APP_APP_COORD_BUSINESS, true, false, "", "elbow", "right", "right", "#1F4E79");
-  addConnector(sheet, "edge_16_APP_APP_ACCESS_APP_SETTING_to_APP_APP_ACCESS_SELECT", shape_APP_APP_ACCESS_APP_SETTING, shape_APP_APP_ACCESS_SELECT, true, false, "", "elbow", "", "", "#7F7F7F");
-  addConnector(sheet, "edge_17_APP_APP_ACCESS_SELECT_to_APP_APP_ACCESS_COMMAND", shape_APP_APP_ACCESS_SELECT, shape_APP_APP_ACCESS_COMMAND, false, false, "", "elbow", "", "", "#1F4E79");
-  addConnector(sheet, "edge_18_APP_APP_ACCESS_COMMAND_to_APP_APP_ACCESS_RESULT", shape_APP_APP_ACCESS_COMMAND, shape_APP_APP_ACCESS_RESULT, false, false, "", "elbow", "", "", "#1F4E79");
-  addConnector(sheet, "edge_19_APP_APP_COORD_LIFECYCLE_to_APP_APP_COORD_PROCESS", shape_APP_APP_COORD_LIFECYCLE, shape_APP_APP_COORD_PROCESS, false, false, "", "elbow", "", "", "#1F4E79");
+  addConnector(sheet, "edge_d512_01_DEVICE_CASH_to_HOST_HOST_ADAPTER_ADAPTER", shape_d512_DEVICE_CASH, shape_d512_HOST_HOST_ADAPTER_ADAPTER, false, true, "制御／結果", "elbow", "left", "right", "#7030A0");
+  addConnector(sheet, "edge_d512_02_DEVICE_DRAWER_to_HOST_HOST_ADAPTER_ADAPTER", shape_d512_DEVICE_DRAWER, shape_d512_HOST_HOST_ADAPTER_ADAPTER, false, true, "制御／結果", "elbow", "left", "right", "#7030A0");
+  addConnector(sheet, "edge_d512_03_DEVICE_DISPLAY_to_HOST_HOST_ADAPTER_ADAPTER", shape_d512_DEVICE_DISPLAY, shape_d512_HOST_HOST_ADAPTER_ADAPTER, false, true, "制御／結果", "elbow", "left", "right", "#7030A0");
+  addConnector(sheet, "edge_d512_04_APP_APP_COORD_PROCESS_to_HOST_HOST_SERVICE_RUNTIME", shape_d512_APP_APP_COORD_PROCESS, shape_d512_HOST_HOST_SERVICE_RUNTIME, false, false, "OSプロセス制御", "elbow", "right", "left", "#548235");
+  addConnector(sheet, "edge_d512_05_APP_APP_ACCESS_COMMAND_to_HOST_HOST_SERVICE_SERVER", shape_d512_APP_APP_ACCESS_COMMAND, shape_d512_HOST_HOST_SERVICE_SERVER, false, true, "コマンド通信用パイプ\n要求／同期応答", "elbow", "right", "left", "#1F4E79");
+  addConnector(sheet, "edge_d512_06_HOST_HOST_SERVICE_EVENT_to_APP_APP_ACCESS_RESULT", shape_d512_HOST_HOST_SERVICE_EVENT, shape_d512_APP_APP_ACCESS_RESULT, true, false, "イベント通知用パイプ\n非同期イベント", "elbow", "left", "right", "#C65911");
+  addConnector(sheet, "edge_d512_07_HOST_HOST_EXEC_MANAGER_to_HOST_HOST_ADAPTER_ADAPTER", shape_d512_HOST_HOST_EXEC_MANAGER, shape_d512_HOST_HOST_ADAPTER_ADAPTER, false, false, "", "elbow", "", "", "#7030A0");
+  addConnector(sheet, "edge_d512_08_HOST_HOST_SERVICE_SERVER_to_HOST_HOST_EXEC_ORDER", shape_d512_HOST_HOST_SERVICE_SERVER, shape_d512_HOST_HOST_EXEC_ORDER, false, false, "", "elbow", "left", "left", "#1F4E79");
+  addConnector(sheet, "edge_d512_09_HOST_HOST_EXEC_MANAGER_to_HOST_HOST_SERVICE_EVENT", shape_d512_HOST_HOST_EXEC_MANAGER, shape_d512_HOST_HOST_SERVICE_EVENT, true, false, "デバイス処理結果", "elbow", "right", "right", "#C65911");
+  addConnector(sheet, "edge_d512_10_HOST_HOST_EXEC_HOST_SETTING_to_HOST_HOST_EXEC_MANAGER", shape_d512_HOST_HOST_EXEC_HOST_SETTING, shape_d512_HOST_HOST_EXEC_MANAGER, true, false, "", "elbow", "left", "left", "#7F7F7F");
+  addConnector(sheet, "edge_d512_11_HOST_HOST_EXEC_ORDER_to_HOST_HOST_EXEC_CONTROL", shape_d512_HOST_HOST_EXEC_ORDER, shape_d512_HOST_HOST_EXEC_CONTROL, false, false, "", "elbow", "", "", "#1F4E79");
+  addConnector(sheet, "edge_d512_12_HOST_HOST_EXEC_CONTROL_to_HOST_HOST_EXEC_MANAGER", shape_d512_HOST_HOST_EXEC_CONTROL, shape_d512_HOST_HOST_EXEC_MANAGER, false, false, "", "elbow", "", "", "#1F4E79");
+  addConnector(sheet, "edge_d512_13_HOST_HOST_SERVICE_RUNTIME_to_HOST_HOST_SERVICE_SERVER", shape_d512_HOST_HOST_SERVICE_RUNTIME, shape_d512_HOST_HOST_SERVICE_SERVER, false, false, "", "elbow", "", "", "#1F4E79");
+  addConnector(sheet, "edge_d512_14_APP_APP_COORD_BUSINESS_to_APP_APP_ACCESS_SELECT", shape_d512_APP_APP_COORD_BUSINESS, shape_d512_APP_APP_ACCESS_SELECT, false, false, "", "elbow", "left", "left", "#1F4E79");
+  addConnector(sheet, "edge_d512_15_APP_APP_ACCESS_RESULT_to_APP_APP_COORD_BUSINESS", shape_d512_APP_APP_ACCESS_RESULT, shape_d512_APP_APP_COORD_BUSINESS, true, false, "", "elbow", "right", "right", "#1F4E79");
+  addConnector(sheet, "edge_d512_16_APP_APP_ACCESS_APP_SETTING_to_APP_APP_ACCESS_SELECT", shape_d512_APP_APP_ACCESS_APP_SETTING, shape_d512_APP_APP_ACCESS_SELECT, true, false, "", "elbow", "", "", "#7F7F7F");
+  addConnector(sheet, "edge_d512_17_APP_APP_ACCESS_SELECT_to_APP_APP_ACCESS_COMMAND", shape_d512_APP_APP_ACCESS_SELECT, shape_d512_APP_APP_ACCESS_COMMAND, false, false, "", "elbow", "", "", "#1F4E79");
+  addConnector(sheet, "edge_d512_18_APP_APP_ACCESS_COMMAND_to_APP_APP_ACCESS_RESULT", shape_d512_APP_APP_ACCESS_COMMAND, shape_d512_APP_APP_ACCESS_RESULT, false, false, "", "elbow", "", "", "#1F4E79");
+  addConnector(sheet, "edge_d512_19_APP_APP_COORD_LIFECYCLE_to_APP_APP_COORD_PROCESS", shape_d512_APP_APP_COORD_LIFECYCLE, shape_d512_APP_APP_COORD_PROCESS, false, false, "", "elbow", "", "", "#1F4E79");
 
   configurePdfReview(workbook, sheet, anchor, canvasRowCount, canvasColumnCount, pdfReviewMode);
 }
@@ -124,13 +133,254 @@ function addCellLaneTable(anchor: ExcelScript.Range, bodyEndRowOffset: number) {
   addLaneColumns(anchor, 17, 8, bodyEndRowOffset, "（3） 周辺機器", "#E4DFEC");
 }
 
-
 function diagramLineColor(): string {
   return "#1F4E79";
 }
 
 function diagramLineWeight(): number {
   return 2;
+}
+
+function commentFillColor(): string {
+  return "#FFF2CC";
+}
+
+function commentBorderColor(): string {
+  return "#BF9000";
+}
+
+function commentFontColor(): string {
+  return "#404040";
+}
+
+function commentTransparency(): number {
+  return 0.7;
+}
+
+function appFillColor(): string {
+  return "#F7FBFF";
+}
+
+function hostFillColor(): string {
+  return "#FCE4D6";
+}
+
+function applicationLayerFillColor(): string {
+  return "#DDEBF7";
+}
+
+function deviceControlFillColor(): string {
+  return "#E2F0D9";
+}
+
+function deviceFillColor(): string {
+  return "#E4DFEC";
+}
+
+function normalFillColor(): string {
+  return "#F8FBFD";
+}
+
+function decisionFillColor(): string {
+  return "#FFF2CC";
+}
+
+function errorFillColor(): string {
+  return "#F4CCCC";
+}
+
+function connectorColor(semantic: string): string {
+  if (semantic === "lifecycle") {
+    return "#548235";
+  }
+  if (semantic === "deviceControl") {
+    return "#7030A0";
+  }
+  if (semantic === "asyncEvent") {
+    return "#C65911";
+  }
+  if (semantic === "configReference") {
+    return "#7F7F7F";
+  }
+  if (semantic === "errorPath") {
+    return "#C00000";
+  }
+  return diagramLineColor();
+}
+
+function connectorIsDashed(semantic: string): boolean {
+  return semantic === "asyncEvent" || semantic === "configReference" || semantic === "errorPath";
+}
+
+function connectorIsBidirectional(semantic: string): boolean {
+  return semantic === "commandCommunication" || semantic === "deviceControl";
+}
+
+function connectorLineColor(color: string): string {
+  return color && color.length > 0 ? color : diagramLineColor();
+}
+
+function applyShapeView(shape: ExcelScript.Shape, fill: string, bordered: boolean, dashed: boolean) {
+  if (bordered) {
+    shape.getFill().setSolidColor(fill);
+    shape.getLineFormat().setVisible(true);
+    shape.getLineFormat().setColor(diagramLineColor());
+    shape.getLineFormat().setWeight(diagramLineWeight());
+    if (dashed) {
+      shape.getLineFormat().setDashStyle(ExcelScript.ShapeLineDashStyle.dash);
+    }
+    return;
+  }
+  shape.getFill().setTransparency(1);
+  shape.getLineFormat().setVisible(true);
+  shape.getLineFormat().setColor(diagramLineColor());
+  shape.getLineFormat().setWeight(diagramLineWeight());
+}
+
+function applyConnectorView(connector: ExcelScript.Shape, line: ExcelScript.Line, dashed: boolean, bidirectional: boolean, color: string) {
+  connector.getLineFormat().setVisible(true);
+  connector.getLineFormat().setColor(connectorLineColor(color));
+  connector.getLineFormat().setWeight(diagramLineWeight());
+  if (dashed) {
+    connector.getLineFormat().setDashStyle(ExcelScript.ShapeLineDashStyle.dash);
+  }
+  if (bidirectional) {
+    line.setBeginArrowheadStyle(ExcelScript.ArrowheadStyle.triangle);
+  }
+  line.setEndArrowheadStyle(ExcelScript.ArrowheadStyle.triangle);
+}
+
+function applyConnectorLabelView(box: ExcelScript.Shape) {
+  box.getFill().setSolidColor("#FFFFFF");
+  box.getLineFormat().setVisible(true);
+  box.getLineFormat().setColor(diagramLineColor());
+  box.getLineFormat().setWeight(diagramLineWeight());
+}
+
+function applyCommentView(box: ExcelScript.Shape) {
+  box.getFill().setSolidColor(commentFillColor());
+  box.getFill().setTransparency(commentTransparency());
+  box.getLineFormat().setVisible(true);
+  box.getLineFormat().setColor(commentBorderColor());
+  box.getLineFormat().setWeight(diagramLineWeight());
+}
+
+function stableIdBucket(sourceId: string, bucketCount: number): number {
+  let value = 0;
+  for (let i = 0; i < sourceId.length; i++) {
+    value = (value * 31 + sourceId.charCodeAt(i)) % 2147483647;
+  }
+  return bucketCount > 0 ? value % bucketCount : 0;
+}
+
+function connectorLabelPositionOrder(sourceId: string): string[] {
+  const preferredPositions = ["top", "bottom", "left", "right"];
+  const preferred = preferredPositions[stableIdBucket(sourceId, preferredPositions.length)];
+  const positions: string[] = [preferred];
+  for (let i = 0; i < preferredPositions.length; i++) {
+    if (preferredPositions[i] !== preferred) {
+      positions.push(preferredPositions[i]);
+    }
+  }
+  return positions;
+}
+
+function connectorLabelPosition(position: string, centerX: number, centerY: number, width: number, height: number): number[] {
+  if (position === "bottom") {
+    return [centerX - width / 2, centerY + 6];
+  }
+  if (position === "left") {
+    return [centerX - width - 6, centerY - height / 2];
+  }
+  if (position === "right") {
+    return [centerX + 6, centerY - height / 2];
+  }
+  return [centerX - width / 2, centerY - height - 6];
+}
+
+function shapeCommentPositionOrder(sourceId: string, preferLeft: boolean): string[] {
+  const horizontalFirst = preferLeft ? ["left", "right"] : ["right", "left"];
+  const allPositions = [horizontalFirst[0], horizontalFirst[1], "bottom", "top", "bottomRight", "bottomLeft", "topRight", "topLeft"];
+  const offset = stableIdBucket(sourceId, allPositions.length);
+  const positions: string[] = [];
+  for (let i = 0; i < allPositions.length; i++) {
+    positions.push(allPositions[(i + offset) % allPositions.length]);
+  }
+  return positions;
+}
+
+function shapeCommentPosition(position: string, targetLeft: number, targetTop: number, targetRight: number, targetBottom: number, targetWidth: number, targetHeight: number, width: number, height: number, gap: number): number[] {
+  if (position === "left") return [targetLeft - width - gap, targetTop + (targetHeight - height) / 2];
+  if (position === "right") return [targetRight + gap, targetTop + (targetHeight - height) / 2];
+  if (position === "bottom") return [targetLeft + (targetWidth - width) / 2, targetBottom + gap];
+  if (position === "top") return [targetLeft + (targetWidth - width) / 2, targetTop - height - gap];
+  if (position === "bottomRight") return [targetRight + gap, targetBottom + gap];
+  if (position === "bottomLeft") return [targetLeft - width - gap, targetBottom + gap];
+  if (position === "topRight") return [targetRight + gap, targetTop - height - gap];
+  return [targetLeft - width - gap, targetTop - height - gap];
+}
+
+function collectDiagramReviewData(
+  shapes: ExcelScript.Shape[],
+  edgeSourcePrefix: string,
+  shapeSourcePrefix: string,
+  shapeIndexById: { [key: string]: number },
+  edgeIds: string[],
+  shapeIds: string[],
+  obstacleBounds: number[][]
+) {
+  for (let i = 0; i < shapes.length; i++) {
+    const id = shapes[i].getName();
+    shapeIndexById[id] = i;
+    if (id.indexOf(edgeSourcePrefix) === 0) {
+      edgeIds.push(id);
+    }
+    if (id.indexOf(shapeSourcePrefix) === 0) {
+      shapeIds.push(id);
+    }
+    if (id.indexOf("section_bg_") === 0 || shapes[i].getType() === ExcelScript.ShapeType.line) {
+      continue;
+    }
+    obstacleBounds.push([shapes[i].getLeft(), shapes[i].getTop(), shapes[i].getWidth(), shapes[i].getHeight()]);
+  }
+}
+
+function appendObstacleBounds(obstacleBounds: number[][], box: ExcelScript.Shape) {
+  obstacleBounds.push([box.getLeft(), box.getTop(), box.getWidth(), box.getHeight()]);
+}
+
+function overlapsObstacleBounds(obstacleBounds: number[][], left: number, top: number, width: number, height: number): boolean {
+  const right = left + width;
+  const bottom = top + height;
+  for (let i = 0; i < obstacleBounds.length; i++) {
+    const candidateLeft = obstacleBounds[i][0];
+    const candidateTop = obstacleBounds[i][1];
+    const candidateRight = candidateLeft + obstacleBounds[i][2];
+    const candidateBottom = candidateTop + obstacleBounds[i][3];
+    const separated = right + 4 <= candidateLeft || candidateRight + 4 <= left || bottom + 4 <= candidateTop || candidateBottom + 4 <= top;
+    if (!separated) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function placeOverlayInReviewGrid(obstacleBounds: number[][], box: ExcelScript.Shape, reviewLeft: number, reviewRight: number, reviewTop: number): boolean {
+  const width = box.getWidth();
+  const height = box.getHeight();
+  const horizontalStep = Math.max(72, width + 8);
+  const verticalStep = height + 8;
+  for (let row = 0; row < 80; row++) {
+    const top = Math.max(0, reviewTop + row * verticalStep);
+    for (let left = reviewLeft; left + width <= reviewRight; left += horizontalStep) {
+      if (!overlapsObstacleBounds(obstacleBounds, left, top, width, height)) {
+        box.setLeft(left);
+        box.setTop(top);
+        return true;
+      }
+    }
+  }
+  return false;
 }
 
 function getAnchoredRange(anchor: ExcelScript.Range, rowOffset: number, columnOffset: number, rowCount: number, columnCount: number): ExcelScript.Range {
@@ -192,9 +442,7 @@ function addSectionBackground(sheet: ExcelScript.Worksheet, shapeName: string, t
   background.setTop(Math.max(0, top - titlePadding));
   background.setWidth(Math.max(1, laneWidth - sidePadding * 2));
   background.setHeight(Math.max(28, bottom - top + titlePadding + bottomPadding));
-  background.getFill().setSolidColor(fill);
-  background.getLineFormat().setColor(diagramLineColor());
-  background.getLineFormat().setWeight(diagramLineWeight());
+  applyShapeView(background, fill, true, false);
   const frame = background.getTextFrame();
   frame.getTextRange().setText(title);
   frame.setHorizontalAlignment(ExcelScript.ShapeTextHorizontalAlignment.center);
@@ -379,19 +627,7 @@ function addTextShape(sheet: ExcelScript.Worksheet, shapeName: string, text: str
   shape.setTop(top);
   shape.setWidth(width);
   shape.setHeight(height);
-  if (bordered) {
-    shape.getFill().setSolidColor(fill);
-    shape.getLineFormat().setColor(diagramLineColor());
-    shape.getLineFormat().setWeight(diagramLineWeight());
-    if (dashed) {
-      shape.getLineFormat().setDashStyle(ExcelScript.ShapeLineDashStyle.dash);
-    }
-  } else {
-    shape.getFill().setTransparency(1);
-    shape.getLineFormat().setVisible(true);
-    shape.getLineFormat().setColor(diagramLineColor());
-    shape.getLineFormat().setWeight(diagramLineWeight());
-  }
+  applyShapeView(shape, fill, bordered, dashed);
   const frame = shape.getTextFrame();
   frame.getTextRange().setText(text);
   if (align === "left") {
@@ -428,11 +664,6 @@ function addConnector(sheet: ExcelScript.Worksheet, shapeName: string, fromShape
   const endTop = toShape.getTop() + toShape.getHeight() / 2;
   const connector = sheet.addLine(startLeft, startTop, endLeft, endTop, connectorType(kind));
   connector.setName(shapeName);
-  connector.getLineFormat().setColor(connectorLineColor(color));
-  connector.getLineFormat().setWeight(diagramLineWeight());
-  if (dashed) {
-    connector.getLineFormat().setDashStyle(ExcelScript.ShapeLineDashStyle.dash);
-  }
   const inferredBeginSide = preferredSide(fromShape, toShape);
   const beginSide = requestedFromSide === "left" || requestedFromSide === "top" || requestedFromSide === "right" || requestedFromSide === "bottom" ? requestedFromSide : inferredBeginSide;
   const endSide = requestedToSide === "left" || requestedToSide === "top" || requestedToSide === "right" || requestedToSide === "bottom" ? requestedToSide : oppositeSide(beginSide);
@@ -440,17 +671,10 @@ function addConnector(sheet: ExcelScript.Worksheet, shapeName: string, fromShape
   line.connectBeginShape(fromShape, connectionSite(fromShape, beginSide));
   line.connectEndShape(toShape, connectionSite(toShape, endSide));
   line.setConnectorType(connectorType(kind));
-  if (bidirectional) {
-    line.setBeginArrowheadStyle(ExcelScript.ArrowheadStyle.triangle);
-  }
-  line.setEndArrowheadStyle(ExcelScript.ArrowheadStyle.triangle);
+  applyConnectorView(connector, line, dashed, bidirectional, color);
   if (label !== "") {
     connector.setAltTextTitle(label);
     connector.setAltTextDescription(label);
   }
   return connector;
-}
-
-function connectorLineColor(color: string): string {
-  return color && color.length > 0 ? color : diagramLineColor();
 }
