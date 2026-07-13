@@ -1,0 +1,332 @@
+{
+  "sheetName": "05_全体構成_01",
+  "anchorAddress": "B26",
+  "diagramTitle": "5.1.1 システムコンテキスト図",
+  "description": "システムコンテキスト図は、3つの責務領域、プロセス境界、および領域間の通信だけを示す。\n論理構成図は、各責務領域を責務グループと論理構成要素へ分解する。番号は5.3と対応する。\nタブレットPOS端末アプリとデバイスコネクタは同一Windows端末上の別プロセスであり、要求、応答、およびイベント通知には名前付きパイプを使用する。\nアプリケーション層はデバイスコネクタ内部を直接呼び出さない。デバイス操作はデバイスアクセスを経由し、プロセスの起動・停止はデバイスコネクタプロセス管理が担当する。\n再試行、タイムアウト、所有プロセス、および異常分岐は静的構成ではなく、06_運用シナリオで示す。",
+  "colors": {
+    "connector": "#1F4E79",
+    "guide": "#D9D9D9",
+    "normal": "#F8FBFD",
+    "error": "#F4CCCC",
+    "white": "#FFFFFF",
+    "text": "#111111"
+  },
+  "lanes": [],
+  "nodes": [
+    {
+      "id": "APP",
+      "text": "（1） タブレットPOS端末アプリ\n業務判断／デバイス操作の依頼",
+      "x": 60.0,
+      "y": 260.0,
+      "width": 140.40336851617116,
+      "height": 76.91662796972854,
+      "fill": "#F7FBFF",
+      "stroke": "#1F4E79",
+      "lineWeight": 1.2208988566623578,
+      "dashed": false,
+      "shape": "roundRect",
+      "role": "node",
+      "sourceOrder": 100000,
+      "direction": "",
+      "sourceFormat": "mermaid",
+      "strokeWidth": 2,
+      "comment": "",
+      "commentPriority": 0
+    },
+    {
+      "id": "DEVICE",
+      "text": "（3） 周辺機器\n釣銭機／キャッシュドロア／カスタマーディスプレイ",
+      "x": 679.5966314838289,
+      "y": 267.32539313997415,
+      "width": 140.40336851617116,
+      "height": 62.265841689780245,
+      "fill": "#E4DFEC",
+      "stroke": "#1F4E79",
+      "lineWeight": 1.2208988566623578,
+      "dashed": false,
+      "shape": "roundRect",
+      "role": "node",
+      "sourceOrder": 100000,
+      "direction": "",
+      "sourceFormat": "mermaid",
+      "strokeWidth": 2,
+      "comment": "周辺機器はデバイスコネクタ経由で\nのみ制御します。\nアプリから実機を直接呼び出しません。",
+      "commentPriority": 100
+    },
+    {
+      "id": "HOST",
+      "text": "（2） デバイスコネクタ\n要求制御／実機制御",
+      "x": 378.6546015888754,
+      "y": 274.6507862799483,
+      "width": 122.69079682224928,
+      "height": 47.61505540983195,
+      "fill": "#FCE4D6",
+      "stroke": "#1F4E79",
+      "lineWeight": 1.2208988566623578,
+      "dashed": false,
+      "shape": "roundRect",
+      "role": "node",
+      "sourceOrder": 100000,
+      "direction": "",
+      "sourceFormat": "mermaid",
+      "strokeWidth": 2,
+      "comment": "",
+      "commentPriority": 0
+    }
+  ],
+  "edges": [
+    {
+      "from": "APP",
+      "to": "HOST",
+      "fromSide": "right",
+      "toSide": "left",
+      "connectorType": "elbow",
+      "stroke": "#1F4E79",
+      "lineWeight": 1.7092583993273007,
+      "start": {
+        "x": 202.79816162351435,
+        "y": 283.99493567941363
+      },
+      "end": {
+        "x": 376.26530252638713,
+        "y": 285.01255487644175
+      },
+      "points": [
+        {
+          "x": 202.79816162351435,
+          "y": 283.99493567941363
+        },
+        {
+          "x": 289.52898505252324,
+          "y": 266.71494371164295
+        },
+        {
+          "x": 376.26530252638713,
+          "y": 285.01255487644175
+        }
+      ],
+      "dashed": false,
+      "bidirectional": true,
+      "label": "コマンド通信用パイプ\n要求（アプリ→コネクタ）\n同期応答（コネクタ→アプリ）",
+      "visibleLabel": true
+    },
+    {
+      "from": "HOST",
+      "to": "APP",
+      "fromSide": "left",
+      "toSide": "right",
+      "connectorType": "elbow",
+      "stroke": "#C65911",
+      "lineWeight": 1.098808970996122,
+      "start": {
+        "x": 378.6546015888754,
+        "y": 311.39984186548526
+      },
+      "end": {
+        "x": 202.79816162351435,
+        "y": 312.9216922903149
+      },
+      "points": [
+        {
+          "x": 378.6546015888754,
+          "y": 311.39984186548526
+        },
+        {
+          "x": 289.52898505252324,
+          "y": 330.2016842580856
+        },
+        {
+          "x": 202.79816162351435,
+          "y": 312.9216922903149
+        }
+      ],
+      "dashed": true,
+      "bidirectional": false,
+      "label": "イベント通知用パイプ\n非同期イベント（コネクタ→アプリ）",
+      "visibleLabel": true
+    },
+    {
+      "from": "HOST",
+      "to": "DEVICE",
+      "fromSide": "right",
+      "toSide": "left",
+      "connectorType": "elbow",
+      "stroke": "#7030A0",
+      "lineWeight": 1.4650786279948294,
+      "start": {
+        "x": 503.78696720591375,
+        "y": 298.4583139848643
+      },
+      "end": {
+        "x": 677.1546048519685,
+        "y": 298.4583139848643
+      },
+      "points": [
+        {
+          "x": 503.78696720591375,
+          "y": 298.4583139848643
+        },
+        {
+          "x": 590.4707860289411,
+          "y": 298.4583139848643
+        },
+        {
+          "x": 677.1546048519685,
+          "y": 298.4583139848643
+        }
+      ],
+      "dashed": false,
+      "bidirectional": true,
+      "label": "実機制御（コネクタ→機器）\n結果（機器→コネクタ）",
+      "visibleLabel": true
+    }
+  ],
+  "audit": {
+    "sourceSvg": "/Users/vti-sam/pm-control/smj-ks-pos/project-store/artifacts/reports/architecture/ARCH-HOST-01_タブレットPOS_デバイスコネクタ基本設計書/ARCH-HOST-01_5.1.1_システムコンテキスト図.mermaid-rendered.svg",
+    "sourceShapeCount": 3,
+    "renderedNodeCount": 3,
+    "sourceEdgeCount": 3,
+    "renderedEdgeCount": 3,
+    "scale": 0.6104494283311789,
+    "minX": 8.0,
+    "minY": 45.0,
+    "sourceTopLevelContainerCount": 0,
+    "sourceNestedContainerCount": 0
+  },
+  "visualContract": {
+    "source": "/Users/vti-sam/pm-control/smj-ks-pos/project-store/artifacts/reports/architecture/ARCH-HOST-01_タブレットPOS_デバイスコネクタ基本設計書/ARCH-HOST-01_タブレットPOS_デバイスコネクタ基本設計書.md",
+    "entries": [
+      {
+        "display": "（1）タブレットPOS端末アプリ",
+        "color": "#F7FBFF",
+        "meaning": "アプリケーション層とデバイス制御を含むアプリプロセスの責務境界を示す。"
+      },
+      {
+        "display": "（2）デバイスコネクタ",
+        "color": "#FCE4D6",
+        "meaning": "通信、コマンド実行、デバイス管理、および実機制御を担当する独立プロセスを示す。"
+      },
+      {
+        "display": "（3）周辺機器",
+        "color": "#E4DFEC",
+        "meaning": "デバイスコネクタから制御される実機を示す。"
+      },
+      {
+        "display": "責務グループ",
+        "color": "#FFFFFF",
+        "meaning": "同じ目的を持つ論理構成要素のまとまりを示す。"
+      },
+      {
+        "display": "角丸ブロック",
+        "color": "#F8FBFD",
+        "meaning": "論理構成要素、処理、または対象デバイスを示す。"
+      },
+      {
+        "display": "◇",
+        "color": "#FFF2CC",
+        "meaning": "次の処理を決める判定を示す。"
+      },
+      {
+        "display": "補足コメント（吹き出し・半透明）",
+        "color": "#FFF2CC",
+        "meaning": "対象要素を指し示し、図だけでは判断しにくい設計意図、運用条件、または制約を補足する。",
+        "transparency": 0.7
+      },
+      {
+        "display": "異常処理",
+        "color": "#F4CCCC",
+        "meaning": "起動中止、通信失敗、または強制終了などの主要な異常結果を示す。"
+      },
+      {
+        "display": "運用フェーズ",
+        "color": "#FFFFFF",
+        "meaning": "起動、デバイス操作、および終了の区切りを示す。"
+      },
+      {
+        "display": "━━▶ 主処理",
+        "color": "#1F4E79",
+        "meaning": "通常の処理順または一方向の要求を示す。"
+      },
+      {
+        "display": "◀━━▶ コマンド通信",
+        "color": "#1F4E79",
+        "meaning": "アプリからの要求とデバイスコネクタからの同期応答を同じ通信経路で送受信する関係を示す。"
+      },
+      {
+        "display": "━━▶ ライフサイクル",
+        "color": "#548235",
+        "meaning": "プロセスの起動、停止、および終了監視を示す。"
+      },
+      {
+        "display": "◀━━▶ 実機制御",
+        "color": "#7030A0",
+        "meaning": "デバイスコネクタと周辺機器間の制御と結果を示す。"
+      },
+      {
+        "display": "┄┄▶ 非同期イベント",
+        "color": "#C65911",
+        "meaning": "同期応答とは別に通知されるデバイス処理結果を示す。"
+      },
+      {
+        "display": "┈┈▶ 設定参照",
+        "color": "#7F7F7F",
+        "meaning": "設定情報を参照する関係を示す。"
+      },
+      {
+        "display": "┄┄▶ 異常経路",
+        "color": "#C00000",
+        "meaning": "通常経路から異常結果または復旧処理へ分岐する経路を示す。"
+      }
+    ],
+    "areaEntries": [
+      {
+        "display": "（1）タブレットPOS端末アプリ",
+        "color": "#F7FBFF",
+        "meaning": "アプリケーション層とデバイス制御を含むアプリプロセスの責務境界を示す。"
+      },
+      {
+        "display": "（2）デバイスコネクタ",
+        "color": "#FCE4D6",
+        "meaning": "通信、コマンド実行、デバイス管理、および実機制御を担当する独立プロセスを示す。"
+      },
+      {
+        "display": "（3）周辺機器",
+        "color": "#E4DFEC",
+        "meaning": "デバイスコネクタから制御される実機を示す。"
+      }
+    ],
+    "fillColors": [
+      "#E4DFEC",
+      "#F4CCCC",
+      "#F7FBFF",
+      "#F8FBFD",
+      "#FCE4D6",
+      "#FFF2CC",
+      "#FFFFFF"
+    ],
+    "edgeColors": [
+      "#1F4E79",
+      "#548235",
+      "#7030A0",
+      "#7F7F7F",
+      "#C00000",
+      "#C65911"
+    ],
+    "componentFill": "#F8FBFD",
+    "decisionFill": "#FFF2CC",
+    "commentFill": "#FFF2CC",
+    "commentTransparency": 0.7,
+    "commentBorder": "#BF9000",
+    "errorFill": "#F4CCCC",
+    "responsibilityFill": "#FFFFFF",
+    "phaseFill": "#FFFFFF",
+    "primaryLine": "#1F4E79",
+    "typography": {
+      "fontFamily": "Meiryo UI",
+      "laneSize": 13,
+      "componentSize": 10,
+      "connectorLabelSize": 9,
+      "lineWeight": 2
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "markdown": "ARCH-HOST-01_タブレットPOS_デバイスコネクタ基本設計書.md",
+  "workbook": "ARCH-HOST-01_タブレットPOS_デバイスコネクタ基本設計書.xlsx",
+  "outputDir": ".",
+  "diagrams": [
+    {
+      "title": "5.1.1 システムコンテキスト図",
+      "sheetName": "05_全体構成_01",
+      "anchorAddress": "B26",
+      "outputBase": "ARCH-HOST-01_5.1.1_システムコンテキスト図"
+    },
+    {
+      "title": "5.1.2 論理構成図",
+      "sheetName": "05_全体構成_01",
+      "anchorAddress": "B68",
+      "outputBase": "ARCH-HOST-01_5.1.2_論理構成図"
+    },
+    {
+      "title": "6.1 運用シナリオ図",
+      "sheetName": "06_運用シナリオ_01",
+      "anchorAddress": "B7",
+      "outputBase": "ARCH-HOST-01_6.1_運用シナリオ図"
+    }
+  ]
+}

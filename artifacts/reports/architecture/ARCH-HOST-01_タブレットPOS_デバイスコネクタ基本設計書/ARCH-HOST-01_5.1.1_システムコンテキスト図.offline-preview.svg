@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 936.00 252.00">
+<defs><marker id="arrow-1F4E79" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#1F4E79"/></marker><marker id="arrow-7030A0" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#7030A0"/></marker><marker id="arrow-C65911" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#C65911"/></marker><marker id="comment-callout-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#BF9000"/></marker></defs>
+<rect width="936.00" height="252.00" fill="#FFFFFF"/>
+<g transform="translate(18.0,18.0)">
+<polyline points="239.44,42.00 255.44,33.00 369.73,33.00 385.73,42.00" fill="none" stroke="#1F4E79" stroke-width="2"/>
+<polyline points="385.73,42.00 369.73,51.00 255.44,51.00 239.44,42.00" fill="none" stroke="#C65911" stroke-width="2" stroke-dasharray="8 6"/>
+<polyline points="514.28,42.00 592.01,42.00 592.01,49.50 669.75,49.50" fill="none" stroke="#7030A0" stroke-width="2"/>
+<rect x="72.56" y="24.00" width="166.88" height="36.00" rx="8" fill="#F7FBFF" stroke="#1F4E79" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="middle" font-family="Meiryo UI, Noto Sans CJK JP, sans-serif" font-size="10" font-weight="700" fill="#111111"><tspan x="156.00" y="35.25">（1） タブレットPOS端末アプリ</tspan><tspan x="156.00" y="48.75">業務判断／デバイス操作の依頼</tspan></text>
+<rect x="385.73" y="24.00" width="128.55" height="36.00" rx="8" fill="#FCE4D6" stroke="#1F4E79" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="middle" font-family="Meiryo UI, Noto Sans CJK JP, sans-serif" font-size="10" font-weight="700" fill="#111111"><tspan x="450.00" y="35.25">（2） デバイスコネクタ</tspan><tspan x="450.00" y="48.75">要求制御／実機制御</tspan></text>
+<rect x="669.75" y="24.00" width="148.50" height="51.00" rx="8" fill="#E4DFEC" stroke="#1F4E79" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="middle" font-family="Meiryo UI, Noto Sans CJK JP, sans-serif" font-size="10" font-weight="700" fill="#111111"><tspan x="744.00" y="36.00">（3） 周辺機器</tspan><tspan x="744.00" y="49.50">釣銭機／キャッシュドロア／</tspan><tspan x="744.00" y="63.00">カスタマーディスプレイ</tspan></text>
+<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="start" points="239.44,42.00 245.95,33.18 250.36,41.02" fill="#1F4E79"/>
+<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="385.73,42.00 374.80,41.02 379.22,33.18" fill="#1F4E79"/>
+<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="239.44,42.00 250.36,42.98 245.95,50.82" fill="#C65911"/>
+<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="start" points="514.28,42.00 524.28,37.50 524.28,46.50" fill="#7030A0"/>
+<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="669.75,49.50 659.75,54.00 659.75,45.00" fill="#7030A0"/>
+<line data-shape-comment-pointer="true" x1="744.00" y1="85.00" x2="744.00" y2="75.00" stroke="#BF9000" stroke-width="2" marker-end="url(#comment-callout-arrow)"/>
+<rect data-shape-comment="true" data-shape-comment-type="wedgeRRectCallout" x="664.00" y="85.00" width="160.00" height="53.00" rx="8" fill="#FFF2CC" fill-opacity="0.30" stroke="#BF9000" stroke-width="2"/>
+<text text-anchor="start" dominant-baseline="middle" font-family="Meiryo UI, Noto Sans CJK JP, sans-serif" font-size="9" font-weight="400" fill="#404040"><tspan x="672.00" y="98.90">周辺機器はデバイスコネクタ経由で</tspan><tspan x="672.00" y="111.50">のみ制御します。</tspan><tspan x="672.00" y="124.10">アプリから実機を直接呼び出しません。</tspan></text>
+<rect x="274.73" y="70.00" width="190.00" height="34.00" fill="#FFFFFF" stroke="#1F4E79" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="middle" font-family="Meiryo UI, Noto Sans CJK JP, sans-serif" font-size="9" font-weight="400" fill="#111111"><tspan x="369.73" y="74.85">コマンド通信用パイプ</tspan><tspan x="369.73" y="87.00">要求（アプリ→コネクタ）</tspan><tspan x="369.73" y="99.15">同期応答（コネクタ→アプリ）</tspan></text>
+<rect x="497.01" y="86.50" width="190.00" height="34.00" fill="#FFFFFF" stroke="#1F4E79" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="middle" font-family="Meiryo UI, Noto Sans CJK JP, sans-serif" font-size="9" font-weight="400" fill="#111111"><tspan x="592.01" y="97.42">実機制御（コネクタ→機器）</tspan><tspan x="592.01" y="109.58">結果（機器→コネクタ）</tspan></text>
+<metadata data-rendered-comments="1" data-rendered-edge-start-arrows="2" data-rendered-edge-end-arrows="3"/>
+</g>
+</svg>
