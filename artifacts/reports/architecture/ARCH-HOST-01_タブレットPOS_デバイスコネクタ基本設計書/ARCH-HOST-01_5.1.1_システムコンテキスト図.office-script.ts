@@ -1,7 +1,9 @@
-function main(workbook: ExcelScript.Workbook) {
-  const anchor = workbook.getActiveCell();
-  const sheet = anchor.getWorksheet();
-  const pdfReviewMode = false;
+function main(workbook: ExcelScript.Workbook, sheetName: string = "05_全体構成_01", anchorAddress: string = "B26", pdfReviewMode: boolean = false) {
+  const sheet = workbook.getWorksheet(sheetName);
+  if (!sheet) {
+    throw new Error("Worksheet not found: " + sheetName);
+  }
+  const anchor = sheet.getRange(anchorAddress);
   const originTop = anchor.getTop();
   const shapePrefix = "shape_d511_";
   const edgePrefix = "edge_d511_";
@@ -31,12 +33,12 @@ function main(workbook: ExcelScript.Workbook) {
 
   const laneRange1 = getAnchoredRange(anchor, 0, 0, 1, 25);
 
-  const shape_d511_APP = addTextShape(sheet, "shape_d511_APP", "（1） タブレットPOS端末アプリ\n業務判断／デバイス操作の依頼", 0, 0, 166.875, 36, 10, true, "#F7FBFF", true, "center", "roundRect", false);
-  setShapeAltText(shape_d511_APP, "（1） タブレットPOS端末アプリ 業務判断／デバイス操作の依頼", "");
+  const shape_d511_APP = addTextShape(sheet, "shape_d511_APP", "（1） タブレットPOS端末アプリ\nMAUIプロセス\n業務判断／デバイス操作の依頼", 0, 0, 166.875, 51, 10, true, "#F7FBFF", true, "center", "roundRect", false);
+  setShapeAltText(shape_d511_APP, "（1） タブレットPOS端末アプリ MAUIプロセス 業務判断／デバイス操作の依頼", "");
   const shape_d511_DEVICE = addTextShape(sheet, "shape_d511_DEVICE", "（3） 周辺機器\n釣銭機／キャッシュドロア／\nカスタマーディスプレイ", 0, 0, 148.5, 51, 10, true, "#E4DFEC", true, "center", "roundRect", false);
   setShapeAltText(shape_d511_DEVICE, "（3） 周辺機器 釣銭機／キャッシュドロア／ カスタマーディスプレイ", "周辺機器はデバイスコネクタ経由で\nのみ制御します。\nアプリから実機を直接呼び出しません。");
-  const shape_d511_HOST = addTextShape(sheet, "shape_d511_HOST", "（2） デバイスコネクタ\n要求制御／実機制御", 0, 0, 128.55, 36, 10, true, "#FCE4D6", true, "center", "roundRect", false);
-  setShapeAltText(shape_d511_HOST, "（2） デバイスコネクタ 要求制御／実機制御", "");
+  const shape_d511_HOST = addTextShape(sheet, "shape_d511_HOST", "（2） デバイスコネクタ\nWindows別プロセス\n既存デバイス資源の呼出し", 0, 0, 138, 51, 10, true, "#FCE4D6", true, "center", "roundRect", false);
+  setShapeAltText(shape_d511_HOST, "（2） デバイスコネクタ Windows別プロセス 既存デバイス資源の呼出し", "");
 
   let groupBottom1 = placeD2Row([shape_d511_APP, shape_d511_HOST, shape_d511_DEVICE], [0.15, 0.5, 0.85], laneRange1.getLeft(), originTop + 24, laneRange1.getWidth(), 30, 28);
 
@@ -215,6 +217,70 @@ function connectorLabelPosition(position: string, centerX: number, centerY: numb
     return [centerX + 6, centerY - height / 2];
   }
   return [centerX - width / 2, centerY - height - 6];
+}
+
+function isBranchConnectorLabel(text: string): boolean {
+  return text === "はい" || text === "いいえ";
+}
+
+function connectorEndpointShapeIds(sourceId: string, edgeSourcePrefix: string, shapeSourcePrefix: string): string[] {
+  if (sourceId.indexOf(edgeSourcePrefix) !== 0) {
+    return [];
+  }
+  const suffix = sourceId.substring(edgeSourcePrefix.length);
+  const numberSeparator = suffix.indexOf("_");
+  if (numberSeparator < 0) {
+    return [];
+  }
+  const route = suffix.substring(numberSeparator + 1);
+  const routeSeparator = route.indexOf("_to_");
+  if (routeSeparator < 0) {
+    return [];
+  }
+  return [
+    shapeSourcePrefix + route.substring(0, routeSeparator),
+    shapeSourcePrefix + route.substring(routeSeparator + 4),
+  ];
+}
+
+function branchConnectorLabelPositions(sourceBounds: number[], targetBounds: number[], width: number, height: number): number[][] {
+  if (sourceBounds.length !== 4 || targetBounds.length !== 4) {
+    return [];
+  }
+  const sourceCenterX = sourceBounds[0] + sourceBounds[2] / 2;
+  const sourceCenterY = sourceBounds[1] + sourceBounds[3] / 2;
+  const targetCenterX = targetBounds[0] + targetBounds[2] / 2;
+  const targetCenterY = targetBounds[1] + targetBounds[3] / 2;
+  const dx = targetCenterX - sourceCenterX;
+  const dy = targetCenterY - sourceCenterY;
+  if (Math.abs(dx) >= Math.abs(dy)) {
+    const direction = dx >= 0 ? 1 : -1;
+    const branchSide = Math.abs(dy) > 1 ? (dy >= 0 ? 1 : -1) : -1;
+    const centerX = direction > 0
+      ? sourceBounds[0] + sourceBounds[2] + width / 2 + 8
+      : sourceBounds[0] - width / 2 - 8;
+    const preferredCenterY = sourceCenterY + branchSide * (height / 2 + 7);
+    const oppositeCenterY = sourceCenterY - branchSide * (height / 2 + 7);
+    return [
+      [centerX - width / 2, preferredCenterY - height / 2],
+      [centerX - width / 2, oppositeCenterY - height / 2],
+      [centerX - width / 2, sourceCenterY - height / 2],
+      [centerX + direction * 18 - width / 2, preferredCenterY - height / 2],
+    ];
+  }
+  const direction = dy >= 0 ? 1 : -1;
+  const branchSide = Math.abs(dx) > 1 ? (dx >= 0 ? 1 : -1) : 1;
+  const centerY = direction > 0
+    ? sourceBounds[1] + sourceBounds[3] + height / 2 + 8
+    : sourceBounds[1] - height / 2 - 8;
+  const preferredCenterX = sourceCenterX + branchSide * (width / 2 + 7);
+  const oppositeCenterX = sourceCenterX - branchSide * (width / 2 + 7);
+  return [
+    [preferredCenterX - width / 2, centerY - height / 2],
+    [oppositeCenterX - width / 2, centerY - height / 2],
+    [sourceCenterX - width / 2, centerY - height / 2],
+    [preferredCenterX - width / 2, centerY + direction * 18 - height / 2],
+  ];
 }
 
 function shapeCommentPositionOrder(sourceId: string, preferLeft: boolean): string[] {

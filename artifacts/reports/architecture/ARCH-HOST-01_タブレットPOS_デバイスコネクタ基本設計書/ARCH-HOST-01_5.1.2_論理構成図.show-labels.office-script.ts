@@ -163,6 +163,70 @@ function connectorLabelPosition(position: string, centerX: number, centerY: numb
   return [centerX - width / 2, centerY - height - 6];
 }
 
+function isBranchConnectorLabel(text: string): boolean {
+  return text === "はい" || text === "いいえ";
+}
+
+function connectorEndpointShapeIds(sourceId: string, edgeSourcePrefix: string, shapeSourcePrefix: string): string[] {
+  if (sourceId.indexOf(edgeSourcePrefix) !== 0) {
+    return [];
+  }
+  const suffix = sourceId.substring(edgeSourcePrefix.length);
+  const numberSeparator = suffix.indexOf("_");
+  if (numberSeparator < 0) {
+    return [];
+  }
+  const route = suffix.substring(numberSeparator + 1);
+  const routeSeparator = route.indexOf("_to_");
+  if (routeSeparator < 0) {
+    return [];
+  }
+  return [
+    shapeSourcePrefix + route.substring(0, routeSeparator),
+    shapeSourcePrefix + route.substring(routeSeparator + 4),
+  ];
+}
+
+function branchConnectorLabelPositions(sourceBounds: number[], targetBounds: number[], width: number, height: number): number[][] {
+  if (sourceBounds.length !== 4 || targetBounds.length !== 4) {
+    return [];
+  }
+  const sourceCenterX = sourceBounds[0] + sourceBounds[2] / 2;
+  const sourceCenterY = sourceBounds[1] + sourceBounds[3] / 2;
+  const targetCenterX = targetBounds[0] + targetBounds[2] / 2;
+  const targetCenterY = targetBounds[1] + targetBounds[3] / 2;
+  const dx = targetCenterX - sourceCenterX;
+  const dy = targetCenterY - sourceCenterY;
+  if (Math.abs(dx) >= Math.abs(dy)) {
+    const direction = dx >= 0 ? 1 : -1;
+    const branchSide = Math.abs(dy) > 1 ? (dy >= 0 ? 1 : -1) : -1;
+    const centerX = direction > 0
+      ? sourceBounds[0] + sourceBounds[2] + width / 2 + 8
+      : sourceBounds[0] - width / 2 - 8;
+    const preferredCenterY = sourceCenterY + branchSide * (height / 2 + 7);
+    const oppositeCenterY = sourceCenterY - branchSide * (height / 2 + 7);
+    return [
+      [centerX - width / 2, preferredCenterY - height / 2],
+      [centerX - width / 2, oppositeCenterY - height / 2],
+      [centerX - width / 2, sourceCenterY - height / 2],
+      [centerX + direction * 18 - width / 2, preferredCenterY - height / 2],
+    ];
+  }
+  const direction = dy >= 0 ? 1 : -1;
+  const branchSide = Math.abs(dx) > 1 ? (dx >= 0 ? 1 : -1) : 1;
+  const centerY = direction > 0
+    ? sourceBounds[1] + sourceBounds[3] + height / 2 + 8
+    : sourceBounds[1] - height / 2 - 8;
+  const preferredCenterX = sourceCenterX + branchSide * (width / 2 + 7);
+  const oppositeCenterX = sourceCenterX - branchSide * (width / 2 + 7);
+  return [
+    [preferredCenterX - width / 2, centerY - height / 2],
+    [oppositeCenterX - width / 2, centerY - height / 2],
+    [sourceCenterX - width / 2, centerY - height / 2],
+    [preferredCenterX - width / 2, centerY + direction * 18 - height / 2],
+  ];
+}
+
 function shapeCommentPositionOrder(sourceId: string, preferLeft: boolean): string[] {
   const horizontalFirst = preferLeft ? ["left", "right"] : ["right", "left"];
   const allPositions = [horizontalFirst[0], horizontalFirst[1], "bottom", "top", "bottomRight", "bottomLeft", "topRight", "topLeft"];
@@ -248,9 +312,12 @@ function placeOverlayInReviewGrid(obstacleBounds: number[][], box: ExcelScript.S
   return false;
 }
 
-function main(workbook: ExcelScript.Workbook) {
-  const anchor = workbook.getActiveCell();
-  const sheet = anchor.getWorksheet();
+function main(workbook: ExcelScript.Workbook, sheetName: string = "05_全体構成_01", anchorAddress: string = "B68", downloadPdf: boolean = false, pdfFileName: string = "5.1.2 論理構成図.pdf") {
+  const sheet = workbook.getWorksheet(sheetName);
+  if (!sheet) {
+    throw new Error("Worksheet not found: " + sheetName);
+  }
+  const anchor = sheet.getRange(anchorAddress);
   const reviewLeft = anchor.getLeft();
   const reviewTop = anchor.getTop();
   const reviewRight = reviewLeft + 25 * 36;
@@ -295,8 +362,23 @@ function main(workbook: ExcelScript.Workbook) {
       const label = reviewConnectorText(rawLabel);
       const centerX = diagramShapes[sourceIndex].getLeft() + diagramShapes[sourceIndex].getWidth() / 2;
       const centerY = diagramShapes[sourceIndex].getTop() + diagramShapes[sourceIndex].getHeight() / 2;
+      const endpointIds = connectorEndpointShapeIds(sourceId, edgeSourcePrefix, shapeSourcePrefix);
+      const branchSourceBounds: number[] = [];
+      const branchTargetBounds: number[] = [];
+      if (endpointIds.length === 2) {
+        const branchSourceIndex = shapeIndexById[endpointIds[0]];
+        const branchTargetIndex = shapeIndexById[endpointIds[1]];
+        if (branchSourceIndex !== undefined) {
+          const branchSource = diagramShapes[branchSourceIndex];
+          branchSourceBounds.push(branchSource.getLeft(), branchSource.getTop(), branchSource.getWidth(), branchSource.getHeight());
+        }
+        if (branchTargetIndex !== undefined) {
+          const branchTarget = diagramShapes[branchTargetIndex];
+          branchTargetBounds.push(branchTarget.getLeft(), branchTarget.getTop(), branchTarget.getWidth(), branchTarget.getHeight());
+        }
+      }
       const overlayName = edgeLabelPrefix + sourceId.substring(edgeSourcePrefix.length);
-      if (addConnectorLabel(sheet, obstacleBounds, overlayName, sourceId, label, centerX, centerY, reviewLeft, reviewRight, reviewTop)) {
+      if (addConnectorLabel(sheet, obstacleBounds, overlayName, sourceId, label, centerX, centerY, branchSourceBounds, branchTargetBounds, reviewLeft, reviewRight, reviewTop)) {
         createdEdgeOverlayCount++;
       } else {
         failedOverlayIds.push(sourceId);
@@ -328,6 +410,10 @@ function main(workbook: ExcelScript.Workbook) {
     throw new Error("Unable to place all review overlays. Missing IDs: " + failedOverlayIds.join(", "));
   }
 
+  if (downloadPdf) {
+    const pdfObject = OfficeScript.convertToPdf();
+    OfficeScript.downloadFile({ name: pdfFileName, content: pdfObject });
+  }
 }
 
 function connectorLabel(shape: ExcelScript.Shape): string {
@@ -380,7 +466,7 @@ function labelHeight(text: string, width: number): number {
   return height;
 }
 
-function addConnectorLabel(sheet: ExcelScript.Worksheet, obstacleBounds: number[][], shapeName: string, sourceId: string, text: string, centerX: number, centerY: number, reviewLeft: number, reviewRight: number, reviewTop: number): boolean {
+function addConnectorLabel(sheet: ExcelScript.Worksheet, obstacleBounds: number[][], shapeName: string, sourceId: string, text: string, centerX: number, centerY: number, branchSourceBounds: number[], branchTargetBounds: number[], reviewLeft: number, reviewRight: number, reviewTop: number): boolean {
   const width = labelWidth(text);
   const height = labelHeight(text, width);
   const box = sheet.addTextBox(text);
@@ -403,7 +489,7 @@ function addConnectorLabel(sheet: ExcelScript.Worksheet, obstacleBounds: number[
   font.setBold(false);
   font.setColor("#000000");
   frame.setAutoSizeSetting(ExcelScript.ShapeAutoSize.autoSizeShapeToFitText);
-  if (!placeConnectorLabel(obstacleBounds, box, sourceId, centerX, centerY, reviewLeft, reviewRight, reviewTop)) {
+  if (!placeConnectorLabel(obstacleBounds, box, sourceId, text, centerX, centerY, branchSourceBounds, branchTargetBounds, reviewLeft, reviewRight, reviewTop)) {
     box.delete();
     return false;
   }
@@ -412,9 +498,24 @@ function addConnectorLabel(sheet: ExcelScript.Worksheet, obstacleBounds: number[
   return true;
 }
 
-function placeConnectorLabel(obstacleBounds: number[][], box: ExcelScript.Shape, sourceId: string, centerX: number, centerY: number, reviewLeft: number, reviewRight: number, reviewTop: number): boolean {
+function placeConnectorLabel(obstacleBounds: number[][], box: ExcelScript.Shape, sourceId: string, text: string, centerX: number, centerY: number, branchSourceBounds: number[], branchTargetBounds: number[], reviewLeft: number, reviewRight: number, reviewTop: number): boolean {
   const width = box.getWidth();
   const height = box.getHeight();
+  if (isBranchConnectorLabel(text)) {
+    const branchPositions = branchConnectorLabelPositions(branchSourceBounds, branchTargetBounds, width, height);
+    for (let i = 0; i < branchPositions.length; i++) {
+      const left = branchPositions[i][0];
+      const top = branchPositions[i][1];
+      if (left < reviewLeft || left + width > reviewRight || top < reviewTop) {
+        continue;
+      }
+      if (!overlapsObstacleBounds(obstacleBounds, left, top, width, height)) {
+        box.setLeft(left);
+        box.setTop(top);
+        return true;
+      }
+    }
+  }
   const positionOrder = connectorLabelPositionOrder(sourceId);
   for (let i = 0; i < positionOrder.length; i++) {
     const position = connectorLabelPosition(positionOrder[i], centerX, centerY, width, height);

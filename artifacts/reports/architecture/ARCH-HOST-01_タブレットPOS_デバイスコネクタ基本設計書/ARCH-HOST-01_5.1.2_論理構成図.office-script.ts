@@ -1,7 +1,9 @@
-function main(workbook: ExcelScript.Workbook) {
-  const anchor = workbook.getActiveCell();
-  const sheet = anchor.getWorksheet();
-  const pdfReviewMode = false;
+function main(workbook: ExcelScript.Workbook, sheetName: string = "05_全体構成_01", anchorAddress: string = "B68", pdfReviewMode: boolean = false) {
+  const sheet = workbook.getWorksheet(sheetName);
+  if (!sheet) {
+    throw new Error("Worksheet not found: " + sheetName);
+  }
+  const anchor = sheet.getRange(anchorAddress);
   const originTop = anchor.getTop();
   const shapePrefix = "shape_d512_";
   const edgePrefix = "edge_d512_";
@@ -43,6 +45,8 @@ function main(workbook: ExcelScript.Workbook) {
   setShapeAltText(shape_d512_HOST_HOST_EXEC_CONTROL, "②-2 要求変換・コマンド制御", "");
   const shape_d512_APP_APP_COORD_PROCESS = addTextShape(sheet, "shape_d512_APP_APP_COORD_PROCESS", "①-3 デバイスコネクタ\nプロセス管理", 0, 0, 123.825, 36, 10, true, "#F8FBFD", true, "center", "roundRect", false);
   setShapeAltText(shape_d512_APP_APP_COORD_PROCESS, "①-3 デバイスコネクタ プロセス管理", "デバイスコネクタはアプリと\nは別プロセスで管理します。\n起動・停止はアプリのライフサイクルに\n合わせて制御します。");
+  const shape_d512_HOST_HOST_ADAPTER_ADAPTER = addTextShape(sheet, "shape_d512_HOST_HOST_ADAPTER_ADAPTER", "③-1 ホスト内部実装\nOPOS／OCX／既存DLL", 0, 0, 113.325, 36, 10, true, "#F8FBFD", true, "center", "roundRect", false);
+  setShapeAltText(shape_d512_HOST_HOST_ADAPTER_ADAPTER, "③-1 ホスト内部実装 OPOS／OCX／既存DLL", "");
   const shape_d512_APP_APP_COORD_LIFECYCLE = addTextShape(sheet, "shape_d512_APP_APP_COORD_LIFECYCLE", "①-2 アプリライフサイクル", 0, 0, 144.825, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
   setShapeAltText(shape_d512_APP_APP_COORD_LIFECYCLE, "①-2 アプリライフサイクル", "");
   const shape_d512_HOST_HOST_EXEC_ORDER = addTextShape(sheet, "shape_d512_HOST_HOST_EXEC_ORDER", "②-1 デバイスID別順序制御", 0, 0, 145.875, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
@@ -53,8 +57,6 @@ function main(workbook: ExcelScript.Workbook) {
   setShapeAltText(shape_d512_APP_APP_ACCESS_RESULT, "②-3 結果・イベント連携", "");
   const shape_d512_HOST_HOST_EXEC_HOST_SETTING = addTextShape(sheet, "shape_d512_HOST_HOST_EXEC_HOST_SETTING", "デバイスコネクタ側設定", 0, 0, 127.5, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
   setShapeAltText(shape_d512_HOST_HOST_EXEC_HOST_SETTING, "デバイスコネクタ側設定", "");
-  const shape_d512_HOST_HOST_ADAPTER_ADAPTER = addTextShape(sheet, "shape_d512_HOST_HOST_ADAPTER_ADAPTER", "③-1 個別デバイス実装", 0, 0, 123.825, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
-  setShapeAltText(shape_d512_HOST_HOST_ADAPTER_ADAPTER, "③-1 個別デバイス実装", "");
   const shape_d512_DEVICE_CASH = addTextShape(sheet, "shape_d512_DEVICE_CASH", "① 釣銭機（RT-300）", 0, 0, 115.425, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
   setShapeAltText(shape_d512_DEVICE_CASH, "① 釣銭機（RT-300）", "");
   const shape_d512_HOST_HOST_SERVICE_RUNTIME = addTextShape(sheet, "shape_d512_HOST_HOST_SERVICE_RUNTIME", "①-1 起動・停止管理", 0, 0, 113.325, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
@@ -95,7 +97,7 @@ function main(workbook: ExcelScript.Workbook) {
   addSectionBackground(sheet, "section_bg_d512_1_2", "② デバイス制御層", [shape_d512_APP_APP_ACCESS_SELECT, shape_d512_APP_APP_ACCESS_RESULT, shape_d512_APP_APP_ACCESS_COMMAND, shape_d512_APP_APP_ACCESS_APP_SETTING], laneRange1.getLeft(), laneRange1.getWidth(), "#FFFFFF");
   addSectionBackground(sheet, "section_bg_d512_2_1", "① プロセス・通信サービス", [shape_d512_HOST_HOST_SERVICE_RUNTIME, shape_d512_HOST_HOST_SERVICE_SERVER, shape_d512_HOST_HOST_SERVICE_EVENT], laneRange2.getLeft(), laneRange2.getWidth(), "#FFFFFF");
   addSectionBackground(sheet, "section_bg_d512_2_2", "② コマンド実行", [shape_d512_HOST_HOST_EXEC_CONTROL, shape_d512_HOST_HOST_EXEC_ORDER, shape_d512_HOST_HOST_EXEC_HOST_SETTING, shape_d512_HOST_HOST_EXEC_MANAGER], laneRange2.getLeft(), laneRange2.getWidth(), "#FFFFFF");
-  addSectionBackground(sheet, "section_bg_d512_2_3", "③ デバイスアダプター", [shape_d512_HOST_HOST_ADAPTER_ADAPTER], laneRange2.getLeft(), laneRange2.getWidth(), "#FFFFFF");
+  addSectionBackground(sheet, "section_bg_d512_2_3", "③ 既存デバイス資源呼出し", [shape_d512_HOST_HOST_ADAPTER_ADAPTER], laneRange2.getLeft(), laneRange2.getWidth(), "#FFFFFF");
   const diagramBottom = Math.max(originTop + 90, groupBottom1, groupBottom2, groupBottom3);
   const bodyEndRowOffset = Math.max(11, Math.ceil((diagramBottom - originTop + 48) / 18) - 1);
   const canvasRowCount = Math.max(baselineCanvasRowCount, bodyEndRowOffset + 1);
@@ -129,7 +131,7 @@ function main(workbook: ExcelScript.Workbook) {
 
 function addCellLaneTable(anchor: ExcelScript.Range, bodyEndRowOffset: number) {
   addLaneColumns(anchor, 0, 9, bodyEndRowOffset, "（1） タブレットPOS端末アプリ（アプリプロセス）", "#F7FBFF");
-  addLaneColumns(anchor, 9, 8, bodyEndRowOffset, "（2） デバイスコネクタ（独立プロセス）", "#FCE4D6");
+  addLaneColumns(anchor, 9, 8, bodyEndRowOffset, "（2） デバイスコネクタ（Windows別プロセス）", "#FCE4D6");
   addLaneColumns(anchor, 17, 8, bodyEndRowOffset, "（3） 周辺機器", "#E4DFEC");
 }
 
@@ -296,6 +298,70 @@ function connectorLabelPosition(position: string, centerX: number, centerY: numb
     return [centerX + 6, centerY - height / 2];
   }
   return [centerX - width / 2, centerY - height - 6];
+}
+
+function isBranchConnectorLabel(text: string): boolean {
+  return text === "はい" || text === "いいえ";
+}
+
+function connectorEndpointShapeIds(sourceId: string, edgeSourcePrefix: string, shapeSourcePrefix: string): string[] {
+  if (sourceId.indexOf(edgeSourcePrefix) !== 0) {
+    return [];
+  }
+  const suffix = sourceId.substring(edgeSourcePrefix.length);
+  const numberSeparator = suffix.indexOf("_");
+  if (numberSeparator < 0) {
+    return [];
+  }
+  const route = suffix.substring(numberSeparator + 1);
+  const routeSeparator = route.indexOf("_to_");
+  if (routeSeparator < 0) {
+    return [];
+  }
+  return [
+    shapeSourcePrefix + route.substring(0, routeSeparator),
+    shapeSourcePrefix + route.substring(routeSeparator + 4),
+  ];
+}
+
+function branchConnectorLabelPositions(sourceBounds: number[], targetBounds: number[], width: number, height: number): number[][] {
+  if (sourceBounds.length !== 4 || targetBounds.length !== 4) {
+    return [];
+  }
+  const sourceCenterX = sourceBounds[0] + sourceBounds[2] / 2;
+  const sourceCenterY = sourceBounds[1] + sourceBounds[3] / 2;
+  const targetCenterX = targetBounds[0] + targetBounds[2] / 2;
+  const targetCenterY = targetBounds[1] + targetBounds[3] / 2;
+  const dx = targetCenterX - sourceCenterX;
+  const dy = targetCenterY - sourceCenterY;
+  if (Math.abs(dx) >= Math.abs(dy)) {
+    const direction = dx >= 0 ? 1 : -1;
+    const branchSide = Math.abs(dy) > 1 ? (dy >= 0 ? 1 : -1) : -1;
+    const centerX = direction > 0
+      ? sourceBounds[0] + sourceBounds[2] + width / 2 + 8
+      : sourceBounds[0] - width / 2 - 8;
+    const preferredCenterY = sourceCenterY + branchSide * (height / 2 + 7);
+    const oppositeCenterY = sourceCenterY - branchSide * (height / 2 + 7);
+    return [
+      [centerX - width / 2, preferredCenterY - height / 2],
+      [centerX - width / 2, oppositeCenterY - height / 2],
+      [centerX - width / 2, sourceCenterY - height / 2],
+      [centerX + direction * 18 - width / 2, preferredCenterY - height / 2],
+    ];
+  }
+  const direction = dy >= 0 ? 1 : -1;
+  const branchSide = Math.abs(dx) > 1 ? (dx >= 0 ? 1 : -1) : 1;
+  const centerY = direction > 0
+    ? sourceBounds[1] + sourceBounds[3] + height / 2 + 8
+    : sourceBounds[1] - height / 2 - 8;
+  const preferredCenterX = sourceCenterX + branchSide * (width / 2 + 7);
+  const oppositeCenterX = sourceCenterX - branchSide * (width / 2 + 7);
+  return [
+    [preferredCenterX - width / 2, centerY - height / 2],
+    [oppositeCenterX - width / 2, centerY - height / 2],
+    [sourceCenterX - width / 2, centerY - height / 2],
+    [preferredCenterX - width / 2, centerY + direction * 18 - height / 2],
+  ];
 }
 
 function shapeCommentPositionOrder(sourceId: string, preferLeft: boolean): string[] {

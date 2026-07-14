@@ -6,7 +6,7 @@
 <rect x="0.00" y="0" width="324.00" height="24.0" fill="#F7FBFF" stroke="#1F4E79" stroke-width="2"/>
 <text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="13" font-weight="700" fill="#111111"><tspan x="162.00" y="12.00">（1） タブレットPOS端末アプリ（アプリプロセス）</tspan></text>
 <rect x="324.00" y="0" width="288.00" height="24.0" fill="#FCE4D6" stroke="#1F4E79" stroke-width="2"/>
-<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="13" font-weight="700" fill="#111111"><tspan x="468.00" y="12.00">（2） デバイスコネクタ（独立プロセス）</tspan></text>
+<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="13" font-weight="700" fill="#111111"><tspan x="468.00" y="12.00">（2） デバイスコネクタ（Windows別プロセス）</tspan></text>
 <rect x="612.00" y="0" width="288.00" height="24.0" fill="#E4DFEC" stroke="#1F4E79" stroke-width="2"/>
 <text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="13" font-weight="700" fill="#111111"><tspan x="756.00" y="12.00">（3） 周辺機器</tspan></text>
 <rect x="77.59" y="48.00" width="168.83" height="198.00" rx="8" fill="#FFFFFF" fill-opacity="0.72" stroke="#1F4E79" stroke-width="2"/>
@@ -17,11 +17,11 @@
 <text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="13" font-weight="700" fill="#111111"><tspan x="468.00" y="63.00">① プロセス・通信サービス</tspan></text>
 <rect x="378.34" y="276.00" width="179.33" height="242.00" rx="8" fill="#FFFFFF" fill-opacity="0.72" stroke="#1F4E79" stroke-width="2"/>
 <text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="13" font-weight="700" fill="#111111"><tspan x="468.00" y="291.00">② コマンド実行</tspan></text>
-<rect x="394.09" y="556.00" width="147.83" height="86.00" rx="8" fill="#FFFFFF" fill-opacity="0.72" stroke="#1F4E79" stroke-width="2"/>
-<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="13" font-weight="700" fill="#111111"><tspan x="468.00" y="571.00">③ デバイスアダプター</tspan></text>
-<polyline points="698.29,104.00 614.10,104.00 614.10,612.00 529.91,612.00" fill="none" stroke="#7030A0" stroke-width="2"/>
-<polyline points="674.92,156.00 602.42,156.00 602.42,612.00 529.91,612.00" fill="none" stroke="#7030A0" stroke-width="2"/>
-<polyline points="659.17,208.00 594.54,208.00 594.54,612.00 529.91,612.00" fill="none" stroke="#7030A0" stroke-width="2"/>
+<rect x="399.34" y="556.00" width="137.33" height="94.00" rx="8" fill="#FFFFFF" fill-opacity="0.72" stroke="#1F4E79" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="13" font-weight="700" fill="#111111"><tspan x="468.00" y="571.00">③ 既存デバイス資源呼出し</tspan></text>
+<polyline points="698.29,104.00 611.48,104.00 611.48,616.00 524.66,616.00" fill="none" stroke="#7030A0" stroke-width="2"/>
+<polyline points="674.92,156.00 599.79,156.00 599.79,616.00 524.66,616.00" fill="none" stroke="#7030A0" stroke-width="2"/>
+<polyline points="659.17,208.00 591.92,208.00 591.92,616.00 524.66,616.00" fill="none" stroke="#7030A0" stroke-width="2"/>
 <polyline points="223.91,212.00 317.62,212.00 317.62,104.00 411.34,104.00" fill="none" stroke="#548235" stroke-width="2"/>
 <polyline points="213.41,444.00 315.00,444.00 315.00,156.00 416.59,156.00" fill="none" stroke="#1F4E79" stroke-width="2"/>
 <polyline points="416.59,208.00 322.88,208.00 322.88,496.00 229.16,496.00" fill="none" stroke="#C65911" stroke-width="2" stroke-dasharray="8 6"/>
@@ -66,8 +66,8 @@
 <text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="468.00" y="436.00">②-2 要求変換・コマンド制御</tspan></text>
 <rect x="416.59" y="474.00" width="102.83" height="28.00" rx="8" fill="#F8FBFD" stroke="#1F4E79" stroke-width="2"/>
 <text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="468.00" y="488.00">②-3 デバイス管理</tspan></text>
-<rect x="406.09" y="598.00" width="123.83" height="28.00" rx="8" fill="#F8FBFD" stroke="#1F4E79" stroke-width="2"/>
-<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="468.00" y="612.00">③-1 個別デバイス実装</tspan></text>
+<rect x="411.34" y="598.00" width="113.33" height="36.00" rx="8" fill="#F8FBFD" stroke="#1F4E79" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="468.00" y="609.25">③-1 ホスト内部実装</tspan><tspan x="468.00" y="622.75">OPOS／OCX／既存DLL</tspan></text>
 <rect x="698.29" y="90.00" width="115.42" height="28.00" rx="8" fill="#F8FBFD" stroke="#1F4E79" stroke-width="2"/>
 <text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="756.00" y="104.00">① 釣銭機（RT-300）</tspan></text>
 <rect x="674.92" y="142.00" width="162.15" height="28.00" rx="8" fill="#F8FBFD" stroke="#1F4E79" stroke-width="2"/>
@@ -75,11 +75,11 @@
 <rect x="659.17" y="194.00" width="193.65" height="28.00" rx="8" fill="#F8FBFD" stroke="#1F4E79" stroke-width="2"/>
 <text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="756.00" y="208.00">③ カスタマーディスプレイ（SHARP）</tspan></text>
 <polygon data-edge-arrowhead="true" data-edge-arrowhead-position="start" points="698.29,104.00 688.29,108.50 688.29,99.50" fill="#7030A0"/>
-<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="529.91,612.00 539.91,607.50 539.91,616.50" fill="#7030A0"/>
+<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="524.66,616.00 534.66,611.50 534.66,620.50" fill="#7030A0"/>
 <polygon data-edge-arrowhead="true" data-edge-arrowhead-position="start" points="674.92,156.00 664.92,160.50 664.92,151.50" fill="#7030A0"/>
-<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="529.91,612.00 539.91,607.50 539.91,616.50" fill="#7030A0"/>
+<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="524.66,616.00 534.66,611.50 534.66,620.50" fill="#7030A0"/>
 <polygon data-edge-arrowhead="true" data-edge-arrowhead-position="start" points="659.17,208.00 649.17,212.50 649.17,203.50" fill="#7030A0"/>
-<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="529.91,612.00 539.91,607.50 539.91,616.50" fill="#7030A0"/>
+<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="524.66,616.00 534.66,611.50 534.66,620.50" fill="#7030A0"/>
 <polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="411.34,104.00 401.34,108.50 401.34,99.50" fill="#548235"/>
 <polygon data-edge-arrowhead="true" data-edge-arrowhead-position="start" points="213.41,444.00 223.41,439.50 223.41,448.50" fill="#1F4E79"/>
 <polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="416.59,156.00 406.59,160.50 406.59,151.50" fill="#1F4E79"/>
@@ -106,12 +106,12 @@
 <line data-shape-comment-pointer="true" x1="529.41" y1="240.00" x2="519.41" y2="222.00" stroke="#BF9000" stroke-width="2" marker-end="url(#comment-callout-arrow)"/>
 <rect data-shape-comment="true" data-shape-comment-type="wedgeRRectCallout" x="529.41" y="232.00" width="141.00" height="53.00" rx="8" fill="#FFF2CC" fill-opacity="0.30" stroke="#BF9000" stroke-width="2"/>
 <text text-anchor="start" dominant-baseline="middle" font-family="Hiragino Sans" font-size="9" font-weight="400" fill="#404040"><tspan x="537.41" y="245.90">デバイス処理結果は同期応答と</tspan><tspan x="537.41" y="258.50">は別経路で配信し、</tspan><tspan x="537.41" y="271.10">アプリの購読処理へ通知します。</tspan></text>
-<rect x="588.10" y="569.00" width="52.00" height="22.00" fill="#FFFFFF" stroke="#1F4E79" stroke-width="2"/>
-<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="9" font-weight="400" fill="#111111"><tspan x="614.10" y="580.00">制御／結果</tspan></text>
-<rect x="576.42" y="633.00" width="52.00" height="22.00" fill="#FFFFFF" stroke="#1F4E79" stroke-width="2"/>
-<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="9" font-weight="400" fill="#111111"><tspan x="602.42" y="644.00">制御／結果</tspan></text>
-<rect x="568.54" y="547.00" width="52.00" height="22.00" fill="#FFFFFF" stroke="#1F4E79" stroke-width="2"/>
-<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="9" font-weight="400" fill="#111111"><tspan x="594.54" y="558.00">制御／結果</tspan></text>
+<rect x="585.48" y="573.00" width="52.00" height="22.00" fill="#FFFFFF" stroke="#1F4E79" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="9" font-weight="400" fill="#111111"><tspan x="611.48" y="584.00">制御／結果</tspan></text>
+<rect x="573.79" y="637.00" width="52.00" height="22.00" fill="#FFFFFF" stroke="#1F4E79" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="9" font-weight="400" fill="#111111"><tspan x="599.79" y="648.00">制御／結果</tspan></text>
+<rect x="565.92" y="551.00" width="52.00" height="22.00" fill="#FFFFFF" stroke="#1F4E79" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="9" font-weight="400" fill="#111111"><tspan x="591.92" y="562.00">制御／結果</tspan></text>
 <rect x="283.23" y="61.00" width="68.80" height="22.00" fill="#FFFFFF" stroke="#1F4E79" stroke-width="2"/>
 <text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="9" font-weight="400" fill="#111111"><tspan x="317.62" y="72.00">OSプロセス制御</tspan></text>
 <rect x="238.80" y="113.00" width="152.40" height="22.00" fill="#FFFFFF" stroke="#1F4E79" stroke-width="2"/>
