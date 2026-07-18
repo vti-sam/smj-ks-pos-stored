@@ -33,10 +33,10 @@ function main(workbook: ExcelScript.Workbook, sheetName: string = "05_全体構�
 
   const laneRange1 = getAnchoredRange(anchor, 0, 0, 1, 25);
 
+  const shape_d511_DEVICE = addTextShape(sheet, "shape_d511_DEVICE", "（3） 周辺機器\n自動釣銭機：GLORY RT-300／RAD-300\nドロア：SHARP UP-J36DW3\nカスタマディスプレイ：SHARP RZ-4DP1", 0, 0, 202.575, 66, 10, true, "#E4DFEC", true, "center", "roundRect", false);
+  setShapeAltText(shape_d511_DEVICE, "（3） 周辺機器 自動釣銭機：GLORY RT-300／RAD-300 ドロア：SHARP UP-J36DW3 カスタマディスプレイ：SHARP RZ-4DP1", "周辺機器はデバイスコネクタ経由で\nのみ制御します。\nアプリから実機を直接呼び出しません。");
   const shape_d511_APP = addTextShape(sheet, "shape_d511_APP", "（1） タブレットPOS端末アプリ\nMAUIプロセス\n業務判断／デバイス操作の依頼", 0, 0, 166.875, 51, 10, true, "#F7FBFF", true, "center", "roundRect", false);
   setShapeAltText(shape_d511_APP, "（1） タブレットPOS端末アプリ MAUIプロセス 業務判断／デバイス操作の依頼", "");
-  const shape_d511_DEVICE = addTextShape(sheet, "shape_d511_DEVICE", "（3） 周辺機器\n釣銭機／キャッシュドロア／\nカスタマーディスプレイ", 0, 0, 148.5, 51, 10, true, "#E4DFEC", true, "center", "roundRect", false);
-  setShapeAltText(shape_d511_DEVICE, "（3） 周辺機器 釣銭機／キャッシュドロア／ カスタマーディスプレイ", "周辺機器はデバイスコネクタ経由で\nのみ制御します。\nアプリから実機を直接呼び出しません。");
   const shape_d511_HOST = addTextShape(sheet, "shape_d511_HOST", "（2） デバイスコネクタ\nWindows別プロセス\n既存デバイス資源の呼出し", 0, 0, 138, 51, 10, true, "#FCE4D6", true, "center", "roundRect", false);
   setShapeAltText(shape_d511_HOST, "（2） デバイスコネクタ Windows別プロセス 既存デバイス資源の呼出し", "");
 

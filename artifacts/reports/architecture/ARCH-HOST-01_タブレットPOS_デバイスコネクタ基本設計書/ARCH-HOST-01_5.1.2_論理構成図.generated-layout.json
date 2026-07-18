@@ -2,7 +2,7 @@
   "sheetName": "05_全体構成_01",
   "anchorAddress": "B68",
   "diagramTitle": "5.1.2 論理構成図",
-  "description": "システムコンテキスト図は、3つの責務領域、プロセス境界、および領域間の通信だけを示す。\n論理構成図は、各責務領域を責務グループと論理構成要素へ分解する。番号は5.3と対応する。\nタブレットPOS端末アプリはMAUIプロセス、デバイスコネクタは既存デバイス資源を利用するWindows別プロセスとして、同一Windows端末上で動作する。要求、応答、およびイベント通知には名前付きパイプを使用する。\nアプリケーション層はOPOS、OCX、ActiveX、既存DLL、またはデバイスコネクタ内部実装を直接呼び出さない。デバイス操作はデバイス制御層を経由し、プロセスの起動・停止はデバイスコネクタプロセス管理が担当する。\nデバイスコネクタ側のホスト内部実装は、アプリ側のストラテジークラスではなく、既存デバイス資源を呼び出すための内部構成要素である。\n再試行、タイムアウト、所有プロセス、および異常分岐は静的構成ではなく、06_運用シナリオで示す。",
+  "description": "システムコンテキスト図は、3つの責務領域、プロセス境界、および領域間の通信だけを示す。\n論理構成図は、各責務領域を責務グループと論理構成要素へ分解する。責務グループは「責務グループ①」のように明記したオレンジ色の内枠で示す。番号は5.3と対応する。\nタブレットPOS端末アプリはMAUIプロセス、デバイスコネクタは既存デバイス資源を利用するWindows別プロセスとして、同一Windows端末上で動作する。要求、応答、およびイベント通知には名前付きパイプを使用する。\nアプリケーション層はOPOS、OCX、ActiveX、既存DLL、またはデバイスコネクタ内部実装を直接呼び出さない。デバイス操作はデバイス制御層を経由し、プロセスの起動・停止はデバイスコネクタプロセス管理が担当する。\nデバイスコネクタ側のホスト内部実装は、アプリ側のストラテジークラスではなく、既存デバイス資源を呼び出すための内部構成要素である。\n再試行、タイムアウト、所有プロセス、および異常分岐は静的構成ではなく、06_運用シナリオで示す。",
   "colors": {
     "connector": "#1F4E79",
     "guide": "#D9D9D9",
@@ -16,504 +16,478 @@
     {
       "id": "HOST",
       "text": "（2） デバイスコネクタ（Windows別プロセス）",
-      "x": 295.4882802478188,
-      "y": 268.85606412966297,
-      "width": 239.099893900697,
-      "height": 356.49683605588666,
+      "x": 298.8661660573448,
+      "y": 265.0632001779696,
+      "width": 247.38160617520768,
+      "height": 369.4502839537783,
       "fill": "#FCE4D6",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.6440773912482144,
+      "stroke": "#ED7D31",
+      "lineWeight": 0.6533161519960713,
       "dashed": false,
       "shape": "rectangle",
       "role": "container",
       "sourceOrder": 3,
       "direction": "TB",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2
+      "sourceFormat": "mermaid"
     },
     {
       "id": "APP",
       "text": "（1） タブレットPOS端末アプリ（アプリプロセス）",
       "x": 60.0,
       "y": 260.0,
-      "width": 165.43480024033727,
-      "height": 374.20896431521254,
+      "width": 167.80782646289714,
+      "height": 379.5766843097174,
       "fill": "#F7FBFF",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.6440773912482144,
+      "stroke": "#4472C4",
+      "lineWeight": 0.6533161519960713,
       "dashed": false,
       "shape": "rectangle",
       "role": "container",
       "sourceOrder": 0,
       "direction": "TB",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2
+      "sourceFormat": "mermaid"
     },
     {
       "id": "HOST.HOST_EXEC",
-      "text": "② コマンド実行",
-      "x": 328.08463447052145,
-      "y": 282.2206699980634,
-      "width": 165.45241173150418,
-      "height": 164.23973476829468,
-      "fill": "#FFFFFF",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.6440773912482144,
+      "text": "責務グループ②：コマンド実行",
+      "x": 335.1647687445172,
+      "y": 278.619510331888,
+      "width": 167.8256905764283,
+      "height": 166.59561875899817,
+      "fill": "none",
+      "stroke": "#ED7D31",
+      "lineWeight": 0.6533161519960713,
       "dashed": false,
       "shape": "rectangle",
       "role": "container",
       "sourceOrder": 5,
       "direction": "TB",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2
+      "sourceFormat": "mermaid"
     },
     {
       "id": "APP.APP_ACCESS",
-      "text": "② デバイス制御層",
-      "x": 100.99829347298936,
-      "y": 273.3646058684005,
-      "width": 83.43821329435852,
-      "height": 208.68107476442145,
-      "fill": "#FFFFFF",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.6440773912482144,
+      "text": "責務グループ②：デバイス制御層",
+      "x": 101.58638029239054,
+      "y": 273.5563101539185,
+      "width": 84.63506587811605,
+      "height": 211.6744332467271,
+      "fill": "none",
+      "stroke": "#ED7D31",
+      "lineWeight": 0.6533161519960713,
       "dashed": false,
       "shape": "rectangle",
       "role": "container",
       "sourceOrder": 2,
       "direction": "TB",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2
+      "sourceFormat": "mermaid"
     },
     {
       "id": "APP.APP_COORD",
-      "text": "① アプリケーション層（業務・プロセス管理）",
-      "x": 68.05096739060268,
-      "y": 508.7748923696228,
-      "width": 149.3328654591319,
-      "height": 112.0694660771893,
-      "fill": "#FFFFFF",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.6440773912482144,
+      "text": "責務グループ①：アプリケーション層（業務・プロセス管理）",
+      "x": 68.16645189995089,
+      "y": 512.3433637084826,
+      "width": 151.47492266299537,
+      "height": 113.6770104473164,
+      "fill": "none",
+      "stroke": "#ED7D31",
+      "lineWeight": 0.6533161519960713,
       "dashed": false,
       "shape": "rectangle",
       "role": "container",
       "sourceOrder": 1,
       "direction": "TB",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2
+      "sourceFormat": "mermaid"
     },
     {
       "id": "HOST.HOST_SERVICE",
-      "text": "① プロセス・通信サービス",
-      "x": 386.44911619777173,
-      "y": 494.283151066538,
-      "width": 131.63331683635383,
-      "height": 104.34053738221073,
-      "fill": "#FFFFFF",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.6440773912482144,
+      "text": "責務グループ①：プロセス・通信サービス",
+      "x": 391.1317604294775,
+      "y": 493.7238533765945,
+      "width": 139.99084967868941,
+      "height": 113.6770104473164,
+      "fill": "none",
+      "stroke": "#ED7D31",
+      "lineWeight": 0.6533161519960713,
       "dashed": false,
       "shape": "rectangle",
       "role": "container",
       "sourceOrder": 4,
       "direction": "TB",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2
-    },
-    {
-      "id": "DEVICE",
-      "text": "（3） 周辺機器",
-      "x": 579.0295141446426,
-      "y": 421.1803671598657,
-      "width": 240.97048585535734,
-      "height": 51.84822999548126,
-      "fill": "#E4DFEC",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.6440773912482144,
-      "dashed": false,
-      "shape": "rectangle",
-      "role": "container",
-      "sourceOrder": 7,
-      "direction": "TB",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2
+      "sourceFormat": "mermaid"
     },
     {
       "id": "HOST.HOST_ADAPTER",
-      "text": "③ 既存デバイス資源呼出し",
-      "x": 301.929054160301,
-      "y": 480.9185451981375,
-      "width": 76.46909464686807,
-      "height": 131.06974911901162,
-      "fill": "#FFFFFF",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.6440773912482144,
+      "text": "責務グループ③：既存デバイス資源呼出し",
+      "x": 293.979054998468,
+      "y": 480.16754322267604,
+      "width": 100.4065261098962,
+      "height": 140.78963075515335,
+      "fill": "none",
+      "stroke": "#ED7D31",
+      "lineWeight": 0.6533161519960713,
       "dashed": false,
       "shape": "rectangle",
       "role": "container",
       "sourceOrder": 6,
       "direction": "",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2
+      "sourceFormat": "mermaid"
     },
     {
-      "id": "DEVICE.DRAWER",
-      "text": "② キャッシュドロア（SHARP）",
-      "x": 654.1500717535847,
-      "y": 434.5449730282661,
-      "width": 74.06889999354466,
-      "height": 25.119018258680363,
-      "fill": "#F8FBFD",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.6440773912482144,
+      "id": "DEVICE",
+      "text": "（3） 周辺機器",
+      "x": 596.2136977791583,
+      "y": 423.49236703701683,
+      "width": 223.78630222084178,
+      "height": 52.59195023568374,
+      "fill": "#E4DFEC",
+      "stroke": "#8064A2",
+      "lineWeight": 0.6533161519960713,
       "dashed": false,
-      "shape": "roundRect",
-      "role": "node",
-      "sourceOrder": 16,
-      "direction": "",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2,
-      "comment": "",
-      "commentPriority": 0
-    },
-    {
-      "id": "DEVICE.DISPLAY",
-      "text": "③ カスタマーディスプレイ（SHARP）",
-      "x": 737.8801326158526,
-      "y": 434.5449730282661,
-      "width": 74.06889999354466,
-      "height": 25.119018258680363,
-      "fill": "#F8FBFD",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.6440773912482144,
-      "dashed": false,
-      "shape": "roundRect",
-      "role": "node",
-      "sourceOrder": 17,
-      "direction": "",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2,
-      "comment": "",
-      "commentPriority": 0
+      "shape": "rectangle",
+      "role": "container",
+      "sourceOrder": 7,
+      "direction": "TB",
+      "sourceFormat": "mermaid"
     },
     {
       "id": "HOST.HOST_EXEC.CONTROL",
       "text": "②-2 要求変換・コマンド制御",
-      "x": 411.41717881787827,
-      "y": 351.78102825287056,
-      "width": 74.06889999354466,
-      "height": 25.119018258680363,
+      "x": 419.69264994144635,
+      "y": 349.17765474746375,
+      "width": 75.1313574795482,
+      "height": 25.47932992784678,
       "fill": "#F8FBFD",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.6440773912482144,
+      "stroke": "#0D32B2",
+      "lineWeight": 0.6533161519960713,
       "dashed": false,
       "shape": "roundRect",
       "role": "node",
       "sourceOrder": 12,
       "direction": "",
       "sourceFormat": "mermaid",
-      "strokeWidth": 2,
-      "comment": "",
-      "commentPriority": 0
-    },
-    {
-      "id": "APP.APP_COORD.PROCESS",
-      "text": "①-3 デバイスコネクタ\nプロセス管理",
-      "x": 142.79413590311032,
-      "y": 578.33525062443,
-      "width": 61.46410417263233,
-      "height": 25.119018258680363,
-      "fill": "#F8FBFD",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.6440773912482144,
-      "dashed": false,
-      "shape": "roundRect",
-      "role": "node",
-      "sourceOrder": 2,
-      "direction": "",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2,
-      "comment": "デバイスコネクタはアプリと\nは別プロセスで管理します。\n起動・停止はアプリのライフサイクルに\n合わせて制御します。",
-      "commentPriority": 100
-    },
-    {
-      "id": "HOST.HOST_ADAPTER.ADAPTER",
-      "text": "③-1 ホスト内部実装\nOPOS／OCX／既存DLL",
-      "x": 309.98002155090364,
-      "y": 533.8939106283032,
-      "width": 60.36715986566272,
-      "height": 25.119018258680363,
-      "fill": "#F8FBFD",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.6440773912482144,
-      "dashed": false,
-      "shape": "roundRect",
-      "role": "node",
-      "sourceOrder": 14,
-      "direction": "",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2,
-      "comment": "",
-      "commentPriority": 0
-    },
-    {
-      "id": "APP.APP_COORD.LIFECYCLE",
-      "text": "①-2 アプリライフサイクル",
-      "x": 137.71951051972104,
-      "y": 526.1649819333246,
-      "width": 71.61335493941084,
-      "height": 17.39008956370179,
-      "fill": "#F8FBFD",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.6440773912482144,
-      "dashed": false,
-      "shape": "roundRect",
-      "role": "node",
-      "sourceOrder": 1,
-      "direction": "",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2,
-      "comment": "",
-      "commentPriority": 0
-    },
-    {
-      "id": "HOST.HOST_EXEC.ORDER",
-      "text": "②-1 デバイスID別順序制御",
-      "x": 412.77074771042334,
-      "y": 299.6107595617652,
-      "width": 71.36176220845451,
-      "height": 17.39008956370179,
-      "fill": "#F8FBFD",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.6440773912482144,
-      "dashed": false,
-      "shape": "roundRect",
-      "role": "node",
-      "sourceOrder": 11,
-      "direction": "",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2,
-      "comment": "同一デバイスへの要求は\nデバイスID単位で順序制御し、\n並行実行による競合を防止します。",
-      "commentPriority": 96
-    },
-    {
-      "id": "APP.APP_ACCESS.SELECT",
-      "text": "②-1 設定・制御方式選択",
-      "x": 109.04926086359205,
-      "y": 342.9249641232076,
-      "width": 67.33627851315316,
-      "height": 17.39008956370179,
-      "fill": "#F8FBFD",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.6440773912482144,
-      "dashed": false,
-      "shape": "roundRect",
-      "role": "node",
-      "sourceOrder": 4,
-      "direction": "",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2,
-      "comment": "",
-      "commentPriority": 0
-    },
-    {
-      "id": "APP.APP_ACCESS.RESULT",
-      "text": "②-3 結果・イベント連携",
-      "x": 109.28072617607188,
-      "y": 447.26550150541834,
-      "width": 66.8733478881935,
-      "height": 17.39008956370179,
-      "fill": "#F8FBFD",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.6440773912482144,
-      "dashed": false,
-      "shape": "roundRect",
-      "role": "node",
-      "sourceOrder": 6,
-      "direction": "",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2,
-      "comment": "",
-      "commentPriority": 0
-    },
-    {
-      "id": "HOST.HOST_EXEC.HOST_SETTING",
-      "text": "デバイスコネクタ側設定",
-      "x": 336.1356018611241,
-      "y": 355.64549260035983,
-      "width": 65.62041608803096,
-      "height": 17.39008956370179,
-      "fill": "#F8FBFD",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.6440773912482144,
-      "dashed": false,
-      "shape": "roundRect",
-      "role": "node",
-      "sourceOrder": 10,
-      "direction": "",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2,
-      "comment": "",
-      "commentPriority": 0
-    },
-    {
-      "id": "DEVICE.CASH",
-      "text": "① 釣銭機（RT-300）",
-      "x": 587.0804815352453,
-      "y": 438.4094373757554,
-      "width": 57.408429349616235,
-      "height": 17.39008956370179,
-      "fill": "#F8FBFD",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.6440773912482144,
-      "dashed": false,
-      "shape": "roundRect",
-      "role": "node",
-      "sourceOrder": 15,
-      "direction": "",
-      "sourceFormat": "mermaid",
-      "strokeWidth": 2,
       "comment": "",
       "commentPriority": 0
     },
     {
       "id": "HOST.HOST_SERVICE.RUNTIME",
-      "text": "①-1 起動・停止管理",
-      "x": 394.5000835883744,
-      "y": 511.6732406302398,
-      "width": 57.031040253181736,
-      "height": 17.39008956370179,
+      "text": "①-1 起動・停止管理\nMutexによる二重起動防止",
+      "x": 399.2982123294284,
+      "y": 511.3633894804884,
+      "width": 70.78782587526182,
+      "height": 25.47932992784678,
       "fill": "#F8FBFD",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.6440773912482144,
+      "stroke": "#0D32B2",
+      "lineWeight": 0.6533161519960713,
       "dashed": false,
       "shape": "roundRect",
       "role": "node",
       "sourceOrder": 7,
       "direction": "",
       "sourceFormat": "mermaid",
-      "strokeWidth": 2,
+      "comment": "",
+      "commentPriority": 0
+    },
+    {
+      "id": "DEVICE.DISPLAY",
+      "text": "③ カスタマディスプレイ\nSHARP RZ-4DP1",
+      "x": 743.6947150598339,
+      "y": 437.04867719093534,
+      "width": 68.13883304021525,
+      "height": 25.47932992784678,
+      "fill": "#F8FBFD",
+      "stroke": "#0D32B2",
+      "lineWeight": 0.6533161519960713,
+      "dashed": false,
+      "shape": "roundRect",
+      "role": "node",
+      "sourceOrder": 17,
+      "direction": "",
+      "sourceFormat": "mermaid",
+      "comment": "",
+      "commentPriority": 0
+    },
+    {
+      "id": "DEVICE.CASH",
+      "text": "① 自動釣銭機\nGLORY RT-300／RAD-300",
+      "x": 604.3801496791092,
+      "y": 437.04867719093534,
+      "width": 66.8679289632854,
+      "height": 25.47932992784678,
+      "fill": "#F8FBFD",
+      "stroke": "#0D32B2",
+      "lineWeight": 0.6533161519960713,
+      "dashed": false,
+      "shape": "roundRect",
+      "role": "node",
+      "sourceOrder": 15,
+      "direction": "",
+      "sourceFormat": "mermaid",
+      "comment": "",
+      "commentPriority": 0
+    },
+    {
+      "id": "APP.APP_COORD.PROCESS",
+      "text": "①-3 デバイスコネクタ\nプロセス管理",
+      "x": 143.98174972611997,
+      "y": 582.9015081240582,
+      "width": 62.34575622368759,
+      "height": 25.47932992784678,
+      "fill": "#F8FBFD",
+      "stroke": "#0D32B2",
+      "lineWeight": 0.6533161519960713,
+      "dashed": false,
+      "shape": "roundRect",
+      "role": "node",
+      "sourceOrder": 2,
+      "direction": "",
+      "sourceFormat": "mermaid",
+      "comment": "デバイスコネクタはアプリと\nは別プロセスで管理します。\n起動・停止はアプリのライフサイクルに\n合わせて制御します。",
+      "commentPriority": 100
+    },
+    {
+      "id": "HOST.HOST_ADAPTER.ADAPTER",
+      "text": "③-1 ホスト内部実装\nOPOS／OCX／既存DLL",
+      "x": 313.56577947725646,
+      "y": 537.8226936363293,
+      "width": 61.233077152319275,
+      "height": 25.47932992784678,
+      "fill": "#F8FBFD",
+      "stroke": "#0D32B2",
+      "lineWeight": 0.6533161519960713,
+      "dashed": false,
+      "shape": "roundRect",
+      "role": "node",
+      "sourceOrder": 14,
+      "direction": "",
+      "sourceFormat": "mermaid",
+      "comment": "",
+      "commentPriority": 0
+    },
+    {
+      "id": "DEVICE.DRAWER",
+      "text": "② ドロア\nSHARP UP-J36DW3",
+      "x": 681.0478209223356,
+      "y": 437.04867719093534,
+      "width": 52.84715185755721,
+      "height": 25.47932992784678,
+      "fill": "#F8FBFD",
+      "stroke": "#0D32B2",
+      "lineWeight": 0.6533161519960713,
+      "dashed": false,
+      "shape": "roundRect",
+      "role": "node",
+      "sourceOrder": 16,
+      "direction": "",
+      "sourceFormat": "mermaid",
+      "comment": "",
+      "commentPriority": 0
+    },
+    {
+      "id": "APP.APP_COORD.LIFECYCLE",
+      "text": "①-2 アプリライフサイクル",
+      "x": 138.83433301293218,
+      "y": 529.9828998123764,
+      "width": 72.64058965006318,
+      "height": 17.639536103893924,
+      "fill": "#F8FBFD",
+      "stroke": "#0D32B2",
+      "lineWeight": 0.6533161519960713,
+      "dashed": false,
+      "shape": "roundRect",
+      "role": "node",
+      "sourceOrder": 1,
+      "direction": "",
+      "sourceFormat": "mermaid",
+      "comment": "",
+      "commentPriority": 0
+    },
+    {
+      "id": "HOST.HOST_EXEC.ORDER",
+      "text": "②-1 デバイスID別順序制御",
+      "x": 421.0656346671256,
+      "y": 296.25904643578195,
+      "width": 72.38538802818971,
+      "height": 17.639536103893924,
+      "fill": "#F8FBFD",
+      "stroke": "#0D32B2",
+      "lineWeight": 0.6533161519960713,
+      "dashed": false,
+      "shape": "roundRect",
+      "role": "node",
+      "sourceOrder": 11,
+      "direction": "",
+      "sourceFormat": "mermaid",
+      "comment": "同一デバイスへの要求は\nデバイスID単位で順序制御し、\n並行実行による競合を防止します。",
+      "commentPriority": 96
+    },
+    {
+      "id": "APP.APP_ACCESS.SELECT",
+      "text": "②-1 設定・制御方式選択",
+      "x": 109.75283219234143,
+      "y": 344.11445456949417,
+      "width": 68.30216207821427,
+      "height": 17.639536103893924,
+      "fill": "#F8FBFD",
+      "stroke": "#0D32B2",
+      "lineWeight": 0.6533161519960713,
+      "dashed": false,
+      "shape": "roundRect",
+      "role": "node",
+      "sourceOrder": 4,
+      "direction": "",
+      "sourceFormat": "mermaid",
+      "comment": "",
+      "commentPriority": 0
+    },
+    {
+      "id": "APP.APP_ACCESS.RESULT",
+      "text": "②-3 結果・イベント連携",
+      "x": 109.98761768446502,
+      "y": 449.9516711928577,
+      "width": 67.8325910939671,
+      "height": 17.639536103893924,
+      "fill": "#F8FBFD",
+      "stroke": "#0D32B2",
+      "lineWeight": 0.6533161519960713,
+      "dashed": false,
+      "shape": "roundRect",
+      "role": "node",
+      "sourceOrder": 6,
+      "direction": "",
+      "sourceFormat": "mermaid",
+      "comment": "",
+      "commentPriority": 0
+    },
+    {
+      "id": "HOST.HOST_EXEC.HOST_SETTING",
+      "text": "デバイスコネクタ側設定",
+      "x": 343.3312206444681,
+      "y": 353.09755165944017,
+      "width": 66.56168701703723,
+      "height": 17.639536103893924,
+      "fill": "#F8FBFD",
+      "stroke": "#0D32B2",
+      "lineWeight": 0.6533161519960713,
+      "dashed": false,
+      "shape": "roundRect",
+      "role": "node",
+      "sourceOrder": 10,
+      "direction": "",
+      "sourceFormat": "mermaid",
       "comment": "",
       "commentPriority": 0
     },
     {
       "id": "APP.APP_COORD.BUSINESS",
       "text": "①-1 画面・業務処理",
-      "x": 76.10193478120536,
-      "y": 582.1997149719193,
-      "width": 57.031040253181736,
-      "height": 17.39008956370179,
+      "x": 76.33290379990179,
+      "y": 586.8214050360347,
+      "width": 57.84910364627712,
+      "height": 17.639536103893924,
       "fill": "#F8FBFD",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.6440773912482144,
+      "stroke": "#0D32B2",
+      "lineWeight": 0.6533161519960713,
       "dashed": false,
       "shape": "roundRect",
       "role": "node",
       "sourceOrder": 0,
       "direction": "",
       "sourceFormat": "mermaid",
-      "strokeWidth": 2,
       "comment": "",
       "commentPriority": 0
     },
     {
       "id": "HOST.HOST_SERVICE.SERVER",
       "text": "①-2 コマンド受付",
-      "x": 397.0763931533673,
-      "y": 563.8435093213452,
-      "width": 51.87842112319602,
-      "height": 17.39008956370179,
+      "x": 408.380838051905,
+      "y": 572.1217916161231,
+      "width": 52.62257443030855,
+      "height": 17.639536103893924,
       "fill": "#F8FBFD",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.6440773912482144,
+      "stroke": "#0D32B2",
+      "lineWeight": 0.6533161519960713,
       "dashed": false,
       "shape": "roundRect",
       "role": "node",
       "sourceOrder": 8,
       "direction": "",
       "sourceFormat": "mermaid",
-      "strokeWidth": 2,
       "comment": "",
       "commentPriority": 0
     },
     {
       "id": "APP.APP_ACCESS.COMMAND",
       "text": "②-2 コマンド通信",
-      "x": 116.77818955857062,
-      "y": 395.09523281431296,
-      "width": 51.87842112319602,
-      "height": 17.39008956370179,
+      "x": 117.59262601629429,
+      "y": 397.03306288117597,
+      "width": 52.62257443030855,
+      "height": 17.639536103893924,
       "fill": "#F8FBFD",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.6440773912482144,
+      "stroke": "#0D32B2",
+      "lineWeight": 0.6533161519960713,
       "dashed": false,
       "shape": "roundRect",
       "role": "node",
       "sourceOrder": 5,
       "direction": "",
       "sourceFormat": "mermaid",
-      "strokeWidth": 2,
       "comment": "",
       "commentPriority": 0
     },
     {
       "id": "HOST.HOST_SERVICE.EVENT",
       "text": "①-3 イベント配信",
-      "x": 458.6159751452865,
-      "y": 563.8435093213452,
-      "width": 51.415490498236366,
-      "height": 17.39008956370179,
+      "x": 470.80315476215463,
+      "y": 572.1217916161231,
+      "width": 52.153003446061376,
+      "height": 17.639536103893924,
       "fill": "#F8FBFD",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.6440773912482144,
+      "stroke": "#0D32B2",
+      "lineWeight": 0.6533161519960713,
       "dashed": false,
       "shape": "roundRect",
       "role": "node",
       "sourceOrder": 9,
       "direction": "",
       "sourceFormat": "mermaid",
-      "strokeWidth": 2,
       "comment": "デバイス処理結果は同期応答と\nは別経路で配信し、\nアプリの購読処理へ通知します。",
       "commentPriority": 92
     },
     {
       "id": "HOST.HOST_EXEC.MANAGER",
       "text": "②-3 デバイス管理",
-      "x": 383.04380858427777,
-      "y": 411.6802256389545,
-      "width": 51.309821551234705,
-      "height": 17.39008956370179,
+      "x": 390.9122870346663,
+      "y": 409.93605688309833,
+      "width": 52.045818764874525,
+      "height": 17.639536103893924,
       "fill": "#F8FBFD",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.6440773912482144,
+      "stroke": "#0D32B2",
+      "lineWeight": 0.6533161519960713,
       "dashed": false,
       "shape": "roundRect",
       "role": "node",
       "sourceOrder": 13,
       "direction": "",
       "sourceFormat": "mermaid",
-      "strokeWidth": 2,
       "comment": "",
       "commentPriority": 0
     },
     {
       "id": "APP.APP_ACCESS.APP_SETTING",
       "text": "アプリ側設定",
-      "x": 122.42896229584987,
-      "y": 290.75469543210227,
-      "width": 40.576875648637504,
-      "height": 17.39008956370179,
+      "x": 123.32445444357232,
+      "y": 291.1958462578124,
+      "width": 41.15891757575249,
+      "height": 17.639536103893924,
       "fill": "#F8FBFD",
-      "stroke": "#1F4E79",
-      "lineWeight": 0.6440773912482144,
+      "stroke": "#0D32B2",
+      "lineWeight": 0.6533161519960713,
       "dashed": false,
       "shape": "roundRect",
       "role": "node",
       "sourceOrder": 3,
       "direction": "",
       "sourceFormat": "mermaid",
-      "strokeWidth": 2,
       "comment": "",
       "commentPriority": 0
     }
@@ -526,27 +500,27 @@
       "toSide": "top",
       "connectorType": "elbow",
       "stroke": "#7030A0",
-      "lineWeight": 0.6440773912482144,
+      "lineWeight": 0.6533161519960713,
       "start": {
-        "x": 577.747729690094,
-        "y": 435.0138613690948
+        "x": 594.9143591375193,
+        "y": 437.6863137552835
       },
       "end": {
-        "x": 535.869817711135,
-        "y": 435.02770903300666
+        "x": 552.4354162766588,
+        "y": 437.46875947666877
       },
       "points": [
         {
-          "x": 577.747729690094,
-          "y": 435.0138613690948
+          "x": 594.9143591375193,
+          "y": 437.6863137552835
         },
         {
-          "x": 556.8087737006146,
-          "y": 432.93477955014555
+          "x": 573.674397719975,
+          "y": 435.41538681094517
         },
         {
-          "x": 535.869817711135,
-          "y": 435.02770903300666
+          "x": 552.4354162766588,
+          "y": 437.46875947666877
         }
       ],
       "dashed": false,
@@ -557,31 +531,31 @@
     {
       "from": "DEVICE.DRAWER",
       "to": "HOST.HOST_ADAPTER.ADAPTER",
-      "fromSide": "bottom",
+      "fromSide": "top",
       "toSide": "top",
       "connectorType": "elbow",
       "stroke": "#7030A0",
-      "lineWeight": 0.6440773912482144,
+      "lineWeight": 0.6533161519960713,
       "start": {
-        "x": 577.7412889161816,
-        "y": 447.1044821576063
+        "x": 594.9071726598473,
+        "y": 449.7883421548587
       },
       "end": {
-        "x": 535.8762584850476,
-        "y": 447.1044821576063
+        "x": 552.4416227801026,
+        "y": 449.7883421548587
       },
       "points": [
         {
-          "x": 577.7412889161816,
-          "y": 447.1044821576063
+          "x": 594.9071726598473,
+          "y": 449.7883421548587
         },
         {
-          "x": 556.8087737006146,
-          "y": 447.1044821576063
+          "x": 573.674397719975,
+          "y": 449.7883421548587
         },
         {
-          "x": 535.8762584850476,
-          "y": 447.1044821576063
+          "x": 552.4416227801026,
+          "y": 449.7883421548587
         }
       ],
       "dashed": false,
@@ -596,27 +570,27 @@
       "toSide": "top",
       "connectorType": "elbow",
       "stroke": "#7030A0",
-      "lineWeight": 0.6440773912482144,
+      "lineWeight": 0.6533161519960713,
       "start": {
-        "x": 577.747729690094,
-        "y": 459.19510294611774
+        "x": 594.9143591375193,
+        "y": 461.89037055443396
       },
       "end": {
-        "x": 535.869817711135,
-        "y": 459.18125528220594
+        "x": 552.4354162766588,
+        "y": 462.1079248330486
       },
       "points": [
         {
-          "x": 577.747729690094,
-          "y": 459.19510294611774
+          "x": 594.9143591375193,
+          "y": 461.89037055443396
         },
         {
-          "x": 556.8087737006146,
-          "y": 461.274184765067
+          "x": 573.674397719975,
+          "y": 464.1612974987723
         },
         {
-          "x": 535.869817711135,
-          "y": 459.18125528220594
+          "x": 552.4354162766588,
+          "y": 462.1079248330486
         }
       ],
       "dashed": false,
@@ -631,27 +605,27 @@
       "toSide": "top",
       "connectorType": "elbow",
       "stroke": "#548235",
-      "lineWeight": 0.5796696521233929,
+      "lineWeight": 0.5879845367964642,
       "start": {
-        "x": 225.43482036775575,
-        "y": 447.1044821576063
+        "x": 227.8078468790269,
+        "y": 449.7883421548587
       },
       "end": {
-        "x": 294.200065083067,
-        "y": 447.1044821576063
+        "x": 297.5594725049634,
+        "y": 449.7883421548587
       },
       "points": [
         {
-          "x": 225.43482036775575,
-          "y": 447.1044821576063
+          "x": 227.8078468790269,
+          "y": 449.7883421548587
         },
         {
-          "x": 260.46168113600737,
-          "y": 447.1044821576063
+          "x": 263.3371391730292,
+          "y": 449.7883421548587
         },
         {
-          "x": 294.200065083067,
-          "y": 447.1044821576063
+          "x": 297.5594725049634,
+          "y": 449.7883421548587
         }
       ],
       "dashed": false,
@@ -666,27 +640,27 @@
       "toSide": "top",
       "connectorType": "elbow",
       "stroke": "#1F4E79",
-      "lineWeight": 0.7084851303730358,
+      "lineWeight": 0.7186477671956785,
       "start": {
-        "x": 226.70816137025344,
-        "y": 459.9689619317025
+        "x": 229.09945291152312,
+        "y": 462.83735231675223
       },
       "end": {
-        "x": 294.2087601278488,
-        "y": 461.20140401985594
+        "x": 297.5679656149394,
+        "y": 464.207682945564
       },
       "points": [
         {
-          "x": 226.70816137025344,
-          "y": 459.9689619317025
+          "x": 229.09945291152312,
+          "y": 462.83735231675223
         },
         {
-          "x": 260.46168113600737,
-          "y": 465.1386491125563
+          "x": 263.3371391730292,
+          "y": 468.0811944107487
         },
         {
-          "x": 294.2087601278488,
-          "y": 461.20140401985594
+          "x": 297.5679656149394,
+          "y": 464.207682945564
         }
       ],
       "dashed": false,
@@ -701,27 +675,27 @@
       "toSide": "top",
       "connectorType": "elbow",
       "stroke": "#C65911",
-      "lineWeight": 0.5796696521233929,
+      "lineWeight": 0.5879845367964642,
       "start": {
-        "x": 295.4882198655634,
-        "y": 433.15666421143055
+        "x": 298.8661048089556,
+        "y": 435.5156708402766
       },
       "end": {
-        "x": 225.43482036775575,
-        "y": 434.43515783305827
+        "x": 227.8078468790269,
+        "y": 436.93728678701996
       },
       "points": [
         {
-          "x": 295.4882198655634,
-          "y": 433.15666421143055
+          "x": 298.8661048089556,
+          "y": 435.5156708402766
         },
         {
-          "x": 260.46168113600737,
-          "y": 429.0703152026563
+          "x": 263.3371391730292,
+          "y": 431.4954898989687
         },
         {
-          "x": 225.43482036775575,
-          "y": 434.43515783305827
+          "x": 227.8078468790269,
+          "y": 436.93728678701996
         }
       ],
       "dashed": true,
@@ -736,31 +710,31 @@
       "toSide": "top",
       "connectorType": "elbow",
       "stroke": "#7030A0",
-      "lineWeight": 0.6440773912482144,
+      "lineWeight": 0.6533161519960713,
       "start": {
-        "x": 352.41538251198784,
-        "y": 446.46040476635807
+        "x": 357.17071272608223,
+        "y": 445.2151290908862
       },
       "end": {
-        "x": 340.16374237566436,
-        "y": 532.6057558458067
+        "x": 344.1824609663243,
+        "y": 536.5160613323371
       },
       "points": [
         {
-          "x": 352.41538251198784,
-          "y": 446.46040476635807
+          "x": 357.17071272608223,
+          "y": 445.2151290908862
         },
         {
-          "x": 340.16374237566436,
-          "y": 463.6894749822478
+          "x": 344.1824609663243,
+          "y": 462.6913361567811
         },
         {
-          "x": 340.16374237566436,
-          "y": 480.9185451981375
+          "x": 344.1824609663243,
+          "y": 480.16754322267604
         },
         {
-          "x": 340.16374237566436,
-          "y": 532.6057558458067
+          "x": 344.1824609663243,
+          "y": 536.5160613323371
         }
       ],
       "dashed": false,
@@ -773,31 +747,31 @@
       "toSide": "right",
       "connectorType": "elbow",
       "stroke": "#1F4E79",
-      "lineWeight": 0.7084851303730358,
+      "lineWeight": 0.7186477671956785,
       "start": {
-        "x": 485.83440391557735,
-        "y": 494.283151066538
+        "x": 495.6632838908174,
+        "y": 493.7238533765945
       },
       "end": {
-        "x": 480.7616503821064,
-        "y": 447.4458431749678
+        "x": 490.0316986606112,
+        "y": 446.2147028034402
       },
       "points": [
         {
-          "x": 485.83440391557735,
-          "y": 494.283151066538
+          "x": 495.6632838908174,
+          "y": 493.7238533765945
         },
         {
-          "x": 494.4341252435235,
-          "y": 480.9185451981375
+          "x": 503.90029393518387,
+          "y": 480.16754322267604
         },
         {
-          "x": 494.4341252435235,
-          "y": 463.6894749822478
+          "x": 503.90029393518387,
+          "y": 462.6913361567811
         },
         {
-          "x": 480.7616503821064,
-          "y": 447.4458431749678
+          "x": 490.0316986606112,
+          "y": 446.2147028034402
         }
       ],
       "dashed": false,
@@ -806,35 +780,35 @@
     {
       "from": "HOST.HOST_EXEC.MANAGER",
       "to": "HOST.HOST_SERVICE.EVENT",
-      "fromSide": "right",
+      "fromSide": "bottom",
       "toSide": "left",
       "connectorType": "elbow",
       "stroke": "#C65911",
-      "lineWeight": 0.5796696521233929,
+      "lineWeight": 0.5879845367964642,
       "start": {
-        "x": 417.7995429619416,
-        "y": 446.46040476635807
+        "x": 424.8294400590994,
+        "y": 445.2151290908862
       },
       "end": {
-        "x": 425.41608015214734,
-        "y": 493.13250680707307
+        "x": 432.21093260242696,
+        "y": 492.5544174645215
       },
       "points": [
         {
-          "x": 417.7995429619416,
-          "y": 446.46040476635807
+          "x": 424.8294400590994,
+          "y": 445.2151290908862
         },
         {
-          "x": 419.26546310442257,
-          "y": 463.6894749822478
+          "x": 426.0364416499121,
+          "y": 462.6913361567811
         },
         {
-          "x": 419.26546310442257,
-          "y": 480.9185451981375
+          "x": 426.0364416499121,
+          "y": 480.16754322267604
         },
         {
-          "x": 425.41608015214734,
-          "y": 493.13250680707307
+          "x": 432.21093260242696,
+          "y": 492.5544174645215
         }
       ],
       "dashed": true,
@@ -851,25 +825,25 @@
       "stroke": "#7F7F7F",
       "lineWeight": 0.5,
       "start": {
-        "x": 368.94587028739505,
-        "y": 373.0355821640616
+        "x": 376.6121254013759,
+        "y": 370.7370877633341
       },
       "end": {
-        "x": 394.37082530691833,
-        "y": 410.9736727407552
+        "x": 402.4017805014209,
+        "y": 409.21936906435866
       },
       "points": [
         {
-          "x": 368.94587028739505,
-          "y": 373.0355821640616
+          "x": 376.6121254013759,
+          "y": 370.7370877633341
         },
         {
-          "x": 368.94587028739505,
-          "y": 394.2901360752527
+          "x": 376.6121254013759,
+          "y": 392.29652077920446
         },
         {
-          "x": 394.37082530691833,
-          "y": 410.9736727407552
+          "x": 402.4017805014209,
+          "y": 409.21936906435866
         }
       ],
       "dashed": true,
@@ -882,27 +856,27 @@
       "toSide": "top",
       "connectorType": "elbow",
       "stroke": "#1F4E79",
-      "lineWeight": 0.7084851303730358,
+      "lineWeight": 0.7186477671956785,
       "start": {
-        "x": 448.4517495791615,
-        "y": 317.00084912546697
+        "x": 457.258451177999,
+        "y": 313.8985825396759
       },
       "end": {
-        "x": 448.4517495791615,
-        "y": 350.4928734703741
+        "x": 457.258451177999,
+        "y": 347.8710224434716
       },
       "points": [
         {
-          "x": 448.4517495791615,
-          "y": 317.00084912546697
+          "x": 457.258451177999,
+          "y": 313.8985825396759
         },
         {
-          "x": 448.4517495791615,
-          "y": 334.39093868916876
+          "x": 457.258451177999,
+          "y": 331.5381186435698
         },
         {
-          "x": 448.4517495791615,
-          "y": 350.4928734703741
+          "x": 457.258451177999,
+          "y": 347.8710224434716
         }
       ],
       "dashed": false,
@@ -915,27 +889,27 @@
       "toSide": "top",
       "connectorType": "elbow",
       "stroke": "#1F4E79",
-      "lineWeight": 0.7084851303730358,
+      "lineWeight": 0.7186477671956785,
       "start": {
-        "x": 448.4517495791615,
-        "y": 376.9000465115509
+        "x": 457.258451177999,
+        "y": 374.6569846753105
       },
       "end": {
-        "x": 423.02679455963823,
-        "y": 410.9736727407552
+        "x": 431.46879607795404,
+        "y": 409.21936906435866
       },
       "points": [
         {
-          "x": 448.4517495791615,
-          "y": 376.9000465115509
+          "x": 457.258451177999,
+          "y": 374.6569846753105
         },
         {
-          "x": 448.4517495791615,
-          "y": 394.2901360752527
+          "x": 457.258451177999,
+          "y": 392.29652077920446
         },
         {
-          "x": 423.02679455963823,
-          "y": 410.9736727407552
+          "x": 431.46879607795404,
+          "y": 409.21936906435866
         }
       ],
       "dashed": false,
@@ -948,27 +922,27 @@
       "toSide": "top",
       "connectorType": "elbow",
       "stroke": "#1F4E79",
-      "lineWeight": 0.7084851303730358,
+      "lineWeight": 0.7186477671956785,
       "start": {
-        "x": 423.0156439698022,
-        "y": 529.0633301939415
+        "x": 434.6922681799676,
+        "y": 536.8427194083351
       },
       "end": {
-        "x": 423.0156439698022,
-        "y": 562.5553545388486
+        "x": 434.6922681799676,
+        "y": 570.8151593121308
       },
       "points": [
         {
-          "x": 423.0156439698022,
-          "y": 529.0633301939415
+          "x": 434.6922681799676,
+          "y": 536.8427194083351
         },
         {
-          "x": 423.0156439698022,
-          "y": 546.4534197576434
+          "x": 434.6922681799676,
+          "y": 554.4822555122291
         },
         {
-          "x": 423.0156439698022,
-          "y": 562.5553545388486
+          "x": 434.6922681799676,
+          "y": 570.8151593121308
         }
       ],
       "dashed": false,
@@ -981,27 +955,27 @@
       "toSide": "right",
       "connectorType": "elbow",
       "stroke": "#1F4E79",
-      "lineWeight": 0.7084851303730358,
+      "lineWeight": 0.7186477671956785,
       "start": {
-        "x": 173.5112333174984,
-        "y": 508.7748923696228
+        "x": 175.1394586535596,
+        "y": 512.3433637084826
       },
       "end": {
-        "x": 176.92258922024462,
-        "y": 483.27103786967166
+        "x": 178.5997476526068,
+        "y": 486.4736773798181
       },
       "points": [
         {
-          "x": 173.5112333174984,
-          "y": 508.7748923696228
+          "x": 175.1394586535596,
+          "y": 512.3433637084826
         },
         {
-          "x": 180.85564780990182,
-          "y": 495.41028650122234
+          "x": 182.58922273477083,
+          "y": 498.78705355456407
         },
         {
-          "x": 176.92258922024462,
-          "y": 483.27103786967166
+          "x": 178.5997476526068,
+          "y": 486.4736773798181
         }
       ],
       "dashed": false,
@@ -1014,27 +988,27 @@
       "toSide": "right",
       "connectorType": "elbow",
       "stroke": "#1F4E79",
-      "lineWeight": 0.7084851303730358,
+      "lineWeight": 0.7186477671956785,
       "start": {
-        "x": 108.90930485921565,
-        "y": 482.0456806328219
+        "x": 109.61086863412567,
+        "y": 485.23074340064557
       },
       "end": {
-        "x": 111.92358705025731,
-        "y": 508.7748923696228
+        "x": 112.66838822546728,
+        "y": 512.3433637084826
       },
       "points": [
         {
-          "x": 108.90930485921565,
-          "y": 482.0456806328219
+          "x": 109.61086863412567,
+          "y": 485.23074340064557
         },
         {
-          "x": 104.57917255785391,
-          "y": 495.41028650122234
+          "x": 105.21862414425607,
+          "y": 498.78705355456407
         },
         {
-          "x": 111.92358705025731,
-          "y": 508.7748923696228
+          "x": 112.66838822546728,
+          "y": 512.3433637084826
         }
       ],
       "dashed": true,
@@ -1049,25 +1023,25 @@
       "stroke": "#7F7F7F",
       "lineWeight": 0.5,
       "start": {
-        "x": 142.7174403750056,
-        "y": 308.144784995804
+        "x": 143.90395406370808,
+        "y": 308.8353823617063
       },
       "end": {
-        "x": 142.7174403750056,
-        "y": 341.6368093407112
+        "x": 143.90395406370808,
+        "y": 342.80782226550207
       },
       "points": [
         {
-          "x": 142.7174403750056,
-          "y": 308.144784995804
+          "x": 143.90395406370808,
+          "y": 308.8353823617063
         },
         {
-          "x": 142.7174403750056,
-          "y": 325.5348745595058
+          "x": 143.90395406370808,
+          "y": 326.47491846560024
         },
         {
-          "x": 142.7174403750056,
-          "y": 341.6368093407112
+          "x": 143.90395406370808,
+          "y": 342.80782226550207
         }
       ],
       "dashed": true,
@@ -1080,27 +1054,27 @@
       "toSide": "top",
       "connectorType": "elbow",
       "stroke": "#1F4E79",
-      "lineWeight": 0.7084851303730358,
+      "lineWeight": 0.7186477671956785,
       "start": {
-        "x": 142.7174403750056,
-        "y": 360.3150536869094
+        "x": 143.90395406370808,
+        "y": 361.7539906733881
       },
       "end": {
-        "x": 142.7174403750056,
-        "y": 393.80707803181656
+        "x": 143.90395406370808,
+        "y": 395.7264305771838
       },
       "points": [
         {
-          "x": 142.7174403750056,
-          "y": 360.3150536869094
+          "x": 143.90395406370808,
+          "y": 361.7539906733881
         },
         {
-          "x": 142.7174403750056,
-          "y": 377.7051432506112
+          "x": 143.90395406370808,
+          "y": 379.39352677728203
         },
         {
-          "x": 142.7174403750056,
-          "y": 393.80707803181656
+          "x": 143.90395406370808,
+          "y": 395.7264305771838
         }
       ],
       "dashed": false,
@@ -1113,27 +1087,27 @@
       "toSide": "top",
       "connectorType": "elbow",
       "stroke": "#1F4E79",
-      "lineWeight": 0.7084851303730358,
+      "lineWeight": 0.7186477671956785,
       "start": {
-        "x": 142.7174403750056,
-        "y": 412.48532237801476
+        "x": 143.90395406370808,
+        "y": 414.67259898506984
       },
       "end": {
-        "x": 142.7174403750056,
-        "y": 445.9773467229219
+        "x": 143.90395406370808,
+        "y": 448.6450388888656
       },
       "points": [
         {
-          "x": 142.7174403750056,
-          "y": 412.48532237801476
+          "x": 143.90395406370808,
+          "y": 414.67259898506984
         },
         {
-          "x": 142.7174403750056,
-          "y": 429.87541194171655
+          "x": 143.90395406370808,
+          "y": 432.3121350889638
         },
         {
-          "x": 142.7174403750056,
-          "y": 445.9773467229219
+          "x": 143.90395406370808,
+          "y": 448.6450388888656
         }
       ],
       "dashed": false,
@@ -1146,27 +1120,27 @@
       "toSide": "top",
       "connectorType": "elbow",
       "stroke": "#1F4E79",
-      "lineWeight": 0.7084851303730358,
+      "lineWeight": 0.7186477671956785,
       "start": {
-        "x": 173.52604709749716,
-        "y": 543.5550714970263
+        "x": 175.15448492505553,
+        "y": 547.6224359162704
       },
       "end": {
-        "x": 173.52604709749716,
-        "y": 577.0470958419335
+        "x": 175.15448492505553,
+        "y": 581.5948758200661
       },
       "points": [
         {
-          "x": 173.52604709749716,
-          "y": 543.5550714970263
+          "x": 175.15448492505553,
+          "y": 547.6224359162704
         },
         {
-          "x": 173.52604709749716,
-          "y": 560.9451610607282
+          "x": 175.15448492505553,
+          "y": 565.2619720201643
         },
         {
-          "x": 173.52604709749716,
-          "y": 577.0470958419335
+          "x": 175.15448492505553,
+          "y": 581.5948758200661
         }
       ],
       "dashed": false,
@@ -1179,145 +1153,10 @@
     "renderedNodeCount": 26,
     "sourceEdgeCount": 19,
     "renderedEdgeCount": 19,
-    "scale": 0.3220386956241072,
+    "scale": 0.32665807599803565,
     "minX": 8.0,
     "minY": 8.0,
     "sourceTopLevelContainerCount": 3,
     "sourceNestedContainerCount": 5
-  },
-  "visualContract": {
-    "source": "/Users/vti-sam/pm-control/smj-ks-pos/project-store/artifacts/reports/architecture/ARCH-HOST-01_タブレットPOS_デバイスコネクタ基本設計書/ARCH-HOST-01_タブレットPOS_デバイスコネクタ基本設計書.md",
-    "entries": [
-      {
-        "display": "（1）タブレットPOS端末アプリ",
-        "color": "#F7FBFF",
-        "meaning": "アプリケーション層とデバイス制御を含むアプリプロセスの責務境界を示す。"
-      },
-      {
-        "display": "（2）デバイスコネクタ",
-        "color": "#FCE4D6",
-        "meaning": "OPOS、OCX、ActiveX、および既存DLLを利用する既存デバイス制御を担当するWindows別プロセスを示す。"
-      },
-      {
-        "display": "（3）周辺機器",
-        "color": "#E4DFEC",
-        "meaning": "デバイスコネクタから制御される実機を示す。"
-      },
-      {
-        "display": "責務グループ",
-        "color": "#FFFFFF",
-        "meaning": "同じ目的を持つ論理構成要素のまとまりを示す。"
-      },
-      {
-        "display": "角丸ブロック",
-        "color": "#F8FBFD",
-        "meaning": "論理構成要素、処理、または対象デバイスを示す。"
-      },
-      {
-        "display": "◇",
-        "color": "#FFF2CC",
-        "meaning": "次の処理を決める判定を示す。"
-      },
-      {
-        "display": "補足コメント（吹き出し・半透明）",
-        "color": "#FFF2CC",
-        "meaning": "70%透過の吹き出しで対象要素を指し示し、図だけでは判断しにくい設計意図、運用条件、または制約を補足する。"
-      },
-      {
-        "display": "異常処理",
-        "color": "#F4CCCC",
-        "meaning": "起動中止、通信失敗、または強制終了などの主要な異常結果を示す。"
-      },
-      {
-        "display": "運用フェーズ",
-        "color": "#FFFFFF",
-        "meaning": "起動、デバイス操作、および終了の区切りを示す。"
-      },
-      {
-        "display": "━━▶ 主処理",
-        "color": "#1F4E79",
-        "meaning": "通常の処理順または一方向の要求を示す。"
-      },
-      {
-        "display": "◀━━▶ コマンド通信",
-        "color": "#1F4E79",
-        "meaning": "アプリからの要求とデバイスコネクタからの同期応答を同じ通信経路で送受信する関係を示す。"
-      },
-      {
-        "display": "━━▶ ライフサイクル",
-        "color": "#548235",
-        "meaning": "プロセスの起動、停止、および終了監視を示す。"
-      },
-      {
-        "display": "◀━━▶ 実機制御",
-        "color": "#7030A0",
-        "meaning": "デバイスコネクタと周辺機器間の制御と結果を示す。"
-      },
-      {
-        "display": "┄┄▶ 非同期イベント",
-        "color": "#C65911",
-        "meaning": "同期応答とは別に通知されるデバイス処理結果を示す。"
-      },
-      {
-        "display": "┈┈▶ 設定参照",
-        "color": "#7F7F7F",
-        "meaning": "設定情報を参照する関係を示す。"
-      },
-      {
-        "display": "┄┄▶ 異常経路",
-        "color": "#C00000",
-        "meaning": "通常経路から異常結果または復旧処理へ分岐する経路を示す。"
-      }
-    ],
-    "areaEntries": [
-      {
-        "display": "（1）タブレットPOS端末アプリ",
-        "color": "#F7FBFF",
-        "meaning": "アプリケーション層とデバイス制御を含むアプリプロセスの責務境界を示す。"
-      },
-      {
-        "display": "（2）デバイスコネクタ",
-        "color": "#FCE4D6",
-        "meaning": "OPOS、OCX、ActiveX、および既存DLLを利用する既存デバイス制御を担当するWindows別プロセスを示す。"
-      },
-      {
-        "display": "（3）周辺機器",
-        "color": "#E4DFEC",
-        "meaning": "デバイスコネクタから制御される実機を示す。"
-      }
-    ],
-    "fillColors": [
-      "#E4DFEC",
-      "#F4CCCC",
-      "#F7FBFF",
-      "#F8FBFD",
-      "#FCE4D6",
-      "#FFF2CC",
-      "#FFFFFF"
-    ],
-    "edgeColors": [
-      "#1F4E79",
-      "#548235",
-      "#7030A0",
-      "#7F7F7F",
-      "#C00000",
-      "#C65911"
-    ],
-    "componentFill": "#F8FBFD",
-    "decisionFill": "#FFF2CC",
-    "commentFill": "#FFF2CC",
-    "commentTransparency": 0.7,
-    "commentBorder": "#BF9000",
-    "errorFill": "#F4CCCC",
-    "responsibilityFill": "#FFFFFF",
-    "phaseFill": "#FFFFFF",
-    "primaryLine": "#1F4E79",
-    "typography": {
-      "fontFamily": "Meiryo UI",
-      "laneSize": 13,
-      "componentSize": 10,
-      "connectorLabelSize": 9,
-      "lineWeight": 2
-    }
   }
 }

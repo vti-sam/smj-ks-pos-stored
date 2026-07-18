@@ -9,7 +9,7 @@ function main(workbook: ExcelScript.Workbook, sheetName: string = "05_全体構�
   const edgePrefix = "edge_d512_";
   const sectionPrefix = "section_bg_d512_";
   const canvasColumnCount = 25;
-  const baselineCanvasRowCount = 38;
+  const baselineCanvasRowCount = 39;
   const canvasLeft = anchor.getLeft();
   const canvasTop = anchor.getTop();
   const canvasRight = canvasLeft + canvasColumnCount * 36;
@@ -37,16 +37,20 @@ function main(workbook: ExcelScript.Workbook, sheetName: string = "05_全体構�
 
   addCellLaneTable(anchor, baselineCanvasRowCount - 1);
 
-  const shape_d512_DEVICE_DRAWER = addTextShape(sheet, "shape_d512_DEVICE_DRAWER", "② キャッシュドロア（SHARP）", 0, 0, 162.15, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
-  setShapeAltText(shape_d512_DEVICE_DRAWER, "② キャッシュドロア（SHARP）", "");
-  const shape_d512_DEVICE_DISPLAY = addTextShape(sheet, "shape_d512_DEVICE_DISPLAY", "③ カスタマーディスプレイ（SHARP）", 0, 0, 193.65, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
-  setShapeAltText(shape_d512_DEVICE_DISPLAY, "③ カスタマーディスプレイ（SHARP）", "");
   const shape_d512_HOST_HOST_EXEC_CONTROL = addTextShape(sheet, "shape_d512_HOST_HOST_EXEC_CONTROL", "②-2 要求変換・コマンド制御", 0, 0, 155.325, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
   setShapeAltText(shape_d512_HOST_HOST_EXEC_CONTROL, "②-2 要求変換・コマンド制御", "");
+  const shape_d512_HOST_HOST_SERVICE_RUNTIME = addTextShape(sheet, "shape_d512_HOST_HOST_SERVICE_RUNTIME", "①-1 起動・停止管理\nMutexによる二重起動防止", 0, 0, 135.375, 36, 10, true, "#F8FBFD", true, "center", "roundRect", false);
+  setShapeAltText(shape_d512_HOST_HOST_SERVICE_RUNTIME, "①-1 起動・停止管理 Mutexによる二重起動防止", "");
+  const shape_d512_DEVICE_DISPLAY = addTextShape(sheet, "shape_d512_DEVICE_DISPLAY", "③ カスタマディスプレイ\nSHARP RZ-4DP1", 0, 0, 133.275, 36, 10, true, "#F8FBFD", true, "center", "roundRect", false);
+  setShapeAltText(shape_d512_DEVICE_DISPLAY, "③ カスタマディスプレイ SHARP RZ-4DP1", "");
+  const shape_d512_DEVICE_CASH = addTextShape(sheet, "shape_d512_DEVICE_CASH", "① 自動釣銭機\nGLORY RT-300／RAD-300", 0, 0, 132.225, 36, 10, true, "#F8FBFD", true, "center", "roundRect", false);
+  setShapeAltText(shape_d512_DEVICE_CASH, "① 自動釣銭機 GLORY RT-300／RAD-300", "");
   const shape_d512_APP_APP_COORD_PROCESS = addTextShape(sheet, "shape_d512_APP_APP_COORD_PROCESS", "①-3 デバイスコネクタ\nプロセス管理", 0, 0, 123.825, 36, 10, true, "#F8FBFD", true, "center", "roundRect", false);
   setShapeAltText(shape_d512_APP_APP_COORD_PROCESS, "①-3 デバイスコネクタ プロセス管理", "デバイスコネクタはアプリと\nは別プロセスで管理します。\n起動・停止はアプリのライフサイクルに\n合わせて制御します。");
   const shape_d512_HOST_HOST_ADAPTER_ADAPTER = addTextShape(sheet, "shape_d512_HOST_HOST_ADAPTER_ADAPTER", "③-1 ホスト内部実装\nOPOS／OCX／既存DLL", 0, 0, 113.325, 36, 10, true, "#F8FBFD", true, "center", "roundRect", false);
   setShapeAltText(shape_d512_HOST_HOST_ADAPTER_ADAPTER, "③-1 ホスト内部実装 OPOS／OCX／既存DLL", "");
+  const shape_d512_DEVICE_DRAWER = addTextShape(sheet, "shape_d512_DEVICE_DRAWER", "② ドロア\nSHARP UP-J36DW3", 0, 0, 98.625, 36, 10, true, "#F8FBFD", true, "center", "roundRect", false);
+  setShapeAltText(shape_d512_DEVICE_DRAWER, "② ドロア SHARP UP-J36DW3", "");
   const shape_d512_APP_APP_COORD_LIFECYCLE = addTextShape(sheet, "shape_d512_APP_APP_COORD_LIFECYCLE", "①-2 アプリライフサイクル", 0, 0, 144.825, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
   setShapeAltText(shape_d512_APP_APP_COORD_LIFECYCLE, "①-2 アプリライフサイクル", "");
   const shape_d512_HOST_HOST_EXEC_ORDER = addTextShape(sheet, "shape_d512_HOST_HOST_EXEC_ORDER", "②-1 デバイスID別順序制御", 0, 0, 145.875, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
@@ -57,10 +61,6 @@ function main(workbook: ExcelScript.Workbook, sheetName: string = "05_全体構�
   setShapeAltText(shape_d512_APP_APP_ACCESS_RESULT, "②-3 結果・イベント連携", "");
   const shape_d512_HOST_HOST_EXEC_HOST_SETTING = addTextShape(sheet, "shape_d512_HOST_HOST_EXEC_HOST_SETTING", "デバイスコネクタ側設定", 0, 0, 127.5, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
   setShapeAltText(shape_d512_HOST_HOST_EXEC_HOST_SETTING, "デバイスコネクタ側設定", "");
-  const shape_d512_DEVICE_CASH = addTextShape(sheet, "shape_d512_DEVICE_CASH", "① 釣銭機（RT-300）", 0, 0, 115.425, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
-  setShapeAltText(shape_d512_DEVICE_CASH, "① 釣銭機（RT-300）", "");
-  const shape_d512_HOST_HOST_SERVICE_RUNTIME = addTextShape(sheet, "shape_d512_HOST_HOST_SERVICE_RUNTIME", "①-1 起動・停止管理", 0, 0, 113.325, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
-  setShapeAltText(shape_d512_HOST_HOST_SERVICE_RUNTIME, "①-1 起動・停止管理", "");
   const shape_d512_APP_APP_COORD_BUSINESS = addTextShape(sheet, "shape_d512_APP_APP_COORD_BUSINESS", "①-1 画面・業務処理", 0, 0, 113.325, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
   setShapeAltText(shape_d512_APP_APP_COORD_BUSINESS, "①-1 画面・業務処理", "");
   const shape_d512_HOST_HOST_SERVICE_SERVER = addTextShape(sheet, "shape_d512_HOST_HOST_SERVICE_SERVER", "①-2 コマンド受付", 0, 0, 102.825, 28, 10, true, "#F8FBFD", true, "center", "roundRect", false);
@@ -93,11 +93,11 @@ function main(workbook: ExcelScript.Workbook, sheetName: string = "05_全体構�
   groupBottom3 = placeD2Row([shape_d512_DEVICE_DRAWER], [0.5], laneRange3.getLeft(), groupBottom3 + 24, laneRange3.getWidth(), 30, 28);
   groupBottom3 = placeD2Row([shape_d512_DEVICE_DISPLAY], [0.5], laneRange3.getLeft(), groupBottom3 + 24, laneRange3.getWidth(), 30, 28);
 
-  addSectionBackground(sheet, "section_bg_d512_1_1", "① アプリケーション層（業務・プロセス管理）", [shape_d512_APP_APP_COORD_PROCESS, shape_d512_APP_APP_COORD_LIFECYCLE, shape_d512_APP_APP_COORD_BUSINESS], laneRange1.getLeft(), laneRange1.getWidth(), "#FFFFFF");
-  addSectionBackground(sheet, "section_bg_d512_1_2", "② デバイス制御層", [shape_d512_APP_APP_ACCESS_SELECT, shape_d512_APP_APP_ACCESS_RESULT, shape_d512_APP_APP_ACCESS_COMMAND, shape_d512_APP_APP_ACCESS_APP_SETTING], laneRange1.getLeft(), laneRange1.getWidth(), "#FFFFFF");
-  addSectionBackground(sheet, "section_bg_d512_2_1", "① プロセス・通信サービス", [shape_d512_HOST_HOST_SERVICE_RUNTIME, shape_d512_HOST_HOST_SERVICE_SERVER, shape_d512_HOST_HOST_SERVICE_EVENT], laneRange2.getLeft(), laneRange2.getWidth(), "#FFFFFF");
-  addSectionBackground(sheet, "section_bg_d512_2_2", "② コマンド実行", [shape_d512_HOST_HOST_EXEC_CONTROL, shape_d512_HOST_HOST_EXEC_ORDER, shape_d512_HOST_HOST_EXEC_HOST_SETTING, shape_d512_HOST_HOST_EXEC_MANAGER], laneRange2.getLeft(), laneRange2.getWidth(), "#FFFFFF");
-  addSectionBackground(sheet, "section_bg_d512_2_3", "③ 既存デバイス資源呼出し", [shape_d512_HOST_HOST_ADAPTER_ADAPTER], laneRange2.getLeft(), laneRange2.getWidth(), "#FFFFFF");
+  addSectionBackground(sheet, "section_bg_d512_1_1", "責務グループ①：アプリケーション層（業務・プロセス管理）", [shape_d512_APP_APP_COORD_PROCESS, shape_d512_APP_APP_COORD_LIFECYCLE, shape_d512_APP_APP_COORD_BUSINESS], laneRange1.getLeft(), laneRange1.getWidth(), "none");
+  addSectionBackground(sheet, "section_bg_d512_1_2", "責務グループ②：デバイス制御層", [shape_d512_APP_APP_ACCESS_SELECT, shape_d512_APP_APP_ACCESS_RESULT, shape_d512_APP_APP_ACCESS_COMMAND, shape_d512_APP_APP_ACCESS_APP_SETTING], laneRange1.getLeft(), laneRange1.getWidth(), "none");
+  addSectionBackground(sheet, "section_bg_d512_2_1", "責務グループ①：プロセス・通信サービス", [shape_d512_HOST_HOST_SERVICE_RUNTIME, shape_d512_HOST_HOST_SERVICE_SERVER, shape_d512_HOST_HOST_SERVICE_EVENT], laneRange2.getLeft(), laneRange2.getWidth(), "none");
+  addSectionBackground(sheet, "section_bg_d512_2_2", "責務グループ②：コマンド実行", [shape_d512_HOST_HOST_EXEC_CONTROL, shape_d512_HOST_HOST_EXEC_ORDER, shape_d512_HOST_HOST_EXEC_HOST_SETTING, shape_d512_HOST_HOST_EXEC_MANAGER], laneRange2.getLeft(), laneRange2.getWidth(), "none");
+  addSectionBackground(sheet, "section_bg_d512_2_3", "責務グループ③：既存デバイス資源呼出し", [shape_d512_HOST_HOST_ADAPTER_ADAPTER], laneRange2.getLeft(), laneRange2.getWidth(), "none");
   const diagramBottom = Math.max(originTop + 90, groupBottom1, groupBottom2, groupBottom3);
   const bodyEndRowOffset = Math.max(11, Math.ceil((diagramBottom - originTop + 48) / 18) - 1);
   const canvasRowCount = Math.max(baselineCanvasRowCount, bodyEndRowOffset + 1);

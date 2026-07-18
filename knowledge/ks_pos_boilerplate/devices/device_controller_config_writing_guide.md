@@ -380,7 +380,7 @@ flowchart TD
 
 | device ID | name | classId | visible | productName | 用途 |
 |---|---|---|---|---|---|
-| `LineDisplay` | `SHARPRZ4DP1B` | `LineDisplay1` | `false` | `SHARPRZ4DP1B` | カスタマーディスプレイ |
+| `LineDisplay` | `SHARPRZ4DP1B` | `CustomerDisplay1` | `false` | `SHARPRZ4DP1B` | カスタマーディスプレイ |
 | `CashDrawer` | `SHARPUPJ36DW3` | `CashDrawer1` | `false` | `SHARPUPJ36DW3` | キャッシュドロワー |
 | `CashChanger` | `CASHCHANGER` | `CashChanger1` | `false` | - | 自動釣銭機 |
 
@@ -397,6 +397,8 @@ flowchart TD
 | 参照タイミング | タブレットPOSアプリ起動時、デバイス制御時 | Windows Host 起動時 |
 
 両ファイルの ID は必ずしも同一である必要はない。ただし、導入・保守時に追跡しやすいよう、device type、製品名、論理名の対応関係が分かる命名にする。
+
+`CustomerDisplay1` はHost設定上の実装識別IDであり、Host内部では既存クラスIDの `LineDisplay1` に変換して既存実装を生成する。既存のHost設定との互換性を維持するため、`LineDisplay1` も引き続き受け付ける。
 
 ## 5. デバイス取得・制御処理概要
 

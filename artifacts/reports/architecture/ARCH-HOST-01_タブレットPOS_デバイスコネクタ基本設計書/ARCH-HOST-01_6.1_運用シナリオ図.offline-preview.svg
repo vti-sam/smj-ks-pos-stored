@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 1332.00 594.00">
-<defs><marker id="arrow-548235" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#548235"/></marker><marker id="arrow-C00000" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#C00000"/></marker><marker id="arrow-C65911" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#C65911"/></marker><marker id="comment-callout-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#BF9000"/></marker></defs>
+<defs><marker id="arrow-1F4E79" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#1F4E79"/></marker><marker id="arrow-548235" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#548235"/></marker><marker id="arrow-C00000" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#C00000"/></marker><marker id="arrow-C65911" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#C65911"/></marker><marker id="comment-callout-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#BF9000"/></marker></defs>
 <rect width="1332.00" height="594.00" fill="#FFFFFF"/>
 <g transform="translate(18.0,18.0)">
 <rect x="0.00" y="0" width="432.00" height="24.0" fill="#FFFFFF" stroke="#1F4E79" stroke-width="2"/>
@@ -9,121 +9,133 @@
 <text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="13" font-weight="700" fill="#111111"><tspan x="648.00" y="12.00">デバイス操作フェーズ</tspan></text>
 <rect x="864.00" y="0" width="432.00" height="24.0" fill="#FFFFFF" stroke="#1F4E79" stroke-width="2"/>
 <text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="13" font-weight="700" fill="#111111"><tspan x="1080.00" y="12.00">終了フェーズ</tspan></text>
-<polyline points="802.67,484.00 893.35,484.00 893.35,104.00 984.04,104.00" fill="none" stroke="#548235" stroke-width="2"/>
-<polyline points="179.97,352.00 402.70,352.00 402.70,104.00 625.42,104.00" fill="none" stroke="#548235" stroke-width="2"/>
-<polyline points="1040.17,118.00 1040.17,130.00 1121.90,130.00 1121.90,142.00" fill="none" stroke="#548235" stroke-width="2"/>
-<polyline points="1121.90,194.00 1121.90,304.00 1040.17,304.00 1040.17,414.00" fill="none" stroke="#548235" stroke-width="2"/>
-<polyline points="1121.90,194.00 1121.90,206.00 1100.89,206.00 1100.89,218.00" fill="none" stroke="#548235" stroke-width="2"/>
-<polyline points="1100.89,254.00 1100.89,266.00 1179.45,266.00 1179.45,278.00" fill="none" stroke="#548235" stroke-width="2"/>
-<polyline points="1179.45,330.00 1179.45,372.00 1040.17,372.00 1040.17,414.00" fill="none" stroke="#548235" stroke-width="2"/>
-<polyline points="1179.45,330.00 1179.45,342.00 1160.28,342.00 1160.28,354.00" fill="none" stroke="#C00000" stroke-width="2" stroke-dasharray="8 6"/>
-<polyline points="1160.28,390.00 1160.28,402.00 1040.17,402.00 1040.17,414.00" fill="none" stroke="#C00000" stroke-width="2"/>
-<polyline points="686.81,118.00 686.81,130.00 651.99,130.00 651.99,142.00" fill="none" stroke="#548235" stroke-width="2"/>
-<polyline points="651.99,178.00 651.99,190.00 651.99,190.00 651.99,202.00" fill="none" stroke="#548235" stroke-width="2"/>
-<polyline points="651.99,238.00 651.99,250.00 646.13,250.00 646.13,262.00" fill="none" stroke="#548235" stroke-width="2"/>
-<polyline points="646.13,314.00 646.13,356.00 529.62,356.00 529.62,398.00" fill="none" stroke="#548235" stroke-width="2"/>
-<polyline points="577.62,416.00 620.14,416.00 620.14,484.00 662.67,484.00" fill="none" stroke="#548235" stroke-width="2"/>
+<polyline points="802.67,484.00 894.95,484.00 894.95,104.00 987.22,104.00" fill="none" stroke="#548235" stroke-width="2"/>
+<polyline points="182.09,464.00 403.75,464.00 403.75,104.00 625.42,104.00" fill="none" stroke="#548235" stroke-width="2"/>
+<polyline points="1043.36,118.00 1043.36,130.00 1126.87,130.00 1126.87,142.00" fill="none" stroke="#548235" stroke-width="2"/>
+<polyline points="1126.87,194.00 1126.87,330.00 1043.36,330.00 1043.36,466.00" fill="none" stroke="#548235" stroke-width="2"/>
+<polyline points="1126.87,194.00 1126.87,206.00 1097.58,206.00 1097.58,218.00" fill="none" stroke="#548235" stroke-width="2"/>
+<polyline points="1097.58,246.00 1097.58,258.00 1097.58,258.00 1097.58,270.00" fill="none" stroke="#548235" stroke-width="2"/>
+<polyline points="1097.58,306.00 1097.58,318.00 1177.85,318.00 1177.85,330.00" fill="none" stroke="#548235" stroke-width="2"/>
+<polyline points="1177.85,382.00 1177.85,424.00 1043.36,424.00 1043.36,466.00" fill="none" stroke="#548235" stroke-width="2"/>
+<polyline points="1177.85,382.00 1177.85,394.00 1158.26,394.00 1158.26,406.00" fill="none" stroke="#C00000" stroke-width="2" stroke-dasharray="8 6"/>
+<polyline points="1158.26,442.00 1158.26,454.00 1043.36,454.00 1043.36,466.00" fill="none" stroke="#C00000" stroke-width="2"/>
+<polyline points="686.81,118.00 686.81,130.00 651.99,130.00 651.99,142.00" fill="none" stroke="#1F4E79" stroke-width="2"/>
+<polyline points="651.99,178.00 651.99,190.00 651.99,190.00 651.99,202.00" fill="none" stroke="#1F4E79" stroke-width="2"/>
+<polyline points="651.99,238.00 651.99,250.00 646.13,250.00 646.13,262.00" fill="none" stroke="#1F4E79" stroke-width="2"/>
+<polyline points="646.13,314.00 646.13,356.00 529.62,356.00 529.62,398.00" fill="none" stroke="#1F4E79" stroke-width="2"/>
+<polyline points="577.62,416.00 620.14,416.00 620.14,484.00 662.67,484.00" fill="none" stroke="#1F4E79" stroke-width="2"/>
 <polyline points="646.13,314.00 646.13,356.00 664.12,356.00 664.12,398.00" fill="none" stroke="#C00000" stroke-width="2" stroke-dasharray="8 6"/>
 <polyline points="664.12,434.00 664.12,446.00 732.67,446.00 732.67,458.00" fill="none" stroke="#C00000" stroke-width="2"/>
-<polyline points="732.67,458.00 732.67,288.00 686.81,288.00 686.81,118.00" fill="none" stroke="#548235" stroke-width="2"/>
+<polyline points="732.67,458.00 732.67,288.00 686.81,288.00 686.81,118.00" fill="none" stroke="#1F4E79" stroke-width="2"/>
 <polyline points="651.99,238.00 651.99,288.00 718.12,288.00 718.12,338.00" fill="none" stroke="#C65911" stroke-width="2" stroke-dasharray="8 6"/>
-<polyline points="209.80,118.00 209.80,130.00 209.80,130.00 209.80,142.00" fill="none" stroke="#548235" stroke-width="2"/>
-<polyline points="209.80,178.00 209.80,190.00 209.80,190.00 209.80,202.00" fill="none" stroke="#548235" stroke-width="2"/>
-<polyline points="209.80,238.00 209.80,250.00 304.13,250.00 304.13,262.00" fill="none" stroke="#548235" stroke-width="2"/>
-<polyline points="234.13,288.00 207.05,288.00 207.05,352.00 179.97,352.00" fill="none" stroke="#548235" stroke-width="2"/>
-<polyline points="304.13,314.00 304.13,326.00 287.62,326.00 287.62,338.00" fill="none" stroke="#C00000" stroke-width="2" stroke-dasharray="8 6"/>
-<rect x="161.80" y="90.00" width="96.00" height="28.00" rx="8" fill="#F8FBFD" stroke="#1F4E79" stroke-width="2"/>
-<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="209.80" y="104.00">① アプリ起動</tspan></text>
-<rect x="150.77" y="142.00" width="118.05" height="36.00" rx="8" fill="#F8FBFD" stroke="#1F4E79" stroke-width="2"/>
-<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="209.80" y="153.25">② 設定を準備</tspan><tspan x="209.80" y="166.75">運用設定 → 初期設定</tspan></text>
-<rect x="148.41" y="202.00" width="122.78" height="36.00" rx="8" fill="#F8FBFD" stroke="#1F4E79" stroke-width="2"/>
-<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="209.80" y="213.25">③ デバイスコネクタと</tspan><tspan x="209.80" y="226.75">通信・デバイスを準備</tspan></text>
-<polygon points="304.13,262.00 374.13,288.00 304.13,314.00 234.13,288.00" fill="#FFF2CC" stroke="#1F4E79" stroke-width="2"/>
-<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="304.13" y="281.25">④ 起動準備が</tspan><tspan x="304.13" y="294.75">完了したか</tspan></text>
-<rect x="83.97" y="338.00" width="96.00" height="28.00" rx="8" fill="#F8FBFD" stroke="#1F4E79" stroke-width="2"/>
-<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="131.97" y="352.00">運用開始</tspan></text>
-<rect x="239.62" y="338.00" width="96.00" height="36.00" rx="8" fill="#F4CCCC" stroke="#1F4E79" stroke-width="2"/>
-<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="287.62" y="349.25">起動を中止して</tspan><tspan x="287.62" y="362.75">異常を記録</tspan></text>
-<rect x="625.42" y="90.00" width="122.78" height="28.00" rx="8" fill="#F8FBFD" stroke="#1F4E79" stroke-width="2"/>
+<polyline points="209.95,118.00 209.95,130.00 209.95,130.00 209.95,142.00" fill="none" stroke="#548235" stroke-width="2"/>
+<polyline points="209.95,178.00 209.95,190.00 209.95,190.00 209.95,202.00" fill="none" stroke="#548235" stroke-width="2"/>
+<polyline points="209.95,238.00 209.95,250.00 209.95,250.00 209.95,262.00" fill="none" stroke="#548235" stroke-width="2"/>
+<polyline points="209.95,298.00 209.95,310.00 209.95,310.00 209.95,322.00" fill="none" stroke="#548235" stroke-width="2"/>
+<polyline points="209.95,350.00 209.95,362.00 301.91,362.00 301.91,374.00" fill="none" stroke="#548235" stroke-width="2"/>
+<polyline points="231.91,400.00 207.00,400.00 207.00,464.00 182.09,464.00" fill="none" stroke="#548235" stroke-width="2"/>
+<polyline points="301.91,426.00 301.91,438.00 285.81,438.00 285.81,450.00" fill="none" stroke="#C00000" stroke-width="2" stroke-dasharray="8 6"/>
+<rect x="161.95" y="90.00" width="96.00" height="28.00" rx="8" fill="#DDEBF7" stroke="#1F4E79" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="209.95" y="104.00">① アプリ起動</tspan></text>
+<rect x="150.93" y="142.00" width="118.05" height="36.00" rx="8" fill="#DDEBF7" stroke="#1F4E79" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="209.95" y="153.25">② 設定を準備</tspan><tspan x="209.95" y="166.75">運用設定 → 初期設定</tspan></text>
+<rect x="143.31" y="202.00" width="133.28" height="36.00" rx="8" fill="#DDEBF7" stroke="#1F4E79" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="209.95" y="213.25">③ 既存プロセスを確認し</tspan><tspan x="209.95" y="226.75">未起動時だけ起動</tspan></text>
+<rect x="148.56" y="262.00" width="122.78" height="36.00" rx="8" fill="#FCE4D6" stroke="#1F4E79" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="209.95" y="273.25">④ デバイスコネクタは</tspan><tspan x="209.95" y="286.75">Mutexで二重起動防止</tspan></text>
+<rect x="143.31" y="322.00" width="133.28" height="28.00" rx="8" fill="#FCE4D6" stroke="#1F4E79" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="209.95" y="336.00">⑤ 通信・デバイスを準備</tspan></text>
+<polygon points="301.91,374.00 371.91,400.00 301.91,426.00 231.91,400.00" fill="#FFF2CC" stroke="#1F4E79" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="301.91" y="393.25">⑥ 起動準備が</tspan><tspan x="301.91" y="406.75">完了したか</tspan></text>
+<rect x="86.09" y="450.00" width="96.00" height="28.00" rx="8" fill="#DDEBF7" stroke="#1F4E79" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="134.09" y="464.00">運用開始</tspan></text>
+<rect x="237.81" y="450.00" width="96.00" height="36.00" rx="8" fill="#F4CCCC" stroke="#1F4E79" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="285.81" y="461.25">起動を中止して</tspan><tspan x="285.81" y="474.75">異常を記録</tspan></text>
+<rect x="625.42" y="90.00" width="122.78" height="28.00" rx="8" fill="#E2F0D9" stroke="#1F4E79" stroke-width="2"/>
 <text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="686.81" y="104.00">① デバイス操作を依頼</tspan></text>
-<rect x="598.74" y="142.00" width="106.50" height="36.00" rx="8" fill="#F8FBFD" stroke="#1F4E79" stroke-width="2"/>
+<rect x="598.74" y="142.00" width="106.50" height="36.00" rx="8" fill="#E2F0D9" stroke="#1F4E79" stroke-width="2"/>
 <text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="651.99" y="153.25">② 接続を確認して</tspan><tspan x="651.99" y="166.75">コマンド要求を送信</tspan></text>
-<rect x="598.74" y="202.00" width="106.50" height="36.00" rx="8" fill="#F8FBFD" stroke="#1F4E79" stroke-width="2"/>
+<rect x="598.74" y="202.00" width="106.50" height="36.00" rx="8" fill="#FCE4D6" stroke="#1F4E79" stroke-width="2"/>
 <text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="651.99" y="213.25">③ 順序制御して</tspan><tspan x="651.99" y="226.75">対象デバイスを制御</tspan></text>
 <polygon points="646.13,262.00 716.13,288.00 646.13,314.00 576.13,288.00" fill="#FFF2CC" stroke="#1F4E79" stroke-width="2"/>
 <text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="646.13" y="281.25">④ 同期結果を</tspan><tspan x="646.13" y="294.75">確定できたか</tspan></text>
-<rect x="670.12" y="338.00" width="96.00" height="36.00" rx="8" fill="#F8FBFD" stroke="#1F4E79" stroke-width="2"/>
+<rect x="670.12" y="338.00" width="96.00" height="36.00" rx="8" fill="#FCE4D6" stroke="#1F4E79" stroke-width="2"/>
 <text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="718.12" y="349.25">非同期イベントを</tspan><tspan x="718.12" y="362.75">アプリへ通知</tspan></text>
-<rect x="481.62" y="398.00" width="96.00" height="36.00" rx="8" fill="#F8FBFD" stroke="#1F4E79" stroke-width="2"/>
+<rect x="481.62" y="398.00" width="96.00" height="36.00" rx="8" fill="#E2F0D9" stroke="#1F4E79" stroke-width="2"/>
 <text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="529.62" y="409.25">正常応答または</tspan><tspan x="529.62" y="422.75">失敗応答を返却</tspan></text>
 <rect x="605.62" y="398.00" width="117.00" height="36.00" rx="8" fill="#F4CCCC" stroke="#1F4E79" stroke-width="2"/>
 <text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="664.12" y="409.25">通信失敗を返却</tspan><tspan x="664.12" y="422.75">送信後は自動再送なし</tspan></text>
 <polygon points="732.67,458.00 802.67,484.00 732.67,510.00 662.67,484.00" fill="#FFF2CC" stroke="#1F4E79" stroke-width="2"/>
 <text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="732.67" y="484.00">運用を継続するか</tspan></text>
-<rect x="984.04" y="90.00" width="112.28" height="28.00" rx="8" fill="#F8FBFD" stroke="#1F4E79" stroke-width="2"/>
-<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="1040.17" y="104.00">① アプリ停止・破棄</tspan></text>
-<polygon points="1121.90,142.00 1191.90,168.00 1121.90,194.00 1051.90,168.00" fill="#FFF2CC" stroke="#1F4E79" stroke-width="2"/>
-<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="1121.90" y="168.00">② 所有プロセスか</tspan></text>
-<rect x="1039.50" y="218.00" width="122.78" height="36.00" rx="8" fill="#F8FBFD" stroke="#1F4E79" stroke-width="2"/>
-<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="1100.89" y="229.25">③ 停止要求を送信して</tspan><tspan x="1100.89" y="242.75">終了を監視</tspan></text>
-<polygon points="1179.45,278.00 1249.45,304.00 1179.45,330.00 1109.45,304.00" fill="#FFF2CC" stroke="#1F4E79" stroke-width="2"/>
-<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="1179.45" y="297.25">④ 10秒以内に</tspan><tspan x="1179.45" y="310.75">終了したか</tspan></text>
-<rect x="1101.78" y="354.00" width="117.00" height="36.00" rx="8" fill="#F4CCCC" stroke="#1F4E79" stroke-width="2"/>
-<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="1160.28" y="365.25">所有プロセスツリーを</tspan><tspan x="1160.28" y="378.75">強制終了</tspan></text>
-<rect x="992.17" y="414.00" width="96.00" height="28.00" rx="8" fill="#F8FBFD" stroke="#1F4E79" stroke-width="2"/>
-<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="1040.17" y="428.00">終了処理完了</tspan></text>
-<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="984.04,104.00 974.04,108.50 974.04,99.50" fill="#548235"/>
+<rect x="987.22" y="90.00" width="112.28" height="28.00" rx="8" fill="#DDEBF7" stroke="#1F4E79" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="1043.36" y="104.00">① アプリ停止・破棄</tspan></text>
+<polygon points="1126.87,142.00 1196.87,168.00 1126.87,194.00 1056.87,168.00" fill="#FFF2CC" stroke="#1F4E79" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="1126.87" y="168.00">② 所有プロセスか</tspan></text>
+<rect x="1046.69" y="218.00" width="101.78" height="28.00" rx="8" fill="#DDEBF7" stroke="#1F4E79" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="1097.58" y="232.00">③ 停止要求を送信</tspan></text>
+<rect x="1036.19" y="270.00" width="122.78" height="36.00" rx="8" fill="#FCE4D6" stroke="#1F4E79" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="1097.58" y="281.25">④ デバイスコネクタが</tspan><tspan x="1097.58" y="294.75">接続とデバイスを停止</tspan></text>
+<polygon points="1177.85,330.00 1247.85,356.00 1177.85,382.00 1107.85,356.00" fill="#FFF2CC" stroke="#1F4E79" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="1177.85" y="349.25">⑤ 10秒以内に</tspan><tspan x="1177.85" y="362.75">終了したか</tspan></text>
+<rect x="1099.76" y="406.00" width="117.00" height="36.00" rx="8" fill="#F4CCCC" stroke="#1F4E79" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="1158.26" y="417.25">所有プロセスツリーを</tspan><tspan x="1158.26" y="430.75">強制終了</tspan></text>
+<rect x="995.36" y="466.00" width="96.00" height="28.00" rx="8" fill="#DDEBF7" stroke="#1F4E79" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="10" font-weight="700" fill="#111111"><tspan x="1043.36" y="480.00">終了処理完了</tspan></text>
+<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="987.22,104.00 977.22,108.50 977.22,99.50" fill="#548235"/>
 <polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="625.42,104.00 615.42,108.50 615.42,99.50" fill="#548235"/>
-<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="1121.90,142.00 1117.40,132.00 1126.40,132.00" fill="#548235"/>
-<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="1040.17,414.00 1035.67,404.00 1044.67,404.00" fill="#548235"/>
-<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="1100.89,218.00 1096.39,208.00 1105.39,208.00" fill="#548235"/>
-<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="1179.45,278.00 1174.95,268.00 1183.95,268.00" fill="#548235"/>
-<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="1040.17,414.00 1035.67,404.00 1044.67,404.00" fill="#548235"/>
-<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="1160.28,354.00 1155.78,344.00 1164.78,344.00" fill="#C00000"/>
-<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="1040.17,414.00 1035.67,404.00 1044.67,404.00" fill="#C00000"/>
-<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="651.99,142.00 647.49,132.00 656.49,132.00" fill="#548235"/>
-<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="651.99,202.00 647.49,192.00 656.49,192.00" fill="#548235"/>
-<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="646.13,262.00 641.63,252.00 650.63,252.00" fill="#548235"/>
-<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="529.62,398.00 525.12,388.00 534.12,388.00" fill="#548235"/>
-<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="662.67,484.00 652.67,488.50 652.67,479.50" fill="#548235"/>
+<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="1126.87,142.00 1122.37,132.00 1131.37,132.00" fill="#548235"/>
+<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="1043.36,466.00 1038.86,456.00 1047.86,456.00" fill="#548235"/>
+<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="1097.58,218.00 1093.08,208.00 1102.08,208.00" fill="#548235"/>
+<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="1097.58,270.00 1093.08,260.00 1102.08,260.00" fill="#548235"/>
+<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="1177.85,330.00 1173.35,320.00 1182.35,320.00" fill="#548235"/>
+<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="1043.36,466.00 1038.86,456.00 1047.86,456.00" fill="#548235"/>
+<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="1158.26,406.00 1153.76,396.00 1162.76,396.00" fill="#C00000"/>
+<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="1043.36,466.00 1038.86,456.00 1047.86,456.00" fill="#C00000"/>
+<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="651.99,142.00 647.49,132.00 656.49,132.00" fill="#1F4E79"/>
+<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="651.99,202.00 647.49,192.00 656.49,192.00" fill="#1F4E79"/>
+<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="646.13,262.00 641.63,252.00 650.63,252.00" fill="#1F4E79"/>
+<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="529.62,398.00 525.12,388.00 534.12,388.00" fill="#1F4E79"/>
+<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="662.67,484.00 652.67,488.50 652.67,479.50" fill="#1F4E79"/>
 <polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="664.12,398.00 659.62,388.00 668.62,388.00" fill="#C00000"/>
 <polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="732.67,458.00 728.17,448.00 737.17,448.00" fill="#C00000"/>
-<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="686.81,118.00 691.31,128.00 682.31,128.00" fill="#548235"/>
+<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="686.81,118.00 691.31,128.00 682.31,128.00" fill="#1F4E79"/>
 <polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="718.12,338.00 713.62,328.00 722.62,328.00" fill="#C65911"/>
-<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="209.80,142.00 205.30,132.00 214.30,132.00" fill="#548235"/>
-<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="209.80,202.00 205.30,192.00 214.30,192.00" fill="#548235"/>
-<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="304.13,262.00 299.63,252.00 308.63,252.00" fill="#548235"/>
-<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="179.97,352.00 189.97,347.50 189.97,356.50" fill="#548235"/>
-<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="287.62,338.00 283.12,328.00 292.12,328.00" fill="#C00000"/>
+<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="209.95,142.00 205.45,132.00 214.45,132.00" fill="#548235"/>
+<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="209.95,202.00 205.45,192.00 214.45,192.00" fill="#548235"/>
+<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="209.95,262.00 205.45,252.00 214.45,252.00" fill="#548235"/>
+<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="209.95,322.00 205.45,312.00 214.45,312.00" fill="#548235"/>
+<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="301.91,374.00 297.41,364.00 306.41,364.00" fill="#548235"/>
+<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="182.09,464.00 192.09,459.50 192.09,468.50" fill="#548235"/>
+<polygon data-edge-arrowhead="true" data-edge-arrowhead-position="end" points="285.81,450.00 281.31,440.00 290.31,440.00" fill="#C00000"/>
 <line data-shape-comment-pointer="true" x1="588.74" y1="220.00" x2="598.74" y2="220.00" stroke="#BF9000" stroke-width="2" marker-end="url(#comment-callout-arrow)"/>
 <rect data-shape-comment="true" data-shape-comment-type="wedgeRRectCallout" x="428.74" y="193.50" width="160.00" height="53.00" rx="8" fill="#FFF2CC" fill-opacity="0.30" stroke="#BF9000" stroke-width="2"/>
 <text text-anchor="start" dominant-baseline="middle" font-family="Hiragino Sans" font-size="9" font-weight="400" fill="#404040"><tspan x="436.74" y="207.40">設計上の役割：デバイス操作フェーズ。</tspan><tspan x="436.74" y="220.00">入力は② 接続を確認して、出力先は④</tspan><tspan x="436.74" y="232.60">同期結果を、非同期イベントをです。</tspan></text>
-<line data-shape-comment-pointer="true" x1="1041.90" y1="168.00" x2="1051.90" y2="168.00" stroke="#BF9000" stroke-width="2" marker-end="url(#comment-callout-arrow)"/>
-<rect data-shape-comment="true" data-shape-comment-type="wedgeRRectCallout" x="892.70" y="141.50" width="149.20" height="53.00" rx="8" fill="#FFF2CC" fill-opacity="0.30" stroke="#BF9000" stroke-width="2"/>
-<text text-anchor="start" dominant-baseline="middle" font-family="Hiragino Sans" font-size="9" font-weight="400" fill="#404040"><tspan x="900.70" y="155.40">アプリが起動した所有</tspan><tspan x="900.70" y="168.00">プロセスだけを停止対象とします。</tspan><tspan x="900.70" y="180.60">既存プロセスは停止しません。</tspan></text>
+<line data-shape-comment-pointer="true" x1="1046.87" y1="168.00" x2="1056.87" y2="168.00" stroke="#BF9000" stroke-width="2" marker-end="url(#comment-callout-arrow)"/>
+<rect data-shape-comment="true" data-shape-comment-type="wedgeRRectCallout" x="897.67" y="141.50" width="149.20" height="53.00" rx="8" fill="#FFF2CC" fill-opacity="0.30" stroke="#BF9000" stroke-width="2"/>
+<text text-anchor="start" dominant-baseline="middle" font-family="Hiragino Sans" font-size="9" font-weight="400" fill="#404040"><tspan x="905.67" y="155.40">アプリが起動した所有</tspan><tspan x="905.67" y="168.00">プロセスだけを停止対象とします。</tspan><tspan x="905.67" y="180.60">既存プロセスは停止しません。</tspan></text>
 <line data-shape-comment-pointer="true" x1="652.67" y1="484.00" x2="662.67" y2="484.00" stroke="#BF9000" stroke-width="2" marker-end="url(#comment-callout-arrow)"/>
 <rect data-shape-comment="true" data-shape-comment-type="wedgeRRectCallout" x="503.47" y="457.50" width="149.20" height="53.00" rx="8" fill="#FFF2CC" fill-opacity="0.30" stroke="#BF9000" stroke-width="2"/>
 <text text-anchor="start" dominant-baseline="middle" font-family="Hiragino Sans" font-size="9" font-weight="400" fill="#404040"><tspan x="511.47" y="471.40">失敗応答と通信失敗を区別します。</tspan><tspan x="511.47" y="484.00">同期結果を確定できない</tspan><tspan x="511.47" y="496.60">要求は自動再送しません。</tspan></text>
 <rect x="810.67" y="455.00" width="36.00" height="22.00" fill="#FFFFFF" stroke="#1F4E79" stroke-width="2"/>
 <text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="9" font-weight="400" fill="#111111"><tspan x="828.67" y="466.00">いいえ</tspan></text>
-<rect x="1022.17" y="261.00" width="36.00" height="22.00" fill="#FFFFFF" stroke="#1F4E79" stroke-width="2"/>
-<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="9" font-weight="400" fill="#111111"><tspan x="1040.17" y="272.00">いいえ</tspan></text>
-<rect x="1115.89" y="195.00" width="34.00" height="22.00" fill="#FFFFFF" stroke="#1F4E79" stroke-width="2"/>
-<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="9" font-weight="400" fill="#111111"><tspan x="1132.89" y="206.00">はい</tspan></text>
-<rect x="1023.17" y="329.00" width="34.00" height="22.00" fill="#FFFFFF" stroke="#1F4E79" stroke-width="2"/>
-<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="9" font-weight="400" fill="#111111"><tspan x="1040.17" y="340.00">はい</tspan></text>
-<rect x="1174.28" y="331.00" width="36.00" height="22.00" fill="#FFFFFF" stroke="#1F4E79" stroke-width="2"/>
-<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="9" font-weight="400" fill="#111111"><tspan x="1192.28" y="342.00">いいえ</tspan></text>
+<rect x="1025.36" y="351.00" width="36.00" height="22.00" fill="#FFFFFF" stroke="#1F4E79" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="9" font-weight="400" fill="#111111"><tspan x="1043.36" y="362.00">いいえ</tspan></text>
+<rect x="1112.58" y="195.00" width="34.00" height="22.00" fill="#FFFFFF" stroke="#1F4E79" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="9" font-weight="400" fill="#111111"><tspan x="1129.58" y="206.00">はい</tspan></text>
+<rect x="1026.36" y="381.00" width="34.00" height="22.00" fill="#FFFFFF" stroke="#1F4E79" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="9" font-weight="400" fill="#111111"><tspan x="1043.36" y="392.00">はい</tspan></text>
+<rect x="1172.26" y="383.00" width="36.00" height="22.00" fill="#FFFFFF" stroke="#1F4E79" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="9" font-weight="400" fill="#111111"><tspan x="1190.26" y="394.00">いいえ</tspan></text>
 <rect x="605.13" y="322.00" width="34.00" height="22.00" fill="#FFFFFF" stroke="#1F4E79" stroke-width="2"/>
 <text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="9" font-weight="400" fill="#111111"><tspan x="622.13" y="333.00">はい</tspan></text>
 <rect x="614.12" y="345.00" width="36.00" height="22.00" fill="#FFFFFF" stroke="#1F4E79" stroke-width="2"/>
 <text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="9" font-weight="400" fill="#111111"><tspan x="632.12" y="356.00">いいえ</tspan></text>
 <rect x="739.67" y="428.00" width="34.00" height="22.00" fill="#FFFFFF" stroke="#1F4E79" stroke-width="2"/>
 <text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="9" font-weight="400" fill="#111111"><tspan x="756.67" y="439.00">はい</tspan></text>
-<rect x="192.13" y="295.00" width="34.00" height="22.00" fill="#FFFFFF" stroke="#1F4E79" stroke-width="2"/>
-<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="9" font-weight="400" fill="#111111"><tspan x="209.13" y="306.00">はい</tspan></text>
-<rect x="301.62" y="315.00" width="36.00" height="22.00" fill="#FFFFFF" stroke="#1F4E79" stroke-width="2"/>
-<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="9" font-weight="400" fill="#111111"><tspan x="319.62" y="326.00">いいえ</tspan></text>
-<metadata data-rendered-comments="3" data-rendered-edge-start-arrows="0" data-rendered-edge-end-arrows="23"/>
+<rect x="189.91" y="407.00" width="34.00" height="22.00" fill="#FFFFFF" stroke="#1F4E79" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="9" font-weight="400" fill="#111111"><tspan x="206.91" y="418.00">はい</tspan></text>
+<rect x="299.81" y="427.00" width="36.00" height="22.00" fill="#FFFFFF" stroke="#1F4E79" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="middle" font-family="Hiragino Sans" font-size="9" font-weight="400" fill="#111111"><tspan x="317.81" y="438.00">いいえ</tspan></text>
+<metadata data-rendered-comments="3" data-rendered-edge-start-arrows="0" data-rendered-edge-end-arrows="26"/>
 </g>
 </svg>
