@@ -1,0 +1,6 @@
+tables:
+  wbs:
+    display_title: Estimate Gantt / 見積ガント
+    description: >-
+      Dùng để quản lý estimate schedule có Gantt chart: hạng mục estimate, deliverable, owner,
+      ngày bắt đầu, deadline, trạng thái và tiêu chí hoàn thành.

@@ -1,7 +1,7 @@
 # AGENTS.md
 
-- `project-store/` là snapshot dữ liệu dự án được quản lý bởi Git repo stored khai báo trong `registry/projects.yaml`.
-- Chỉ đặt các folder dữ liệu portable trong subtree này: `knowledge/`, `memory/`, `artifacts/`, `management/`.
+- `project-store/` là snapshot dữ liệu và cấu hình portable riêng của dự án, được quản lý bằng nested Git repo do User clone thủ công.
+- Chỉ đặt các folder portable trong subtree này: `config/`, `knowledge/`, `memory/`, `artifacts/`, `management/`.
 
 ## Commands
 
@@ -13,9 +13,10 @@
 ## Boundaries
 
 - `memory/` chỉ lưu lịch sử phiên và ghi chú tác nhân dạng historical; không dùng làm source-of-truth active. Khi nội dung có giá trị bền, promote sang `knowledge/` với source/evidence rõ.
-- Không lưu source code, secret, token, cache/index, build output hoặc file nháp tạm trong `project-store/`.
-- Khi bootstrap workspace, fetch/pull repo stored về đúng `project-store/` trước khi dùng các workflow cần dữ liệu dự án.
-- Sau khi sửa nội dung trong `project-store/knowledge/`, `project-store/memory/`, `project-store/artifacts/` hoặc `project-store/management/`, kiểm tra repo stored bằng Git; không dùng Google Drive/rclone làm snapshot backend mặc định.
+- Không lưu source code, secret tracked, cache/index, build output hoặc file nháp tạm trong `project-store/`.
+- File portable trong `config/` chỉ chứa định danh, resource ID, binding và tham chiếu local; secret/token/key thật chỉ nằm trong biến môi trường hoặc các path local bị nested Git ignore.
+- Trước khi bootstrap workspace, User clone repo stored về đúng `project-store/`; bootstrap không fetch/pull repo này.
+- Sau khi sửa nội dung portable trong `project-store/`, kiểm tra repo stored bằng Git; không dùng Google Drive/rclone làm snapshot backend mặc định.
 - Link nội bộ trong snapshot nên viết từ repo root bằng tiền tố `project-store/` khi tài liệu được tham chiếu từ ngoài subtree.
 
 ## Git Workflow
@@ -27,4 +28,4 @@
 ## Examples
 
 - Đúng: file gốc hoặc bản xuất ra để lưu bền đặt trong `project-store/artifacts/`; ghi chú đã tổng hợp và có source/evidence đặt trong `project-store/knowledge/`.
-- Sai: lưu source code, cache index, secret, file nháp tạm hoặc dữ liệu chưa xác minh trực tiếp trong `project-store/`.
+- Sai: commit source code, cache index, secret hoặc file nháp tạm vào stored repo.

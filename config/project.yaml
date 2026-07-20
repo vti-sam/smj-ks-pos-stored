@@ -1,0 +1,45 @@
+schema_version: 1
+
+project:
+  id: smj-ks-pos
+  display_name: SMJ KS POS
+  folder: smj-ks-pos
+  aliases: []
+
+google:
+  service_account:
+    email: project-sheets-bot@sharp-smj-sheets.iam.gserviceaccount.com
+    key_path: project-store/config/keystore.local/google/sheets-service-account.json
+    credentials_env: GOOGLE_APPLICATION_CREDENTIALS
+    mcp_credentials_env: SERVICE_ACCOUNT_PATH
+  resources:
+    spreadsheet_id: 1cNCS6-y0tX7hkpZ2Y26UfVVPGtFOOxQOwd5AVfUgMpA
+    spreadsheet_url: https://docs.google.com/spreadsheets/d/1cNCS6-y0tX7hkpZ2Y26UfVVPGtFOOxQOwd5AVfUgMpA/edit
+    drive_folder_id: 180qn9_ruaXA703CDd9VDlbpgPJnNONkP
+
+backlog:
+  role_aliases:
+    customer: backlogCus
+    cus: backlogCus
+    backlogCus: backlogCus
+    internal: backlogMe
+    me: backlogMe
+    backlogMe: backlogMe
+  bindings:
+    backlogCus:
+      connection: backlog-customer-smj-ks-pos
+      project_key: KSNEWSYS
+      language: ja
+    backlogMe:
+      connection: backlog-vti-smj-ks-pos
+      project_key: SHARP_MULTI_DEVICE_POS
+      language: vi
+  connections:
+    backlog-customer-smj-ks-pos:
+      name: Backlog KH SMJ
+      base_url: https://siconnect.backlog.com
+      api_key_env: BACKLOG_CUSTOMER_SMJ_API_KEY
+    backlog-vti-smj-ks-pos:
+      name: Backlog VTI SMJ
+      base_url: https://vti-corp.backlog.com
+      api_key_env: BACKLOG_VTI_SMJ_API_KEY

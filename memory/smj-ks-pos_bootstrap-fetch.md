@@ -24,7 +24,6 @@ promote_to_knowledge: false
 - Google Sheets full fetch completed with 39 WBS, 10 risks, 11 decisions, 11 stakeholders, and 10 communications records.
 - Google Drive `modifiedTime` lookup returned `FAILED_PRECONDITION`; management sync used its `full_fetch` fallback successfully.
 - Backlog project keys are `KSNEWSYS` for customer and `SHARP_MULTI_DEVICE_POS` for internal.
-- On 2026-06-21, `scripts/bootstrap_project.py` was updated so `project-store/` is recreated as a nested Git repository with `origin` set to the stored repo registered in `registry/projects.yaml`.
-- The stored repo currently keeps data under a `project-store/` prefix, so bootstrap strips `stored_repo.source_root` into the nested repo root instead of creating `project-store/project-store`.
-- `project-data.template.yaml` restores the management `layout` and `tables` schema when ignored local `project-data.yaml` only has the minimal project fields.
+- Cập nhật 2026-07-18: cơ chế bootstrap tự clone/recreate stored repo và mapping dự án tại registry chung đã bị loại bỏ. Bootstrap chỉ kiểm tra nested Git repo đã được chuẩn bị thủ công; cấu hình dự án nằm tại `project-store/config/project.yaml`.
+- Template management dùng chung hiện nằm tại `skills/project-ops/management-sync/resources/project-data.template.yaml`.
 - Rider local VCS mapping includes both `$PROJECT_DIR$` and `$PROJECT_DIR$/project-store`.
