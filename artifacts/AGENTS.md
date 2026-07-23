@@ -26,7 +26,7 @@
 - Mã tài liệu phải thể hiện loại tài liệu trước, sau đó mới đến phạm vi/domain; không dùng mã sản phẩm hoặc domain thay cho loại tài liệu.
 - Mã tài liệu cấp file dùng dạng `<doc_type>-<domain>-<seq2>` hoặc `<doc_type>-<phase>-<domain>-<seq2>` khi loại tài liệu cần phase. `seq2` là số thứ tự 2 chữ số trong cùng nhóm.
 - Mã tài liệu cấp bundle dùng cùng quy tắc nhưng có thể bỏ domain khi bundle gom nhiều tài liệu con cùng loại và cùng title nhóm, ví dụ bundle đơn thể test dùng `TC-UT-01`.
-- Code loại tài liệu chuẩn trong subtree này: `ARCH` = 構造設計書, `CFG` = 設定ファイル記載要領, `PS` = プログラム仕様書, `TC` = テストケース.
+- Code loại tài liệu chuẩn trong subtree này: `ARCH` = 構造設計書, `CFG` = 設定ファイル記載要領, `EX` = 実装例, `PS` = プログラム仕様書, `TC` = テストケース.
 - Code phase testcase chuẩn: `UT` = 単体テスト, `IT` = 結合テスト, `ST` = システムテスト, `UAT` = 受入テスト. Trong testcase, `IT` luôn nghĩa là 結合テスト, không dùng để chỉ Information Technology.
 - Code domain chuẩn phải là ASCII uppercase ổn định và có nghĩa nghiệp vụ/kỹ thuật rõ, ví dụ `HOST`, `STATE`, `MON`, `DEVICE`. Nếu cần tách nhỏ theo thiết bị, thêm domain phụ sau domain chính thay vì bỏ domain chính.
 - Các bản xuất cùng nội dung nhưng khác định dạng phải giữ cùng basename và chỉ khác extension; nếu cần gom theo định dạng, dùng subfolder như `excel/`.

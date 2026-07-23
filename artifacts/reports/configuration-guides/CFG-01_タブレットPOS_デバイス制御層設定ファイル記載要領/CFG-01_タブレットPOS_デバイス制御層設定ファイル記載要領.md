@@ -6,7 +6,7 @@ type: configuration-guide
 status: draft
 source:
   - chat:2026-06-11
-  - sources/tabletposboilerplate/TabetPos.Applications/Resources/Raw/device_controller_config.json
+  - sources/tabletposboilerplate/TabetPos.DeviceCtrl/Resources/Raw/device_controller_config.json
   - sources/tabletposboilerplate/TabetPos.Host/src/AppServer/Resources/host_device_config.json
 tags:
   - タブレットPOS
@@ -23,10 +23,11 @@ tags:
 
 | 改訂日 | 版数 | 内容 | 改訂者 | 承認者 |
 |---|---|---|---|---|
-| 2026/06/11 | 0.1.0 | `device_controller_config.json` および `host_device_config.json` の記載要領を新規作成 | VTI-サム | - |
-| 2026/06/12 | 0.1.1 | デバイス種類ごとの `device_controller_config.json` 記載例を追加 | VTI-サム | - |
-| 2026/06/15 | 0.1.2 | `device_controller_config.json` の全体記載例を追加 | VTI-サム | - |
+| 2026/07/23 | 0.1.4 | device_controller_config.jsonの管理責務をDeviceCtrlへ統一し、読込・フォールバック、接続方式、およびプラットフォーム別の利用状態を現行実装に合わせて更新 | VTI-サム | - |
 | 2026/06/25 | 0.1.3 | 設定ファイル名、配置先、Named Pipe 名を現行構成に合わせて更新 | VTI-サム | - |
+| 2026/06/15 | 0.1.2 | `device_controller_config.json` の全体記載例を追加 | VTI-サム | - |
+| 2026/06/12 | 0.1.1 | デバイス種類ごとの `device_controller_config.json` 記載例を追加 | VTI-サム | - |
+| 2026/06/11 | 0.1.0 | `device_controller_config.json` および `host_device_config.json` の記載要領を新規作成 | VTI-サム | - |
 
 ## 目次
 
@@ -86,7 +87,7 @@ tags:
 
 | ファイル | 所在 | 用途 |
 |---|---|---|
-| `device_controller_config.json` | `TabetPos.Applications/Resources/Raw/device_controller_config.json` | アプリに同梱する初期設定 |
+| `device_controller_config.json` | `TabetPos.DeviceCtrl/Resources/Raw/device_controller_config.json` | DeviceCtrlに埋め込むデフォルト設定 |
 | `device_controller_config.json` | `FileSystem.AppDataDirectory/device_controller_config.json` | 起動後に編集・保存する端末別設定 |
 | `host_device_config.json` | `TabetPos.Host/src/AppServer/Resources/host_device_config.json` | デバイスコネクタ（Host）側に同梱するデバイス実装設定 |
 | `host_device_config.json` | `デバイスコネクタ実行フォルダ\Resources\host_device_config.json` | ビルド後にデバイスコネクタ（Host）が実際に読み込む設定 |
@@ -94,6 +95,7 @@ tags:
 ### 1.3 前提事項
 
 - `device_controller_config.json` は、端末アプリケーション側で使用するデバイス設定である。
+- `device_controller_config.json` の読込、フォールバック、保存、デシリアライズ、および適用は DeviceCtrl が行う。アプリケーション層は DeviceManager の公開 API だけを呼び出す。
 - `host_device_config.json` は、デバイスコネクタ（Host）側で使用するデバイス設定である。
 - `device_controller_config.json` は、デバイスコネクタ（Host）側のデバイス読込設定を置き換えない。
 - Windows の OPOS / OCX / ActiveX lifecycle はデバイスコネクタ（Host）側に閉じ込める。
@@ -138,7 +140,7 @@ tags:
 
 | 設定ファイル | 管轄 | 目的 | 主な構成 | 読込タイミング |
 |---|---|---|---|---|
-| `device_controller_config.json` | 端末アプリケーション側 | 端末で使用するデバイス候補と有効デバイスを定義する | `devices`, `activeDevices`, `appSettings` | タブレットPOSアプリ起動時 |
+| `device_controller_config.json` | DeviceCtrl | 端末で使用するデバイス候補と有効デバイスを定義する | `devices`, `activeDevices`, `appSettings` | DeviceManagerの初期化時 |
 | `host_device_config.json` | デバイスコネクタ（Host）側 | デバイスコネクタ（Host）がロードする既存デバイス資源を定義する | `devices` | デバイスコネクタ（Host）起動時 |
 
 補足:
@@ -167,7 +169,7 @@ tags:
 |---|---|
 | 目的 | 端末アプリケーションから見たデバイス候補と、OS ごとの有効デバイスを定義する |
 | 対象 | Windows / iOS / Android の各端末で使用する周辺機器 |
-| 使用者 | タブレットPOSアプリ、デバイス制御層 |
+| 使用者 | デバイス制御層（DeviceCtrl） |
 | 主な判断 | どの OS で、どの device ID を使用し、どの接続方式で制御するか |
 
 ### 3.2 起動時設定読込フロー
@@ -178,14 +180,14 @@ tags:
 
 | 処理順 | 処理 | 内容 | 備考 |
 |---|---|---|---|
-| 1 | タブレットPOSアプリ起動 | タブレットPOSアプリの起動時に設定読込処理を開始する | - |
-| 2 | 端末別設定ファイル確認 | AppData 配下に端末別の `device_controller_config.json` が存在するか確認する | 存在する場合は端末別設定を優先する |
-| 3 | 初期設定使用 | 端末別設定がない場合、アプリに同梱された初期設定を使用する | 初期導入時の標準設定として使用する |
-| 4 | 設定ファイル読込 | 選択した `device_controller_config.json` を読み込む | JSON が読めない場合は設定不備として扱う |
-| 5 | 設定内容確認 | `devices`, `activeDevices`, `appSettings` の内容を確認する | 参照先 device ID が存在しない場合は設定不備として扱う |
-| 6 | 使用デバイス決定 | 現在の OS に応じて使用するデバイスを `activeDevices` から判定する | 対象 OS の定義が不整合な場合は設定不備として扱う |
-| 7 | 共通設定保持 | `appSettings.namedPipe` などの共通設定を保持する | デバイスコネクタ（Host）経由デバイスで使用する |
-| 8 | 利用準備完了 | デバイス制御層（DeviceCtrl）で利用できる状態にする | - |
+| 1 | 初期化要求 | MauiProgramがDeviceManager.InitializeAsyncを呼び出す | アプリケーション層はファイルを読み込まない |
+| 2 | ランタイム設定確認 | DeviceCtrlがAppData配下のdevice_controller_config.jsonを確認する | 存在する場合はランタイム設定を優先する |
+| 3 | ランタイム設定読込 | ランタイム設定をDeviceConfigへ変換する | 読込またはJSON解析に失敗した場合は警告ログを出力する |
+| 4 | デフォルト設定使用 | ランタイム設定が存在しない、または使用できない場合、DeviceCtrlに埋め込まれたデフォルト設定を読み込む | ランタイム設定が存在しない場合は警告ログを出力しない |
+| 5 | デフォルト設定確認 | デフォルト設定をDeviceConfigへ変換する | 読込またはJSON解析に失敗した場合はエラーログを出力し、初期化を中止する |
+| 6 | 設定内容確認 | devices、activeDevices、appSettingsの内容を確認する | 参照先device IDが存在しない場合は設定不備として扱う |
+| 7 | 設定適用 | DeviceManagerがOS別のストラテジーを登録し、有効デバイスと共通設定を適用する | 同時に複数回初期化されても読込と適用は一度だけ行う |
+| 8 | 利用準備完了 | DeviceCtrlの公開Getterを利用できる状態にする | OperationCanceledExceptionではフォールバックせず呼出元へ返す |
 
 ### 3.4 ルート項目
 
@@ -224,7 +226,7 @@ tags:
 
 | 分類 | キー | 型 | 必須 | 内容 | 備考 |
 |---|---|---|---|---|---|
-| devices[].config | `connectiontype` | string | 任意 | 接続方式 | `COM`, `USB`, `wifi`, `bluetooth`, `NamedPipe`, `camera` |
+| devices[].config | `connectiontype` | string | 任意 | ストラテジーが解釈する接続方式 | `wifi`, `bluetooth`, `serial`, `camera`, `USB`, `COM`, `NamedPipe`, `RawInput`。iOSプリンターは`tcp`, `wi-fi`もTCP/IP接続として扱う |
 | devices[].config | `ipaddress` | string | 任意 | IP アドレス | Network device で使用 |
 | devices[].config | `port` | string | 任意 | ポート番号 | TCP 接続時に使用 |
 | devices[].config | `comport` | string | 任意 | COM ポート名 | Serial device で使用 |
@@ -243,6 +245,8 @@ tags:
 - Serial device の場合は `comport`, `baudrate`, `parity`, `databits`, `stopbits`, `handshake` を確認する。
 - Network device の場合は `ipaddress` と `port` を確認する。
 - Bluetooth device の場合は `bluetoothaddress` または制御方式が参照する address 項目を確認する。
+- `connectiontype` は文字列であり、DeviceConnectionType列挙を設定値の全一覧として扱わない。
+- WindowsのOPOS・OCXストラテジーでは、`connectiontype`の値にかかわらずDeviceCtrlからデバイスコネクタまでは`appSettings.namedPipe`で指定した名前付きパイプを使用する。
 
 ### 3.7 activeDevices
 
@@ -295,6 +299,17 @@ tags:
 | `windows` | Windows POS 端末 |
 | `ios` | iPad / iOS 端末 |
 | `android` | Android 端末 |
+
+#### connectiontype
+
+| 対象 | 主な値 | 接続情報と扱い |
+|---|---|---|
+| Windows OPOS・OCXデバイス | `serial`, `COM`, `USB`, `NamedPipe` | デバイス定義上の接続情報として保持する。DeviceCtrlとデバイスコネクタ間の実通信は名前付きパイプを使用し、周辺機器側のUSB・COMはデバイスコネクタで管理する |
+| Windowsシリアルデバイス | `serial`, `COM`, `USB` | `comport`とシリアル通信項目を使用する。USBシリアル変換もCOMポートとして扱う |
+| Windows専用キーボード | `RawInput` | Windows Raw Input APIを使用する |
+| iOSプリンター | `tcp`, `wifi`, `wi-fi`, `bluetooth` | TCP/IP接続では`ipaddress`、Bluetooth接続では`bluetoothaddress`を使用する |
+| iOSスキャナー | `camera`、BLE用設定 | カメラAPIまたはBluetooth Low Energy APIを使用する |
+| Androidデバイス | `bluetooth`, `camera`, `USB` | 現在は設定値を保持するが、登録済みストラテジーから周辺機器への接続は実行しない |
 
 #### strategyclass
 
@@ -418,19 +433,21 @@ tags:
 | 処理 | 内容 | 関連設定 |
 |---|---|---|
 | 使用デバイス選択 | 端末側設定から使用する device ID と制御方式を決定する | `device_controller_config.json` |
-| デバイスコネクタ連携 | デバイスコネクタ（Host）へ機器制御を依頼する | `appSettings.namedPipe` |
-| デバイスコネクタ（Host）側デバイス判定 | デバイスコネクタ（Host）側設定から対象デバイス実装を取得する | `host_device_config.json` |
-| 外部機器制御 | デバイスコネクタ（Host）側から OPOS / OCX / ActiveX / Vendor DLL を呼び出す | `classId`, `name`, `parameters` |
-| 結果返却 | デバイスコネクタ（Host）から端末アプリケーションへ制御結果を返却する | デバイスコネクタ（Host）からの処理結果 |
+| OPOS・OCX経路 | DeviceCtrlから名前付きパイプでデバイスコネクタへ要求する | `appSettings.namedPipe` |
+| OPOS・OCX機器制御 | デバイスコネクタ側の設定から対象実装を取得し、OPOS・OCXとドライバーを介してUSBまたはCOMで周辺機器を制御する | `host_device_config.json`, `classId`, `name`, `parameters` |
+| シリアル直接接続 | DeviceCtrlのWindowsストラテジーからSerialPort・COMで周辺機器へ直接接続する | `connectiontype`, `comport`, シリアル通信項目 |
+| Raw Input直接接続 | DeviceCtrlのWindowsストラテジーからWindows Raw Input APIを使用する | `connectiontype: RawInput` |
+| 結果返却 | 各ストラテジーが処理結果またはイベントをアプリケーションサービスへ返す | ストラテジーごとの処理結果 |
 
 ### 5.3 iOS / Android 端末の外部機器制御
 
-| 処理 | 内容 | 関連設定 |
-|---|---|---|
-| 使用デバイス選択 | 端末側設定から使用する device ID と制御方式を決定する | `device_controller_config.json` |
-| 端末内制御 | カメラ、Bluetooth、SDK など端末内の機能を使用して機器を制御する | `devices[].config` |
-| 結果整理 | 外部機器からの結果をアプリケーション側で扱う形式に整理する | 制御方式ごとの処理 |
-| 結果返却 | 端末アプリケーションへ制御結果またはイベントを返却する | 制御方式ごとの処理 |
+| OS | 処理 | 内容 | 関連設定 |
+|---|---|---|---|
+| iOS | 使用デバイス選択 | DeviceCtrlが端末側設定から使用するdevice IDと制御方式を決定する | `device_controller_config.json` |
+| iOS | 周辺機器制御 | Epson SDKによるTCP/IP・Wi-Fi・Bluetooth、カメラAPI、またはBLE APIを直接使用する | `devices[].config` |
+| iOS | 結果返却 | ストラテジーが処理結果またはイベントをアプリケーションサービスへ返す | 制御方式ごとの処理 |
+| Android | 使用デバイス選択 | DeviceCtrlがBluetooth、カメラ、またはUSBの設定を持つデバイスを選択する | `device_controller_config.json` |
+| Android | 利用状態 | ストラテジーは登録されているが、現在はSDKまたはAndroid APIを呼び出して周辺機器を制御しない | 制御方式ごとの処理 |
 
 ## 6. 記載時チェックリスト
 
