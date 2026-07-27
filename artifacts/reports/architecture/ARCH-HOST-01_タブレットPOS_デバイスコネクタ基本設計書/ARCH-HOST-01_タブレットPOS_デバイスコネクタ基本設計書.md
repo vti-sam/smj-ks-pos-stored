@@ -3,8 +3,8 @@
 タブレットPOS
 ARCH-HOST-01 デバイスコネクタ基本設計書
 文書ID: ARCH-HOST-01
-第0.3.7版
-2026年7月24日
+第0.3.8版
+2026年7月27日
 
 ## 00_表紙
 
@@ -15,7 +15,7 @@ ARCH-HOST-01 デバイスコネクタ基本設計書
 | 文書ID | ARCH-HOST-01 |
 | 文書名 | タブレットPOS デバイスコネクタ基本設計書 |
 | 対象 | デバイスコネクタ、およびタブレットPOS端末アプリとのプロセス間連携 |
-| 版数 | 0.3.7 |
+| 版数 | 0.3.8 |
 | 作成日 | 2026/07/07 |
 | 作成者 | VTI サム、VTI　吉田 |
 | レビュー担当 | SMJ 鎌田 |
@@ -30,6 +30,7 @@ ARCH-HOST-01 デバイスコネクタ基本設計書
 
 | 版数 | 日付 | 変更内容 | 作成者 | 承認者 |
 |---|---|---|---|---|
+| 0.3.8 | 2026/07/27 | ケーズ様が利用する対応機種をRZ-4DP3カスタマディスプレイおよびUP-J46DW3ドロアへ統一し、OCXの登録名を対応機種として扱う記載を削除。 | VTI サム | |
 | 0.3.7 | 2026/07/24 | 運用シナリオ図と説明のフェーズおよび全処理番号を一致させ、非同期イベントをデバイス操作フェーズへ統合。デバイス制御設定の名称をランタイム設定／デフォルト設定へ統一し、図の表示規約を凡例参照方式へ統一。 | VTI サム | |
 | 0.3.6 | 2026/07/21 | CAFIS Arch Saturnのアプリ側有効デバイス区分、アプリ側設定ID、デバイスID、およびデバイスコネクタ側のid／name／classIdを設計値として確定し、対象範囲、通信・データ設計、設定・デバイス設計、実装対応へ反映。未確定表現と抽象的な設定例を整理。 | VTI サム | |
 | 0.3.5 | 2026/07/21 | CAFIS Arch Saturnを初期対象に追加し、対象範囲、全体構成、通信・デバイス設計、異常・運用設計、実装対応へ反映。デバイスコネクタのプロセス管理、実機制御、Windows導入・保守の責任分界を明確化。 | VTI サム | |
@@ -144,16 +145,16 @@ ARCH-HOST-01 デバイスコネクタ基本設計書
 
 ### 3.2 対象デバイス
 
-初期対象は、GLORY RT-300／RAD-300自動釣銭機、SHARP UP-J36DW3ドロア、SHARP RZ-4DP1カスタマディスプレイ、CAFIS Arch Saturn決済端末の4種類とする。機種名、デバイスコネクタで利用する既存デバイス資源、およびアプリ側設定とデバイスコネクタ側設定の対応を次に示す。
+初期対象は、GLORY RT-300／RAD-300自動釣銭機、SHARP UP-J46DW3ドロア、SHARP RZ-4DP3カスタマディスプレイ、CAFIS Arch Saturn決済端末の4種類とする。機種名、デバイスコネクタで利用する既存デバイス資源、およびアプリ側設定とデバイスコネクタ側設定の対応を次に示す。
 
 #### 3.2.1 デバイスID対応
 
-| 対象デバイス | メーカー／機種名 | 利用する既存デバイス資源 | アプリ側有効デバイス区分 | アプリ側設定ID | デバイスコネクタ要求のデバイスID（DeviceId） | デバイスコネクタ側設定（id / name / classId） |
+| 対象デバイス | メーカー／機種名 | 利用する既存デバイス資源 | アプリ側有効デバイス区分 | アプリ側設定ID | デバイスコネクタ要求のデバイスID（DeviceId） | デバイスコネクタ側設定（id / classId） |
 |---|---|---|---|---|---|---|
-| 自動釣銭機 | GLORY RT-300／RAD-300 | OPOS／OCX | local_cashchanger | cash_changer_glory_rt300_windows | 釣銭機（CashChanger） | CashChanger / CASHCHANGER / CashChanger1 |
-| ドロア | SHARP UP-J36DW3 | OCX | local_drawer | drawer_external_windows | キャッシュドロア（CashDrawer） | CashDrawer / SHARPUPJ36DW3 / CashDrawer1 |
-| カスタマディスプレイ | SHARP RZ-4DP1 | OPOS／OCX | local_display | customer_display_sharp_windows | カスタマーディスプレイ（CustomerDisplay） | CustomerDisplay / SHARPRZ4DP1B / CustomerDisplay1 |
-| 決済端末 | CAFIS Arch Saturn | OPOS／OCX（CAT） | local_payment | payment_cafis_arch_saturn_windows | 決済端末（Payment） | Payment / CAFIS Arch / Payment1 |
+| 自動釣銭機 | GLORY RT-300／RAD-300 | OPOS／OCX | local_cashchanger | cash_changer_glory_rt300_windows | 釣銭機（CashChanger） | CashChanger / CashChanger1 |
+| ドロア | SHARP UP-J46DW3 | OCX | local_drawer | drawer_external_windows | キャッシュドロア（CashDrawer） | CashDrawer / CashDrawer1 |
+| カスタマディスプレイ | SHARP RZ-4DP3 | OPOS／OCX | local_display | customer_display_sharp_windows | カスタマーディスプレイ（CustomerDisplay） | CustomerDisplay / CustomerDisplay1 |
+| 決済端末 | CAFIS Arch Saturn | OPOS／OCX（CAT） | local_payment | payment_cafis_arch_saturn_windows | 決済端末（Payment） | Payment / Payment1 |
 
 ### 3.3 対象外
 
@@ -191,8 +192,8 @@ ARCH-HOST-01 デバイスコネクタ基本設計書
 | PS-HOST-06 | デバイスマネージャー | デバイス生成、保持、検索、停止の仕様。 |
 | PS-HOST-07 | デバイスベース | デバイス共通基底処理の仕様。 |
 | PS-HOST-08 | 自動釣銭機制御 GLORY RT-300／RAD-300 | GLORY RT-300／RAD-300自動釣銭機のプログラム仕様。 |
-| PS-HOST-10 | ドロア制御 SHARP UP-J36DW3 | SHARP UP-J36DW3ドロアのプログラム仕様。 |
-| PS-HOST-11 | カスタマディスプレイ制御 SHARP RZ-4DP1 | SHARP RZ-4DP1カスタマディスプレイのプログラム仕様。 |
+| PS-HOST-10 | ドロア制御 SHARP UP-J46DW3 | SHARP UP-J46DW3ドロアのプログラム仕様。 |
+| PS-HOST-11 | カスタマディスプレイ制御 SHARP RZ-4DP3 | SHARP RZ-4DP3カスタマディスプレイのプログラム仕様。 |
 | DC-PAY-WIN-001 | OPOS CAFIS Arch決済ストラテジー | CAFIS Arch Saturnの接続、切断、疎通確認、決済実行、および再印字の設計。 |
 
 ## 05_全体構成_01
@@ -244,7 +245,7 @@ flowchart LR
     %% legend-bind label=コネクターラベル
     APP("（1） タブレットPOS端末アプリ<br/>MAUIプロセス<br/>業務判断／デバイス操作の依頼")
     HOST("（2） デバイスコネクタ<br/>Windows別プロセス<br/>既存デバイス資源の呼出し")
-    DEVICE("（3） 周辺機器<br/>自動釣銭機：GLORY RT-300／RAD-300<br/>ドロア：SHARP UP-J36DW3<br/>カスタマディスプレイ：SHARP RZ-4DP1<br/>決済端末：CAFIS Arch Saturn")
+    DEVICE("（3） 周辺機器<br/>自動釣銭機：GLORY RT-300／RAD-300<br/>ドロア：SHARP UP-J46DW3<br/>カスタマディスプレイ：SHARP RZ-4DP3<br/>決済端末：CAFIS Arch Saturn")
 
     APP <-->|コマンド通信用パイプ<br/>要求（アプリ→コネクタ）<br/>同期応答（コネクタ→アプリ）| HOST
     HOST -.->|イベント通知用パイプ<br/>非同期イベント（コネクタ→アプリ）| APP
@@ -328,8 +329,8 @@ flowchart RL
     subgraph DEVICE["（3） 周辺機器"]
         direction TB
         CASH("① 自動釣銭機<br/>GLORY RT-300／RAD-300")
-        DRAWER("② ドロア<br/>SHARP UP-J36DW3")
-        DISPLAY("③ カスタマディスプレイ<br/>SHARP RZ-4DP1")
+        DRAWER("② ドロア<br/>SHARP UP-J46DW3")
+        DISPLAY("③ カスタマディスプレイ<br/>SHARP RZ-4DP3")
         PAYMENT("④ 決済端末<br/>CAFIS Arch Saturn")
     end
 
@@ -416,16 +417,16 @@ flowchart RL
 
   ① 自動釣銭機（GLORY RT-300／RAD-300）は、入金、払出、状態確認、およびエラー確認を行う。
     関連シート: 03_対象範囲、09_設定・デバイス設計
-  ② ドロア（SHARP UP-J36DW3）は、ドロア開放を行う。
+  ② ドロア（SHARP UP-J46DW3）は、ドロア開放を行う。
     関連シート: 03_対象範囲、09_設定・デバイス設計
-  ③ カスタマディスプレイ（SHARP RZ-4DP1）は、表示、消去、スクロール、および位置指定表示を行う。
+  ③ カスタマディスプレイ（SHARP RZ-4DP3）は、表示、消去、スクロール、および位置指定表示を行う。
     関連シート: 03_対象範囲、09_設定・デバイス設計
   ④ 決済端末（CAFIS Arch Saturn）は、端末接続、切断、疎通確認、決済実行、および再印字を行う。
     関連シート: 03_対象範囲、08_通信・データ設計、09_設定・デバイス設計
 
 ### 5.4 デバイスコネクタの実行形態
 
-本設計では、GLORY RT-300／RAD-300自動釣銭機、SHARP UP-J36DW3ドロア、SHARP RZ-4DP1カスタマディスプレイ、およびCAFIS Arch Saturn決済端末の既存デバイス資源を一つのデバイスコネクタプロセスで管理する。デバイスコネクタはMutexによる排他制御を行い、二重起動を防止する。
+本設計では、GLORY RT-300／RAD-300自動釣銭機、SHARP UP-J46DW3ドロア、SHARP RZ-4DP3カスタマディスプレイ、およびCAFIS Arch Saturn決済端末の既存デバイス資源を一つのデバイスコネクタプロセスで管理する。デバイスコネクタはMutexによる排他制御を行い、二重起動を防止する。
 
 通常運用時は画面を表示せず、バックグラウンドで動作する。デバイスコネクタを直接開始・停止する画面は、デバッグ引数（DEBUG）付きで起動した場合だけ表示する。
 
@@ -843,13 +844,13 @@ CAFIS Arch Saturnのデバイス制御は、アプリ側有効デバイス区分
 
 ### 9.5 デバイス別設計
 
-起動条件のデバイスコネクタ側識別情報は、デバイスID、実行時名、実装識別IDの順に示す。
+起動条件のデバイスコネクタ側識別情報は、デバイスIDおよび実装識別IDを示し、接続に必要な場合は実行時名を併記する。
 
 | No. | デバイス名 | 主な担当 | 主な処理 | 起動条件 | 終了条件 | 主な制約 | 備考 |
 |---:|---|---|---|---|---|---|---|
 | ① | GLORY RT-300／RAD-300自動釣銭機 | 自動釣銭機制御部 | 入金、払出、状態確認、エラー確認。 | host_device_config.jsonに自動釣銭機（CashChanger） / 実行時名（CASHCHANGER） / 実装識別ID（CashChanger1）として定義されている。 | デバイスコネクタ停止時またはデバイス停止処理時。 | デバイスコネクタ内のOPOS／OCX、UIスレッド、共有メモリ、要求／応答ファイルを利用する。 | デバイス開始は最大3回試行する。同期応答とデバイス処理結果通知を分けて扱う。 |
-| ② | SHARP UP-J36DW3ドロア | ドロア制御部 | ドロアオープン。 | host_device_config.jsonにキャッシュドロア（CashDrawer） / 実行時名（SHARPUPJ36DW3） / 実装識別ID（CashDrawer1）として定義されている。 | デバイスコネクタ停止時またはデバイス停止処理時。 | デバイスコネクタ内のSHARP既存実装と、OCXを保持する非表示フォームを利用する。 | 結果コードと拡張結果コードを返す。 |
-| ③ | SHARP RZ-4DP1カスタマディスプレイ | カスタマディスプレイ制御部 | 表示、消去、スクロール、位置指定表示。 | host_device_config.jsonにカスタマーディスプレイ（CustomerDisplay） / 実行時名（SHARPRZ4DP1B） / 実装識別ID（CustomerDisplay1）として定義されている。デバイスコネクタ（Host）内部では既存クラスIDのLineDisplay1に変換して既存実装を生成する。 | デバイスコネクタ停止時またはデバイス停止処理時。 | デバイスコネクタ内のSHARP既存実装、OPOS／OCXを保持する非表示フォーム、および日本語文字列を利用する。 | 名前付きパイプはUTF-8の一行単位で送受信する。 |
+| ② | SHARP UP-J46DW3ドロア | ドロア制御部 | ドロアオープン。 | host_device_config.jsonにキャッシュドロア（CashDrawer） / 実装識別ID（CashDrawer1）として定義されている。 | デバイスコネクタ停止時またはデバイス停止処理時。 | デバイスコネクタ内のSHARP既存実装と、OCXを保持する非表示フォームを利用する。 | 結果コードと拡張結果コードを返す。 |
+| ③ | SHARP RZ-4DP3カスタマディスプレイ | カスタマディスプレイ制御部 | 表示、消去、スクロール、位置指定表示。 | host_device_config.jsonにカスタマーディスプレイ（CustomerDisplay） / 実装識別ID（CustomerDisplay1）として定義されている。デバイスコネクタ（Host）内部では既存クラスIDのLineDisplay1に変換して既存実装を生成する。 | デバイスコネクタ停止時またはデバイス停止処理時。 | デバイスコネクタ内のSHARP既存実装、OPOS／OCXを保持する非表示フォーム、および日本語文字列を利用する。 | 名前付きパイプはUTF-8の一行単位で送受信する。 |
 | ④ | CAFIS Arch Saturn決済端末 | 決済端末制御部 | 端末接続、切断、疎通確認、決済実行、再印字。 | device_controller_config.jsonに有効デバイス区分（local_payment） / アプリ側設定ID（payment_cafis_arch_saturn_windows）として定義し、host_device_config.jsonに決済端末（Payment） / 実行時名（CAFIS Arch） / 実装識別ID（Payment1）として定義する。Windows側にはOPOS CAT／OCX、OPOS論理名（CAFIS Arch）、接続設定を導入する。 | デバイスコネクタ停止時または端末切断処理時。 | WindowsのCOM／OCX登録、OPOS Service Object、論理デバイス名、通信ポート、およびCAFIS Arch設定フォルダーが必要。 | 決済情報および端末応答全文はログに出力しない。 |
 
 ## 10_異常・運用設計
@@ -962,8 +963,8 @@ CAFIS Arch Saturnのデバイス制御は、アプリ側有効デバイス区分
 | ⑥ | （2）②-3 | F-HOST-009 | デバイス管理部 | TabletDeviceManager | デバイス生成、保持、検索、停止、準備状態管理。 | PS-HOST-06 |
 | ⑦ | （2）③-1 | F-HOST-008 | デバイス共通処理 | IFDevice、DeviceBase | デバイス共通の使用開始、使用終了、メソッド実行。 | PS-HOST-07 |
 | ⑧ | （2）③-1、（3）① | F-HOST-008 | 自動釣銭機制御部 | CashChangerByRt300、CashChangerByRt300Form | GLORY RT-300／RAD-300自動釣銭機のOPOS／OCXを利用した既存制御処理。 | PS-HOST-08 |
-| ⑨ | （2）③-1、（3）② | F-HOST-008 | ドロア制御部 | CashDrawerBySharp、CashDrawerBySharpForm | SHARP UP-J36DW3ドロアの既存制御処理とOCX保持。 | PS-HOST-10 |
-| ⑩ | （2）③-1、（3）③ | F-HOST-008 | カスタマディスプレイ制御部 | CustomerDisplayBySharp、CustomerDisplayBySharpForm | SHARP RZ-4DP1カスタマディスプレイの既存制御処理とOPOS／OCX保持。 | PS-HOST-11 |
+| ⑨ | （2）③-1、（3）② | F-HOST-008 | ドロア制御部 | CashDrawerBySharp、CashDrawerBySharpForm | SHARP UP-J46DW3ドロアの既存制御処理とOCX保持。 | PS-HOST-10 |
+| ⑩ | （2）③-1、（3）③ | F-HOST-008 | カスタマディスプレイ制御部 | CustomerDisplayBySharp、CustomerDisplayBySharpForm | SHARP RZ-4DP3カスタマディスプレイの既存制御処理とOPOS／OCX保持。 | PS-HOST-11 |
 | ⑪ | （1）①-3 | F-HOST-001、F-HOST-002、F-HOST-011 | デバイスコネクタプロセス管理 | HostProcessManager | プロセス存在・稼働確認、起動、デバイスコネクタ停止要求、所有プロセス終了監視、強制終了。 | 本書 06_運用シナリオ_02 |
 | ⑫ | （2）②-2 | F-HOST-005 | 要求・応答変換 | NamedPipeCommandMapper | JSON要求の内部コマンド変換、および処理結果のJSON応答変換。 | PS-HOST-02、PS-HOST-04 |
 | ⑬ | （1）②-1 | - | デバイス制御設定管理 | DeviceControllerConfigService、DeviceManager | ランタイム設定またはデフォルト設定の読込、有効デバイスと制御方式の選択。 | CFG-01 |

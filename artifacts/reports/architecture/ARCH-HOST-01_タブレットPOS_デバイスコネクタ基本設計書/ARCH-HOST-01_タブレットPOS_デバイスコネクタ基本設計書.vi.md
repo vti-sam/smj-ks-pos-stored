@@ -3,8 +3,8 @@
 Tablet POS
 ARCH-HOST-01 Tài liệu thiết kế cơ bản Device Connector
 Mã tài liệu: ARCH-HOST-01
-Phiên bản 0.3.7
-Ngày 24 tháng 07 năm 2026
+Phiên bản 0.3.8
+Ngày 27 tháng 07 năm 2026
 
 ## 00_表紙
 
@@ -15,7 +15,7 @@ Hiển thị thông tin tài liệu, mục đích và đối tượng review c�
 | 文書ID | ARCH-HOST-01 |
 | 文書名 | タブレットPOS デバイスコネクタ基本設計書 (Tài liệu thiết kế cơ bản Device Connector Tablet POS) |
 | 対象 | Device Connector và liên kết giữa các tiến trình (IPC) với ứng dụng POS trên máy tính bảng |
-| 版数 | 0.3.7 |
+| 版数 | 0.3.8 |
 | 作成日 | 2026/07/07 |
 | 作成者 | VTI Sam, VTI Yoshida |
 | レビュー担当 | SMJ Kamada |
@@ -30,6 +30,7 @@ Hiển thị phiên bản và nội dung thay đổi chính của tài liệu n�
 
 | 版数 | 日付 | 変更内容 | 作成者 | 承認者 |
 |---|---|---|---|---|
+| 0.3.8 | 2026/07/27 | Thống nhất model K's sử dụng thành Customer Display RZ-4DP3 và Drawer UP-J46DW3; xóa nội dung coi tên đăng ký OCX là model thiết bị được hỗ trợ. | VTI Sam | |
 | 0.3.7 | 2026/07/24 | Đồng nhất số thứ tự giai đoạn và toàn bộ xử lý giữa sơ đồ kịch bản vận hành và phần giải thích, tích hợp sự kiện bất đồng bộ vào giai đoạn thao tác thiết bị. Đồng nhất tên gọi cài đặt điều khiển thiết bị thành Cài đặt Runtime / Cài đặt Mặc định, đồng nhất quy chuẩn hiển thị sơ đồ theo phương thức tham chiếu chú giải (凡例). | VTI Sam | |
 | 0.3.6 | 2026/07/21 | Xác định giá trị thiết kế cho phân loại thiết bị khả dụng phía ứng dụng, ID cài đặt phía ứng dụng, ID thiết bị và id/name/classId phía Device Connector của CAFIS Arch Saturn, phản ánh vào phạm vi đối tượng, thiết kế truyền thông/dữ liệu, thiết kế cài đặt/thiết bị và đối ứng cài đặt. Sắp xếp lại biểu hiện chưa chốt và ví dụ cài đặt trừu tượng. | VTI Sam | |
 | 0.3.5 | 2026/07/21 | Thêm CAFIS Arch Saturn vào đối tượng ban đầu, phản ánh vào phạm vi đối tượng, cấu trúc tổng thể, thiết kế truyền thông/thiết bị, thiết kế bất thường/vận hành và đối ứng cài đặt. Làm rõ ranh giới trách nhiệm quản lý tiến trình Device Connector, điều khiển máy thực tế và cài đặt/bảo trì trên Windows. | VTI Sam | |
@@ -144,16 +145,16 @@ Hiển thị trách nhiệm là đối tượng thiết kế, thiết bị đố
 
 ### 3.2 対象デバイス
 
-Đối tượng ban đầu gồm 4 loại: Máy bán/trả tiền thừa tự động GLORY RT-300/RAD-300, Ngăn kéo đựng tiền SHARP UP-J36DW3, Màn hình hiển thị khách hàng SHARP RZ-4DP1, Thiết bị thanh toán CAFIS Arch Saturn. Tên dòng máy, tài nguyên thiết bị hiện có sử dụng tại Device Connector và tương ứng giữa cài đặt phía ứng dụng với cài đặt phía Device Connector như sau:
+Đối tượng ban đầu gồm 4 loại: Máy bán/trả tiền thừa tự động GLORY RT-300/RAD-300, Ngăn kéo đựng tiền SHARP UP-J46DW3, Màn hình hiển thị khách hàng SHARP RZ-4DP3, Thiết bị thanh toán CAFIS Arch Saturn. Tên dòng máy, tài nguyên thiết bị hiện có sử dụng tại Device Connector và tương ứng giữa cài đặt phía ứng dụng với cài đặt phía Device Connector như sau:
 
 #### 3.2.1 デバイスID対応
 
-| 対象デバイス | メーカー／機種名 | 利用する既存デバイス資源 | アプリ側有効デバイス区分 | アプリ側設定ID | デバイスコネクタ要求のデバイスID（DeviceId） | デバイスコネクタ側設定（id / name / classId） |
+| 対象デバイス | メーカー／機種名 | 利用する既存デバイス資源 | アプリ側有効デバイス区分 | アプリ側設定ID | デバイスコネクタ要求のデバイスID（DeviceId） | デバイスコネクタ側設定（id / classId） |
 |---|---|---|---|---|---|---|
-| Máy bán/trả tiền tự động | GLORY RT-300／RAD-300 | OPOS／OCX | local_cashchanger | cash_changer_glory_rt300_windows | Máy trả tiền thừa (CashChanger) | CashChanger / CASHCHANGER / CashChanger1 |
-| Ngăn kéo đựng tiền | SHARP UP-J36DW3 | OCX | local_drawer | drawer_external_windows | Ngăn kéo tiền (CashDrawer) | CashDrawer / SHARPUPJ36DW3 / CashDrawer1 |
-| Màn hình hiển thị khách hàng | SHARP RZ-4DP1 | OPOS／OCX | local_display | customer_display_sharp_windows | Màn hình hiển thị (CustomerDisplay) | CustomerDisplay / SHARPRZ4DP1B / CustomerDisplay1 |
-| Thiết bị thanh toán | CAFIS Arch Saturn | OPOS／OCX（CAT） | local_payment | payment_cafis_arch_saturn_windows | Thiết bị thanh toán (Payment) | Payment / CAFIS Arch / Payment1 |
+| Máy bán/trả tiền tự động | GLORY RT-300／RAD-300 | OPOS／OCX | local_cashchanger | cash_changer_glory_rt300_windows | Máy trả tiền thừa (CashChanger) | CashChanger / CashChanger1 |
+| Ngăn kéo đựng tiền | SHARP UP-J46DW3 | OCX | local_drawer | drawer_external_windows | Ngăn kéo tiền (CashDrawer) | CashDrawer / CashDrawer1 |
+| Màn hình hiển thị khách hàng | SHARP RZ-4DP3 | OPOS／OCX | local_display | customer_display_sharp_windows | Màn hình hiển thị (CustomerDisplay) | CustomerDisplay / CustomerDisplay1 |
+| Thiết bị thanh toán | CAFIS Arch Saturn | OPOS／OCX（CAT） | local_payment | payment_cafis_arch_saturn_windows | Thiết bị thanh toán (Payment) | Payment / Payment1 |
 
 ### 3.3 対象外
 
@@ -191,8 +192,8 @@ Hiển thị các tài liệu thiết kế cấu trúc, hướng dẫn cài đ�
 | PS-HOST-06 | Device Manager | Quy cách khởi tạo, lưu giữ, tìm kiếm và dừng thiết bị. |
 | PS-HOST-07 | Device Base | Quy cách xử lý cơ sở chung cho các thiết bị. |
 | PS-HOST-08 | Điều khiển máy trả tiền tự động GLORY RT-300／RAD-300 | Quy cách chương trình cho máy trả tiền tự động GLORY RT-300/RAD-300. |
-| PS-HOST-10 | Điều khiển ngăn kéo đựng tiền SHARP UP-J36DW3 | Quy cách chương trình cho ngăn kéo tiền SHARP UP-J36DW3. |
-| PS-HOST-11 | Điều khiển màn hình hiển thị SHARP RZ-4DP1 | Quy cách chương trình cho màn hình hiển thị khách hàng SHARP RZ-4DP1. |
+| PS-HOST-10 | Điều khiển ngăn kéo đựng tiền SHARP UP-J46DW3 | Quy cách chương trình cho ngăn kéo tiền SHARP UP-J46DW3. |
+| PS-HOST-11 | Điều khiển màn hình hiển thị SHARP RZ-4DP3 | Quy cách chương trình cho màn hình hiển thị khách hàng SHARP RZ-4DP3. |
 | DC-PAY-WIN-001 | Strategy thanh toán OPOS CAFIS Arch | Thiết kế kết nối, ngắt kết nối, xác nhận thông suốt, thực thi thanh toán và in lại cho CAFIS Arch Saturn. |
 
 ## 05_全体構成_01
@@ -244,7 +245,7 @@ flowchart LR
     %% legend-bind label=コネクターラベル
     APP("（1） Ứng dụng POS máy tính bảng<br/>Tiến trình MAUI<br/>Đánh giá nghiệp vụ／Yêu cầu thao tác thiết bị")
     HOST("（2） Device Connector<br/>Tiến trình Windows riêng biệt<br/>Gọi tài nguyên thiết bị hiện có")
-    DEVICE("（3） Thiết bị ngoại vi<br/>Máy trả tiền tự động: GLORY RT-300／RAD-300<br/>Ngăn kéo tiền: SHARP UP-J36DW3<br/>Màn hình hiển thị: SHARP RZ-4DP1<br/>Thiết bị thanh toán: CAFIS Arch Saturn")
+    DEVICE("（3） Thiết bị ngoại vi<br/>Máy trả tiền tự động: GLORY RT-300／RAD-300<br/>Ngăn kéo tiền: SHARP UP-J46DW3<br/>Màn hình hiển thị: SHARP RZ-4DP3<br/>Thiết bị thanh toán: CAFIS Arch Saturn")
 
     APP <-->|Pipe truyền thông lệnh<br/>Yêu cầu (Ứng dụng → Connector)<br/>Phản hồi đồng bộ (Connector → Ứng dụng)| HOST
     HOST -.->|Pipe thông báo sự kiện<br/>Sự kiện bất đồng bộ (Connector → Ứng dụng)| APP
@@ -328,8 +329,8 @@ flowchart RL
     subgraph DEVICE["（3） Thiết bị ngoại vi"]
         direction TB
         CASH("① Máy trả tiền tự động<br/>GLORY RT-300／RAD-300")
-        DRAWER("② Ngăn kéo tiền<br/>SHARP UP-J36DW3")
-        DISPLAY("③ Màn hình hiển thị khách hàng<br/>SHARP RZ-4DP1")
+        DRAWER("② Ngăn kéo tiền<br/>SHARP UP-J46DW3")
+        DISPLAY("③ Màn hình hiển thị khách hàng<br/>SHARP RZ-4DP3")
         PAYMENT("④ Thiết bị thanh toán<br/>CAFIS Arch Saturn")
     end
 
@@ -416,16 +417,16 @@ Giải thích quan hệ giữa các vùng trách nhiệm, nhóm trách nhiệm v
 
   ① Máy trả tiền tự động (GLORY RT-300／RAD-300) thực hiện nạp tiền, rút tiền, kiểm tra trạng thái và kiểm tra lỗi.
     Sheet liên quan: 03_対象範囲, 09_設定・デバイス設計
-  ② Ngăn kéo tiền (SHARP UP-J36DW3) thực hiện mở ngăn kéo.
+  ② Ngăn kéo tiền (SHARP UP-J46DW3) thực hiện mở ngăn kéo.
     Sheet liên quan: 03_対象範囲, 09_設定・デバイス設計
-  ③ Màn hình hiển thị khách hàng (SHARP RZ-4DP1) thực hiện hiển thị, xóa, cuộn và hiển thị chỉ định vị trí.
+  ③ Màn hình hiển thị khách hàng (SHARP RZ-4DP3) thực hiện hiển thị, xóa, cuộn và hiển thị chỉ định vị trí.
     Sheet liên quan: 03_対象範囲, 09_設定・デバイス設計
   ④ Thiết bị thanh toán (CAFIS Arch Saturn) thực hiện kết nối thiết bị, ngắt kết nối, kiểm tra thông suốt, thực thi thanh toán và in lại.
     Sheet liên quan: 03_対象範囲, 08_通信・データ設計, 09_設定・デバイス設計
 
 ### 5.4 デバイスコネクタの実行形態
 
-Trong thiết kế này, các tài nguyên thiết bị hiện có của máy trả tiền tự động GLORY RT-300/RAD-300, ngăn kéo tiền SHARP UP-J36DW3, màn hình hiển thị SHARP RZ-4DP1 và thiết bị thanh toán CAFIS Arch Saturn được quản lý bởi một tiến trình Device Connector duy nhất. Device Connector thực hiện điều khiển độc quyền bằng Mutex để ngăn chặn khởi động kép.
+Trong thiết kế này, các tài nguyên thiết bị hiện có của máy trả tiền tự động GLORY RT-300/RAD-300, ngăn kéo tiền SHARP UP-J46DW3, màn hình hiển thị SHARP RZ-4DP3 và thiết bị thanh toán CAFIS Arch Saturn được quản lý bởi một tiến trình Device Connector duy nhất. Device Connector thực hiện điều khiển độc quyền bằng Mutex để ngăn chặn khởi động kép.
 
 Trong vận hành thông thường không hiển thị màn hình, chạy ngầm dưới background. Màn hình điều khiển khởi động/dừng trực tiếp Device Connector chỉ hiển thị khi khởi động kèm tham số debug (DEBUG).
 
@@ -843,13 +844,13 @@ Thông tin thanh toán, thông tin thẻ và toàn văn phản hồi của thi�
 
 ### 9.5 デバイス別設計
 
-Thông tin định danh phía Device Connector của điều kiện khởi động được hiển thị theo thứ tự: ID thiết bị, Tên khi thực thi, ID định danh triển khai.
+Thông tin định danh phía Device Connector trong điều kiện khởi động gồm ID thiết bị và ID định danh triển khai; Tên khi thực thi chỉ được ghi khi cần thiết cho kết nối.
 
 | No. | デバイス名 | 主な担当 | 主な処理 | 起動条件 | 終了条件 | 主な制約 | 備考 |
 |---:|---|---|---|---|---|---|---|
 | ① | Máy trả tiền tự động GLORY RT-300／RAD-300 | Bộ điều khiển máy trả tiền tự động | Nạp tiền, rút tiền, kiểm tra trạng thái, kiểm tra lỗi. | Được định nghĩa trong host_device_config.json là Máy trả tiền (CashChanger) / Tên khi thực thi (CASHCHANGER) / ID định danh triển khai (CashChanger1). | Khi dừng Device Connector hoặc khi xử lý dừng thiết bị. | Sử dụng OPOS/OCX, UI Thread, bộ nhớ chia sẻ, file yêu cầu/phản hồi bên trong Device Connector. | Thử bắt đầu thiết bị tối đa 3 lần. Xử lý riêng biệt phản hồi đồng bộ và thông báo kết quả xử lý thiết bị. |
-| ② | Ngăn kéo tiền SHARP UP-J36DW3 | Bộ điều khiển ngăn kéo tiền | Mở ngăn kéo tiền. | Được định nghĩa trong host_device_config.json là Ngăn kéo tiền (CashDrawer) / Tên khi thực thi (SHARPUPJ36DW3) / ID định danh triển khai (CashDrawer1). | Khi dừng Device Connector hoặc khi xử lý dừng thiết bị. | Sử dụng triển khai hiện có của SHARP bên trong Device Connector và Form ẩn chứa OCX. | Trả về Mã kết quả và Mã kết quả mở rộng. |
-| ③ | Màn hình hiển thị khách hàng SHARP RZ-4DP1 | Bộ điều khiển màn hình hiển thị | Hiển thị, xóa, cuộn, hiển thị chỉ định vị trí. | Được định nghĩa trong host_device_config.json là Màn hình hiển thị (CustomerDisplay) / Tên khi thực thi (SHARPRZ4DP1B) / ID định danh triển khai (CustomerDisplay1). Bên trong Device Connector chuyển đổi sang ClassID hiện có LineDisplay1 để tạo triển khai hiện có. | Khi dừng Device Connector hoặc khi xử lý dừng thiết bị. | Sử dụng triển khai hiện có của SHARP bên trong Device Connector, Form ẩn chứa OPOS/OCX và chuỗi chữ tiếng Nhật. | Named Pipe gửi/nhận theo đơn vị 1 dòng UTF-8. |
+| ② | Ngăn kéo tiền SHARP UP-J46DW3 | Bộ điều khiển ngăn kéo tiền | Mở ngăn kéo tiền. | Được định nghĩa trong host_device_config.json là Ngăn kéo tiền (CashDrawer) / ID định danh triển khai (CashDrawer1). | Khi dừng Device Connector hoặc khi xử lý dừng thiết bị. | Sử dụng triển khai hiện có của SHARP bên trong Device Connector và Form ẩn chứa OCX. | Trả về Mã kết quả và Mã kết quả mở rộng. |
+| ③ | Màn hình hiển thị khách hàng SHARP RZ-4DP3 | Bộ điều khiển màn hình hiển thị | Hiển thị, xóa, cuộn, hiển thị chỉ định vị trí. | Được định nghĩa trong host_device_config.json là Màn hình hiển thị (CustomerDisplay) / ID định danh triển khai (CustomerDisplay1). Bên trong Device Connector chuyển đổi sang ClassID hiện có LineDisplay1 để tạo triển khai hiện có. | Khi dừng Device Connector hoặc khi xử lý dừng thiết bị. | Sử dụng triển khai hiện có của SHARP bên trong Device Connector, Form ẩn chứa OPOS/OCX và chuỗi chữ tiếng Nhật. | Named Pipe gửi/nhận theo đơn vị 1 dòng UTF-8. |
 | ④ | Thiết bị thanh toán CAFIS Arch Saturn | Bộ điều khiển thiết bị thanh toán | Kết nối thiết bị, ngắt kết nối, kiểm tra thông suốt, thực thi thanh toán, in lại. | Định nghĩa trong device_controller_config.json là Phân loại thiết bị khả dụng (local_payment) / ID cài đặt phía ứng dụng (payment_cafis_arch_saturn_windows), và định nghĩa trong host_device_config.json là Thiết bị thanh toán (Payment) / Tên khi thực thi (CAFIS Arch) / ID định danh triển khai (Payment1). Phía Windows cài đặt OPOS CAT/OCX, Tên logic OPOS (CAFIS Arch), cài đặt kết nối. | Khi dừng Device Connector hoặc khi xử lý ngắt kết nối thiết bị. | Cần đăng ký COM/OCX trên Windows, OPOS Service Object, Tên thiết bị logic, Cổng truyền thông, và Thư mục cài đặt CAFIS Arch. | Thông tin thanh toán và toàn văn phản hồi thiết bị không xuất ra log. |
 
 ## 10_異常・運用設計
@@ -962,8 +963,8 @@ Tương ứng giữa phần tử cấu tạo logic và Function ID với Class v
 | ⑥ | (2) ②-3 | F-HOST-009 | Bộ quản lý thiết bị | TabletDeviceManager | Tạo, lưu giữ, tìm kiếm, dừng thiết bị, quản lý trạng thái chuẩn bị. | PS-HOST-06 |
 | ⑦ | (2) ③-1 | F-HOST-008 | Xử lý chung thiết bị | IFDevice, DeviceBase | Bắt đầu sử dụng, kết thúc sử dụng, thực thi method chung của các thiết bị. | PS-HOST-07 |
 | ⑧ | (2) ③-1, (3) ① | F-HOST-008 | Bộ điều khiển máy trả tiền tự động | CashChangerByRt300, CashChangerByRt300Form | Xử lý điều khiển hiện có sử dụng OPOS/OCX của máy trả tiền tự động GLORY RT-300/RAD-300. | PS-HOST-08 |
-| ⑨ | (2) ③-1, (3) ② | F-HOST-008 | Bộ điều khiển ngăn kéo tiền | CashDrawerBySharp, CashDrawerBySharpForm | Xử lý điều khiển hiện có và lưu giữ OCX của ngăn kéo tiền SHARP UP-J36DW3. | PS-HOST-10 |
-| ⑩ | (2) ③-1, (3) ③ | F-HOST-008 | Bộ điều khiển màn hình hiển thị | CustomerDisplayBySharp, CustomerDisplayBySharpForm | Xử lý điều khiển hiện có và lưu giữ OPOS/OCX của màn hình hiển thị SHARP RZ-4DP1. | PS-HOST-11 |
+| ⑨ | (2) ③-1, (3) ② | F-HOST-008 | Bộ điều khiển ngăn kéo tiền | CashDrawerBySharp, CashDrawerBySharpForm | Xử lý điều khiển hiện có và lưu giữ OCX của ngăn kéo tiền SHARP UP-J46DW3. | PS-HOST-10 |
+| ⑩ | (2) ③-1, (3) ③ | F-HOST-008 | Bộ điều khiển màn hình hiển thị | CustomerDisplayBySharp, CustomerDisplayBySharpForm | Xử lý điều khiển hiện có và lưu giữ OPOS/OCX của màn hình hiển thị SHARP RZ-4DP3. | PS-HOST-11 |
 | ⑪ | (1) ①-3 | F-HOST-001, F-HOST-002, F-HOST-011 | Quản lý tiến trình Device Connector | HostProcessManager | Xác nhận tồn tại/hoạt động tiến trình, khởi động, yêu cầu dừng Device Connector, giám sát kết thúc tiến trình sở hữu, cưỡng chế kết thúc. | Tài liệu này 06_運用シナリオ_02 |
 | ⑫ | (2) ②-2 | F-HOST-005 | Chuyển đổi yêu cầu & phản hồi | NamedPipeCommandMapper | Chuyển đổi yêu cầu JSON sang lệnh nội bộ, chuyển đổi kết quả xử lý sang phản hồi JSON. | PS-HOST-02, PS-HOST-04 |
 | ⑬ | (1) ②-1 | - | Quản lý cài đặt điều khiển thiết bị | DeviceControllerConfigService, DeviceManager | Đọc cài đặt Runtime hoặc cài đặt mặc định, lựa chọn thiết bị khả dụng và phương thức điều khiển. | CFG-01 |
