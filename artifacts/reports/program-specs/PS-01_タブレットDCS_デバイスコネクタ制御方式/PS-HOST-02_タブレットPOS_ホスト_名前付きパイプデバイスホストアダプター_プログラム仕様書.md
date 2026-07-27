@@ -1,77 +1,93 @@
 # PS-HOST-02 タブレットPOS ホスト 名前付きパイプデバイスホストアダプター プログラム仕様書
 
-## 改訂履歴
+タブレットPOS
 
-| バージョン | 更新日 | 更新者 | 変更内容 |
-| --- | --- | --- | --- |
-| 0.0.2 | 2026/06/21 | VTI サム | クラス仕様、フィールド/プロパティ、メソッド仕様を更新 |
-| 0.0.1 | 2026/06/19 | VTI サム | 初版作成 |
-
-## 基本情報
+## 00_表紙
 
 | 項目 | 内容 |
 | --- | --- |
 | 文書ID | PS-HOST-02 |
-| プロジェクト名 | タブレットPOS |
+| 文書名 | タブレットPOS ホスト 名前付きパイプデバイスホストアダプター プログラム仕様書 |
+| 対象 | タブレットPOS / 名前付きパイプデバイスホストアダプター |
+| 版数 | 0.0.4 |
+| 作成日 | 2026/06/19 |
+| 作成者 | VTI サム, VTI 吉田 |
+| レビュー担当 | SMJ 蒲田 |
+| 承認者 | SMJ 蒲田 |
+| 目的 | 対象クラスの構造、フィールド／プロパティ及びメソッド仕様を定義する。 |
+| 期待成果 | 実装及びレビューで参照するクラス単位の仕様を明確にする。 |
+
+## 01_改訂履歴
+
+| 版数 | 日付 | 変更内容 | 作成者 | 承認者 |
+| --- | --- | --- | --- | --- |
+| 0.0.4 | 2026/07/23 | ARCH-HOST-01に合わせて、デバイスコネクタ、タブレットPOS端末アプリ、および通信経路の表記を統一 | VTI サム |  |
+| 0.0.3 | 2026/07/23 | 現行クラス名、ルーティングキー選択、応答送信後のデバイスコネクタ制御処理を更新 | VTI サム |  |
+| 0.0.2 | 2026/06/21 | クラス仕様、フィールド/プロパティ、メソッド仕様を更新 | VTI サム |  |
+| 0.0.1 | 2026/06/19 | 初版作成 | VTI サム |  |
+
+## クラス情報
+
+| 項目 | 内容 |
+| --- | --- |
 | 機能名 | 名前付きパイプデバイスホストアダプター |
-| 物理クラス名 | NamedPipeConnectionAdapter |
+| 物理クラス名 | NamedPipeDeviceHostAdapter |
 | 名前空間 | TabletOutProcess.TabletDeviceServer |
 | アクセス修飾子 | internal sealed |
 | 継承/実装 | IDisposable |
-| 更新日 | 2026/06/21 |
 
 ## ソース対応
 
 | 項目 | 内容 |
 | --- | --- |
 | ソースファイル | sources/tabletposboilerplate/TabetPos.Host/src/TabletHost/DeviceHost/NamedPipeDeviceHostAdapter.cs |
-| 対象クラス | NamedPipeConnectionAdapter |
+| 対象クラス | NamedPipeDeviceHostAdapter |
 | 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 
 ## クラス概要
 
-ホスト内部のデバイス制御処理と名前付きパイプ通信をつなぐ中継層。アプリケーションから届くコマンドを内部処理用の要求に変換し、デバイス応答やホスト制御通知を通信路へ戻す。
+デバイスコネクタ内部のデバイス制御処理と名前付きパイプ通信をつなぐ中継部。タブレットPOS端末アプリから届くコマンドを内部処理用の要求に変換し、デバイス応答やデバイスコネクタ制御通知を通信経路へ戻す。
 
 ### 主な責務
 
-- コマンド受信用とイベント通知用の通信路を開始・終了する。
+- コマンド通信用パイプとイベント通知用パイプを開始・終了する。
 - 外部メッセージと内部デバイスコマンドの変換を行う。
-- デバイス単位の順序制御とホスト停止・再起動通知を仲介する。
+- デバイス単位の順序制御とデバイスコネクタ停止・再起動通知を仲介する。
 
 ## フィールド/プロパティ
 
 | 区分 | 可視性 | 型 | 名前 | 用途 |
 | --- | --- | --- | --- | --- |
-| フィールド | private | string | NamedPipeCommandPipeName | コマンド要求を受け付ける既定の Named Pipe 名。 |
-| フィールド | private | string | NamedPipeEventPipeName | デバイスイベントを送信する既定の Named Pipe 名。 |
-| フィールド | private | IDeviceCommandHandler | _commandHandler | デバイスコマンド処理の委譲先。 |
-| フィールド | private | Action<DeviceHostAction> | _hostActionHandler | Kill/ReStart などホスト制御アクションの通知先。 |
-| フィールド | private | INamedPipeCommandMapper | _commandMapper | Named Pipe 要求/応答と内部コマンド/結果の変換担当。 |
-| フィールド | private | string | _commandPipeName | コマンド受信用サーバー起動時に使用する Named Pipe 名。 |
-| フィールド | private | string | _eventPipeName | イベント送信用 publisher 起動時に使用する Named Pipe 名。 |
+| フィールド | private const | string | NamedPipeCommandPipeName | コマンド通信用パイプの既定名。 |
+| フィールド | private const | string | NamedPipeEventPipeName | イベント通知用パイプの既定名。 |
+| フィールド | private readonly | IDeviceCommandHandler | _commandHandler | デバイスコマンド処理の委譲先。 |
+| フィールド | private readonly | Action<DeviceHostAction> | _hostActionHandler | Kill／ReStartなどデバイスコネクタ制御アクションの通知先。 |
+| フィールド | private readonly | INamedPipeCommandMapper | _commandMapper | 名前付きパイプ要求/応答と内部コマンド/結果の変換担当。 |
+| フィールド | private readonly | string | _commandPipeName | コマンド通信用パイプ名。 |
+| フィールド | private readonly | string | _eventPipeName | イベント通知用パイプ名。 |
 | フィールド | private | DeviceCommandRouter | _commandRouter | デバイス単位のコマンドキュー制御。 |
-| フィールド | private | NamedPipeCommandServer | _commandServer | コマンド受信用 Named Pipe サーバー。 |
-| フィールド | private | NamedPipeEventPublisher | _eventPublisher | イベント送信用 Named Pipe publisher。 |
+| フィールド | private | NamedPipeCommandServer | _commandServer | コマンド通信用パイプのサーバー。 |
+| フィールド | private | NamedPipeEventPublisher | _eventPublisher | イベント通知用パイプのパブリッシャー。 |
 
 ## メソッド一覧
 
 | No | 可視性 | 戻り値 | メソッド名 | 概要 |
 | --- | --- | --- | --- | --- |
-| 1 | public | - | NamedPipeConnectionAdapter | インスタンスを初期化する。 |
-| 2 | internal | - | NamedPipeConnectionAdapter | インスタンスを初期化する。 |
-| 3 | internal | - | NamedPipeConnectionAdapter | インスタンスを初期化する。 |
-| 4 | public | void | Start | コマンドルーター、イベント送信用 publisher、コマンド受信用サーバーを準備し、Named Pipe 通信を開始する。 |
-| 5 | public | void | Dispose | コマンド受信用サーバー、ルーター、イベント送信用 publisher を停止・破棄し、再開始可能な状態へ戻す。 |
-| 6 | public | void | PublishDeviceReply | デバイス側の非同期応答をイベント用 NamedPipeDeviceEvent に変換して送信する。 |
-| 7 | private | NamedPipeDeviceCommandResponse | ProcessCommand | Named Pipe 要求を内部コマンドに変換し、ハンドラー実行後に応答へ戻す。 |
+| ① | public | - | NamedPipeDeviceHostAdapter | 既定のマッパーとパイプ名を使用してインスタンスを初期化する。 |
+| ② | internal | - | NamedPipeDeviceHostAdapter | 指定されたマッパーと既定のパイプ名を使用してインスタンスを初期化する。 |
+| ③ | internal | - | NamedPipeDeviceHostAdapter | 指定されたマッパーとパイプ名を使用してインスタンスを初期化する。 |
+| ④ | public | void | Start | コマンドルーター、イベント通知用パブリッシャー、コマンド通信用サーバーを準備し、名前付きパイプ通信を開始する。 |
+| ⑤ | public | void | Dispose | コマンド通信用サーバー、ルーター、イベント通知用パブリッシャーを停止・破棄し、再開始可能な状態へ戻す。 |
+| ⑥ | public | void | PublishDeviceReply | デバイス側の非同期応答をイベント通知用のNamedPipeDeviceEventに変換して送信する。 |
+| ⑦ | private | NamedPipeDeviceCommandResponse | ProcessCommand | 名前付きパイプ要求を内部コマンドに変換し、ハンドラー実行後に応答へ戻す。 |
 
 ## メソッド詳細
 
-### 1. NamedPipeConnectionAdapter
+### ①. NamedPipeDeviceHostAdapter
 
 | 項目 | 内容 |
 | --- | --- |
-| シグネチャ | `public NamedPipeConnectionAdapter( IDeviceCommandHandler commandHandler, Action<DeviceHostAction> hostActionHandler)` |
+| シグネチャ | `public NamedPipeDeviceHostAdapter(IDeviceCommandHandler commandHandler, Action<DeviceHostAction> hostActionHandler)` |
 | 可視性 | public |
 | 戻り値 | - |
 | 戻り値内容 | - |
@@ -81,21 +97,21 @@
 | 型 | 論理名 | 物理名 |
 | --- | --- | --- |
 | IDeviceCommandHandler | コマンドハンドラー | commandHandler |
-| Action<DeviceHostAction> | ホストアクションハンドラー | hostActionHandler |
+| Action<DeviceHostAction> | デバイスコネクタ制御アクションハンドラー | hostActionHandler |
 
 処理内容:
 
-- ① コマンド処理ハンドラーとホスト制御アクション通知先を受け取る。
+- ① コマンド処理ハンドラーとデバイスコネクタ制御アクション通知先を受け取る。
 - ② LegacyMessageParser を使用する NamedPipeCommandMapper を生成する。
-- ③ コマンド用/イベント用パイプは既定名を使用し、共通コンストラクタへ初期化を委譲する。
+- ③ コマンド通信用パイプ／イベント通知用パイプは既定名を使用し、共通コンストラクタへ初期化を委譲する。
 
 備考: -
 
-### 2. NamedPipeConnectionAdapter
+### ②. NamedPipeDeviceHostAdapter
 
 | 項目 | 内容 |
 | --- | --- |
-| シグネチャ | `internal NamedPipeConnectionAdapter( IDeviceCommandHandler commandHandler, Action<DeviceHostAction> hostActionHandler, INamedPipeCommandMapper commandMapper)` |
+| シグネチャ | `internal NamedPipeDeviceHostAdapter(IDeviceCommandHandler commandHandler, Action<DeviceHostAction> hostActionHandler, INamedPipeCommandMapper commandMapper)` |
 | 可視性 | internal |
 | 戻り値 | - |
 | 戻り値内容 | - |
@@ -105,22 +121,22 @@
 | 型 | 論理名 | 物理名 |
 | --- | --- | --- |
 | IDeviceCommandHandler | コマンドハンドラー | commandHandler |
-| Action<DeviceHostAction> | ホストアクションハンドラー | hostActionHandler |
+| Action<DeviceHostAction> | デバイスコネクタ制御アクションハンドラー | hostActionHandler |
 | INamedPipeCommandMapper | コマンドマッパー | commandMapper |
 
 処理内容:
 
-- ① コマンド処理ハンドラー、ホスト制御アクション通知先、コマンドマッパーを受け取る。
-- ② コマンド用/イベント用パイプは既定名を使用する。
+- ① コマンド処理ハンドラー、デバイスコネクタ制御アクション通知先、コマンドマッパーを受け取る。
+- ② コマンド通信用パイプ／イベント通知用パイプは既定名を使用する。
 - ③ 共通コンストラクタへ委譲し、マッパー差し替え可能なアダプターを構成する。
 
 備考: -
 
-### 3. NamedPipeConnectionAdapter
+### ③. NamedPipeDeviceHostAdapter
 
 | 項目 | 内容 |
 | --- | --- |
-| シグネチャ | `internal NamedPipeConnectionAdapter( IDeviceCommandHandler commandHandler, Action<DeviceHostAction> hostActionHandler, INamedPipeCommandMapper commandMapper, string commandPipeName, string eventPipeName)` |
+| シグネチャ | `internal NamedPipeDeviceHostAdapter(IDeviceCommandHandler commandHandler, Action<DeviceHostAction> hostActionHandler, INamedPipeCommandMapper commandMapper, string commandPipeName, string eventPipeName)` |
 | 可視性 | internal |
 | 戻り値 | - |
 | 戻り値内容 | - |
@@ -130,20 +146,20 @@
 | 型 | 論理名 | 物理名 |
 | --- | --- | --- |
 | IDeviceCommandHandler | コマンドハンドラー | commandHandler |
-| Action<DeviceHostAction> | ホストアクションハンドラー | hostActionHandler |
+| Action<DeviceHostAction> | デバイスコネクタ制御アクションハンドラー | hostActionHandler |
 | INamedPipeCommandMapper | コマンドマッパー | commandMapper |
-| string | コマンド用パイプ名 | commandPipeName |
-| string | イベント用パイプ名 | eventPipeName |
+| string | コマンド通信用パイプ名 | commandPipeName |
+| string | イベント通知用パイプ名 | eventPipeName |
 
 処理内容:
 
-- ① コマンド処理ハンドラー、ホスト制御アクション通知先、コマンドマッパー、コマンド用/イベント用パイプ名を受け取る。
+- ① コマンド処理ハンドラー、デバイスコネクタ制御アクション通知先、コマンドマッパー、コマンド通信用パイプ名／イベント通知用パイプ名を受け取る。
 - ② 受け取った依存先とパイプ名を private field に保持する。
-- ③ Start 時にルーター、コマンド受信用サーバー、イベント送信用 publisher を生成できる状態にする。
+- ③ Start時にルーター、コマンド通信用サーバー、イベント通知用パブリッシャーを生成できる状態にする。
 
 備考: -
 
-### 4. Start
+### ④. Start
 
 | 項目 | 内容 |
 | --- | --- |
@@ -154,13 +170,14 @@
 
 処理内容:
 
-- ① 未生成の DeviceCommandRouter、NamedPipeEventPublisher、NamedPipeCommandServer を作成する。
-- ② イベント用パイプの publisher を開始する。
-- ③ コマンド用パイプのサーバーを開始し、要求をルーターの enqueue に接続する。
+- ① 未生成の DeviceCommandRouter を ProcessCommand とコマンドマッパーの GetRoutingKey で作成する。
+- ② 未生成の NamedPipeEventPublisher と NamedPipeCommandServer を作成する。
+- ③ イベント通知用パイプのパブリッシャーを開始する。
+- ④ コマンド通信用パイプのサーバーを開始し、要求をルーターの enqueue に接続する。
 
 備考: -
 
-### 5. Dispose
+### ⑤. Dispose
 
 | 項目 | 内容 |
 | --- | --- |
@@ -171,13 +188,13 @@
 
 処理内容:
 
-- ① コマンド受信用サーバーを破棄し、参照を null にする。
+- ① コマンド通信用サーバーを破棄し、参照を null にする。
 - ② ルーターを破棄してワーカーキューを停止する。
-- ③ イベント送信用 publisher を破棄し、参照を null にする。
+- ③ イベント通知用パブリッシャーを破棄し、参照をnullにする。
 
 備考: -
 
-### 6. PublishDeviceReply
+### ⑥. PublishDeviceReply
 
 | 項目 | 内容 |
 | --- | --- |
@@ -197,20 +214,21 @@
 
 処理内容:
 
-- ① デバイスID、メソッドID、ペイロードから NamedPipeDeviceEvent を生成する。
+- ① デバイスID、メソッドID、ハンドル、ペイロードから NamedPipeDeviceEvent を生成する。
 - ② EventId を GUID で採番し、EventType/Message に ReplyDevice を設定する。
-- ③ イベント送信用 publisher が存在する場合のみ送信する。
+- ③ ペイロードが null の場合は空の辞書を設定する。
+- ④ イベント通知用パブリッシャーが存在する場合のみ送信する。
 
 備考: -
 
-### 7. ProcessCommand
+### ⑦. ProcessCommand
 
 | 項目 | 内容 |
 | --- | --- |
 | シグネチャ | `private NamedPipeDeviceCommandResponse ProcessCommand(NamedPipeDeviceCommandRequest request)` |
 | 可視性 | private |
 | 戻り値 | NamedPipeDeviceCommandResponse |
-| 戻り値内容 | Named Pipe 要求を内部コマンドに変換し、ハンドラー実行後に応答へ戻した結果。 |
+| 戻り値内容 | 名前付きパイプ要求を内部コマンドに変換し、ハンドラー実行後に応答へ戻した結果。 |
 
 引数:
 
@@ -222,17 +240,20 @@
 
 - ① 要求をコマンドマッパーで内部 DeviceCommand に変換する。
 - ② DeviceCommandHandler.Handle を呼び、処理結果を取得する。
-- ③ Kill/Restart の場合は 500ms 遅延してホスト制御アクション通知先を実行する。
-- ④ 処理結果を Named Pipe 応答へ変換して返却する。
+- ③ 処理結果を 名前付きパイプ応答へ変換する。
+- ④ Kill/Restart の場合は、応答送信後に500ms待ってデバイスコネクタ制御アクション通知先を実行する処理を PostWriteAction に設定する。
+- ⑤ PostWriteAction を含む応答を返却する。
 
 備考: -
+
 ## 処理フロー/注意事項
 
-- Start がコマンドルーター、イベント送信用 publisher、コマンド受信用サーバーを生成して開始する。
+- Startがコマンドルーター、イベント通知用パブリッシャー、コマンド通信用サーバーを生成して開始する。
 - ProcessCommand が要求、コマンド、結果、応答の変換を行う。
-- PublishDeviceReply がデバイスイベントをイベント用パイプへ送信する。
+- PublishDeviceReply がデバイスイベントをイベント通知用パイプへ送信する。
 - Dispose が通信関連リソースを解放する。
 
 ### 注意事項
 
 - 既定 pipe 名は `TabetPos.Host.Command` と `TabetPos.Host.Event`。
+- Kill/Restart のデバイスコネクタ制御はコマンド応答の送信完了後に実行される。

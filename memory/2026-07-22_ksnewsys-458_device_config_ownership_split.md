@@ -8,6 +8,10 @@ source:
   - sources/tabletposboilerplate/TabetPos.DeviceCtrl/Configuration/DeviceControllerConfigService.cs
   - project-store/artifacts/reports/architecture/ARCH-DEVICE-01_次世代POS_デバイス制御クラス構成図/draft/ARCH-DEVICE-01_次世代POS_デバイス制御クラス構成図.md
   - project-store/artifacts/reports/implementation-examples/EX-DEVICE-01_次世代POS_デバイス制御実装例集/draft/EX-DEVICE-01_次世代POS_デバイス制御実装例集.md
+  - project-store/artifacts/deliverables/KSNEWSYS-458_device-control/ARCH-DEVICE-01_次世代POS_デバイス制御クラス構成図.xlsx
+  - project-store/artifacts/deliverables/KSNEWSYS-458_device-control/ARCH-DEVICE-01_クラス構成図.office-script.ts
+  - project-store/artifacts/deliverables/KSNEWSYS-458_device-control/EX-DEVICE-01_次世代POS_デバイス制御実装例集.xlsx
+  - project-store/artifacts/deliverables/KSNEWSYS-458_device-control/EX-DEVICE-01_共通利用フロー.office-script.ts
 tags:
   - KSNEWSYS-458
   - DeviceCtrl
@@ -31,6 +35,7 @@ KSNEWSYS-458 đã chốt và triển khai ownership hoàn toàn của `device_co
 - Connector label được tạo cùng connector và group thành một object; node label nằm trong chính node. Màu semantic của application, DeviceCtrl, config, platform, external, decision và error được lấy từ `凡例` rồi nhúng trực tiếp vào Office Script.
 - Template compact dùng lại nằm tại `skills/doc-authoring/basic-design-authoring/resources/compact-basic-design-template.md`; workbook template đã lưu sơ đồ native tại `skills/doc-authoring/basic-design-excel/resources/compact-basic-design-template.xlsx`. Contract giữ 13 sheet, không có `区分_基本情報`, chỉ có một sơ đồ chính và merge dọc theo `プラットフォーム`.
 - Bản tiếng Nhật của ARCH-DEVICE và EX-DEVICE dùng thuật ngữ thống nhất với ARCH-HOST và CFG-01, giữ nguyên identifier kỹ thuật như `strategyclass`. ARCH-HOST, ARCH-01, ARCH-02, ARCH-03 và CFG-01 không được sửa trong vòng dịch này; việc cập nhật physical mapping của các tài liệu liên quan vẫn là phạm vi follow-up riêng.
+- Ngày 2026-07-23, hai workbook và hai Office Script hiện hành đã được promote vào bundle bàn giao `project-store/artifacts/deliverables/KSNEWSYS-458_device-control/`. Các bản trong `draft/` được giữ làm nguồn review; bản Excel thừa `scratch/ARCH-DEVICE-01_updated.xlsx` đã bị xóa.
 
 # Kiểm tra
 

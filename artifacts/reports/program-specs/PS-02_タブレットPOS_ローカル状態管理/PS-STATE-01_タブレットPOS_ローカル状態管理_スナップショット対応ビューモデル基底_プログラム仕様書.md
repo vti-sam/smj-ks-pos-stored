@@ -1,23 +1,37 @@
 # PS-STATE-01 タブレットPOS ローカル状態管理 スナップショット対応ビューモデル基底 プログラム仕様書
 
-## 改訂履歴
+タブレットPOS
 
-| バージョン | 更新日 | 更新者 | 変更内容 |
-| --- | --- | --- | --- |
-| 0.0.1 | 2026/06/21 | VTI | 初版作成 |
-
-## 基本情報
+## 00_表紙
 
 | 項目 | 内容 |
 | --- | --- |
 | 文書ID | PS-STATE-01 |
-| プロジェクト名 | タブレットPOS |
+| 文書名 | タブレットPOS ローカル状態管理 スナップショット対応ビューモデル基底 プログラム仕様書 |
+| 対象 | タブレットPOS / スナップショット対応ビューモデル基底 |
+| 版数 | 0.0.1 |
+| 作成日 | 2026/06/21 |
+| 作成者 | VTI サム, VTI 吉田 |
+| レビュー担当 | SMJ 蒲田 |
+| 承認者 | SMJ 蒲田 |
+| 目的 | 対象クラスの構造、フィールド／プロパティ及びメソッド仕様を定義する。 |
+| 期待成果 | 実装及びレビューで参照するクラス単位の仕様を明確にする。 |
+
+## 01_改訂履歴
+
+| 版数 | 日付 | 変更内容 | 作成者 | 承認者 |
+| --- | --- | --- | --- | --- |
+| 0.0.1 | 2026/06/21 | 初版作成 | VTI |  |
+
+## クラス情報
+
+| 項目 | 内容 |
+| --- | --- |
 | 機能名 | スナップショット対応ビューモデル基底 |
 | 物理クラス名 | SnapshotViewModelBase |
 | 名前空間 | TabetPos.Applications.Presentation.ViewModels.Base |
 | アクセス修飾子 | public abstract |
 | 継承/実装 | BaseViewModel |
-| 更新日 | 2026/06/21 |
 
 ## ソース対応
 
@@ -52,19 +66,19 @@
 
 | No | 可視性 | 戻り値 | メソッド名 | 概要 |
 | --- | --- | --- | --- | --- |
-| 1 | protected override | Task | OnAppearingAsync | 画面表示時に保存済み状態を復元してから基底処理を実行する。 |
-| 2 | protected override | Task | OnDisappearingAsync | 画面非表示時に現在状態を保存してから基底処理を実行する。 |
-| 3 | protected override | Task | OnResumingAsync | アプリ復帰時に保存済み状態を再取得する。 |
-| 4 | protected override | Task | OnStoppingAsync | アプリ停止時に現在状態を保存する。 |
-| 5 | private | Task | SavePropertiesToSnapshotAsync | 重複保存を抑止しながら保存本体を実行する。 |
-| 6 | private | Task | SavePropertiesToSnapshotCoreAsync | 保存対象項目を収集してスナップショット保存サービスへ渡す。 |
-| 7 | private | Task | RestorePropertiesFromSnapshotAsync | 保存済み値を取得し、対象項目へ反映する。 |
-| 8 | private | PropertyInfo[] | GetPersistableProperties | 保存対象として指定された項目を抽出してキャッシュする。 |
-| 9 | private static | object? | ConvertSnapshotValue | 保存済み値を復元先の型へ変換する。 |
+| ① | protected override | Task | OnAppearingAsync | 画面表示時に保存済み状態を復元してから基底処理を実行する。 |
+| ② | protected override | Task | OnDisappearingAsync | 画面非表示時に現在状態を保存してから基底処理を実行する。 |
+| ③ | protected override | Task | OnResumingAsync | アプリ復帰時に保存済み状態を再取得する。 |
+| ④ | protected override | Task | OnStoppingAsync | アプリ停止時に現在状態を保存する。 |
+| ⑤ | private | Task | SavePropertiesToSnapshotAsync | 重複保存を抑止しながら保存本体を実行する。 |
+| ⑥ | private | Task | SavePropertiesToSnapshotCoreAsync | 保存対象項目を収集してスナップショット保存サービスへ渡す。 |
+| ⑦ | private | Task | RestorePropertiesFromSnapshotAsync | 保存済み値を取得し、対象項目へ反映する。 |
+| ⑧ | private | PropertyInfo[] | GetPersistableProperties | 保存対象として指定された項目を抽出してキャッシュする。 |
+| ⑨ | private static | object? | ConvertSnapshotValue | 保存済み値を復元先の型へ変換する。 |
 
 ## メソッド詳細
 
-### 1. OnAppearingAsync
+### ①. OnAppearingAsync
 
 | 項目 | 内容 |
 | --- | --- |
@@ -80,7 +94,7 @@
 
 備考: -
 
-### 2. OnDisappearingAsync
+### ②. OnDisappearingAsync
 
 | 項目 | 内容 |
 | --- | --- |
@@ -96,7 +110,7 @@
 
 備考: -
 
-### 3. OnResumingAsync
+### ③. OnResumingAsync
 
 | 項目 | 内容 |
 | --- | --- |
@@ -112,7 +126,7 @@
 
 備考: -
 
-### 4. OnStoppingAsync
+### ④. OnStoppingAsync
 
 | 項目 | 内容 |
 | --- | --- |
@@ -128,7 +142,7 @@
 
 備考: -
 
-### 5. SavePropertiesToSnapshotAsync
+### ⑤. SavePropertiesToSnapshotAsync
 
 | 項目 | 内容 |
 | --- | --- |
@@ -146,7 +160,7 @@
 
 備考: -
 
-### 6. SavePropertiesToSnapshotCoreAsync
+### ⑥. SavePropertiesToSnapshotCoreAsync
 
 | 項目 | 内容 |
 | --- | --- |
@@ -164,7 +178,7 @@
 
 備考: -
 
-### 7. RestorePropertiesFromSnapshotAsync
+### ⑦. RestorePropertiesFromSnapshotAsync
 
 | 項目 | 内容 |
 | --- | --- |
@@ -182,7 +196,7 @@
 
 備考: -
 
-### 8. GetPersistableProperties
+### ⑧. GetPersistableProperties
 
 | 項目 | 内容 |
 | --- | --- |
@@ -200,7 +214,7 @@
 
 備考: -
 
-### 9. ConvertSnapshotValue
+### ⑨. ConvertSnapshotValue
 
 | 項目 | 内容 |
 | --- | --- |

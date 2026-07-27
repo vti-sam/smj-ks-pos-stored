@@ -1,23 +1,37 @@
 # PS-STATE-05 タブレットPOS ローカル状態管理 セッションサービスインターフェース プログラム仕様書
 
-## 改訂履歴
+タブレットPOS
 
-| バージョン | 更新日 | 更新者 | 変更内容 |
-| --- | --- | --- | --- |
-| 0.0.1 | 2026/06/21 | VTI | 初版作成 |
-
-## 基本情報
+## 00_表紙
 
 | 項目 | 内容 |
 | --- | --- |
 | 文書ID | PS-STATE-05 |
-| プロジェクト名 | タブレットPOS |
+| 文書名 | タブレットPOS ローカル状態管理 セッションサービスインターフェース プログラム仕様書 |
+| 対象 | タブレットPOS / セッションサービスインターフェース |
+| 版数 | 0.0.1 |
+| 作成日 | 2026/06/21 |
+| 作成者 | VTI サム, VTI 吉田 |
+| レビュー担当 | SMJ 蒲田 |
+| 承認者 | SMJ 蒲田 |
+| 目的 | 対象クラスの構造、フィールド／プロパティ及びメソッド仕様を定義する。 |
+| 期待成果 | 実装及びレビューで参照するクラス単位の仕様を明確にする。 |
+
+## 01_改訂履歴
+
+| 版数 | 日付 | 変更内容 | 作成者 | 承認者 |
+| --- | --- | --- | --- | --- |
+| 0.0.1 | 2026/06/21 | 初版作成 | VTI |  |
+
+## クラス情報
+
+| 項目 | 内容 |
+| --- | --- |
 | 機能名 | セッションサービスインターフェース |
 | 物理クラス名 | ILocalStateSessionService |
 | 名前空間 | TabetPos.Core.State |
 | アクセス修飾子 | public |
 | 継承/実装 | - |
-| 更新日 | 2026/06/21 |
 
 ## ソース対応
 
@@ -47,15 +61,15 @@
 
 | No | 可視性 | 戻り値 | メソッド名 | 概要 |
 | --- | --- | --- | --- | --- |
-| 1 | public | Task<LocalStateSession> | GetOrCreateActiveSessionAsync | 有効なセッションを取得し、存在しない場合は作成する。 |
-| 2 | public | Task<IReadOnlyList<LocalStateSession>> | GetActiveSessionsAsync | 有効期限内の有効セッション一覧を取得する。 |
-| 3 | public | Task | MarkCompletedAsync | 対象セッションを完了状態にする。 |
-| 4 | public | Task | MarkAbandonedAsync | 対象セッションを破棄状態にする。 |
-| 5 | public | Task | UpdateLastRouteAsync | 対象セッションの最終ルートを更新する。 |
+| ① | public | Task<LocalStateSession> | GetOrCreateActiveSessionAsync | 有効なセッションを取得し、存在しない場合は作成する。 |
+| ② | public | Task<IReadOnlyList<LocalStateSession>> | GetActiveSessionsAsync | 有効期限内の有効セッション一覧を取得する。 |
+| ③ | public | Task | MarkCompletedAsync | 対象セッションを完了状態にする。 |
+| ④ | public | Task | MarkAbandonedAsync | 対象セッションを破棄状態にする。 |
+| ⑤ | public | Task | UpdateLastRouteAsync | 対象セッションの最終ルートを更新する。 |
 
 ## メソッド詳細
 
-### 1. GetOrCreateActiveSessionAsync
+### ①. GetOrCreateActiveSessionAsync
 
 | 項目 | 内容 |
 | --- | --- |
@@ -80,7 +94,7 @@
 
 備考: -
 
-### 2. GetActiveSessionsAsync
+### ②. GetActiveSessionsAsync
 
 | 項目 | 内容 |
 | --- | --- |
@@ -103,7 +117,7 @@
 
 備考: -
 
-### 3. MarkCompletedAsync
+### ③. MarkCompletedAsync
 
 | 項目 | 内容 |
 | --- | --- |
@@ -126,7 +140,7 @@
 
 備考: -
 
-### 4. MarkAbandonedAsync
+### ④. MarkAbandonedAsync
 
 | 項目 | 内容 |
 | --- | --- |
@@ -149,7 +163,7 @@
 
 備考: -
 
-### 5. UpdateLastRouteAsync
+### ⑤. UpdateLastRouteAsync
 
 | 項目 | 内容 |
 | --- | --- |

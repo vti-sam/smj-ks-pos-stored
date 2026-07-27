@@ -1,26 +1,41 @@
 # PS-HOST-09 タブレットPOS ホスト 自動釣銭機UIスレッドフォーム RT-300 プログラム仕様書
 
-## 改訂履歴
+タブレットPOS
 
-| バージョン | 更新日 | 更新者 | 変更内容 |
-| --- | --- | --- | --- |
-| 0.0.4 | 2026/06/25 | VTI サム | 内部フォームの表示可否判定の表現を明確化 |
-| 0.0.3 | 2026/06/25 | VTI サム | UIスレッドフォームの位置づけを追記 |
-| 0.0.2 | 2026/06/21 | VTI サム | クラス仕様、フィールド/プロパティ、メソッド仕様を更新 |
-| 0.0.1 | 2026/06/19 | VTI サム | 初版作成 |
-
-## 基本情報
+## 00_表紙
 
 | 項目 | 内容 |
 | --- | --- |
 | 文書ID | PS-HOST-09 |
-| プロジェクト名 | タブレットPOS |
+| 文書名 | タブレットPOS ホスト 自動釣銭機UIスレッドフォーム RT-300 プログラム仕様書 |
+| 対象 | タブレットPOS / 自動釣銭機UIスレッドフォーム RT-300 |
+| 版数 | 0.0.5 |
+| 作成日 | 2026/06/19 |
+| 作成者 | VTI サム, VTI 吉田 |
+| レビュー担当 | SMJ 蒲田 |
+| 承認者 | SMJ 蒲田 |
+| 目的 | 対象クラスの構造、フィールド／プロパティ及びメソッド仕様を定義する。 |
+| 期待成果 | 実装及びレビューで参照するクラス単位の仕様を明確にする。 |
+
+## 01_改訂履歴
+
+| 版数 | 日付 | 変更内容 | 作成者 | 承認者 |
+| --- | --- | --- | --- | --- |
+| 0.0.5 | 2026/07/23 | ARCH-HOST-01に合わせて、自動釣銭機とOPOS／OCXの表記を統一 | VTI サム |  |
+| 0.0.4 | 2026/06/25 | 内部フォームの表示可否判定の表現を明確化 | VTI サム |  |
+| 0.0.3 | 2026/06/25 | UIスレッドフォームの位置づけを追記 | VTI サム |  |
+| 0.0.2 | 2026/06/21 | クラス仕様、フィールド/プロパティ、メソッド仕様を更新 | VTI サム |  |
+| 0.0.1 | 2026/06/19 | 初版作成 | VTI サム |  |
+
+## クラス情報
+
+| 項目 | 内容 |
+| --- | --- |
 | 機能名 | 自動釣銭機UIスレッドフォーム RT-300 |
 | 物理クラス名 | CashChangerByRt300Form |
 | 名前空間 | TabletOutProcess.TabletDeviceServer |
 | アクセス修飾子 | public partial |
 | 継承/実装 | Form |
-| 更新日 | 2026/06/25 |
 
 ## ソース対応
 
@@ -32,13 +47,13 @@
 
 ## クラス概要
 
-RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イベント、周期監視、外部要求ファイルを処理するフォーム部品。管理画面ではなく、OPOS/OCX を UI スレッド上で扱うための内部フォームである。通常運用時は画面としてユーザーに操作させることを前提とせず、デバイス制御部からの要求を実機操作へつなぎ、結果を応答データとして返す。
+RT-300 自動釣銭機の制御部品を UI スレッド上で保持し、自動釣銭機イベント、周期監視、外部要求ファイルを処理するフォーム部品。管理画面ではなく、OPOS／OCX を UI スレッド上で扱うための内部フォームである。通常運用時は画面としてユーザーに操作させることを前提とせず、デバイス制御部からの要求を実機操作へつなぎ、結果を応答データとして返す。
 
 ### 主な責務
 
-- 釣銭機から通知されるイベントと状態変化を受け取る。
+- 自動釣銭機から通知されるイベントと状態変化を受け取る。
 - 共有メモリおよび要求・応答ファイルによる外部連携を処理する。
-- 周期タイマーで釣銭機状態と未処理要求を確認する。
+- 周期タイマーで自動釣銭機状態と未処理要求を確認する。
 
 ## フィールド/プロパティ
 
@@ -46,19 +61,19 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 | --- | --- | --- | --- | --- |
 | フィールド | public | CashChangerBase | Device | フォームから参照するデバイス制御インスタンス。 |
 | フィールド | public | TabletDeviceId | DeviceId | フォームに紐づくデバイスID。 |
-| フィールド | public | int | DiStatus | OPOS 釣銭機イベントの DI_STATUS 値。 |
-| フィールド | public | int | DiEvent | OPOS 釣銭機イベントの DI_EVENT 値。 |
-| フィールド | public | int | EnqStatus | OPOS 釣銭機イベントの ENQ_STATUS 値。 |
+| フィールド | public | int | DiStatus | OPOS 自動釣銭機イベントの DI_STATUS 値。 |
+| フィールド | public | int | DiEvent | OPOS 自動釣銭機イベントの DI_EVENT 値。 |
+| フィールド | public | int | EnqStatus | OPOS 自動釣銭機イベントの ENQ_STATUS 値。 |
 | フィールド | private | int | _loadflg | Shown/Activated 初回処理を一度だけ通すためのロードフラグ。 |
-| フィールド | private | string | NameTurireqMem | 釣銭機要求用 memory mapped file 名（TURIREQ）。 |
-| フィールド | private | string | NameTuriansMem | 釣銭機応答用 memory mapped file 名（TURIANS）。 |
-| フィールド | private | KsMemoryMappedFile | _mmfTuriReq | 釣銭機共通 DLL からの要求を受信する共有メモリ。 |
-| フィールド | private | KsMemoryMappedFile | _mmfTuriAns | 釣銭機サーバーから応答を書き込む共有メモリ。 |
+| フィールド | private | string | NameTurireqMem | 自動釣銭機要求用 memory mapped file 名（TURIREQ）。 |
+| フィールド | private | string | NameTuriansMem | 自動釣銭機応答用 memory mapped file 名（TURIANS）。 |
+| フィールド | private | KsMemoryMappedFile | _mmfTuriReq | 自動釣銭機共通 DLL からの要求を受信する共有メモリ。 |
+| フィールド | private | KsMemoryMappedFile | _mmfTuriAns | 自動釣銭機サーバーから応答を書き込む共有メモリ。 |
 | フィールド | private | int | ChkTimeInterval | Timer1 の監視間隔（500ms）。 |
 | フィールド | private | int | FileChkTime | ファイル連携の監視待機間隔（50ms）。 |
 | フィールド | private | Dictionary<string, string> | _mFileStock | ファイル連携で読み取った要求/応答情報を保持する辞書。 |
-| フィールド | private | string | NameReqfile | 釣銭機共通 DLL から釣銭機サーバーへの要求ファイル名。 |
-| フィールド | private | string | NameAnsfile | 釣銭機サーバーから釣銭機共通 DLL への応答ファイル名。 |
+| フィールド | private | string | NameReqfile | 自動釣銭機共通 DLL から自動釣銭機サーバーへの要求ファイル名。 |
+| フィールド | private | string | NameAnsfile | 自動釣銭機サーバーから自動釣銭機共通 DLL への応答ファイル名。 |
 | フィールド | private | string | NameReqfileOk | 要求ファイル受信確認用の OK ファイル名。 |
 | フィールド | private | string | NameAnsfileOk | 応答ファイル処理正常完了を示す OK ファイル名。 |
 | フィールド | private | string | NameAnsfileNg | 応答ファイル処理異常を示す NG ファイル名。 |
@@ -73,63 +88,63 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 | No | 可視性 | 戻り値 | メソッド名 | 概要 |
 | --- | --- | --- | --- | --- |
-| 1 | public | - | CashChangerByRt300Form | インスタンスを初期化する。 |
-| 2 | private | void | DevForm_Load | 例外ハンドラー、非表示配置、共有メモリ、要求/応答ファイルパス、タイマー初期値を設定する。 |
-| 3 | private | void | DevForm_Shown | TabletDeviceInfo 登録、OPOS Open/Claim/DeviceEnabled、内部フォームの表示可否判定、監視タイマー起動を行う。 |
-| 4 | private | void | DevForm_FormClosing | 共有メモリを破棄し、対象 OPOS CashChanger が opened の場合は close する。 |
-| 5 | private | void | OnThreadException | COM 呼び出し競合の既知 ExternalException は無視し、それ以外は再throwする。 |
-| 6 | private | void | OnUnhandledThreadException | 未処理例外でも同じ COM 競合だけを無視し、それ以外は再throwする。 |
-| 7 | private | void | AxOPOSCashChanger1_DataEvent | DataEvent 発生回数を加算し、イベント状態を釣銭機ログへ出力する。 |
-| 8 | private | void | AxOPOSCashChanger1_DirectIOEvent | DirectIOEvent を記録し、非同期中は重複を避けてイベントリストに保持する。 |
-| 9 | private | void | AxOPOSCashChanger1_StatusUpdateEvent | StatusUpdateEvent を記録し、非同期完了・ジャムなどの状態を内部結果へ反映する。 |
-| 10 | public | bool | IsArrayEx | 非同期イベント配列が利用可能な状態か確認する。 |
-| 11 | public | void | OposCashMng | OPOS CashChanger の管理処理と状態確認を実行する。 |
-| 12 | private | void | Timer1_Tick | 釣銭機が非同期実行中でない場合だけ管理処理を呼び、監視タイマーを再開する。 |
-| 13 | private | int | OPOSCash_DepositAmount | BeginDeposit 後の入金額と金種別枚数を取得する。 |
-| 14 | private | int | OPOSCash_DirectIO | 指定 command、pData、pString で CashChanger DirectIO を同期実行する。 |
-| 15 | private | void | PDirectIo | OPOS CashChanger の DirectIO を呼び出す。 |
-| 16 | private | int | OPOSCash_Seisa | 精査 DirectIO を実行し、収納庫・回収ボックス別の収納データを返却する。 |
-| 17 | private | string | OposCashResltMsg | ResultCode/ResultCodeExtended とデバイス状態から表示用エラーメッセージを決定する。 |
-| 18 | private | void | PReleaseDevice | CashChanger の排他を解放する。 |
-| 19 | private | string | PGetDepositCounts | DepositCounts を取得し、ログ出力する。 |
-| 20 | private | int | PGetDepositAmount | DepositAmount を取得し、ログ出力する。 |
-| 21 | private | void | PDeviceEnabled2 | 異常時の復旧用に DeviceEnabled を再設定する。 |
-| 22 | private | void | PFreezeEvents | FreezeEvents プロパティを設定する。 |
-| 23 | private | void | PDataEventEnabled | DataEventEnabled プロパティを設定する。 |
-| 24 | private | void | PDeviceEnabled | DeviceEnabled プロパティを設定し、結果コードを保持する。 |
-| 25 | private | void | PClaimDevice | CashChanger の排他取得を実行し、結果コードを保持する。 |
-| 26 | private | int | OPOSCash_FullStatus | CashChanger の FullStatus を取得する。 |
-| 27 | private | int | PGetFullStatus | FullStatus を取得し、ログ出力する。 |
-| 28 | private | void | TmrErrGuide_Tick | エラーガイダンス表示中だけガイダンスウィンドウを前面へ戻し、タイマーを元の間隔で再開する。 |
-| 29 | private | void | TimFile_Tick | 共有メモリまたは要求ファイルを監視し、再送要求またはデバイスメソッド要求を処理して応答を書き戻す。 |
-| 30 | private | int | File_Method | ファイル/メモリ連携から来た釣銭機コマンドを DeviceMethod と同等の分岐で実行する。 |
-| 31 | private | int | OPOSCash_EndDeposit_FlagON | EndDeposit 完了フラグを立て、入金終了処理が完了した状態を記録する。 |
-| 32 | private | int | OPOSCash_EndDeposit | 入金終了区分に従って EndDeposit を実行し、Begin/End 間の排他状態を解除する。 |
-| 33 | private | void | PEndDeposit | CashChanger の EndDeposit を呼び出す。 |
-| 34 | private | int | OPOSCash_FixDeposit | 入金を確定し、確定金額と金種別枚数を取得する。 |
-| 35 | private | void | PFixDeposit | CashChanger の FixDeposit を呼び出す。 |
-| 36 | private | int | OPOSCash_DispenseCashAsync | 非同期モードで金種別払出を実行し、結果を async result として受け取る。 |
-| 37 | private | int | OPOSCash_DispenseCash | 払出口と金種別枚数を指定して払出を実行する。 |
-| 38 | private | void | PDispenseCash | CashChanger の DispenseCash を呼び出す。 |
-| 39 | private | int | OPOSCash_DispenseChange | 払出口と金額を指定して払出を実行する。 |
-| 40 | private | void | PDispenseChange | CashChanger の DispenseChange を呼び出す。 |
-| 41 | private | void | PCurrentExit | CurrentExit プロパティを設定する。 |
-| 42 | private | int | OPOSCash_DepositDataRead | 計数中データを DirectIO で取得し、金種別の枚数文字列へ整形する。 |
-| 43 | private | int | OPOSCash_CoinStatus | 硬貨部の収納状態を DirectIO で取得し、金種別 status 文字列へ整形する。 |
-| 44 | private | string | Read_IconFile | 外部連携用の INI またはアイコン状態ファイルを読み書きする。 |
-| 45 | private | string | GetIni | 外部連携用の INI またはアイコン状態ファイルを読み書きする。 |
-| 46 | private | int | OPOSCash_Enq | 釣銭機全体の状態を取得し、状態コードとエラー情報を更新する。 |
-| 47 | private | int | OPOSCash_ClearInput | 釣銭機の入力状態を ClearInput でクリアする。 |
-| 48 | private | void | PClearInput | CashChanger の ClearInput を呼び出す。 |
-| 49 | private | int | OPOSCash_ErrGuidance | エラーガイダンス表示コマンドを実行し、必要に応じてガイダンスウィンドウを前面へ出す。 |
-| 50 | private | void | pDirectIO_Async | 非同期 DirectIO を実行し、非同期完了イベントで結果を受ける。 |
-| 51 | private | void | PAsyncMode | AsyncMode プロパティを設定する。 |
-| 52 | private | long | OPOSCash_AsyncEnd | 非同期処理を終了し、DeviceEnabled を無効化して排他を解放する。 |
-| 53 | private | void | PPowerNotify | PowerNotify プロパティを設定する。 |
+| ① | public | - | CashChangerByRt300Form | インスタンスを初期化する。 |
+| ② | private | void | DevForm_Load | 例外ハンドラー、非表示配置、共有メモリ、要求/応答ファイルパス、タイマー初期値を設定する。 |
+| ③ | private | void | DevForm_Shown | TabletDeviceInfo 登録、OPOS Open/Claim/DeviceEnabled、内部フォームの表示可否判定、監視タイマー起動を行う。 |
+| ④ | private | void | DevForm_FormClosing | 共有メモリを破棄し、対象 OPOS CashChanger が opened の場合は close する。 |
+| ⑤ | private | void | OnThreadException | COM 呼び出し競合の既知 ExternalException は無視し、それ以外は再throwする。 |
+| ⑥ | private | void | OnUnhandledThreadException | 未処理例外でも同じ COM 競合だけを無視し、それ以外は再throwする。 |
+| ⑦ | private | void | AxOPOSCashChanger1_DataEvent | DataEvent 発生回数を加算し、イベント状態を自動釣銭機ログへ出力する。 |
+| ⑧ | private | void | AxOPOSCashChanger1_DirectIOEvent | DirectIOEvent を記録し、非同期中は重複を避けてイベントリストに保持する。 |
+| ⑨ | private | void | AxOPOSCashChanger1_StatusUpdateEvent | StatusUpdateEvent を記録し、非同期完了・ジャムなどの状態を内部結果へ反映する。 |
+| ⑩ | public | bool | IsArrayEx | 非同期イベント配列が利用可能な状態か確認する。 |
+| ⑪ | public | void | OposCashMng | OPOS CashChanger の管理処理と状態確認を実行する。 |
+| ⑫ | private | void | Timer1_Tick | 自動釣銭機が非同期実行中でない場合だけ管理処理を呼び、監視タイマーを再開する。 |
+| ⑬ | private | int | OPOSCash_DepositAmount | BeginDeposit 後の入金額と金種別枚数を取得する。 |
+| ⑭ | private | int | OPOSCash_DirectIO | 指定 command、pData、pString で CashChanger DirectIO を同期実行する。 |
+| ⑮ | private | void | PDirectIo | OPOS CashChanger の DirectIO を呼び出す。 |
+| ⑯ | private | int | OPOSCash_Seisa | 精査 DirectIO を実行し、収納庫・回収ボックス別の収納データを返却する。 |
+| ⑰ | private | string | OposCashResltMsg | ResultCode/ResultCodeExtended とデバイス状態から表示用エラーメッセージを決定する。 |
+| ⑱ | private | void | PReleaseDevice | CashChanger の排他を解放する。 |
+| ⑲ | private | string | PGetDepositCounts | DepositCounts を取得し、ログ出力する。 |
+| ⑳ | private | int | PGetDepositAmount | DepositAmount を取得し、ログ出力する。 |
+| ㉑ | private | void | PDeviceEnabled2 | 異常時の復旧用に DeviceEnabled を再設定する。 |
+| ㉒ | private | void | PFreezeEvents | FreezeEvents プロパティを設定する。 |
+| ㉓ | private | void | PDataEventEnabled | DataEventEnabled プロパティを設定する。 |
+| ㉔ | private | void | PDeviceEnabled | DeviceEnabled プロパティを設定し、結果コードを保持する。 |
+| ㉕ | private | void | PClaimDevice | CashChanger の排他取得を実行し、結果コードを保持する。 |
+| ㉖ | private | int | OPOSCash_FullStatus | CashChanger の FullStatus を取得する。 |
+| ㉗ | private | int | PGetFullStatus | FullStatus を取得し、ログ出力する。 |
+| ㉘ | private | void | TmrErrGuide_Tick | エラーガイダンス表示中だけガイダンスウィンドウを前面へ戻し、タイマーを元の間隔で再開する。 |
+| ㉙ | private | void | TimFile_Tick | 共有メモリまたは要求ファイルを監視し、再送要求またはデバイスメソッド要求を処理して応答を書き戻す。 |
+| ㉚ | private | int | File_Method | ファイル/メモリ連携から来た自動釣銭機コマンドを DeviceMethod と同等の分岐で実行する。 |
+| ㉛ | private | int | OPOSCash_EndDeposit_FlagON | EndDeposit 完了フラグを立て、入金終了処理が完了した状態を記録する。 |
+| ㉜ | private | int | OPOSCash_EndDeposit | 入金終了区分に従って EndDeposit を実行し、Begin/End 間の排他状態を解除する。 |
+| ㉝ | private | void | PEndDeposit | CashChanger の EndDeposit を呼び出す。 |
+| ㉞ | private | int | OPOSCash_FixDeposit | 入金を確定し、確定金額と金種別枚数を取得する。 |
+| ㉟ | private | void | PFixDeposit | CashChanger の FixDeposit を呼び出す。 |
+| ㊱ | private | int | OPOSCash_DispenseCashAsync | 非同期モードで金種別払出を実行し、結果を async result として受け取る。 |
+| ㊲ | private | int | OPOSCash_DispenseCash | 払出口と金種別枚数を指定して払出を実行する。 |
+| ㊳ | private | void | PDispenseCash | CashChanger の DispenseCash を呼び出す。 |
+| ㊴ | private | int | OPOSCash_DispenseChange | 払出口と金額を指定して払出を実行する。 |
+| ㊵ | private | void | PDispenseChange | CashChanger の DispenseChange を呼び出す。 |
+| ㊶ | private | void | PCurrentExit | CurrentExit プロパティを設定する。 |
+| ㊷ | private | int | OPOSCash_DepositDataRead | 計数中データを DirectIO で取得し、金種別の枚数文字列へ整形する。 |
+| ㊸ | private | int | OPOSCash_CoinStatus | 硬貨部の収納状態を DirectIO で取得し、金種別 status 文字列へ整形する。 |
+| ㊹ | private | string | Read_IconFile | 外部連携用の INI またはアイコン状態ファイルを読み書きする。 |
+| ㊺ | private | string | GetIni | 外部連携用の INI またはアイコン状態ファイルを読み書きする。 |
+| ㊻ | private | int | OPOSCash_Enq | 自動釣銭機全体の状態を取得し、状態コードとエラー情報を更新する。 |
+| ㊼ | private | int | OPOSCash_ClearInput | 自動釣銭機の入力状態を ClearInput でクリアする。 |
+| ㊽ | private | void | PClearInput | CashChanger の ClearInput を呼び出す。 |
+| ㊾ | private | int | OPOSCash_ErrGuidance | エラーガイダンス表示コマンドを実行し、必要に応じてガイダンスウィンドウを前面へ出す。 |
+| ㊿ | private | void | pDirectIO_Async | 非同期 DirectIO を実行し、非同期完了イベントで結果を受ける。 |
+| ⑤① | private | void | PAsyncMode | AsyncMode プロパティを設定する。 |
+| ⑤② | private | long | OPOSCash_AsyncEnd | 非同期処理を終了し、DeviceEnabled を無効化して排他を解放する。 |
+| ⑤③ | private | void | PPowerNotify | PowerNotify プロパティを設定する。 |
 
 ## メソッド詳細
 
-### 1. CashChangerByRt300Form
+### ①. CashChangerByRt300Form
 
 | 項目 | 内容 |
 | --- | --- |
@@ -146,7 +161,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 2. DevForm_Load
+### ②. DevForm_Load
 
 | 項目 | 内容 |
 | --- | --- |
@@ -165,13 +180,13 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 処理内容:
 
 - ① ロードフラグを初期化し、UI スレッドと AppDomain の例外ハンドラーを登録する。
-- ② フォームを画面外へ移動し、釣銭機関連のグローバル結果を初期化する。
+- ② フォームを画面外へ移動し、自動釣銭機関連のグローバル結果を初期化する。
 - ③ 共有メモリ TURIREQ/TURIANS を作成し、既存内容をクリアする。
 - ④ 要求/応答ファイルのパスとタイマー間隔を設定し、タイマーは停止状態にする。
 
 備考: -
 
-### 3. DevForm_Shown
+### ③. DevForm_Shown
 
 | 項目 | 内容 |
 | --- | --- |
@@ -193,11 +208,11 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 - ② DeviceId/DeviceName を TabletDeviceInfo に登録し、Device_Open を実行する。
 - ③ Visible 設定に応じて taskbar 表示とフォーム位置を調整する。
 - ④ Claim、PowerNotify、DeviceEnabled を順に実行し、初回排他エラーはログに残す。
-- ⑤ 釣銭機監視タイマーとファイル連携タイマーを開始する。
+- ⑤ 自動釣銭機監視タイマーとファイル連携タイマーを開始する。
 
 備考: -
 
-### 4. DevForm_FormClosing
+### ④. DevForm_FormClosing
 
 | 項目 | 内容 |
 | --- | --- |
@@ -222,7 +237,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 5. OnThreadException
+### ⑤. OnThreadException
 
 | 項目 | 内容 |
 | --- | --- |
@@ -246,7 +261,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 6. OnUnhandledThreadException
+### ⑥. OnUnhandledThreadException
 
 | 項目 | 内容 |
 | --- | --- |
@@ -270,7 +285,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 7. AxOPOSCashChanger1_DataEvent
+### ⑦. AxOPOSCashChanger1_DataEvent
 
 | 項目 | 内容 |
 | --- | --- |
@@ -290,12 +305,12 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 - ① ログ抑制フラグを一時退避する。
 - ② DataEvent 発生回数を加算する。
-- ③ イベント状態を釣銭機ログへ出力する。
+- ③ イベント状態を自動釣銭機ログへ出力する。
 - ④ ログ抑制フラグを元に戻す。
 
 備考: -
 
-### 8. AxOPOSCashChanger1_DirectIOEvent
+### ⑧. AxOPOSCashChanger1_DirectIOEvent
 
 | 項目 | 内容 |
 | --- | --- |
@@ -314,13 +329,13 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 処理内容:
 
 - ① ログ抑制フラグを一時退避し、イベント番号を DiEvent に保持する。
-- ② DirectIOEvent の内容を釣銭機ログへ出力する。
+- ② DirectIOEvent の内容を自動釣銭機ログへ出力する。
 - ③ AsyncMode 中はイベント番号を GsAsyncDirectIoEvents へ重複なしで追加する。
 - ④ ログ抑制フラグを元に戻す。
 
 備考: -
 
-### 9. AxOPOSCashChanger1_StatusUpdateEvent
+### ⑨. AxOPOSCashChanger1_StatusUpdateEvent
 
 | 項目 | 内容 |
 | --- | --- |
@@ -338,14 +353,14 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 処理内容:
 
-- ① status data を DiStatus に保持し、釣銭機ログへ出力する。
+- ① status data を DiStatus に保持し、自動釣銭機ログへ出力する。
 - ② AsyncMode 中は status を GsAsyncStatusUpdateEvents へ重複なしで追加する。
 - ③ 非同期完了 status の場合は AsyncResultCode/Extended を保存し、GbAsyncResult を true にする。
 - ④ jam 等の異常 status は追加状態取得と戻り値保存へつなげる。
 
 備考: -
 
-### 10. IsArrayEx
+### ⑩. IsArrayEx
 
 | 項目 | 内容 |
 | --- | --- |
@@ -368,7 +383,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 11. OposCashMng
+### ⑪. OposCashMng
 
 | 項目 | 内容 |
 | --- | --- |
@@ -380,12 +395,12 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 処理内容:
 
 - ① OPOSCashChanger1 の状態、共有メモリ、ファイル連携要求を確認する。
-- ② 受信した釣銭機コマンド、DirectIO、イベント結果、エラーガイダンスを処理する。
+- ② 受信した自動釣銭機コマンド、DirectIO、イベント結果、エラーガイダンスを処理する。
 - ③ 処理結果を共有メモリ/応答ファイルまたは内部状態へ反映し、次回監視に備える。
 
 備考: -
 
-### 12. Timer1_Tick
+### ⑫. Timer1_Tick
 
 | 項目 | 内容 |
 | --- | --- |
@@ -405,12 +420,12 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 - ① Timer1 を停止する。
 - ② GlOposCashReslt が 107 の場合はフォームを close して終了する。
-- ③ AsyncMode でない場合だけ OposCashMng を呼び、釣銭機管理処理を実行する。
+- ③ AsyncMode でない場合だけ OposCashMng を呼び、自動釣銭機管理処理を実行する。
 - ④ タイマー間隔を既定値に戻し、Timer1 を再開する。
 
 備考: -
 
-### 13. OPOSCash_DepositAmount
+### ⑬. OPOSCash_DepositAmount
 
 | 項目 | 内容 |
 | --- | --- |
@@ -439,7 +454,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 14. OPOSCash_DirectIO
+### ⑭. OPOSCash_DirectIO
 
 | 項目 | 内容 |
 | --- | --- |
@@ -468,7 +483,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 15. PDirectIo
+### ⑮. PDirectIo
 
 | 項目 | 内容 |
 | --- | --- |
@@ -493,7 +508,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 16. OPOSCash_Seisa
+### ⑯. OPOSCash_Seisa
 
 | 項目 | 内容 |
 | --- | --- |
@@ -520,7 +535,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 17. OposCashResltMsg
+### ⑰. OposCashResltMsg
 
 | 項目 | 内容 |
 | --- | --- |
@@ -539,12 +554,12 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 処理内容:
 
 - ① ResultCode、ResultCodeExtended、および OPOSCashChanger の DeviceStatus/FullStatus を参照する。
-- ② OPOS 標準エラーと釣銭機固有エラーを判定し、表示用メッセージを選択する。
-- ③ 必要に応じて lRsltEx を釣銭機固有エラーへ補正し、メッセージ文字列を返却する。
+- ② OPOS 標準エラーと自動釣銭機固有エラーを判定し、表示用メッセージを選択する。
+- ③ 必要に応じて lRsltEx を自動釣銭機固有エラーへ補正し、メッセージ文字列を返却する。
 
 備考: -
 
-### 18. PReleaseDevice
+### ⑱. PReleaseDevice
 
 | 項目 | 内容 |
 | --- | --- |
@@ -561,7 +576,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 19. PGetDepositCounts
+### ⑲. PGetDepositCounts
 
 | 項目 | 内容 |
 | --- | --- |
@@ -584,7 +599,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 20. PGetDepositAmount
+### ⑳. PGetDepositAmount
 
 | 項目 | 内容 |
 | --- | --- |
@@ -607,7 +622,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 21. PDeviceEnabled2
+### ㉑. PDeviceEnabled2
 
 | 項目 | 内容 |
 | --- | --- |
@@ -631,7 +646,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 22. PFreezeEvents
+### ㉒. PFreezeEvents
 
 | 項目 | 内容 |
 | --- | --- |
@@ -654,7 +669,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 23. PDataEventEnabled
+### ㉓. PDataEventEnabled
 
 | 項目 | 内容 |
 | --- | --- |
@@ -677,7 +692,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 24. PDeviceEnabled
+### ㉔. PDeviceEnabled
 
 | 項目 | 内容 |
 | --- | --- |
@@ -701,7 +716,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 25. PClaimDevice
+### ㉕. PClaimDevice
 
 | 項目 | 内容 |
 | --- | --- |
@@ -724,7 +739,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 26. OPOSCash_FullStatus
+### ㉖. OPOSCash_FullStatus
 
 | 項目 | 内容 |
 | --- | --- |
@@ -749,7 +764,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 27. PGetFullStatus
+### ㉗. PGetFullStatus
 
 | 項目 | 内容 |
 | --- | --- |
@@ -772,7 +787,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 28. TmrErrGuide_Tick
+### ㉘. TmrErrGuide_Tick
 
 | 項目 | 内容 |
 | --- | --- |
@@ -797,7 +812,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 29. TimFile_Tick
+### ㉙. TimFile_Tick
 
 | 項目 | 内容 |
 | --- | --- |
@@ -824,14 +839,14 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 30. File_Method
+### ㉚. File_Method
 
 | 項目 | 内容 |
 | --- | --- |
 | シグネチャ | `private int File_Method(TabletDeviceMethodID methodId, Dictionary<string, string> arguments, ref Dictionary<string, string> returns)` |
 | 可視性 | private |
 | 戻り値 | int |
-| 戻り値内容 | ファイル/メモリ連携から来た釣銭機コマンドを DeviceMethod と同等の分岐で実行した結果。 |
+| 戻り値内容 | ファイル/メモリ連携から来た自動釣銭機コマンドを DeviceMethod と同等の分岐で実行した結果。 |
 
 引数:
 
@@ -852,7 +867,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 31. OPOSCash_EndDeposit_FlagON
+### ㉛. OPOSCash_EndDeposit_FlagON
 
 | 項目 | 内容 |
 | --- | --- |
@@ -871,7 +886,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 32. OPOSCash_EndDeposit
+### ㉜. OPOSCash_EndDeposit
 
 | 項目 | 内容 |
 | --- | --- |
@@ -898,7 +913,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 33. PEndDeposit
+### ㉝. PEndDeposit
 
 | 項目 | 内容 |
 | --- | --- |
@@ -921,7 +936,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 34. OPOSCash_FixDeposit
+### ㉞. OPOSCash_FixDeposit
 
 | 項目 | 内容 |
 | --- | --- |
@@ -948,7 +963,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 35. PFixDeposit
+### ㉟. PFixDeposit
 
 | 項目 | 内容 |
 | --- | --- |
@@ -965,7 +980,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 36. OPOSCash_DispenseCashAsync
+### ㊱. OPOSCash_DispenseCashAsync
 
 | 項目 | 内容 |
 | --- | --- |
@@ -993,7 +1008,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 37. OPOSCash_DispenseCash
+### ㊲. OPOSCash_DispenseCash
 
 | 項目 | 内容 |
 | --- | --- |
@@ -1021,7 +1036,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 38. PDispenseCash
+### ㊳. PDispenseCash
 
 | 項目 | 内容 |
 | --- | --- |
@@ -1044,7 +1059,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 39. OPOSCash_DispenseChange
+### ㊴. OPOSCash_DispenseChange
 
 | 項目 | 内容 |
 | --- | --- |
@@ -1072,7 +1087,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 40. PDispenseChange
+### ㊵. PDispenseChange
 
 | 項目 | 内容 |
 | --- | --- |
@@ -1095,7 +1110,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 41. PCurrentExit
+### ㊶. PCurrentExit
 
 | 項目 | 内容 |
 | --- | --- |
@@ -1118,7 +1133,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 42. OPOSCash_DepositDataRead
+### ㊷. OPOSCash_DepositDataRead
 
 | 項目 | 内容 |
 | --- | --- |
@@ -1145,7 +1160,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 43. OPOSCash_CoinStatus
+### ㊸. OPOSCash_CoinStatus
 
 | 項目 | 内容 |
 | --- | --- |
@@ -1172,7 +1187,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 44. Read_IconFile
+### ㊹. Read_IconFile
 
 | 項目 | 内容 |
 | --- | --- |
@@ -1195,7 +1210,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 45. GetIni
+### ㊺. GetIni
 
 | 項目 | 内容 |
 | --- | --- |
@@ -1221,14 +1236,14 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 46. OPOSCash_Enq
+### ㊻. OPOSCash_Enq
 
 | 項目 | 内容 |
 | --- | --- |
 | シグネチャ | `private int OPOSCash_Enq(ref int lErr, ref string sErr)` |
 | 可視性 | private |
 | 戻り値 | int |
-| 戻り値内容 | 釣銭機全体の状態を取得し、状態コードとエラー情報を更新した結果。 |
+| 戻り値内容 | 自動釣銭機全体の状態を取得し、状態コードとエラー情報を更新した結果。 |
 
 引数:
 
@@ -1247,14 +1262,14 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 47. OPOSCash_ClearInput
+### ㊼. OPOSCash_ClearInput
 
 | 項目 | 内容 |
 | --- | --- |
 | シグネチャ | `private int OPOSCash_ClearInput(ref int lErr, ref string sErr)` |
 | 可視性 | private |
 | 戻り値 | int |
-| 戻り値内容 | 釣銭機の入力状態を ClearInput でクリアした結果。 |
+| 戻り値内容 | 自動釣銭機の入力状態を ClearInput でクリアした結果。 |
 
 引数:
 
@@ -1273,7 +1288,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 48. PClearInput
+### ㊽. PClearInput
 
 | 項目 | 内容 |
 | --- | --- |
@@ -1290,7 +1305,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 49. OPOSCash_ErrGuidance
+### ㊾. OPOSCash_ErrGuidance
 
 | 項目 | 内容 |
 | --- | --- |
@@ -1318,7 +1333,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 50. pDirectIO_Async
+### ㊿. pDirectIO_Async
 
 | 項目 | 内容 |
 | --- | --- |
@@ -1345,7 +1360,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 51. PAsyncMode
+### ⑤①. PAsyncMode
 
 | 項目 | 内容 |
 | --- | --- |
@@ -1368,7 +1383,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 52. OPOSCash_AsyncEnd
+### ⑤②. OPOSCash_AsyncEnd
 
 | 項目 | 内容 |
 | --- | --- |
@@ -1386,7 +1401,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 備考: -
 
-### 53. PPowerNotify
+### ⑤③. PPowerNotify
 
 | 項目 | 内容 |
 | --- | --- |
@@ -1408,6 +1423,7 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 - ③ ResultCode/ResultCodeExtended やログ出力用状態を更新する。
 
 備考: -
+
 ## 処理フロー/注意事項
 
 - Load/Shown が OCX と例外ハンドラを初期化する。
@@ -1417,6 +1433,6 @@ RT-300 釣銭機の制御部品を UI スレッド上で保持し、釣銭機イ
 
 ### 注意事項
 
-- 本フォームはデバッグ／開発者向けの管理画面ではなく、OPOS/OCX 操作時のスレッド/COM 関連エラーを避けるための内部フォームとして扱う。
+- 本フォームはデバッグ／開発者向けの管理画面ではなく、OPOS／OCX 操作時のスレッド/COM 関連エラーを避けるための内部フォームとして扱う。
 - 通常運用時は画面としてユーザーに操作させることを前提としない。
 - Designer.cs の自動生成部品初期化は仕様記載範囲から除外する。

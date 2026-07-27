@@ -1,23 +1,37 @@
 # PS-STATE-06 タブレットPOS ローカル状態管理 セッション管理サービス プログラム仕様書
 
-## 改訂履歴
+タブレットPOS
 
-| バージョン | 更新日 | 更新者 | 変更内容 |
-| --- | --- | --- | --- |
-| 0.0.1 | 2026/06/21 | VTI | 初版作成 |
-
-## 基本情報
+## 00_表紙
 
 | 項目 | 内容 |
 | --- | --- |
 | 文書ID | PS-STATE-06 |
-| プロジェクト名 | タブレットPOS |
+| 文書名 | タブレットPOS ローカル状態管理 セッション管理サービス プログラム仕様書 |
+| 対象 | タブレットPOS / セッション管理サービス |
+| 版数 | 0.0.1 |
+| 作成日 | 2026/06/21 |
+| 作成者 | VTI サム, VTI 吉田 |
+| レビュー担当 | SMJ 蒲田 |
+| 承認者 | SMJ 蒲田 |
+| 目的 | 対象クラスの構造、フィールド／プロパティ及びメソッド仕様を定義する。 |
+| 期待成果 | 実装及びレビューで参照するクラス単位の仕様を明確にする。 |
+
+## 01_改訂履歴
+
+| 版数 | 日付 | 変更内容 | 作成者 | 承認者 |
+| --- | --- | --- | --- | --- |
+| 0.0.1 | 2026/06/21 | 初版作成 | VTI |  |
+
+## クラス情報
+
+| 項目 | 内容 |
+| --- | --- |
 | 機能名 | セッション管理サービス |
 | 物理クラス名 | EfCoreLocalStateSessionService |
 | 名前空間 | TabetPos.Core.State |
 | アクセス修飾子 | public sealed |
 | 継承/実装 | ILocalStateSessionService |
-| 更新日 | 2026/06/21 |
 
 ## ソース対応
 
@@ -47,17 +61,17 @@
 
 | No | 可視性 | 戻り値 | メソッド名 | 概要 |
 | --- | --- | --- | --- | --- |
-| 1 | public | Task<LocalStateSession> | GetOrCreateActiveSessionAsync | 有効セッションを取得し、未作成または非有効の場合は利用可能な状態にする。 |
-| 2 | public | Task<IReadOnlyList<LocalStateSession>> | GetActiveSessionsAsync | 有効期限内の有効セッションを更新日時の新しい順で取得する。 |
-| 3 | public | Task | MarkCompletedAsync | 対象セッションを完了状態へ更新する。 |
-| 4 | public | Task | MarkAbandonedAsync | 対象セッションを破棄状態へ更新する。 |
-| 5 | public | Task | UpdateLastRouteAsync | 対象セッションの最終ルートと更新日時を保存する。 |
-| 6 | private | Task | MarkAsync | 対象セッションの状態と更新日時を変更する。 |
-| 7 | private static | LocalStateSession | ToModel | DB行を外部返却用モデルへ変換する。 |
+| ① | public | Task<LocalStateSession> | GetOrCreateActiveSessionAsync | 有効セッションを取得し、未作成または非有効の場合は利用可能な状態にする。 |
+| ② | public | Task<IReadOnlyList<LocalStateSession>> | GetActiveSessionsAsync | 有効期限内の有効セッションを更新日時の新しい順で取得する。 |
+| ③ | public | Task | MarkCompletedAsync | 対象セッションを完了状態へ更新する。 |
+| ④ | public | Task | MarkAbandonedAsync | 対象セッションを破棄状態へ更新する。 |
+| ⑤ | public | Task | UpdateLastRouteAsync | 対象セッションの最終ルートと更新日時を保存する。 |
+| ⑥ | private | Task | MarkAsync | 対象セッションの状態と更新日時を変更する。 |
+| ⑦ | private static | LocalStateSession | ToModel | DB行を外部返却用モデルへ変換する。 |
 
 ## メソッド詳細
 
-### 1. GetOrCreateActiveSessionAsync
+### ①. GetOrCreateActiveSessionAsync
 
 | 項目 | 内容 |
 | --- | --- |
@@ -84,7 +98,7 @@
 
 備考: -
 
-### 2. GetActiveSessionsAsync
+### ②. GetActiveSessionsAsync
 
 | 項目 | 内容 |
 | --- | --- |
@@ -108,7 +122,7 @@
 
 備考: -
 
-### 3. MarkCompletedAsync
+### ③. MarkCompletedAsync
 
 | 項目 | 内容 |
 | --- | --- |
@@ -131,7 +145,7 @@
 
 備考: -
 
-### 4. MarkAbandonedAsync
+### ④. MarkAbandonedAsync
 
 | 項目 | 内容 |
 | --- | --- |
@@ -154,7 +168,7 @@
 
 備考: -
 
-### 5. UpdateLastRouteAsync
+### ⑤. UpdateLastRouteAsync
 
 | 項目 | 内容 |
 | --- | --- |
@@ -180,7 +194,7 @@
 
 備考: -
 
-### 6. MarkAsync
+### ⑥. MarkAsync
 
 | 項目 | 内容 |
 | --- | --- |
@@ -206,7 +220,7 @@
 
 備考: -
 
-### 7. ToModel
+### ⑦. ToModel
 
 | 項目 | 内容 |
 | --- | --- |

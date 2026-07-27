@@ -1,23 +1,37 @@
 # PS-MON-05 タブレットPOS 監視ログ連携 機微情報マスキング プログラム仕様書
 
-## 改訂履歴
+タブレットPOS
 
-| バージョン | 更新日 | 更新者 | 変更内容 |
-| --- | --- | --- | --- |
-| 0.0.1 | 2026/06/21 | VTI | 初版作成 |
-
-## 基本情報
+## 00_表紙
 
 | 項目 | 内容 |
 | --- | --- |
 | 文書ID | PS-MON-05 |
-| プロジェクト名 | タブレットPOS |
+| 文書名 | タブレットPOS 監視ログ連携 機微情報マスキング プログラム仕様書 |
+| 対象 | タブレットPOS / 機微情報マスキング |
+| 版数 | 0.0.1 |
+| 作成日 | 2026/06/21 |
+| 作成者 | VTI サム, VTI 吉田 |
+| レビュー担当 | SMJ 蒲田 |
+| 承認者 | SMJ 蒲田 |
+| 目的 | 対象クラスの構造、フィールド／プロパティ及びメソッド仕様を定義する。 |
+| 期待成果 | 実装及びレビューで参照するクラス単位の仕様を明確にする。 |
+
+## 01_改訂履歴
+
+| 版数 | 日付 | 変更内容 | 作成者 | 承認者 |
+| --- | --- | --- | --- | --- |
+| 0.0.1 | 2026/06/21 | 初版作成 | VTI |  |
+
+## クラス情報
+
+| 項目 | 内容 |
+| --- | --- |
 | 機能名 | 機微情報マスキング |
 | 物理クラス名 | SensitiveDataMasker |
 | 名前空間 | TabetPos.Core.Monitoring |
 | アクセス修飾子 | public static partial |
 | 継承/実装 | - |
-| 更新日 | 2026/06/21 |
 
 ## ソース対応
 
@@ -47,18 +61,18 @@
 
 | No | 可視性 | 戻り値 | メソッド名 | 概要 |
 | --- | --- | --- | --- | --- |
-| 1 | public static | string? | Mask | 対象文字列に含まれる機微情報候補をマスキングする。 |
-| 2 | private static | string | MaskAllButLastFour | カード番号候補を末尾4桁だけ残して伏字化する。 |
-| 3 | private static | string | MaskMemberCard | 会員番号候補を先頭と末尾だけ残して伏字化する。 |
-| 4 | private static partial | Regex | CreditCardRegex | カード番号候補を検出する正規表現を返す。 |
-| 5 | private static partial | Regex | MemberCardRegex | 会員番号候補を検出する正規表現を返す。 |
-| 6 | private static partial | Regex | PhoneRegex | 電話番号候補を検出する正規表現を返す。 |
-| 7 | private static partial | Regex | EmailRegex | メールアドレスを検出する正規表現を返す。 |
-| 8 | private static partial | Regex | DigitsRegex | 数字以外を検出する正規表現を返す。 |
+| ① | public static | string? | Mask | 対象文字列に含まれる機微情報候補をマスキングする。 |
+| ② | private static | string | MaskAllButLastFour | カード番号候補を末尾4桁だけ残して伏字化する。 |
+| ③ | private static | string | MaskMemberCard | 会員番号候補を先頭と末尾だけ残して伏字化する。 |
+| ④ | private static partial | Regex | CreditCardRegex | カード番号候補を検出する正規表現を返す。 |
+| ⑤ | private static partial | Regex | MemberCardRegex | 会員番号候補を検出する正規表現を返す。 |
+| ⑥ | private static partial | Regex | PhoneRegex | 電話番号候補を検出する正規表現を返す。 |
+| ⑦ | private static partial | Regex | EmailRegex | メールアドレスを検出する正規表現を返す。 |
+| ⑧ | private static partial | Regex | DigitsRegex | 数字以外を検出する正規表現を返す。 |
 
 ## メソッド詳細
 
-### 1. Mask
+### ①. Mask
 
 | 項目 | 内容 |
 | --- | --- |
@@ -83,7 +97,7 @@
 
 備考: -
 
-### 2. MaskAllButLastFour
+### ②. MaskAllButLastFour
 
 | 項目 | 内容 |
 | --- | --- |
@@ -106,7 +120,7 @@
 
 備考: -
 
-### 3. MaskMemberCard
+### ③. MaskMemberCard
 
 | 項目 | 内容 |
 | --- | --- |
@@ -129,7 +143,7 @@
 
 備考: -
 
-### 4. CreditCardRegex
+### ④. CreditCardRegex
 
 | 項目 | 内容 |
 | --- | --- |
@@ -145,7 +159,7 @@
 
 備考: -
 
-### 5. MemberCardRegex
+### ⑤. MemberCardRegex
 
 | 項目 | 内容 |
 | --- | --- |
@@ -160,7 +174,7 @@
 
 備考: -
 
-### 6. PhoneRegex
+### ⑥. PhoneRegex
 
 | 項目 | 内容 |
 | --- | --- |
@@ -176,7 +190,7 @@
 
 備考: -
 
-### 7. EmailRegex
+### ⑦. EmailRegex
 
 | 項目 | 内容 |
 | --- | --- |
@@ -191,7 +205,7 @@
 
 備考: -
 
-### 8. DigitsRegex
+### ⑧. DigitsRegex
 
 | 項目 | 内容 |
 | --- | --- |

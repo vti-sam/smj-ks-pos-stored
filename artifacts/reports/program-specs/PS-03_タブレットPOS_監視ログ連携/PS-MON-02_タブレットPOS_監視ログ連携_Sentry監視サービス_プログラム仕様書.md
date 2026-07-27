@@ -1,23 +1,37 @@
 # PS-MON-02 タブレットPOS 監視ログ連携 Sentry監視サービス プログラム仕様書
 
-## 改訂履歴
+タブレットPOS
 
-| バージョン | 更新日 | 更新者 | 変更内容 |
-| --- | --- | --- | --- |
-| 0.0.1 | 2026/06/21 | VTI | 初版作成 |
-
-## 基本情報
+## 00_表紙
 
 | 項目 | 内容 |
 | --- | --- |
 | 文書ID | PS-MON-02 |
-| プロジェクト名 | タブレットPOS |
+| 文書名 | タブレットPOS 監視ログ連携 Sentry監視サービス プログラム仕様書 |
+| 対象 | タブレットPOS / Sentry監視サービス |
+| 版数 | 0.0.1 |
+| 作成日 | 2026/06/21 |
+| 作成者 | VTI サム, VTI 吉田 |
+| レビュー担当 | SMJ 蒲田 |
+| 承認者 | SMJ 蒲田 |
+| 目的 | 対象クラスの構造、フィールド／プロパティ及びメソッド仕様を定義する。 |
+| 期待成果 | 実装及びレビューで参照するクラス単位の仕様を明確にする。 |
+
+## 01_改訂履歴
+
+| 版数 | 日付 | 変更内容 | 作成者 | 承認者 |
+| --- | --- | --- | --- | --- |
+| 0.0.1 | 2026/06/21 | 初版作成 | VTI |  |
+
+## クラス情報
+
+| 項目 | 内容 |
+| --- | --- |
 | 機能名 | Sentry監視サービス |
 | 物理クラス名 | SentryMonitoringService |
 | 名前空間 | TabetPos.Core.Monitoring |
 | アクセス修飾子 | public sealed |
 | 継承/実装 | IMonitoringService |
-| 更新日 | 2026/06/21 |
 
 ## ソース対応
 
@@ -47,20 +61,20 @@
 
 | No | 可視性 | 戻り値 | メソッド名 | 概要 |
 | --- | --- | --- | --- | --- |
-| 1 | public | void | SetContext | 監視コンテキストをSentryタグへ設定する。 |
-| 2 | public | void | AddBreadcrumb | 監視イベントをSentryの操作履歴として追加する。 |
-| 3 | public | string | CaptureMessage | 監視イベントのメッセージをSentryイベントとして送信する。 |
-| 4 | public | string | CaptureException | 例外をSentryイベントとして送信する。 |
-| 5 | public | Task | FlushAsync | 保留中イベントの送信完了を待つ。 |
-| 6 | private static | void | SetTag | タグ値が有効な場合だけマスキングして設定する。 |
-| 7 | private static | string | Mask | 文字列をマスキングし、nullの場合も空文字で扱う。 |
-| 8 | private static | Dictionary<string, string>? | MaskData | 補足データの値をマスキングする。 |
-| 9 | private static | BreadcrumbLevel | ToBreadcrumbLevel | 監視レベルを操作履歴レベルへ変換する。 |
-| 10 | private static | SentryLevel | ToSentryLevel | 監視レベルをSentryイベントレベルへ変換する。 |
+| ① | public | void | SetContext | 監視コンテキストをSentryタグへ設定する。 |
+| ② | public | void | AddBreadcrumb | 監視イベントをSentryの操作履歴として追加する。 |
+| ③ | public | string | CaptureMessage | 監視イベントのメッセージをSentryイベントとして送信する。 |
+| ④ | public | string | CaptureException | 例外をSentryイベントとして送信する。 |
+| ⑤ | public | Task | FlushAsync | 保留中イベントの送信完了を待つ。 |
+| ⑥ | private static | void | SetTag | タグ値が有効な場合だけマスキングして設定する。 |
+| ⑦ | private static | string | Mask | 文字列をマスキングし、nullの場合も空文字で扱う。 |
+| ⑧ | private static | Dictionary<string, string>? | MaskData | 補足データの値をマスキングする。 |
+| ⑨ | private static | BreadcrumbLevel | ToBreadcrumbLevel | 監視レベルを操作履歴レベルへ変換する。 |
+| ⑩ | private static | SentryLevel | ToSentryLevel | 監視レベルをSentryイベントレベルへ変換する。 |
 
 ## メソッド詳細
 
-### 1. SetContext
+### ①. SetContext
 
 | 項目 | 内容 |
 | --- | --- |
@@ -84,7 +98,7 @@
 
 備考: -
 
-### 2. AddBreadcrumb
+### ②. AddBreadcrumb
 
 | 項目 | 内容 |
 | --- | --- |
@@ -108,7 +122,7 @@
 
 備考: -
 
-### 3. CaptureMessage
+### ③. CaptureMessage
 
 | 項目 | 内容 |
 | --- | --- |
@@ -132,7 +146,7 @@
 
 備考: -
 
-### 4. CaptureException
+### ④. CaptureException
 
 | 項目 | 内容 |
 | --- | --- |
@@ -156,7 +170,7 @@
 
 備考: -
 
-### 5. FlushAsync
+### ⑤. FlushAsync
 
 | 項目 | 内容 |
 | --- | --- |
@@ -179,7 +193,7 @@
 
 備考: -
 
-### 6. SetTag
+### ⑥. SetTag
 
 | 項目 | 内容 |
 | --- | --- |
@@ -204,7 +218,7 @@
 
 備考: -
 
-### 7. Mask
+### ⑦. Mask
 
 | 項目 | 内容 |
 | --- | --- |
@@ -227,7 +241,7 @@
 
 備考: -
 
-### 8. MaskData
+### ⑧. MaskData
 
 | 項目 | 内容 |
 | --- | --- |
@@ -251,7 +265,7 @@
 
 備考: -
 
-### 9. ToBreadcrumbLevel
+### ⑨. ToBreadcrumbLevel
 
 | 項目 | 内容 |
 | --- | --- |
@@ -275,7 +289,7 @@
 
 備考: -
 
-### 10. ToSentryLevel
+### ⑩. ToSentryLevel
 
 | 項目 | 内容 |
 | --- | --- |

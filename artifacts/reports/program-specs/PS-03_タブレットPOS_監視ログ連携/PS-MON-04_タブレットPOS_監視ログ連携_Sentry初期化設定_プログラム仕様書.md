@@ -1,23 +1,37 @@
 # PS-MON-04 タブレットPOS 監視ログ連携 Sentry初期化設定 プログラム仕様書
 
-## 改訂履歴
+タブレットPOS
 
-| バージョン | 更新日 | 更新者 | 変更内容 |
-| --- | --- | --- | --- |
-| 0.0.1 | 2026/06/21 | VTI | 初版作成 |
-
-## 基本情報
+## 00_表紙
 
 | 項目 | 内容 |
 | --- | --- |
 | 文書ID | PS-MON-04 |
-| プロジェクト名 | タブレットPOS |
+| 文書名 | タブレットPOS 監視ログ連携 Sentry初期化設定 プログラム仕様書 |
+| 対象 | タブレットPOS / Sentry初期化設定 |
+| 版数 | 0.0.1 |
+| 作成日 | 2026/06/21 |
+| 作成者 | VTI サム, VTI 吉田 |
+| レビュー担当 | SMJ 蒲田 |
+| 承認者 | SMJ 蒲田 |
+| 目的 | 対象クラスの構造、フィールド／プロパティ及びメソッド仕様を定義する。 |
+| 期待成果 | 実装及びレビューで参照するクラス単位の仕様を明確にする。 |
+
+## 01_改訂履歴
+
+| 版数 | 日付 | 変更内容 | 作成者 | 承認者 |
+| --- | --- | --- | --- | --- |
+| 0.0.1 | 2026/06/21 | 初版作成 | VTI |  |
+
+## クラス情報
+
+| 項目 | 内容 |
+| --- | --- |
 | 機能名 | Sentry初期化設定 |
 | 物理クラス名 | SentryConfiguration |
 | 名前空間 | TabetPos.Core.Monitoring |
 | アクセス修飾子 | public static |
 | 継承/実装 | - |
-| 更新日 | 2026/06/21 |
 
 ## ソース対応
 
@@ -47,13 +61,13 @@ Sentry SDKの初期化オプションを設定するユーティリティであ�
 
 | No | 可視性 | 戻り値 | メソッド名 | 概要 |
 | --- | --- | --- | --- | --- |
-| 1 | public static | void | Configure | Sentry SDKの初期化オプションを設定する。 |
-| 2 | private static | SentryEvent | MaskEvent | 送信前イベントのメッセージをマスキングする。 |
-| 3 | private static | Breadcrumb | MaskBreadcrumb | 操作履歴のメッセージをマスキングする。 |
+| ① | public static | void | Configure | Sentry SDKの初期化オプションを設定する。 |
+| ② | private static | SentryEvent | MaskEvent | 送信前イベントのメッセージをマスキングする。 |
+| ③ | private static | Breadcrumb | MaskBreadcrumb | 操作履歴のメッセージをマスキングする。 |
 
 ## メソッド詳細
 
-### 1. Configure
+### ①. Configure
 
 | 項目 | 内容 |
 | --- | --- |
@@ -79,7 +93,7 @@ Sentry SDKの初期化オプションを設定するユーティリティであ�
 
 備考: -
 
-### 2. MaskEvent
+### ②. MaskEvent
 
 | 項目 | 内容 |
 | --- | --- |
@@ -102,7 +116,7 @@ Sentry SDKの初期化オプションを設定するユーティリティであ�
 
 備考: -
 
-### 3. MaskBreadcrumb
+### ③. MaskBreadcrumb
 
 | 項目 | 内容 |
 | --- | --- |

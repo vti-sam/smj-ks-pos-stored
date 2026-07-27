@@ -1,23 +1,37 @@
 # PS-STATE-15 タブレットPOS ローカル状態管理 SQLiteジャーナルモード設定 プログラム仕様書
 
-## 改訂履歴
+タブレットPOS
 
-| バージョン | 更新日 | 更新者 | 変更内容 |
-| --- | --- | --- | --- |
-| 0.0.1 | 2026/06/21 | VTI | 初版作成 |
-
-## 基本情報
+## 00_表紙
 
 | 項目 | 内容 |
 | --- | --- |
 | 文書ID | PS-STATE-15 |
-| プロジェクト名 | タブレットPOS |
+| 文書名 | タブレットPOS ローカル状態管理 SQLiteジャーナルモード設定 プログラム仕様書 |
+| 対象 | タブレットPOS / SQLiteジャーナルモード設定 |
+| 版数 | 0.0.1 |
+| 作成日 | 2026/06/21 |
+| 作成者 | VTI サム, VTI 吉田 |
+| レビュー担当 | SMJ 蒲田 |
+| 承認者 | SMJ 蒲田 |
+| 目的 | 対象クラスの構造、フィールド／プロパティ及びメソッド仕様を定義する。 |
+| 期待成果 | 実装及びレビューで参照するクラス単位の仕様を明確にする。 |
+
+## 01_改訂履歴
+
+| 版数 | 日付 | 変更内容 | 作成者 | 承認者 |
+| --- | --- | --- | --- | --- |
+| 0.0.1 | 2026/06/21 | 初版作成 | VTI |  |
+
+## クラス情報
+
+| 項目 | 内容 |
+| --- | --- |
 | 機能名 | SQLiteジャーナルモード設定 |
 | 物理クラス名 | SqliteJournalModeSettingInterceptor |
 | 名前空間 | TabetPos.Core.State |
 | アクセス修飾子 | public sealed |
 | 継承/実装 | DbConnectionInterceptor |
-| 更新日 | 2026/06/21 |
 
 ## ソース対応
 
@@ -47,12 +61,12 @@ SQLite接続開始時にジャーナルモードをWALへ設定するための�
 
 | No | 可視性 | 戻り値 | メソッド名 | 概要 |
 | --- | --- | --- | --- | --- |
-| 1 | public override | void | ConnectionOpened | 同期接続開始時にWAL設定を実行する。 |
-| 2 | public override | Task | ConnectionOpenedAsync | 非同期接続開始時にWAL設定を実行する。 |
+| ① | public override | void | ConnectionOpened | 同期接続開始時にWAL設定を実行する。 |
+| ② | public override | Task | ConnectionOpenedAsync | 非同期接続開始時にWAL設定を実行する。 |
 
 ## メソッド詳細
 
-### 1. ConnectionOpened
+### ①. ConnectionOpened
 
 | 項目 | 内容 |
 | --- | --- |
@@ -77,7 +91,7 @@ SQLite接続開始時にジャーナルモードをWALへ設定するための�
 
 備考: -
 
-### 2. ConnectionOpenedAsync
+### ②. ConnectionOpenedAsync
 
 | 項目 | 内容 |
 | --- | --- |

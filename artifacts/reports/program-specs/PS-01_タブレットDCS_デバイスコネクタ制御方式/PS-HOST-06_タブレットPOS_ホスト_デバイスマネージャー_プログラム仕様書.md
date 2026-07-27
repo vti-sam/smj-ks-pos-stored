@@ -1,24 +1,40 @@
 # PS-HOST-06 タブレットPOS ホスト デバイスマネージャー プログラム仕様書
 
-## 改訂履歴
+タブレットPOS
 
-| バージョン | 更新日 | 更新者 | 変更内容 |
-| --- | --- | --- | --- |
-| 0.0.2 | 2026/06/21 | VTI サム | クラス仕様、フィールド/プロパティ、メソッド仕様を更新 |
-| 0.0.1 | 2026/06/19 | VTI サム | 初版作成 |
-
-## 基本情報
+## 00_表紙
 
 | 項目 | 内容 |
 | --- | --- |
 | 文書ID | PS-HOST-06 |
-| プロジェクト名 | タブレットPOS |
+| 文書名 | タブレットPOS ホスト デバイスマネージャー プログラム仕様書 |
+| 対象 | タブレットPOS / デバイスマネージャー |
+| 版数 | 0.0.4 |
+| 作成日 | 2026/06/19 |
+| 作成者 | VTI サム, VTI 吉田 |
+| レビュー担当 | SMJ 蒲田 |
+| 承認者 | SMJ 蒲田 |
+| 目的 | 対象クラスの構造、フィールド／プロパティ及びメソッド仕様を定義する。 |
+| 期待成果 | 実装及びレビューで参照するクラス単位の仕様を明確にする。 |
+
+## 01_改訂履歴
+
+| 版数 | 日付 | 変更内容 | 作成者 | 承認者 |
+| --- | --- | --- | --- | --- |
+| 0.0.4 | 2026/07/23 | ARCH-HOST-01に合わせて、デバイスコネクタと応答通信部の表記を統一 | VTI サム |  |
+| 0.0.3 | 2026/07/23 | 準備状態管理、監視対象、応答引数型を現行実装に合わせて更新 | VTI サム |  |
+| 0.0.2 | 2026/06/21 | クラス仕様、フィールド/プロパティ、メソッド仕様を更新 | VTI サム |  |
+| 0.0.1 | 2026/06/19 | 初版作成 | VTI サム |  |
+
+## クラス情報
+
+| 項目 | 内容 |
+| --- | --- |
 | 機能名 | デバイスマネージャー |
 | 物理クラス名 | TabletDeviceManager |
 | 名前空間 | TabletOutProcess.TabletDeviceServer |
 | アクセス修飾子 | public |
 | 継承/実装 | - |
-| 更新日 | 2026/06/21 |
 
 ## ソース対応
 
@@ -30,7 +46,7 @@
 
 ## クラス概要
 
-設定に基づいて利用対象デバイスを生成・起動し、ホスト内で一元管理するデバイス管理部。起動済みデバイスの検索、停止、応答通知、稼働監視を担当する。
+設定に基づいて利用対象デバイスを生成・起動し、デバイスコネクタ内で一元管理するデバイス管理部。起動済みデバイスの検索、停止、応答通知、稼働監視を担当する。
 
 ### 主な責務
 
@@ -43,26 +59,28 @@
 | 区分 | 可視性 | 型 | 名前 | 用途 |
 | --- | --- | --- | --- | --- |
 | フィールド | private | IFSettingDevice | _deviceSetting | 起動対象デバイス一覧とデバイスインスタンス生成を提供する設定インスタンス。 |
-| フィールド | private | IFDeviceReply | _deviceReply | デバイス処理結果を Host 通信部へ返却するための応答先。 |
+| フィールド | private | IFDeviceReply | _deviceReply | デバイス処理結果をデバイスコネクタ通信部へ返却するための応答先。 |
 | フィールド | private | bool | _stopFlg | デバイス管理部の監視ループを終了させる停止フラグ。 |
-| フィールド | private | TabletDeviceManager | _singleton | デバイス管理部のシングルトンインスタンス。 |
-| フィールド | private | List<IFDevice> | _deviceList | 起動済み IFDevice の保持リスト。 |
+| フィールド | private | bool | _isReady | デバイス初期化の完了状態。 |
+| フィールド | private static | TabletDeviceManager | _singleton | デバイス管理部のシングルトンインスタンス。 |
+| フィールド | private readonly | List<IFDevice> | _deviceList | 起動済み IFDevice の保持リスト。 |
 | プロパティ | public | IReadOnlyList<IFDevice> | Devices | 起動済みデバイスの読み取り専用スナップショット。 |
+| プロパティ | public | bool | IsReady | Volatile 読取で取得するデバイス管理部の準備状態。 |
 
 ## メソッド一覧
 
 | No | 可視性 | 戻り値 | メソッド名 | 概要 |
 | --- | --- | --- | --- | --- |
-| 1 | private | - | TabletDeviceManager | インスタンスコンストラクタ |
-| 2 | public | TabletDeviceManager | GetInstance | Singleton インスタンスを返却する。 |
-| 3 | public | void | StartDeviceManager | 設定から対象デバイスを生成し、起動後は停止要求まで keep-alive 監視ループを維持する。 |
-| 4 | public | void | StopDeviceManager | 停止フラグを立て、保持中の全デバイスへ StopDevice を呼び出してリストを空にする。 |
-| 5 | public | IFDevice | FindDevice | 起動済みデバイスリストから DeviceId が一致する IFDevice を返す。 |
-| 6 | public | void | ReplyDevice | 既存互換プロセス情報のクライアント/ハンドル/メソッドを使い、Host の ReplyDevice へ応答を渡す。 |
+| ① | private | - | TabletDeviceManager | インスタンスコンストラクタ |
+| ② | public | TabletDeviceManager | GetInstance | Singleton インスタンスを返却する。 |
+| ③ | public | void | StartDeviceManager | 設定から対象デバイスを生成し、起動後は停止要求まで keep-alive 監視ループを維持する。 |
+| ④ | public | void | StopDeviceManager | 停止フラグを立て、保持中の全デバイスへ StopDevice を呼び出してリストを空にする。 |
+| ⑤ | public | IFDevice | FindDevice | 起動済みデバイスリストから DeviceId が一致する IFDevice を返す。 |
+| ⑥ | public | void | ReplyDevice | 既存互換プロセス情報のクライアント／ハンドル／メソッドを使い、デバイスコネクタのReplyDeviceへ応答を渡す。 |
 
 ## メソッド詳細
 
-### 1. TabletDeviceManager
+### ①. TabletDeviceManager
 
 | 項目 | 内容 |
 | --- | --- |
@@ -79,7 +97,7 @@
 
 備考: -
 
-### 2. GetInstance
+### ②. GetInstance
 
 | 項目 | 内容 |
 | --- | --- |
@@ -96,7 +114,7 @@
 
 備考: -
 
-### 3. StartDeviceManager
+### ③. StartDeviceManager
 
 | 項目 | 内容 |
 | --- | --- |
@@ -115,14 +133,15 @@
 処理内容:
 
 - ① 停止フラグを false にし、設定と応答先を保持する。
-- ② 設定から起動対象 DeviceId リストを取得する。
+- ② 準備状態を false にして、設定から起動対象 DeviceId リストを取得する。
 - ③ 各デバイスを最大3回まで生成・StartDevice し、成功したものをリストに追加する。
-- ④ 停止要求まで 10ms 間隔で DoEvents し、60秒ごとに MSR/CashChanger の keep-alive を確認する。
-- ⑤ 30秒以上応答がない対象は状態監視ログへ出力する。
+- ④ 全デバイスの起動試行後、準備状態を true にする。
+- ⑤ 停止要求まで 10ms 間隔で DoEvents し、60秒ごとに CashChanger の keep-alive を確認する。
+- ⑥ 30秒以上応答がない CashChanger は状態監視ログへ出力する。
 
 備考: -
 
-### 4. StopDeviceManager
+### ④. StopDeviceManager
 
 | 項目 | 内容 |
 | --- | --- |
@@ -134,12 +153,13 @@
 処理内容:
 
 - ① 停止フラグを true にする。
-- ② リスト内の各 IFDevice へ StopDevice を呼ぶ。
-- ③ デバイスリストをクリアする。
+- ② 準備状態を false にする。
+- ③ リスト内の各 IFDevice へ StopDevice を呼ぶ。
+- ④ デバイスリストをクリアする。
 
 備考: -
 
-### 5. FindDevice
+### ⑤. FindDevice
 
 | 項目 | 内容 |
 | --- | --- |
@@ -162,11 +182,11 @@
 
 備考: -
 
-### 6. ReplyDevice
+### ⑥. ReplyDevice
 
 | 項目 | 内容 |
 | --- | --- |
-| シグネチャ | `public void ReplyDevice(ref KsProcessInfo proc, ref Dictionary<string, string> dic)` |
+| シグネチャ | `public void ReplyDevice(ref TabletProcessInfo proc, ref Dictionary<string, string> dic)` |
 | 可視性 | public |
 | 戻り値 | void |
 | 戻り値内容 | - |
@@ -175,22 +195,26 @@
 
 | 型 | 論理名 | 物理名 |
 | --- | --- | --- |
-| KsProcessInfo | プロセス情報 | proc |
+| TabletProcessInfo | プロセス情報 | proc |
 | Dictionary<string, string> | 応答データ | dic |
 
 処理内容:
 
-- ① KsProcessInfo と戻り値辞書を受け取る。
+- ① TabletProcessInfo と戻り値辞書を受け取る。
 - ② proc から client、deviceId、methodId、handle を取得する。
 - ③ _deviceReply.ReplyDevice に委譲し、クライアントへデバイス処理結果を返却する。
 
 備考: -
+
 ## 処理フロー/注意事項
 
 - StartDeviceManager がデバイスリストを構築し、停止フラグまで監視ループを維持する。
+- StartDeviceManager は起動開始時に IsReady を false、起動試行完了後に true へ更新する。
 - StopDeviceManager が全デバイス StopDevice を実行してリストをクリアする。
+- StopDeviceManager は停止開始時に IsReady を false へ更新する。
 - FindDevice がコマンド処理ハンドラーからの検索口になる。
 
 ### 注意事項
 
 - `Devices` は内部リストの配列コピーを返す。
+- `IsReady`はVolatile.Readで取得し、デバイスコネクタのHealthCheck判定に使用される。

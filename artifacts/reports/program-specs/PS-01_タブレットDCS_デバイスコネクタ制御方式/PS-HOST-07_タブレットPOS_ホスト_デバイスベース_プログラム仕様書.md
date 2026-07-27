@@ -1,24 +1,39 @@
 # PS-HOST-07 タブレットPOS ホスト デバイスベース プログラム仕様書
 
-## 改訂履歴
+タブレットPOS
 
-| バージョン | 更新日 | 更新者 | 変更内容 |
-| --- | --- | --- | --- |
-| 0.0.2 | 2026/06/21 | VTI サム | クラス仕様、フィールド/プロパティ、メソッド仕様を更新 |
-| 0.0.1 | 2026/06/19 | VTI サム | 初版作成 |
-
-## 基本情報
+## 00_表紙
 
 | 項目 | 内容 |
 | --- | --- |
 | 文書ID | PS-HOST-07 |
-| プロジェクト名 | タブレットPOS |
+| 文書名 | タブレットPOS ホスト デバイスベース プログラム仕様書 |
+| 対象 | タブレットPOS / デバイスベース |
+| 版数 | 0.0.3 |
+| 作成日 | 2026/06/19 |
+| 作成者 | VTI サム, VTI 吉田 |
+| レビュー担当 | SMJ 蒲田 |
+| 承認者 | SMJ 蒲田 |
+| 目的 | 対象クラスの構造、フィールド／プロパティ及びメソッド仕様を定義する。 |
+| 期待成果 | 実装及びレビューで参照するクラス単位の仕様を明確にする。 |
+
+## 01_改訂履歴
+
+| 版数 | 日付 | 変更内容 | 作成者 | 承認者 |
+| --- | --- | --- | --- | --- |
+| 0.0.3 | 2026/07/23 | ARCH-HOST-01に合わせて、OPOS／OCXの表記を統一 | VTI サム |  |
+| 0.0.2 | 2026/06/21 | クラス仕様、フィールド/プロパティ、メソッド仕様を更新 | VTI サム |  |
+| 0.0.1 | 2026/06/19 | 初版作成 | VTI サム |  |
+
+## クラス情報
+
+| 項目 | 内容 |
+| --- | --- |
 | 機能名 | デバイスベース |
 | 物理クラス名 | DeviceBase |
 | 名前空間 | TabletOutProcess.TabletDeviceServer |
 | アクセス修飾子 | public |
 | 継承/実装 | IFDevice |
-| 更新日 | 2026/06/21 |
 
 ## ソース対応
 
@@ -30,7 +45,7 @@
 
 ## クラス概要
 
-OPOS/OCX デバイス制御に共通する接続、占有、解放、監視の基本機能を提供する基底部品。個別デバイスの実装はこの共通機能を利用し、機種固有の操作だけを補う構成とする。
+OPOS／OCX デバイス制御に共通する接続、占有、解放、監視の基本機能を提供する基底部品。個別デバイスの実装はこの共通機能を利用し、機種固有の操作だけを補う構成とする。
 
 ### 主な責務
 
@@ -45,7 +60,7 @@ OPOS/OCX デバイス制御に共通する接続、占有、解放、監視の�
 | フィールド | protected | bool | EndOrder | デバイス制御終了要求を示すフラグ。 |
 | フィールド | protected | Timer | LoopTimer | デバイス周期処理用タイマー。 |
 | フィールド | protected | Form | MyForm | OCX を保持するフォーム。 |
-| フィールド | protected | dynamic | MyDevice | OPOS/OCX デバイスインスタンス。 |
+| フィールド | protected | dynamic | MyDevice | OPOS／OCX デバイスインスタンス。 |
 | フィールド | protected | TabletDeviceId | MyDeviceId | 対象デバイスID。 |
 | フィールド | protected | bool | IsSimulator | 実機ではなくシミュレーターとして動作するかを示すフラグ。 |
 | フィールド | protected | bool | IsClaimDeviceReleaseDevice | Claim/Release 操作を ClaimDevice/ReleaseDevice として扱うかを示すフラグ。 |
@@ -58,28 +73,28 @@ OPOS/OCX デバイス制御に共通する接続、占有、解放、監視の�
 
 | No | 可視性 | 戻り値 | メソッド名 | 概要 |
 | --- | --- | --- | --- | --- |
-| 1 | public | int | GetForegroundWindow | Windows の前面ウィンドウハンドルを取得する。 |
-| 2 | protected | - | DeviceBase | 100ms タイマーを設定し、派生デバイス共通の周期処理基盤を初期化する。 |
-| 3 | public | void | timer_tick | keep-alive を更新し、タイマーを止めて Device_Mng を実行した後、終了指示がなければタイマーを再開する。 |
-| 4 | public | void | Device_Mng | 基底クラスでは周期監視処理を行わず、派生クラスで必要な処理を実装する。 |
-| 5 | public | int | Data_Check | 基底クラスでは読込データ検証を実装せず、既定値 -1 を返す。 |
-| 6 | public | void | PutLog | DeviceLog.ProcessInfo へデバイスログメッセージを出力する。 |
-| 7 | public | int | Device_Open | OPOS デバイスを Open し、管理状態を opened に更新する。 |
-| 8 | public | int | Device_Close | 必要に応じて Release したうえで OPOS デバイスを Close する。 |
-| 9 | public | int | Device_Claim | OPOS デバイスの排他取得を実行する。 |
-| 10 | public | int | Device_Release | OPOS デバイスの排他を解放する。 |
-| 11 | public | int | Device_Start | Claim、DeviceEnabled、DataEventEnabled など読込開始状態を設定する。 |
-| 12 | public | int | Device_End | DataEventEnabled、DeviceEnabled、Release など読込終了状態を設定する。 |
-| 13 | public | int | Device_End | DataEventEnabled、DeviceEnabled、Release など読込終了状態を設定する。 |
-| 14 | public | void | StartDevice | 対象デバイスIDを保持し、OCXを配置したフォームとタイマー同期先を初期化する。 |
-| 15 | public | void | StopDevice | 終了指示を立て、実行中の Device_Mng を最大約3秒待ち、フォームを閉じて破棄する。 |
-| 16 | public | int | DeviceMethod | 基底クラスではデバイス固有メソッドを実行せず、既定値 -1 を返す。 |
-| 17 | public | int | DeviceUse | 基底クラスでは使用開始処理を実装せず、既定値 -1 を返す。 |
-| 18 | public | int | DeviceUnUse | 基底クラスでは使用終了処理を実装せず、既定値 -1 を返す。 |
+| ① | public | int | GetForegroundWindow | Windows の前面ウィンドウハンドルを取得する。 |
+| ② | protected | - | DeviceBase | 100ms タイマーを設定し、派生デバイス共通の周期処理基盤を初期化する。 |
+| ③ | public | void | timer_tick | keep-alive を更新し、タイマーを止めて Device_Mng を実行した後、終了指示がなければタイマーを再開する。 |
+| ④ | public | void | Device_Mng | 基底クラスでは周期監視処理を行わず、派生クラスで必要な処理を実装する。 |
+| ⑤ | public | int | Data_Check | 基底クラスでは読込データ検証を実装せず、既定値 -1 を返す。 |
+| ⑥ | public | void | PutLog | DeviceLog.ProcessInfo へデバイスログメッセージを出力する。 |
+| ⑦ | public | int | Device_Open | OPOS デバイスを Open し、管理状態を opened に更新する。 |
+| ⑧ | public | int | Device_Close | 必要に応じて Release したうえで OPOS デバイスを Close する。 |
+| ⑨ | public | int | Device_Claim | OPOS デバイスの排他取得を実行する。 |
+| ⑩ | public | int | Device_Release | OPOS デバイスの排他を解放する。 |
+| ⑪ | public | int | Device_Start | Claim、DeviceEnabled、DataEventEnabled など読込開始状態を設定する。 |
+| ⑫ | public | int | Device_End | DataEventEnabled、DeviceEnabled、Release など読込終了状態を設定する。 |
+| ⑬ | public | int | Device_End | DataEventEnabled、DeviceEnabled、Release など読込終了状態を設定する。 |
+| ⑭ | public | void | StartDevice | 対象デバイスIDを保持し、OCXを配置したフォームとタイマー同期先を初期化する。 |
+| ⑮ | public | void | StopDevice | 終了指示を立て、実行中の Device_Mng を最大約3秒待ち、フォームを閉じて破棄する。 |
+| ⑯ | public | int | DeviceMethod | 基底クラスではデバイス固有メソッドを実行せず、既定値 -1 を返す。 |
+| ⑰ | public | int | DeviceUse | 基底クラスでは使用開始処理を実装せず、既定値 -1 を返す。 |
+| ⑱ | public | int | DeviceUnUse | 基底クラスでは使用終了処理を実装せず、既定値 -1 を返す。 |
 
 ## メソッド詳細
 
-### 1. GetForegroundWindow
+### ①. GetForegroundWindow
 
 | 項目 | 内容 |
 | --- | --- |
@@ -96,7 +111,7 @@ OPOS/OCX デバイス制御に共通する接続、占有、解放、監視の�
 
 備考: -
 
-### 2. DeviceBase
+### ②. DeviceBase
 
 | 項目 | 内容 |
 | --- | --- |
@@ -113,7 +128,7 @@ OPOS/OCX デバイス制御に共通する接続、占有、解放、監視の�
 
 備考: -
 
-### 3. timer_tick
+### ③. timer_tick
 
 | 項目 | 内容 |
 | --- | --- |
@@ -139,7 +154,7 @@ OPOS/OCX デバイス制御に共通する接続、占有、解放、監視の�
 
 備考: -
 
-### 4. Device_Mng
+### ④. Device_Mng
 
 | 項目 | 内容 |
 | --- | --- |
@@ -162,7 +177,7 @@ OPOS/OCX デバイス制御に共通する接続、占有、解放、監視の�
 
 備考: -
 
-### 5. Data_Check
+### ⑤. Data_Check
 
 | 項目 | 内容 |
 | --- | --- |
@@ -186,7 +201,7 @@ OPOS/OCX デバイス制御に共通する接続、占有、解放、監視の�
 
 備考: -
 
-### 6. PutLog
+### ⑥. PutLog
 
 | 項目 | 内容 |
 | --- | --- |
@@ -209,7 +224,7 @@ OPOS/OCX デバイス制御に共通する接続、占有、解放、監視の�
 
 備考: -
 
-### 7. Device_Open
+### ⑦. Device_Open
 
 | 項目 | 内容 |
 | --- | --- |
@@ -232,7 +247,7 @@ OPOS/OCX デバイス制御に共通する接続、占有、解放、監視の�
 
 備考: -
 
-### 8. Device_Close
+### ⑧. Device_Close
 
 | 項目 | 内容 |
 | --- | --- |
@@ -255,7 +270,7 @@ OPOS/OCX デバイス制御に共通する接続、占有、解放、監視の�
 
 備考: -
 
-### 9. Device_Claim
+### ⑨. Device_Claim
 
 | 項目 | 内容 |
 | --- | --- |
@@ -278,7 +293,7 @@ OPOS/OCX デバイス制御に共通する接続、占有、解放、監視の�
 
 備考: -
 
-### 10. Device_Release
+### ⑩. Device_Release
 
 | 項目 | 内容 |
 | --- | --- |
@@ -301,7 +316,7 @@ OPOS/OCX デバイス制御に共通する接続、占有、解放、監視の�
 
 備考: -
 
-### 11. Device_Start
+### ⑪. Device_Start
 
 | 項目 | 内容 |
 | --- | --- |
@@ -328,7 +343,7 @@ OPOS/OCX デバイス制御に共通する接続、占有、解放、監視の�
 
 備考: -
 
-### 12. Device_End
+### ⑫. Device_End
 
 | 項目 | 内容 |
 | --- | --- |
@@ -354,7 +369,7 @@ OPOS/OCX デバイス制御に共通する接続、占有、解放、監視の�
 
 備考: -
 
-### 13. Device_End
+### ⑬. Device_End
 
 | 項目 | 内容 |
 | --- | --- |
@@ -381,7 +396,7 @@ OPOS/OCX デバイス制御に共通する接続、占有、解放、監視の�
 
 備考: -
 
-### 14. StartDevice
+### ⑭. StartDevice
 
 | 項目 | 内容 |
 | --- | --- |
@@ -404,7 +419,7 @@ OPOS/OCX デバイス制御に共通する接続、占有、解放、監視の�
 
 備考: -
 
-### 15. StopDevice
+### ⑮. StopDevice
 
 | 項目 | 内容 |
 | --- | --- |
@@ -422,7 +437,7 @@ OPOS/OCX デバイス制御に共通する接続、占有、解放、監視の�
 
 備考: -
 
-### 16. DeviceMethod
+### ⑯. DeviceMethod
 
 | 項目 | 内容 |
 | --- | --- |
@@ -447,7 +462,7 @@ OPOS/OCX デバイス制御に共通する接続、占有、解放、監視の�
 
 備考: -
 
-### 17. DeviceUse
+### ⑰. DeviceUse
 
 | 項目 | 内容 |
 | --- | --- |
@@ -470,7 +485,7 @@ OPOS/OCX デバイス制御に共通する接続、占有、解放、監視の�
 
 備考: -
 
-### 18. DeviceUnUse
+### ⑱. DeviceUnUse
 
 | 項目 | 内容 |
 | --- | --- |
@@ -492,6 +507,7 @@ OPOS/OCX デバイス制御に共通する接続、占有、解放、監視の�
 - ② 派生クラスで override する前提として -1 を返す。
 
 備考: -
+
 ## 処理フロー/注意事項
 
 - コンストラクタがタイマーを設定する。

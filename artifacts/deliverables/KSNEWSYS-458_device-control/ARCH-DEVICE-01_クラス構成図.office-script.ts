@@ -4,58 +4,58 @@ function main(workbook: ExcelScript.Workbook) {
   sheet.activate();
   const anchor = sheet.getCell(anchorPosition.rowIndex, anchorPosition.columnIndex);
   const originTop = anchor.getTop();
-  const canvasColumnCount = 34;
+  const canvasColumnCount = 36;
   const baselineCanvasRowCount = 43;
   formatDiagramGrid(anchor, baselineCanvasRowCount, canvasColumnCount);
 
-  const laneRange1 = getAnchoredRange(anchor, 0, 0, 1, 9);
-  const laneRange2 = getAnchoredRange(anchor, 0, 9, 1, 7);
-  const laneRange3 = getAnchoredRange(anchor, 0, 16, 1, 8);
-  const laneRange4 = getAnchoredRange(anchor, 0, 24, 1, 10);
+  const laneRange1 = getAnchoredRange(anchor, 0, 0, 1, 10);
+  const laneRange2 = getAnchoredRange(anchor, 0, 10, 1, 8);
+  const laneRange3 = getAnchoredRange(anchor, 0, 18, 1, 8);
+  const laneRange4 = getAnchoredRange(anchor, 0, 26, 1, 10);
 
   addCellLaneTable(anchor, baselineCanvasRowCount - 1);
 
-  const shape_d51_CORE_CONFIG_GROUP_CONFIG = addTextShape(sheet, "shape_d51_CORE_CONFIG_GROUP_CONFIG", "DeviceControllerConfigService\n設定の読込・フォールバック・保存", 0, 0, 180, 36, 10, true, "#E2F0D9", 0, "#548235", 2, "#111111", true, "center", "roundRect", false);
-  setShapeAltText(shape_d51_CORE_CONFIG_GROUP_CONFIG, "DeviceControllerConfigService 設定の読込・フォールバック・保存", "");
-  const shape_d51_PLATFORM_IOS = addTextShape(sheet, "shape_d51_PLATFORM_IOS", "iOS直接接続\nTCP/IP・Bluetooth / カメラ・BLE", 0, 0, 185.775, 36, 10, true, "#FFF2CC", 0, "#BF9000", 2, "#111111", true, "center", "roundRect", false);
-  setShapeAltText(shape_d51_PLATFORM_IOS, "iOS直接接続 TCP/IP・Bluetooth / カメラ・BLE", "");
-  const shape_d51_PLATFORM_ANDROID = addTextShape(sheet, "shape_d51_PLATFORM_ANDROID", "Android直接接続\nBluetooth・カメラ・USB / 現在は利用不可", 0, 0, 224.625, 36, 10, true, "#FFF2CC", 0, "#BF9000", 2, "#111111", true, "center", "roundRect", false);
-  setShapeAltText(shape_d51_PLATFORM_ANDROID, "Android直接接続 Bluetooth・カメラ・USB / 現在は利用不可", "");
-  const shape_d51_CORE_CONFIG_GROUP_MODEL = addTextShape(sheet, "shape_d51_CORE_CONFIG_GROUP_MODEL", "DeviceConfig /\nActiveDevice / DeviceSpec\n設定モデル", 0, 0, 156.375, 51, 10, true, "#E2F0D9", 0, "#548235", 2, "#111111", true, "center", "roundRect", false);
-  setShapeAltText(shape_d51_CORE_CONFIG_GROUP_MODEL, "DeviceConfig / ActiveDevice / DeviceSpec 設定モデル", "");
-  const shape_d51_CORE_MANAGER = addTextShape(sheet, "shape_d51_CORE_MANAGER", "DeviceManager\n初期化と有効デバイスの選択", 0, 0, 148.5, 36, 10, true, "#E2F0D9", 0, "#548235", 2, "#111111", true, "center", "roundRect", false);
-  setShapeAltText(shape_d51_CORE_MANAGER, "DeviceManager 初期化と有効デバイスの選択", "");
-  const shape_d51_CORE_CONTRACT = addTextShape(sheet, "shape_d51_CORE_CONTRACT", "公開ストラテジーインターフェース\nおよびDeviceStrategyBase", 0, 0, 180, 36, 10, true, "#E2F0D9", 0, "#548235", 2, "#111111", true, "center", "roundRect", false);
-  setShapeAltText(shape_d51_CORE_CONTRACT, "公開ストラテジーインターフェース およびDeviceStrategyBase", "");
-  const shape_d51_APP_SERVICE = addTextShape(sheet, "shape_d51_APP_SERVICE", "アプリケーションサービス\nデバイス呼出を管理", 0, 0, 138, 36, 10, true, "#D9EAF7", 0, "#4472C4", 2, "#111111", true, "center", "roundRect", false);
-  setShapeAltText(shape_d51_APP_SERVICE, "アプリケーションサービス デバイス呼出を管理", "");
-  const shape_d51_APP_BOOT = addTextShape(sheet, "shape_d51_APP_BOOT", "MauiProgram\nDeviceCtrlの初期化を起動", 0, 0, 143.25, 36, 10, true, "#D9EAF7", 0, "#4472C4", 2, "#111111", true, "center", "roundRect", false);
-  setShapeAltText(shape_d51_APP_BOOT, "MauiProgram DeviceCtrlの初期化を起動", "");
-  const shape_d51_EXTERNAL_WIN_OPOS_DEVICE = addTextShape(sheet, "shape_d51_EXTERNAL_WIN_OPOS_DEVICE", "Windows OPOS・OCX機器\nUSB / COM", 0, 0, 130.125, 36, 10, true, "#FCE4D6", 0, "#C55A11", 2, "#111111", true, "center", "roundRect", false);
-  setShapeAltText(shape_d51_EXTERNAL_WIN_OPOS_DEVICE, "Windows OPOS・OCX機器 USB / COM", "");
-  const shape_d51_PLATFORM_WIN_DIRECT = addTextShape(sheet, "shape_d51_PLATFORM_WIN_DIRECT", "Windows直接接続\nSerialPort / Raw Input", 0, 0, 139.05, 36, 10, true, "#FFF2CC", 0, "#BF9000", 2, "#111111", true, "center", "roundRect", false);
-  setShapeAltText(shape_d51_PLATFORM_WIN_DIRECT, "Windows直接接続 SerialPort / Raw Input", "");
-  const shape_d51_EXTERNAL_WIN_DIRECT_DEVICE = addTextShape(sheet, "shape_d51_EXTERNAL_WIN_DIRECT_DEVICE", "Windows直接接続機器\nCOM / Raw Input", 0, 0, 115.425, 36, 10, true, "#FCE4D6", 0, "#C55A11", 2, "#111111", true, "center", "roundRect", false);
-  setShapeAltText(shape_d51_EXTERNAL_WIN_DIRECT_DEVICE, "Windows直接接続機器 COM / Raw Input", "");
-  const shape_d51_CORE_CONFIG_GROUP_DEFAULT = addTextShape(sheet, "shape_d51_CORE_CONFIG_GROUP_DEFAULT", "デフォルト設定\nDeviceCtrlのリソース", 0, 0, 122.25, 36, 10, true, "#EDEDED", 0, "#7F7F7F", 2, "#111111", true, "center", "roundRect", false);
-  setShapeAltText(shape_d51_CORE_CONFIG_GROUP_DEFAULT, "デフォルト設定 DeviceCtrlのリソース", "");
-  const shape_d51_PLATFORM_WIN_CONNECTOR = addTextShape(sheet, "shape_d51_PLATFORM_WIN_CONNECTOR", "Windows OPOS・OCX\nストラテジー", 0, 0, 109.125, 36, 10, true, "#FFF2CC", 0, "#BF9000", 2, "#111111", true, "center", "roundRect", false);
-  setShapeAltText(shape_d51_PLATFORM_WIN_CONNECTOR, "Windows OPOS・OCX ストラテジー", "");
-  const shape_d51_CORE_FACTORY = addTextShape(sheet, "shape_d51_CORE_FACTORY", "StrategyFactory<T>\nストラテジーを生成", 0, 0, 115.95, 36, 10, true, "#E2F0D9", 0, "#548235", 2, "#111111", true, "center", "roundRect", false);
-  setShapeAltText(shape_d51_CORE_FACTORY, "StrategyFactory<T> ストラテジーを生成", "");
-  const shape_d51_EXTERNAL_CONNECTOR = addTextShape(sheet, "shape_d51_EXTERNAL_CONNECTOR", "デバイスコネクター\nWindows別プロセス", 0, 0, 106.5, 36, 10, true, "#FCE4D6", 0, "#C55A11", 2, "#111111", true, "center", "roundRect", false);
-  setShapeAltText(shape_d51_EXTERNAL_CONNECTOR, "デバイスコネクター Windows別プロセス", "名前付きパイプはDeviceCtrlとの通信に使用する。周辺機器との物理接続はOPOS・OCX側で管理する。");
-  const shape_d51_CORE_CONFIG_GROUP_RUNTIME = addTextShape(sheet, "shape_d51_CORE_CONFIG_GROUP_RUNTIME", "ランタイム設定\nアプリデータ領域", 0, 0, 96, 36, 10, true, "#EDEDED", 0, "#7F7F7F", 2, "#111111", true, "center", "roundRect", false);
-  setShapeAltText(shape_d51_CORE_CONFIG_GROUP_RUNTIME, "ランタイム設定 アプリデータ領域", "");
-  const shape_d51_APP_VIEW = addTextShape(sheet, "shape_d51_APP_VIEW", "ViewModel\n業務要求を送信", 0, 0, 96, 36, 10, true, "#D9EAF7", 0, "#4472C4", 2, "#111111", true, "center", "roundRect", false);
-  setShapeAltText(shape_d51_APP_VIEW, "ViewModel 業務要求を送信", "");
-  const shape_d51_EXTERNAL_ANDROID_DEVICE = addTextShape(sheet, "shape_d51_EXTERNAL_ANDROID_DEVICE", "Android周辺機器", 0, 0, 96, 28, 10, true, "#FCE4D6", 0, "#C55A11", 2, "#111111", true, "center", "roundRect", false);
-  setShapeAltText(shape_d51_EXTERNAL_ANDROID_DEVICE, "Android周辺機器", "");
-  const shape_d51_EXTERNAL_IOS_DEVICE = addTextShape(sheet, "shape_d51_EXTERNAL_IOS_DEVICE", "iOS周辺機器", 0, 0, 96, 28, 10, true, "#FCE4D6", 0, "#C55A11", 2, "#111111", true, "center", "roundRect", false);
-  setShapeAltText(shape_d51_EXTERNAL_IOS_DEVICE, "iOS周辺機器", "");
+  const shape_d51_EXTERNAL_WIN_OPOS_DEVICE = addTextShape(sheet, "shape_d51_EXTERNAL_WIN_OPOS_DEVICE", "② Windows OPOS／OCX機器\nUSB / COM", 0, 0, 146.4, 36, 10, true, "#E4DFEC", 0, "#8064A2", 2, "#111111", true, "center", "roundRect", false);
+  setShapeAltText(shape_d51_EXTERNAL_WIN_OPOS_DEVICE, "② Windows OPOS／OCX機器 USB / COM", "");
+  const shape_d51_PLATFORM_IOS = addTextShape(sheet, "shape_d51_PLATFORM_IOS", "③ iOS直接接続\nTCP/IP・Bluetooth / カメラ・BLE", 0, 0, 185.775, 36, 10, true, "#F8FBFD", 0, "#0D32B2", 2, "#111111", true, "center", "roundRect", false);
+  setShapeAltText(shape_d51_PLATFORM_IOS, "③ iOS直接接続 TCP/IP・Bluetooth / カメラ・BLE", "");
+  const shape_d51_PLATFORM_ANDROID = addTextShape(sheet, "shape_d51_PLATFORM_ANDROID", "④ Android直接接続\nBluetooth・カメラ・USB / 現在は利用不可", 0, 0, 224.625, 36, 10, true, "#F8FBFD", 0, "#0D32B2", 2, "#111111", true, "center", "roundRect", false);
+  setShapeAltText(shape_d51_PLATFORM_ANDROID, "④ Android直接接続 Bluetooth・カメラ・USB / 現在は利用不可", "");
+  const shape_d51_CORE_CONFIG_GROUP_MODEL = addTextShape(sheet, "shape_d51_CORE_CONFIG_GROUP_MODEL", "①-4 設定モデル\n（DeviceConfig /\nActiveDevice / DeviceSpec）", 0, 0, 166.875, 51, 10, true, "#F8FBFD", 0, "#0D32B2", 2, "#111111", true, "center", "roundRect", false);
+  setShapeAltText(shape_d51_CORE_CONFIG_GROUP_MODEL, "①-4 設定モデル （DeviceConfig / ActiveDevice / DeviceSpec）", "");
+  const shape_d51_CORE_CONTRACT = addTextShape(sheet, "shape_d51_CORE_CONTRACT", "④ 公開デバイス契約\n（I...Strategy / DeviceStrategyBase）", 0, 0, 223.575, 36, 10, true, "#F8FBFD", 0, "#0D32B2", 2, "#111111", true, "center", "roundRect", false);
+  setShapeAltText(shape_d51_CORE_CONTRACT, "④ 公開デバイス契約 （I...Strategy / DeviceStrategyBase）", "");
+  const shape_d51_APP_SERVICE = addTextShape(sheet, "shape_d51_APP_SERVICE", "③ アプリケーションサービス\nデバイス呼出を管理", 0, 0, 154.275, 36, 10, true, "#F8FBFD", 0, "#0D32B2", 2, "#111111", true, "center", "roundRect", false);
+  setShapeAltText(shape_d51_APP_SERVICE, "③ アプリケーションサービス デバイス呼出を管理", "");
+  const shape_d51_CORE_CONFIG_GROUP_CONFIG = addTextShape(sheet, "shape_d51_CORE_CONFIG_GROUP_CONFIG", "①-3 設定管理\n（DeviceControllerConfigService）", 0, 0, 200.475, 36, 10, true, "#F8FBFD", 0, "#0D32B2", 2, "#111111", true, "center", "roundRect", false);
+  setShapeAltText(shape_d51_CORE_CONFIG_GROUP_CONFIG, "①-3 設定管理 （DeviceControllerConfigService）", "");
+  const shape_d51_CORE_CONFIG_GROUP_DEFAULT = addTextShape(sheet, "shape_d51_CORE_CONFIG_GROUP_DEFAULT", "①-2 デフォルト設定\nデバイス制御層のリソース", 0, 0, 138, 36, 10, true, "#F8FBFD", 0, "#0D32B2", 2, "#111111", true, "center", "roundRect", false);
+  setShapeAltText(shape_d51_CORE_CONFIG_GROUP_DEFAULT, "①-2 デフォルト設定 デバイス制御層のリソース", "");
+  const shape_d51_EXTERNAL_WIN_DIRECT_DEVICE = addTextShape(sheet, "shape_d51_EXTERNAL_WIN_DIRECT_DEVICE", "③ Windows直接接続機器\nCOM / Raw Input", 0, 0, 131.7, 36, 10, true, "#E4DFEC", 0, "#8064A2", 2, "#111111", true, "center", "roundRect", false);
+  setShapeAltText(shape_d51_EXTERNAL_WIN_DIRECT_DEVICE, "③ Windows直接接続機器 COM / Raw Input", "");
+  const shape_d51_PLATFORM_WIN_CONNECTOR = addTextShape(sheet, "shape_d51_PLATFORM_WIN_CONNECTOR", "① Windows OPOS／OCX\nストラテジー", 0, 0, 125.4, 36, 10, true, "#F8FBFD", 0, "#0D32B2", 2, "#111111", true, "center", "roundRect", false);
+  setShapeAltText(shape_d51_PLATFORM_WIN_CONNECTOR, "① Windows OPOS／OCX ストラテジー", "");
+  const shape_d51_CORE_FACTORY = addTextShape(sheet, "shape_d51_CORE_FACTORY", "③ ストラテジー生成\n（StrategyFactory<T>）", 0, 0, 136.95, 36, 10, true, "#F8FBFD", 0, "#0D32B2", 2, "#111111", true, "center", "roundRect", false);
+  setShapeAltText(shape_d51_CORE_FACTORY, "③ ストラテジー生成 （StrategyFactory<T>）", "");
+  const shape_d51_PLATFORM_WIN_DIRECT = addTextShape(sheet, "shape_d51_PLATFORM_WIN_DIRECT", "② Windows直接接続\nSerialPort / Raw Input", 0, 0, 139.05, 36, 10, true, "#F8FBFD", 0, "#0D32B2", 2, "#111111", true, "center", "roundRect", false);
+  setShapeAltText(shape_d51_PLATFORM_WIN_DIRECT, "② Windows直接接続 SerialPort / Raw Input", "");
+  const shape_d51_EXTERNAL_CONNECTOR = addTextShape(sheet, "shape_d51_EXTERNAL_CONNECTOR", "① デバイスコネクタ\nWindows別プロセス", 0, 0, 112.275, 36, 10, true, "#FCE4D6", 0, "#ED7D31", 2, "#111111", true, "center", "roundRect", false);
+  setShapeAltText(shape_d51_EXTERNAL_CONNECTOR, "① デバイスコネクタ Windows別プロセス", "コマンド通信用パイプとイベント通知用パイプはデバイス制御層との通信に使用する。周辺機器との物理接続はOPOS／OCX側で管理する。");
+  const shape_d51_CORE_CONFIG_GROUP_RUNTIME = addTextShape(sheet, "shape_d51_CORE_CONFIG_GROUP_RUNTIME", "①-1 ランタイム設定\nアプリデータ領域", 0, 0, 113.325, 36, 10, true, "#F8FBFD", 0, "#0D32B2", 2, "#111111", true, "center", "roundRect", false);
+  setShapeAltText(shape_d51_CORE_CONFIG_GROUP_RUNTIME, "①-1 ランタイム設定 アプリデータ領域", "");
+  const shape_d51_CORE_MANAGER = addTextShape(sheet, "shape_d51_CORE_MANAGER", "② デバイス管理\n（DeviceManager）", 0, 0, 108.075, 36, 10, true, "#F8FBFD", 0, "#0D32B2", 2, "#111111", true, "center", "roundRect", false);
+  setShapeAltText(shape_d51_CORE_MANAGER, "② デバイス管理 （DeviceManager）", "");
+  const shape_d51_APP_BOOT = addTextShape(sheet, "shape_d51_APP_BOOT", "① 構成ルート\n（MauiProgram）", 0, 0, 96.525, 36, 10, true, "#F8FBFD", 0, "#0D32B2", 2, "#111111", true, "center", "roundRect", false);
+  setShapeAltText(shape_d51_APP_BOOT, "① 構成ルート （MauiProgram）", "");
+  const shape_d51_APP_VIEW = addTextShape(sheet, "shape_d51_APP_VIEW", "② 画面状態管理\n（ViewModel）", 0, 0, 96, 36, 10, true, "#F8FBFD", 0, "#0D32B2", 2, "#111111", true, "center", "roundRect", false);
+  setShapeAltText(shape_d51_APP_VIEW, "② 画面状態管理 （ViewModel）", "");
+  const shape_d51_EXTERNAL_ANDROID_DEVICE = addTextShape(sheet, "shape_d51_EXTERNAL_ANDROID_DEVICE", "⑤ Android周辺機器", 0, 0, 110.7, 28, 10, true, "#E4DFEC", 0, "#8064A2", 2, "#111111", true, "center", "roundRect", false);
+  setShapeAltText(shape_d51_EXTERNAL_ANDROID_DEVICE, "⑤ Android周辺機器", "");
+  const shape_d51_EXTERNAL_IOS_DEVICE = addTextShape(sheet, "shape_d51_EXTERNAL_IOS_DEVICE", "④ iOS周辺機器", 0, 0, 96, 28, 10, true, "#E4DFEC", 0, "#8064A2", 2, "#111111", true, "center", "roundRect", false);
+  setShapeAltText(shape_d51_EXTERNAL_IOS_DEVICE, "④ iOS周辺機器", "");
 
-  let groupBottom1 = placeDiagramRow([shape_d51_APP_BOOT], [0.772444], laneRange1.getLeft(), originTop + 90, laneRange1.getWidth(), 30, 28);
-  groupBottom1 = placeDiagramRow([shape_d51_APP_VIEW, shape_d51_APP_SERVICE], [0.167076, 0.772444], laneRange1.getLeft(), groupBottom1 + 60, laneRange1.getWidth(), 30, 28);
+  let groupBottom1 = placeDiagramRow([shape_d51_APP_BOOT], [0.770841], laneRange1.getLeft(), originTop + 90, laneRange1.getWidth(), 30, 28);
+  groupBottom1 = placeDiagramRow([shape_d51_APP_VIEW, shape_d51_APP_SERVICE], [0.167478, 0.770841], laneRange1.getLeft(), groupBottom1 + 60, laneRange1.getWidth(), 30, 28);
   let groupBottom2 = placeDiagramRow([shape_d51_CORE_CONFIG_GROUP_RUNTIME], [0.5], laneRange2.getLeft(), originTop + 90, laneRange2.getWidth(), 30, 28);
   groupBottom2 = placeDiagramRow([shape_d51_CORE_CONFIG_GROUP_DEFAULT], [0.5], laneRange2.getLeft(), groupBottom2 + 60, laneRange2.getWidth(), 30, 28);
   groupBottom2 = placeDiagramRow([shape_d51_CORE_CONFIG_GROUP_CONFIG], [0.5], laneRange2.getLeft(), groupBottom2 + 60, laneRange2.getWidth(), 30, 28);
@@ -67,12 +67,12 @@ function main(workbook: ExcelScript.Workbook) {
   groupBottom3 = placeDiagramRow([shape_d51_PLATFORM_WIN_DIRECT], [0.5], laneRange3.getLeft(), groupBottom3 + 60, laneRange3.getWidth(), 30, 28);
   groupBottom3 = placeDiagramRow([shape_d51_PLATFORM_IOS], [0.5], laneRange3.getLeft(), groupBottom3 + 60, laneRange3.getWidth(), 30, 28);
   groupBottom3 = placeDiagramRow([shape_d51_PLATFORM_ANDROID], [0.5], laneRange3.getLeft(), groupBottom3 + 60, laneRange3.getWidth(), 30, 28);
-  let groupBottom4 = placeDiagramRow([shape_d51_EXTERNAL_CONNECTOR, shape_d51_EXTERNAL_WIN_OPOS_DEVICE], [0.231485, 0.731485], laneRange4.getLeft(), originTop + 90, laneRange4.getWidth(), 30, 28);
-  groupBottom4 = placeDiagramRow([shape_d51_EXTERNAL_WIN_DIRECT_DEVICE], [0.731485], laneRange4.getLeft(), groupBottom4 + 60, laneRange4.getWidth(), 30, 28);
-  groupBottom4 = placeDiagramRow([shape_d51_EXTERNAL_IOS_DEVICE], [0.731485], laneRange4.getLeft(), groupBottom4 + 60, laneRange4.getWidth(), 30, 28);
-  groupBottom4 = placeDiagramRow([shape_d51_EXTERNAL_ANDROID_DEVICE], [0.731485], laneRange4.getLeft(), groupBottom4 + 60, laneRange4.getWidth(), 30, 28);
+  let groupBottom4 = placeDiagramRow([shape_d51_EXTERNAL_CONNECTOR, shape_d51_EXTERNAL_WIN_OPOS_DEVICE], [0.226352, 0.726352], laneRange4.getLeft(), originTop + 90, laneRange4.getWidth(), 30, 28);
+  groupBottom4 = placeDiagramRow([shape_d51_EXTERNAL_WIN_DIRECT_DEVICE], [0.726352], laneRange4.getLeft(), groupBottom4 + 60, laneRange4.getWidth(), 30, 28);
+  groupBottom4 = placeDiagramRow([shape_d51_EXTERNAL_IOS_DEVICE], [0.726352], laneRange4.getLeft(), groupBottom4 + 60, laneRange4.getWidth(), 30, 28);
+  groupBottom4 = placeDiagramRow([shape_d51_EXTERNAL_ANDROID_DEVICE], [0.726352], laneRange4.getLeft(), groupBottom4 + 60, laneRange4.getWidth(), 30, 28);
 
-  addSectionBackground(sheet, "section_bg_d51_2_1", "設定管理", [shape_d51_CORE_CONFIG_GROUP_CONFIG, shape_d51_CORE_CONFIG_GROUP_MODEL, shape_d51_CORE_CONFIG_GROUP_DEFAULT, shape_d51_CORE_CONFIG_GROUP_RUNTIME], laneRange2.getLeft(), laneRange2.getWidth(), "", 1, "#ED7D31", 2, "#111111");
+  addSectionBackground(sheet, "section_bg_d51_2_1", "① 設定管理", [shape_d51_CORE_CONFIG_GROUP_MODEL, shape_d51_CORE_CONFIG_GROUP_CONFIG, shape_d51_CORE_CONFIG_GROUP_DEFAULT, shape_d51_CORE_CONFIG_GROUP_RUNTIME], laneRange2.getLeft(), laneRange2.getWidth(), "", 1, "#ED7D31", 2, "#111111");
   const diagramBottom = Math.max(originTop + 90, groupBottom1, groupBottom2, groupBottom3, groupBottom4);
   const bodyEndRowOffset = Math.max(11, Math.ceil((diagramBottom - originTop + 48) / 18) - 1);
   const canvasRowCount = Math.max(baselineCanvasRowCount, bodyEndRowOffset + 1);
@@ -81,73 +81,36 @@ function main(workbook: ExcelScript.Workbook) {
     addCellLaneTable(anchor, bodyEndRowOffset);
   }
 
-  const reviewLeft = anchor.getLeft();
-  const reviewTop = anchor.getTop();
-  const reviewRight = reviewLeft + canvasColumnCount * 36;
-  const obstacleBounds: number[][] = [];
-  collectDiagramObstacleBounds(sheet.getShapes(), obstacleBounds);
-  const failedOverlayIds: string[] = [];
-
-  const edge_d51_01_PLATFORM_WIN_CONNECTOR_to_EXTERNAL_CONNECTOR = addConnector(sheet, "edge_d51_01_PLATFORM_WIN_CONNECTOR_to_EXTERNAL_CONNECTOR", shape_d51_PLATFORM_WIN_CONNECTOR, shape_d51_EXTERNAL_CONNECTOR, false, false, "名前付きパイプ", "名前付きパイプ", "elbow", "right", "left", "#1F4E79", 2);
-  if (!addConnectorLabel(sheet, obstacleBounds, "edge_label_d51_01_PLATFORM.WIN_CONNECTOR_to_EXTERNAL.CONNECTOR", "edge_group_d51_01_PLATFORM.WIN_CONNECTOR_to_EXTERNAL.CONNECTOR", edge_d51_01_PLATFORM_WIN_CONNECTOR_to_EXTERNAL_CONNECTOR, "名前付きパイプ", edge_d51_01_PLATFORM_WIN_CONNECTOR_to_EXTERNAL_CONNECTOR.getLeft() + edge_d51_01_PLATFORM_WIN_CONNECTOR_to_EXTERNAL_CONNECTOR.getWidth() / 2, edge_d51_01_PLATFORM_WIN_CONNECTOR_to_EXTERNAL_CONNECTOR.getTop() + edge_d51_01_PLATFORM_WIN_CONNECTOR_to_EXTERNAL_CONNECTOR.getHeight() / 2, reviewLeft, reviewRight, reviewTop)) {
-    failedOverlayIds.push("edge_d51_01_PLATFORM_WIN_CONNECTOR_to_EXTERNAL_CONNECTOR");
-  }
-  const edge_d51_02_PLATFORM_WIN_DIRECT_to_EXTERNAL_WIN_DIRECT_DEVICE = addConnector(sheet, "edge_d51_02_PLATFORM_WIN_DIRECT_to_EXTERNAL_WIN_DIRECT_DEVICE", shape_d51_PLATFORM_WIN_DIRECT, shape_d51_EXTERNAL_WIN_DIRECT_DEVICE, false, false, "Windows直接接続 → Windows直接接続機器", "", "elbow", "right", "left", "#1F4E79", 2);
-  const edge_d51_03_PLATFORM_IOS_to_EXTERNAL_IOS_DEVICE = addConnector(sheet, "edge_d51_03_PLATFORM_IOS_to_EXTERNAL_IOS_DEVICE", shape_d51_PLATFORM_IOS, shape_d51_EXTERNAL_IOS_DEVICE, false, false, "iOS直接接続 → iOS周辺機器", "", "elbow", "right", "left", "#1F4E79", 2);
-  const edge_d51_04_PLATFORM_ANDROID_to_EXTERNAL_ANDROID_DEVICE = addConnector(sheet, "edge_d51_04_PLATFORM_ANDROID_to_EXTERNAL_ANDROID_DEVICE", shape_d51_PLATFORM_ANDROID, shape_d51_EXTERNAL_ANDROID_DEVICE, false, false, "Android直接接続 → Android周辺機器", "", "elbow", "right", "left", "#1F4E79", 2);
-  const edge_d51_05_CORE_CONTRACT_to_PLATFORM_WIN_CONNECTOR = addConnector(sheet, "edge_d51_05_CORE_CONTRACT_to_PLATFORM_WIN_CONNECTOR", shape_d51_CORE_CONTRACT, shape_d51_PLATFORM_WIN_CONNECTOR, false, false, "公開ストラテジーインターフェース → Windows OPOS・OCX", "", "elbow", "right", "left", "#1F4E79", 2);
-  const edge_d51_06_CORE_CONTRACT_to_PLATFORM_WIN_DIRECT = addConnector(sheet, "edge_d51_06_CORE_CONTRACT_to_PLATFORM_WIN_DIRECT", shape_d51_CORE_CONTRACT, shape_d51_PLATFORM_WIN_DIRECT, false, false, "公開ストラテジーインターフェース → Windows直接接続", "", "elbow", "right", "left", "#1F4E79", 2);
-  const edge_d51_07_CORE_CONTRACT_to_PLATFORM_IOS = addConnector(sheet, "edge_d51_07_CORE_CONTRACT_to_PLATFORM_IOS", shape_d51_CORE_CONTRACT, shape_d51_PLATFORM_IOS, false, false, "公開ストラテジーインターフェース → iOS直接接続", "", "elbow", "right", "left", "#1F4E79", 2);
-  const edge_d51_08_CORE_CONTRACT_to_PLATFORM_ANDROID = addConnector(sheet, "edge_d51_08_CORE_CONTRACT_to_PLATFORM_ANDROID", shape_d51_CORE_CONTRACT, shape_d51_PLATFORM_ANDROID, false, false, "公開ストラテジーインターフェース → Android直接接続", "", "elbow", "right", "left", "#1F4E79", 2);
+  const edge_d51_01_PLATFORM_WIN_CONNECTOR_to_EXTERNAL_CONNECTOR = addConnector(sheet, "edge_d51_01_PLATFORM_WIN_CONNECTOR_to_EXTERNAL_CONNECTOR", shape_d51_PLATFORM_WIN_CONNECTOR, shape_d51_EXTERNAL_CONNECTOR, false, false, "コマンド通信用／ イベント通知用パイプ", "コマンド通信用／ イベント通知用パイプ", "elbow", "right", "left", "#1F4E79", 2);
+  const edge_d51_02_PLATFORM_WIN_DIRECT_to_EXTERNAL_WIN_DIRECT_DEVICE = addConnector(sheet, "edge_d51_02_PLATFORM_WIN_DIRECT_to_EXTERNAL_WIN_DIRECT_DEVICE", shape_d51_PLATFORM_WIN_DIRECT, shape_d51_EXTERNAL_WIN_DIRECT_DEVICE, false, false, "② Windows直接接続 → ③ Windows直接接続機器", "", "elbow", "right", "left", "#7030A0", 2);
+  const edge_d51_03_PLATFORM_IOS_to_EXTERNAL_IOS_DEVICE = addConnector(sheet, "edge_d51_03_PLATFORM_IOS_to_EXTERNAL_IOS_DEVICE", shape_d51_PLATFORM_IOS, shape_d51_EXTERNAL_IOS_DEVICE, false, false, "③ iOS直接接続 → ④ iOS周辺機器", "", "elbow", "right", "left", "#7030A0", 2);
+  const edge_d51_04_PLATFORM_ANDROID_to_EXTERNAL_ANDROID_DEVICE = addConnector(sheet, "edge_d51_04_PLATFORM_ANDROID_to_EXTERNAL_ANDROID_DEVICE", shape_d51_PLATFORM_ANDROID, shape_d51_EXTERNAL_ANDROID_DEVICE, false, false, "④ Android直接接続 → ⑤ Android周辺機器", "", "elbow", "right", "left", "#7030A0", 2);
+  const edge_d51_05_CORE_CONTRACT_to_PLATFORM_WIN_CONNECTOR = addConnector(sheet, "edge_d51_05_CORE_CONTRACT_to_PLATFORM_WIN_CONNECTOR", shape_d51_CORE_CONTRACT, shape_d51_PLATFORM_WIN_CONNECTOR, false, false, "④ 公開デバイス契約 → ① Windows OPOS／OCX", "", "elbow", "right", "left", "#1F4E79", 2);
+  const edge_d51_06_CORE_CONTRACT_to_PLATFORM_WIN_DIRECT = addConnector(sheet, "edge_d51_06_CORE_CONTRACT_to_PLATFORM_WIN_DIRECT", shape_d51_CORE_CONTRACT, shape_d51_PLATFORM_WIN_DIRECT, false, false, "④ 公開デバイス契約 → ② Windows直接接続", "", "elbow", "right", "left", "#1F4E79", 2);
+  const edge_d51_07_CORE_CONTRACT_to_PLATFORM_IOS = addConnector(sheet, "edge_d51_07_CORE_CONTRACT_to_PLATFORM_IOS", shape_d51_CORE_CONTRACT, shape_d51_PLATFORM_IOS, false, false, "④ 公開デバイス契約 → ③ iOS直接接続", "", "elbow", "right", "left", "#1F4E79", 2);
+  const edge_d51_08_CORE_CONTRACT_to_PLATFORM_ANDROID = addConnector(sheet, "edge_d51_08_CORE_CONTRACT_to_PLATFORM_ANDROID", shape_d51_CORE_CONTRACT, shape_d51_PLATFORM_ANDROID, false, false, "④ 公開デバイス契約 → ④ Android直接接続", "", "elbow", "right", "left", "#1F4E79", 2);
   const edge_d51_09_APP_BOOT_to_CORE_MANAGER = addConnector(sheet, "edge_d51_09_APP_BOOT_to_CORE_MANAGER", shape_d51_APP_BOOT, shape_d51_CORE_MANAGER, false, false, "InitializeAsync", "InitializeAsync", "elbow", "right", "left", "#1F4E79", 2);
-  if (!addConnectorLabel(sheet, obstacleBounds, "edge_label_d51_09_APP.BOOT_to_CORE.MANAGER", "edge_group_d51_09_APP.BOOT_to_CORE.MANAGER", edge_d51_09_APP_BOOT_to_CORE_MANAGER, "InitializeAsync", edge_d51_09_APP_BOOT_to_CORE_MANAGER.getLeft() + edge_d51_09_APP_BOOT_to_CORE_MANAGER.getWidth() / 2, edge_d51_09_APP_BOOT_to_CORE_MANAGER.getTop() + edge_d51_09_APP_BOOT_to_CORE_MANAGER.getHeight() / 2, reviewLeft, reviewRight, reviewTop)) {
-    failedOverlayIds.push("edge_d51_09_APP_BOOT_to_CORE_MANAGER");
-  }
   const edge_d51_10_APP_SERVICE_to_CORE_MANAGER = addConnector(sheet, "edge_d51_10_APP_SERVICE_to_CORE_MANAGER", shape_d51_APP_SERVICE, shape_d51_CORE_MANAGER, false, false, "Get...StrategyAsync", "Get...StrategyAsync", "elbow", "right", "left", "#1F4E79", 2);
-  if (!addConnectorLabel(sheet, obstacleBounds, "edge_label_d51_10_APP.SERVICE_to_CORE.MANAGER", "edge_group_d51_10_APP.SERVICE_to_CORE.MANAGER", edge_d51_10_APP_SERVICE_to_CORE_MANAGER, "Get...StrategyAsync", edge_d51_10_APP_SERVICE_to_CORE_MANAGER.getLeft() + edge_d51_10_APP_SERVICE_to_CORE_MANAGER.getWidth() / 2, edge_d51_10_APP_SERVICE_to_CORE_MANAGER.getTop() + edge_d51_10_APP_SERVICE_to_CORE_MANAGER.getHeight() / 2, reviewLeft, reviewRight, reviewTop)) {
-    failedOverlayIds.push("edge_d51_10_APP_SERVICE_to_CORE_MANAGER");
-  }
   const edge_d51_11_APP_SERVICE_to_CORE_CONTRACT = addConnector(sheet, "edge_d51_11_APP_SERVICE_to_CORE_CONTRACT", shape_d51_APP_SERVICE, shape_d51_CORE_CONTRACT, false, false, "Start / デバイス操作 / End", "Start / デバイス操作 / End", "elbow", "right", "left", "#1F4E79", 2);
-  if (!addConnectorLabel(sheet, obstacleBounds, "edge_label_d51_11_APP.SERVICE_to_CORE.CONTRACT", "edge_group_d51_11_APP.SERVICE_to_CORE.CONTRACT", edge_d51_11_APP_SERVICE_to_CORE_CONTRACT, "Start / デバイス操作 / End", edge_d51_11_APP_SERVICE_to_CORE_CONTRACT.getLeft() + edge_d51_11_APP_SERVICE_to_CORE_CONTRACT.getWidth() / 2, edge_d51_11_APP_SERVICE_to_CORE_CONTRACT.getTop() + edge_d51_11_APP_SERVICE_to_CORE_CONTRACT.getHeight() / 2, reviewLeft, reviewRight, reviewTop)) {
-    failedOverlayIds.push("edge_d51_11_APP_SERVICE_to_CORE_CONTRACT");
-  }
-  const edge_d51_12_EXTERNAL_CONNECTOR_to_EXTERNAL_WIN_OPOS_DEVICE = addConnector(sheet, "edge_d51_12_EXTERNAL_CONNECTOR_to_EXTERNAL_WIN_OPOS_DEVICE", shape_d51_EXTERNAL_CONNECTOR, shape_d51_EXTERNAL_WIN_OPOS_DEVICE, false, false, "デバイスコネクター → Windows OPOS・OCX機器", "", "elbow", "", "", "#1F4E79", 2);
-  const edge_d51_13_CORE_MANAGER_to_CORE_FACTORY = addConnector(sheet, "edge_d51_13_CORE_MANAGER_to_CORE_FACTORY", shape_d51_CORE_MANAGER, shape_d51_CORE_FACTORY, false, false, "DeviceManager → StrategyFactory<T>", "", "elbow", "", "", "#1F4E79", 2);
-  const edge_d51_14_CORE_FACTORY_to_CORE_CONTRACT = addConnector(sheet, "edge_d51_14_CORE_FACTORY_to_CORE_CONTRACT", shape_d51_CORE_FACTORY, shape_d51_CORE_CONTRACT, false, false, "StrategyFactory<T> → 公開ストラテジーインターフェース", "", "elbow", "", "", "#1F4E79", 2);
+  const edge_d51_12_EXTERNAL_CONNECTOR_to_EXTERNAL_WIN_OPOS_DEVICE = addConnector(sheet, "edge_d51_12_EXTERNAL_CONNECTOR_to_EXTERNAL_WIN_OPOS_DEVICE", shape_d51_EXTERNAL_CONNECTOR, shape_d51_EXTERNAL_WIN_OPOS_DEVICE, false, false, "① デバイスコネクタ → ② Windows OPOS／OCX機器", "", "elbow", "", "", "#7030A0", 2);
+  const edge_d51_13_CORE_MANAGER_to_CORE_FACTORY = addConnector(sheet, "edge_d51_13_CORE_MANAGER_to_CORE_FACTORY", shape_d51_CORE_MANAGER, shape_d51_CORE_FACTORY, false, false, "② デバイス管理 → ③ ストラテジー生成", "", "elbow", "", "", "#1F4E79", 2);
+  const edge_d51_14_CORE_FACTORY_to_CORE_CONTRACT = addConnector(sheet, "edge_d51_14_CORE_FACTORY_to_CORE_CONTRACT", shape_d51_CORE_FACTORY, shape_d51_CORE_CONTRACT, false, false, "③ ストラテジー生成 → ④ 公開デバイス契約", "", "elbow", "", "", "#1F4E79", 2);
   const edge_d51_15_CORE_MANAGER_to_CORE_CONFIG_GROUP_MODEL = addConnector(sheet, "edge_d51_15_CORE_MANAGER_to_CORE_CONFIG_GROUP_MODEL", shape_d51_CORE_MANAGER, shape_d51_CORE_CONFIG_GROUP_MODEL, true, false, "適用", "適用", "elbow", "", "", "#7F7F7F", 2);
-  if (!addConnectorLabel(sheet, obstacleBounds, "edge_label_d51_15_CORE.MANAGER_to_CORE.CONFIG_GROUP.MODEL", "edge_group_d51_15_CORE.MANAGER_to_CORE.CONFIG_GROUP.MODEL", edge_d51_15_CORE_MANAGER_to_CORE_CONFIG_GROUP_MODEL, "適用", edge_d51_15_CORE_MANAGER_to_CORE_CONFIG_GROUP_MODEL.getLeft() + edge_d51_15_CORE_MANAGER_to_CORE_CONFIG_GROUP_MODEL.getWidth() / 2, edge_d51_15_CORE_MANAGER_to_CORE_CONFIG_GROUP_MODEL.getTop() + edge_d51_15_CORE_MANAGER_to_CORE_CONFIG_GROUP_MODEL.getHeight() / 2, reviewLeft, reviewRight, reviewTop)) {
-    failedOverlayIds.push("edge_d51_15_CORE_MANAGER_to_CORE_CONFIG_GROUP_MODEL");
-  }
-  const edge_d51_16_CORE_MANAGER_to_CORE_CONFIG_GROUP_CONFIG = addConnector(sheet, "edge_d51_16_CORE_MANAGER_to_CORE_CONFIG_GROUP_CONFIG", shape_d51_CORE_MANAGER, shape_d51_CORE_CONFIG_GROUP_CONFIG, false, false, "DeviceManager → DeviceControllerConfigService", "", "elbow", "left", "left", "#1F4E79", 2);
-  const edge_d51_17_CORE_CONFIG_GROUP_RUNTIME_to_CORE_CONFIG_GROUP_CONFIG = addConnector(sheet, "edge_d51_17_CORE_CONFIG_GROUP_RUNTIME_to_CORE_CONFIG_GROUP_CONFIG", shape_d51_CORE_CONFIG_GROUP_RUNTIME, shape_d51_CORE_CONFIG_GROUP_CONFIG, true, false, "ランタイム設定 → DeviceControllerConfigService", "", "elbow", "right", "right", "#7F7F7F", 2);
+  const edge_d51_16_CORE_MANAGER_to_CORE_CONFIG_GROUP_CONFIG = addConnector(sheet, "edge_d51_16_CORE_MANAGER_to_CORE_CONFIG_GROUP_CONFIG", shape_d51_CORE_MANAGER, shape_d51_CORE_CONFIG_GROUP_CONFIG, false, false, "② デバイス管理 → ①-3 設定管理", "", "elbow", "left", "left", "#1F4E79", 2);
+  const edge_d51_17_CORE_CONFIG_GROUP_RUNTIME_to_CORE_CONFIG_GROUP_CONFIG = addConnector(sheet, "edge_d51_17_CORE_CONFIG_GROUP_RUNTIME_to_CORE_CONFIG_GROUP_CONFIG", shape_d51_CORE_CONFIG_GROUP_RUNTIME, shape_d51_CORE_CONFIG_GROUP_CONFIG, true, false, "①-1 ランタイム設定 → ①-3 設定管理", "", "elbow", "right", "right", "#7F7F7F", 2);
   const edge_d51_18_CORE_CONFIG_GROUP_DEFAULT_to_CORE_CONFIG_GROUP_CONFIG = addConnector(sheet, "edge_d51_18_CORE_CONFIG_GROUP_DEFAULT_to_CORE_CONFIG_GROUP_CONFIG", shape_d51_CORE_CONFIG_GROUP_DEFAULT, shape_d51_CORE_CONFIG_GROUP_CONFIG, true, false, "フォールバック", "フォールバック", "elbow", "", "", "#7F7F7F", 2);
-  if (!addConnectorLabel(sheet, obstacleBounds, "edge_label_d51_18_CORE.CONFIG_GROUP.DEFAULT_to_CORE.CONFIG_GROUP.CONFIG", "edge_group_d51_18_CORE.CONFIG_GROUP.DEFAULT_to_CORE.CONFIG_GROUP.CONFIG", edge_d51_18_CORE_CONFIG_GROUP_DEFAULT_to_CORE_CONFIG_GROUP_CONFIG, "フォールバック", edge_d51_18_CORE_CONFIG_GROUP_DEFAULT_to_CORE_CONFIG_GROUP_CONFIG.getLeft() + edge_d51_18_CORE_CONFIG_GROUP_DEFAULT_to_CORE_CONFIG_GROUP_CONFIG.getWidth() / 2, edge_d51_18_CORE_CONFIG_GROUP_DEFAULT_to_CORE_CONFIG_GROUP_CONFIG.getTop() + edge_d51_18_CORE_CONFIG_GROUP_DEFAULT_to_CORE_CONFIG_GROUP_CONFIG.getHeight() / 2, reviewLeft, reviewRight, reviewTop)) {
-    failedOverlayIds.push("edge_d51_18_CORE_CONFIG_GROUP_DEFAULT_to_CORE_CONFIG_GROUP_CONFIG");
-  }
-  const edge_d51_19_CORE_CONFIG_GROUP_CONFIG_to_CORE_CONFIG_GROUP_RUNTIME = addConnector(sheet, "edge_d51_19_CORE_CONFIG_GROUP_CONFIG_to_CORE_CONFIG_GROUP_RUNTIME", shape_d51_CORE_CONFIG_GROUP_CONFIG, shape_d51_CORE_CONFIG_GROUP_RUNTIME, true, false, "DeviceControllerConfigService → ランタイム設定", "", "elbow", "left", "left", "#7F7F7F", 2);
+  const edge_d51_19_CORE_CONFIG_GROUP_CONFIG_to_CORE_CONFIG_GROUP_RUNTIME = addConnector(sheet, "edge_d51_19_CORE_CONFIG_GROUP_CONFIG_to_CORE_CONFIG_GROUP_RUNTIME", shape_d51_CORE_CONFIG_GROUP_CONFIG, shape_d51_CORE_CONFIG_GROUP_RUNTIME, true, false, "①-3 設定管理 → ①-1 ランタイム設定", "", "elbow", "left", "left", "#7F7F7F", 2);
   const edge_d51_20_CORE_CONFIG_GROUP_CONFIG_to_CORE_CONFIG_GROUP_MODEL = addConnector(sheet, "edge_d51_20_CORE_CONFIG_GROUP_CONFIG_to_CORE_CONFIG_GROUP_MODEL", shape_d51_CORE_CONFIG_GROUP_CONFIG, shape_d51_CORE_CONFIG_GROUP_MODEL, false, false, "デシリアライズ", "デシリアライズ", "elbow", "", "", "#1F4E79", 2);
-  if (!addConnectorLabel(sheet, obstacleBounds, "edge_label_d51_20_CORE.CONFIG_GROUP.CONFIG_to_CORE.CONFIG_GROUP.MODEL", "edge_group_d51_20_CORE.CONFIG_GROUP.CONFIG_to_CORE.CONFIG_GROUP.MODEL", edge_d51_20_CORE_CONFIG_GROUP_CONFIG_to_CORE_CONFIG_GROUP_MODEL, "デシリアライズ", edge_d51_20_CORE_CONFIG_GROUP_CONFIG_to_CORE_CONFIG_GROUP_MODEL.getLeft() + edge_d51_20_CORE_CONFIG_GROUP_CONFIG_to_CORE_CONFIG_GROUP_MODEL.getWidth() / 2, edge_d51_20_CORE_CONFIG_GROUP_CONFIG_to_CORE_CONFIG_GROUP_MODEL.getTop() + edge_d51_20_CORE_CONFIG_GROUP_CONFIG_to_CORE_CONFIG_GROUP_MODEL.getHeight() / 2, reviewLeft, reviewRight, reviewTop)) {
-    failedOverlayIds.push("edge_d51_20_CORE_CONFIG_GROUP_CONFIG_to_CORE_CONFIG_GROUP_MODEL");
-  }
   const edge_d51_21_APP_VIEW_to_APP_SERVICE = addConnector(sheet, "edge_d51_21_APP_VIEW_to_APP_SERVICE", shape_d51_APP_VIEW, shape_d51_APP_SERVICE, false, false, "ユースケースを呼出", "ユースケースを呼出", "elbow", "", "", "#1F4E79", 2);
-  if (!addConnectorLabel(sheet, obstacleBounds, "edge_label_d51_21_APP.VIEW_to_APP.SERVICE", "edge_group_d51_21_APP.VIEW_to_APP.SERVICE", edge_d51_21_APP_VIEW_to_APP_SERVICE, "ユースケースを呼出", edge_d51_21_APP_VIEW_to_APP_SERVICE.getLeft() + edge_d51_21_APP_VIEW_to_APP_SERVICE.getWidth() / 2, edge_d51_21_APP_VIEW_to_APP_SERVICE.getTop() + edge_d51_21_APP_VIEW_to_APP_SERVICE.getHeight() / 2, reviewLeft, reviewRight, reviewTop)) {
-    failedOverlayIds.push("edge_d51_21_APP_VIEW_to_APP_SERVICE");
-  }
-  if (!addShapeComment(sheet, obstacleBounds, "shape_comment_d51_EXTERNAL.CONNECTOR", "shape_group_d51_EXTERNAL.CONNECTOR", "デバイスコネクター Windows別プロセス", "EXTERNAL.CONNECTOR", "名前付きパイプはDeviceCtrlとの通信に使用する。周辺機器との物理接続はOPOS・OCX側で管理する。", shape_d51_EXTERNAL_CONNECTOR, reviewLeft, reviewRight, reviewTop)) {
-    failedOverlayIds.push("EXTERNAL.CONNECTOR");
-  }
 
-  if (failedOverlayIds.length > 0) {
-    throw new Error("Unable to place all diagram-owned overlays. Missing IDs: " + failedOverlayIds.join(", "));
-  }
   configurePdfReview(workbook, sheet, anchor, canvasRowCount, canvasColumnCount, false);
 }
 
 function addCellLaneTable(anchor: ExcelScript.Range, bodyEndRowOffset: number) {
-  addLaneColumns(anchor, 0, 9, bodyEndRowOffset, "アプリケーション層", "", 1, "#ED7D31", 2, "#111111");
-  addLaneColumns(anchor, 9, 7, bodyEndRowOffset, "DeviceCtrl", "", 1, "#ED7D31", 2, "#111111");
-  addLaneColumns(anchor, 16, 8, bodyEndRowOffset, "プラットフォーム別ストラテジー", "", 1, "#ED7D31", 2, "#111111");
-  addLaneColumns(anchor, 24, 10, bodyEndRowOffset, "外部境界", "", 1, "#ED7D31", 2, "#111111");
+  addLaneColumns(anchor, 0, 10, bodyEndRowOffset, "（1） アプリケーション層", "#F7FBFF", 0, "#4472C4", 2, "#111111");
+  addLaneColumns(anchor, 10, 8, bodyEndRowOffset, "（2） デバイス制御層（DeviceCtrl）", "#F7FBFF", 0, "#4472C4", 2, "#111111");
+  addLaneColumns(anchor, 18, 8, bodyEndRowOffset, "（3） プラットフォーム別ストラテジー", "#F7FBFF", 0, "#4472C4", 2, "#111111");
+  addLaneColumns(anchor, 26, 10, bodyEndRowOffset, "（4） 外部境界", "", 1, "#ED7D31", 2, "#111111");
 }
 
 function applyShapeView(shape: ExcelScript.Shape, fill: string, bordered: boolean, dashed: boolean, stroke: string, fillTransparency: number, lineWeight: number) {
@@ -604,159 +567,4 @@ function addConnector(sheet: ExcelScript.Worksheet, shapeName: string, fromShape
   connector.setAltTextTitle(altTextTitle);
   connector.setAltTextDescription(altTextDescription);
   return connector;
-}
-function labelWidth(text: string): number {
-  const normalized = text.replace(/\n/g, " ");
-  const width = normalized.length * 5 + 8;
-  if (width < 28) {
-    return 28;
-  }
-  if (width > 144) {
-    return 144;
-  }
-  return width;
-}
-
-function labelHeight(text: string, width: number): number {
-  const lineCount = text.split("\n").length;
-  const estimatedLines = Math.ceil((text.length * 5) / Math.max(width - 6, 18));
-  const height = Math.max(lineCount, estimatedLines) * 12 + 2;
-  if (height < 16) {
-    return 16;
-  }
-  if (height > 36) {
-    return 36;
-  }
-  return height;
-}
-
-function addConnectorLabel(sheet: ExcelScript.Worksheet, obstacleBounds: number[][], shapeName: string, groupName: string, connector: ExcelScript.Shape, text: string, centerX: number, centerY: number, reviewLeft: number, reviewRight: number, reviewTop: number): boolean {
-  const width = labelWidth(text);
-  const height = labelHeight(text, width);
-  const box = sheet.addTextBox(text);
-  box.setName(shapeName);
-  box.setWidth(width);
-  box.setHeight(height);
-  applyConnectorLabelView(box, "", 1, "", 0);
-
-  const frame = box.getTextFrame();
-  frame.getTextRange().setText(text);
-  frame.setHorizontalAlignment(ExcelScript.ShapeTextHorizontalAlignment.center);
-  frame.setVerticalAlignment(ExcelScript.ShapeTextVerticalAlignment.middle);
-  frame.setLeftMargin(3);
-  frame.setRightMargin(3);
-  frame.setTopMargin(1);
-  frame.setBottomMargin(1);
-  const font = frame.getTextRange().getFont();
-  font.setName("Meiryo UI");
-  font.setSize(9);
-  font.setBold(isBranchConnectorLabel(text));
-  font.setColor("#111111");
-  if (!placeConnectorLabel(box, centerX, centerY, reviewLeft, reviewRight, reviewTop)) {
-    box.delete();
-    return false;
-  }
-  box.setZOrder(ExcelScript.ShapeZOrder.bringToFront);
-  appendObstacleBounds(obstacleBounds, box);
-  const group = sheet.addGroup([connector, box]);
-  group.setName(groupName);
-  group.setAltTextTitle(text);
-  group.setAltTextDescription(text);
-  return true;
-}
-
-function placeConnectorLabel(box: ExcelScript.Shape, centerX: number, centerY: number, reviewLeft: number, reviewRight: number, reviewTop: number): boolean {
-  const width = box.getWidth();
-  const height = box.getHeight();
-  const left = Math.max(reviewLeft, Math.min(centerX - width / 2, reviewRight - width));
-  const top = Math.max(reviewTop, centerY - height / 2);
-  box.setLeft(left);
-  box.setTop(top);
-  return left + width <= reviewRight;
-}
-
-function commentWidth(text: string): number {
-  const normalized = text.replace(/\n/g, " ");
-  const width = normalized.length * 5.4 + 24;
-  if (width < 120) {
-    return 120;
-  }
-  if (width > 160) {
-    return 160;
-  }
-  return width;
-}
-
-function commentHeight(text: string, width: number): number {
-  const lineCount = text.split("\n").length;
-  const estimatedLines = Math.ceil((text.length * 5.4) / Math.max(width - 20, 30));
-  const height = Math.max(lineCount, estimatedLines) * 15 + 14;
-  if (height < 44) {
-    return 44;
-  }
-  if (height > 110) {
-    return 110;
-  }
-  return height;
-}
-
-function addShapeComment(sheet: ExcelScript.Worksheet, obstacleBounds: number[][], shapeName: string, groupName: string, targetTitle: string, sourceId: string, text: string, target: ExcelScript.Shape, reviewLeft: number, reviewRight: number, reviewTop: number): boolean {
-  const width = commentWidth(text);
-  const height = commentHeight(text, width);
-  const box = sheet.addGeometricShape(ExcelScript.GeometricShapeType.wedgeRRectCallout);
-  box.setName(shapeName);
-  box.setWidth(width);
-  box.setHeight(height);
-  applyCommentView(box, "#FFF2CC", 0.15, "#BF9000", 2);
-
-  const frame = box.getTextFrame();
-  frame.getTextRange().setText(text);
-  frame.setHorizontalAlignment(ExcelScript.ShapeTextHorizontalAlignment.left);
-  frame.setVerticalAlignment(ExcelScript.ShapeTextVerticalAlignment.middle);
-  frame.setLeftMargin(7);
-  frame.setRightMargin(7);
-  frame.setTopMargin(4);
-  frame.setBottomMargin(4);
-  const font = frame.getTextRange().getFont();
-  font.setName("Meiryo UI");
-  font.setSize(9);
-  font.setBold(false);
-  font.setColor("#404040");
-  if (!placeShapeComment(obstacleBounds, box, sourceId, target, reviewLeft, reviewRight, reviewTop)) {
-    box.delete();
-    return false;
-  }
-  box.setZOrder(ExcelScript.ShapeZOrder.bringToFront);
-  appendObstacleBounds(obstacleBounds, box);
-  const group = sheet.addGroup([target, box]);
-  group.setName(groupName);
-  group.setAltTextTitle(targetTitle);
-  group.setAltTextDescription(text);
-  return true;
-}
-
-function placeShapeComment(obstacleBounds: number[][], box: ExcelScript.Shape, sourceId: string, target: ExcelScript.Shape, reviewLeft: number, reviewRight: number, reviewTop: number): boolean {
-  const gap = 10;
-  const width = box.getWidth();
-  const height = box.getHeight();
-  const targetLeft = target.getLeft();
-  const targetTop = target.getTop();
-  const targetRight = targetLeft + target.getWidth();
-  const targetBottom = targetTop + target.getHeight();
-  const preferLeft = targetLeft + target.getWidth() / 2 >= reviewLeft + (reviewRight - reviewLeft) / 2;
-  const positionOrder = shapeCommentPositionOrder(sourceId, preferLeft);
-  for (let i = 0; i < positionOrder.length; i++) {
-    const position = shapeCommentPosition(positionOrder[i], targetLeft, targetTop, targetRight, targetBottom, target.getWidth(), target.getHeight(), width, height, gap);
-    const left = position[0];
-    const top = Math.max(0, position[1]);
-    if (left < reviewLeft || left + width > reviewRight) {
-      continue;
-    }
-    if (!overlapsObstacleBounds(obstacleBounds, left, top, width, height)) {
-      box.setLeft(left);
-      box.setTop(top);
-      return true;
-    }
-  }
-  return placeOverlayInReviewGrid(obstacleBounds, box, reviewLeft, reviewRight, reviewTop);
 }
