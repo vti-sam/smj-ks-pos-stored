@@ -2,10 +2,12 @@
 title: Tool Routing Token Policy
 project: project_management
 type: runbook
-status: confirmed
+status: active
 source:
   - migrated from memory/project_management/tool_routing_token_policy_2026-05-23.md
 tags: [project_management, policy, tool_routing_token_policy_2026_05_23]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # Tool routing token policy - 2026-05-23

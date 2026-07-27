@@ -2,10 +2,12 @@
 title: Original Repo Local Tooling Gitignore
 project: ks_host
 type: architecture
-status: confirmed
+status: active
 source:
   - migrated from memory/ks_pos_boilerplate/ks_host/_source_notes/original_repo_local_tooling_gitignore.md
 tags: [ks_host, architecture, ks_pos_boilerplate, source_notes, original_repo_local_tooling_gitignore]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # Gitignore cho công cụ cục bộ repo

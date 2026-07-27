@@ -2,10 +2,12 @@
 title: Device Loading
 project: ks_host
 type: architecture
-status: confirmed
+status: active
 source:
   - migrated from memory/ks_pos_boilerplate/ks_host/runtime/device_loading.md
 tags: [ks_host, runtime, ks_pos_boilerplate, device_loading]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # Tải thiết bị và vòng đời

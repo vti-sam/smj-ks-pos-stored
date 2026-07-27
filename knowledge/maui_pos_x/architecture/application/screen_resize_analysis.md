@@ -2,10 +2,12 @@
 title: Screen Resize Analysis
 project: maui_pos_x
 type: architecture
-status: confirmed
+status: active
 source:
   - migrated from memory/maui_pos_x/application_architecture/screen_resize_analysis.md
 tags: [maui_pos_x, architecture, application_architecture, screen_resize_analysis]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # 画面リサイズ対応・解像度比率変更可否の確認結果

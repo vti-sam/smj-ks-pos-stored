@@ -2,10 +2,12 @@
 title: Core
 project: maui_pos_x
 type: architecture
-status: confirmed
+status: active
 source:
   - migrated from memory/maui_pos_x/device_controller/core.md
 tags: [maui_pos_x, devices, device_controller, core]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # Bộ nhớ cốt lõi MauiPOSX.DeviceCtrl

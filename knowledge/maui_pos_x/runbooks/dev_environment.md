@@ -2,10 +2,12 @@
 title: Dev Environment
 project: maui_pos_x
 type: runbook
-status: confirmed
+status: active
 source:
   - migrated from memory/maui_pos_x/dev_environment.md
 tags: [maui_pos_x, maintenance, dev_environment]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # 端末アプリ開発環境情報

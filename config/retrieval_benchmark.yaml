@@ -1,0 +1,161 @@
+cases:
+  - id: vi-api-navigation
+    category: vi
+    scope: knowledge
+    query: "Cách gọi API và chuyển màn hình trong MauiPOSX"
+    filters:
+      project: maui_pos_x
+      type: architecture
+      status: active
+    expected_paths:
+      - project-store/knowledge/maui_pos_x/architecture/application/api_call_and_navigation_guide.md
+
+  - id: vi-state-snapshot
+    category: vi
+    scope: knowledge
+    query: "Quản lý trạng thái ViewModel và PersistSnapshot"
+    expected_paths:
+      - project-store/knowledge/maui_pos_x/architecture/application/state_management_architecture.md
+      - project-store/knowledge/ks_pos_boilerplate/architecture/application/local_state_snapshot_persistence_2026-05-27.md
+
+  - id: vi-device-factory
+    category: vi
+    scope: knowledge
+    query: "DeviceManager và StrategyFactory tạo driver theo hệ điều hành"
+    expected_paths:
+      - project-store/knowledge/maui_pos_x/architecture/device_controller/device_ctrl_design.md
+      - project-store/knowledge/maui_pos_x/_source_notes/device_controller/original_class_detail_design_strategy_factory.md
+      - project-store/knowledge/maui_pos_x/_source_notes/device_controller/original_architecture_design_device_control_specific.md
+
+  - id: vi-host-named-pipe
+    category: vi
+    scope: knowledge
+    query: "Ứng dụng giao tiếp với Host bằng Named Pipe"
+    filters:
+      project: ks_host
+      status: active
+    expected_paths:
+      - project-store/knowledge/ks_pos_boilerplate/architecture/application/host_named_pipe_basic_design_2026-05-29.md
+      - project-store/knowledge/ks_pos_boilerplate/runtime/named_pipe.md
+
+  - id: vi-sentry-masking
+    category: vi
+    scope: knowledge
+    query: "Sentry che dữ liệu nhạy cảm trước khi gửi log giám sát"
+    expected_paths:
+      - project-store/knowledge/ks_pos_boilerplate/architecture/application/sentry_monitoring_2026-05-22.md
+      - project-store/knowledge/ks_pos_boilerplate/architecture/sentry/プログラム仕様書_ログ処理_Sentry_SensitiveDataMasker.md
+      - project-store/knowledge/ks_pos_boilerplate/architecture/sentry/プログラム仕様書_ログ処理_Sentry監視基盤.md
+
+  - id: vi-cash-changer
+    category: vi
+    scope: knowledge
+    query: "CashChanger RT300 trao đổi dữ liệu qua file bridge"
+    expected_paths:
+      - project-store/knowledge/ks_pos_boilerplate/devices/cash_changer_rt300.md
+      - project-store/knowledge/ks_pos_boilerplate/integration/cash_changer_file_bridge.md
+
+  - id: ja-screen-resize
+    category: ja
+    scope: knowledge
+    query: "画面リサイズと解像度比率の対応方針"
+    expected_paths:
+      - project-store/knowledge/maui_pos_x/architecture/application/screen_resize_analysis.md
+
+  - id: ja-api-navigation
+    category: ja
+    scope: knowledge
+    query: "API呼び出しと画面遷移の設計"
+    expected_paths:
+      - project-store/knowledge/maui_pos_x/architecture/application/api_call_and_navigation_guide.md
+      - project-store/knowledge/maui_pos_x/_source_notes/application_architecture/original_api_call_and_navigation_architecture_basic_design.md
+
+  - id: ja-local-state
+    category: ja
+    scope: knowledge
+    query: "ローカルストレージのスナップショット保持基盤"
+    expected_paths:
+      - project-store/knowledge/ks_pos_boilerplate/architecture/local-state/プログラム仕様書_ローカルストレージ保持基盤.md
+      - project-store/knowledge/ks_pos_boilerplate/architecture/application/local_state_snapshot_persistence_2026-05-27.md
+
+  - id: ja-line-display
+    category: ja
+    scope: knowledge
+    query: "LineDisplayのOCX制御仕様"
+    filters:
+      project: ks_host
+      type: architecture
+      status: active
+      domain: devices
+    expected_paths:
+      - project-store/knowledge/ks_pos_boilerplate/devices/line_display.md
+
+  - id: cross-vi-screen-resize
+    category: cross_language
+    scope: knowledge
+    query: "Màn hình có thay đổi được tỷ lệ độ phân giải không"
+    expected_paths:
+      - project-store/knowledge/maui_pos_x/architecture/application/screen_resize_analysis.md
+
+  - id: cross-ja-cash-changer
+    category: cross_language
+    scope: knowledge
+    query: "現金釣銭機RT300のファイル連携"
+    expected_paths:
+      - project-store/knowledge/ks_pos_boilerplate/devices/cash_changer_rt300.md
+      - project-store/knowledge/ks_pos_boilerplate/integration/cash_changer_file_bridge.md
+
+  - id: cross-vi-non-ascii
+    category: cross_language
+    scope: knowledge
+    query: "Ghi tiếng Nhật qua API mà không bị mojibake"
+    filters:
+      project: tooling
+      type: runbook
+      status: active
+      domain: runbooks
+    expected_paths:
+      - project-store/knowledge/tooling/runbooks/non_ascii_api_write_policy_2026-05-27.md
+
+  - id: identifier-viewmodel-snapshot
+    category: identifier
+    scope: knowledge
+    query: "IViewModelSnapshotService SaveAsync"
+    expected_paths:
+      - project-store/knowledge/ks_pos_boilerplate/architecture/local-state/プログラム仕様書_ローカルストレージ保持基盤_IViewModelSnapshotService.md
+      - project-store/knowledge/ks_pos_boilerplate/architecture/local-state/プログラム仕様書_ローカルストレージ保持基盤_EfCoreViewModelSnapshotService.md
+      - project-store/knowledge/ks_pos_boilerplate/architecture/local-state/プログラム仕様書_ローカルストレージ保持基盤.md
+
+  - id: identifier-appstopserver
+    category: identifier
+    scope: knowledge
+    query: "AppStopServer NamedPipeServerStream"
+    expected_paths:
+      - project-store/knowledge/ks_pos_boilerplate/runtime/appserver_appstopserver.md
+      - project-store/knowledge/ks_pos_boilerplate/runtime/named_pipe.md
+      - project-store/knowledge/ks_pos_boilerplate/_source_notes/original_appserver_appstopserver.md
+
+  - id: memory-automation-id
+    category: memory
+    scope: memory
+    query: "Quy tắc AutomationId và issue Backlog"
+    filters:
+      project: smj-ks-pos
+      type: decision
+      status: archived
+    expected_paths:
+      - project-store/memory/backlog_automationid_policy_issue_2026-06-30.md
+
+  - id: memory-office-script-cell
+    category: memory
+    scope: memory
+    query: "Office Script sử dụng active cell"
+    expected_paths:
+      - project-store/memory/arch_host01_final_office_scripts_active_cell_2026-07-13.md
+
+  - id: memory-semantic-compression
+    category: memory
+    scope: memory
+    query: "Semantic compression khi báo cáo kỹ thuật tiếng Nhật"
+    expected_paths:
+      - project-store/memory/japanese-tech-report-structure-first-semantic-compression-2026-07-14.md

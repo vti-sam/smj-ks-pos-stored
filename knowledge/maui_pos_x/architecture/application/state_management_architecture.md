@@ -2,10 +2,12 @@
 title: State Management Architecture
 project: maui_pos_x
 type: architecture
-status: confirmed
+status: active
 source:
   - migrated from memory/maui_pos_x/application_architecture/state_management_architecture.md
 tags: [maui_pos_x, architecture, application_architecture, state_management_architecture]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # State Management — POS MAUI Mobile App (In-Memory)

@@ -2,10 +2,12 @@
 title: Original Architecture Design Device Control Specific
 project: maui_pos_x
 type: architecture
-status: confirmed
+status: active
 source:
   - migrated from memory/maui_pos_x/device_controller/_source_notes/original_architecture_design_device_control_specific.md
 tags: [maui_pos_x, devices, device_controller, source_notes, original_architecture_design_device_control_specific]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # Hệ thống POS thế hệ mới: Thiết kế kiến trúc cơ bản

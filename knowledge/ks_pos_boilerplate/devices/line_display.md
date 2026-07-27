@@ -2,10 +2,12 @@
 title: Line Display
 project: ks_host
 type: architecture
-status: confirmed
+status: active
 source:
   - migrated from memory/ks_pos_boilerplate/ks_host/devices/line_display.md
 tags: [ks_host, devices, ks_pos_boilerplate, line_display]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # LineDisplay

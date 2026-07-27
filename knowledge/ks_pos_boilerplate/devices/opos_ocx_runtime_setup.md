@@ -2,13 +2,15 @@
 title: OPOS OCX Runtime Setup
 project: ks_host
 type: runbook
-status: confirmed
+status: active
 source:
   - raw/Register
   - raw/OCX
   - raw/LineDisplay vs CashDrawer
   - runtime verification on 2026-06-10
 tags: [ks_host, devices, opos, ocx, activex, runtime]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # OPOS / OCX Runtime Setup

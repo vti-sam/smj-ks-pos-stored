@@ -2,10 +2,12 @@
 title: Named Pipe
 project: ks_host
 type: architecture
-status: confirmed
+status: active
 source:
   - migrated from memory/ks_pos_boilerplate/ks_host/runtime/named_pipe.md
 tags: [ks_host, runtime, ks_pos_boilerplate, named_pipe]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # Named Pipe Host

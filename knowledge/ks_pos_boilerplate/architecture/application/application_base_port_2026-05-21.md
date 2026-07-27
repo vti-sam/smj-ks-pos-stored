@@ -2,10 +2,12 @@
 title: Application Base Port
 project: ks_host
 type: architecture
-status: confirmed
+status: active
 source:
   - migrated from memory/ks_pos_boilerplate/application_base_port_2026-05-21.md
 tags: [ks_host, architecture, ks_pos_boilerplate, application_base_port_2026_05_21]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # Port Application base cho KsPosBoilerplate - 2026-05-21

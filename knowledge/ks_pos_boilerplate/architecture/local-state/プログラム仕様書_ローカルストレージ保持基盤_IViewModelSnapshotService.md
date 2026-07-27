@@ -2,7 +2,7 @@
 project: ks_host
 source:
 - migrated from management/program-specs/local-state/プログラム仕様書_ローカルストレージ保持基盤_IViewModelSnapshotService.md
-status: confirmed
+status: active
 tags:
 - ks_host
 - architecture
@@ -10,6 +10,8 @@ tags:
 - プログラム仕様書_ローカルストレージ保持基盤_iviewmodelsnapshotservice
 title: プログラム仕様書_ローカルストレージ保持基盤_IViewModelSnapshotService
 type: architecture
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # プログラム仕様書_ローカルストレージ保持基盤_IViewModelSnapshotService

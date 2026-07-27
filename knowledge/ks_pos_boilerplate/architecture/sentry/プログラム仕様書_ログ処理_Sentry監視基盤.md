@@ -2,7 +2,7 @@
 project: ks_host
 source:
 - migrated from management/program-specs/sentry/プログラム仕様書_ログ処理_Sentry監視基盤.md
-status: confirmed
+status: active
 tags:
 - ks_host
 - architecture
@@ -10,6 +10,8 @@ tags:
 - プログラム仕様書_ログ処理_sentry監視基盤
 title: プログラム仕様書_ログ処理_Sentry監視基盤
 type: architecture
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # プログラム仕様書_ログ処理_Sentry監視基盤

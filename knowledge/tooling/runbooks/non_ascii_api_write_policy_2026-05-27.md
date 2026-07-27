@@ -2,10 +2,12 @@
 title: Non Ascii API Write Policy
 project: tooling
 type: runbook
-status: confirmed
+status: active
 source:
   - migrated from memory/tooling/non_ascii_api_write_policy_2026-05-27.md
 tags: [tooling, policy, non_ascii_api_write_policy_2026_05_27]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # Chính sách ghi dữ liệu non-ASCII qua API - 2026-05-27

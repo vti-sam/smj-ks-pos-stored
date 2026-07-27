@@ -2,10 +2,12 @@
 title: Conversion Artifacts
 project: ks_host
 type: runbook
-status: confirmed
+status: active
 source:
   - migrated from memory/ks_pos_boilerplate/ks_host/maintenance/conversion_artifacts.md
 tags: [ks_host, maintenance, ks_pos_boilerplate, conversion_artifacts]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # Conversion artifacts

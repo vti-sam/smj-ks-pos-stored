@@ -5,9 +5,9 @@
 ## Commands
 
 - Tìm memory theo keyword: `rtk rg "<keyword>" project-store/memory`.
-- Query semantic search: `rtk uv run skills/knowledge-code/knowledge-memory-sync/scripts/sync_qdrant.py query "<keyword>" --scope memory`.
+- Query hybrid search: `rtk uv run skills/knowledge-code/knowledge-memory-sync/scripts/sync_falkor.py query "<keyword>" --scope memory`.
 - Lint frontmatter/link: `rtk uv run skills/knowledge-code/knowledge-memory-sync/scripts/lint_knowledge.py`.
-- Sync index sau khi sửa: `rtk uv run skills/knowledge-code/knowledge-memory-sync/scripts/sync_qdrant.py`.
+- Sync index sau khi sửa: `rtk uv run skills/knowledge-code/knowledge-memory-sync/scripts/sync_falkor.py`.
 - Promote sang knowledge khi có yêu cầu rõ: `rtk uv run skills/knowledge-code/knowledge-memory-sync/scripts/promote_memory.py --help`.
 
 ## Boundaries

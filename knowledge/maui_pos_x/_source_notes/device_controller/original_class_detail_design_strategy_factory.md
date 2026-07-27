@@ -2,10 +2,12 @@
 title: Original Class Detail Design Strategy Factory
 project: maui_pos_x
 type: architecture
-status: confirmed
+status: active
 source:
   - migrated from memory/maui_pos_x/device_controller/_source_notes/original_class_detail_design_strategy_factory.md
 tags: [maui_pos_x, devices, device_controller, source_notes, original_class_detail_design_strategy_factory]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # クラス詳細設計書

@@ -2,7 +2,7 @@
 project: ks_host
 source:
 - migrated from management/program-specs/local-state/review_vi_local_state_snapshot_architecture.md
-status: confirmed
+status: active
 tags:
 - ks_host
 - architecture
@@ -10,6 +10,8 @@ tags:
 - review_vi_local_state_snapshot_architecture
 title: Review kiến trúc local snapshot persistence
 type: architecture
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # Review kiến trúc local snapshot persistence

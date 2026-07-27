@@ -2,10 +2,12 @@
 title: Window Message Client
 project: ks_host
 type: architecture
-status: confirmed
+status: active
 source:
   - migrated from memory/ks_pos_boilerplate/ks_host/integration/window_message_client.md
 tags: [ks_host, integration, ks_pos_boilerplate, window_message_client]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # WindowMessage client protocol

@@ -2,10 +2,12 @@
 title: Original Host Device Com OCX OPOS Wiki
 project: ks_host
 type: architecture
-status: confirmed
+status: active
 source:
   - migrated from memory/ks_pos_boilerplate/ks_host/_source_notes/original_host-device-com-ocx-opos-wiki.md
 tags: [ks_host, architecture, ks_pos_boilerplate, source_notes, original_host_device_com_ocx_opos_wiki]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # Ghi chú kiến trúc Host Device: COM, OCX, ActiveX, OPOS

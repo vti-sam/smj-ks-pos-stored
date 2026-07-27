@@ -2,10 +2,12 @@
 title: Original Architecture Proposal
 project: maui_pos_x
 type: architecture
-status: confirmed
+status: active
 source:
   - migrated from memory/maui_pos_x/application_architecture/_source_notes/original_architecture_proposal.md
 tags: [maui_pos_x, architecture, application_architecture, source_notes, original_architecture_proposal]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # アーキテクチャ提案書

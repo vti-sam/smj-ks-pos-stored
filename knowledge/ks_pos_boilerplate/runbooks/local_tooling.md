@@ -2,10 +2,12 @@
 title: Local Tooling
 project: ks_host
 type: runbook
-status: confirmed
+status: active
 source:
   - migrated from memory/ks_pos_boilerplate/ks_host/maintenance/local_tooling.md
 tags: [ks_host, maintenance, ks_pos_boilerplate, local_tooling]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # Công cụ cục bộ

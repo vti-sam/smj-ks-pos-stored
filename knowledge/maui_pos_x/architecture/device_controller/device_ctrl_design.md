@@ -2,10 +2,12 @@
 title: Device Ctrl Design
 project: maui_pos_x
 type: architecture
-status: confirmed
+status: active
 source:
   - migrated from memory/maui_pos_x/device_controller/device_ctrl_design.md
 tags: [maui_pos_x, devices, device_controller, device_ctrl_design]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # MauiPOSX.DeviceCtrl - Detailed Design Document

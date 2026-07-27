@@ -2,10 +2,12 @@
 title: Original Proposal Integrated Configuration File Management
 project: maui_pos_x
 type: architecture
-status: confirmed
+status: active
 source:
   - migrated from memory/maui_pos_x/device_controller/_source_notes/original_proposal_integrated_configuration_file_management.md
 tags: [maui_pos_x, devices, device_controller, source_notes, original_proposal_integrated_configuration_file_management]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # 提案：config.json による統合設定管理の導入

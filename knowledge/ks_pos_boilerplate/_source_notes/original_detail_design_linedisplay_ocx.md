@@ -2,10 +2,12 @@
 title: Original Detail Design Linedisplay OCX
 project: ks_host
 type: architecture
-status: confirmed
+status: active
 source:
   - migrated from memory/ks_pos_boilerplate/ks_host/_source_notes/original_detail_design_linedisplay_ocx.md
 tags: [ks_host, architecture, ks_pos_boilerplate, source_notes, original_detail_design_linedisplay_ocx]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # Thiết kế chi tiết: Điều khiển LineDisplay (Màn hình hiển thị khách hàng)

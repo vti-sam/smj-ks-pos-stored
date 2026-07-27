@@ -2,12 +2,14 @@
 title: Cash Changer File Bridge
 project: ks_host
 type: architecture
-status: confirmed
+status: active
 source:
   - migrated from memory/ks_pos_boilerplate/ks_host/integration/cash_changer_file_bridge.md
   - sources/KsPosBoilerplate/KsPos.Host/src/KsDevice/CashChanger/CashChangerByRT300/CashChangerByRT300Form.cs
   - sources/KsPosBoilerplate/KsPos.Host/src/KsDevice/CashChanger/CashChangerByRT300/TuriFileBas.cs
 tags: [ks_host, integration, ks_pos_boilerplate, cash_changer_file_bridge]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # CashChanger file bridge

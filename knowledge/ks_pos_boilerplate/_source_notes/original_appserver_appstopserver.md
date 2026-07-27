@@ -2,10 +2,12 @@
 title: Original Appserver Appstopserver
 project: ks_host
 type: architecture
-status: confirmed
+status: active
 source:
   - migrated from memory/ks_pos_boilerplate/ks_host/_source_notes/original_appserver_appstopserver.md
 tags: [ks_host, architecture, ks_pos_boilerplate, source_notes, original_appserver_appstopserver]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # Tài liệu AppServer / AppStopServer

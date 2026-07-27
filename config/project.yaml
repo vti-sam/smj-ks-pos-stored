@@ -6,6 +6,10 @@ project:
   folder: smj-ks-pos
   aliases: []
 
+knowledge_memory:
+  backend: falkordb
+  graph: pm_control_smj_ks_pos_knowledge_memory_v1
+
 google:
   service_account:
     email: project-sheets-bot@sharp-smj-sheets.iam.gserviceaccount.com

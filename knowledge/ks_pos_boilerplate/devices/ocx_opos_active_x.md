@@ -2,10 +2,12 @@
 title: OCX OPOS Active X
 project: ks_host
 type: architecture
-status: confirmed
+status: active
 source:
   - migrated from memory/ks_pos_boilerplate/ks_host/devices/ocx_opos_active_x.md
 tags: [ks_host, devices, ks_pos_boilerplate, ocx_opos_active_x]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # COM / OCX / ActiveX / OPOS

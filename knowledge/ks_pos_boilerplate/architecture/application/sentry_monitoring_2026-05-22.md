@@ -2,10 +2,12 @@
 title: Sentry Monitoring
 project: ks_host
 type: architecture
-status: confirmed
+status: active
 source:
   - migrated from memory/ks_pos_boilerplate/application_architecture/sentry_monitoring_2026-05-22.md
 tags: [ks_host, architecture, ks_pos_boilerplate, application_architecture, sentry_monitoring_2026_05_22]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # Sentry monitoring base cho KsPos.Applications

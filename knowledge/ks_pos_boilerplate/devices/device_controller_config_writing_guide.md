@@ -2,7 +2,7 @@
 title: Device Controller Config Writing Guide
 project: ks_pos_boilerplate
 type: architecture
-status: draft
+status: active
 source:
   - chat:2026-06-11
   - knowledge/ks_pos_boilerplate/architecture/タブレットPOSソフトウエア構造設計書_1.0.0.md
@@ -11,6 +11,8 @@ tags:
   - device-controller
   - config
   - writing-guide
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # デバイス制御層設定ファイル 記載要領

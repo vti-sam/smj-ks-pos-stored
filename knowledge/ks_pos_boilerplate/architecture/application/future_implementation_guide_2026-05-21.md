@@ -2,10 +2,12 @@
 title: Future Implementation Guide
 project: ks_host
 type: architecture
-status: confirmed
+status: active
 source:
   - migrated from memory/ks_pos_boilerplate/application_architecture/future_implementation_guide_2026-05-21.md
 tags: [ks_host, architecture, ks_pos_boilerplate, application_architecture, future_implementation_guide_2026_05_21]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # Hướng triển khai tiếp kiến trúc KsPos.Applications - 2026-05-21

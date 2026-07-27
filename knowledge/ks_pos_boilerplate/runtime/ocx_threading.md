@@ -2,10 +2,12 @@
 title: OCX Threading
 project: ks_host
 type: architecture
-status: confirmed
+status: active
 source:
   - migrated from memory/ks_pos_boilerplate/ks_host/runtime/ocx_threading.md
 tags: [ks_host, runtime, ks_pos_boilerplate, ocx_threading]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # OCX threading / WinForms boundary

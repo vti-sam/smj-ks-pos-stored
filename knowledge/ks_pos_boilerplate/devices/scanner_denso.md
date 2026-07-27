@@ -2,10 +2,12 @@
 title: Scanner Denso
 project: ks_host
 type: architecture
-status: confirmed
+status: active
 source:
   - migrated from memory/ks_pos_boilerplate/ks_host/devices/scanner_denso.md
 tags: [ks_host, devices, ks_pos_boilerplate, scanner_denso]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # Scanner DENSO

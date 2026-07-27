@@ -2,10 +2,12 @@
 title: Original Program Spec Linedisplay OCX
 project: ks_host
 type: architecture
-status: confirmed
+status: active
 source:
   - migrated from memory/ks_pos_boilerplate/ks_host/_source_notes/original_program_spec_linedisplay_ocx.md
 tags: [ks_host, architecture, ks_pos_boilerplate, source_notes, original_program_spec_linedisplay_ocx]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # Đặc tả chương trình: Điều khiển LineDisplay

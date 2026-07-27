@@ -2,7 +2,7 @@
 title: VTI Host Control Cleanup Guide
 project: ks_host
 type: runbook
-status: confirmed
+status: active
 source:
   - user request 2026-06-08
   - sources/KsPosBoilerplate/KsPos.Host/src
@@ -11,6 +11,8 @@ tags:
   - vti
   - cleanup
   - cash_changer
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # VTI Host control cleanup guide

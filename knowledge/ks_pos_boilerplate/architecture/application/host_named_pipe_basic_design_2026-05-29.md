@@ -2,11 +2,13 @@
 title: Host Named Pipe Basic Design
 project: ks_host
 type: architecture
-status: confirmed
+status: active
 source:
   - migrated from memory/ks_pos_boilerplate/application_architecture/host_named_pipe_basic_design_2026-05-29.md
 tags: [ks_host, ks_pos_boilerplate, application_architecture, named_pipe, basic_design, device_host]
 last_updated: 2026-05-29
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # Basic Design: Application liên kết Host qua Named Pipe

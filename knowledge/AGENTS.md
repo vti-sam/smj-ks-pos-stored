@@ -1,41 +1,29 @@
 # AGENTS.md
 
-- `project-store/knowledge/` là nơi lưu tri thức dài hạn của project: requirement, decision, gotcha, runbook, architecture và lesson learned.
-
-## Commands
-
-- Tìm tri thức theo keyword: `rtk rg "<keyword>" project-store/knowledge`.
-- Query semantic search: `rtk uv run skills/knowledge-code/knowledge-memory-sync/scripts/sync_qdrant.py query "<keyword>" --scope knowledge`.
-- Lint frontmatter/link: `rtk uv run skills/knowledge-code/knowledge-memory-sync/scripts/lint_knowledge.py`.
-- Sync index sau khi sửa: `rtk uv run skills/knowledge-code/knowledge-memory-sync/scripts/sync_qdrant.py`.
-
-## Workflow
-
-- Không bắt buộc đọc `project-store/knowledge/` trước mọi task. Chỉ đọc file liên quan, dùng `rtk rg` trong `project-store/knowledge/`, hoặc dùng `skills/knowledge-code/knowledge-memory-sync/` khi task cần ngữ cảnh bền, có link cụ thể, hoặc User yêu cầu.
-- Index/cache tìm kiếm nếu có (ví dụ: Qdrant) chỉ phục vụ tra cứu nội dung nằm trong `project-store/knowledge/`; bắt buộc sử dụng cơ chế Local Storage (lưu trữ SQLite/file cục bộ) thay vì Qdrant server ngoài để đảm bảo tính độc lập. Source-of-truth dài hạn của repo vẫn là `project-store/knowledge/`.
-- Bố cục canonical cho tri thức mới là project-first: `project-store/knowledge/<project_or_domain>/<area>/...`. `type` trong YAML frontmatter dùng để phân loại requirement/decision/gotcha/runbook/architecture/lesson.
-- Chọn `<project_or_domain>` theo tên chính thức trong source-of-truth hoặc folder/task đang xử lý; không hardcode danh sách solution/domain vào rule nếu không phải boundary kỹ thuật bắt buộc.
-- Với architecture lớn, ưu tiên đặt dưới `architecture/<component>/`. Với runbook, đặt dưới `runbooks/`. Ghi chú gốc/raw notes đặt trong `_source_notes/` khi cần bảo toàn provenance; không tạo mặc định.
-- Bắt buộc khai báo YAML frontmatter ở đầu mọi file tài liệu `.md` trong `project-store/knowledge/` khi tạo mới hoặc cập nhật lớn:
+- `project-store/knowledge/` lưu tri thức bền của project và là source-of-truth nội bộ.
+- Trước khi tạo, sửa, di chuyển hoặc sắp xếp lại file trong subtree này, đọc rule gần nhất, kiểm tra cấu trúc hiện có và dùng `skills/knowledge-code/knowledge-memory-sync/` cho query/sync.
+- Không tự tạo taxonomy, enum metadata hoặc trạng thái hiện tại nếu chưa có source/evidence.
+- Chỉ lưu tri thức có thể tái sử dụng và có nguồn rõ như requirement, decision, architecture, runbook, glossary hoặc analysis.
+- Không lưu raw file khách hàng, draft tạm, cache/index, credential hoặc source code ứng dụng trong subtree này.
+- FalkorDB chỉ là index có thể rebuild; source-of-truth vẫn là Markdown trong `project-store/knowledge/`.
+- Markdown knowledge phải bắt đầu bằng frontmatter:
 
 ```yaml
 ---
-title: <Human readable title>
+title: <Tiêu đề dễ đọc>
 project: <project_id>
-type: requirement | decision | gotcha | runbook | architecture | lesson
-status: draft | pending | confirmed | stale | archived
+type: requirement | decision | gotcha | runbook | architecture | glossary | analysis
+status: active | superseded | archived
 source:
-  - <Backlog ticket / log file / meeting note>
+  - <source path, ticket, meeting hoặc evidence>
 tags:
   - <keyword>
+scope: durable
+updated_at: <YYYY-MM-DD>
 ---
 ```
 
-- Dùng `type` trong frontmatter để phân loại tài liệu.
-- Khi di chuyển/đổi tên/chỉnh sửa file trong `project-store/knowledge/`: cập nhật markdown link nội bộ liên quan.
-- Viết ghi chú cô đọng, ưu tiên invariant, pitfall, verify command và nguồn xác minh. Ghi nhãn song ngữ Việt/Nhật nếu có thuật ngữ Nhật quan trọng.
-
-## Examples
-
-- Đúng: ghi quyết định đã xác minh vào `project-store/knowledge/<project_or_domain>/runbooks/...` với `source` và `status` rõ.
-- Sai: copy log phiên dài, nháp chưa xác minh hoặc note historical vào knowledge; những nội dung đó thuộc `project-store/memory/`.
+- `active` là nội dung còn dùng làm căn cứ hiện tại; `superseded` là nội dung đã có file khác thay thế; `archived` chỉ giữ để truy vết.
+- Khi knowledge được promote từ memory, thêm path memory vào `source` để giữ evidence chain.
+- Link nội bộ dùng path từ workspace root với prefix `project-store/`.
+- Sau khi sửa knowledge, chạy lint rồi sync FalkorDB.

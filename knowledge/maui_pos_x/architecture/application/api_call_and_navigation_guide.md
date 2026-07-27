@@ -2,10 +2,12 @@
 title: API Call And Navigation Guide
 project: maui_pos_x
 type: architecture
-status: confirmed
+status: active
 source:
   - migrated from memory/maui_pos_x/application_architecture/api_call_and_navigation_guide.md
 tags: [maui_pos_x, architecture, application_architecture, api_call_and_navigation_guide]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # Hướng dẫn gọi API và chuyển màn hình - MauiPOSX

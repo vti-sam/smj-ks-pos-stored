@@ -2,10 +2,12 @@
 title: Original API Detail Design Device Control Layer
 project: maui_pos_x
 type: architecture
-status: confirmed
+status: active
 source:
   - migrated from memory/maui_pos_x/device_controller/_source_notes/original_api_detail_design_device_control_layer.md
 tags: [maui_pos_x, devices, device_controller, source_notes, original_api_detail_design_device_control_layer]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # Thiết kế chi tiết

@@ -2,10 +2,12 @@
 title: Core
 project: ks_host
 type: architecture
-status: confirmed
+status: active
 source:
   - migrated from memory/ks_pos_boilerplate/ks_host/core.md
 tags: [ks_host, architecture, ks_pos_boilerplate, core]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # Bộ nhớ cốt lõi KsPos.Host

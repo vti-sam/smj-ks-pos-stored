@@ -2,10 +2,12 @@
 title: Appserver Appstopserver
 project: ks_host
 type: architecture
-status: confirmed
+status: active
 source:
   - migrated from memory/ks_pos_boilerplate/ks_host/runtime/appserver_appstopserver.md
 tags: [ks_host, runtime, ks_pos_boilerplate, appserver_appstopserver]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # AppServer / AppStopServer

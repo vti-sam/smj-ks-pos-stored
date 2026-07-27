@@ -2,10 +2,12 @@
 title: Local State Snapshot Persistence
 project: ks_host
 type: architecture
-status: confirmed
+status: active
 source:
   - migrated from memory/ks_pos_boilerplate/application_architecture/local_state_snapshot_persistence_2026-05-27.md
 tags: [ks_host, architecture, ks_pos_boilerplate, application_architecture, local_state_snapshot_persistence_2026_05_27]
+scope: durable
+updated_at: 2026-07-27
 ---
 
 # Local state snapshot persistence - 2026-05-27
