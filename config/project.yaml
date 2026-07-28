@@ -10,6 +10,58 @@ knowledge_memory:
   backend: falkordb
   graph: pm_control_smj_ks_pos_knowledge_memory_v1
 
+source_code:
+  projects:
+    - id: tabletposboilerplate
+      path: sources/tabletposboilerplate
+      codegraph:
+        enabled: true
+      scip:
+        enabled: true
+        indexer: scip-dotnet
+        indexer_version: "0.2.14"
+        consumer_version: "0.9.0"
+        output_dir: scratch/indexes/scip/tabletposboilerplate
+        targets:
+          - id: applications
+            path: TabetPos.Applications/TabetPos.Applications.csproj
+          - id: application-controls
+            path: TabetPos.ApplicationControls/TabetPos.ApplicationControls.csproj
+          - id: application-utils
+            path: TabetPos.ApplicationUtils/TabetPos.ApplicationUtils.csproj
+          - id: core
+            path: TabetPos.Core/TabetPos.Core.csproj
+          - id: device-control
+            path: TabetPos.DeviceCtrl/TabetPos.DeviceCtrl.csproj
+          - id: host-app-server
+            path: TabetPos.Host/src/AppServer/AppServer.csproj
+          - id: host-app-stop-server
+            path: TabetPos.Host/src/AppStopServer/AppStopServer.csproj
+          - id: host-device-definition
+            path: TabetPos.Host/src/TabletDeviceDefinition/TabletDeviceDefinition.csproj
+          - id: host-device-manager
+            path: TabetPos.Host/src/TabletDeviceManager/TabletDeviceManager.csproj
+          - id: host-device-setting
+            path: TabetPos.Host/src/TabletDeviceSettingBase/TabletDeviceSettingBase.csproj
+          - id: host-device-base
+            path: TabetPos.Host/src/TabletDevice/DeviceBase/DeviceBase.csproj
+          - id: host-cash-changer-base
+            path: TabetPos.Host/src/TabletDevice/CashChanger/CashChangerBase/CashChangerBase.csproj
+          - id: host-cash-changer
+            path: TabetPos.Host/src/TabletDevice/CashChanger/CashChangerByRT300/CashChangerByRT300.csproj
+          - id: host-cash-drawer
+            path: TabetPos.Host/src/TabletDevice/CashDrawer/CashDrawerBySharp/CashDrawerBySharp.csproj
+          - id: host-customer-display
+            path: TabetPos.Host/src/TabletDevice/CustomerDisplay/CustomerDisplayBySharp/CustomerDisplayBySharp.csproj
+          - id: host-tablet
+            path: TabetPos.Host/src/TabletHost/DeviceHost/TabletHost.csproj
+          - id: host-test-device-core
+            path: TabetPos.Host/tests/DeviceHostCore.Tests/DeviceHostCore.Tests.csproj
+          - id: host-test-device-setting
+            path: TabetPos.Host/tests/TabletDeviceSettingBase.Tests/TabletDeviceSettingBase.Tests.csproj
+          - id: ui-tests
+            path: TabetPos.UITests/TabetPos.UITests.csproj
+
 google:
   service_account:
     email: project-sheets-bot@sharp-smj-sheets.iam.gserviceaccount.com

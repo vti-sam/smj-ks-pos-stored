@@ -37,6 +37,8 @@ agent chỉ cần nạp một nguồn rule cho stored project.
   môi trường, `config/secrets.local.yaml` hoặc `config/keystore.local/`; các
   path local này phải bị nested Git ignore.
 - `knowledge_memory.graph` phải ổn định và chỉ gồm chữ, số, dấu gạch dưới.
+- `source_code.projects[]` chỉ lưu định danh, path source tương đối từ workspace root và cấu hình backend source-intelligence portable. Source vẫn nằm dưới `sources/`; binary, index, status và cache sinh ra phải trỏ tới `scratch/`, không lưu trong `project-store/`.
+- SCIP chỉ được bật tường minh theo project, phải pin indexer/consumer version và khai báo target solution/project cụ thể. Không dùng cấu hình SCIP để thay CodeGraph hoặc tự động index toàn bộ `sources/`.
 - Không lưu cache/index FalkorDB trong `config/`.
 - Khi đổi project ID hoặc binding, chạy bootstrap dry-run, verify runtime
   resolver và smoke test read-only của workflow liên quan trước thao tác online.
