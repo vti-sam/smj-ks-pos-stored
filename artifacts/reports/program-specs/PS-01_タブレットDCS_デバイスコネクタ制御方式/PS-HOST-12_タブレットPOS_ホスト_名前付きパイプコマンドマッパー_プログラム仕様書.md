@@ -64,7 +64,7 @@
 | No | 可視性 | 戻り値 | メソッド名 | 概要 |
 | --- | --- | --- | --- | --- |
 | ① | internal | - | NamedPipeCommandMapper | 既存形式メッセージ解析部を受け取って初期化する。 |
-| ② | public | string | GetRoutingKey | 要求形式に応じてデバイスIDまたは`Host`をルーティングキーとして返す。 |
+| ② | public | string | GetRoutingKey | 要求形式に応じて、デバイスIDまたは「Host」をルーティングキーとして返す。 |
 | ③ | public | DeviceCommand | ToCommand | 外部要求を内部デバイスコマンドへ変換する。 |
 | ④ | public | NamedPipeDeviceCommandResponse | ToResponse | 内部処理結果を外部応答へ変換する。 |
 | ⑤ | private static | Dictionary<string, string> | BuildItemList | 新形式要求から既存互換の項目一覧を構築する。 |
@@ -111,13 +111,13 @@
 
 処理内容:
 
-- ① 要求がnullの場合は`Host`を返す。
+- ① 要求が存在しない場合は「Host」を返す。
 - ② 既存形式メッセージが空の場合は新形式要求として扱う。
-- ③ 新形式要求のDeviceIdが設定されている場合はその値を返し、未設定の場合は`Host`を返す。
+- ③ 新形式要求のデバイスID（DeviceId）が設定されている場合はその値を返し、未設定の場合は「Host」を返す。
 - ④ 既存形式メッセージがある場合は項目一覧へ変換する。
-- ⑤ 項目一覧に空でないDeviceIdがある場合はその値を返し、それ以外は`Host`を返す。
+- ⑤ 項目一覧に空でないデバイスID（DeviceId）がある場合はその値を返し、それ以外は「Host」を返す。
 
-備考: `Host`はデバイスIDを持たないデバイスコネクタ制御要求の共通キーとして使用する。
+備考: 「Host」はデバイスIDを持たないデバイスコネクタ制御要求の共通キーとして使用する。
 
 ### ③. ToCommand
 
@@ -136,13 +136,13 @@
 
 処理内容:
 
-- ① 要求がnullの場合はArgumentNullExceptionを送出する。
-- ② 既存形式メッセージがある場合は解析部で項目一覧へ変換する。
-- ③ 新形式要求の場合はBuildItemListで既存互換の項目一覧を構築する。
-- ④ DeviceCommandFactoryを使用して項目一覧を内部デバイスコマンドへ変換する。
-- ⑤ 外部要求のRequestIdを内部デバイスコマンドへ設定して返す。
+- ① 要求が存在しない場合は、引数未指定例外（ArgumentNullException）を送出する。
+- ② 既存形式メッセージがある場合は、解析部で項目一覧へ変換する。
+- ③ 新形式要求の場合は、項目一覧構築処理（BuildItemList）で既存互換の項目一覧を構築する。
+- ④ デバイスコマンド生成処理（DeviceCommandFactory）を使用して、項目一覧を内部デバイスコマンドへ変換する。
+- ⑤ 外部要求の要求ID（RequestId）を内部デバイスコマンドへ設定して返す。
 
-備考: DeviceId、MethodId、Handleの型変換はDeviceCommandFactoryが担当する。
+備考: デバイスID（DeviceId）、メソッドID（MethodId）、ハンドル（Handle）の型変換は、デバイスコマンド生成処理（DeviceCommandFactory）が担当する。
 
 ### ④. ToResponse
 
@@ -162,10 +162,10 @@
 
 処理内容:
 
-- ① 要求のRequestIdを応答へ設定する。
-- ② 処理結果のSuccessとReturnValueを応答の成功状態とResultCodeへ設定する。
-- ③ メッセージがnullの場合は空文字を設定する。
-- ④ ペイロードがnullの場合は空の辞書を設定する。
+- ① 要求の要求ID（RequestId）を応答へ設定する。
+- ② 処理結果の成功状態（Success）と戻り値（ReturnValue）を、応答の成功状態と結果コード（ResultCode）へ設定する。
+- ③ メッセージが存在しない場合は空文字を設定する。
+- ④ ペイロードが存在しない場合は空の辞書を設定する。
 - ⑤ 変換した名前付きパイプ応答を返す。
 
 備考: デバイスコネクタ制御用のPostWriteActionは呼出元のアダプターが変換後の応答へ設定する。
@@ -187,9 +187,9 @@
 
 処理内容:
 
-- ① Messageが空の場合はDeviceMethodを既定値として設定する。
-- ② DeviceIdとMethodIdを既存互換キーへ設定する。
-- ③ Handleが空の場合は0を設定し、それ以外は受信値を設定する。
+- ① メッセージ（Message）が空の場合は、デバイスメソッド（DeviceMethod）を既定値として設定する。
+- ② デバイスID（DeviceId）とメソッドID（MethodId）を既存互換キーへ設定する。
+- ③ ハンドル（Handle）が空の場合は「0」を設定し、それ以外は受信値を設定する。
 - ④ ペイロードがある場合は全項目を項目一覧へ追加する。
 - ⑤ 同じキーがある場合はペイロードの値で更新する。
 - ⑥ 構築した項目一覧を返す。

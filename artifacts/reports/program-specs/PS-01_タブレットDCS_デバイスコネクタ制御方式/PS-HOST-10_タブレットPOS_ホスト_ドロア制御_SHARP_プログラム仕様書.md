@@ -66,7 +66,7 @@ SHARP ドロアの開放操作を提供するデバイス制御部。タブレ�
 | --- | --- | --- | --- | --- |
 | ① | public | void | StartDevice | 対象デバイスIDを保持し、OCXを配置したフォームとタイマー同期先を初期化する。 |
 | ② | public | void | StopDevice | デバイス制御を終了し、タイマー停止とフォーム解放を実行する。 |
-| ③ | public | int | DeviceMethod | OpenDrawer だけを処理し、実行結果を ResultCode/ResultCodeExtended として返す。 |
+| ③ | public | int | DeviceMethod | ドロア開放（OpenDrawer）を実行し、結果コード（ResultCode）を返す。拡張結果コード（ResultCodeExtended）は戻り値辞書へ設定する。 |
 | ④ | public | void | Device_Mng | ドロアは常時監視を行わないため、周期タイマーを停止する。 |
 
 ## メソッド詳細
@@ -118,7 +118,7 @@ SHARP ドロアの開放操作を提供するデバイス制御部。タブレ�
 | シグネチャ | `public override int DeviceMethod(TabletDeviceMethodID methodId, Dictionary<string, string> arguments, ref Dictionary<string, string> returns)` |
 | 可視性 | public |
 | 戻り値 | int |
-| 戻り値内容 | OpenDrawer だけを処理し、実行結果を ResultCode/ResultCodeExtended。 |
+| 戻り値内容 | ドロア開放（OpenDrawer）の結果コード（ResultCode）。拡張結果コード（ResultCodeExtended）は戻り値辞書に設定する。 |
 
 引数:
 
@@ -130,10 +130,10 @@ SHARP ドロアの開放操作を提供するデバイス制御部。タブレ�
 
 処理内容:
 
-- ① resultCode/resultCodeExtended を -1 で初期化する。
-- ② methodId が OpenDrawer の場合だけ Device_Start を実行する。
-- ③ Device_Start 成功時に OCX OpenDrawer を呼び、ResultCodeExtended を取得する。
-- ④ Device_End で排他を解放し、returns に ResultCode/ResultCodeExtended を設定する。
+- ① 結果コード（resultCode）と拡張結果コード（resultCodeExtended）を「-1」で初期化する。
+- ② メソッドID（methodId）がドロア開放（OpenDrawer）の場合だけ、デバイス開始処理（Device_Start）を実行する。
+- ③ デバイス開始処理の成功時に、OCXのドロア開放処理（OpenDrawer）を呼び、拡張結果コード（ResultCodeExtended）を取得する。
+- ④ デバイス終了処理（Device_End）で排他を解放し、戻り値辞書（returns）に結果コード（ResultCode）と拡張結果コード（ResultCodeExtended）を設定する。
 
 備考: -
 
@@ -156,7 +156,7 @@ SHARP ドロアの開放操作を提供するデバイス制御部。タブレ�
 処理内容:
 
 - ① 周期タイマーを停止する。
-- ② タイマー有効状態を false にする。
+- ② タイマーを無効にする。
 - ③ ドロアはイベント監視を継続しないため、追加処理は行わない。
 
 備考: -

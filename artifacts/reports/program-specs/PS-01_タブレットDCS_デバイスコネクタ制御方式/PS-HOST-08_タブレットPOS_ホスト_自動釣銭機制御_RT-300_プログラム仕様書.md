@@ -66,7 +66,7 @@ RT-300 自動釣銭機に対する入出金、精算、状態照会、エラー�
 | No | 可視性 | 戻り値 | メソッド名 | 概要 |
 | --- | --- | --- | --- | --- |
 | ① | public | int | UpdateWindow | user32 UpdateWindow を呼び出し、指定したウィンドウハンドルの描画更新を要求する。 |
-| ② | public | CashChangerByRt300 | GetInstance | Singleton インスタンスを返却する。 |
+| ② | public | CashChangerByRt300 | GetInstance | シングルトンインスタンスを返却する。 |
 | ③ | public | void | StartDevice | 対象デバイスIDを保持し、OCXを配置したフォームとタイマー同期先を初期化する。 |
 | ④ | public | void | StopDevice | デバイス制御を終了し、タイマー停止とフォーム解放を実行する。 |
 | ⑤ | public | int | DeviceMethod | RT-300 の methodId、handle、同期区分を判定し、同期/非同期の OPOS 操作と戻り値生成を制御する。 |
@@ -160,12 +160,12 @@ RT-300 自動釣銭機に対する入出金、精算、状態照会、エラー�
 | シグネチャ | `public static CashChangerByRt300 GetInstance()` |
 | 可視性 | public |
 | 戻り値 | CashChangerByRt300 |
-| 戻り値内容 | Singleton インスタンス。 |
+| 戻り値内容 | シングルトンインスタンス。 |
 
 処理内容:
 
 - ① _instance が null の場合だけ CashChangerByRt300 を生成する。
-- ② 生成済みの場合は既存 instance を再利用する。
+- ② 生成済みの場合は既存インスタンスを再利用する。
 - ③ シングルトンインスタンスを返す。
 
 備考: -

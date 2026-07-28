@@ -122,7 +122,7 @@
 - ③ HealthCheck は準備状態確認関数が false 以外の場合に `Ready` を返し、false の場合は `Host is not ready.` の失敗結果を返す。
 - ④ DeviceId 未指定またはデバイス未登録の場合は Failure を返す。
 - ⑤ DeviceUse/DeviceUnUse/DeviceUnUseComplete ではプロセス情報を更新し、対象デバイスの use/unuse を呼ぶ。
-- ⑥ DeviceMethod では MethodId を必須確認し、対象 device の DeviceMethod を呼ぶ。
+- ⑥ DeviceMethod では MethodId の指定を確認し、対象デバイスの DeviceMethod を呼ぶ。
 - ⑦ 戻り値、成功判定、ペイロードを結果に設定し、既存互換キーを補完する。
 
 備考: -

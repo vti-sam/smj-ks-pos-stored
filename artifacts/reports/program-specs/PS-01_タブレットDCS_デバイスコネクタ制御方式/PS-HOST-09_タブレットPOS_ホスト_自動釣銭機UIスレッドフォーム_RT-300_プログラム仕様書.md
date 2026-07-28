@@ -117,7 +117,7 @@ RT-300 自動釣銭機の制御部品を UI スレッド上で保持し、自動
 | ㉗ | private | int | PGetFullStatus | FullStatus を取得し、ログ出力する。 |
 | ㉘ | private | void | TmrErrGuide_Tick | エラーガイダンス表示中だけガイダンスウィンドウを前面へ戻し、タイマーを元の間隔で再開する。 |
 | ㉙ | private | void | TimFile_Tick | 共有メモリまたは要求ファイルを監視し、再送要求またはデバイスメソッド要求を処理して応答を書き戻す。 |
-| ㉚ | private | int | File_Method | ファイル/メモリ連携から来た自動釣銭機コマンドを DeviceMethod と同等の分岐で実行する。 |
+| ㉚ | private | int | File_Method | ファイル/メモリ連携から来た自動釣銭機コマンドをデバイスメソッド（DeviceMethod）と同等の分岐で実行する。 |
 | ㉛ | private | int | OPOSCash_EndDeposit_FlagON | EndDeposit 完了フラグを立て、入金終了処理が完了した状態を記録する。 |
 | ㉜ | private | int | OPOSCash_EndDeposit | 入金終了区分に従って EndDeposit を実行し、Begin/End 間の排他状態を解除する。 |
 | ㉝ | private | void | PEndDeposit | CashChanger の EndDeposit を呼び出す。 |
@@ -833,7 +833,7 @@ RT-300 自動釣銭機の制御部品を UI スレッド上で保持し、自動
 - ① タイマーを停止し、共有メモリ要求または要求ファイルの有無を確認する。
 - ② 要求を読み取り、空データまたは読込エラーはログ出力して処理を抜ける。
 - ③ ReplyMessage の場合は保存済み応答を再送する。
-- ④ DeviceMethod の場合は DeviceId/methodId/handle を解析し、対象 device が起動済みなら File_Method を実行する。
+- ④ デバイスメソッド（DeviceMethod）の場合は DeviceId、methodId、handle を解析し、対象デバイスが起動済みであれば File_Method を実行する。
 - ⑤ 戻りペイロードと ReturnValue を応答文字列へ追加し、共有メモリまたは応答ファイルへ書き込む。
 - ⑥ 応答文字列を再送用ストックに保存し、タイマーを再開する。
 
@@ -846,7 +846,7 @@ RT-300 自動釣銭機の制御部品を UI スレッド上で保持し、自動
 | シグネチャ | `private int File_Method(TabletDeviceMethodID methodId, Dictionary<string, string> arguments, ref Dictionary<string, string> returns)` |
 | 可視性 | private |
 | 戻り値 | int |
-| 戻り値内容 | ファイル/メモリ連携から来た自動釣銭機コマンドを DeviceMethod と同等の分岐で実行した結果。 |
+| 戻り値内容 | ファイル/メモリ連携から来た自動釣銭機コマンドをデバイスメソッド（DeviceMethod）と同等の分岐で実行した結果。 |
 
 引数:
 

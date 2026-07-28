@@ -66,7 +66,7 @@ SHARP カスタマディスプレイへの表示制御を提供するデバイ�
 | --- | --- | --- | --- | --- |
 | ① | public | void | StartDevice | 対象デバイスIDを保持し、OCXを配置したフォームとタイマー同期先を初期化する。 |
 | ② | public | void | StopDevice | デバイス制御を終了し、タイマー停止とフォーム解放を実行する。 |
-| ③ | public | int | DeviceMethod | 表示クリア、文字表示、スクロール、DirectIO 表示を methodId と引数に応じて実行する。 |
+| ③ | public | int | DeviceMethod | 表示クリア、文字表示、スクロール、直接入出力（DirectIO）表示をメソッドID（methodId）と引数に応じて実行する。 |
 | ④ | public | void | Device_Mng | カスタマディスプレイは常時監視を行わないため、周期タイマーを停止する。 |
 | ⑤ | private | int | LinDsp | 区分0では表示文字列を DirectIO 用データへ変換し、それ以外では表示をクリアする。 |
 
@@ -119,7 +119,7 @@ SHARP カスタマディスプレイへの表示制御を提供するデバイ�
 | シグネチャ | `public override int DeviceMethod(TabletDeviceMethodID methodId, Dictionary<string, string> arguments, ref Dictionary<string, string> returns)` |
 | 可視性 | public |
 | 戻り値 | int |
-| 戻り値内容 | 表示クリア、文字表示、スクロール、DirectIO 表示を methodId と引数に応じて実行した結果。 |
+| 戻り値内容 | 表示クリア、文字表示、スクロール、直接入出力（DirectIO）表示をメソッドID（methodId）と引数に応じて実行した結果。 |
 
 引数:
 
@@ -131,10 +131,10 @@ SHARP カスタマディスプレイへの表示制御を提供するデバイ�
 
 処理内容:
 
-- ① 命令ごとに Device_Start を実行し、ディスプレイを有効化する。
-- ② methodId に応じて ClearDescriptors、ClearText、DisplayText、DisplayTextAt、ScrollText、LinDsp、LinDspTelop を実行する。
-- ③ 必要な引数が不足する場合は初期値 ResultCode=-1 のまま返す。
-- ④ Device_End で排他を解放し、ResultCode/ResultCodeExtended を returns に設定する。
+- ① 命令ごとにデバイス開始処理（Device_Start）を実行し、ディスプレイを有効化する。
+- ② メソッドID（methodId）に応じて、表示記述子クリア（ClearDescriptors）、表示クリア（ClearText）、文字表示（DisplayText／DisplayTextAt）、スクロール表示（ScrollText）、直接表示（LinDsp／LinDspTelop）を実行する。
+- ③ 必要な引数が不足する場合は、初期値「-1」の結果コード（ResultCode）のまま返す。
+- ④ デバイス終了処理（Device_End）で排他を解放し、結果コード（ResultCode）と拡張結果コード（ResultCodeExtended）を戻り値辞書（returns）に設定する。
 
 備考: -
 
@@ -180,9 +180,9 @@ SHARP カスタマディスプレイへの表示制御を提供するデバイ�
 
 処理内容:
 
-- ① kbn が 0 の場合は文字列を Unicode byte 配列から DirectIO 用文字列へ組み立てる。
-- ② command=0、pData=0 で DirectIO を実行する。
-- ③ kbn が 0 以外の場合は ClearDescriptors を呼んで表示をクリアする。
+- ① 処理区分（kbn）が「0」の場合は、Unicodeバイト配列から直接入出力（DirectIO）用文字列を組み立てる。
+- ② コマンド番号（command）と付加データ（pData）に「0」を設定して直接入出力（DirectIO）を実行する。
+- ③ 処理区分（kbn）が「0」以外の場合は、表示記述子クリア（ClearDescriptors）を呼んで表示をクリアする。
 
 備考: -
 

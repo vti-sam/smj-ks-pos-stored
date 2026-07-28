@@ -58,8 +58,8 @@
 
 | 区分 | 可視性 | 型 | 名前 | 用途 |
 | --- | --- | --- | --- | --- |
-| フィールド | private readonly | Lock | _syncObject | Worker 辞書更新用の排他制御。 |
-| フィールド | private readonly | Dictionary<string, Worker> | _workers | DeviceIdまたは`Host`をキーとするWorker管理辞書。 |
+| フィールド | private readonly | Lock | _syncObject | ワーカー辞書更新用の排他制御。 |
+| フィールド | private readonly | Dictionary<string, Worker> | _workers | DeviceIdまたは「Host」をキーとするワーカー管理辞書。 |
 
 ## メソッド一覧
 
@@ -67,9 +67,9 @@
 | --- | --- | --- | --- | --- |
 | ① | internal | - | DeviceCommandRouter | 処理関数を受け取り、デバイス単位のワーカーキューを管理する。 |
 | ② | public | Task<NamedPipeDeviceCommandResponse> | EnqueueAsync | リクエストを対象デバイスのワーカーへ投入する。 |
-| ③ | private | Worker | GetWorker | デバイスキーに対応する Worker を取得または生成する。 |
+| ③ | private | Worker | GetWorker | デバイスキーに対応するワーカーを取得または生成する。 |
 | ④ | private | string | GetDeviceKey | 選択関数、DeviceId、`Host`の優先順でキューキーを決定する。 |
-| ⑤ | public | void | Dispose | 全 Worker を破棄し、キュー管理辞書をクリアする。 |
+| ⑤ | public | void | Dispose | すべてのワーカーを破棄し、キュー管理辞書をクリアする。 |
 
 ## メソッド詳細
 
@@ -128,7 +128,7 @@
 | シグネチャ | `private Worker GetWorker(string key)` |
 | 可視性 | private |
 | 戻り値 | Worker |
-| 戻り値内容 | デバイスキーに対応する Worker を取得または生成した結果。 |
+| 戻り値内容 | デバイスキーに対応するワーカーを取得または生成した結果。 |
 
 引数:
 
@@ -139,7 +139,7 @@
 処理内容:
 
 - ① ワーカー辞書をロックする。
-- ② キーが未登録の場合は processor を持つ Worker を生成して登録する。
+- ② キーが未登録の場合は、処理関数を保持するワーカーを生成して登録する。
 - ③ 登録済みワーカーを返す。
 
 備考: -

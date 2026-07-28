@@ -72,7 +72,7 @@
 | No | 可視性 | 戻り値 | メソッド名 | 概要 |
 | --- | --- | --- | --- | --- |
 | ① | private | - | TabletDeviceManager | インスタンスコンストラクタ |
-| ② | public | TabletDeviceManager | GetInstance | Singleton インスタンスを返却する。 |
+| ② | public | TabletDeviceManager | GetInstance | シングルトンインスタンスを返却する。 |
 | ③ | public | void | StartDeviceManager | 設定から対象デバイスを生成し、起動後は停止要求まで keep-alive 監視ループを維持する。 |
 | ④ | public | void | StopDeviceManager | 停止フラグを立て、保持中の全デバイスへ StopDevice を呼び出してリストを空にする。 |
 | ⑤ | public | IFDevice | FindDevice | 起動済みデバイスリストから DeviceId が一致する IFDevice を返す。 |
@@ -91,7 +91,7 @@
 
 処理内容:
 
-- ① private constructor として生成経路をシングルトンに限定する。
+- ① 非公開コンストラクターとして生成経路をシングルトンに限定する。
 - ② 生成されたインスタンスを _singleton に設定する。
 - ③ GetInstance から同一インスタンスを返却できる状態にする。
 
@@ -104,13 +104,13 @@
 | シグネチャ | `public static TabletDeviceManager GetInstance()` |
 | 可視性 | public |
 | 戻り値 | TabletDeviceManager |
-| 戻り値内容 | Singleton インスタンス。 |
+| 戻り値内容 | シングルトンインスタンス。 |
 
 処理内容:
 
 - ① 現在保持している _singleton を参照する。
 - ② 新規生成は行わず、初期化済みデバイス管理部インスタンスを返す。
-- ③ 呼出元は返却インスタンス経由でデバイスの開始/停止/検索を実行する。
+- ③ 呼出元は返却インスタンスを使用してデバイスを操作する。
 
 備考: -
 

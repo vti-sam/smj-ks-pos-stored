@@ -110,7 +110,7 @@
 - ② デバイスイベント受信部をサービス取得元から取得する。
 - ③ Windows環境では名前付きパイプクライアントをサービス取得元から取得する。
 
-備考: 本クラスは依存性注入コンテナーへSingletonとして登録される。
+備考: 本クラスは依存性注入コンテナーへシングルトンとして登録される。
 
 ### ②. InitializeDevice
 
@@ -236,13 +236,13 @@
 | シグネチャ | `private static string GetRuntimeOs()` |
 | 可視性 | private static |
 | 戻り値 | string |
-| 戻り値内容 | windows、ios、androidのいずれかのOS識別文字列。 |
+| 戻り値内容 | 「windows」、「ios」、「android」のいずれかのOS識別文字列。 |
 
 処理内容:
 
-- ① iOSビルドではiosを返す。
-- ② Androidビルドではandroidを返す。
-- ③ その他のビルドではwindowsを返す。
+- ① iOSビルドでは「ios」を返す。
+- ② Androidビルドでは「android」を返す。
+- ③ その他のビルドでは「windows」を返す。
 
 備考: コンパイル対象プラットフォームにより返却値が決定される。
 
@@ -434,7 +434,7 @@
 
 - 初期化と保存は同じセマフォで排他制御される。
 - 初期化済みフラグはApplyConfigの全処理完了後にtrueとなる。
-- ServiceCollectionExtensionsは設定ストレージ実装、設定サービス、デバイスマネージャーをSingletonとして登録する。
-- ServiceCollectionExtensionsはWindows環境の名前付きパイプ通信部をSingleton、各デバイス制御方式をTransientとして登録する。iOS/Android環境では空実装のイベント受信部と各プラットフォーム用制御方式を登録する。
+- ServiceCollectionExtensionsは設定ストレージ実装、設定サービス、デバイスマネージャーをシングルトンとして登録する。
+- ServiceCollectionExtensionsはWindows環境の名前付きパイプ通信部をシングルトン、各デバイス制御方式をトランジェントとして登録する。iOS／Android環境では空実装のイベント受信部と各プラットフォーム用制御方式を登録する。
 - MauiProgramはアプリ構築とデータベース移行の後にDeviceManagerを取得し、InitializeAsyncの完了を同期的に待つ。
 - MauiProgramで初期化に失敗した場合はエラーログを出力し、例外を再送出してアプリ起動を継続しない。

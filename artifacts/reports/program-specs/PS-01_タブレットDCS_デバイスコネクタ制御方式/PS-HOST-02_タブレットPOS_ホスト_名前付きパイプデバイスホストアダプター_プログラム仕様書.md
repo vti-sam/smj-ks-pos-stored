@@ -61,7 +61,7 @@
 | フィールド | private const | string | NamedPipeCommandPipeName | コマンド通信用パイプの既定名。 |
 | フィールド | private const | string | NamedPipeEventPipeName | イベント通知用パイプの既定名。 |
 | フィールド | private readonly | IDeviceCommandHandler | _commandHandler | デバイスコマンド処理の委譲先。 |
-| フィールド | private readonly | Action<DeviceHostAction> | _hostActionHandler | Kill／ReStartなどデバイスコネクタ制御アクションの通知先。 |
+| フィールド | private readonly | Action<DeviceHostAction> | _hostActionHandler | 「Kill」／「ReStart」要求など、デバイスコネクタ制御アクションの通知先。 |
 | フィールド | private readonly | INamedPipeCommandMapper | _commandMapper | 名前付きパイプ要求/応答と内部コマンド/結果の変換担当。 |
 | フィールド | private readonly | string | _commandPipeName | コマンド通信用パイプ名。 |
 | フィールド | private readonly | string | _eventPipeName | イベント通知用パイプ名。 |
@@ -154,8 +154,8 @@
 処理内容:
 
 - ① コマンド処理ハンドラー、デバイスコネクタ制御アクション通知先、コマンドマッパー、コマンド通信用パイプ名／イベント通知用パイプ名を受け取る。
-- ② 受け取った依存先とパイプ名を private field に保持する。
-- ③ Start時にルーター、コマンド通信用サーバー、イベント通知用パブリッシャーを生成できる状態にする。
+- ② 受け取った依存先とパイプ名を非公開フィールドに保持する。
+- ③ 開始処理（Start）時にルーター、コマンド通信用サーバー、イベント通知用パブリッシャーを生成できる状態にする。
 
 備考: -
 
@@ -170,10 +170,10 @@
 
 処理内容:
 
-- ① 未生成の DeviceCommandRouter を ProcessCommand とコマンドマッパーの GetRoutingKey で作成する。
-- ② 未生成の NamedPipeEventPublisher と NamedPipeCommandServer を作成する。
+- ① 未生成のデバイスコマンドルーター（DeviceCommandRouter）を、コマンド処理（ProcessCommand）とルーティングキー取得処理（GetRoutingKey）で作成する。
+- ② 未生成の名前付きパイプイベントパブリッシャー（NamedPipeEventPublisher）と名前付きパイプコマンドサーバー（NamedPipeCommandServer）を作成する。
 - ③ イベント通知用パイプのパブリッシャーを開始する。
-- ④ コマンド通信用パイプのサーバーを開始し、要求をルーターの enqueue に接続する。
+- ④ コマンド通信用パイプのサーバーを開始し、要求をルーターの非同期キュー投入処理（EnqueueAsync）へ接続する。
 
 備考: -
 
@@ -188,9 +188,9 @@
 
 処理内容:
 
-- ① コマンド通信用サーバーを破棄し、参照を null にする。
+- ① コマンド通信用サーバーを破棄し、参照を未設定（null）にする。
 - ② ルーターを破棄してワーカーキューを停止する。
-- ③ イベント通知用パブリッシャーを破棄し、参照をnullにする。
+- ③ イベント通知用パブリッシャーを破棄し、参照を未設定（null）にする。
 
 備考: -
 
@@ -238,11 +238,11 @@
 
 処理内容:
 
-- ① 要求をコマンドマッパーで内部 DeviceCommand に変換する。
-- ② DeviceCommandHandler.Handle を呼び、処理結果を取得する。
-- ③ 処理結果を 名前付きパイプ応答へ変換する。
-- ④ Kill/Restart の場合は、応答送信後に500ms待ってデバイスコネクタ制御アクション通知先を実行する処理を PostWriteAction に設定する。
-- ⑤ PostWriteAction を含む応答を返却する。
+- ① 要求をコマンドマッパーで内部デバイスコマンド（DeviceCommand）に変換する。
+- ② デバイスコマンド処理（DeviceCommandHandler.Handle）を呼び、処理結果を取得する。
+- ③ 処理結果を名前付きパイプ応答へ変換する。
+- ④ 「Kill」／「ReStart」要求によってデバイスコネクタ制御アクションが設定された場合は、応答送信後に500ミリ秒待機して通知先を実行する送信後処理（PostWriteAction）を設定する。
+- ⑤ 送信後処理（PostWriteAction）を含む応答を返却する。
 
 備考: -
 
@@ -256,4 +256,4 @@
 ### 注意事項
 
 - 既定 pipe 名は `TabetPos.Host.Command` と `TabetPos.Host.Event`。
-- Kill/Restart のデバイスコネクタ制御はコマンド応答の送信完了後に実行される。
+- 「Kill」／「ReStart」要求によるデバイスコネクタ制御は、コマンド応答の送信完了後に実行される。
