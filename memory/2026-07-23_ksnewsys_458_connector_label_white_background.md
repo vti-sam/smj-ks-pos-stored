@@ -4,9 +4,10 @@ project: smj-ks-pos
 type: decision
 status: archived
 source:
-  - project-store/artifacts/reports/architecture/ARCH-DEVICE-01_次世代POS_デバイス制御クラス構成図/draft/ARCH-DEVICE-01_次世代POS_デバイス制御クラス構成図.md
+  - project-store/artifacts/reports/architecture/ARCH-DEVICE-01_次世代POS_デバイス制御クラス構成図/ARCH-DEVICE-01_次世代POS_デバイス制御クラス構成図.md
   - project-store/artifacts/reports/implementation-examples/EX-DEVICE-01_次世代POS_デバイス制御実装例集/draft/EX-DEVICE-01_次世代POS_デバイス制御実装例集.md
-  - project-store/artifacts/deliverables/KSNEWSYS-458_device-control/
+  - project-store/artifacts/reports/architecture/ARCH-DEVICE-01_次世代POS_デバイス制御クラス構成図/
+  - project-store/artifacts/reports/implementation-examples/EX-DEVICE-01_次世代POS_デバイス制御実装例集/
 tags:
   - KSNEWSYS-458
   - office-script

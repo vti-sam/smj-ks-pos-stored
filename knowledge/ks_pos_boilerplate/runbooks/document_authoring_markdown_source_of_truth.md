@@ -6,15 +6,17 @@ status: active
 source:
   - User-approved decision in Codex task 2026-07-28
   - project-store/artifacts/reports/program-specs/PS-01_タブレットDCS_デバイスコネクタ制御方式/
-  - skills/doc-authoring/design-doc-md/SKILL.md
+  - skills/doc-authoring/program-spec-authoring/SKILL.md
+  - skills/doc-authoring/document-quality-gate/SKILL.md
   - skills/doc-authoring/program-spec-excel/SKILL.md
+  - skills/doc-authoring/mermaid-office-script/SKILL.md
 tags:
   - document-authoring
   - markdown
   - source-of-truth
   - program-spec
 scope: durable
-updated_at: 2026-07-28
+updated_at: 2026-07-29
 ---
 
 # Markdown là nguồn nội dung duy nhất của tài liệu
@@ -28,6 +30,13 @@ hoặc phát hành.
 Mọi thay đổi về nội dung, thuật ngữ, bảng, mô tả, liên kết và sơ đồ phải được
 phản ánh vào Markdown trước. Không sửa trực tiếp file Excel, Word hoặc PDF rồi
 coi file đã sửa là nguồn chính thức.
+
+Với sơ đồ Mermaid, Markdown cũng sở hữu cấu trúc nhóm, chỉ thị render, `凡例`
+và quan hệ giữa các container. Main Office Script và labels Office Script phải
+được regenerate cùng nhau từ đúng block Mermaid, mang cùng fingerprint nguồn
+và không được sửa tay để thay đổi nội dung hoặc cấu trúc. Một thao tác trình bày
+thủ công chỉ là bước review; nếu tạo ra quyết định layout có ý nghĩa thì phải
+phản ánh quyết định đó về Markdown hoặc renderer trước khi phát hành.
 
 ## Quy trình bắt buộc
 

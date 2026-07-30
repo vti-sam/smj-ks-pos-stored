@@ -9,7 +9,7 @@
 | 文書ID | PS-DEVICE-01 |
 | 文書名 | タブレットPOS デバイス制御 デバイスマネージャー プログラム仕様書 |
 | 対象 | タブレットPOS / デバイス制御デバイスマネージャー |
-| 版数 | 0.0.1 |
+| 版数 | 0.0.2 |
 | 作成日 | 2026/07/23 |
 | 作成者 | VTI サム, VTI 吉田 |
 | レビュー担当 | SMJ 蒲田 |
@@ -21,6 +21,7 @@
 
 | 版数 | 日付 | 変更内容 | 作成者 | 承認者 |
 | --- | --- | --- | --- | --- |
+| 0.0.2 | 2026/07/30 | カスタマディスプレイの表記を関連文書と統一 | VTI サム |  |
 | 0.0.1 | 2026/07/23 | 初版作成 | VTI サム |  |
 
 ## クラス情報
@@ -80,7 +81,7 @@
 | ⑧ | public | Task<IBarcodeScannerStrategy?> | GetScannerStrategyAsync | 実行環境で有効なスキャナー制御方式を取得する。 |
 | ⑨ | public | Task<IPrinterStrategy?> | GetPrinterStrategyAsync | 実行環境で有効なプリンター制御方式を取得する。 |
 | ⑩ | public | Task<ICashChangerStrategy?> | GetCashChangerStrategyAsync | 実行環境で有効な自動釣銭機制御方式を取得する。 |
-| ⑪ | public | Task<ICustomerDisplayStrategy?> | GetCustomerDisplayStrategyAsync | 実行環境で有効なカスタマーディスプレイ制御方式を取得する。 |
+| ⑪ | public | Task<ICustomerDisplayStrategy?> | GetCustomerDisplayStrategyAsync | 実行環境で有効なカスタマディスプレイ制御方式を取得する。 |
 | ⑫ | public | Task<IDrawerStrategy?> | GetDrawerStrategyAsync | 実行環境で有効なドロワー制御方式を取得する。 |
 | ⑬ | public | Task<IKeyboardStrategy?> | GetKeyboardStrategyAsync | 実行環境で有効なキーボード制御方式を取得する。 |
 | ⑭ | public | DeviceSpec | GetActiveDevice | デバイス種別とOSに一致する有効デバイス仕様を取得する。 |
@@ -307,14 +308,14 @@
 | シグネチャ | `public async Task<ICustomerDisplayStrategy?> GetCustomerDisplayStrategyAsync()` |
 | 可視性 | public |
 | 戻り値 | Task<ICustomerDisplayStrategy?> |
-| 戻り値内容 | 有効なカスタマーディスプレイ制御方式。未設定の場合はnull。 |
+| 戻り値内容 | 有効なカスタマディスプレイ制御方式。未設定の場合はnull。 |
 
 処理内容:
 
 - ① デバイス設定の初期化完了を待つ。
 - ② 現在のOSとlocal_displayを条件に有効デバイスを選択する。
 - ③ 制御方式クラス名が空の場合はnullを返す。
-- ④ 制御方式ファクトリーでカスタマーディスプレイ制御方式を生成して返す。
+- ④ 制御方式ファクトリーでカスタマディスプレイ制御方式を生成して返す。
 
 備考: -
 
@@ -380,7 +381,7 @@
 - ④ 対象ID、デバイス種別、OSが一致する最初のデバイス仕様を返す。
 - ⑤ 一致するデバイスがない場合は空のDeviceSpecを返す。
 
-備考: 対応する種別はプリンター、スキャナー、自動釣銭機、カスタマーディスプレイ、ドロワー、キーボード。
+備考: 対応する種別はプリンター、スキャナー、自動釣銭機、カスタマディスプレイ、ドロワー、キーボード。
 
 ### ⑮. RegisterDeviceStrategy
 
@@ -394,8 +395,8 @@
 処理内容:
 
 - ① WindowsビルドではOPOS、シリアル、Raw Keyboardの各制御方式を登録する。
-- ② iOSビルドではEpsonプリンター、カメラ/BLEスキャナー、カスタマーディスプレイの各制御方式を登録する。
-- ③ AndroidビルドではBluetoothプリンター、カメラスキャナー、カスタマーディスプレイの各制御方式を登録する。
+- ② iOSビルドではEpsonプリンター、カメラ/BLEスキャナー、カスタマディスプレイの各制御方式を登録する。
+- ③ AndroidビルドではBluetoothプリンター、カメラスキャナー、カスタマディスプレイの各制御方式を登録する。
 - ④ 設定のStrategyClassから制御方式を生成できる状態にする。
 
 備考: 登録対象はコンパイル対象プラットフォームにより異なる。

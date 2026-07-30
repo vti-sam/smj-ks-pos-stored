@@ -147,12 +147,20 @@ promote_to_knowledge: false
 ```
 
 - `archived` còn hữu ích để truy vết; `stale` phải verify lại trước khi dùng.
+- Phần thân bắt buộc tách đúng bốn mục `Outcome`, `Evidence`, `Unresolved` và `Retrieval keys`; không gộp evidence đã kiểm chứng với suy luận hoặc phần còn thiếu.
+- `Outcome` chỉ ghi kết quả, quyết định hoặc gotcha đã được verify và gắn với project anchor.
+- `Evidence` liệt kê source path, issue/WBS, deliverable, quyết định khách hàng hoặc read-back trực tiếp chứng minh outcome.
+- `Unresolved` ghi limitation, mâu thuẫn hoặc nội dung chưa đủ căn cứ; không biến phần này thành fact nghiệp vụ.
+- `Retrieval keys` giữ document ID, issue ID, symbol, artifact path và thuật ngữ ổn định cần cho lần truy xuất sau.
 
 ## `artifacts/`
 
 - `artifacts/` lưu artifact portable không thuộc workflow Google Sheets
   management. Nếu artifact có nguồn hoặc mục đích dùng lại, ghi source trong
   tên, metadata hoặc companion document.
+- Artifact tài liệu chính thức phải nằm trực tiếp trong report bundle tương ứng
+  dưới `artifacts/reports/<category>/<document_id>_<document_title>/`. Không
+  tạo hoặc sử dụng `artifacts/deliverables/` làm bundle phát hành song song.
 - Khi di chuyển/đổi tên artifact, cập nhật internal link liên quan.
 - `artifacts/reports/` chỉ chứa category folder dạng ASCII kebab-case; không
   đặt report bundle trực tiếp dưới `reports/`.

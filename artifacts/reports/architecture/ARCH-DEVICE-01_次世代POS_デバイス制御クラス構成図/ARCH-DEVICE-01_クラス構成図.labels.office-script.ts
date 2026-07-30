@@ -1,3 +1,7 @@
+// Generated from Markdown: ARCH-DEVICE-01_次世代POS_デバイス制御クラス構成図.md
+// Source contract SHA-256: 937cc217b8e9555ba0509c7ca71328ac237877fa4de162e2e37f34c24908edc9
+// Generated output; do not edit. Change Markdown or the owning renderer and regenerate both scripts.
+
 function main(workbook: ExcelScript.Workbook) {
   const sheet = workbook.getActiveWorksheet();
   const expectedSheetBase = "05_クラス構成_01";
