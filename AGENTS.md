@@ -1,195 +1,137 @@
 # AGENTS.md
 
-File này là rule duy nhất cho toàn bộ `project-store/`. Không tạo `AGENTS.md`
-trong folder con; boundary đặc thù phải được bổ sung thành section tại đây để
-agent chỉ cần nạp một nguồn rule cho stored project.
+File này kế thừa root `AGENTS.md` và chỉ bổ sung boundary cho toàn bộ
+`project-store/`. Không tạo `AGENTS.md` trong folder con; boundary đặc thù phải
+được bổ sung tại đúng section này. Approval, secret, destructive action, online
+write và packaging gate của root luôn còn hiệu lực.
 
-## Commands
+Link nội bộ dùng path từ workspace root với prefix `project-store/`.
 
-- Kiểm tra repo stored: `rtk git -C project-store status --short`.
-- Tìm path/link trong snapshot: `rtk rg "<keyword_or_path>" project-store`.
-- Lint rule: `rtk uv run skills/knowledge-code/knowledge-memory-sync/scripts/lint_rules.py`.
-- Lint knowledge/memory: `rtk uv run skills/knowledge-code/knowledge-memory-sync/scripts/lint_knowledge.py`.
-- Sync FalkorDB sau khi sửa knowledge/memory: `rtk uv run skills/knowledge-code/knowledge-memory-sync/scripts/sync_falkor.py`.
-- Kiểm tra index sau sync: `rtk uv run skills/knowledge-code/knowledge-memory-sync/scripts/sync_falkor.py doctor`.
-
-## Stored Project
+## Stored project
 
 - `project-store/` là nested Git repo chứa snapshot portable riêng của project.
-- Chỉ các folder `config/`, `knowledge/`, `memory/`, `artifacts/`,
-  `management/`, `skills/` được dùng làm top-level data folder.
-- Không lưu application source, secret tracked, cache/index, build output hoặc
-  draft tạm. Source đặt trong `sources/`; draft và candidate chưa verify đặt
-  trong `scratch/` hoặc runtime `DATA_DIR`.
-- Link nội bộ dùng path từ workspace root với prefix `project-store/`.
-- User clone/pull repo stored; bootstrap chỉ kiểm tra và dùng repo hiện có,
-  không fetch hoặc reset nested repo.
-- Không stage, commit hoặc push nếu User chưa yêu cầu. Sau khi sửa phải kiểm
-  tra Git status của cả root repo và `project-store/`.
+- Chỉ `config/`, `knowledge/`, `memory/`, `artifacts/`, `management/` và
+  `skills/` là top-level data folder được phép.
+- Application source nằm ngoài nested repo dưới `sources/<project>/`. Cache,
+  index, build output, secret tracked và draft một lần không được lưu trong
+  snapshot; dùng `scratch/` hoặc ignored path do owner skill quy định.
+- Bootstrap bình thường chỉ kiểm tra repo stored hiện có; không tự fetch, pull,
+  reset, stage, commit hoặc push. Flow `--init-stored` chỉ khởi tạo local từ rule
+  mẫu, không tạo remote/commit/push. Clone/pull phải là action cụ thể đã được
+  User duyệt.
+- Sau thay đổi, kiểm tra status của cả root repo và nested repo. Không stage,
+  commit hoặc push nếu User chưa yêu cầu.
 
-## `config/`
+## Source-of-truth map
 
-- `config/project.yaml` là source-of-truth portable cho project ID, resource
-  binding và backend dùng chung.
-- `config/management.override.yaml` chỉ chứa phần khác biệt với template chung
-  do `management-sync` sở hữu.
-- Chỉ lưu config endpoint-neutral, không bí mật. Secret thật chỉ nằm trong biến
-  môi trường, `config/secrets.local.yaml` hoặc `config/keystore.local/`; các
-  path local này phải bị nested Git ignore.
+| Dữ liệu | Source-of-truth hoặc đích hợp lệ |
+|---|---|
+| Project ID, resource binding, backend và endpoint không bí mật | `config/project.yaml` |
+| Credential, token và key material | Environment hoặc local ignored config |
+| WBS, risks, decisions, stakeholders, communications | `management/*.md`; Google Sheets chỉ là projection |
+| Tri thức bền đã verify | `knowledge/` |
+| Historical project outcome có anchor | `memory/` |
+| Raw customer file và artifact portable | `artifacts/` |
+| Workflow deterministic riêng của project | `skills/` |
+| Draft, candidate, cache, index và output tạm | Workspace `scratch/` hoặc ignored path do owner skill quy định |
+
+## config/
+
+- `config/project.yaml` là source-of-truth portable duy nhất cho project ID,
+  resource binding và backend dùng chung. Không đưa secret thật vào file này.
+- `config/management.override.yaml` chỉ tồn tại khi owner workflow có một
+  khác biệt đã được xác định; không dùng nó để nhân bản template chung.
+- Secret thật chỉ nằm trong environment, `config/secrets.local.yaml` hoặc
+  `config/keystore.local/`; các path local phải bị nested Git ignore.
 - `knowledge_memory.graph` phải ổn định và chỉ gồm chữ, số, dấu gạch dưới.
-- `source_code.projects[]` chỉ lưu định danh, path source tương đối từ workspace root và cấu hình backend source-intelligence portable. Source vẫn nằm dưới `sources/`; binary, index, status và cache sinh ra phải trỏ tới `scratch/`, không lưu trong `project-store/`.
-- SCIP chỉ được bật tường minh theo project, phải pin indexer/consumer version và khai báo target solution/project cụ thể. Không dùng cấu hình SCIP để thay CodeGraph hoặc tự động index toàn bộ `sources/`.
-- Không lưu cache/index FalkorDB trong `config/`.
-- Khi đổi project ID hoặc binding, chạy bootstrap dry-run, verify runtime
-  resolver và smoke test read-only của workflow liên quan trước thao tác online.
+  Không lưu cache hoặc index trong `config/`.
+- Binding source-intelligence nếu có phải lấy từ `config/project.yaml` và
+  route qua owner skill; rule này không tự tạo index.
+- Khi đổi project ID, endpoint hoặc binding, chạy bootstrap dry-run và smoke
+  test read-only của workflow liên quan trước online write.
 
-## `management/`
+## management/
 
-- Google Sheets là source-of-truth; YAML trong `management/` chỉ là
-  export/cache/sync metadata do `skills/project-ops/management-sync/` tạo hoặc
-  đọc.
-- Không viết tài liệu tự do hoặc artifact không thuộc workflow management vào
-  folder này. Artifact portable đặt trong `artifacts/`; tri thức tổng hợp đặt
-  trong `knowledge/`; draft đặt trong `scratch/`.
-- Không sửa YAML management trực tiếp trừ khi User yêu cầu rõ. Cập nhật bằng
-  workflow quản trị theo stable `id`, không dùng row number hoặc row order.
-- Trước khi cập nhật WBS, fetch bản mới nhất từ Google Sheets. Nếu duplicate
-  `id` thì dừng; nếu thiếu `id` thì chỉ tạo khi request cho phép tạo mới.
-- Record archived phải được xóa khỏi source-of-truth theo stable `id`;
-  `deadline` là hạn kế hoạch, `end_date` chỉ ghi khi item đã hoàn thành có căn
-  cứ.
-- WBS chính dùng tiếng Nhật cho `作業項目`; `作業項目 (VN)` / `title_vi` là
-  memo nội bộ được dịch một lần khi tạo. Không tự overwrite bản tiếng Việt theo
-  thay đổi tiếng Nhật nếu User chưa yêu cầu.
-- Dropdown `担当` lấy từ `Stakeholders / 関係者` field `name` (`氏名`), không
-  hardcode owner hoặc email. Không hardcode dropdown cho `種別` hay `区分` nếu
-  User chưa yêu cầu.
-- `WBS_JP / WBS_日本語` là legacy generated view, không phải source mặc định.
-- Audit trail của quyết định vận hành hoặc task lớn phải ghi vào
-  `Decisions / 決定事項` (`DECISIONS.yaml`) với liên kết WBS, knowledge, memory
-  và verification phù hợp; không tạo decision store song song.
-- Sau mọi write online, read-back hoặc sync/fetch lại để kiểm tra kết quả và
-  encoding UTF-8.
+- Markdown trong `management/` là source-of-truth duy nhất. Google Sheets chỉ
+  là projection có thể xoá và dựng lại từ Markdown; `.sync-state.json` chỉ là
+  metadata disposable, còn YAML cũ không còn là nguồn dữ liệu.
+- Mọi mutation dùng completion contract của owner skill:
+  `validate MD → plan → approval → publish/rebuild → read-back`.
+  Không định danh record bằng row number hoặc row order.
+- Google Sheets chỉ phản ánh ngược vào Markdown khi chạy trực tiếp lệnh
+  `management-google-sheets import`; lệnh này tạo candidate trước, chỉ
+  `--apply` mới cập nhật Markdown chính, và không tự publish lại. Schema và
+  authoring gate thuộc `management-authoring`.
+- Duplicate stable `id` phải dừng; record mới chỉ được tạo khi request cho phép.
+- Chỉ xóa record khi dry-run của owner workflow đánh dấu xóa từ authoritative
+  snapshot đã được duyệt; thiếu record trong partial cache không tự là lệnh xóa.
+- `deadline` là hạn kế hoạch; `end_date` chỉ ghi khi item hoàn thành có căn cứ.
+- Tên cột và nội dung Markdown thuộc `management-authoring`; dropdown và
+  generated view của WBS thuộc `management-google-sheets`; không tạo biến thể
+  riêng trong rule này.
+- Chỉ ghi Decisions khi task thực sự tạo hoặc thay đổi quyết định vận hành;
+  không tạo decision store song song.
+- Sau mọi online write, read-back đúng table và stable `id`, kiểm tra encoding
+  UTF-8 và dừng nếu kết quả khác dry-run.
 
-## `knowledge/`
+## knowledge/
 
-- `knowledge/` là source-of-truth nội bộ cho tri thức bền, reusable và có
-  evidence. FalkorDB chỉ là index có thể rebuild.
+- `knowledge/` là source-of-truth cho tri thức bền, reusable và có evidence;
+  backend/index chỉ là dữ liệu có thể rebuild.
 - Không lưu raw customer file, draft, credential, application source hoặc dữ
-  liệu chưa verify. Raw artifact đặt trong `artifacts/`; historical context đặt
-  trong `memory/`.
-- Không tự tạo taxonomy, metadata enum hoặc trạng thái hiện tại nếu chưa có
-  source/evidence và chưa thống nhất scope.
-- Markdown knowledge phải bắt đầu bằng frontmatter:
+  liệu chưa verify. Taxonomy, metadata và status phải có source/evidence.
+- Frontmatter, schema và lint dùng owner skill
+  `skills/knowledge-code/knowledge-memory-sync/`.
+- Verified case phải dùng `project-store/skills/verified-case-learning/` và
+  chỉ lưu evidence trực tiếp; candidate chưa đủ evidence để ở `scratch/`.
 
-```yaml
----
-title: <Human readable title>
-project: <project_id>
-type: requirement | decision | gotcha | runbook | architecture | glossary | analysis
-status: active | superseded | archived
-source:
-  - <source path, ticket, meeting, or evidence>
-tags:
-  - <keyword>
-scope: durable
-updated_at: <YYYY-MM-DD>
----
-```
-
-- `active` được dùng làm căn cứ hiện tại; `superseded` đã có nội dung thay thế;
-  `archived` chỉ giữ để truy vết.
-- Khi promote từ memory, thêm path memory vào `source`.
-- Sau khi sửa, chạy knowledge lint, Falkor sync, doctor và query read-back phù
-  hợp với nội dung đã thay đổi.
-
-### Verified cases
-
-- Mọi tạo/sửa file dưới `knowledge/verified-cases/` hoặc có tag
-  `verified-case` bắt buộc dùng
-  `project-store/skills/verified-case-learning/SKILL.md`.
-- Chỉ lưu case có evidence trực tiếp. User feedback, conversation history hoặc
-  LLM output không được làm nguồn xác nhận nghiệp vụ duy nhất.
-- Candidate `unknown`, `rejected` hoặc chưa đủ evidence chỉ được giữ trong
-  `scratch/`; không ghi vào knowledge.
-- Verified case dùng `type: analysis`, tag `verified-case`; case còn hiệu lực
-  dùng `status: active`, case đã có nội dung thay thế hoặc chỉ giữ audit dùng
-  `superseded`/`archived`. File phải pass validator của skill trước knowledge
-  lint/sync.
-
-## `memory/`
+## memory/
 
 - `memory/` chỉ lưu historical context có relevance trực tiếp với project,
-  không phải active source-of-truth.
-- Trước khi ghi phải có ít nhất một project anchor kiểm chứng được: application
-  source path, issue/WBS, deliverable/artifact, quyết định khách hàng hoặc
-  trạng thái vận hành của project.
-- Không dùng memory làm changelog cho skill/tool/rule chung, benchmark,
-  evaluator hoặc log verify không tạo project outcome.
-- Nội dung bền phải promote sang `knowledge/` với evidence chain.
-- Markdown memory phải bắt đầu bằng frontmatter:
+  không phải active source-of-truth hoặc changelog của rule/skill/tool chung.
+- Trước khi ghi phải có project anchor kiểm chứng được; trước file mới phải tìm
+  memory cùng anchor/identifier để update đúng outcome.
+- Body phải tách đúng bốn mục `Outcome`, `Evidence`, `Unresolved` và
+  `Retrieval keys`. Evidence chỉ dùng source trực tiếp hoặc read-back; phần
+  chưa đủ căn cứ nằm ở `Unresolved`.
+- Không dump transcript, secret hoặc token. Frontmatter, capture, sync và
+  retrieval tuân theo owner skill và root memory gate.
 
-```yaml
----
-title: <Human readable title>
-project: <project_id>
-type: requirement | decision | gotcha | runbook | architecture | lesson
-status: archived | stale
-source:
-  - <Codex session, task log, or evidence path>
-tags:
-  - <keyword>
-scope: historical
-captured_at: <YYYY-MM-DD>
-validity: historical_context
-promote_to_knowledge: false
----
-```
+## artifacts/
 
-- `archived` còn hữu ích để truy vết; `stale` phải verify lại trước khi dùng.
-- Phần thân bắt buộc tách đúng bốn mục `Outcome`, `Evidence`, `Unresolved` và `Retrieval keys`; không gộp evidence đã kiểm chứng với suy luận hoặc phần còn thiếu.
-- `Outcome` chỉ ghi kết quả, quyết định hoặc gotcha đã được verify và gắn với project anchor.
-- `Evidence` liệt kê source path, issue/WBS, deliverable, quyết định khách hàng hoặc read-back trực tiếp chứng minh outcome.
-- `Unresolved` ghi limitation, mâu thuẫn hoặc nội dung chưa đủ căn cứ; không biến phần này thành fact nghiệp vụ.
-- `Retrieval keys` giữ document ID, issue ID, symbol, artifact path và thuật ngữ ổn định cần cho lần truy xuất sau.
+- `artifacts/` lưu raw customer file và artifact portable ngoài workflow
+  Google Sheets. Source/mục đích tái sử dụng phải được ghi trong metadata hoặc
+  companion document; đổi tên/di chuyển phải cập nhật internal link.
+- Draft/review/intermediate để trong `scratch/` hoặc output path do owner skill
+  quy định; artifact chính chỉ promote sau acceptance theo workflow.
+- Naming, document ID, code, vocabulary, bundle layout và renderer thuộc
+  skill tài liệu tương ứng; không copy danh sách convention vào rule này.
 
-## `artifacts/`
+## skills/
 
-- `artifacts/` lưu artifact portable không thuộc workflow Google Sheets
-  management. Nếu artifact có nguồn hoặc mục đích dùng lại, ghi source trong
-  tên, metadata hoặc companion document.
-- Artifact tài liệu chính thức phải nằm trực tiếp trong report bundle tương ứng
-  dưới `artifacts/reports/<category>/<document_id>_<document_title>/`. Không
-  tạo hoặc sử dụng `artifacts/deliverables/` làm bundle phát hành song song.
-- Khi di chuyển/đổi tên artifact, cập nhật internal link liên quan.
-- `artifacts/reports/` chỉ chứa category folder dạng ASCII kebab-case; không
-  đặt report bundle trực tiếp dưới `reports/`.
-- Report bundle dùng `<document_id>_<document_title>/`; file chính dùng
-  `<document_id>_<document_title>_<document_kind>`. Tên title/kind dùng tiếng
-  Nhật khi có tên tài liệu tiếng Nhật chính thức.
-- Document code đặt loại tài liệu trước domain: `<doc_type>-<domain>-<seq2>`
-  hoặc `<doc_type>-<phase>-<domain>-<seq2>`. `seq2` có hai chữ số.
-- Code chuẩn: `ARCH` = structure design, `CFG` = configuration guide,
-  `EX` = implementation example, `PS` = program specification,
-  `TC` = test case. Phase test chuẩn: `UT`, `IT`, `ST`, `UAT`; trong test
-  case, `IT` luôn là integration test.
-- Domain code phải là ASCII uppercase ổn định và có nghĩa rõ; nếu tách theo
-  thiết bị thì thêm domain phụ sau domain chính.
-- Các bản xuất cùng nội dung giữ cùng basename và chỉ khác extension.
-- Không dùng tên class, component, agent hoặc workaround làm title chính nếu
-  đã có tên tài liệu tiếng Nhật tương ứng.
+- `skills/` chỉ chứa workflow portable đặc định cho project. Mỗi skill có
+  `SKILL.md`; script phải deterministic, không tự gọi LLM và không hardcode
+  secret.
+- Script đọc binding không bí mật từ `config/project.yaml`; credential chỉ
+  đọc từ environment hoặc local ignored config.
+- Không lưu source, generated output, cache/index hoặc task history trong skill.
+  Durable knowledge ở `knowledge/`, candidate/draft ở `scratch/`.
+- Mỗi skill phải có validator hoặc verification command tương xứng với artifact
+  nó tạo.
 
-## `skills/`
+## SCIP delta của SMJ KS POS
 
-- `skills/` chỉ chứa skill portable đặc định cho project hiện tại. Mỗi skill
-  phải có `SKILL.md`; chỉ thêm `agents/`, `scripts/`, `references/`,
-  `resources/`, `templates/` khi phục vụ trực tiếp workflow.
-- Script trong project-specific skill phải deterministic; không tự gọi LLM.
-  Model reasoning được thực hiện bởi conversation/agent đang dùng skill.
-- Script đọc config/credential từ `config/project.yaml`, biến môi trường hoặc
-  local ignored config; không hardcode secret.
-- Không lưu application source, generated output, cache/index hoặc task history
-  trong skill. Durable knowledge đặt trong `knowledge/`; candidate/draft đặt
-  trong `scratch/`.
-- Skill phải có validator hoặc verification command tương xứng với artifact nó
-  tạo; luôn chạy verify trước khi coi workflow hoàn tất.
+- `config/project.yaml` bật SCIP tường minh cho project
+  `tabletposboilerplate` cùng với CodeGraph; indexer/consumer version và danh
+  sách target `.csproj` trong config là binding bắt buộc của project này.
+- SCIP chỉ phục vụ source-intelligence của project đã khai báo; không tự động
+  index toàn bộ `sources/`, không thay thế CodeGraph và output index chỉ nằm ở
+  `scratch/indexes/scip/`.
+
+## Verification và hoàn tất
+
+- Knowledge/memory, management và artifact phải pass completion contract của
+  owner skill; verify ở phạm vi hẹp nhất chứng minh được thay đổi.
+- Sau mỗi write, kiểm tra diff và status của root cùng nested `project-store/`.
+- Closeout phải báo memory `created`, `updated` hoặc `not applicable`; không
+  kết luận hoàn tất khi write/read-back bắt buộc còn thiếu.
