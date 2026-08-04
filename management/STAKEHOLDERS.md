@@ -9,14 +9,10 @@ mode: replace
 
 | id | type | name | email | organization | role | influence | interest | expectations | communication_strategy | notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| SH-001 | Stakeholder | 菅原充仁 | sugawara.michihito@mail.sharp | Sharp | Sharp側管理責任者；顧客側の意思決定およびエスカレーション担当 | High | Medium | 全体状況、scope/riskの大きな影響、エスカレーションが必要な判断事項を把握すること。 | scope/cost/scheduleに影響がある場合は密に連携し、通常時はsummaryで状況を共有します。 | Sharp側の管理者。意思決定とescalationを担当。 |
-| SH-002 | Stakeholder | 鎌田克 | kamata.katsu@mail.sharp | Sharp | Sharp側管理担当；顧客側の意思決定およびエスカレーション担当 | High | Medium | 全体状況、scope/riskの大きな影響、エスカレーションが必要な判断事項を把握すること。 | scope/cost/scheduleに影響がある場合は密に連携し、通常時はsummaryで状況を共有します。 | Sharp側の管理者。意思決定とescalationを追跡。 |
-| SH-003 | Stakeholder | 小林智幸 | kobayashi.tomoyuki@mail.sharp | Sharp | Sharp側チームリード；app、UI/UX、POSに関する主要窓口 | High | High | reviewしやすい設計、明確なflow、確認事項への迅速な回答を期待します。 | 設計reviewと日次または短周期の確認で密に連携します。 | Sharp側のチームリード。app/UI/UX/POSの窓口。 |
-| SH-004 | Stakeholder | 伊藤怜央馬 | ito.reoma@mail.sharp | Sharp | Sharp側主担当；app、UI/UX、POSに関する主要窓口 | High | High | reviewしやすい設計、明確なflow、確認事項への迅速な回答を期待します。 | 設計reviewと日次または短周期の確認で密に連携します。 | Sharp側のapp/UI/UX/POS主担当。 |
-| SH-005 | Stakeholder | 小山 岳広 | ta-koyama@japannet.co.jp | Japannet | Japannet側主要技術担当 | High | High | 技術方針、integration point、技術制約の確定を支援すること。 | 技術判断や難しい問題が発生した際に密に連携します。 | Japannet側の主要技術窓口。 |
-| SH-006 | Stakeholder | NGOC Pham Van (VJP) | ngoc.phamvan@vti.com.vn | VTI | VTI側上位管理者 / GM；VTI側実行管理 | High | Medium | deliverable、escalation、resource、costを管理すること。 | 重要なリスクやresource/cost判断が必要な場合に高頻度で共有します。 | VTI側GM。delivery、escalation、resource、costを管理。 |
-| SH-007 | Stakeholder | VTI_SAM | son.nguyenhong1@vti.com.vn | VTI | VTI側Tech Lead / BrSE；技術および実行の主担当 | High | High | 技術調整、設計、coding、risk、お客様との技術コミュニケーションを主導すること。 | deliverableと技術確認の直接窓口として対応します。 | VTI側Tech Lead/BrSE。技術と主要コミュニケーションを担当。 |
-| SH-008 | Stakeholder | VTI_NHUT | nhut.nguyenminh@vti.com.vn | VTI | BrSE支援；日本語・ベトナム語コミュニケーション支援 | Medium | High | 要求確認、meeting支援、review、日本語・ベトナム語の橋渡しを行うこと。 | お客様連携ではSAMと連携し、確認事項を短周期で整理します。 | 日越コミュニケーションを支援し、要求を明確化するBrSE。 |
-| SH-009 | Stakeholder | VTI_ヒエップ | hiep.nguyendinh@vti.com.vn | VTI | VTI側PM；D8開発チーム調整担当 | High | High | task、deadline、resource、blockerを把握し、開発チームを調整すること。 | 計画、daily follow-up、内部escalationで密に連携します。 | VTI/D8側PM。task、deadline、blockerを調整。 |
-| SH-010 | Stakeholder | Vu Van Canh | canh.vuvan@vti.com.vn | VTI | 開発メンバー | Medium | High | 明確なtask、完了条件、迅速な技術feedbackを受けて実装すること。 | PM/SAM経由で同期し、技術確認が必要な場合は直接連携します。 | VTI側developer。taskを担当し、技術feedbackに対応。 |
-| SH-011 | Stakeholder | Đỗ Hoàng Nam VTI.D6 | nam.dohoang@vti.com.vn | VTI | 開発メンバー | Medium | High | 明確なtask、完了条件、迅速な技術feedbackを受けて実装すること。 | PM/SAM経由で同期し、技術確認が必要な場合は直接連携します。 | VTI側developer。taskを担当し、技術feedbackに対応。 |
+| S-001 | Vendor reviewer | VTI サム | son.nguyenhong1@vti.com.vn | VTI | 納品責任者／技術窓口 | High | High | 確定フォーマットに沿った成果物、格納先、ソース確認・修正およびテスト結果を明示する。 | WBSGAMENコメントで成果物、格納先、レビュー依頼を連絡し、VTI内部Issueと相互参照する。 | 直接投稿: WBSGAMEN-209、WBSGAMEN-266、KSNEWSYS-424、KSNEWSYS-458、KSNEWSYS-472。 |
+| S-002 | Vendor reviewer | VTI ニャット |  | VTI | 設計書作成／VTI内部レビュー | Medium | High | 設計書の論理名、構成、処理責務およびレビュー指摘を整理し、対外成果物へ反映する。 | VTI Backlogで内部レビューを行い、確定内容をKSNEWSYS/WBSGAMENの成果物へ反映する。 | 直接投稿: KSNEWSYS-424。関連内部Issue: SHARP_MULTI_DEVICE_POS-523。 |
+| S-003 | WBS coordinator | SMJ 南 |  | SMJ | WBS管理／一次レビュー／顧客連絡 | High | High | 作業範囲、期限、レビュー状態、Ks様承認要否および完了条件を一貫して管理する。 | WBSGAMENのIssueフィールドとコメントを更新し、遅延・確認事項はKSNEWSYSと関連付ける。 | 直接投稿・担当: WBSGAMEN-40、-209、-211、-266、KSNEWSYS-472、-568。 |
+| S-004 | Responsible reviewer | SMJ鎌田 |  | SMJ | 責任者レビュー／設計方針確認 | High | High | 設計方針、資料の対象範囲およびレビュー指摘への対応結果を確認する。 | Backlogコメントで対象資料と判断事項を明示し、レビュー完了前に再確認する。 | 直接投稿: KSNEWSYS-424、KSNEWSYS-458、KSNEWSYS-568、WBSGAMEN-266。 |
+| S-005 | PMO reviewer | SMJ 小林 |  | SMJ | PMOレビュー／工数・進捗確認 | High | High | レビュー内容、工数、スケジュールおよび成果物の妥当性を確認する。 | レビュー依頼時に関連Issueと資料格納先を明記し、指摘・再提出・完了条件を追跡する。 | 直接投稿: KSNEWSYS-568。成果物レビュー通知: WBSGAMEN-209、WBSGAMEN-266。 |
+| S-006 | Project manager | SMJ 菅原 |  | SMJ | PM／最終確認 | High | High | 責任者・PMOのレビュー結果を踏まえ、設計内容と完了判定を確認する。 | 回付ルートの最終確認者として、レビュー結果と未解決事項をIssue上で確認する。 | KSNEWSYS-568の回付ルートおよびレビューコメントで確認。 |
+| S-007 | Team lead reviewer | 小山@ジャパンネット |  | JNET | チームリーダー／設計書フォーマット・範囲レビュー | High | High | 資料の位置付け、用語、フォーマット、責務分担および利用者視点の不足を確認する。 | VTIからの提出資料をBacklogで確認し、修正観点と正式文書への掲載要否を明示する。 | 直接投稿: KSNEWSYS-424、KSNEWSYS-458、KSNEWSYS-472。 |

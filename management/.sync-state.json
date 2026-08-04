@@ -1,27 +1,27 @@
 {
   "spreadsheet_id": "1cNCS6-y0tX7hkpZ2Y26UfVVPGtFOOxQOwd5AVfUgMpA",
   "source_of_truth": "markdown",
-  "last_published_at": "2026-08-03T00:05:03+09:00",
+  "last_published_at": "2026-08-04T14:38:04+09:00",
   "tables": {
     "wbs": {
-      "record_count": 27,
-      "source_hash": "a9e981c10115ab22c1654e08c9541ac835863f27ba9d57883995eb9d85ed2246"
+      "record_count": 6,
+      "source_hash": "d10df8db327169a2752440b42b5a7bcf808c7e04babff11405c9de538262d65b"
     },
     "risks": {
-      "record_count": 10,
-      "source_hash": "6517488388f4549fd0f344d01ff7af82fd39b91185d3eb91348e627dcd087aef"
+      "record_count": 5,
+      "source_hash": "d15f64e428071a3657b27b680a2ebe71ba2997ef8fc587fff88598cf23348f59"
     },
     "decisions": {
-      "record_count": 8,
-      "source_hash": "c786691354ae82ce2f64a57e3443022a679eddb707abeecadd72a0a11cc7a28a"
+      "record_count": 3,
+      "source_hash": "70a8cffb05fbe5fa96b71f5c4fa2253f88792ca5772b66267886bb2220b4b404"
     },
     "stakeholders": {
-      "record_count": 11,
-      "source_hash": "058c3727c273762addcdff5daabf0b24cb3982fda7bab2556ce5b1fbbb662c06"
+      "record_count": 7,
+      "source_hash": "5d0e22ad32ae432bafac311b46f60f0fafda3e4337482824e067993c63fcfd88"
     },
     "communications": {
-      "record_count": 10,
-      "source_hash": "5d27f7c4ac9a09b480c77bbd106e93113f3deb4b5121e77af847b4563805cb4d"
+      "record_count": 5,
+      "source_hash": "55e6b4a5629d739e507f775d33055c84f447d2cd9661edf59e42edef041b9c6a"
     }
   }
 }

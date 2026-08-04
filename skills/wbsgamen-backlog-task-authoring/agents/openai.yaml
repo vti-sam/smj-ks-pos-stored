@@ -1,0 +1,4 @@
+interface:
+  display_name: "WBSGAMEN Backlog Task Authoring"
+  short_description: "Soạn task WBSGAMEN theo mẫu Backlog của dự án"
+  default_prompt: "Use $wbsgamen-backlog-task-authoring to draft a concise WBSGAMEN Backlog task."
