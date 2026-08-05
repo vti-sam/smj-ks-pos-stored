@@ -1,26 +1,63 @@
 {
   "spreadsheet_id": "1cNCS6-y0tX7hkpZ2Y26UfVVPGtFOOxQOwd5AVfUgMpA",
   "source_of_truth": "markdown",
-  "last_published_at": "2026-08-04T14:38:04+09:00",
+  "last_published_at": "2026-08-05T13:51:16+09:00",
+  "projection_contract_hash": "ca278f8cc939eb89e2f001b876b96d843ca0cedde37a29a3d696ea880a8113b6",
   "tables": {
     "wbs": {
       "record_count": 6,
-      "source_hash": "d10df8db327169a2752440b42b5a7bcf808c7e04babff11405c9de538262d65b"
+      "record_ids": [
+        "PS-DEVICE-01",
+        "DEV-DEVICE-01-CFG",
+        "DEV-DEVICE-01-SEL",
+        "DEV-DEVICE-01-FACT",
+        "DEV-DEVICE-01-STR",
+        "DEV-DEVICE-01-ITG"
+      ],
+      "source_hash": "938997351064ce39c8bcb5f1fe5f1ba135242a3052ed97d7d5cb62e71d340844"
     },
     "risks": {
       "record_count": 5,
+      "record_ids": [
+        "R-001",
+        "R-002",
+        "R-003",
+        "R-004",
+        "R-005"
+      ],
       "source_hash": "d15f64e428071a3657b27b680a2ebe71ba2997ef8fc587fff88598cf23348f59"
     },
     "decisions": {
       "record_count": 3,
-      "source_hash": "70a8cffb05fbe5fa96b71f5c4fa2253f88792ca5772b66267886bb2220b4b404"
+      "record_ids": [
+        "D-001",
+        "D-002",
+        "D-003"
+      ],
+      "source_hash": "c290f8c52be8559f39cfd7980664800fb2e23ae7cd819a2fa23f2e14366450cc"
     },
     "stakeholders": {
       "record_count": 7,
-      "source_hash": "5d0e22ad32ae432bafac311b46f60f0fafda3e4337482824e067993c63fcfd88"
+      "record_ids": [
+        "S-001",
+        "S-002",
+        "S-008",
+        "S-007",
+        "S-005",
+        "S-004",
+        "S-006"
+      ],
+      "source_hash": "7ff472d9eff4d09c23137c31468312b46b280af941267043df01430ec82df9e5"
     },
     "communications": {
       "record_count": 5,
+      "record_ids": [
+        "C-001",
+        "C-002",
+        "C-003",
+        "C-004",
+        "C-005"
+      ],
       "source_hash": "55e6b4a5629d739e507f775d33055c84f447d2cd9661edf59e42edef041b9c6a"
     }
   }

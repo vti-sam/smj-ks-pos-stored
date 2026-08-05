@@ -58,6 +58,11 @@ Link nội bộ dùng path từ workspace root với prefix `project-store/`.
 - Mọi mutation dùng completion contract của owner skill:
   `validate MD → plan → approval → publish/rebuild → read-back`.
   Không định danh record bằng row number hoặc row order.
+- `watch-fast` chỉ được dùng khi User đã chủ động bắt đầu watcher và chấp nhận
+  auto-projection sau mỗi lần lưu. Nó là approval scope hẹp cho thay đổi nội
+  dung có stable ID/thứ tự không đổi: dùng sync-state local, ghi đúng một batch
+  values và read-back. Bất kỳ thay đổi structural nào phải dừng, không tự
+  rebuild hoặc tự sửa Sheet.
 - Google Sheets chỉ phản ánh ngược vào Markdown khi chạy trực tiếp lệnh
   `management-google-sheets import`; lệnh này tạo candidate trước, chỉ
   `--apply` mới cập nhật Markdown chính, và không tự publish lại. Schema và

@@ -6,10 +6,11 @@ project:
   system_name: KsタブレットPOS（次世代システム）
   document_name: KsタブレットPOS プロジェクト管理サマリー
   target: 共通部品開発（初期開発）／デバイス制御層
+  milestone: 【MS】共通部品開発（初期開発）
   version: "1.0"
   created_date: "2026-08-04"
   author: VTI サム
-  reviewer: SMJ 小林、SMJ鎌田、小山@ジャパンネット
+  reviewer: SMJ 小林、SMJ鎌田、SMJ 南
   approver: SMJ 菅原
   purpose: デバイス制御層に関する設計、プログラム仕様書、ソースコード修正、テストおよびレビューの進捗と判断事項を一元管理する。
   expected_outcome: 2026年8月のプログラム仕様書納品と9月の設計・開発完了に向け、成果物、レビュー、課題およびリスクを追跡できる状態。

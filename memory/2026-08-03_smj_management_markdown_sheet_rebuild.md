@@ -17,6 +17,13 @@ source:
   - project-data.yaml
   - scratch/management-audit/projection-20260804-070059.json
   - scratch/management-audit/projection-20260804-142401.json
+  - skills/project-ops/management-authoring/resources/management.schema.yaml
+  - skills/project-ops/management-authoring/scripts/migrate_management_v3_to_v4.py
+  - scratch/management-audit/projection-20260804-154234.json
+  - scratch/management-audit/projection-20260804-154820.json
+  - scratch/management-audit/projection-20260804-161703.json
+  - scratch/management-audit/projection-20260804-164948.json
+  - scratch/management-verification/verify.log
 tags:
   - smj-ks-pos
   - management
@@ -63,6 +70,22 @@ leaving an empty tail, and blank separator rows are reduced to 10px. The old
 system-name value was corrected to `KsタブレットPOS（次世代システム）`; the
 creation date is displayed as `2026-08-04`, and risk/stakeholder level labels
 are displayed in Japanese (`高／中／低`).
+
+The management schema is now v4. `WBS.md` stores `estimate_month` and
+`estimate_mm` explicitly: August is anchored at 2.0人月 on `DM-SPEC`, and
+September is anchored at 1.0人月 on `DM-CONFIG` for the five-task group. The
+other September rows keep the month but leave the amount blank, so the monthly
+sum cannot multiply the shared estimate. In `基本情報`, counts, status totals,
+deadline-month totals, month labels, grouped monthly effort and deadline values
+are formula-backed references to WBS; profile metadata and the projection time
+remain fixed metadata by design. `estimate_month` is written as text and
+`estimate_mm` as numeric data to keep the formulas stable after Excel export.
+
+The current reviewer display was corrected in the project profile and
+`STAKEHOLDERS.md`: the former `小山@ジャパンネット` label is now `SMJ 南` in
+the profile reviewer field and stakeholder `S-007`. The historical D-003
+wording `チームリーダー（小山）` was left unchanged because this correction
+was scoped to the exact current display label.
 
 The WBS status was corrected from the previous snapshot: `DM-SPEC` is now
 `In Progress`; `DM-CONFIG`, `DM-SELECT`, `DM-FACTORY`,
@@ -148,6 +171,23 @@ they are needed for traceability.
   failure. Final dark-symbol audit:
   `scratch/management-audit/projection-20260804-143804.json`; exported XLSX
   rendering confirms dark symbols, preserved formulas and no `####` matches.
+- The v4 authoring and projection tests pass 59/59. The final live read-back
+  confirms formulas in `基本情報` for WBS/risk/status/deadline counts and the
+  two monthly estimate rows; the WBS estimate range returns text months and
+  numeric 2.0/1.0 values. XLSX formula/error verification found zero matches
+  for `#REF!`, `#DIV/0!`, `#VALUE!`, `#NAME?`, `#N/A` and `####`; LibreOffice
+  rendering also shows the calculated 6/5 counts and 2.0/1.0人月 values.
+- The `SMJ 南` naming correction publish completed with shadow read-back in
+  8.76 seconds wall time; a separate live API read-back completed in 2.08
+  seconds and
+  returned `基本情報` reviewer `SMJ 小林、SMJ鎌田、SMJ 南` and stakeholder `S-007`
+  name `SMJ 南`. The final seven-tab audit is
+  `scratch/management-audit/projection-20260804-164948.json` with
+  `missing=0`, `legacy=0` and `merge_validation=PASS`.
+- The timed workflow measured authoring gate 0.24s, plan 4.41s, publish with
+  shadow read-back 8.76s, live read-back 2.08s and audit 0.80s (about 16.3s
+  for these commands). The observed 5m32s therefore was outside the measured
+  Google Sheets publish/read-back path.
 
 ## Unresolved
 

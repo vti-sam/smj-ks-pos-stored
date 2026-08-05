@@ -1,5 +1,5 @@
 ---
-schema_version: 3
+schema_version: 4
 table: risks
 key: id
 mode: replace
