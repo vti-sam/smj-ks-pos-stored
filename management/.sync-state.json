@@ -1,7 +1,7 @@
 {
   "spreadsheet_id": "1cNCS6-y0tX7hkpZ2Y26UfVVPGtFOOxQOwd5AVfUgMpA",
   "source_of_truth": "markdown",
-  "last_published_at": "2026-08-05T13:51:16+09:00",
+  "last_published_at": "2026-08-05T15:47:08+09:00",
   "projection_contract_hash": "ca278f8cc939eb89e2f001b876b96d843ca0cedde37a29a3d696ea880a8113b6",
   "tables": {
     "wbs": {
@@ -14,7 +14,7 @@
         "DEV-DEVICE-01-STR",
         "DEV-DEVICE-01-ITG"
       ],
-      "source_hash": "938997351064ce39c8bcb5f1fe5f1ba135242a3052ed97d7d5cb62e71d340844"
+      "source_hash": "4c5cb2aafe70b2cc9a3d6d366c002a9c8b940fc0486c6b28ce32f2964be7b3c8"
     },
     "risks": {
       "record_count": 5,
@@ -37,17 +37,20 @@
       "source_hash": "c290f8c52be8559f39cfd7980664800fb2e23ae7cd819a2fa23f2e14366450cc"
     },
     "stakeholders": {
-      "record_count": 7,
+      "record_count": 10,
       "record_ids": [
         "S-001",
         "S-002",
         "S-008",
+        "S-011",
         "S-007",
         "S-005",
+        "S-009",
+        "S-010",
         "S-004",
         "S-006"
       ],
-      "source_hash": "7ff472d9eff4d09c23137c31468312b46b280af941267043df01430ec82df9e5"
+      "source_hash": "8903d9b8f023b6822b5ee7b5c784ef06737200cb2d6a1da30e1234d49acee908"
     },
     "communications": {
       "record_count": 5,
