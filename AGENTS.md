@@ -99,6 +99,8 @@ Link nội bộ dùng path từ workspace root với prefix `project-store/`.
 - Body phải tách đúng bốn mục `Outcome`, `Evidence`, `Unresolved` và
   `Retrieval keys`. Evidence chỉ dùng source trực tiếp hoặc read-back; phần
   chưa đủ căn cứ nằm ở `Unresolved`.
+- Dùng frontmatter `status: stale` khi limitation hoặc mâu thuẫn quan trọng
+  vẫn cần kiểm tra lại; không ghi suy luận chưa verify thành fact.
 - Không dump transcript, secret hoặc token. Frontmatter, capture, sync và
   retrieval tuân theo owner skill và root memory gate.
 
