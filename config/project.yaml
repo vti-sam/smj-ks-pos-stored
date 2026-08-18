@@ -26,8 +26,8 @@ knowledge_memory:
 
 source_code:
   projects:
-    - id: tabletposboilerplate
-      path: sources/tabletposboilerplate
+    - id: tabetposboilerplate
+      path: sources/TabetPosBoilerplate
       codegraph:
         enabled: true
       scip:
@@ -35,7 +35,7 @@ source_code:
         indexer: scip-dotnet
         indexer_version: "0.2.14"
         consumer_version: "0.9.0"
-        output_dir: scratch/indexes/scip/tabletposboilerplate
+        output_dir: scratch/indexes/scip/tabetposboilerplate
         targets:
           - id: applications
             path: TabetPos.Applications/TabetPos.Applications.csproj

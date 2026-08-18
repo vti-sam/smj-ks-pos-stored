@@ -5,8 +5,8 @@ type: lesson
 status: archived
 source:
   - project-store/artifacts/reports/testcases/TC-UT-01_タブレットPOS_単体テストケース/
-  - sources/KsPosBoilerplate/TabetPos.Test/
-  - sources/KsPosBoilerplate/TabetPos.Host/tests/
+  - sources/TabetPosBoilerplate/TabetPos.Test/
+  - sources/TabetPosBoilerplate/TabetPos.Host/tests/
 tags:
   - testcase
   - unittest
@@ -45,7 +45,7 @@ promote_to_knowledge: false
 
 ## Host Coverage Update
 
-Host core の単体テストを `sources/KsPosBoilerplate/TabetPos.Host/tests/DeviceHostCore.Tests/` に追加した。
+Host core の単体テストを `sources/TabetPosBoilerplate/TabetPos.Host/tests/DeviceHostCore.Tests/` に追加した。
 
 - 新規 TestMethod: 23 件。
 - Host unit testcase: 既存 10 件 + 新規 23 件 = 33 件。

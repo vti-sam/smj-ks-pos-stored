@@ -4,9 +4,9 @@ project: smj-ks-pos
 type: gotcha
 status: archived
 source:
-  - Codex session 2026-06-23 report Markdown audit against sources/ksposboilerplate
+  - Codex session 2026-06-23 report Markdown audit against sources/TabetPosBoilerplate
   - project-store/artifacts/reports/
-  - sources/ksposboilerplate/
+  - sources/TabetPosBoilerplate/
 tags:
   - reports
   - named-pipe
@@ -21,7 +21,7 @@ promote_to_knowledge: false
 
 # Report Markdown Code Audit 2026-06-23
 
-Snapshot audit checked 44 Markdown files under `project-store/artifacts/reports/` against current source under `sources/ksposboilerplate`.
+Snapshot audit checked 44 Markdown files under `project-store/artifacts/reports/` against current source under `sources/TabetPosBoilerplate`.
 
 Verified current code state:
 
@@ -33,7 +33,7 @@ Verified current code state:
 Report findings:
 
 - `ARCH-01`, `ARCH-02`, `ARCH-03`, and `CFG-01` still contain old root path text `sources/POS 開発用ベースプロジェクト`.
-- All 33 program spec Markdown files use `sources/KsPosBoilerplate`; after normalizing to `sources/ksposboilerplate`, source files and documented physical class names all resolve correctly.
+- All 33 program spec Markdown files use `sources/TabetPosBoilerplate`; after normalizing to `sources/TabetPosBoilerplate`, source files and documented physical class names all resolve correctly.
 - `PS-HOST-05` has stale transport wording: `_transport` is described as `WindowMessage/Named Pipe transport`; current implementation is Named Pipe only.
 - `CFG-01` still shows `KsPOSPipeMessage` as named pipe example/default; current default config uses `TabetPos.Host.Command`.
 - `TC-IT-HOST-01` case `IT-HOST-032` still expects no `WindowMessage送信エラー`; AppStopServer now uses Named Pipe stop request, so the expected result should mention pipe close/Named Pipe behavior instead.

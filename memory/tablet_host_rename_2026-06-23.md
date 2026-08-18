@@ -20,9 +20,9 @@ promote_to_knowledge: false
 
 User requested source code naming to stop using project-owned `Ks*` host/device names and switch to `Tablet*`.
 
-Completed in nested source repo `sources/tabletposboilerplate` on branch `develop`, commit `b484ac1`:
+Completed in nested source repo `sources/TabetPosBoilerplate` on branch `develop`, commit `b484ac1`:
 
-- Renamed local source folder from `sources/ksposboilerplate` to `sources/tabletposboilerplate`.
+- Renamed local source folder from `sources/TabetPosBoilerplate` to `sources/TabetPosBoilerplate`.
 - Renamed project-owned host/device paths and symbols:
   - `KsHost` -> `TabletHost`
   - `KsDevice*` -> `TabletDevice*`
@@ -34,7 +34,7 @@ Completed in nested source repo `sources/tabletposboilerplate` on branch `develo
 
 Verification:
 
-- CodeGraph ensured for `sources/tabletposboilerplate`.
+- CodeGraph ensured for `sources/TabetPosBoilerplate`.
 - `dotnet build src/TabletHost/DeviceHost/TabletHost.csproj -p:EnableWindowsTargeting=true /m:1` passed.
 - `dotnet build tests/DeviceHostCore.Tests/DeviceHostCore.Tests.csproj -p:EnableWindowsTargeting=true /m:1 -nr:false` passed.
 - `dotnet build tests/TabletDeviceSettingBase.Tests/TabletDeviceSettingBase.Tests.csproj -p:EnableWindowsTargeting=true /m:1 -nr:false` passed.

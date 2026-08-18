@@ -5,8 +5,8 @@ type: decision
 status: archived
 source:
   - Codex session 2026-06-23 AppStopServer NamedPipe migration
-  - sources/KsPosBoilerplate/TabetPos.Host/src/AppStopServer/Program.cs
-  - project-store/knowledge/ks_pos_boilerplate/runtime/appserver_appstopserver.md
+  - sources/TabetPosBoilerplate/TabetPos.Host/src/AppStopServer/Program.cs
+  - project-store/knowledge/tabet_pos_boilerplate/runtime/appserver_appstopserver.md
   - project-store/artifacts/reports/architecture/ARCH-01_タブレットPOS_ソフトウェア構造設計書/ARCH-01_タブレットPOS_ソフトウェア構造図.drawio
 tags:
   - ks_host

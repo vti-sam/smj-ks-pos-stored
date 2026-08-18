@@ -759,10 +759,10 @@ Example:
 | `devices[].id` | デバイスコネクタ（Host）内で扱う論理device ID。Customer display は `CustomerDisplay` を使用する |
 | `devices[].name` | runtime device display name |
 | `devices[].visible` | device form visibility |
-| `devices[].classId` | 既存 `KsClassFactory` で生成する runtime class ID |
+| `devices[].classId` | `HostDeviceClassRegistry` に登録したFactoryで生成する runtime class ID |
 | `devices[].productName` | device product name |
 
-`LineDisplay1` は 既存 API の `KsClassID` / `KsClassFactory` が使用する物理実装側の class IDである。Application / DeviceCtrl / Host間の論理IDは `CustomerDisplay` に統一するが、この class ID と 既存 API 名は変更しない。
+`LineDisplay1` は既存 API の `KsClassID` とHost側の登録済みFactoryが使用する物理実装側の class IDである。Application / DeviceCtrl / Host間の論理IDは `CustomerDisplay` に統一するが、この class ID と既存 API 名は変更しない。
 
 使用有無は compile reference ではなく、runtime の `host_device_config.json` と `classId` により決まる。
 
