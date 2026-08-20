@@ -47,6 +47,10 @@ source_code:
             path: TabetPos.Core/TabetPos.Core.csproj
           - id: device-control
             path: TabetPos.DeviceCtrl/TabetPos.DeviceCtrl.csproj
+          - id: binding-android
+            path: TabetPos.BindingLibrary/Epos2Android/Epos2Android.csproj
+          - id: binding-ios
+            path: TabetPos.BindingLibrary/Epos2iOS/Epos2iOS.csproj
           - id: host-app-server
             path: TabetPos.Host/src/AppServer/AppServer.csproj
           - id: host-app-stop-server
@@ -67,14 +71,14 @@ source_code:
             path: TabetPos.Host/src/TabletDevice/CashDrawer/CashDrawerBySharp/CashDrawerBySharp.csproj
           - id: host-customer-display
             path: TabetPos.Host/src/TabletDevice/CustomerDisplay/CustomerDisplayBySharp/CustomerDisplayBySharp.csproj
+          - id: host-payment
+            path: TabetPos.Host/src/TabletDevice/Payment/PaymentByCafisArch/PaymentByCafisArch.csproj
+          - id: host-printer
+            path: TabetPos.Host/src/TabletDevice/Printer/PrinterByOpos/PrinterByOpos.csproj
           - id: host-tablet
             path: TabetPos.Host/src/TabletHost/DeviceHost/TabletHost.csproj
-          - id: host-test-device-core
-            path: TabetPos.Host/tests/DeviceHostCore.Tests/DeviceHostCore.Tests.csproj
-          - id: host-test-device-setting
-            path: TabetPos.Host/tests/TabletDeviceSettingBase.Tests/TabletDeviceSettingBase.Tests.csproj
-          - id: ui-tests
-            path: TabetPos.UITests/TabetPos.UITests.csproj
+          - id: peripheral-integration-runner
+            path: tools/PeripheralIntegrationRunner/PeripheralIntegrationRunner.csproj
 
 google:
   service_account:

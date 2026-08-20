@@ -27,7 +27,6 @@ draft/
 # Local cache/index state
 scratch/
 .codegraph/
-.fastembed_cache/
 __pycache__/
 *.pyc
 

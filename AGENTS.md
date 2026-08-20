@@ -129,7 +129,7 @@ Link nội bộ dùng path từ workspace root với prefix `project-store/`.
 ## SCIP delta của SMJ KS POS
 
 - `config/project.yaml` bật SCIP tường minh cho project
-  `tabletposboilerplate` cùng với CodeGraph; indexer/consumer version và danh
+  `tabetposboilerplate` cùng với CodeGraph; indexer/consumer version và danh
   sách target `.csproj` trong config là binding bắt buộc của project này.
 - SCIP chỉ phục vụ source-intelligence của project đã khai báo; không tự động
   index toàn bộ `sources/`, không thay thế CodeGraph và output index chỉ nằm ở
