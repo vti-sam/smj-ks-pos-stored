@@ -6,7 +6,8 @@ status: archived
 source:
   - scratch/デバイスコネクタプログラム仕様書/指摘反映済み/
   - scratch/デバイスコネクタプログラム仕様書/
-  - project-store/artifacts/reports/program-specs/PS-01_タブレットDCS_デバイスコネクタ制御方式/
+  - project-store/artifacts/reports/program-specs/PS-DEVICE_タブレットPOS_デバイス制御/
+  - project-store/artifacts/reports/program-specs/PS-HOST_タブレットPOS_デバイスコネクタ/
   - project-store/knowledge/tabet_pos_boilerplate/runbooks/document_authoring_markdown_source_of_truth.md
   - sources/tabletposboilerplate/TabetPos.Host/src/TabletHost/DeviceHost/DeviceCommandCore.cs
   - sources/tabletposboilerplate/TabetPos.Host/src/TabletHost/DeviceHost/NamedPipeDeviceHostAdapter.cs

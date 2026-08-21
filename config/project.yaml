@@ -26,8 +26,8 @@ knowledge_memory:
 
 source_code:
   projects:
-    - id: tabetposboilerplate
-      path: sources/TabetPosBoilerplate
+    - id: tabletposboilerplate
+      path: sources/TabletPosBoilerplate
       codegraph:
         enabled: true
       scip:
@@ -35,48 +35,48 @@ source_code:
         indexer: scip-dotnet
         indexer_version: "0.2.14"
         consumer_version: "0.9.0"
-        output_dir: scratch/indexes/scip/tabetposboilerplate
+        output_dir: scratch/indexes/scip/tabletposboilerplate
         targets:
           - id: applications
-            path: TabetPos.Applications/TabetPos.Applications.csproj
+            path: TabletPos.Applications/TabletPos.Applications.csproj
           - id: application-controls
-            path: TabetPos.ApplicationControls/TabetPos.ApplicationControls.csproj
+            path: TabletPos.ApplicationControls/TabletPos.ApplicationControls.csproj
           - id: application-utils
-            path: TabetPos.ApplicationUtils/TabetPos.ApplicationUtils.csproj
+            path: TabletPos.ApplicationUtils/TabletPos.ApplicationUtils.csproj
           - id: core
-            path: TabetPos.Core/TabetPos.Core.csproj
+            path: TabletPos.Core/TabletPos.Core.csproj
           - id: device-control
-            path: TabetPos.DeviceCtrl/TabetPos.DeviceCtrl.csproj
+            path: TabletPos.DeviceCtrl/TabletPos.DeviceCtrl.csproj
           - id: binding-android
-            path: TabetPos.BindingLibrary/Epos2Android/Epos2Android.csproj
+            path: TabletPos.BindingLibrary/Epos2Android/Epos2Android.csproj
           - id: binding-ios
-            path: TabetPos.BindingLibrary/Epos2iOS/Epos2iOS.csproj
+            path: TabletPos.BindingLibrary/Epos2iOS/Epos2iOS.csproj
           - id: host-app-server
-            path: TabetPos.Host/src/AppServer/AppServer.csproj
+            path: TabletPos.Host/src/AppServer/AppServer.csproj
           - id: host-app-stop-server
-            path: TabetPos.Host/src/AppStopServer/AppStopServer.csproj
+            path: TabletPos.Host/src/AppStopServer/AppStopServer.csproj
           - id: host-device-definition
-            path: TabetPos.Host/src/TabletDeviceDefinition/TabletDeviceDefinition.csproj
+            path: TabletPos.Host/src/TabletDeviceDefinition/TabletDeviceDefinition.csproj
           - id: host-device-manager
-            path: TabetPos.Host/src/TabletDeviceManager/TabletDeviceManager.csproj
+            path: TabletPos.Host/src/TabletDeviceManager/TabletDeviceManager.csproj
           - id: host-device-setting
-            path: TabetPos.Host/src/TabletDeviceSettingBase/TabletDeviceSettingBase.csproj
+            path: TabletPos.Host/src/TabletDeviceSettingBase/TabletDeviceSettingBase.csproj
           - id: host-device-base
-            path: TabetPos.Host/src/TabletDevice/DeviceBase/DeviceBase.csproj
+            path: TabletPos.Host/src/TabletDevice/DeviceBase/DeviceBase.csproj
           - id: host-cash-changer-base
-            path: TabetPos.Host/src/TabletDevice/CashChanger/CashChangerBase/CashChangerBase.csproj
+            path: TabletPos.Host/src/TabletDevice/CashChanger/CashChangerBase/CashChangerBase.csproj
           - id: host-cash-changer
-            path: TabetPos.Host/src/TabletDevice/CashChanger/CashChangerByRT300/CashChangerByRT300.csproj
+            path: TabletPos.Host/src/TabletDevice/CashChanger/CashChangerByRT300/CashChangerByRT300.csproj
           - id: host-cash-drawer
-            path: TabetPos.Host/src/TabletDevice/CashDrawer/CashDrawerBySharp/CashDrawerBySharp.csproj
+            path: TabletPos.Host/src/TabletDevice/CashDrawer/CashDrawerBySharp/CashDrawerBySharp.csproj
           - id: host-customer-display
-            path: TabetPos.Host/src/TabletDevice/CustomerDisplay/CustomerDisplayBySharp/CustomerDisplayBySharp.csproj
+            path: TabletPos.Host/src/TabletDevice/CustomerDisplay/CustomerDisplayBySharp/CustomerDisplayBySharp.csproj
           - id: host-payment
-            path: TabetPos.Host/src/TabletDevice/Payment/PaymentByCafisArch/PaymentByCafisArch.csproj
+            path: TabletPos.Host/src/TabletDevice/Payment/PaymentByCafisArch/PaymentByCafisArch.csproj
           - id: host-printer
-            path: TabetPos.Host/src/TabletDevice/Printer/PrinterByOpos/PrinterByOpos.csproj
+            path: TabletPos.Host/src/TabletDevice/Printer/PrinterByOpos/PrinterByOpos.csproj
           - id: host-tablet
-            path: TabetPos.Host/src/TabletHost/DeviceHost/TabletHost.csproj
+            path: TabletPos.Host/src/TabletHost/DeviceHost/TabletHost.csproj
           - id: peripheral-integration-runner
             path: tools/PeripheralIntegrationRunner/PeripheralIntegrationRunner.csproj
 

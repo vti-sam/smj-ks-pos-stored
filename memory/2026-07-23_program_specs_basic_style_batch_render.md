@@ -4,7 +4,8 @@ project: smj-ks-pos
 type: decision
 status: archived
 source:
-  - project-store/artifacts/reports/program-specs/PS-01_タブレットDCS_デバイスコネクタ制御方式/
+  - project-store/artifacts/reports/program-specs/PS-DEVICE_タブレットPOS_デバイス制御/
+  - project-store/artifacts/reports/program-specs/PS-HOST_タブレットPOS_デバイスコネクタ/
   - project-store/artifacts/reports/program-specs/PS-02_タブレットPOS_ローカル状態管理/
   - project-store/artifacts/reports/program-specs/PS-03_タブレットPOS_監視ログ連携/
 tags:

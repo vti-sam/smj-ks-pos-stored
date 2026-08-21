@@ -1,3 +1,7 @@
+// Generated from Markdown: EX-DEVICE-01_次世代POS_デバイス制御実装例集.md
+// Source contract SHA-256: 6165cc00adf077bfeecfdea5895e4b582aedfe5e8a25554d855027d324a6e140
+// Generated output; do not edit. Change Markdown or the owning renderer and regenerate both scripts.
+
 function main(workbook: ExcelScript.Workbook) {
   const sheet = workbook.getActiveWorksheet();
   const expectedSheetBase = "05_共通利用フロー_01";
@@ -78,7 +82,7 @@ function main(workbook: ExcelScript.Workbook) {
     const labelName = edgeLabelPrefix + suffix;
     const centerX = candidate.left + candidate.width / 2;
     const centerY = candidate.top + candidate.height / 2;
-    if (!addConnectorLabel(sheet, obstacleBounds, labelName, groupName, shapes[candidate.shapeIndex], candidate.title, candidate.description, centerX, centerY, reviewLeft, reviewRight, reviewTop)) {
+    if (!addConnectorLabel(sheet, obstacleBounds, labelName, groupName, shapes[candidate.shapeIndex], candidate.title, candidate.description, centerX, centerY, candidate.width, candidate.height, reviewLeft, reviewRight, reviewTop)) {
       failedOverlayIds.push(candidate.name);
     } else {
       existingNames[groupName] = true;
@@ -270,7 +274,7 @@ function labelHeight(text: string, width: number): number {
   return height;
 }
 
-function addConnectorLabel(sheet: ExcelScript.Worksheet, obstacleBounds: number[][], shapeName: string, groupName: string, connector: ExcelScript.Shape, altTextTitle: string, text: string, centerX: number, centerY: number, reviewLeft: number, reviewRight: number, reviewTop: number): boolean {
+function addConnectorLabel(sheet: ExcelScript.Worksheet, obstacleBounds: number[][], shapeName: string, groupName: string, connector: ExcelScript.Shape, altTextTitle: string, text: string, centerX: number, centerY: number, connectorWidth: number, connectorHeight: number, reviewLeft: number, reviewRight: number, reviewTop: number): boolean {
   const width = labelWidth(text);
   const height = labelHeight(text, width);
   const box = sheet.addTextBox(text);
@@ -294,7 +298,7 @@ function addConnectorLabel(sheet: ExcelScript.Worksheet, obstacleBounds: number[
   font.setColor("#111111");
   box.setAltTextTitle(altTextTitle || text);
   box.setAltTextDescription(text);
-  if (!placeConnectorLabel(box, centerX, centerY, reviewLeft, reviewRight, reviewTop)) {
+  if (!placeConnectorLabel(box, centerX, centerY, connectorWidth, connectorHeight, 0, reviewLeft, reviewRight, reviewTop)) {
     box.delete();
     return false;
   }
@@ -307,11 +311,13 @@ function addConnectorLabel(sheet: ExcelScript.Worksheet, obstacleBounds: number[
   return true;
 }
 
-function placeConnectorLabel(box: ExcelScript.Shape, centerX: number, centerY: number, reviewLeft: number, reviewRight: number, reviewTop: number): boolean {
+function placeConnectorLabel(box: ExcelScript.Shape, centerX: number, centerY: number, connectorWidth: number, connectorHeight: number, gap: number, reviewLeft: number, reviewRight: number, reviewTop: number): boolean {
   const width = box.getWidth();
   const height = box.getHeight();
-  const left = Math.max(reviewLeft, Math.min(centerX - width / 2, reviewRight - width));
-  const top = Math.max(reviewTop, centerY - height / 2);
+  const preferredLeft = gap > 0 && connectorHeight > connectorWidth ? centerX + gap : centerX - width / 2;
+  const preferredTop = gap > 0 && connectorHeight <= connectorWidth ? centerY - gap - height : centerY - height / 2;
+  const left = Math.max(reviewLeft, Math.min(preferredLeft, reviewRight - width));
+  const top = Math.max(reviewTop, preferredTop);
   box.setLeft(left);
   box.setTop(top);
   return left + width <= reviewRight;

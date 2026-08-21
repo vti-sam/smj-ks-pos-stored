@@ -1,14 +1,15 @@
 タブレットPOS
 ARCH-02 端末アプリケーション構造設計書
 文書ID: ARCH-02
-第1.0.0版
-2026年6月19日
+第1.0.1版
+2026年8月24日
 
 ## 改訂履歴
 
 | 改訂日 | 版数 | 内容 | 改訂者 | 承認者 |
 | :----- | :--- | :--- | :----- | :----- |
 | 2026/06/19 | 1.0.0 | タブレットPOS ソフトウェア全体構造設計書の構成に合わせ、端末アプリケーションの Presentation / Application / Domain / Ports / Infrastructure の責務と実装規約を定義 | VTI | - |
+| 2026/08/24 | 1.0.1 | 現行ソースに合わせてDI登録、DeviceManager初期化、実機確認用strategy provider、Host・イベント受信ライフサイクル、およびDeviceCtrl設定管理の責務を更新 | VTI | - |
 
 ## 目次
 
@@ -43,6 +44,7 @@ ARCH-02 端末アプリケーション構造設計書
   - [6.3 命名・配置規約](#63-命名配置規約)
   - [6.4 テスト・検証観点](#64-テスト検証観点)
 - [7. 関連資料](#7-関連資料)
+- [8. 結論](#8-結論)
 
 ## 1. イントロダクション
 
@@ -50,7 +52,7 @@ ARCH-02 端末アプリケーション構造設計書
 
 本書は、タブレットPOS 端末アプリケーションの内部構造を定義する構造設計書である。
 
-対象は `TabetPos.Applications` を中心とし、UI、画面遷移、ViewModel、Application service、設定サービス、DeviceCtrl 呼び出し境界を扱う。
+対象は `TabletPos.Applications` を中心とし、UI、画面遷移、ViewModel、Application service、設定サービス、DeviceCtrl 呼び出し境界を扱う。
 
 本書は個別業務画面の詳細仕様ではない。個別機能の入力項目、業務判定、帳票レイアウトは各機能仕様書で定義する。
 
@@ -62,7 +64,7 @@ ARCH-02 端末アプリケーション構造設計書
 
 画面遷移は MAUI Shell route と `IRouteRegistry` / `INavigationService` の組み合わせで管理する。
 
-デバイス制御は `TabetPos.DeviceCtrl` の strategy interface を経由し、画面層から OPOS / OCX / Named Pipe を直接呼び出さない。
+デバイス制御は `TabletPos.DeviceCtrl` の strategy interface を経由し、画面層から OPOS / OCX / Named Pipe を直接呼び出さない。
 
 ### 1.3 対象読者
 
@@ -71,7 +73,7 @@ ARCH-02 端末アプリケーション構造設計書
 | アプリケーション開発者 | Page、ViewModel、Application service の配置と責務を確認する |
 | デバイス制御開発者 | 端末アプリケーションから DeviceCtrl へ渡す境界を確認する |
 | テスト担当者 | 画面遷移、ライフサイクル、設定反映、デバイス呼び出しの検証観点を確認する |
-| PM / アーキテクト | 端末アプリケーション層の設計方針と未実装範囲を確認する |
+| PM / アーキテクト | 端末アプリケーション層の設計方針、現在の適用範囲、および責務境界を確認する |
 
 ### 1.4 関連ドキュメント
 
@@ -103,24 +105,25 @@ ARCH-02 端末アプリケーション構造設計書
 
 ![端末アプリケーション構造図](ARCH-02_タブレットPOS_端末アプリケーション構造図.svg)
 
-図内の太字は class 名または仕様IDを示し、下段は基本設計レベルの責務を示す。端末アプリケーション層は画面、ViewModel、navigation、device 設定読込を担当し、デバイスの物理制御は `TabetPos.DeviceCtrl` と `TabetPos.Host` へ委譲する。
+図内の太字はclass名または仕様IDを示し、下段は基本設計レベルの責務を示す。端末アプリケーション層は画面、ViewModel、navigation、DeviceManager初期化、およびHost・イベント受信のライフサイクルを担当する。デバイス設定の読込・保存とstrategy選択は `TabletPos.DeviceCtrl`、物理制御は `TabletPos.DeviceCtrl` と `TabletPos.Host` へ委譲する。
 
 | 設計要素 | 対象 class / file | 基本設計上の役割 |
 |---|---|---|
-| 起動構成 | `MauiProgram`, `DependencyInjection` | MAUI app の生成、DI container 構成、画面 / ViewModel / service 登録を行う |
+| 起動構成 | `MauiProgram`, `DependencyInjection` | MAUI appの生成、`AddApplicationServices`によるDI構成、ローカルDB migration、および`DeviceManager.InitializeAsync`の起動を行う |
 | 画面遷移 | `AppShell`, `IRouteRegistry`, `INavigationService` | Shell route 登録、route 名の一元管理、ViewModel からの画面遷移要求を扱う |
 | 画面構成 | `MainPage`, `MainPageViewModel` | 画面表示、入力状態、command、navigation / device service 呼び出しを分離する |
-| デバイス設定 | `DeviceControllerConfigService` | `device_controller_config.json` を読み込み、`DeviceManager` へ設定を反映する |
-| デバイス境界 | `DeviceManager`, `NamedPipeClient` | strategy 解決とデバイスコネクタ（Host）連携を担当し、端末アプリケーションから通信詳細を隠蔽する |
+| デバイス設定 | `DeviceManager`, `DeviceControllerConfigService` | 端末アプリケーションは`DeviceManager.InitializeAsync`だけを起動し、DeviceCtrl内部の設定サービスが`device_controller_config.json`を読み込んで設定を反映する |
+| 実機確認用デバイス境界 | `DeviceIntegrationTestViewModel`, `IDeviceIntegrationTestStrategyProvider`, `DeviceIntegrationTestStrategyProvider` | ViewModelからDeviceManagerを直接参照せず、デバイス種別ごとの公開strategyを取得する |
+| デバイスサービスライフサイクル | `App`, `IHostProcessManager`, `IDeviceEventReceiver` | Window作成・有効化・再開時にHostとイベント受信を開始し、停止・破棄時にイベント受信とHostを停止する |
 
 ### 2.2 レイヤ構成
 
 | レイヤ | 主な構成 | 責務 |
 |---|---|---|
 | Presentation | Views、ViewModels、Resources、Controls | 画面表示、入力、画面状態、UI lifecycle |
-| Application | Devices、Navigation、共通Result / handler契約 | ユースケース単位の調整、画面遷移、設定読込、DeviceCtrl 呼び出し |
-| Domain | 業務モデル、業務ルール | 現行ソースでは独立folder未作成。業務ルール増加時に分離する |
-| Ports | service interface、device strategy interface | 外部境界を抽象化する契約 |
+| Application | Devices、Navigation、共通Result / handler契約 | ユースケース単位の調整、画面遷移、実機確認用strategy provider、Hostプロセス管理、およびDeviceCtrl呼び出し |
+| Domain | 業務モデル、業務ルール | 現行構成では独立したDomain folderを使用しない。業務ルールを追加する場合はUIとdevice実装から分離する |
+| Ports | navigation、dialog、device process / strategy provider interface | 外部境界を抽象化する契約 |
 | Infrastructure | Platform services、local settings、file system、HTTP、logging | OS / SDK / 永続化などの実装詳細 |
 
 ### 2.3 依存関係ルール
@@ -143,7 +146,8 @@ Infrastructure は Ports の実装として配置し、OS API、ファイル、H
 | Navigation | MAUI Shell | Route based navigation |
 | DI | Microsoft.Extensions.DependencyInjection | Page / ViewModel / service 登録 |
 | Logging | Serilog / AppLogger | アプリケーションログ |
-| Device boundary | TabetPos.DeviceCtrl | 周辺機器制御 strategy 呼び出し |
+| Device boundary | TabletPos.DeviceCtrl | 周辺機器制御 strategy 呼び出し |
+| Shared device contract | TabletPos.DeviceContracts | DeviceCtrlとHostで共有する名前付きパイプ要求・応答・イベントDTO、識別子、および通信既定値 |
 
 ## 3. Presentation 層
 
@@ -185,9 +189,9 @@ ViewModel から他画面へ遷移する場合は `INavigationService` を利用
 
 ### 4.1 構成要素
 
-Application 層は、Navigation、DeviceController 設定読込、共通Result、command / query handler 契約など、画面をまたぐ処理を提供する。
+Application層は、Navigation、Hostプロセス管理、実機確認用strategy provider、共通Result、command / query handler契約など、画面をまたぐ処理を提供する。デバイス設定の読込と保存はDeviceCtrl内部の責務とする。
 
-`MauiProgram` は `AddApplicationServices()` を呼び出し、`IDeviceControllerConfigService`、`IRouteRegistry`、`INavigationService`、`AppShell`、`MainPage`、`MainPageViewModel` を DI 登録する。
+`MauiProgram` は `AddApplicationServices()` を呼び出す。`DependencyInjection.AddApplicationServices` は `AddTabletPosDeviceCtrl()` によりDeviceCtrlを登録し、`IHostProcessManager`、`IDeviceIntegrationTestStrategyProvider`、`IRouteRegistry`、`INavigationService`、`AppShell`、Page、およびViewModelをDI登録する。
 
 ### 4.2 サービス実装規約
 
@@ -199,11 +203,13 @@ Service は UI 表示そのものではなく、画面から呼び出される�
 
 ### 4.3 デバイス制御層との連携
 
-`IDeviceControllerConfigService.InitializeDeviceManagerAsync` は設定読込後に DI で注入された `DeviceManager.InitializeFromConfig` を呼び出す。
+`MauiProgram.InitializeDeviceControllerConfig` はDIから `DeviceManager` を解決し、`InitializeAsync` の完了を待つ。設定読込、デフォルト設定への切替、strategy登録、およびNamedPipeSettingsの適用はDeviceCtrl内部で行う。
 
-ViewModel は `ICashChangerStrategy`、`IPrinterStrategy`、`IBarcodeScannerStrategy` などの device interface を介してデバイス操作を呼び出す。
+`DeviceIntegrationTestViewModel` は `IDeviceIntegrationTestStrategyProvider` を介して実機確認用のstrategyを取得する。`DeviceIntegrationTestStrategyProvider` は `DeviceManager.Get...StrategyAsync` へ委譲し、`ICashChangerStrategy`、`IPrinterStrategy`、`IPaymentStrategy`、`IBarcodeScannerStrategy` などの公開デバイス契約を返す。
 
 端末アプリケーション側では device strategy の選択条件、OS 別実装、Named Pipe command 名を直接分岐しない。
+
+`App` はWindow作成・有効化・再開時に `IHostProcessManager.EnsureStartedAsync` の後で `IDeviceEventReceiver.StartAsync` を呼び出し、停止・破棄時はイベント受信を止めてからHostを停止する。現行ソースでは `EventReceived` の購読者を登録していないため、受信イベントをApplicationユースケースへ引き渡さない。
 
 ### 4.4 非同期処理とエラー処理
 
@@ -225,7 +231,7 @@ Domain 層は業務ルール、金額計算、販売状態、入力可否など�
 
 Ports は Application 層が利用する抽象契約である。
 
-例として、`INavigationService`、`IRouteRegistry`、`IDeviceControllerConfigService`、DeviceCtrl の各 strategy interface が該当する。
+例として、`INavigationService`、`IRouteRegistry`、`IHostProcessManager`、`IDeviceIntegrationTestStrategyProvider`、DeviceCtrlの各strategy interfaceが該当する。
 
 ### 5.3 Infrastructure 層
 
@@ -235,7 +241,7 @@ Infrastructure は Application / Ports から呼び出される実装であり�
 
 ### 5.4 設定・ログ・永続化
 
-デバイス設定は `device_controller_config.json` から読み込む。`DeviceControllerConfigService` は runtime 設定ファイルを優先し、存在しない場合は package default を読み込み、DeviceManager へ反映する。
+デバイス設定はDeviceCtrl内部の `DeviceControllerConfigService` が `device_controller_config.json` から読み込む。runtime設定ファイルを優先し、存在しない、または有効な設定へ変換できない場合はpackage defaultを読み込み、DeviceManagerへ反映する。端末アプリケーションは設定ファイルを直接読み込まない。
 
 ログは `AppLogger` / Serilog を経由し、端末アプリケーションのログファイルは app data 配下の `logs/app.log` を基本とする。
 
@@ -245,7 +251,7 @@ Infrastructure は Application / Ports から呼び出される実装であり�
 
 ### 6.1 DI 登録規約
 
-Page、ViewModel、Service は `MauiProgram` で登録する。
+Page、ViewModel、Serviceは `DependencyInjection.AddApplicationServices` で登録し、`MauiProgram` はこの拡張メソッドを一度呼び出す。DeviceCtrlの登録は `AddTabletPosDeviceCtrl` へ委譲する。
 
 画面常駐または共有状態が必要なものは Singleton、画面遷移ごとに状態を分離するものは Transient とする。
 
@@ -261,7 +267,7 @@ ViewModel は `BaseViewModel` を継承し、初期化、再表示、画面離�
 
 画面名は `{Feature}Page`、ViewModel は `{Feature}PageViewModel` を基本とする。
 
-Application service は用途別folderに interface と実装を配置する。現行の device 設定は `Application/Devices`、navigation は `Ports/Navigation` と `Infrastructure/Navigation` に分離する。
+Application serviceは用途別folderにinterfaceと実装を配置する。Hostプロセス管理は `Application/Devices`、実機確認用strategy providerは `Application/Devices/Testing`、navigationは `Ports/Navigation` と `Infrastructure/Navigation` に分離する。DeviceCtrlの設定サービスは `TabletPos.DeviceCtrl/Configuration` に配置する。
 
 Platform 固有処理は platform service として分離し、ViewModel に OS 分岐を埋め込まない。
 
@@ -271,12 +277,26 @@ Platform 固有処理は platform service として分離し、ViewModel に OS 
 
 DeviceCtrl 呼び出しを伴う画面は、device 未接続、設定不備、timeout、再試行時の UI 表示を確認する。
 
-device_controller_config 更新時は JSON parse、DeviceManager 再初期化、既存画面への影響を確認する。
+Host再起動またはNamed Pipe切断を検出した場合は、通信異常を操作結果「失敗」として記録し、再起動前のstrategy参照を破棄して画面状態を「未接続」へ戻すことを確認する。後続操作は、`Start`で新しいHostセッションを確立してから実行する。
+
+device_controller_config更新時はJSON変換、DeviceManagerへの再適用、コマンド通信とイベント受信へのNamedPipeSettings反映、および既存画面への影響を確認する。
 
 ## 7. 関連資料
 
-- `sources/tabletposboilerplate/TabetPos.Applications/MauiProgram.cs`
-- `sources/tabletposboilerplate/TabetPos.Applications/AppShell.xaml.cs`
-- `sources/tabletposboilerplate/TabetPos.Applications/Presentation/ViewModels/Base/BaseViewModel.cs`
-- `sources/tabletposboilerplate/TabetPos.Applications/Application/Devices/DeviceControllerConfigService.cs`
-- `sources/tabletposboilerplate/TabetPos.DeviceCtrl/Interfaces/`
+- `sources/TabletPosBoilerplate/TabletPos.Applications/MauiProgram.cs`
+- `sources/TabletPosBoilerplate/TabletPos.Applications/App.xaml.cs`
+- `sources/TabletPosBoilerplate/TabletPos.Applications/Composition/DependencyInjection.cs`
+- `sources/TabletPosBoilerplate/TabletPos.Applications/AppShell.xaml.cs`
+- `sources/TabletPosBoilerplate/TabletPos.Applications/Presentation/ViewModels/Base/BaseViewModel.cs`
+- `sources/TabletPosBoilerplate/TabletPos.Applications/Application/Devices/Testing/DeviceIntegrationTestStrategyProvider.cs`
+- `sources/TabletPosBoilerplate/TabletPos.DeviceCtrl/Configuration/DeviceControllerConfigService.cs`
+- `sources/TabletPosBoilerplate/TabletPos.DeviceCtrl/DeviceManager.cs`
+- `sources/TabletPosBoilerplate/TabletPos.DeviceCtrl/Interfaces/`
+
+## 8. 結論
+
+端末アプリケーションは、`MauiProgram` と `DependencyInjection` で構成を登録し、`DeviceManager.InitializeAsync` の起動だけを担当する。設定の読込・保存、strategy選択、および名前付きパイプ設定の適用はDeviceCtrl内部で完結する。
+
+実機確認画面は `IDeviceIntegrationTestStrategyProvider` を介してDeviceManagerから公開strategyを取得する。Windowsでは `App` がHostとイベント受信のライフサイクルを管理するが、現行ソースでは `EventReceived` の購読者を登録していないため、受信イベントをApplicationユースケースへ引き渡さない。
+
+端末アプリケーション側の `DeviceManager` はstrategy選択とDeviceCtrl設定を管理する。Host側の `TabletDeviceManager` は別プロセス内で物理デバイスの読込、利用状態、およびライフサイクルを管理する。名称が似ていても責務とプロセス境界は異なる。

@@ -4,7 +4,7 @@ project: smj-ks-pos
 type: lesson
 status: archived
 source:
-  - project-store/artifacts/reports/program-specs/PS-01_タブレットDCS_デバイスコネクタ制御方式/
+  - project-store/artifacts/reports/program-specs/PS-DEVICE_タブレットPOS_デバイス制御/
   - project-store/artifacts/reports/architecture/ARCH-HOST-01_タブレットPOS_デバイスコネクタ基本設計書/ARCH-HOST-01_タブレットPOS_デバイスコネクタ基本設計書.md
   - project-store/artifacts/reports/architecture/ARCH-DEVICE-01_次世代POS_デバイス制御クラス構成図/ARCH-DEVICE-01_次世代POS_デバイス制御クラス構成図.md
 tags:
@@ -33,10 +33,10 @@ promote_to_knowledge: false
 
 ## Bằng chứng
 
-- `project-store/artifacts/reports/program-specs/PS-01_タブレットDCS_デバイスコネクタ制御方式/PS-DEVICE-01_タブレットPOS_デバイス制御_デバイスマネージャー_プログラム仕様書.md`
-- `project-store/artifacts/reports/program-specs/PS-01_タブレットDCS_デバイスコネクタ制御方式/PS-DEVICE-04_タブレットPOS_デバイス制御_設定ストレージインターフェース_プログラム仕様書.md`
-- `project-store/artifacts/reports/program-specs/PS-01_タブレットDCS_デバイスコネクタ制御方式/draft/2026-07-30_wrap-fix/`
-- `project-store/artifacts/reports/program-specs/PS-01_タブレットDCS_デバイスコネクタ制御方式/draft/2026-07-30_date-span3/`
+- `project-store/artifacts/reports/program-specs/PS-DEVICE_タブレットPOS_デバイス制御/PS-DEVICE-01_タブレットPOS_デバイス制御_デバイスマネージャー_プログラム仕様書.md`
+- `project-store/artifacts/reports/program-specs/PS-DEVICE_タブレットPOS_デバイス制御/PS-DEVICE-04_タブレットPOS_デバイス制御_設定ストレージインターフェース_プログラム仕様書.md`
+- `scratch/program-specs/PS-DEVICE_タブレットPOS_デバイス制御/draft/2026-07-30_wrap-fix/`
+- `scratch/program-specs/PS-DEVICE_タブレットPOS_デバイス制御/draft/2026-07-30_date-span3/`
 - `project-store/artifacts/reports/architecture/ARCH-HOST-01_タブレットPOS_デバイスコネクタ基本設計書/draft/2026-07-30_date-span3/`
 - `project-store/artifacts/reports/architecture/ARCH-DEVICE-01_次世代POS_デバイス制御クラス構成図/draft/2026-07-30_date-span3/`
 - Validation Program Spec đạt 17/17 tài liệu Markdown; audit thuật ngữ đạt cho toàn bộ 17 target so với `ARCH-HOST-01`.
@@ -53,7 +53,7 @@ promote_to_knowledge: false
 
 - PS-DEVICE-01
 - PS-DEVICE-04
-- PS-01_タブレットDCS_デバイスコネクタ制御方式
+- PS-DEVICE_タブレットPOS_デバイス制御
 - ARCH-HOST-01
 - ARCH-DEVICE-01
 - カスタマディスプレイ

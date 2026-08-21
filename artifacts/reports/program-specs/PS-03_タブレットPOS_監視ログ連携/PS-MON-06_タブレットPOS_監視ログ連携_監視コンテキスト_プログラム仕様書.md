@@ -29,7 +29,7 @@
 | --- | --- |
 | 機能名 | 監視コンテキスト |
 | 物理クラス名 | MonitoringContext |
-| 名前空間 | TabetPos.Core.Monitoring |
+| 名前空間 | TabletPos.Core.Monitoring |
 | アクセス修飾子 | public sealed |
 | 継承/実装 | record |
 
@@ -37,7 +37,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/tabletposboilerplate/TabetPos.Core/Monitoring/MonitoringContext.cs |
+| ソースファイル | sources/TabletPosBoilerplate/TabletPos.Core/Monitoring/MonitoringContext.cs |
 | 対象クラス | MonitoringContext |
 | 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 

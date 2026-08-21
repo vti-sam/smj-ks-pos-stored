@@ -4,13 +4,23 @@
 プロジェクト名: タブレットPOS
 モジュール: ホストデバイス制御（デバイス戦略・OPOS連携）
 段階: 結合テスト
+文書名: タブレットPOS ホストデバイス制御 デバイス戦略・OPOS連携 結合テストケース
+版数: 1.4.0
 作成者: VTI-SAM
 作成日: 2026/06/21
+改訂者: VTI-SAM
+改訂日: 2026/08/24
+文書区分: テストケース
 作成日時: 2026/06/21 17:30
 環境: ローカル
 
+## 概要
+
+本書は、デバイス制御層からHostのデバイス戦略および実機制御までの連携を対象とし、Customer Display、Cash Drawer、Cash Changer、Printer、Payment、およびHostプロセス制御を確認する46件の結合テストケースを定義する。
+
 ## テストケース {sheet=ホストデバイス制御結合テスト}
 | ID | 画面/機能カテゴリ | 大項目 | 中項目 | 前提条件 | 実行手順 | 期待される結果 | 種別 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
 | IT-HOST-001 | ホストデバイス制御 | OPOSランタイム | COM Control登録確認 | Windows端末に対象OPOS Controlが登録され、必要なランタイムファイルが配置済みである。 | 1. Cash Changer、Customer Display、Cash Drawer のCLSIDおよびProgIDを確認する。<br>2. 各COM Controlのインスタンス生成を確認する。<br>3. レジストリ画面、確認コマンド結果、またはテスト実行結果を証跡として保存する。 | 対象OPOS Controlが登録済みで、各COM Controlのインスタンス生成が成功する。 | N |
 | IT-HOST-002 | ホストデバイス制御 | OPOSランタイム | ServiceOPOSマッピング確認 | Windows端末にServiceOPOS設定が登録され、論理デバイス名とService Objectが設定済みである。 | 1. ServiceOPOS のカテゴリキーを確認する。<br>2. 対象デバイスの論理デバイス名とService Object ProgIDを確認する。<br>3. レジストリ画面、設定ファイル、または確認コマンド結果を証跡として保存する。 | ServiceOPOS のカテゴリ、論理デバイス名、Service Object ProgID が設計値と一致する。 | N |
 | IT-HOST-003 | ホストデバイス制御 | OPOS実機接続 | 論理デバイスOpen確認 | 対象OPOS実機または店舗相当ランタイムが利用可能であり、実機確認用フラグが有効である。 | 1. 実機または店舗相当ランタイムを接続する。<br>2. 実機確認用フラグを有効化する。<br>3. Cash Changer、Customer Display、Cash Drawer の論理デバイス名を指定してOpen確認を実施する。<br>4. 実行画面、結果ログ、ResultCodeを証跡として保存する。 | 各論理デバイスのOpenが成功し、ResultCodeが正常値となる。実機確認用フラグが無効な場合は未実施として扱う。 | B |
@@ -42,30 +52,48 @@
 | IT-HOST-029 | ホストデバイス制御 | Cash Changer | エラーガイダンス取得 | Cash Changer の使用開始が完了している。エラー状態を発生させる場合は現場責任者の承認を得る。 | 1. デバイス戦略からエラーガイダンス取得操作を実行する。<br>2. ホスト応答、返却されたガイダンス情報、ホストログを確認する。<br>3. 実機表示またはログを証跡として保存する。 | 現在状態に応じたガイダンス情報が取得でき、デバイス戦略へ正常結果が返る。 | N |
 | IT-HOST-030 | ホストデバイス制御 | Cash Changer | 精査データ取得 | Cash Changer の使用開始が完了し、精査操作を実施できる状態である。 | 1. デバイス戦略から精査データ取得操作を実行する。<br>2. ホスト応答、返却された収納庫・回収ボックス別データ、ホストログを確認する。<br>3. 管理画面またはログを証跡として保存する。 | 精査データが取得でき、デバイス戦略へ正常結果が返る。 | N |
 | IT-HOST-031 | ホストデバイス制御 | Cash Changer | 使用終了 | Cash Changer の使用開始が完了し、デバイス戦略からホストへ使用終了要求を送信できる状態である。 | 1. デバイス戦略から Cash Changer の使用終了操作を実行する。<br>2. ホスト応答、ホストログ、OPOSログを確認する。<br>3. 実行結果ログを証跡として保存する。 | ホスト経由で Cash Changer の使用終了が正常終了し、デバイス使用状態が解除される。 | N |
-| IT-HOST-032 | ホストデバイス制御 | Host制御 | AppStopServerによる終了 | Host が起動済みで、`TabetPos.Host.Command` が接続可能である。`TabletDeviceServer.AppStopServer.exe` が同じ端末に配置済みである。 | 1. Host 起動ログと command pipe の待受状態を確認する。<br>2. `TabletDeviceServer.AppStopServer.exe` を実行する。<br>3. AppStopServerログ、Hostログ、プロセス終了状態を確認する。 | AppStopServer からの Named Pipe 終了要求により Host が正常終了する。Host 側で device stop と pipe close が行われ、pipe handle や接続待ち状態が残らない。 | N |
-| IT-HOST-033 | ホストデバイス制御 | Host制御 | Host未起動時のAppStopServer | Host プロセスが起動しておらず、`TabetPos.Host.Command` が存在しない状態である。 | 1. Host が停止していることを確認する。<br>2. `TabletDeviceServer.AppStopServer.exe` を実行する。<br>3. 5秒程度待機し、AppStopServerログとプロセス状態を確認する。 | AppStopServer はハングせず異常ログを出力して終了する。不要なHostプロセスや接続待ち状態は残らない。 | A |
-| IT-HOST-034 | ホストデバイス制御 | Host制御 | 終了後の再起動 | IT-HOST-032 または同等の手順で Host を正常終了済みである。 | 1. Host を再起動する。<br>2. `TabetPos.Host.Command` へ接続できることを確認する。<br>3. Customer Display または Cash Drawer の軽い確認コマンドを送信し、Host応答とログを確認する。 | AppStopServer終了後でも Host は再起動できる。再起動後の Named Pipe command が正常に処理され、前回停止時の pipe handle は残らない。 | N |
+| IT-HOST-032 | ホストデバイス制御 | Host制御 | AppStopServerによる終了 | Host が起動済みで、`TabletPos.Host.Command` が接続可能である。`TabletDeviceServer.AppStopServer.exe` が同じ端末に配置済みである。 | 1. Host 起動ログと command pipe の待受状態を確認する。<br>2. `TabletDeviceServer.AppStopServer.exe` を実行する。<br>3. AppStopServerログ、Hostログ、プロセス終了状態を確認する。 | AppStopServer からの Named Pipe 終了要求により Host が正常終了する。Host 側で device stop と pipe close が行われ、pipe handle や接続待ち状態が残らない。 | N |
+| IT-HOST-033 | ホストデバイス制御 | Host制御 | Host未起動時のAppStopServer | Host プロセスが起動しておらず、`TabletPos.Host.Command` が存在しない状態である。 | 1. Host が停止していることを確認する。<br>2. `TabletDeviceServer.AppStopServer.exe` を実行する。<br>3. 5秒程度待機し、AppStopServerログとプロセス状態を確認する。 | AppStopServer はハングせず異常ログを出力して終了する。不要なHostプロセスや接続待ち状態は残らない。 | A |
+| IT-HOST-034 | ホストデバイス制御 | Host制御 | 終了後の再起動とAppセッション同期 | Customer DisplayまたはCash Drawerの`Start`が成功し、App画面が「準備完了」の状態である。HostをApp外から正常終了できる。 | 1. App画面を開いたままHostを正常終了し、再起動する。<br>2. 再起動前のAppセッションを使用して軽い確認コマンドを実行し、操作ログと状態遷移を確認する。<br>3. 対象デバイスの`Start`を再実行する。<br>4. 軽い確認コマンドを再実行し、Host応答、App操作ログおよびHostログを確認する。 | 再起動前のAppセッションによる最初の要求は通信切断として失敗し、操作ログの実行結果が「失敗」、App状態が「未接続」となり、保持していたストラテジー参照が破棄される。「準備完了」のまま残らない。`Start`再実行後は新しいHostセッションで確認コマンドが成功し、前回停止時のpipe handleは残らない。 | N |
+| IT-HOST-035 | ホストデバイス制御 | Printer | 使用開始 | Hostが起動済みで、`POSPrinter1`に対応するプリンターの電源が入り、用紙がセットされている。`OposPrinterStrategy`からHostへ要求を送信できる。 | 1. `OposPrinterStrategy.Start`を実行する。<br>2. 応答、Hostログ、OPOSログを確認する。 | HostのPrinter deviceでOpen、Claim、DeviceEnabledが成功し、`ResultCode=0`の`PrinterResponse`が返る。 | N |
+| IT-HOST-036 | ホストデバイス制御 | Printer | 文字列印字 | IT-HOST-035が成功し、印字ステーション`2`と文字列`TABLETPOS DEVICE TEST`を指定できる。 | 1. `OposPrinterStrategy.PrintNormal(2, "TABLETPOS DEVICE TEST")`を実行する。<br>2. 印字内容、応答、Hostログを確認する。 | 指定文字列がプリンターに印字され、`ResultCode=0`の応答が返る。 | N |
+| IT-HOST-037 | ホストデバイス制御 | Printer | バーコード印字 | IT-HOST-035が成功し、JAN13データ`4901234567894`、種別`104`、高さ`80`、幅`2`、配置`-2`、文字印字位置`-12`を指定できる。 | 1. 指定値で`OposPrinterStrategy.PrintBarCode`を実行する。<br>2. 印字コードを読み取り、応答とHostログを確認する。 | JAN13が欠けずに印字され、読取値が入力値と一致し、`ResultCode=0`の応答が返る。 | N |
+| IT-HOST-038 | ホストデバイス制御 | Printer | 画像印字 | IT-HOST-035が成功し、非圧縮Windows BMPの絶対パスを用意している。印字ステーション`2`、画像幅`-11`、配置`-2`を指定する。 | 1. 指定値で`OposPrinterStrategy.PrintBitmap`を実行する。<br>2. 印字画像、応答、Hostログを確認する。 | 指定BMPが原寸で欠けずに印字され、`ResultCode=0`の応答が返る。 | N |
+| IT-HOST-039 | ホストデバイス制御 | Printer | 用紙カット | IT-HOST-035が成功し、確認用文字列を印字済みである。カット率`100`を指定する。 | 1. `OposPrinterStrategy.CutPaper(100)`を実行する。<br>2. 用紙の切断状態、応答、Hostログを確認する。 | 用紙が100%カットされ、`ResultCode=0`の応答が返る。 | N |
+| IT-HOST-040 | ホストデバイス制御 | Printer | レシート一括印字 | IT-HOST-035が成功し、文字列、JAN13、JAN8、QRコードを含むテスト用`Receipt`を用意している。 | 1. `OposPrinterStrategy.PrintReceipt`を実行する。<br>2. 文字列、各コード、送り、カット、応答およびHostログを確認する。 | レシート全体が欠けずに印字・カットされ、各Host commandが正常終了し、最終応答の`ResultCode=0`が返る。 | N |
+| IT-HOST-041 | ホストデバイス制御 | Printer | 使用終了 | IT-HOST-035が成功し、印字処理中ではない。 | 1. `OposPrinterStrategy.End`を実行する。<br>2. 応答、Hostログ、OPOSログを確認する。 | HostのPrinter deviceでReleaseとCloseが成功し、`ResultCode=0`の応答が返る。 | N |
+| IT-HOST-042 | ホストデバイス制御 | Payment | 使用開始 | Hostが起動済みで、`Payment1`に対応するCAFIS Archテスト端末とテスト環境が利用可能である。`OposCafisArchPaymentStrategy`からHostへ要求を送信できる。 | 1. `OposCafisArchPaymentStrategy.Start`を実行する。<br>2. 応答、Hostログ、決済端末の状態を確認する。 | HostのPayment deviceで初期化が成功し、以降の決済要求を受け付けられる。 | N |
+| IT-HOST-043 | ホストデバイス制御 | Payment | 稼働確認 | IT-HOST-042が成功している。 | 1. `OposCafisArchPaymentStrategy.HealthCheck`を実行する。<br>2. 応答、Hostログ、決済端末の状態を確認する。 | 決済端末から正常応答が返り、`PaymentResponse.Success=true`となる。 | N |
+| IT-HOST-044 | ホストデバイス制御 | Payment | 決済実行 | IT-HOST-042が成功し、CAFIS Archテスト環境用の有効な決済要求JSONとHostで検証可能なテスト用トランザクションIDを用意している。 | 1. `OposCafisArchPaymentStrategy.GenericPayment`を実行する。<br>2. 決済端末の案内に従ってテスト決済を完了する。<br>3. 応答とHostログを確認する。 | テスト決済が正常終了し、`PaymentResponse.Success=true`となる。要求・応答ペイロードは操作ログに出力されない。 | N |
+| IT-HOST-045 | ホストデバイス制御 | Payment | 伝票再印字 | IT-HOST-044が成功し、直前のテスト決済が再印字可能である。 | 1. `OposCafisArchPaymentStrategy.RePrint`を実行する。<br>2. 再印字された伝票、応答、Hostログを確認する。 | 直前のテスト決済の伝票が再印字され、`PaymentResponse.Success=true`となる。 | N |
+| IT-HOST-046 | ホストデバイス制御 | Payment | 使用終了 | IT-HOST-042が成功し、決済処理中ではない。 | 1. `OposCafisArchPaymentStrategy.End`を実行する。<br>2. 応答、Hostログ、決済端末の状態を確認する。 | HostのPayment deviceで終了処理が成功し、デバイス使用状態が解除される。 | N |
 
 ## 基本情報
 | 項目 | 内容 |
 | --- | --- |
 | 文書ID | TC-IT-HOST-01 |
+| 文書名 | タブレットPOS ホストデバイス制御 デバイス戦略・OPOS連携 結合テストケース |
 | プロジェクト名 | タブレットPOS |
 | モジュール名 | ホストデバイス制御（デバイス戦略・OPOS連携） |
 | テスト段階 | 結合テスト |
 | 実施方式 | 手動（デバイス戦略からホストへ要求し、ホスト応答・ログ・実機動作を確認） |
+| 版数 | 1.4.0 |
 | 作成者 | VTI-SAM |
 | 作成日 | 2026/06/21 |
+| 改訂者 | VTI-SAM |
+| 改訂日 | 2026/08/24 |
+| 文書区分 | テストケース |
 | 環境 | ローカル |
-| 件数 | 34件 |
-| 対象デバイス | Customer Display / Cash Drawer / Cash Changer |
-| 確認範囲 | デバイス戦略からホストへの要求送信、ホスト側ルーティング、Device/OPOS処理、デバイス戦略への結果返却 |
+| 件数 | 46件 |
+| 対象デバイス | Customer Display / Cash Drawer / Cash Changer / Printer / Payment |
+| 確認範囲 | DeviceCtrlのデバイス戦略からHostへの要求送信、Host側ルーティング、Device/OPOS処理、DeviceContractsに基づく結果返却 |
 | 証跡 | レジストリ確認結果、設定確認結果、ホストログ、OPOSログ、実行画面、スクリーンショット、写真または動画 |
 
 ## 更新履歴
 | バージョン | 依頼者 | 更新者 | 更新日時 | 変更理由 | シート名 | 更新内容 |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1.0.0 | - | VTI-SAM | 2026/06/21 | 新規作成 | ホストデバイス制御結合テスト | OPOSランタイムおよび実機接続確認を結合テストとして分離 |
-| 1.1.0 | - | VTI-SAM | 2026/06/21 | テスト追加 | ホストデバイス制御結合テスト | 対象デバイス別のサポート済みコマンド確認を追加 |
-| 1.2.0 | - | VTI-SAM | 2026/06/21 | 記載改善 | ホストデバイス制御結合テスト | デバイス戦略からホスト経由で実機・OPOS処理結果を確認する範囲を明確化 |
+| 1.4.0 | - | VTI-SAM | 2026/08/24 | 現行構成への整合 | ホストデバイス制御結合テスト | Hostの5デバイス構成、DeviceCtrl、DeviceContractsおよびPrinter・Paymentの結合確認を追加し、Host再起動時のAppセッション破棄・再接続確認を明確化。文書メタデータを標準化 |
 | 1.3.0 | - | VTI-SAM | 2026/06/23 | テスト追加 | ホストデバイス制御結合テスト | AppStopServerのNamed Pipe終了要求、未起動時異常系、終了後再起動確認を追加 |
+| 1.2.0 | - | VTI-SAM | 2026/06/21 | 記載改善 | ホストデバイス制御結合テスト | デバイス戦略からホスト経由で実機・OPOS処理結果を確認する範囲を明確化 |
+| 1.1.0 | - | VTI-SAM | 2026/06/21 | テスト追加 | ホストデバイス制御結合テスト | 対象デバイス別のサポート済みコマンド確認を追加 |
+| 1.0.0 | - | VTI-SAM | 2026/06/21 | 新規作成 | ホストデバイス制御結合テスト | OPOSランタイムおよび実機接続確認を結合テストとして分離 |

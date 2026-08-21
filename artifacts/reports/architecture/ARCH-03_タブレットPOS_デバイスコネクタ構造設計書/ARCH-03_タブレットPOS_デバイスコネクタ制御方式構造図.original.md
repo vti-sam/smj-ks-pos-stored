@@ -1,15 +1,6 @@
 # タブレットPOS デバイスコネクタ制御方式構造図 Mermaid 原文
 
 ```mermaid
-%%{init: {
-  "flowchart": {
-    "nodeSpacing": 25,
-    "rankSpacing": 35,
-    "padding": 8,
-    "curve": "basis"
-  }
-}}%%
-
 flowchart TB
     classDef direct fill:#F0FDF4,stroke:#22C55E,color:#14532D,stroke-width:1.5px;
     classDef server fill:#EFF6FF,stroke:#3B82F6,color:#1E3A8A,stroke-width:1.5px;
@@ -24,23 +15,31 @@ flowchart TB
             direction TB
 
             app_layer["アプリケーション層\n機器操作を要求する"]
-            app_lifecycle["通常運用時のライフサイクル連携\n起動・画面作成・復帰：サーバー自動起動\n停止・終了：Killでサーバー停止\nStart/Stop画面：デバッグ用途のみ"]
+            app_lifecycle["MauiProgram / App\nHostとイベント受信のライフサイクルを管理する"]
 
             subgraph device_ctrl["デバイス制御層（DeviceCtrl）"]
                 direction TB
-                device_setup["DeviceManager / Config / Factory\n機器ごとの制御方式を決定する"]
+                device_setup["DeviceManager / DeviceControllerConfigService / StrategyFactory\n設定から機器ごとのStrategyを決定する"]
 
                 subgraph control_route["制御方式"]
                     direction LR
-                    direct_control["直接制御\nアプリ内で制御する"]
-                namedpipe_client["NamedPipeClient\nデバイスコネクタ経由の機器を送信する"]
+                    direct_control["直接制御Strategy\n端末内で機器を制御する"]
+                    opos_mapper["OposNamedPipeCommandClient\nStrategy操作を共通要求へ変換する"]
+                    namedpipe_client["NamedPipeClient\nコマンド通信用パイプを送受信する"]
                 end
+
+                event_receiver["NamedPipeEventReceiver\nイベント通知用パイプを受信する"]
             end
+
+            device_contracts["TabletPos.DeviceContracts\n共通デバイス通信契約\n要求・応答・イベント・既定値"]
 
             app_layer -->|"機器操作要求"| device_setup
             app_layer -.->|"起動・終了制御"| app_lifecycle
             device_setup -->|"直接制御"| direct_control
-            device_setup -->|"サーバー経由"| namedpipe_client
+            device_setup -->|"OPOS / CAFIS Host経由"| opos_mapper
+            opos_mapper -->|"共通要求"| namedpipe_client
+            opos_mapper -.->|"DTO・ID・既定値を参照"| device_contracts
+            event_receiver -.->|"イベント契約を参照"| device_contracts
         end
 
         subgraph appserver["デバイスコネクタ（Host）"]
@@ -53,7 +52,8 @@ flowchart TB
                 direction LR
                 command_server["名前付きパイプコマンドサーバー\n(NamedPipeCommandServer)\n要求を受け付ける"]
                 command_router["デバイスコマンドルーター\n(DeviceCommandRouter)\n要求を振り分ける"]
-                command_handler["デバイスコマンドハンドラー\n(DeviceCommandHandler)\n機器操作を実行する"]
+                command_mapper["デバイスコマンドマッピング\n(DeviceCommandMapping)\n共通要求を機器呼出しへ変換する"]
+                event_publisher["名前付きパイプイベント発行\n(NamedPipeEventPublisher)\n機器イベントを発行する"]
             end
 
             subgraph appserver_runtime["デバイスコネクタ内デバイス実装"]
@@ -69,18 +69,25 @@ flowchart TB
 
                 cash_drawer["キャッシュドロア制御 SHARP\n(CashDrawerBySharp)\nSHARP既存実装を利用"]
                 customer_display["カスタマーディスプレイ制御 SHARP\n(CustomerDisplayBySharp)\nSHARP既存実装を利用"]
+                printer_host["プリンター制御 OPOS\n(OposPrinterDevice)\nレシート印字を実行する"]
+                payment_host["決済端末制御 CAFIS Arch\n(CafisArchPaymentDevice)\n決済端末を制御する"]
             end
 
             host_main --> host_adapter
             host_adapter --> command_server
             command_server --> command_router
-            command_router --> command_handler
-            command_handler --> device_manager
+            command_router --> command_mapper
+            command_mapper --> device_manager
             device_manager --> device_base
             device_base --> cash_changer
             cash_changer --> cash_changer_form
             device_base --> cash_drawer
             device_base --> customer_display
+            device_base --> printer_host
+            device_base --> payment_host
+            device_manager --> event_publisher
+            command_server -.->|"DTO・ID・既定値を参照"| device_contracts
+            event_publisher -.->|"イベント契約を参照"| device_contracts
         end
     end
 
@@ -89,10 +96,8 @@ flowchart TB
 
         subgraph direct_devices["アプリ内で直接制御する機器"]
             direction TB
-            scanner["スキャナー\nUSB / Bluetooth"]
-            camera["カメラ\nバーコード読取"]
-            printer["プリンター\nレシート / A4"]
-            payment_terminal["決済端末\n決済連携"]
+            scanner["スキャナー / カメラ\nSerial / Camera"]
+            keyboard["POSキーボード\nRaw Input"]
         end
 
         subgraph server_devices["デバイスコネクタ（Host）経由の実機\n現行POSの対象機器"]
@@ -100,26 +105,30 @@ flowchart TB
             cash_changer_device["釣銭機"]
             cash_drawer_device["キャッシュドロア"]
             customer_display_device["カスタマーディスプレイ"]
+            printer_device["プリンター"]
+            payment_terminal["決済端末"]
         end
     end
 
     namedpipe_client -->|"デバイスコネクタ経由"| command_server
-    app_lifecycle ==>|"自動起動／停止要求"| host_main
+    event_publisher -.->|"非同期イベント"| event_receiver
+    app_lifecycle ==>|"Hostを起動／停止"| host_main
+    app_lifecycle ==>|"受信処理を開始／停止"| event_receiver
 
     direct_control --> scanner
-    direct_control --> camera
-    direct_control --> printer
-    direct_control --> payment_terminal
+    direct_control --> keyboard
 
     cash_changer_form --> cash_changer_device
     cash_drawer --> cash_drawer_device
     customer_display --> customer_display_device
+    printer_host --> printer_device
+    payment_host --> payment_terminal
 
-    memo["＊ 通常運用時は、タブレットPOSアプリのライフサイクルに合わせてデバイスコネクタ（Host）を自動起動・停止します。Start/Stop画面はデバッグ／開発者向けに限定し、通常運用時には表示しません。\n＊ デバイスコネクタ（Host）経由は現行POSの対象機器を継続利用するための経路です。機種追加時は原則として直接制御で対応します。\n＊ 自動釣銭機UIスレッドフォーム RT-300 は、内部フォームとしてOPOS/OCXをUIスレッド上で保持し、共有メモリ・要求/応答ファイル連携を処理します。"]
+    memo["＊ Windowsの現行設定では、プリンター・釣銭機・カスタマーディスプレイ・キャッシュドロア・決済端末をデバイスコネクタ（Host）経由で制御します。\n＊ AppはHostとイベント受信処理をライフサイクルに合わせて開始・停止します。NamedPipeEventReceiverは稼働しますが、現行コードにはEventReceived購読先がありません。\n＊ CustomerDisplay1はHost設定読込時に互換ID LineDisplay1へ変換され、CustomerDisplayBySharpへ解決されます。"]
 
-    class app_layer,device_setup,namedpipe_client,direct_control,host_main,host_adapter,command_server,command_router,command_handler,device_manager,device_base core;
-    class scanner,camera,printer,payment_terminal,cash_changer_device,cash_drawer_device,customer_display_device core;
-    class cash_changer,cash_changer_form,cash_drawer,customer_display server;
+    class app_layer,device_setup,namedpipe_client,opos_mapper,event_receiver,device_contracts,direct_control,host_main,host_adapter,command_server,command_router,command_mapper,event_publisher,device_manager,device_base core;
+    class scanner,keyboard,printer_device,payment_terminal,cash_changer_device,cash_drawer_device,customer_display_device core;
+    class cash_changer,cash_changer_form,cash_drawer,customer_display,printer_host,payment_host server;
     class app_lifecycle lifecycle;
     class memo memo;
 ```

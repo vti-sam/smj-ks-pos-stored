@@ -29,7 +29,7 @@
 | --- | --- |
 | 機能名 | セッションサービスインターフェース |
 | 物理クラス名 | ILocalStateSessionService |
-| 名前空間 | TabetPos.Core.State |
+| 名前空間 | TabletPos.Core.State |
 | アクセス修飾子 | public |
 | 継承/実装 | - |
 
@@ -37,7 +37,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/tabletposboilerplate/TabetPos.Core/State/ILocalStateSessionService.cs |
+| ソースファイル | sources/TabletPosBoilerplate/TabletPos.Core/State/ILocalStateSessionService.cs |
 | 対象クラス | ILocalStateSessionService |
 | 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 

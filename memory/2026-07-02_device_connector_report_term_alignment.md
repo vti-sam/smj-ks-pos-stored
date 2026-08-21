@@ -23,7 +23,7 @@ Use `デバイスコネクタ（Host）` when the text needs to map the business
 Renamed/updated report areas:
 
 - `project-store/artifacts/reports/architecture/ARCH-03_タブレットPOS_デバイスコネクタ構造設計書/`
-- `project-store/artifacts/reports/program-specs/PS-01_タブレットDCS_デバイスコネクタ制御方式/`
+- `project-store/artifacts/reports/program-specs/PS-HOST_タブレットPOS_デバイスコネクタ/`
 - `project-store/artifacts/reports/testcases/TC-IT-DCS-01_タブレットPOS_デバイスコネクタ制御_デバイス戦略・OPOS連携_結合テストケース/`
 - `project-store/artifacts/reports/configuration-guides/CFG-01_タブレットPOS_デバイス制御層設定ファイル記載要領/`
 

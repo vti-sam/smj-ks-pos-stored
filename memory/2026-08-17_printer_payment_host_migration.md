@@ -39,6 +39,11 @@ promote_to_knowledge: false
   được ghi log.
 - Đã tách timeout chờ response Named Pipe khỏi timeout kết nối để lệnh in và
   thanh toán dài không bị cắt ở mốc 5 giây.
+- Timeout dùng cho bước OPOS `Claim` của Printer và CAFIS Payment được sở hữu
+  chung tại `TabletDeviceConst.OposClaimTimeoutMilliseconds=5000`; hai device
+  không còn khai báo `private ClaimTimeoutMilliseconds` trùng nhau. Các luồng
+  legacy dùng `Claim(0)` và timeout chờ command/payment giữ nguyên vì khác
+  semantics.
 - Đã tích hợp màn hình `DeviceIntegrationTestPage` vào App để kiểm tra trực tiếp
   Payment health check, generic payment bằng JSON và in receipt mẫu. Màn hình
   chỉ là integration harness, chưa nối vào business flow bán hàng.
@@ -114,6 +119,11 @@ promote_to_knowledge: false
   quản lý MSI theo ProductCode và hash; installer chung hỗ trợ cài mới, repair
   bằng `-Force` khi trạng thái MSI/COM bị sai, và read-back ProgID, CLSID, server
   path cùng server hash trước khi tạo logical device `SHARPRECPRT80`.
+- Ngày 2026-08-20, đã khoanh lỗi UI báo thất bại khi chạy
+  `CashChangerForceRecovery` về timeout phản hồi Named Pipe: Host cần khoảng
+  8 giây nhưng App chỉ chờ 5 giây. Source được cập nhật để riêng lệnh này chờ
+  tối đa đúng 10 giây và dialog cảnh báo người dùng không thao tác chức năng
+  khác cho đến khi xử lý hoàn tất; timeout mặc định của lệnh khác không đổi.
 
 ## Evidence
 
@@ -203,6 +213,9 @@ promote_to_knowledge: false
 - Test runtime OPOS sau khi cài POSPrinter CCO: 3 active tests passed, test
   `Open(logicalName)` phần cứng chủ động skip.
 - `PrinterByOpos.Tests`: 5 passed; `PaymentByCafisArch.Tests`: 5 passed.
+- Sau khi common hóa OPOS Claim timeout, build `PrinterByOpos.csproj` và
+  `PaymentByCafisArch.csproj` đều đạt 2 project, 0 error, 0 warning; source chỉ
+  còn một literal `5000` tại `TabletDeviceConst` và hai caller tham chiếu nó.
 - CodeGraph đã refresh sau khi stage và đọc được trực tiếp các class mới
   `CafisArchPaymentDevice`, `OposPrinterDevice` và
   `DeviceIntegrationTestViewModel`; không còn file Payment/Printer ngoài index.
@@ -340,6 +353,56 @@ promote_to_knowledge: false
   `13e4621d359d0e9f9abc45b1ca52a42c4a5ec58c`. Các thay đổi UI/Figma và package
   bump có sẵn không thuộc task vẫn giữ local, không nằm trong commit.
 
+### Follow-up 2026-08-20: timeout `CashChangerForceRecovery`
+
+- Log read-only trên POS tại
+  `C:\Deploy\TabetPos.DebugNew\Host\LOG\AppServer.runtime.log` cho thấy ba lần
+  `CashChangerForceRecovery` lúc 19:02, 19:03 và 19:04 đều hoàn tất phía Host
+  với `ResultCode=0`, sau khoảng 8 giây, rồi ngay lập tức ghi `Pipe is broken`.
+- Evidence runner dùng timeout dài hơn đã nhận response đầy đủ trong khoảng
+  7,8–8,4 giây với `FullStatus=0`, xác nhận thiết bị phục hồi xong và lỗi quan
+  sát ở App là timeout transport, không phải lỗi hoàn tất recovery của Host.
+- `OposCashChangerStrategy.ForceRecovery` truyền
+  `ResponseTimeoutMilliseconds=10000`; `NamedPipeClient` dùng key này làm
+  timeout phản hồi chính xác, không cộng thêm timeout kết nối 5 giây. Dialog
+  tiếng Nhật nêu thao tác có thể mất khoảng 10 giây và yêu cầu không thực hiện
+  thao tác khác cho đến khi hoàn tất.
+- `git diff --check` pass và CodeGraph parse lại thành công ba file đã sửa.
+  Build local ban đầu bị chặn trước compile bởi `NETSDK1147` vì máy chưa có
+  MAUI workload.
+- Theo yêu cầu ngày 2026-08-20, máy build đã cài workload tổng `maui` cho SDK
+  `10.0.400`; `dotnet workload list` xác nhận workload version `10.0.400.1` và
+  MAUI manifest `10.0.20/10.0.100`. Build Windows của
+  `TabetPos.Applications.csproj` sau đó đạt 17 project, 0 lỗi. Build còn 72
+  cảnh báo, gồm `NU1903` cho `System.Security.Cryptography.Xml 10.0.0`; chưa
+  thay đổi dependency để xử lý cảnh báo này.
+- Đã cài tiếp Android SDK và Microsoft OpenJDK 17 vào
+  `%LOCALAPPDATA%\Android`, đặt user environment `ANDROID_HOME` và `JAVA_HOME`.
+  Sau cài đặt, `Epos2Android.csproj` build được không cần truyền path thủ công;
+  build toàn bộ `TabetPos.sln` đạt 21 project, 0 lỗi, 0 cảnh báo. Các lỗi Rider
+  `NU1015` cho `$(MauiVersion)` và `NU1012` cho `net10.0-android` không tái hiện
+  sau khi workload/toolchain hoàn tất; Rider cần restart để nhận environment
+  mới.
+- Rider sau restart đã nhận đúng Android SDK/JDK nhưng Android binding task gặp
+  `XARDF7024` khi xóa `generated\enums` trong `Epos2Android\obj` nằm dưới
+  OneDrive reparse point. Không sửa source: local ignored path
+  `Epos2Android\obj` được đổi thành junction tới
+  `%LOCALAPPDATA%\TabetPosBuild\Epos2Android\obj`; build trực tiếp trong Rider
+  sau đó đạt 0 lỗi, còn 101 warning binding metadata của Epson. Hai bản cache
+  cũ được giữ có thể khôi phục dưới `scratch/quarantine/`.
+- Ba shared Rider run configuration `POS - Run`, `POS - Deploy only` và
+  `POS - Logs` đã được sửa để gọi đúng Windows PowerShell 5.1 với tham số
+  `-File`; trước đó script path có khoảng trắng bị PowerShell tách tại
+  `OneDrive\pm control`. `PosDebug.ps1 -Mode Validate` xác nhận SSH config và
+  remote root hợp lệ. Local Rider workspace cũng được dọn hai run configuration
+  auto-generated không thể chạy: UWP cũ của `TabetPos.Applications` và Android
+  binding library `Epos2Android`; cấu hình MAUI `Windows Machine` vẫn được giữ.
+- OneDrive được vô hiệu hóa theo yêu cầu để dừng đồng bộ workspace: process đã
+  shutdown và startup state của user được đặt `Disabled`. Không uninstall ứng
+  dụng, không xóa file local/cloud và các known folder vẫn đang trỏ vào
+  OneDrive. Startup value gốc được ghi lại tại
+  `scratch/onedrive-startup-backup-20260820.txt` để có thể khôi phục.
+
 ## Unresolved
 
 - Chưa chạy cài mới trên một máy POS sạch. Máy `192.168.9.176` đã open và in
@@ -356,6 +419,9 @@ promote_to_knowledge: false
   không chạy được trên máy Windows vì thiếu output
   `net10.0-ios\iossimulator-arm64\TabetPos.Applications.app` và môi trường iOS
   Simulator/Appium. Đây là environment limitation, không phải compile failure.
+- Chưa deploy bản timeout 10 giây lên POS và chưa replay UI để xác nhận App nhận
+  response trước hạn; lần kiểm tra tiếp theo cần đối chiếu không còn
+  `Pipe is broken` sau `CashChangerForceRecovery`.
 
 ## Retrieval keys
 
@@ -386,3 +452,6 @@ promote_to_knowledge: false
 - TabetPosBoilerplate checkout rename legacy Ks directories 353 bin obj files
 - HostDeviceClassRegistry external legacy KsUtility KsClassID KsLogControls
 - 13e4621 origin develop POS host integration debug tooling
+- CashChangerForceRecovery ResponseTimeoutMilliseconds 10000 Pipe is broken
+- OposClaimTimeoutMilliseconds 5000 Printer Payment common constant
+- 2026-08-19 19:02 19:03 19:04 Host ResultCode 0 App timeout 5 seconds

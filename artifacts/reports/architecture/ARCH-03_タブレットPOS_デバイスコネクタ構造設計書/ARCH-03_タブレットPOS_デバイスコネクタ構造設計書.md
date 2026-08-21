@@ -1,8 +1,8 @@
 タブレットPOS
 ARCH-03 デバイスコネクタ構造設計書
 文書ID: ARCH-03
-第1.0.2版
-2026年6月25日
+第1.0.3版
+2026年8月24日
 
 ## 改訂履歴
 
@@ -11,6 +11,7 @@ ARCH-03 デバイスコネクタ構造設計書
 | 2026/06/19 | 1.0.0 | タブレットPOS ソフトウェア全体構造設計書の構成に合わせ、DeviceManager / DeviceCtrl / 制御方式選択 / 生成処理 / デバイスインターフェースの構成と責務を定義 | VTI サム | - |
 | 2026/06/24 | 1.0.1 | デバイスコネクタを中心とする構造に見直し、デバイス制御層（DeviceCtrl）は呼び出し境界として整理 | VTI サム | - |
 | 2026/06/25 | 1.0.2 | 通常運用時のデバイスコネクタ（Host）自動起動・停止方針を明確化し、構造図にも反映 | VTI サム | - |
+| 2026/08/24 | 1.0.3 | 共通デバイス通信契約、OPOSコマンド変換、イベント受信ライフサイクル、およびPrinter・Paymentを含む現行5デバイス構成へ更新 | VTI サム | - |
 
 ## 目次
 
@@ -41,6 +42,7 @@ ARCH-03 デバイスコネクタ構造設計書
 - [6. 初期対象デバイスと機種追加方針](#6-初期対象デバイスと機種追加方針)
 - [7. テスト・確認観点](#7-テスト確認観点)
 - [8. 関連資料](#8-関連資料)
+- [9. 結論](#9-結論)
 
 ## 1. イントロダクション
 
@@ -50,7 +52,7 @@ ARCH-03 デバイスコネクタ構造設計書
 
 対象はデバイスコネクタ（Host）を中心とし、デバイスコネクタ（Host）の起動、Named Pipe 通信、コマンド処理、デバイスコネクタ（Host）内デバイス管理、既存デバイス資源の呼び出し方式を扱う。
 
-本書では、タブレットPOSアプリ側の `TabetPos.DeviceCtrl` を「デバイス制御層（DeviceCtrl）」、`TabetPos.Host` を「デバイスコネクタ（Host）」と表記する。以降は、文脈上明らかな場合は「デバイス制御層」「デバイスコネクタ」と記載する。
+本書では、タブレットPOSアプリ側の `TabletPos.DeviceCtrl` を「デバイス制御層（DeviceCtrl）」、`TabletPos.Host` を「デバイスコネクタ（Host）」と表記する。以降は、文脈上明らかな場合は「デバイス制御層」「デバイスコネクタ」と記載する。
 
 デバイス制御層（DeviceCtrl）は、タブレットPOSアプリ内で機器ごとの制御方式を選択し、デバイスコネクタへ要求を渡す呼び出し境界として扱う。デバイス制御層内の制御方式選択、生成処理、インターフェースの詳細は、本書の主対象ではない。
 
@@ -66,11 +68,11 @@ ARCH-03 デバイスコネクタ構造設計書
 
 デバイスコネクタ（Host）は Windows 端末上で動作する別プロセスである。
 
-タブレットPOSアプリはデバイス制御層（DeviceCtrl）内の `NamedPipeClient` から `TabetPos.Host.Command` へ要求を送信する。
+タブレットPOSアプリはデバイス制御層（DeviceCtrl）内の `OposNamedPipeCommandClient` で要求を共通DTOへ変換し、`INamedPipeClient` / `NamedPipeClient` から `TabletPos.Host.Command` へ送信する。
 
 デバイスコネクタ（Host）は `host_device_config.json` に定義された対象デバイスを起動し、DeviceId と MethodId に基づいて対象デバイス実装を呼び出す。
 
-スキャナー、カメラ、プリンター、決済端末など、アプリ内で直接制御する機器はデバイスコネクタの初期対象外とする。
+ScannerとKeyboardはアプリ内で直接制御し、デバイスコネクタの対象外とする。WindowsのPrinterとPaymentはCustomerDisplay、CashDrawer、およびCashChangerと同じデバイスコネクタの対象とする。iOS・AndroidのPrinterとScannerは各プラットフォームのstrategyから直接制御する。
 
 ### 1.4 対象読者
 
@@ -99,6 +101,8 @@ ARCH-03 デバイスコネクタ構造設計書
 | PS-HOST-09_タブレットPOS_ホスト_自動釣銭機UIスレッドフォーム_RT-300_プログラム仕様書.xlsx |
 | PS-HOST-10_タブレットPOS_ホスト_ドロア制御_SHARP_プログラム仕様書.xlsx |
 | PS-HOST-11_タブレットPOS_ホスト_カスタマディスプレイ制御_SHARP_プログラム仕様書.xlsx |
+| PS-HOST-12_タブレットPOS_ホスト_名前付きパイプコマンドマッパー_プログラム仕様書.xlsx |
+| PS-HOST-13_タブレットPOS_ホスト_名前付きパイプイベントパブリッシャー_プログラム仕様書.xlsx |
 
 ## 2. 基本アーキテクチャ
 
@@ -117,11 +121,12 @@ ARCH-03 デバイスコネクタ構造設計書
 | 構成 | 主な class / file | 責務 |
 |---|---|---|
 | タブレットPOSアプリ | アプリケーション層 | 画面または業務処理から機器操作を要求する |
-| デバイス制御層（DeviceCtrl） | `DeviceManager`, `NamedPipeClient`, `device_controller_config.json` | 機器ごとの制御方式を決定し、デバイスコネクタ（Host）経由の対象だけを Named Pipe へ送信する |
+| デバイス制御層（DeviceCtrl） | `DeviceManager`, `OposNamedPipeCommandClient`, `INamedPipeClient`, `NamedPipeClient`, `NamedPipeEventReceiver`, `device_controller_config.json` | 機器ごとの制御方式を決定し、デバイスコネクタ（Host）経由の対象だけを名前付きパイプへ送信する。Appライフサイクルに従ってイベント受信も開始・停止する |
+| 共通デバイス通信契約 | `TabletPos.DeviceContracts` | DeviceCtrlとHostで共有する要求・応答・イベントDTO、識別子、通信既定値、およびOPOSプリンター既定値を定義する |
 | デバイスコネクタ（Host） | `TabletHost`, `NamedPipeDeviceHostAdapter` | デバイスコネクタ（Host）の起動、停止、Named Pipe 通信、デバイス管理を行う |
 | デバイスコネクタ（Host）制御基盤 | `NamedPipeCommandServer`, `DeviceCommandRouter`, `DeviceCommandHandler` | 要求受付、デバイス単位の順序制御、対象デバイス呼び出しを行う |
 | デバイスコネクタ（Host）内デバイス実装 | `TabletDeviceManager`, `DeviceBase`, 各デバイス class | 既存 OPOS / OCX / DLL を利用して実機を制御する |
-| 実機 | 釣銭機、キャッシュドロア、カスタマーディスプレイ | デバイスコネクタ（Host）内デバイス実装から操作される対象機器 |
+| 実機 | 釣銭機、キャッシュドロア、カスタマーディスプレイ、プリンター、決済端末 | デバイスコネクタ（Host）内デバイス実装から操作される対象機器 |
 
 デバイス制御層（DeviceCtrl）は、タブレットPOSアプリ側で制御方式を選択する部品である。一方、デバイスコネクタ（Host）側の部品は、既存デバイス資源を呼び出すための内部実装である。両者は同じ役割の部品として扱わない。
 
@@ -131,7 +136,9 @@ ARCH-03 デバイスコネクタ構造設計書
 
 デバイス制御層は `device_controller_config.json` の設定に従い、アプリ内で直接制御する機器と、デバイスコネクタ（Host）経由で制御する機器を分ける。
 
-デバイスコネクタ（Host）経由の場合、`NamedPipeClient` は `TabetPos.Host.Command` へ JSON 形式の要求を送信し、デバイスコネクタ（Host）から同期応答を受け取る。
+デバイスコネクタ（Host）経由の場合、WindowsのOPOS／OCX strategyは `OposNamedPipeCommandClient` でデバイス操作を `NamedPipeDeviceCommandRequest` へ変換する。`NamedPipeClient` は `TabletPos.Host.Command` へ1行JSON形式の要求を送信し、`NamedPipeDeviceCommandResponse` を同期応答として受け取る。これらのDTOと通信既定値は `TabletPos.DeviceContracts` で共有する。
+
+AppはHost起動後に `NamedPipeEventReceiver.StartAsync` を呼び出し、停止・破棄時に `StopAsync` を呼び出す。Hostから受信したイベントは `NamedPipeDeviceEvent` へ変換する。現行ソースでは `EventReceived` の購読者を登録していないため、受信イベントをApplicationユースケースへ引き渡さない。
 
 ### 2.4 デバイスコネクタの責務
 
@@ -153,8 +160,8 @@ ARCH-03 デバイスコネクタ構造設計書
 
 | タイミング | タブレットPOSアプリ側の処理 | デバイスコネクタ（Host）側の処理 |
 |---|---|---|
-| アプリ起動／画面作成／復帰 | デバイスコネクタ（Host）の起動状態を確認し、未起動の場合は自動起動する | `TabletHost.StartHost()` により Command Pipe / Event Pipe と対象デバイスを起動する |
-| アプリ停止／終了 | デバイスコネクタ（Host）へ停止要求（Kill）を送信する | `TabletHost.StopHost()` により通信部と対象デバイスを停止する |
+| アプリ起動／画面作成／復帰 | デバイスコネクタ（Host）の起動状態を確認し、未起動の場合は自動起動した後、イベント受信を開始する | `TabletHost.StartHost()` によりCommand Pipe、Event Pipe、および対象デバイスを起動する |
+| アプリ停止／終了 | イベント受信を停止した後、デバイスコネクタ（Host）へ停止要求（Kill）を送信する | `TabletHost.StopHost()` により通信部と対象デバイスを停止する |
 | デバッグ時 | Start/Stop 画面から手動確認できる | 通常運用フローには含めない |
 
 ## 3. 制御方式
@@ -165,22 +172,24 @@ ARCH-03 デバイスコネクタ構造設計書
 
 | Pipe | 既定名 | 用途 |
 |---|---|---|
-| Command Pipe | `TabetPos.Host.Command` | デバイス制御層（DeviceCtrl）などのクライアントからデバイスコネクタ（Host）へ操作要求を送信する |
-| Event Pipe | `TabetPos.Host.Event` | デバイスコネクタ（Host）から device reply などの非同期通知を送信する |
+| Command Pipe | `TabletPos.Host.Command` | デバイス制御層（DeviceCtrl）などのクライアントからデバイスコネクタ（Host）へ操作要求を送信する |
+| Event Pipe | `TabletPos.Host.Event` | デバイスコネクタ（Host）から device reply などの非同期通知を送信する |
 
-デバイス制御層（DeviceCtrl）側では、デバイスコネクタ（Host）経由のデバイスに対して `TabetPos.Host.Command` を使用する。
+デバイス制御層（DeviceCtrl）側では、デバイスコネクタ（Host）経由のデバイスに対して `TabletPos.Host.Command` を使用する。
 
 ### 3.2 コマンド処理フロー
 
 | 順序 | 処理 | 主な class |
 |---|---|---|
-| 1 | デバイス制御層（DeviceCtrl）がデバイスコネクタ（Host）へ要求を送信する | `NamedPipeClient` |
-| 2 | デバイスコネクタ（Host）が Command Pipe で要求を受け付ける | `NamedPipeCommandServer` |
-| 3 | 要求を内部 command / response 形式へ変換する | `NamedPipeCommandMapper` |
-| 4 | DeviceId 単位の worker に要求を投入する | `DeviceCommandRouter` |
-| 5 | Host 制御要求またはデバイス操作要求として判定する | `DeviceCommandHandler` |
-| 6 | 対象デバイスを検索して操作を実行する | `TabletDeviceManager`, `IFDevice` |
-| 7 | 実行結果を Command Pipe の同期応答として返す | `NamedPipeCommandServer` |
+| 1 | WindowsのOPOS／OCX strategyがデバイス操作を共通要求へ変換する | `OposNamedPipeCommandClient`, `NamedPipeDeviceCommandRequest` |
+| 2 | デバイス制御層（DeviceCtrl）がデバイスコネクタ（Host）へ要求を送信する | `INamedPipeClient`, `NamedPipeClient` |
+| 3 | デバイスコネクタ（Host）がCommand Pipeで要求を受け付ける | `NamedPipeCommandServer` |
+| 4 | 共通要求をHost内部のcommand / response形式へ変換する | `NamedPipeCommandMapper` |
+| 5 | DeviceId単位のworkerに要求を投入する | `DeviceCommandRouter` |
+| 6 | Host制御要求またはデバイス操作要求として判定する | `DeviceCommandHandler` |
+| 7 | 対象デバイスを検索して操作を実行する | `TabletDeviceManager`, `IFDevice` |
+| 8 | 実行結果を共通応答へ変換し、Command Pipeの同期応答として返す | `NamedPipeCommandMapper`, `NamedPipeCommandServer` |
+| 9 | 共通応答をstrategyの結果またはOPOSプロパティへ変換する | `OposNamedPipeCommandClient` |
 
 主な message は `DeviceUse`、`DeviceUnUse`、`DeviceUnUseComplete`、`DeviceMethod`、`Kill`、`ReStart` とする。
 
@@ -196,7 +205,7 @@ ARCH-03 デバイスコネクタ構造設計書
 
 同期応答は Command Pipe の同一接続へ JSON で返却する。
 
-デバイス側からの非同期応答は、`TabletHost.ReplyDevice()` から `NamedPipeDeviceHostAdapter.PublishDeviceReply()` を経由し、Event Pipe へ送信する。
+デバイス側からの非同期応答は、`TabletHost.ReplyDevice()` から `NamedPipeDeviceHostAdapter.PublishDeviceReply()` を経由し、共通イベント `NamedPipeDeviceEvent` としてEvent Pipeへ送信する。Appライフサイクルで開始された `NamedPipeEventReceiver` が受信するが、現行ソースでは `EventReceived` の購読者を登録していない。
 
 ## 4. デバイスコネクタ（Host）内部構成
 
@@ -206,6 +215,8 @@ ARCH-03 デバイスコネクタ構造設計書
 |---|---|---|
 | 名前付きパイプコマンドサーバー | `NamedPipeCommandServer` | Named Pipe の待受、要求読込、応答返却を行う |
 | 名前付きパイプデバイスホストアダプター | `NamedPipeDeviceHostAdapter` | Command Pipe / Event Pipe とデバイスコネクタ（Host）内 command 処理を接続する |
+| 名前付きパイプコマンドマッパー | `NamedPipeCommandMapper` | 共通要求・応答DTOとHost内部command / responseを相互変換する |
+| 名前付きパイプイベントパブリッシャー | `NamedPipeEventPublisher` | Hostから複数のEvent Pipe接続へ非同期イベントを順序どおり発行する |
 | デバイスコマンドルーター | `DeviceCommandRouter` | DeviceId 単位で要求を順序制御する |
 | デバイスコマンドハンドラー | `DeviceCommandHandler` | message を判定し、Host 制御または IFDevice 呼び出しへ振り分ける |
 | デバイスサーバーホスト | `TabletHost` | デバイスコネクタ（Host）の起動、停止、DeviceManager 起動、reply publish を管理する |
@@ -225,6 +236,8 @@ ARCH-03 デバイスコネクタ構造設計書
 | 自動釣銭機UIスレッドフォーム RT-300 | `CashChangerByRt300Form` | OPOS/OCX を UI スレッド上で保持し、イベント、周期監視、共有メモリ、要求/応答ファイル連携を処理する |
 | キャッシュドロア制御 SHARP | `CashDrawerBySharp` | SHARP キャッシュドロアの open / close 系操作を実行する |
 | カスタマーディスプレイ制御 SHARP | `CustomerDisplayBySharp` | SHARP カスタマーディスプレイの表示、消去、スクロール操作を実行する |
+| プリンター制御 SHARP | `OposPrinterDevice` | OPOSプリンターの印字、バーコード、QRコード、および用紙カットを実行する |
+| 決済端末制御 CAFIS Arch | `CafisArchPaymentDevice` | CAFIS Archの状態確認、決済要求、および再印字を実行する |
 
 ## 5. 設定ファイル
 
@@ -241,14 +254,15 @@ ARCH-03 デバイスコネクタ構造設計書
 | `classId` | 既存 class factory が生成するデバイス class ID |
 | `visible` | デバイス用フォームを表示するかどうか |
 | `parameters` | デバイスごとの追加パラメータ |
+| `productName` | OPOSまたはCAFIS Archで使用する製品・論理デバイス名 |
 
-初期設定では `CustomerDisplay`、`CashDrawer`、`CashChanger` を定義する。
+現行設定では `CustomerDisplay`、`CashDrawer`、`CashChanger`、`Printer`、`Payment` の5デバイスを定義する。
 
 ### 5.2 device_controller_config.json
 
 `device_controller_config.json` はタブレットPOSアプリ側のデバイス制御層（DeviceCtrl）設定である。
 
-デバイスコネクタ（Host）経由のデバイスでは `appSettings.namedPipe.pipeName` に `TabetPos.Host.Command` を指定し、デバイス制御層からデバイスコネクタへ要求を送信する。
+デバイスコネクタ（Host）経由のデバイスでは `appSettings.namedPipe.pipeName` に `TabletPos.Host.Command` を指定し、デバイス制御層からデバイスコネクタへ要求を送信する。
 
 この設定はデバイスコネクタ（Host）内のデバイス生成設定ではない。デバイスコネクタ（Host）内の対象デバイスは `host_device_config.json` で管理する。
 
@@ -259,10 +273,12 @@ ARCH-03 デバイスコネクタ構造設計書
 | 釣銭機 RT-300 | `CashChangerByRt300`, `CashChangerByRt300Form` | OPOS/OCX、UI スレッド、共有メモリ、要求/応答ファイル連携を既存資源として継続利用するため |
 | キャッシュドロア SHARP | `CashDrawerBySharp` | SHARP 既存実装をデバイスコネクタ（Host）側に保持し、アプリ側から分離して利用するため |
 | カスタマーディスプレイ SHARP | `CustomerDisplayBySharp` | SHARP 既存実装をデバイスコネクタ（Host）側に保持し、表示制御を継続利用するため |
+| レシートプリンター SHARP | `OposPrinterDevice` | OPOSプリンターの利用開始、印字、バーコード・QRコード、およびカットをHost側へ集約するため |
+| 決済端末 CAFIS Arch | `CafisArchPaymentDevice` | CAFIS ArchのCOMライフサイクルと決済端末制御を端末アプリケーションから分離するため |
 
 上記の対象デバイスは、現行 POS で使用している既存デバイスを継続利用するためにデバイスコネクタ（Host）経由とする。
 
-機種追加時は、原則として iPad と同等の直接制御方式で対応し、新たなレガシーデバイスをデバイスコネクタ（Host）へ追加しない。RZ-476 など対象機器の利用が終了した後は、デバイスコネクタ（Host）は不要となる資材として整理できる。
+機種追加時は、プラットフォーム内で直接制御できるか、Windows別プロセスでOPOS／OCX／COM資源を保持する必要があるかを判定する。直接制御できる機器はDeviceCtrlのplatform strategyへ追加し、別プロセスが必要な機器だけをデバイスコネクタ（Host）の設定、class registry、IFDevice実装、およびコマンドmappingへ追加する。
 
 上記以外の機器は、初期段階ではデバイス制御層（DeviceCtrl）内または各プラットフォームの制御部品で直接制御する。
 
@@ -272,8 +288,28 @@ ARCH-03 デバイスコネクタ構造設計書
 |---|---|
 | デバイスコネクタ（Host）起動 | タブレットPOSアプリのライフサイクルに合わせてデバイスコネクタ（Host）が自動起動し、`TabletHost.StartHost()` により Command Pipe / Event Pipe と対象デバイスが起動すること |
 | 設定読込 | `host_device_config.json` の対象デバイスが `TabletDeviceManager` に登録されること |
-| 通信 | `NamedPipeClient` から `TabetPos.Host.Command` へ要求を送信し、応答を受け取れること |
+| 通信 | `NamedPipeClient` から `TabletPos.Host.Command` へ要求を送信し、応答を受け取れること |
+| 共通デバイス通信契約 | DeviceCtrlとHostが同じ要求・応答・イベントDTO、識別子、および通信既定値を使用すること |
+| イベント受信 | Host起動後にNamedPipeEventReceiverを開始し、停止・破棄時に終了すること。EventReceived購読を追加する場合はApplicationユースケースへの引渡しも確認すること |
 | 順序制御 | 同一 DeviceId の要求が `DeviceCommandRouter` で順序制御されること |
 | デバイス操作 | `DeviceUse`、`DeviceUnUse`、`DeviceMethod` が対象 `IFDevice` に渡ること |
 | 停止 | タブレットPOSアプリの停止時、終了時にデバイスコネクタ（Host）へ `Kill` が送信され、`StopHost` により pipe と起動済みデバイスが終了すること |
 | 画面表示 | Start/Stop 画面はデバッグ／開発者向けに限定し、通常運用時には表示しないこと |
+
+## 8. 関連資料
+
+- `sources/TabletPosBoilerplate/TabletPos.Applications/App.xaml.cs`
+- `sources/TabletPosBoilerplate/TabletPos.DeviceCtrl/DeviceManager.cs`
+- `sources/TabletPosBoilerplate/TabletPos.DeviceCtrl/Platforms/Windows/Modules/OposNamedPipeCommandClient.cs`
+- `sources/TabletPosBoilerplate/TabletPos.DeviceCtrl/Platforms/Windows/Modules/NamedPipeClient.cs`
+- `sources/TabletPosBoilerplate/TabletPos.DeviceCtrl/Platforms/Windows/Modules/NamedPipeEventReceiver.cs`
+- `sources/TabletPosBoilerplate/TabletPos.DeviceContracts/NamedPipeContracts.cs`
+- `sources/TabletPosBoilerplate/TabletPos.DeviceContracts/DeviceProtocol.cs`
+- `sources/TabletPosBoilerplate/TabletPos.Host/src/AppServer/Resources/host_device_config.json`
+- `sources/TabletPosBoilerplate/TabletPos.Host/src/AppServer/Program.cs`
+
+## 9. 結論
+
+Windowsのデバイスコネクタ（Host）は、CustomerDisplay、CashDrawer、CashChanger、Printer、およびPaymentの5デバイスを別プロセスで管理する。DeviceCtrlは `OposNamedPipeCommandClient` と `NamedPipeClient` を介して同期コマンドを送信し、DeviceCtrlとHostは `TabletPos.DeviceContracts` の共通通信契約を使用する。
+
+AppはHostの起動・停止と同じライフサイクルでイベント受信を開始・停止する。HostからDeviceCtrlまでのイベント伝送は構成されているが、現行ソースでは `EventReceived` の購読者を登録していないため、Applicationユースケースへの引渡しは行わない。

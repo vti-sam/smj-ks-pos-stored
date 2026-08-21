@@ -5,7 +5,8 @@ type: decision
 status: active
 source:
   - User-approved decision in Codex task 2026-07-28
-  - project-store/artifacts/reports/program-specs/PS-01_タブレットDCS_デバイスコネクタ制御方式/
+  - project-store/artifacts/reports/program-specs/PS-DEVICE_タブレットPOS_デバイス制御/
+  - project-store/artifacts/reports/program-specs/PS-HOST_タブレットPOS_デバイスコネクタ/
   - skills/doc-authoring/program-spec-authoring/SKILL.md
   - skills/doc-authoring/document-quality-gate/SKILL.md
   - skills/doc-authoring/program-spec-excel/SKILL.md

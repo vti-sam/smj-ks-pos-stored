@@ -29,7 +29,7 @@
 | --- | --- |
 | 機能名 | DBマイグレーション初期化 |
 | 物理クラス名 | LocalStateDbContextInitializer |
-| 名前空間 | TabetPos.Core.State |
+| 名前空間 | TabletPos.Core.State |
 | アクセス修飾子 | public static |
 | 継承/実装 | - |
 
@@ -37,7 +37,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/tabletposboilerplate/TabetPos.Core/State/LocalStateDbContextInitializer.cs |
+| ソースファイル | sources/TabletPosBoilerplate/TabletPos.Core/State/LocalStateDbContextInitializer.cs |
 | 対象クラス | LocalStateDbContextInitializer |
 | 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 

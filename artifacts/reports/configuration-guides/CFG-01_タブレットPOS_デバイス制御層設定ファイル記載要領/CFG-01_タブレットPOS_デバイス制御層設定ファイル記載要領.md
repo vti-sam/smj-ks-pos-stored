@@ -3,11 +3,11 @@ title: デバイス制御層設定ファイル記載要領
 document_id: CFG-01
 project: tablet_pos
 type: configuration-guide
-status: draft
+status: final
 source:
   - chat:2026-06-11
-  - sources/tabletposboilerplate/TabetPos.DeviceCtrl/Resources/Raw/device_controller_config.json
-  - sources/tabletposboilerplate/TabetPos.Host/src/AppServer/Resources/host_device_config.json
+  - sources/TabletPosBoilerplate/TabletPos.DeviceCtrl/Resources/Raw/device_controller_config.json
+  - sources/TabletPosBoilerplate/TabletPos.Host/src/AppServer/Resources/host_device_config.json
 tags:
   - タブレットPOS
   - device-controller
@@ -23,6 +23,7 @@ tags:
 
 | 改訂日 | 版数 | 内容 | 改訂者 | 承認者 |
 |---|---|---|---|---|
+| 2026/08/24 | 0.1.5 | Hostの5デバイス定義、CustomerDisplay互換ID変換、Payment設定、名前付きパイプの共通タイムアウト／再試行／イベント設定を現行実装に合わせて更新 | VTI-サム | - |
 | 2026/07/23 | 0.1.4 | device_controller_config.jsonの管理責務をDeviceCtrlへ統一し、読込・フォールバック、接続方式、およびプラットフォーム別の利用状態を現行実装に合わせて更新 | VTI-サム | - |
 | 2026/06/25 | 0.1.3 | 設定ファイル名、配置先、Named Pipe 名を現行構成に合わせて更新 | VTI-サム | - |
 | 2026/06/15 | 0.1.2 | `device_controller_config.json` の全体記載例を追加 | VTI-サム | - |
@@ -71,7 +72,8 @@ tags:
   - [7.5 キーボード](#75-キーボード)
   - [7.6 キャッシュドロワー](#76-キャッシュドロワー)
   - [7.7 自動釣銭機](#77-自動釣銭機)
-  - [7.8 device_controller_config.json 全体記載例](#78-device_controller_configjson-全体記載例)
+  - [7.8 決済端末](#78-決済端末)
+  - [7.9 device_controller_config.json 全体記載例](#79-device_controller_configjson-全体記載例)
 
 ## 1. はじめに
 
@@ -87,9 +89,9 @@ tags:
 
 | ファイル | 所在 | 用途 |
 |---|---|---|
-| `device_controller_config.json` | `TabetPos.DeviceCtrl/Resources/Raw/device_controller_config.json` | DeviceCtrlに埋め込むデフォルト設定 |
+| `device_controller_config.json` | `TabletPos.DeviceCtrl/Resources/Raw/device_controller_config.json` | DeviceCtrlに埋め込むデフォルト設定 |
 | `device_controller_config.json` | `FileSystem.AppDataDirectory/device_controller_config.json` | 起動後に編集・保存する端末別設定 |
-| `host_device_config.json` | `TabetPos.Host/src/AppServer/Resources/host_device_config.json` | デバイスコネクタ（Host）側に同梱するデバイス実装設定 |
+| `host_device_config.json` | `TabletPos.Host/src/AppServer/Resources/host_device_config.json` | デバイスコネクタ（Host）側に同梱するデバイス実装設定 |
 | `host_device_config.json` | `デバイスコネクタ実行フォルダ\Resources\host_device_config.json` | ビルド後にデバイスコネクタ（Host）が実際に読み込む設定 |
 
 ### 1.3 前提事項
@@ -119,6 +121,10 @@ tags:
 | PS-HOST-09_タブレットPOS_ホスト_自動釣銭機UIスレッドフォーム_RT-300_プログラム仕様書.xlsx |
 | PS-HOST-10_タブレットPOS_ホスト_ドロア制御_SHARP_プログラム仕様書.xlsx |
 | PS-HOST-11_タブレットPOS_ホスト_カスタマディスプレイ制御_SHARP_プログラム仕様書.xlsx |
+| PS-HOST-12_タブレットPOS_ホスト_名前付きパイプコマンドマッパー_プログラム仕様書.xlsx |
+| PS-HOST-13_タブレットPOS_ホスト_名前付きパイプイベントパブリッシャー_プログラム仕様書.xlsx |
+| PS-DEVICE-10_タブレットPOS_デバイス制御_名前付きパイプクライアント_プログラム仕様書.xlsx |
+| PS-DEVICE-11_タブレットPOS_デバイス制御_名前付きパイプイベント受信_プログラム仕様書.xlsx |
 
 ## 2. 設定ファイルの全体像
 
@@ -131,9 +137,10 @@ tags:
 | POS 利用者 | タブレットPOSアプリを操作する | - |
 | タブレットPOSアプリ | 売上、会計、周辺機器操作を行う端末アプリケーション | `device_controller_config.json` |
 | 端末側デバイス設定 | 端末で使用するデバイス候補、有効デバイス、接続情報を定義する | `device_controller_config.json` |
-| デバイスコネクタ（Host） | Windows 端末で OPOS / OCX / ActiveX 機器を制御する外部プロセス | `host_device_config.json` |
+| デバイスコネクタ（Host） | Windows端末でOPOS／OCX／ActiveXおよびCAFIS Arch機器を制御する外部プロセス | `host_device_config.json` |
 | デバイスコネクタ（Host）側デバイス設定 | デバイスコネクタ（Host）が起動・保持する既存デバイス資源を定義する | `host_device_config.json` |
-| Windows 端末の外部機器 | カスタマーディスプレイ、キャッシュドロワー、自動釣銭機など | 端末側設定 + デバイスコネクタ（Host）側設定 |
+| 共通デバイス通信契約 | DeviceCtrlとHostが共有する要求・応答・イベント、識別子、パイプ名および既定値を定義する | `TabletPos.DeviceContracts`（コンパイル時定義。設定ファイルではない） |
+| Windows端末の外部機器 | カスタマーディスプレイ、キャッシュドロワー、自動釣銭機、レシートプリンター、決済端末 | 端末側設定 + デバイスコネクタ（Host）側設定 |
 | iOS / Android 端末の外部機器 | カメラ、Bluetooth、SDK 経由のプリンターなど | 主に端末側設定 |
 
 ### 2.2 設定ファイルの役割サマリ
@@ -260,6 +267,7 @@ tags:
 | activeDevices | `local_display` | array | 任意 | カスタマーディスプレイの有効デバイス | 要素は `os` と `id` を持つ |
 | activeDevices | `local_drawer` | array | 任意 | キャッシュドロワーの有効デバイス | 要素は `os` と `id` を持つ |
 | activeDevices | `local_keyboard` | array | 任意 | POS キーボードの有効デバイス | 要素は `os` と `id` を持つ |
+| activeDevices | `local_payment` | array | 任意 | 決済端末の有効デバイス | 要素は `os` と `id` を持つ |
 | activeDevices 配列 | `os` | string | 必須 | 対象 OS | `devices[].os` と一致させる |
 | activeDevices 配列 | `id` | string | 必須 | 使用する `devices[].id` | 必ず `devices[]` に存在する ID を指定 |
 
@@ -271,13 +279,18 @@ tags:
 
 ### 3.8 appSettings.namedPipe
 
-`appSettings.namedPipe` は、Windows 端末からデバイスコネクタ（Host）へ機器制御を依頼する際の共通設定である。
+`appSettings.namedPipe` は、Windows端末からデバイスコネクタ（Host）へ機器制御を依頼する際の共通設定である。省略時の既定値は、`TabletPos.DeviceContracts`の`DeviceCommandDefaults`を参照する。
 
 | 分類 | キー | 型 | 必須 | 内容 | 備考 |
 |---|---|---|---|---|---|
 | appSettings | `namedPipe` | object | 任意 | デバイスコネクタ（Host）経由デバイス用の Named Pipe 設定 | iOS / Android では通常使用しない |
-| appSettings.namedPipe | `pipeName` | string | 任意 | デバイスコネクタ（Host）へ接続するための pipe 名 | 例: `TabetPos.Host.Command` |
-| appSettings.namedPipe | `connectionTimeoutMs` | number | 任意 | Named Pipe 接続タイムアウト(ms) | 例: `5000` |
+| appSettings.namedPipe | `pipeName` | string | 任意 | デバイスコネクタ（Host）へ接続するための pipe 名 | 例: `TabletPos.Host.Command` |
+| appSettings.namedPipe | `connectionTimeoutMs` | number | 任意 | コマンド通信用パイプの接続待ち上限（ms） | 共通既定値: `5000` |
+| appSettings.namedPipe | `responseTimeoutMs` | number | 任意 | コマンド応答待ち上限（ms） | 共通既定値: `30000`。Printer／Paymentの操作別上限は`TabletPos.DeviceContracts.DeviceOperationTimeouts`で`300000`を定義する |
+| appSettings.namedPipe | `connectionRetryCount` | number | 任意 | 接続失敗時の再試行回数 | 現行設定: `3` |
+| appSettings.namedPipe | `connectionRetryIntervalMs` | number | 任意 | 接続再試行間隔（ms） | 現行設定: `500` |
+| appSettings.namedPipe | `eventPipeName` | string | 任意 | イベント通知用パイプ名 | 共通既定値: `TabletPos.Host.Event` |
+| appSettings.namedPipe | `eventReconnectIntervalMs` | number | 任意 | イベント通知用パイプの再接続間隔（ms） | 共通既定値: `1000` |
 
 ### 3.9 記載値一覧
 
@@ -291,6 +304,7 @@ tags:
 | `local_display` | カスタマーディスプレイ |
 | `local_drawer` | キャッシュドロワー |
 | `local_keyboard` | POS キーボード |
+| `local_payment` | 決済端末 |
 
 #### os
 
@@ -324,6 +338,7 @@ tags:
 | windows | `OposDrawerStrategy` | デバイスコネクタ（Host）経由キャッシュドロワー |
 | windows | `OposKeyboardStrategy` | OPOS keyboard |
 | windows | `WindowsRawKeyboardStrategy` | Windows raw keyboard listener |
+| windows | `OposCafisArchPaymentStrategy` | デバイスコネクタ（Host）経由 CAFIS Arch 決済端末 |
 | ios | `IosEpsonPrinterStrategy` | iOS Epson printer |
 | ios | `IosCameraBarcodeScannerStrategy` | iOS camera scanner |
 | ios | `IosBleBarcodeScannerStrategy` | iOS BLE scanner |
@@ -344,7 +359,7 @@ tags:
 | 対象 | OPOS / OCX / ActiveX / ベンダー提供 DLL で制御する周辺機器 |
 | 使用者 | デバイスコネクタ（Host） |
 | 主な判断 | デバイスコネクタ（Host）内でどの device ID をどの class ID で生成するか |
-| 配置元 | `TabetPos.Host/src/AppServer/Resources/host_device_config.json` |
+| 配置元 | `TabletPos.Host/src/AppServer/Resources/host_device_config.json` |
 | ビルド後配置先 | `デバイスコネクタ実行フォルダ\Resources\host_device_config.json` |
 | 実行時参照先 | `AppContext.BaseDirectory\Resources\host_device_config.json` |
 
@@ -360,7 +375,7 @@ tags:
 | 2 | デバイスコネクタ（Host）側設定ファイル確認 | デバイスコネクタ実行フォルダ配下の `Resources\host_device_config.json` を確認する | ビルド時に `src\AppServer\Resources` から出力先へコピーされる |
 | 3 | 設定ファイル読込 | `host_device_config.json` を読み込む | JSON が読めない場合は設定不備として扱う |
 | 4 | devices 配列確認 | `devices` 配列を確認する | デバイスコネクタ（Host）が起動・保持する対象機器の一覧として使用する |
-| 5 | device 定義確認 | `id`, `name`, `classId` を確認する | `id` が未定義、`name` が空、`classId` が不正な場合は設定不備として扱う |
+| 5 | device 定義確認 | `id`, `name`, `classId` を確認する | `id` が設定されていない場合、`name` が空の場合、または `classId` が不正な場合は設定不備として扱う |
 | 6 | 起動対象決定 | 有効な定義だけを起動対象にする | 不備がある定義は起動対象から外す |
 | 7 | 対象デバイス実装生成 | `classId` をもとにデバイスコネクタ（Host）側の実装を生成する | - |
 | 8 | 外部機器制御開始 | OPOS / OCX / ActiveX / Vendor DLL をデバイスコネクタ（Host）側から呼び出す | 端末アプリケーション側からは直接呼び出さない |
@@ -395,9 +410,13 @@ tags:
 
 | device ID | name | classId | visible | productName | 用途 |
 |---|---|---|---|---|---|
-| `CustomerDisplay` | `SHARPRZ4DP1B` | `LineDisplay1` | `false` | `SHARPRZ4DP1B` | カスタマーディスプレイ |
+| `CustomerDisplay` | `SHARPRZ4DP1B` | `CustomerDisplay1` | `false` | `SHARPRZ4DP1B` | カスタマーディスプレイ |
 | `CashDrawer` | `SHARPUPJ36DW3` | `CashDrawer1` | `false` | `SHARPUPJ36DW3` | キャッシュドロワー |
 | `CashChanger` | `CASHCHANGER` | `CashChanger1` | `false` | - | 自動釣銭機 |
+| `Printer` | `SHARPRECPRT80` | `POSPrinter1` | `false` | `SHARPRECPRT80` | OPOS プリンター |
+| `Payment` | `CAFIS Arch` | `Payment1` | `false` | `CAFIS Arch Saturn` | CAFIS Arch 決済端末 |
+
+`CustomerDisplay1`はHost設定の公式値である。`TabletDeviceSettingBase`が読込時に互換ID `LineDisplay1`へ変換し、レジストリの`CustomerDisplayBySharp`へ解決する。
 
 ### 4.7 端末側設定との対応関係
 
@@ -437,7 +456,7 @@ tags:
 | OPOS・OCX機器制御 | デバイスコネクタ側の設定から対象実装を取得し、OPOS・OCXとドライバーを介してUSBまたはCOMで周辺機器を制御する | `host_device_config.json`, `classId`, `name`, `parameters` |
 | シリアル直接接続 | DeviceCtrlのWindowsストラテジーからSerialPort・COMで周辺機器へ直接接続する | `connectiontype`, `comport`, シリアル通信項目 |
 | Raw Input直接接続 | DeviceCtrlのWindowsストラテジーからWindows Raw Input APIを使用する | `connectiontype: RawInput` |
-| 結果返却 | 各ストラテジーが処理結果またはイベントをアプリケーションサービスへ返す | ストラテジーごとの処理結果 |
+| 結果返却 | 各ストラテジーが同期処理結果をアプリケーションサービスへ返す。イベント受信はAppライフサイクルで稼働するが、現行コードにはEventReceived購読先がない | ストラテジーごとの同期処理結果、イベント受信ループ |
 
 ### 5.3 iOS / Android 端末の外部機器制御
 
@@ -817,7 +836,38 @@ Windows の Raw Keyboard listener を使用する場合は、`strategyclass` を
 }
 ```
 
-### 7.8 device_controller_config.json 全体記載例
+### 7.8 決済端末
+
+#### Windows CAFIS Arch 決済端末
+
+```json
+{
+  "id": "payment_cafis_arch_saturn_windows",
+  "name": "CAFIS Arch",
+  "type": "local_payment",
+  "vendor": "cafis",
+  "series": "Saturn.windows",
+  "lang": "jp",
+  "os": "windows",
+  "strategyclass": "OposCafisArchPaymentStrategy",
+  "config": {
+    "connectiontype": "OPOS",
+    "ipaddress": "",
+    "port": "",
+    "comport": "",
+    "macaddress": "",
+    "baudrate": "",
+    "parity": "",
+    "databits": "",
+    "stopbits": "",
+    "handshake": ""
+  }
+}
+```
+
+Host側の`host_device_config.json`には、`id=Payment`、`classId=Payment1`、`name=CAFIS Arch`の対応定義が必要である。
+
+### 7.9 device_controller_config.json 全体記載例
 
 本節では、プリンター、スキャナー、カスタマーディスプレイ、キーボードを含む `device_controller_config.json` の全体記載例を示す。
 
@@ -941,8 +991,13 @@ Windows の Raw Keyboard listener を使用する場合は、`strategyclass` を
   },
   "appSettings": {
     "namedPipe": {
-      "pipeName": "TabetPos.Host.Command",
-      "connectionTimeoutMs": 5000
+      "pipeName": "TabletPos.Host.Command",
+      "connectionTimeoutMs": 5000,
+      "responseTimeoutMs": 30000,
+      "connectionRetryCount": 3,
+      "connectionRetryIntervalMs": 500,
+      "eventPipeName": "TabletPos.Host.Event",
+      "eventReconnectIntervalMs": 1000
     }
   }
 }

@@ -27,4 +27,4 @@ Key decision:
 - When a Japanese description needs to map to a code identifier, use the form `日本語（CodeIdentifier）`.
 - Standard mapping terms such as `Host`, `DeviceCtrl`, `OPOS`, `OCX`, and `Named Pipe` can remain when they link the report to diagrams or source code.
 
-The current DCS Host program specs under `project-store/artifacts/reports/program-specs/PS-01_タブレットDCS_デバイス接続サーバー制御方式/` were updated narrowly to follow this rule. Code identifiers and signatures were not renamed.
+The current DCS Host program specs under `project-store/artifacts/reports/program-specs/PS-HOST_タブレットPOS_デバイスコネクタ/` were updated narrowly to follow this rule. Code identifiers and signatures were not renamed.

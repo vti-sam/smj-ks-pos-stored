@@ -29,7 +29,7 @@
 | --- | --- |
 | 機能名 | DBコンテキスト設計時ファクトリ |
 | 物理クラス名 | LocalStateDbContextFactory |
-| 名前空間 | TabetPos.Core.State |
+| 名前空間 | TabletPos.Core.State |
 | アクセス修飾子 | public sealed |
 | 継承/実装 | IDesignTimeDbContextFactory<LocalStateDbContext> |
 
@@ -37,7 +37,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/tabletposboilerplate/TabetPos.Core/State/LocalStateDbContextFactory.cs |
+| ソースファイル | sources/TabletPosBoilerplate/TabletPos.Core/State/LocalStateDbContextFactory.cs |
 | 対象クラス | LocalStateDbContextFactory |
 | 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 

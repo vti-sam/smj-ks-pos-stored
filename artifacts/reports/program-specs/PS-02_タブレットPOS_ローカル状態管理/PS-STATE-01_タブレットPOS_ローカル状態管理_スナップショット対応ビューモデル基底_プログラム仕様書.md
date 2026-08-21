@@ -29,7 +29,7 @@
 | --- | --- |
 | 機能名 | スナップショット対応ビューモデル基底 |
 | 物理クラス名 | SnapshotViewModelBase |
-| 名前空間 | TabetPos.Applications.Presentation.ViewModels.Base |
+| 名前空間 | TabletPos.Applications.Presentation.ViewModels.Base |
 | アクセス修飾子 | public abstract |
 | 継承/実装 | BaseViewModel |
 
@@ -37,7 +37,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/tabletposboilerplate/TabetPos.Applications/Presentation/ViewModels/Base/SnapshotViewModelBase.cs |
+| ソースファイル | sources/TabletPosBoilerplate/TabletPos.Applications/Presentation/ViewModels/Base/SnapshotViewModelBase.cs |
 | 対象クラス | SnapshotViewModelBase |
 | 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 

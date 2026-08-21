@@ -29,7 +29,7 @@
 | --- | --- |
 | 機能名 | スナップショットサービスインターフェース |
 | 物理クラス名 | IViewModelSnapshotService |
-| 名前空間 | TabetPos.Core.State |
+| 名前空間 | TabletPos.Core.State |
 | アクセス修飾子 | public |
 | 継承/実装 | - |
 
@@ -37,7 +37,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/tabletposboilerplate/TabetPos.Core/State/IViewModelSnapshotService.cs |
+| ソースファイル | sources/TabletPosBoilerplate/TabletPos.Core/State/IViewModelSnapshotService.cs |
 | 対象クラス | IViewModelSnapshotService |
 | 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 

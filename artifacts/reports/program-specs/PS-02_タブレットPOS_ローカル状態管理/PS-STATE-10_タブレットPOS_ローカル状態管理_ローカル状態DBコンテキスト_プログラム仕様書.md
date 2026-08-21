@@ -29,7 +29,7 @@
 | --- | --- |
 | 機能名 | ローカル状態DBコンテキスト |
 | 物理クラス名 | LocalStateDbContext |
-| 名前空間 | TabetPos.Core.State |
+| 名前空間 | TabletPos.Core.State |
 | アクセス修飾子 | public sealed |
 | 継承/実装 | DbContext |
 
@@ -37,7 +37,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/tabletposboilerplate/TabetPos.Core/State/LocalStateDbContext.cs |
+| ソースファイル | sources/TabletPosBoilerplate/TabletPos.Core/State/LocalStateDbContext.cs |
 | 対象クラス | LocalStateDbContext |
 | 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 

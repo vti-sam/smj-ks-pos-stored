@@ -111,6 +111,10 @@ Link nội bộ dùng path từ workspace root với prefix `project-store/`.
   companion document; đổi tên/di chuyển phải cập nhật internal link.
 - Draft/review/intermediate để trong `scratch/` hoặc output path do owner skill
   quy định; artifact chính chỉ promote sau acceptance theo workflow.
+- Office projection do skill/renderer sinh không được lưu trong
+  `project-store/`; luôn render vào workspace-root `scratch/<artifact-family>/`.
+  Raw Office do User cung cấp vẫn được lưu như artifact nguồn; bản đã verify chỉ
+  được promote vào `artifacts/` khi User yêu cầu rõ đích bàn giao.
 - Naming, document ID, code, vocabulary, bundle layout và renderer thuộc
   skill tài liệu tương ứng; không copy danh sách convention vào rule này.
 
@@ -129,7 +133,7 @@ Link nội bộ dùng path từ workspace root với prefix `project-store/`.
 ## SCIP delta của SMJ KS POS
 
 - `config/project.yaml` bật SCIP tường minh cho project
-  `tabetposboilerplate` cùng với CodeGraph; indexer/consumer version và danh
+  `tabletposboilerplate` cùng với CodeGraph; indexer/consumer version và danh
   sách target `.csproj` trong config là binding bắt buộc của project này.
 - SCIP chỉ phục vụ source-intelligence của project đã khai báo; không tự động
   index toàn bộ `sources/`, không thay thế CodeGraph và output index chỉ nằm ở

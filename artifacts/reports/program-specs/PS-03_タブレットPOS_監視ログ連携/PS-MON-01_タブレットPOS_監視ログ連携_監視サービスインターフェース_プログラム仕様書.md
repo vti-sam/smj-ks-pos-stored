@@ -29,7 +29,7 @@
 | --- | --- |
 | 機能名 | 監視サービスインターフェース |
 | 物理クラス名 | IMonitoringService |
-| 名前空間 | TabetPos.Core.Monitoring |
+| 名前空間 | TabletPos.Core.Monitoring |
 | アクセス修飾子 | public |
 | 継承/実装 | - |
 
@@ -37,7 +37,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/tabletposboilerplate/TabetPos.Core/Monitoring/IMonitoringService.cs |
+| ソースファイル | sources/TabletPosBoilerplate/TabletPos.Core/Monitoring/IMonitoringService.cs |
 | 対象クラス | IMonitoringService |
 | 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 

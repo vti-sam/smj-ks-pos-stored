@@ -29,7 +29,7 @@
 | --- | --- |
 | 機能名 | Sentry監視サービス |
 | 物理クラス名 | SentryMonitoringService |
-| 名前空間 | TabetPos.Core.Monitoring |
+| 名前空間 | TabletPos.Core.Monitoring |
 | アクセス修飾子 | public sealed |
 | 継承/実装 | IMonitoringService |
 
@@ -37,7 +37,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/tabletposboilerplate/TabetPos.Core/Monitoring/SentryMonitoringService.cs |
+| ソースファイル | sources/TabletPosBoilerplate/TabletPos.Core/Monitoring/SentryMonitoringService.cs |
 | 対象クラス | SentryMonitoringService |
 | 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 

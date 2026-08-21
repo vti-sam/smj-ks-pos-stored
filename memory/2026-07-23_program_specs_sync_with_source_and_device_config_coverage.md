@@ -4,7 +4,8 @@ project: smj-ks-pos
 type: lesson
 status: archived
 source:
-  - project-store/artifacts/reports/program-specs/PS-01_タブレットDCS_デバイスコネクタ制御方式/
+  - project-store/artifacts/reports/program-specs/PS-DEVICE_タブレットPOS_デバイス制御/
+  - project-store/artifacts/reports/program-specs/PS-HOST_タブレットPOS_デバイスコネクタ/
   - sources/tabletposboilerplate/TabetPos.Host/src/TabletHost/DeviceHost/
   - sources/tabletposboilerplate/TabetPos.Host/src/TabletDeviceManager/TabletDeviceManager.cs
   - sources/tabletposboilerplate/TabetPos.DeviceCtrl/DeviceManager.cs
@@ -22,7 +23,7 @@ promote_to_knowledge: false
 
 # Program Specs đồng bộ source và bổ sung Device Config 2026-07-23
 
-Đã đối chiếu 33 Program Spec hiện hữu với source `sources/tabletposboilerplate` tại commit `872ef1d`, sau đó cập nhật bundle `PS-01_タブレットDCS_デバイスコネクタ制御方式`.
+Đã đối chiếu 33 Program Spec hiện hữu với source `sources/tabletposboilerplate` tại commit `872ef1d`, sau đó cập nhật hai bundle `PS-DEVICE_タブレットPOS_デバイス制御` và `PS-HOST_タブレットPOS_デバイスコネクタ`.
 
 Kết quả:
 

@@ -29,7 +29,7 @@
 | --- | --- |
 | 機能名 | 機微情報マスキング |
 | 物理クラス名 | SensitiveDataMasker |
-| 名前空間 | TabetPos.Core.Monitoring |
+| 名前空間 | TabletPos.Core.Monitoring |
 | アクセス修飾子 | public static partial |
 | 継承/実装 | - |
 
@@ -37,7 +37,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/tabletposboilerplate/TabetPos.Core/Monitoring/SensitiveDataMasker.cs |
+| ソースファイル | sources/TabletPosBoilerplate/TabletPos.Core/Monitoring/SensitiveDataMasker.cs |
 | 対象クラス | SensitiveDataMasker |
 | 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 

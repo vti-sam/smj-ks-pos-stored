@@ -7,7 +7,7 @@ source:
   - Codex session 2026-06-25
   - project-store/artifacts/reports/architecture/ARCH-03_タブレットPOS_デバイス接続サーバー構造設計書/ARCH-03_タブレットPOS_デバイス接続サーバー構造設計書.md
   - project-store/artifacts/reports/architecture/ARCH-03_タブレットPOS_デバイス接続サーバー構造設計書/ARCH-03_タブレットPOS_デバイス接続サーバー制御方式構造図.drawio
-  - project-store/artifacts/reports/program-specs/PS-01_タブレットDCS_デバイス接続サーバー制御方式/PS-HOST-05_タブレットPOS_ホスト_デバイスサーバーホスト_プログラム仕様書.md
+  - project-store/artifacts/reports/program-specs/PS-HOST_タブレットPOS_デバイスコネクタ/PS-HOST-05_タブレットPOS_ホスト_デバイスサーバーホスト_プログラム仕様書.md
 tags:
   - device-connection-server
   - lifecycle

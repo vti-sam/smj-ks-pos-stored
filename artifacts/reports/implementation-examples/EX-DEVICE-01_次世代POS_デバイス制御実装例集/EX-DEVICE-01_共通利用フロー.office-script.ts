@@ -1,121 +1,122 @@
+// Generated from Markdown: EX-DEVICE-01_次世代POS_デバイス制御実装例集.md
+// Source contract SHA-256: 6165cc00adf077bfeecfdea5895e4b582aedfe5e8a25554d855027d324a6e140
+// Generated output; do not edit. Change Markdown or the owning renderer and regenerate both scripts.
+
 function main(workbook: ExcelScript.Workbook) {
   const anchorPosition = getRunAnchorPosition(workbook);
   const sheet = createRenderWorksheet(workbook, "05_共通利用フロー_01");
   sheet.activate();
   const anchor = sheet.getCell(anchorPosition.rowIndex, anchorPosition.columnIndex);
   const originTop = anchor.getTop();
-  const canvasColumnCount = 39;
-  const baselineCanvasRowCount = 31;
+  const canvasColumnCount = 77;
+  const baselineCanvasRowCount = 15;
   formatDiagramGrid(anchor, baselineCanvasRowCount, canvasColumnCount);
 
-  const laneRange1 = getAnchoredRange(anchor, 0, 0, 1, 7);
-  const laneRange2 = getAnchoredRange(anchor, 0, 7, 1, 7);
-  const laneRange3 = getAnchoredRange(anchor, 0, 14, 1, 7);
-  const laneRange4 = getAnchoredRange(anchor, 0, 21, 1, 7);
-  const laneRange5 = getAnchoredRange(anchor, 0, 28, 1, 11);
+  const laneRange1 = getAnchoredRange(anchor, 0, 0, 1, 22);
+  const laneRange2 = getAnchoredRange(anchor, 0, 22, 1, 17);
+  const laneRange3 = getAnchoredRange(anchor, 0, 39, 1, 17);
+  const laneRange4 = getAnchoredRange(anchor, 0, 56, 1, 14);
+  const laneRange5 = getAnchoredRange(anchor, 0, 70, 1, 7);
 
   addCellLaneTable(anchor, baselineCanvasRowCount - 1);
 
-  const shape_d51_PREPARE_EXISTS = addTextShape(sheet, "shape_d51_PREPARE_EXISTS", "④ ストラテジーがあるか", 0, 0, 157.2645, 52, 10, true, "#FFF2CC", 0, "#BF9000", 2, "#111111", true, "center", "diamond", false);
-  setShapeAltText(shape_d51_PREPARE_EXISTS, "④ ストラテジーがあるか", "");
-  const shape_d51_FINISH_HAS_ERROR = addTextShape(sheet, "shape_d51_FINISH_HAS_ERROR", "③ 操作エラーがあるか", 0, 0, 144.8745, 52, 10, true, "#FFF2CC", 0, "#BF9000", 2, "#111111", true, "center", "diamond", false);
-  setShapeAltText(shape_d51_FINISH_HAS_ERROR, "③ 操作エラーがあるか", "");
+  const shape_d51_PREPARE_PREPARE_EXISTS = addTextShape(sheet, "shape_d51_PREPARE_PREPARE_EXISTS", "④ ストラテジーがあるか", 0, 0, 157.2645, 52, 10, true, "#FFF2CC", 0, "#BF9000", 2, "#111111", true, "center", "diamond", false);
+  setShapeAltText(shape_d51_PREPARE_PREPARE_EXISTS, "④ ストラテジーがあるか", "");
+  const shape_d51_FINISH_FINISH_ERROR = addTextShape(sheet, "shape_d51_FINISH_FINISH_ERROR", "③ 操作エラーがあるか", 0, 0, 144.8745, 52, 10, true, "#FFF2CC", 0, "#BF9000", 2, "#111111", true, "center", "diamond", false);
+  setShapeAltText(shape_d51_FINISH_FINISH_ERROR, "③ 操作エラーがあるか", "");
   const shape_d51_START_PHASE_START_OK = addTextShape(sheet, "shape_d51_START_PHASE_START_OK", "③ Startが成功したか", 0, 0, 141.777, 52, 10, true, "#FFF2CC", 0, "#BF9000", 2, "#111111", true, "center", "diamond", false);
   setShapeAltText(shape_d51_START_PHASE_START_OK, "③ Startが成功したか", "");
-  const shape_d51_DEVICE_ACTION_RESULT_OK = addTextShape(sheet, "shape_d51_DEVICE_ACTION_RESULT_OK", "③ 結果が有効か", 0, 0, 140, 52, 10, true, "#FFF2CC", 0, "#BF9000", 2, "#111111", true, "center", "diamond", false);
-  setShapeAltText(shape_d51_DEVICE_ACTION_RESULT_OK, "③ 結果が有効か", "");
-  const shape_d51_RESULT_SUCCESS = addTextShape(sheet, "shape_d51_RESULT_SUCCESS", "① 結果をユースケースへ返す", 0, 0, 154.275, 28, 10, true, "#DDEBF7", 0, "#5B9BD5", 2, "#111111", true, "center", "roundRect", false);
-  setShapeAltText(shape_d51_RESULT_SUCCESS, "① 結果をユースケースへ返す", "");
-  const shape_d51_PREPARE_SELECT = addTextShape(sheet, "shape_d51_PREPARE_SELECT", "③ 有効デバイスを選択し\nストラテジーを生成する", 0, 0, 133.275, 36, 10, true, "#E2F0D9", 0, "#70AD47", 2, "#111111", true, "center", "roundRect", false);
-  setShapeAltText(shape_d51_PREPARE_SELECT, "③ 有効デバイスを選択し ストラテジーを生成する", "");
-  const shape_d51_PREPARE_UNAVAILABLE = addTextShape(sheet, "shape_d51_PREPARE_UNAVAILABLE", "⑤ デバイスなしの分岐で\n処理を終了する", 0, 0, 133.275, 36, 10, true, "#F4CCCC", 0, "#C00000", 2, "#111111", true, "center", "roundRect", false);
-  setShapeAltText(shape_d51_PREPARE_UNAVAILABLE, "⑤ デバイスなしの分岐で 処理を終了する", "");
-  const shape_d51_DEVICE_ACTION_EXECUTE_DEVICE = addTextShape(sheet, "shape_d51_DEVICE_ACTION_EXECUTE_DEVICE", "② プラットフォーム別の\n処理を実行する", 0, 0, 133.275, 36, 10, true, "#E2F0D9", 0, "#70AD47", 2, "#111111", true, "center", "roundRect", false);
-  setShapeAltText(shape_d51_DEVICE_ACTION_EXECUTE_DEVICE, "② プラットフォーム別の 処理を実行する", "");
-  const shape_d51_START_PHASE_START_ERROR = addTextShape(sheet, "shape_d51_START_PHASE_START_ERROR", "④ Start失敗の分岐で\n処理を終了する", 0, 0, 120.15, 36, 10, true, "#F4CCCC", 0, "#C00000", 2, "#111111", true, "center", "roundRect", false);
+  const shape_d51_DEVICE_ACTION_ACTION_OK = addTextShape(sheet, "shape_d51_DEVICE_ACTION_ACTION_OK", "③ 結果が有効か", 0, 0, 140, 52, 10, true, "#FFF2CC", 0, "#BF9000", 2, "#111111", true, "center", "diamond", false);
+  setShapeAltText(shape_d51_DEVICE_ACTION_ACTION_OK, "③ 結果が有効か", "");
+  const shape_d51_RESULT_RESULT_SUCCESS = addTextShape(sheet, "shape_d51_RESULT_RESULT_SUCCESS", "① 結果をユースケースへ返す", 0, 0, 154.275, 28, 10, true, "#DDEBF7", 0, "#5B9BD5", 2, "#111111", true, "center", "rectangle", false);
+  setShapeAltText(shape_d51_RESULT_RESULT_SUCCESS, "① 結果をユースケースへ返す", "");
+  const shape_d51_PREPARE_PREPARE_SELECT = addTextShape(sheet, "shape_d51_PREPARE_PREPARE_SELECT", "③ 有効デバイスを選択し\nストラテジーを生成する", 0, 0, 133.275, 36, 10, true, "#E2F0D9", 0, "#70AD47", 2, "#111111", true, "center", "rectangle", false);
+  setShapeAltText(shape_d51_PREPARE_PREPARE_SELECT, "③ 有効デバイスを選択し ストラテジーを生成する", "");
+  const shape_d51_PREPARE_PREPARE_UNAVAILABLE = addTextShape(sheet, "shape_d51_PREPARE_PREPARE_UNAVAILABLE", "⑤ デバイスなしの分岐で\n処理を終了する", 0, 0, 133.275, 36, 10, true, "#F4CCCC", 0, "#C00000", 2, "#111111", true, "center", "rectangle", false);
+  setShapeAltText(shape_d51_PREPARE_PREPARE_UNAVAILABLE, "⑤ デバイスなしの分岐で 処理を終了する", "");
+  const shape_d51_DEVICE_ACTION_ACTION_EXECUTE = addTextShape(sheet, "shape_d51_DEVICE_ACTION_ACTION_EXECUTE", "② プラットフォーム別の\n処理を実行する", 0, 0, 133.275, 36, 10, true, "#E2F0D9", 0, "#70AD47", 2, "#111111", true, "center", "rectangle", false);
+  setShapeAltText(shape_d51_DEVICE_ACTION_ACTION_EXECUTE, "② プラットフォーム別の 処理を実行する", "");
+  const shape_d51_START_PHASE_START_ERROR = addTextShape(sheet, "shape_d51_START_PHASE_START_ERROR", "④ Start失敗の分岐で\n処理を終了する", 0, 0, 120.15, 36, 10, true, "#F4CCCC", 0, "#C00000", 2, "#111111", true, "center", "rectangle", false);
   setShapeAltText(shape_d51_START_PHASE_START_ERROR, "④ Start失敗の分岐で 処理を終了する", "");
-  const shape_d51_FINISH_END_DEVICE = addTextShape(sheet, "shape_d51_FINISH_END_DEVICE", "② 処理を終了または\nリソースを解放する", 0, 0, 112.275, 36, 10, true, "#E2F0D9", 0, "#70AD47", 2, "#111111", true, "center", "roundRect", false);
-  setShapeAltText(shape_d51_FINISH_END_DEVICE, "② 処理を終了または リソースを解放する", "");
-  const shape_d51_START_PHASE_START_DEVICE = addTextShape(sheet, "shape_d51_START_PHASE_START_DEVICE", "② デバイスを初期化\nまたは接続する", 0, 0, 112.275, 36, 10, true, "#E2F0D9", 0, "#70AD47", 2, "#111111", true, "center", "roundRect", false);
+  const shape_d51_FINISH_FINISH_DEVICE = addTextShape(sheet, "shape_d51_FINISH_FINISH_DEVICE", "② 処理を終了または\nリソースを解放する", 0, 0, 112.275, 36, 10, true, "#E2F0D9", 0, "#70AD47", 2, "#111111", true, "center", "rectangle", false);
+  setShapeAltText(shape_d51_FINISH_FINISH_DEVICE, "② 処理を終了または リソースを解放する", "");
+  const shape_d51_START_PHASE_START_DEVICE = addTextShape(sheet, "shape_d51_START_PHASE_START_DEVICE", "② デバイスを初期化\nまたは接続する", 0, 0, 112.275, 36, 10, true, "#E2F0D9", 0, "#70AD47", 2, "#111111", true, "center", "rectangle", false);
   setShapeAltText(shape_d51_START_PHASE_START_DEVICE, "② デバイスを初期化 または接続する", "");
-  const shape_d51_PREPARE_GET = addTextShape(sheet, "shape_d51_PREPARE_GET", "② ストラテジーを要求する", 0, 0, 143.775, 28, 10, true, "#DDEBF7", 0, "#5B9BD5", 2, "#111111", true, "center", "roundRect", false);
-  setShapeAltText(shape_d51_PREPARE_GET, "② ストラテジーを要求する", "");
-  const shape_d51_RESULT_FAILURE = addTextShape(sheet, "shape_d51_RESULT_FAILURE", "② エラーを業務処理へ渡す", 0, 0, 143.775, 28, 10, true, "#F4CCCC", 0, "#C00000", 2, "#111111", true, "center", "roundRect", false);
-  setShapeAltText(shape_d51_RESULT_FAILURE, "② エラーを業務処理へ渡す", "");
-  const shape_d51_DEVICE_ACTION_CALL_OPERATION = addTextShape(sheet, "shape_d51_DEVICE_ACTION_CALL_OPERATION", "① デバイス操作を呼び出す", 0, 0, 143.775, 28, 10, true, "#DDEBF7", 0, "#5B9BD5", 2, "#111111", true, "center", "roundRect", false);
-  setShapeAltText(shape_d51_DEVICE_ACTION_CALL_OPERATION, "① デバイス操作を呼び出す", "");
-  const shape_d51_FINISH_CALL_END = addTextShape(sheet, "shape_d51_FINISH_CALL_END", "① finallyでEndを呼び出す", 0, 0, 149.025, 28, 10, true, "#DDEBF7", 0, "#5B9BD5", 2, "#111111", true, "center", "roundRect", false);
-  setShapeAltText(shape_d51_FINISH_CALL_END, "① finallyでEndを呼び出す", "");
-  const shape_d51_DEVICE_ACTION_MARK_ERROR = addTextShape(sheet, "shape_d51_DEVICE_ACTION_MARK_ERROR", "④ 操作エラーを記録する", 0, 0, 133.275, 28, 10, true, "#DDEBF7", 0, "#5B9BD5", 2, "#111111", true, "center", "roundRect", false);
-  setShapeAltText(shape_d51_DEVICE_ACTION_MARK_ERROR, "④ 操作エラーを記録する", "");
-  const shape_d51_PREPARE_REQUEST = addTextShape(sheet, "shape_d51_PREPARE_REQUEST", "① 業務要求を受け付ける", 0, 0, 133.275, 28, 10, true, "#DDEBF7", 0, "#5B9BD5", 2, "#111111", true, "center", "roundRect", false);
-  setShapeAltText(shape_d51_PREPARE_REQUEST, "① 業務要求を受け付ける", "");
-  const shape_d51_START_PHASE_CALL_START = addTextShape(sheet, "shape_d51_START_PHASE_CALL_START", "① Startを呼び出す", 0, 0, 109.65, 28, 10, true, "#DDEBF7", 0, "#5B9BD5", 2, "#111111", true, "center", "roundRect", false);
-  setShapeAltText(shape_d51_START_PHASE_CALL_START, "① Startを呼び出す", "");
-  const shape_d51_RESULT_COMPLETE = addTextShape(sheet, "shape_d51_RESULT_COMPLETE", "③ 完了", 0, 0, 96, 28, 10, true, "#DDEBF7", 0, "#5B9BD5", 2, "#111111", true, "center", "roundRect", false);
-  setShapeAltText(shape_d51_RESULT_COMPLETE, "③ 完了", "");
+  const shape_d51_PREPARE_PREPARE_GET = addTextShape(sheet, "shape_d51_PREPARE_PREPARE_GET", "② ストラテジーを要求する", 0, 0, 143.775, 28, 10, true, "#DDEBF7", 0, "#5B9BD5", 2, "#111111", true, "center", "rectangle", false);
+  setShapeAltText(shape_d51_PREPARE_PREPARE_GET, "② ストラテジーを要求する", "");
+  const shape_d51_RESULT_RESULT_FAILURE = addTextShape(sheet, "shape_d51_RESULT_RESULT_FAILURE", "② エラーを業務処理へ渡す", 0, 0, 143.775, 28, 10, true, "#F4CCCC", 0, "#C00000", 2, "#111111", true, "center", "rectangle", false);
+  setShapeAltText(shape_d51_RESULT_RESULT_FAILURE, "② エラーを業務処理へ渡す", "");
+  const shape_d51_DEVICE_ACTION_ACTION_CALL = addTextShape(sheet, "shape_d51_DEVICE_ACTION_ACTION_CALL", "① デバイス操作を呼び出す", 0, 0, 143.775, 28, 10, true, "#DDEBF7", 0, "#5B9BD5", 2, "#111111", true, "center", "rectangle", false);
+  setShapeAltText(shape_d51_DEVICE_ACTION_ACTION_CALL, "① デバイス操作を呼び出す", "");
+  const shape_d51_FINISH_FINISH_CALL = addTextShape(sheet, "shape_d51_FINISH_FINISH_CALL", "① finallyでEndを呼び出す", 0, 0, 149.025, 28, 10, true, "#DDEBF7", 0, "#5B9BD5", 2, "#111111", true, "center", "rectangle", false);
+  setShapeAltText(shape_d51_FINISH_FINISH_CALL, "① finallyでEndを呼び出す", "");
+  const shape_d51_PREPARE_PREPARE_REQUEST = addTextShape(sheet, "shape_d51_PREPARE_PREPARE_REQUEST", "① 業務要求を受け付ける", 0, 0, 133.275, 28, 10, true, "#DDEBF7", 0, "#5B9BD5", 2, "#111111", true, "center", "rectangle", false);
+  setShapeAltText(shape_d51_PREPARE_PREPARE_REQUEST, "① 業務要求を受け付ける", "");
+  const shape_d51_DEVICE_ACTION_ACTION_ERROR = addTextShape(sheet, "shape_d51_DEVICE_ACTION_ACTION_ERROR", "④ 操作エラーを記録する", 0, 0, 133.275, 28, 10, true, "#DDEBF7", 0, "#5B9BD5", 2, "#111111", true, "center", "rectangle", false);
+  setShapeAltText(shape_d51_DEVICE_ACTION_ACTION_ERROR, "④ 操作エラーを記録する", "");
+  const shape_d51_START_PHASE_START_CALL = addTextShape(sheet, "shape_d51_START_PHASE_START_CALL", "① Startを呼び出す", 0, 0, 109.65, 28, 10, true, "#DDEBF7", 0, "#5B9BD5", 2, "#111111", true, "center", "rectangle", false);
+  setShapeAltText(shape_d51_START_PHASE_START_CALL, "① Startを呼び出す", "");
+  const shape_d51_RESULT_RESULT_COMPLETE = addTextShape(sheet, "shape_d51_RESULT_RESULT_COMPLETE", "③ 完了", 0, 0, 96, 28, 10, true, "#DDEBF7", 0, "#5B9BD5", 2, "#111111", true, "center", "rectangle", false);
+  setShapeAltText(shape_d51_RESULT_RESULT_COMPLETE, "③ 完了", "");
 
-  let groupBottom1 = placeDiagramRow([shape_d51_PREPARE_REQUEST], [0.5], laneRange1.getLeft(), originTop + 90, laneRange1.getWidth(), 30, 28);
-  groupBottom1 = placeDiagramRow([shape_d51_PREPARE_GET], [0.5], laneRange1.getLeft(), groupBottom1 + 60, laneRange1.getWidth(), 30, 28);
-  groupBottom1 = placeDiagramRow([shape_d51_PREPARE_SELECT], [0.5], laneRange1.getLeft(), groupBottom1 + 60, laneRange1.getWidth(), 30, 28);
-  groupBottom1 = placeDiagramRow([shape_d51_PREPARE_EXISTS], [0.85], laneRange1.getLeft(), groupBottom1 + 60, laneRange1.getWidth(), 30, 28);
-  groupBottom1 = placeDiagramRow([shape_d51_PREPARE_UNAVAILABLE], [0.5], laneRange1.getLeft(), groupBottom1 + 60, laneRange1.getWidth(), 30, 28);
-  let groupBottom2 = placeDiagramRow([shape_d51_START_PHASE_CALL_START], [0.59253], laneRange2.getLeft(), originTop + 90, laneRange2.getWidth(), 30, 28);
-  groupBottom2 = placeDiagramRow([shape_d51_START_PHASE_START_DEVICE], [0.59253], laneRange2.getLeft(), groupBottom2 + 60, laneRange2.getWidth(), 30, 28);
-  groupBottom2 = placeDiagramRow([shape_d51_START_PHASE_START_OK], [0.71534], laneRange2.getLeft(), groupBottom2 + 60, laneRange2.getWidth(), 30, 28);
-  groupBottom2 = placeDiagramRow([shape_d51_START_PHASE_START_ERROR], [0.59253], laneRange2.getLeft(), groupBottom2 + 60, laneRange2.getWidth(), 30, 28);
-  let groupBottom3 = placeDiagramRow([shape_d51_DEVICE_ACTION_CALL_OPERATION], [0.434521], laneRange3.getLeft(), originTop + 90, laneRange3.getWidth(), 30, 28);
-  groupBottom3 = placeDiagramRow([shape_d51_DEVICE_ACTION_EXECUTE_DEVICE], [0.434521], laneRange3.getLeft(), groupBottom3 + 60, laneRange3.getWidth(), 30, 28);
-  groupBottom3 = placeDiagramRow([shape_d51_DEVICE_ACTION_RESULT_OK], [0.85], laneRange3.getLeft(), groupBottom3 + 60, laneRange3.getWidth(), 30, 28);
-  groupBottom3 = placeDiagramRow([shape_d51_DEVICE_ACTION_MARK_ERROR], [0.434521], laneRange3.getLeft(), groupBottom3 + 60, laneRange3.getWidth(), 30, 28);
-  let groupBottom4 = placeDiagramRow([shape_d51_FINISH_CALL_END], [0.5], laneRange4.getLeft(), originTop + 90, laneRange4.getWidth(), 30, 28);
-  groupBottom4 = placeDiagramRow([shape_d51_FINISH_END_DEVICE], [0.5], laneRange4.getLeft(), groupBottom4 + 60, laneRange4.getWidth(), 30, 28);
-  groupBottom4 = placeDiagramRow([shape_d51_FINISH_HAS_ERROR], [0.85], laneRange4.getLeft(), groupBottom4 + 60, laneRange4.getWidth(), 30, 28);
-  let groupBottom5 = placeDiagramRow([shape_d51_RESULT_SUCCESS, shape_d51_RESULT_FAILURE], [0.261109, 0.742325], laneRange5.getLeft(), originTop + 90, laneRange5.getWidth(), 30, 28);
-  groupBottom5 = placeDiagramRow([shape_d51_RESULT_COMPLETE], [0.501717], laneRange5.getLeft(), groupBottom5 + 60, laneRange5.getWidth(), 30, 28);
+  const geometryBottom = placeMermaidGeometry([shape_d51_PREPARE_PREPARE_EXISTS, shape_d51_FINISH_FINISH_ERROR, shape_d51_START_PHASE_START_OK, shape_d51_DEVICE_ACTION_ACTION_OK, shape_d51_RESULT_RESULT_SUCCESS, shape_d51_PREPARE_PREPARE_SELECT, shape_d51_PREPARE_PREPARE_UNAVAILABLE, shape_d51_DEVICE_ACTION_ACTION_EXECUTE, shape_d51_START_PHASE_START_ERROR, shape_d51_FINISH_FINISH_DEVICE, shape_d51_START_PHASE_START_DEVICE, shape_d51_PREPARE_PREPARE_GET, shape_d51_RESULT_RESULT_FAILURE, shape_d51_DEVICE_ACTION_ACTION_CALL, shape_d51_FINISH_FINISH_CALL, shape_d51_PREPARE_PREPARE_REQUEST, shape_d51_DEVICE_ACTION_ACTION_ERROR, shape_d51_START_PHASE_START_CALL, shape_d51_RESULT_RESULT_COMPLETE], [580.240745, 2424.399241, 1184.650558, 1816.27489, 2597.1375, 372.732369, 704.833834, 1641.55796, 1313.342577, 2233.1625, 1000.198668, 219.746979, 2597.1375, 1475.8875, 2090.5125, 66.6375, 1928.182908, 846.825, 2718.268113], [74, 74, 74, 74, 62, 134.159016, 145.431076, 148.61135, 183.558338, 130.060085, 162.060967, 134.159016, 123.590039, 148.61135, 130.060085, 134.159016, 168.699714, 162.060967, 218.333784], anchor.getLeft(), originTop);
 
-  const diagramBottom = Math.max(originTop + 90, groupBottom1, groupBottom2, groupBottom3, groupBottom4, groupBottom5);
-  const bodyEndRowOffset = Math.max(11, Math.ceil((diagramBottom - originTop + 48) / 18) - 1);
+  const diagramBottom = Math.max(originTop + 48, geometryBottom);
+  const bodyEndRowOffset = Math.max(11, Math.ceil((diagramBottom - originTop + 24) / 18) - 1);
   const canvasRowCount = Math.max(baselineCanvasRowCount, bodyEndRowOffset + 1);
   formatDiagramGrid(anchor, canvasRowCount, canvasColumnCount);
   if (bodyEndRowOffset >= baselineCanvasRowCount) {
     addCellLaneTable(anchor, bodyEndRowOffset);
   }
 
-  const edge_d51_01_FINISH_HAS_ERROR_to_RESULT_SUCCESS = addConnector(sheet, "edge_d51_01_FINISH_HAS_ERROR_to_RESULT_SUCCESS", shape_d51_FINISH_HAS_ERROR, shape_d51_RESULT_SUCCESS, false, false, "いいえ", "いいえ", "elbow", "right", "left", "#1F4E79", 2);
-  const edge_d51_02_FINISH_HAS_ERROR_to_RESULT_FAILURE = addConnector(sheet, "edge_d51_02_FINISH_HAS_ERROR_to_RESULT_FAILURE", shape_d51_FINISH_HAS_ERROR, shape_d51_RESULT_FAILURE, false, false, "はい", "はい", "elbow", "right", "left", "#1F4E79", 2);
-  const edge_d51_03_DEVICE_ACTION_MARK_ERROR_to_FINISH_CALL_END = addConnector(sheet, "edge_d51_03_DEVICE_ACTION_MARK_ERROR_to_FINISH_CALL_END", shape_d51_DEVICE_ACTION_MARK_ERROR, shape_d51_FINISH_CALL_END, false, false, "④ 操作エラーを記録する → ① finallyでEndを呼び出す", "", "elbow", "right", "left", "#1F4E79", 2);
-  const edge_d51_04_DEVICE_ACTION_RESULT_OK_to_FINISH_CALL_END = addConnector(sheet, "edge_d51_04_DEVICE_ACTION_RESULT_OK_to_FINISH_CALL_END", shape_d51_DEVICE_ACTION_RESULT_OK, shape_d51_FINISH_CALL_END, false, false, "はい", "はい", "elbow", "right", "left", "#1F4E79", 2);
-  const edge_d51_05_START_PHASE_START_ERROR_to_RESULT_COMPLETE = addConnector(sheet, "edge_d51_05_START_PHASE_START_ERROR_to_RESULT_COMPLETE", shape_d51_START_PHASE_START_ERROR, shape_d51_RESULT_COMPLETE, false, false, "④ Start失敗の分岐で → ③ 完了", "", "elbow", "right", "left", "#1F4E79", 2);
-  const edge_d51_06_START_PHASE_START_OK_to_DEVICE_ACTION_CALL_OPERATION = addConnector(sheet, "edge_d51_06_START_PHASE_START_OK_to_DEVICE_ACTION_CALL_OPERATION", shape_d51_START_PHASE_START_OK, shape_d51_DEVICE_ACTION_CALL_OPERATION, false, false, "はい", "はい", "elbow", "right", "left", "#1F4E79", 2);
-  const edge_d51_07_PREPARE_UNAVAILABLE_to_RESULT_COMPLETE = addConnector(sheet, "edge_d51_07_PREPARE_UNAVAILABLE_to_RESULT_COMPLETE", shape_d51_PREPARE_UNAVAILABLE, shape_d51_RESULT_COMPLETE, false, false, "⑤ デバイスなしの分岐で → ③ 完了", "", "elbow", "right", "left", "#1F4E79", 2);
-  const edge_d51_08_PREPARE_EXISTS_to_START_PHASE_CALL_START = addConnector(sheet, "edge_d51_08_PREPARE_EXISTS_to_START_PHASE_CALL_START", shape_d51_PREPARE_EXISTS, shape_d51_START_PHASE_CALL_START, false, false, "はい", "はい", "elbow", "right", "left", "#1F4E79", 2);
-  const edge_d51_09_RESULT_SUCCESS_to_RESULT_COMPLETE = addConnector(sheet, "edge_d51_09_RESULT_SUCCESS_to_RESULT_COMPLETE", shape_d51_RESULT_SUCCESS, shape_d51_RESULT_COMPLETE, false, false, "① 結果をユースケースへ返す → ③ 完了", "", "elbow", "", "", "#1F4E79", 2);
-  const edge_d51_10_RESULT_FAILURE_to_RESULT_COMPLETE = addConnector(sheet, "edge_d51_10_RESULT_FAILURE_to_RESULT_COMPLETE", shape_d51_RESULT_FAILURE, shape_d51_RESULT_COMPLETE, false, false, "② エラーを業務処理へ渡す → ③ 完了", "", "elbow", "", "", "#1F4E79", 2);
-  const edge_d51_11_FINISH_CALL_END_to_FINISH_END_DEVICE = addConnector(sheet, "edge_d51_11_FINISH_CALL_END_to_FINISH_END_DEVICE", shape_d51_FINISH_CALL_END, shape_d51_FINISH_END_DEVICE, false, false, "① finallyでEndを呼び出す → ② 処理を終了または", "", "elbow", "", "", "#1F4E79", 2);
-  const edge_d51_12_FINISH_END_DEVICE_to_FINISH_HAS_ERROR = addConnector(sheet, "edge_d51_12_FINISH_END_DEVICE_to_FINISH_HAS_ERROR", shape_d51_FINISH_END_DEVICE, shape_d51_FINISH_HAS_ERROR, false, false, "② 処理を終了または → ③ 操作エラーがあるか", "", "elbow", "", "", "#1F4E79", 2);
-  const edge_d51_13_DEVICE_ACTION_CALL_OPERATION_to_DEVICE_ACTION_EXECUTE_DEVICE = addConnector(sheet, "edge_d51_13_DEVICE_ACTION_CALL_OPERATION_to_DEVICE_ACTION_EXECUTE_DEVICE", shape_d51_DEVICE_ACTION_CALL_OPERATION, shape_d51_DEVICE_ACTION_EXECUTE_DEVICE, false, false, "① デバイス操作を呼び出す → ② プラットフォーム別の", "", "elbow", "", "", "#1F4E79", 2);
-  const edge_d51_14_DEVICE_ACTION_EXECUTE_DEVICE_to_DEVICE_ACTION_RESULT_OK = addConnector(sheet, "edge_d51_14_DEVICE_ACTION_EXECUTE_DEVICE_to_DEVICE_ACTION_RESULT_OK", shape_d51_DEVICE_ACTION_EXECUTE_DEVICE, shape_d51_DEVICE_ACTION_RESULT_OK, false, false, "② プラットフォーム別の → ③ 結果が有効か", "", "elbow", "", "", "#1F4E79", 2);
-  const edge_d51_15_DEVICE_ACTION_EXECUTE_DEVICE_to_DEVICE_ACTION_MARK_ERROR = addConnector(sheet, "edge_d51_15_DEVICE_ACTION_EXECUTE_DEVICE_to_DEVICE_ACTION_MARK_ERROR", shape_d51_DEVICE_ACTION_EXECUTE_DEVICE, shape_d51_DEVICE_ACTION_MARK_ERROR, true, false, "② プラットフォーム別の → ④ 操作エラーを記録する", "", "elbow", "left", "left", "#C00000", 2);
-  const edge_d51_16_DEVICE_ACTION_RESULT_OK_to_DEVICE_ACTION_MARK_ERROR = addConnector(sheet, "edge_d51_16_DEVICE_ACTION_RESULT_OK_to_DEVICE_ACTION_MARK_ERROR", shape_d51_DEVICE_ACTION_RESULT_OK, shape_d51_DEVICE_ACTION_MARK_ERROR, false, false, "いいえ", "いいえ", "elbow", "", "", "#1F4E79", 2);
-  const edge_d51_17_START_PHASE_CALL_START_to_START_PHASE_START_DEVICE = addConnector(sheet, "edge_d51_17_START_PHASE_CALL_START_to_START_PHASE_START_DEVICE", shape_d51_START_PHASE_CALL_START, shape_d51_START_PHASE_START_DEVICE, false, false, "① Startを呼び出す → ② デバイスを初期化", "", "elbow", "", "", "#1F4E79", 2);
-  const edge_d51_18_START_PHASE_START_DEVICE_to_START_PHASE_START_OK = addConnector(sheet, "edge_d51_18_START_PHASE_START_DEVICE_to_START_PHASE_START_OK", shape_d51_START_PHASE_START_DEVICE, shape_d51_START_PHASE_START_OK, false, false, "② デバイスを初期化 → ③ Startが成功したか", "", "elbow", "", "", "#1F4E79", 2);
-  const edge_d51_19_START_PHASE_START_OK_to_START_PHASE_START_ERROR = addConnector(sheet, "edge_d51_19_START_PHASE_START_OK_to_START_PHASE_START_ERROR", shape_d51_START_PHASE_START_OK, shape_d51_START_PHASE_START_ERROR, false, false, "いいえ", "いいえ", "elbow", "", "", "#1F4E79", 2);
-  const edge_d51_20_START_PHASE_START_DEVICE_to_START_PHASE_START_ERROR = addConnector(sheet, "edge_d51_20_START_PHASE_START_DEVICE_to_START_PHASE_START_ERROR", shape_d51_START_PHASE_START_DEVICE, shape_d51_START_PHASE_START_ERROR, true, false, "② デバイスを初期化 → ④ Start失敗の分岐で", "", "elbow", "left", "left", "#C00000", 2);
-  const edge_d51_21_PREPARE_REQUEST_to_PREPARE_GET = addConnector(sheet, "edge_d51_21_PREPARE_REQUEST_to_PREPARE_GET", shape_d51_PREPARE_REQUEST, shape_d51_PREPARE_GET, false, false, "① 業務要求を受け付ける → ② ストラテジーを要求する", "", "elbow", "", "", "#1F4E79", 2);
-  const edge_d51_22_PREPARE_GET_to_PREPARE_SELECT = addConnector(sheet, "edge_d51_22_PREPARE_GET_to_PREPARE_SELECT", shape_d51_PREPARE_GET, shape_d51_PREPARE_SELECT, false, false, "② ストラテジーを要求する → ③ 有効デバイスを選択し", "", "elbow", "", "", "#1F4E79", 2);
-  const edge_d51_23_PREPARE_SELECT_to_PREPARE_EXISTS = addConnector(sheet, "edge_d51_23_PREPARE_SELECT_to_PREPARE_EXISTS", shape_d51_PREPARE_SELECT, shape_d51_PREPARE_EXISTS, false, false, "③ 有効デバイスを選択し → ④ ストラテジーがあるか", "", "elbow", "", "", "#1F4E79", 2);
-  const edge_d51_24_PREPARE_EXISTS_to_PREPARE_UNAVAILABLE = addConnector(sheet, "edge_d51_24_PREPARE_EXISTS_to_PREPARE_UNAVAILABLE", shape_d51_PREPARE_EXISTS, shape_d51_PREPARE_UNAVAILABLE, false, false, "いいえ", "いいえ", "elbow", "", "", "#1F4E79", 2);
+  const edge_d51_01_PREPARE_PREPARE_REQUEST_to_PREPARE_PREPARE_GET = addConnector(sheet, "edge_d51_01_PREPARE_PREPARE_REQUEST_to_PREPARE_PREPARE_GET", shape_d51_PREPARE_PREPARE_REQUEST, shape_d51_PREPARE_PREPARE_GET, false, false, "① 業務要求を受け付ける → ② ストラテジーを要求する", "", "elbow", "", "", "#1F4E79", 2);
+  const edge_d51_02_PREPARE_PREPARE_GET_to_PREPARE_PREPARE_SELECT = addConnector(sheet, "edge_d51_02_PREPARE_PREPARE_GET_to_PREPARE_PREPARE_SELECT", shape_d51_PREPARE_PREPARE_GET, shape_d51_PREPARE_PREPARE_SELECT, false, false, "② ストラテジーを要求する → ③ 有効デバイスを選択し", "", "elbow", "", "", "#1F4E79", 2);
+  const edge_d51_03_PREPARE_PREPARE_SELECT_to_PREPARE_PREPARE_EXISTS = addConnector(sheet, "edge_d51_03_PREPARE_PREPARE_SELECT_to_PREPARE_PREPARE_EXISTS", shape_d51_PREPARE_PREPARE_SELECT, shape_d51_PREPARE_PREPARE_EXISTS, false, false, "③ 有効デバイスを選択し → ④ ストラテジーがあるか", "", "elbow", "", "", "#1F4E79", 2);
+  const edge_d51_04_PREPARE_PREPARE_EXISTS_to_START_PHASE_START_CALL = addConnector(sheet, "edge_d51_04_PREPARE_PREPARE_EXISTS_to_START_PHASE_START_CALL", shape_d51_PREPARE_PREPARE_EXISTS, shape_d51_START_PHASE_START_CALL, false, false, "はい", "はい", "elbow", "right", "left", "#1F4E79", 2);
+  const edge_d51_05_PREPARE_PREPARE_EXISTS_to_PREPARE_PREPARE_UNAVAILABLE = addConnector(sheet, "edge_d51_05_PREPARE_PREPARE_EXISTS_to_PREPARE_PREPARE_UNAVAILABLE", shape_d51_PREPARE_PREPARE_EXISTS, shape_d51_PREPARE_PREPARE_UNAVAILABLE, false, false, "いいえ", "いいえ", "elbow", "", "", "#1F4E79", 2);
+  const edge_d51_06_PREPARE_PREPARE_UNAVAILABLE_to_RESULT_RESULT_COMPLETE = addConnector(sheet, "edge_d51_06_PREPARE_PREPARE_UNAVAILABLE_to_RESULT_RESULT_COMPLETE", shape_d51_PREPARE_PREPARE_UNAVAILABLE, shape_d51_RESULT_RESULT_COMPLETE, false, false, "⑤ デバイスなしの分岐で → ③ 完了", "", "elbow", "right", "left", "#1F4E79", 2);
+  const edge_d51_07_START_PHASE_START_CALL_to_START_PHASE_START_DEVICE = addConnector(sheet, "edge_d51_07_START_PHASE_START_CALL_to_START_PHASE_START_DEVICE", shape_d51_START_PHASE_START_CALL, shape_d51_START_PHASE_START_DEVICE, false, false, "① Startを呼び出す → ② デバイスを初期化", "", "elbow", "", "", "#1F4E79", 2);
+  const edge_d51_08_START_PHASE_START_DEVICE_to_START_PHASE_START_OK = addConnector(sheet, "edge_d51_08_START_PHASE_START_DEVICE_to_START_PHASE_START_OK", shape_d51_START_PHASE_START_DEVICE, shape_d51_START_PHASE_START_OK, false, false, "② デバイスを初期化 → ③ Startが成功したか", "", "elbow", "", "", "#1F4E79", 2);
+  const edge_d51_09_START_PHASE_START_OK_to_DEVICE_ACTION_ACTION_CALL = addConnector(sheet, "edge_d51_09_START_PHASE_START_OK_to_DEVICE_ACTION_ACTION_CALL", shape_d51_START_PHASE_START_OK, shape_d51_DEVICE_ACTION_ACTION_CALL, false, false, "はい", "はい", "elbow", "right", "left", "#1F4E79", 2);
+  const edge_d51_10_START_PHASE_START_OK_to_START_PHASE_START_ERROR = addConnector(sheet, "edge_d51_10_START_PHASE_START_OK_to_START_PHASE_START_ERROR", shape_d51_START_PHASE_START_OK, shape_d51_START_PHASE_START_ERROR, false, false, "いいえ", "いいえ", "elbow", "left", "left", "#1F4E79", 2);
+  const edge_d51_11_START_PHASE_START_DEVICE_to_START_PHASE_START_ERROR = addConnector(sheet, "edge_d51_11_START_PHASE_START_DEVICE_to_START_PHASE_START_ERROR", shape_d51_START_PHASE_START_DEVICE, shape_d51_START_PHASE_START_ERROR, true, false, "② デバイスを初期化 → ④ Start失敗の分岐で", "", "elbow", "", "", "#C00000", 2);
+  const edge_d51_12_START_PHASE_START_ERROR_to_RESULT_RESULT_COMPLETE = addConnector(sheet, "edge_d51_12_START_PHASE_START_ERROR_to_RESULT_RESULT_COMPLETE", shape_d51_START_PHASE_START_ERROR, shape_d51_RESULT_RESULT_COMPLETE, false, false, "④ Start失敗の分岐で → ③ 完了", "", "elbow", "right", "left", "#1F4E79", 2);
+  const edge_d51_13_DEVICE_ACTION_ACTION_CALL_to_DEVICE_ACTION_ACTION_EXECUTE = addConnector(sheet, "edge_d51_13_DEVICE_ACTION_ACTION_CALL_to_DEVICE_ACTION_ACTION_EXECUTE", shape_d51_DEVICE_ACTION_ACTION_CALL, shape_d51_DEVICE_ACTION_ACTION_EXECUTE, false, false, "① デバイス操作を呼び出す → ② プラットフォーム別の", "", "elbow", "", "", "#1F4E79", 2);
+  const edge_d51_14_DEVICE_ACTION_ACTION_EXECUTE_to_DEVICE_ACTION_ACTION_OK = addConnector(sheet, "edge_d51_14_DEVICE_ACTION_ACTION_EXECUTE_to_DEVICE_ACTION_ACTION_OK", shape_d51_DEVICE_ACTION_ACTION_EXECUTE, shape_d51_DEVICE_ACTION_ACTION_OK, false, false, "② プラットフォーム別の → ③ 結果が有効か", "", "elbow", "", "", "#1F4E79", 2);
+  const edge_d51_15_DEVICE_ACTION_ACTION_OK_to_FINISH_FINISH_CALL = addConnector(sheet, "edge_d51_15_DEVICE_ACTION_ACTION_OK_to_FINISH_FINISH_CALL", shape_d51_DEVICE_ACTION_ACTION_OK, shape_d51_FINISH_FINISH_CALL, false, false, "はい", "はい", "elbow", "right", "left", "#1F4E79", 2);
+  const edge_d51_16_DEVICE_ACTION_ACTION_OK_to_DEVICE_ACTION_ACTION_ERROR = addConnector(sheet, "edge_d51_16_DEVICE_ACTION_ACTION_OK_to_DEVICE_ACTION_ACTION_ERROR", shape_d51_DEVICE_ACTION_ACTION_OK, shape_d51_DEVICE_ACTION_ACTION_ERROR, false, false, "いいえ", "いいえ", "elbow", "left", "left", "#1F4E79", 2);
+  const edge_d51_17_DEVICE_ACTION_ACTION_EXECUTE_to_DEVICE_ACTION_ACTION_ERROR = addConnector(sheet, "edge_d51_17_DEVICE_ACTION_ACTION_EXECUTE_to_DEVICE_ACTION_ACTION_ERROR", shape_d51_DEVICE_ACTION_ACTION_EXECUTE, shape_d51_DEVICE_ACTION_ACTION_ERROR, true, false, "② プラットフォーム別の → ④ 操作エラーを記録する", "", "elbow", "", "", "#C00000", 2);
+  const edge_d51_18_DEVICE_ACTION_ACTION_ERROR_to_FINISH_FINISH_CALL = addConnector(sheet, "edge_d51_18_DEVICE_ACTION_ACTION_ERROR_to_FINISH_FINISH_CALL", shape_d51_DEVICE_ACTION_ACTION_ERROR, shape_d51_FINISH_FINISH_CALL, false, false, "④ 操作エラーを記録する → ① finallyでEndを呼び出す", "", "elbow", "right", "left", "#1F4E79", 2);
+  const edge_d51_19_FINISH_FINISH_CALL_to_FINISH_FINISH_DEVICE = addConnector(sheet, "edge_d51_19_FINISH_FINISH_CALL_to_FINISH_FINISH_DEVICE", shape_d51_FINISH_FINISH_CALL, shape_d51_FINISH_FINISH_DEVICE, false, false, "① finallyでEndを呼び出す → ② 処理を終了または", "", "elbow", "", "", "#1F4E79", 2);
+  const edge_d51_20_FINISH_FINISH_DEVICE_to_FINISH_FINISH_ERROR = addConnector(sheet, "edge_d51_20_FINISH_FINISH_DEVICE_to_FINISH_FINISH_ERROR", shape_d51_FINISH_FINISH_DEVICE, shape_d51_FINISH_FINISH_ERROR, false, false, "② 処理を終了または → ③ 操作エラーがあるか", "", "elbow", "", "", "#1F4E79", 2);
+  const edge_d51_21_FINISH_FINISH_ERROR_to_RESULT_RESULT_SUCCESS = addConnector(sheet, "edge_d51_21_FINISH_FINISH_ERROR_to_RESULT_RESULT_SUCCESS", shape_d51_FINISH_FINISH_ERROR, shape_d51_RESULT_RESULT_SUCCESS, false, false, "いいえ", "いいえ", "elbow", "right", "left", "#1F4E79", 2);
+  const edge_d51_22_FINISH_FINISH_ERROR_to_RESULT_RESULT_FAILURE = addConnector(sheet, "edge_d51_22_FINISH_FINISH_ERROR_to_RESULT_RESULT_FAILURE", shape_d51_FINISH_FINISH_ERROR, shape_d51_RESULT_RESULT_FAILURE, false, false, "はい", "はい", "elbow", "right", "left", "#1F4E79", 2);
+  const edge_d51_23_RESULT_RESULT_SUCCESS_to_RESULT_RESULT_COMPLETE = addConnector(sheet, "edge_d51_23_RESULT_RESULT_SUCCESS_to_RESULT_RESULT_COMPLETE", shape_d51_RESULT_RESULT_SUCCESS, shape_d51_RESULT_RESULT_COMPLETE, false, false, "① 結果をユースケースへ返す → ③ 完了", "", "elbow", "left", "left", "#1F4E79", 2);
+  const edge_d51_24_RESULT_RESULT_FAILURE_to_RESULT_RESULT_COMPLETE = addConnector(sheet, "edge_d51_24_RESULT_RESULT_FAILURE_to_RESULT_RESULT_COMPLETE", shape_d51_RESULT_RESULT_FAILURE, shape_d51_RESULT_RESULT_COMPLETE, false, false, "② エラーを業務処理へ渡す → ③ 完了", "", "elbow", "", "", "#1F4E79", 2);
 
   configurePdfReview(workbook, sheet, anchor, canvasRowCount, canvasColumnCount, false);
 }
 
 function addCellLaneTable(anchor: ExcelScript.Range, bodyEndRowOffset: number) {
-  addLaneColumns(anchor, 0, 7, bodyEndRowOffset, "（1） 準備", "#FFFFFF", 0, "#4472C4", 2, "#111111");
-  addLaneColumns(anchor, 7, 7, bodyEndRowOffset, "（2） 開始", "#FFFFFF", 0, "#4472C4", 2, "#111111");
-  addLaneColumns(anchor, 14, 7, bodyEndRowOffset, "（3） デバイス操作", "#FFFFFF", 0, "#4472C4", 2, "#111111");
-  addLaneColumns(anchor, 21, 7, bodyEndRowOffset, "（4） 終了", "#FFFFFF", 0, "#4472C4", 2, "#111111");
-  addLaneColumns(anchor, 28, 11, bodyEndRowOffset, "（5） 結果返却", "#FFFFFF", 0, "#4472C4", 2, "#111111");
+  addLaneColumns(anchor, 0, 22, bodyEndRowOffset, "（1） 準備", "", 1, "#4472C4", 2, "#111111");
+  addLaneColumns(anchor, 22, 17, bodyEndRowOffset, "（2） 開始", "", 1, "#4472C4", 2, "#111111");
+  addLaneColumns(anchor, 39, 17, bodyEndRowOffset, "（3） デバイス操作", "", 1, "#4472C4", 2, "#111111");
+  addLaneColumns(anchor, 56, 14, bodyEndRowOffset, "（4） 終了", "", 1, "#4472C4", 2, "#111111");
+  addLaneColumns(anchor, 70, 7, bodyEndRowOffset, "（5） 結果返却", "", 1, "#4472C4", 2, "#111111");
+}
+
+function placeMermaidGeometry(shapes: ExcelScript.Shape[], centerOffsetsX: number[], centerOffsetsY: number[], originLeft: number, originTop: number): number {
+  if (shapes.length !== centerOffsetsX.length || shapes.length !== centerOffsetsY.length) {
+    throw new Error("Mermaid geometry arrays must have identical lengths.");
+  }
+  let diagramBottom = originTop;
+  for (let i = 0; i < shapes.length; i++) {
+    const shape = shapes[i];
+    shape.setLeft(originLeft + centerOffsetsX[i] - shape.getWidth() / 2);
+    shape.setTop(originTop + centerOffsetsY[i] - shape.getHeight() / 2);
+    diagramBottom = Math.max(diagramBottom, shape.getTop() + shape.getHeight());
+  }
+  return diagramBottom;
 }
 
 function applyShapeView(shape: ExcelScript.Shape, fill: string, bordered: boolean, dashed: boolean, stroke: string, fillTransparency: number, lineWeight: number) {
@@ -321,7 +322,7 @@ function addLaneColumns(anchor: ExcelScript.Range, columnOffset: number, columnC
   formatLaneRange(titleRange, fill, fillTransparency, stroke, lineWeight, textColor, true, 13);
 }
 
-function addSectionBackground(sheet: ExcelScript.Worksheet, shapeName: string, title: string, members: ExcelScript.Shape[], laneLeft: number, laneWidth: number, fill: string, fillTransparency: number, stroke: string, lineWeight: number, textColor: string) {
+function addSectionBackground(sheet: ExcelScript.Worksheet, shapeName: string, title: string, members: ExcelScript.Shape[], laneLeft: number, laneWidth: number, ancestorTitlePadding: number, fill: string, fillTransparency: number, stroke: string, lineWeight: number, textColor: string) {
   if (members.length === 0) {
     return;
   }
@@ -338,9 +339,9 @@ function addSectionBackground(sheet: ExcelScript.Worksheet, shapeName: string, t
   const background = sheet.addGeometricShape(ExcelScript.GeometricShapeType.rectangle);
   background.setName(shapeName);
   background.setLeft(laneLeft + sidePadding);
-  background.setTop(Math.max(0, top - titlePadding));
+  background.setTop(Math.max(0, top - titlePadding - ancestorTitlePadding));
   background.setWidth(Math.max(1, laneWidth - sidePadding * 2));
-  background.setHeight(Math.max(28, bottom - top + titlePadding + bottomPadding));
+  background.setHeight(Math.max(28, bottom - top + titlePadding + ancestorTitlePadding + bottomPadding));
   applyShapeView(background, fill, true, false, stroke, fillTransparency, lineWeight);
   const frame = background.getTextFrame();
   frame.getTextRange().setText(title);
@@ -465,45 +466,6 @@ function connectorType(kind: string): ExcelScript.ConnectorType {
     return ExcelScript.ConnectorType.curve;
   }
   return ExcelScript.ConnectorType.elbow;
-}
-
-function placeDiagramRow(shapes: ExcelScript.Shape[], ratios: number[], laneLeft: number, rowTop: number, laneWidth: number, inset: number, gap: number): number {
-  const leftLimit = laneLeft + inset;
-  const rightLimit = laneLeft + laneWidth - inset;
-  const availableWidth = Math.max(1, rightLimit - leftLimit);
-  const positions: number[] = [];
-  let previousRight = leftLimit - gap;
-  let rowBottom = rowTop;
-  for (let i = 0; i < shapes.length; i++) {
-    const shape = shapes[i];
-    const ratio = i < ratios.length ? Math.max(0, Math.min(1, ratios[i])) : 0.5;
-    const desiredLeft = leftLimit + ratio * availableWidth - shape.getWidth() / 2;
-    const nextLeft = Math.max(leftLimit, desiredLeft, previousRight + gap);
-    positions.push(nextLeft);
-    previousRight = nextLeft + shape.getWidth();
-  }
-  if (positions.length > 0) {
-    const finalShape = shapes[shapes.length - 1];
-    const overflow = positions[positions.length - 1] + finalShape.getWidth() - rightLimit;
-    if (overflow > 0) {
-      for (let i = 0; i < positions.length; i++) {
-        positions[i] -= overflow;
-      }
-    }
-    const underflow = leftLimit - positions[0];
-    if (underflow > 0) {
-      for (let i = 0; i < positions.length; i++) {
-        positions[i] += underflow;
-      }
-    }
-  }
-  for (let i = 0; i < shapes.length; i++) {
-    const shape = shapes[i];
-    shape.setLeft(positions[i]);
-    shape.setTop(rowTop);
-    rowBottom = Math.max(rowBottom, shape.getTop() + shape.getHeight());
-  }
-  return rowBottom;
 }
 
 function setShapeAltText(shape: ExcelScript.Shape, title: string, description: string) {

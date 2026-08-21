@@ -6,7 +6,7 @@ status: archived
 source:
   - skills/program-spec-excel/scripts/spec_parse.py
   - skills/program-spec-excel/scripts/spec_validate.py
-  - project-store/artifacts/reports/program-specs/PS-01_タブレットPOS_ホストデバイス制御方式/
+  - project-store/artifacts/reports/program-specs/PS-HOST_タブレットPOS_デバイスコネクタ/
 tags:
   - program-spec
   - excel-render

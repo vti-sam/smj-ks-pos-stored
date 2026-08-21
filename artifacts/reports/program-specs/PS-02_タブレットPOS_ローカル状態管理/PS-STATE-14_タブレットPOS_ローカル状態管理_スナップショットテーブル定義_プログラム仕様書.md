@@ -29,7 +29,7 @@
 | --- | --- |
 | 機能名 | スナップショットテーブル定義 |
 | 物理クラス名 | ViewModelSnapshotConfiguration |
-| 名前空間 | TabetPos.Core.State |
+| 名前空間 | TabletPos.Core.State |
 | アクセス修飾子 | public sealed |
 | 継承/実装 | IEntityTypeConfiguration<ViewModelSnapshotEntity> |
 
@@ -37,7 +37,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/tabletposboilerplate/TabetPos.Core/State/ViewModelSnapshotConfiguration.cs |
+| ソースファイル | sources/TabletPosBoilerplate/TabletPos.Core/State/ViewModelSnapshotConfiguration.cs |
 | 対象クラス | ViewModelSnapshotConfiguration |
 | 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 

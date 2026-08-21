@@ -29,7 +29,7 @@
 | --- | --- |
 | 機能名 | Sentry初期化設定 |
 | 物理クラス名 | SentryConfiguration |
-| 名前空間 | TabetPos.Core.Monitoring |
+| 名前空間 | TabletPos.Core.Monitoring |
 | アクセス修飾子 | public static |
 | 継承/実装 | - |
 
@@ -37,7 +37,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/tabletposboilerplate/TabetPos.Core/Monitoring/SentryConfiguration.cs |
+| ソースファイル | sources/TabletPosBoilerplate/TabletPos.Core/Monitoring/SentryConfiguration.cs |
 | 対象クラス | SentryConfiguration |
 | 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 
