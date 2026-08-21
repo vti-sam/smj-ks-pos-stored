@@ -58,6 +58,13 @@ promote_to_knowledge: false
   trong `PS-HOST_タブレットPOS_デバイスコネクタ`. Toàn bộ 63 workbook
   projection cũ đã được chuyển ra hai subtree tương ứng dưới
   `scratch/program-specs/`; `project-store` chỉ giữ Markdown canonical.
+- Cùng ngày, 17 workbook Excel còn nằm lẫn trong các bundle Architecture,
+  implementation example và testcase được rà lại theo cùng boundary. Mười sáu
+  file đã được chuyển khỏi `project-store` sang
+  `scratch/basic-design-excel/` hoặc `scratch/testcase-excel/`; các bản trùng tên
+  được giữ riêng dưới `legacy-tracked/` để không ghi đè bản render mới hơn. Một
+  file gốc `ARCH-DEVICE-01_次世代POS_デバイス制御クラス構成図.xlsx` đã được sao
+  chép sang `scratch` nhưng chưa xóa được khỏi bundle do đang mở trong Excel.
 - Năm tài liệu kiến trúc, hướng dẫn cấu hình, danh sách bàn giao, ví dụ triển khai, 24 Program Specification và hai bộ testcase đã được đối chiếu lại với source ở commit `860376b595e4c8c932bd9ebf2a40a69fbee3a668`. Ranh giới được chốt là App điều phối vòng đời, `TabletPos.DeviceCtrl` chọn strategy và gọi Named Pipe, Host sở hữu OPOS/thiết bị thật, còn `TabletPos.DeviceContracts` sở hữu DTO, identifier, key và default giao tiếp dùng chung.
 - `ARCH-01` đã bỏ mô tả cũ cho rằng Printer trên Windows còn chờ tích hợp Host; đường dẫn package default được sửa về owner thật `TabletPos.DeviceCtrl/Resources/Raw/device_controller_config.json`, với fallback khi runtime config thiếu hoặc không đọc/parse được.
 - `ARCH-HOST-01` đã ghi đủ năm mapping `CustomerDisplay1`, `CashDrawer1`, `CashChanger1`, `POSPrinter1`, `Payment1`; bổ sung `responseTimeoutMs=30000` cho lệnh thường và giới hạn thao tác dài `300000` cho receipt/payment. Sau khi Host restart hoặc Named Pipe đứt, App ghi thao tác thất bại, chuyển UI về chưa kết nối, hủy strategy cũ và yêu cầu `Start` lại để tạo session mới.
@@ -90,12 +97,21 @@ promote_to_knowledge: false
   pass cho Program Spec, Basic Design, Test Case, Checklist, DB Table, Estimate,
   DOCX và Mermaid Office Script; regression test placement/render liên quan đều
   pass.
+- Read-back bằng artifact-tool import thành công 23 workbook hiện có trong
+  `scratch/basic-design-excel/` và `scratch/testcase-excel/`; không phát hiện
+  chuỗi lỗi công thức `#REF!`, `#DIV/0!`, `#VALUE!` hoặc `#NAME?`. Đối chiếu Git
+  blob xác nhận 11/11 workbook tracked đã chuyển có bản tương ứng nguyên vẹn
+  trong `scratch`.
 
 ## Unresolved
 
 - Máy local không có Microsoft Excel hoặc LibreOffice nên chưa thực hiện native Excel-to-PDF render. Semantic, style và print-setup read-back bằng openpyxl đã pass.
 - Các file Draw.io/SVG cũ không được dùng làm bằng chứng cho năm sơ đồ canonical. Theo quyết định của User, pipeline nghiệm thu là Markdown → Mermaid → Office Script; không yêu cầu regenerate Draw.io trong đợt đồng bộ này.
 - Chưa chạy lại bộ testcase trên thiết bị POS thật; không dùng kết quả lint/render để khẳng định toàn bộ nghiệp vụ vật lý đã pass.
+- Workbook `ARCH-DEVICE-01_次世代POS_デバイス制御クラス構成図.xlsx` vẫn đang bị
+  tiến trình Excel giữ khóa tại bundle Architecture. Cần đóng workbook rồi xóa
+  file nguồn và lock file `~$...xlsx`; bản sao đã được bảo toàn dưới
+  `scratch/basic-design-excel/ARCH-DEVICE-01_次世代POS_デバイス制御クラス構成図/legacy-tracked/`.
 
 ## Retrieval keys
 
@@ -109,3 +125,4 @@ promote_to_knowledge: false
 - `46 host test cases Printer Payment`
 - `DeviceContracts NamedPipe event subscriber not connected`
 - `Program Spec Device Control Device Connector separate folders scratch Office output`
+- `Architecture implementation testcase Excel projection scratch Office output`
