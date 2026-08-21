@@ -9,7 +9,7 @@
 | 文書ID | PS-DEVICE-01 |
 | 文書名 | タブレットPOS デバイス制御 デバイスマネージャー プログラム仕様書 |
 | 対象 | タブレットPOS / デバイス制御デバイスマネージャー |
-| 版数 | 0.0.2 |
+| 版数 | 0.0.3 |
 | 作成日 | 2026/07/23 |
 | 作成者 | VTI サム, VTI 吉田 |
 | レビュー担当 | SMJ 蒲田 |
@@ -21,6 +21,7 @@
 
 | 版数 | 日付 | 変更内容 | 作成者 | 承認者 |
 | --- | --- | --- | --- | --- |
+| 0.0.3 | 2026/08/24 | ソースコードの名称変更に伴い、名前空間、名前付きパイプ名、およびソースファイルパスの表記をTabletPos.*に統一。現行ソースとの照合により決済制御方式取得メソッドの仕様を追加。 | VTI サム |  |
 | 0.0.2 | 2026/07/30 | カスタマディスプレイの表記を関連文書と統一 | VTI サム |  |
 | 0.0.1 | 2026/07/23 | 初版作成 | VTI サム |  |
 
@@ -30,7 +31,7 @@
 | --- | --- |
 | 機能名 | デバイス制御デバイスマネージャー |
 | 物理クラス名 | DeviceManager |
-| 名前空間 | TabetPos.DeviceCtrl |
+| 名前空間 | TabletPos.DeviceCtrl |
 | アクセス修飾子 | public |
 | 継承/実装 | - |
 
@@ -38,7 +39,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/tabletposboilerplate/TabetPos.DeviceCtrl/DeviceManager.cs |
+| ソースファイル | sources/TabletPosBoilerplate/TabletPos.DeviceCtrl/DeviceManager.cs |
 | 対象クラス | DeviceManager |
 | 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 
@@ -80,13 +81,14 @@
 | ⑦ | private static | string | GetRuntimeOs | 実行中のOS識別文字列を返す。 |
 | ⑧ | public | Task<IBarcodeScannerStrategy?> | GetScannerStrategyAsync | 実行環境で有効なスキャナー制御方式を取得する。 |
 | ⑨ | public | Task<IPrinterStrategy?> | GetPrinterStrategyAsync | 実行環境で有効なプリンター制御方式を取得する。 |
-| ⑩ | public | Task<ICashChangerStrategy?> | GetCashChangerStrategyAsync | 実行環境で有効な自動釣銭機制御方式を取得する。 |
-| ⑪ | public | Task<ICustomerDisplayStrategy?> | GetCustomerDisplayStrategyAsync | 実行環境で有効なカスタマディスプレイ制御方式を取得する。 |
-| ⑫ | public | Task<IDrawerStrategy?> | GetDrawerStrategyAsync | 実行環境で有効なドロワー制御方式を取得する。 |
-| ⑬ | public | Task<IKeyboardStrategy?> | GetKeyboardStrategyAsync | 実行環境で有効なキーボード制御方式を取得する。 |
-| ⑭ | public | DeviceSpec | GetActiveDevice | デバイス種別とOSに一致する有効デバイス仕様を取得する。 |
-| ⑮ | public | void | RegisterDeviceStrategy | プラットフォーム別のデバイス制御方式を登録する。 |
-| ⑯ | private | void | ConfigureNamedPipe | Windows環境の名前付きパイプ設定を通信部へ反映する。 |
+| ⑩ | public | Task<IPaymentStrategy?> | GetPaymentStrategyAsync | 実行環境で有効な決済制御方式を取得する。 |
+| ⑪ | public | Task<ICashChangerStrategy?> | GetCashChangerStrategyAsync | 実行環境で有効な自動釣銭機制御方式を取得する。 |
+| ⑫ | public | Task<ICustomerDisplayStrategy?> | GetCustomerDisplayStrategyAsync | 実行環境で有効なカスタマディスプレイ制御方式を取得する。 |
+| ⑬ | public | Task<IDrawerStrategy?> | GetDrawerStrategyAsync | 実行環境で有効なドロワー制御方式を取得する。 |
+| ⑭ | public | Task<IKeyboardStrategy?> | GetKeyboardStrategyAsync | 実行環境で有効なキーボード制御方式を取得する。 |
+| ⑮ | public | DeviceSpec | GetActiveDevice | デバイス種別とOSに一致する有効デバイス仕様を取得する。 |
+| ⑯ | public | void | RegisterDeviceStrategy | プラットフォーム別のデバイス制御方式を登録する。 |
+| ⑰ | private | void | ConfigureNamedPipe | Windows環境の名前付きパイプ設定を通信部へ反映する。 |
 
 ## メソッド詳細
 
@@ -283,7 +285,25 @@
 
 備考: -
 
-### ⑩. GetCashChangerStrategyAsync
+### ⑩. GetPaymentStrategyAsync
+
+| 項目 | 内容 |
+| --- | --- |
+| シグネチャ | `public async Task<IPaymentStrategy?> GetPaymentStrategyAsync()` |
+| 可視性 | public |
+| 戻り値 | Task<IPaymentStrategy?> |
+| 戻り値内容 | 有効な決済制御方式。未設定の場合はnull。 |
+
+処理内容:
+
+- ① デバイス設定の初期化完了を待つ。
+- ② 現在のOSとlocal_paymentを条件に有効デバイスを選択する。
+- ③ 制御方式クラス名が空の場合はnullを返す。
+- ④ 制御方式ファクトリーで決済制御方式を生成して返す。
+
+備考: Windows環境で登録されるOposCafisArchPaymentStrategyを使用する。
+
+### ⑪. GetCashChangerStrategyAsync
 
 | 項目 | 内容 |
 | --- | --- |
@@ -301,7 +321,7 @@
 
 備考: Windows環境で登録される制御方式を使用する。
 
-### ⑪. GetCustomerDisplayStrategyAsync
+### ⑫. GetCustomerDisplayStrategyAsync
 
 | 項目 | 内容 |
 | --- | --- |
@@ -319,7 +339,7 @@
 
 備考: -
 
-### ⑫. GetDrawerStrategyAsync
+### ⑬. GetDrawerStrategyAsync
 
 | 項目 | 内容 |
 | --- | --- |
@@ -337,7 +357,7 @@
 
 備考: Windows環境で登録される制御方式を使用する。
 
-### ⑬. GetKeyboardStrategyAsync
+### ⑭. GetKeyboardStrategyAsync
 
 | 項目 | 内容 |
 | --- | --- |
@@ -355,7 +375,7 @@
 
 備考: Windows環境で登録される制御方式を使用する。
 
-### ⑭. GetActiveDevice
+### ⑮. GetActiveDevice
 
 | 項目 | 内容 |
 | --- | --- |
@@ -383,7 +403,7 @@
 
 備考: 対応する種別はプリンター、スキャナー、自動釣銭機、カスタマディスプレイ、ドロワー、キーボード。
 
-### ⑮. RegisterDeviceStrategy
+### ⑯. RegisterDeviceStrategy
 
 | 項目 | 内容 |
 | --- | --- |
@@ -401,7 +421,7 @@
 
 備考: 登録対象はコンパイル対象プラットフォームにより異なる。
 
-### ⑯. ConfigureNamedPipe
+### ⑰. ConfigureNamedPipe
 
 | 項目 | 内容 |
 | --- | --- |

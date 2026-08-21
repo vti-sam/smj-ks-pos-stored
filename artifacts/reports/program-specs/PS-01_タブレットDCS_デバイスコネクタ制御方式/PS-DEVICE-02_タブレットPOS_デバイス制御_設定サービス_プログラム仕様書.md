@@ -9,7 +9,7 @@
 | 文書ID | PS-DEVICE-02 |
 | 文書名 | タブレットPOS デバイス制御 設定サービス プログラム仕様書 |
 | 対象 | タブレットPOS / デバイス制御設定サービス |
-| 版数 | 0.0.1 |
+| 版数 | 0.0.2 |
 | 作成日 | 2026/07/23 |
 | 作成者 | VTI サム, VTI 吉田 |
 | レビュー担当 | SMJ 蒲田 |
@@ -21,6 +21,7 @@
 
 | 版数 | 日付 | 変更内容 | 作成者 | 承認者 |
 | --- | --- | --- | --- | --- |
+| 0.0.2 | 2026/08/24 | ソースコードの名称変更に伴い、名前空間、およびソースファイルパスの表記をTabletPos.*に統一。責務、処理フロー、および設計上の動作に変更なし。 | VTI サム |  |
 | 0.0.1 | 2026/07/23 | 初版作成 | VTI サム |  |
 
 ## クラス情報
@@ -29,7 +30,7 @@
 | --- | --- |
 | 機能名 | デバイス制御設定サービス |
 | 物理クラス名 | DeviceControllerConfigService |
-| 名前空間 | TabetPos.DeviceCtrl.Configuration |
+| 名前空間 | TabletPos.DeviceCtrl.Configuration |
 | アクセス修飾子 | internal sealed |
 | 継承/実装 | - |
 
@@ -37,7 +38,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/tabletposboilerplate/TabetPos.DeviceCtrl/Configuration/DeviceControllerConfigService.cs |
+| ソースファイル | sources/TabletPosBoilerplate/TabletPos.DeviceCtrl/Configuration/DeviceControllerConfigService.cs |
 | 対象クラス | DeviceControllerConfigService |
 | 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 

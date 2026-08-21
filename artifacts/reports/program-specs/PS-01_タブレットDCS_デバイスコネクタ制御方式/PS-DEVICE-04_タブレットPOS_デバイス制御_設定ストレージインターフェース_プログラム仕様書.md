@@ -9,7 +9,7 @@
 | 文書ID | PS-DEVICE-04 |
 | 文書名 | タブレットPOS デバイス制御 設定ストレージインターフェース プログラム仕様書 |
 | 対象 | タブレットPOS / デバイス制御設定ストレージインターフェース |
-| 版数 | 0.0.2 |
+| 版数 | 0.0.3 |
 | 作成日 | 2026/07/23 |
 | 作成者 | VTI サム, VTI 吉田 |
 | レビュー担当 | SMJ 蒲田 |
@@ -21,6 +21,7 @@
 
 | 版数 | 日付 | 変更内容 | 作成者 | 承認者 |
 | --- | --- | --- | --- | --- |
+| 0.0.3 | 2026/08/24 | ソースコードの名称変更に伴い、名前空間、およびソースファイルパスの表記をTabletPos.*に統一。責務、処理フロー、および設計上の動作に変更なし。 | VTI サム |  |
 | 0.0.2 | 2026/07/30 | クラス概要の表現を明確化 | VTI サム |  |
 | 0.0.1 | 2026/07/23 | 初版作成 | VTI サム |  |
 
@@ -30,7 +31,7 @@
 | --- | --- |
 | 機能名 | デバイス制御設定ストレージインターフェース |
 | 物理クラス名 | IDeviceControllerConfigStorage |
-| 名前空間 | TabetPos.DeviceCtrl.Configuration |
+| 名前空間 | TabletPos.DeviceCtrl.Configuration |
 | アクセス修飾子 | internal |
 | 継承/実装 | - |
 
@@ -38,7 +39,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/tabletposboilerplate/TabetPos.DeviceCtrl/Configuration/IDeviceControllerConfigStorage.cs |
+| ソースファイル | sources/TabletPosBoilerplate/TabletPos.DeviceCtrl/Configuration/IDeviceControllerConfigStorage.cs |
 | 対象クラス | IDeviceControllerConfigStorage |
 | 設計対象 | インターフェース本体、プロパティ、メソッド仕様 |
 
