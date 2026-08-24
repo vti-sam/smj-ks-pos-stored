@@ -4,9 +4,11 @@ project: smj-ks-pos
 type: lesson
 status: stale
 source:
+  - sources/TabetPosBoilerplate/TabetPos.Applications/
   - sources/TabetPosBoilerplate/TabetPos.DeviceCtrl/
   - sources/TabetPosBoilerplate/TabetPos.Host/
   - sources/TabetPosBoilerplate/TabetPos.Test/
+  - sources/Refer/MauiPOSHost/
   - sources/TabetPosBoilerplate/tools/Test-PosPeripherals.ps1
   - scratch/printer-migration-source/README.md
   - project-store/artifacts/reports/architecture/ARCH-HOST-01_タブレットPOS_デバイスコネクタ基本設計書/
@@ -18,6 +20,8 @@ tags:
   - OPOS
   - named-pipe
   - peripheral-integration
+  - thin-device-control
+  - application-orchestration
 scope: historical
 captured_at: 2026-08-17
 validity: historical_context
@@ -352,6 +356,264 @@ promote_to_knowledge: false
   xác nhận remote và local cùng SHA
   `13e4621d359d0e9f9abc45b1ca52a42c4a5ec58c`. Các thay đổi UI/Figma và package
   bump có sẵn không thuộc task vẫn giữ local, không nằm trong commit.
+- Tạo root solution `sources/TabetPosBoilerplate/TabetPos.sln` để Rider mở một
+  lần toàn bộ App, Core, DeviceCtrl, Host, test và peripheral runner. Đối chiếu
+  xác nhận solution chứa đúng 28/28 file `.csproj`. App, `AppServer` và runner
+  vẫn là process/run configuration riêng; debug multi-process dùng Multi-Launch
+  hoặc attach từng process, không gộp lifecycle. Full solution build trên
+  Windows có thể kéo cả iOS/Android/UI test, nên workflow POS chỉ build/debug
+  Windows App và Host x86 theo cấu hình tương ứng.
+- Viết lại toàn bộ ba README active của source repo theo luồng dễ tra cứu:
+  root README giải thích kiến trúc, Rider, remote POS và build/test; Host README
+  phân biệt normal mode tự khởi động với `DEBUG` UI, Named Pipe, command order
+  và năm device factory; OPOS README đưa quick start, `-VerifyOnly`, `-Force`
+  và troubleshooting lên cấu trúc rõ ràng. Audit xác nhận 3/3 README có code
+  fence cân bằng, link nội bộ tồn tại, không còn thuật ngữ project cũ; command
+  `Install-DeviceRuntime.ps1 -List` trả đúng năm device và exit code 0.
+- Đã tách hành vi `TabetPos.BindingLibrary/Epos2iOS` theo hệ điều hành. Trên
+  Windows project dùng `net10.0`, tắt binding và default compile nên không phân
+  tích các API `Foundation/UIKit/ObjCRuntime`; trên môi trường khác project vẫn
+  dùng `net10.0-ios` và là binding project thật. Root `TabetPos.sln` vẫn hiển
+  thị project để điều hướng nhưng không có `Build.0`, vì vậy Rider Build Whole
+  Solution không build trực tiếp iOS binding. Khi build target iOS,
+  `TabetPos.DeviceCtrl` vẫn kéo binding vào bằng conditional ProjectReference.
+- Verification trên Windows: build trực tiếp `Epos2iOS.csproj` đạt 1 project,
+  0 lỗi, 0 cảnh báo; build `TabetPos.DeviceCtrl.csproj` cho
+  `net10.0-windows10.0.19041.0` đạt 2 project, 0 lỗi, 0 cảnh báo. Audit solution
+  xác nhận GUID Epos2iOS chỉ còn `ActiveCfg`, không còn dòng `Build.0`.
+- Đã sửa Rider profile `POS - Logs` trong `tools/PosDebug.ps1` để stream đúng
+  `Host/LOG/AppServer.runtime.log` thay vì chờ file log4net legacy không tồn
+  tại. PowerShell local và remote cùng khóa input/output/pipeline về UTF-8 không
+  BOM cho mọi mode Validate, Deploy, Run và Logs; progress bị tắt và chỉ
+  metadata progress CLIXML bị lọc, còn lỗi SSH thật vẫn được giữ. Host runtime
+  log vốn ghi UTF-8 không BOM và Logs đọc tường minh bằng UTF-8. Chạy thử trên
+  POS xác nhận log command hiển thị liên tục, tiếng Nhật đúng encoding và không
+  còn `#< CLIXML`; strict UTF-8 audit đạt 3/3 file lõi và scan source liên quan
+  không tìm thấy ký tự thay thế hoặc mẫu mojibake.
+- Đã nâng `DeviceIntegrationTestPage` thành Device Test Workbench ở tầng
+  Application, không sửa contract/runtime của DeviceCtrl hoặc Host. Một provider
+  Application bọc bảy strategy CashChanger, CustomerDisplay, Printer,
+  CashDrawer, Payment, Scanner và Keyboard; ViewModel giữ session Start/End,
+  state riêng từng thiết bị và chỉ cho chạy command hợp lệ theo state.
+- Workbench có input và command tương ứng với contract đang support, hiển thị
+  các command Refer chưa map là `Unsupported`. Thao tác vật lý như deposit,
+  dispense, in/cắt, mở drawer và payment/reprint mặc định bị khóa, phải bật
+  `PhysicalOperationsEnabled`; guard nằm cả trong command handler nên không thể
+  bypass chỉ bằng cách gọi command từ code/test.
+- Operation log giữ tối đa 300 dòng mới nhất, gồm App operation ID, Host request
+  ID khi exception trả về, device/command, state trước-sau, duration, result
+  code/extended, stage, exception type và message. Payment request/response JSON
+  không được ghi log. Scanner chờ dữ liệu trên background task để không khóa UI;
+  thoát trang cleanup best-effort mọi session.
+- Bổ sung 3 Application boundary test cho CashChanger state order, physical
+  guard, Payment redaction và lifecycle của đủ bảy panel. Build Windows đạt 17
+  project, 0 lỗi, 0 cảnh báo; toàn bộ `TabetPos.Test` đạt 74/74, 0 warning, gồm
+  cả 9 peripheral command spy hiện có. Scan source mới không có mojibake.
+- Đã chỉnh layout Workbench để mọi action button có khoảng cách ngang/dọc 10px
+  khi wrap; riêng Printer tách Start/End khỏi nhóm Print commands để tránh dải
+  nút dính sát nhau. Commit `1c24299733ad0e4d347c5aabd45fc97dd8598c87`
+  (`feat: add application device test workbench`) đã được push lên
+  `origin/develop`; read-back `ls-remote` xác nhận remote trùng đúng commit.
+  Build Windows sau chỉnh layout vẫn đạt 17 project, 0 lỗi, 0 cảnh báo và toàn
+  bộ `TabetPos.Test` đạt 74/74.
+
+### Follow-up 2026-08-19: parity chức năng và tách orchestration khỏi DeviceCtrl
+
+- Đã đối chiếu command surface của `sources/Refer/MauiPOSHost` và migration các
+  lệnh an toàn còn thiếu cho CashChanger, CustomerDisplay và Printer. DeviceCtrl
+  chỉ còn contract/typed result cùng mapping Named Pipe nguyên tử; chuỗi nghiệp
+  vụ recovery, tính tiền thừa rồi dispense, và gom từng dòng receipt được thực
+  hiện tại tầng Application.
+- CashChanger có thêm deposit details, cash counts, collect, clear input,
+  dispense cash/change, DirectIO, coin/bill/full status, mode, seisa và nhóm
+  async status/event. CustomerDisplay có descriptor/window/refresh/DirectIO cùng
+  LinDsp/Telop. Printer có text, bitmap, barcode/QR và cut nguyên tử.
+- Host vẫn giữ composite receipt cũ để tương thích caller hiện hữu, nhưng
+  Device Test Workbench mới không gọi composite này; Application phân rã receipt
+  thành các lệnh printer nguyên tử. Lifecycle Start/End vẫn gom Open/Claim/Enable
+  vì đây là quản lý session kỹ thuật, không phải nghiệp vụ bán hàng.
+- Verification local đạt `TabetPos.Test` 75/75, `DeviceHostCore.Tests` 30/30,
+  `PrinterByOpos.Tests` 6/6 và `DevicePipeline.Tests` 3/3; tất cả 0 warning.
+  Test recovery xác nhận thứ tự Fix → End → EndDepositFlagOn, test receipt xác
+  nhận không gọi Host composite, và test QR xác nhận bật/tắt BinaryConversion.
+- Commit `ee399f350178d66844f8903fcaa51da4d4eca385`
+  (`feat: complete device command migration`) đã được push lên `origin/develop`;
+  read-back `ls-remote` xác nhận local và remote cùng SHA. Commit chỉ chứa 24
+  file migration; các thay đổi local ngoài task vẫn để nguyên unstaged.
+
+### Follow-up 2026-08-19: bỏ physical guard và chuẩn hóa Workbench tiếng Nhật
+
+- Đã xác nhận `物理操作を許可`/`PhysicalOperationsEnabled` không tồn tại trong
+  test form của source tham chiếu MauiPOSHost. Source tham chiếu bật toàn bộ
+  operation button ngay sau khi kết nối thành công; physical guard là logic được
+  thêm riêng khi dựng Workbench và không thuộc contract DeviceCtrl/Host.
+- Đã xóa hoàn toàn toggle, physical guard và style nút màu cam. Sau `Start`, mọi
+  command của panel được phép gọi khi thiết bị đã kết nối; CashChanger vẫn cập
+  nhật state theo kết quả lệnh nhưng không chặn kỹ thuật viên thử command theo
+  thứ tự khác.
+- Toàn bộ tiêu đề, nhãn trường, trạng thái và nhãn nghiệp vụ của Workbench được
+  chuẩn hóa sang tiếng Nhật. Tên hàm/API được giữ trong ngoặc để truy vết kỹ
+  thuật. CustomerDisplay được chia thành ba nhóm: nội dung/vị trí hiển thị,
+  descriptor/window và DirectIO/telop; mỗi input có nhãn nhỏ mô tả mục đích.
+- `TabetPos.Test` đạt 75/75 test, 0 warning. Audit source không còn
+  `PhysicalOperationsEnabled`, `PhysicalButton` hoặc `物理操作を許可`; XAML được
+  compile qua source generator trong lượt test.
+
+### Follow-up 2026-08-19: tích hợp CashChanger ForceRecovery
+
+- Đã đối chiếu `⚠ 強制回復` của MauiPOSHost: đây là chuỗi khôi phục OPOS mạnh,
+  khác `RecoveryDeposit` thông thường và khác hoàn toàn `HardReset` của
+  `GlorySerialController`. DeviceCtrl không ánh xạ lệnh này sang serial
+  controller khi chưa có contract/protocol tương ứng.
+- Host sở hữu toàn bộ chuỗi `CashChangerForceRecovery`: đóng session hiện tại,
+  mở/claim/enable OPOS, chạy `FixDeposit → EndDeposit(REPAY) → ClearInput`, xóa
+  trạng thái session, đóng/mở và claim/enable lại, sau đó kiểm tra `FullStatus`.
+  Không nuốt lỗi như source tham chiếu: từng bước trả `ResultCode`,
+  `ResultCodeExtended` và message; chỉ thành công khi mọi bước đạt và
+  `FullStatus=CHAN_STATUS_OK`.
+- DeviceCtrl chỉ expose typed `CashChangerForceRecoveryResult`. Application sở
+  hữu xác nhận hai bước và state UI; nút `⚠ 強制復旧 (ForceRecovery)` nằm riêng
+  trong nhóm `保守操作`, vẫn cho phép gọi khi session đang lỗi/chưa kết nối để
+  phục vụ cứu hộ. Hủy ở một trong hai xác nhận không gửi command; lỗi Host đưa
+  CashChanger về `Faulted`, không báo `Ready` giả.
+- Verification local đạt `TabetPos.Test` 78/78 và `DevicePipeline.Tests` 3/3,
+  tất cả 0 warning. Test bao phủ hai bước xác nhận, result lỗi, JSON typed mapping
+  và tuyến Application → DeviceCtrl → named pipe → Host method ID.
+
+### Follow-up 2026-08-19: khôi phục feed giấy trước khi cắt
+
+- Ảnh chạy thật cho thấy QR nằm sát và bị dao cắt đi qua mép dưới. Đối chiếu
+  MauiPOSHost xác nhận composite receipt cũ không có API `FeedPaper` riêng mà
+  dùng `PrintNormal(station, "\n\n\n\n")` để đẩy bốn dòng, sau đó mới gọi
+  `CutPaper(90)`.
+- Atomic receipt flow tại Application và composite compatibility flow trong
+  Host trước đó đều gọi thẳng `CutPaper(100)`, nên thiếu đúng bước feed đã có ở
+  source tham chiếu. Đã sửa cả hai flow thành `PrintNormal` bốn newline rồi
+  `CutPaper(90)`; nếu feed lỗi thì không tiếp tục cắt.
+- Regression test bắt thứ tự QR/barcode → feed bốn dòng → cut 90%. Verification
+  local đạt `TabetPos.Test` 79/79 và `PrinterByOpos.Tests` 6/6, đều 0 warning.
+  Chưa chạy lại trên máy in OPOS thật sau thay đổi này.
+
+### Follow-up 2026-08-19: lifecycle và capability của CustomerDisplay
+
+- `CustomerDisplay.Start` không còn chỉ kiểm tra trạng thái Open. Host xác nhận
+  lần lượt trạng thái Open, Claim và DeviceEnabled; lỗi `Device_Start` được trả
+  về với stage `DeviceStart` thay vì tiếp tục gọi OCX rồi báo Ready giả.
+- Host trả `CapDescriptors`, `CapHMarquee`, `CapVMarquee`, `DeviceWindows`,
+  `Rows` và `Columns` trong response `DeviceUse`. DeviceCtrl giữ capability dưới
+  typed model; Application dùng capability để hiển thị `未対応` và không gửi
+  descriptor/window command mà thiết bị không hỗ trợ.
+- Viewport của `CreateWindow` được tách khỏi tọa độ `DisplayTextAt`, mặc định
+  `(0,0,2,20)`, và được validate theo Rows/Columns cùng quan hệ
+  window-size ≥ viewport-size trước khi gửi Host. `DestroyWindow` và
+  `RefreshWindow` chỉ được bật sau khi `CreateWindow` thành công.
+- Verification local đạt `TabetPos.Test` 83/83, `DevicePipeline.Tests` 3/3 và
+  `DeviceHostCore.Tests` 30/30; project `CustomerDisplayBySharp` build sạch
+  0 error, 0 warning. Test bao phủ capability payload xuyên Host → DeviceCtrl,
+  trạng thái `未対応`, viewport zero-origin, validation và window lifecycle.
+
+### Follow-up 2026-08-19: hoàn thiện Raw Input bàn phím và cấu hình scanner serial
+
+- Đã xác nhận transport Windows đang hoạt động: DENSO scanner dùng
+  `SerialHandyScannerStrategy` mở COM trực tiếp; bàn phím SHARP dùng Windows
+  Raw Input. Tên command `OPOS_Keyboard*` trong MauiPOSHost là protocol qua
+  Named Pipe, còn Host vẫn đọc bàn phím bằng Raw Input chứ không có OPOS
+  Keyboard Control.
+- DeviceCtrl không còn bỏ qua hầu hết tín hiệu bàn phím. Bộ compose phát mọi
+  phím thường, ghép `Shift + key` thành `0x1000 | VirtualKey`, xử lý nhấn
+  `Insert` hai lần thành `0x2D2D`, đồng thời trả VirtualKey, scan code, VID/PID
+  và cờ bàn phím chuyên dụng. Thiết bị SHARP được nhận diện theo `VID_04DD` như
+  MauiPOSHost tham chiếu.
+- Mapping mã phím sang nhãn nghiệp vụ tiếng Nhật đã chuyển khỏi DeviceCtrl sang
+  tầng Application. DeviceCtrl chỉ giữ input/identity của thiết bị; Workbench
+  hiển thị cả mã raw, nhãn nghiệp vụ và device ID, đồng thời vẫn cho thấy phím
+  thường chưa có mapping nghiệp vụ.
+- `WindowsRawKeyboardStrategy.Start` không còn nuốt lỗi hook/register Raw
+  Input. Workbench chỉ chuyển sang Ready sau khi lấy được MAUI window handle,
+  đăng ký Raw Input và hook WndProc thành công; lỗi Start được log và giữ state
+  Disconnected.
+- Scanner đã dùng đúng `ComPort`, baud rate, parity, data bits, stop bits và
+  handshake trong `DeviceSpec`; lỗi cũ luôn ép về COM7 khi có config đã được
+  loại bỏ. Kết nối serial thất bại giờ throw để Workbench không báo kết nối
+  thành công giả.
+- Toàn bộ `TabetPos.Test` đạt 88/88. Test mới bao phủ phím thường, Shift
+  composite, double Insert, mapping Application, cấu hình COM9 và keyboard
+  Start failure không báo Ready. Build trực tiếp test dependency đạt 0 warning,
+  0 error; root `TabetPos.sln` build đủ 28 project, 0 error. Các warning của
+  full solution nằm ở Android Epson binding metadata đã tồn tại ngoài scope.
+
+### Follow-up 2026-08-19: hoàn thiện command OPOS và testcase Workbench
+
+- Đã đối chiếu trực tiếp ba COM interface vendor `IOPOSCashChanger`,
+  `_DLineDisplay` và `_DDrawer`. Workbench bổ sung các lệnh bảo trì dùng chung
+  `CheckHealth`, `RetrieveStatistics`, `ResetStatistics`, `UpdateStatistics`
+  và lấy toàn bộ property OPOS; CashChanger bổ sung `AdjustCashCounts`,
+  `CompareFirmwareVersion`, `UpdateFirmware`; CashDrawer bổ sung `DirectIO` và
+  `WaitForDrawerClose`.
+- Bốn command CashChanger đã có Host mapping nhưng chưa có action độc lập tại
+  Application cũng được đưa ra Workbench: `EndDepositFlagOn`, `ClearHandle`,
+  `DataEventCount` và `Answer`. Command stale `CashChangerEnq2` được loại khỏi
+  method ID vì không có caller và không thuộc COM interface hiện hành.
+- `Open`/`ClaimDevice`/`DeviceEnabled` tiếp tục được quản lý nguyên tử trong
+  `Start`; `ReleaseDevice`/`Close` nằm trong `End`. Các callback Service Object
+  `SOData`, `SODirectIO`, `SOStatusUpdate` và các callback dummy không phải
+  command do kỹ thuật viên gọi nên không tạo nút/testcase riêng.
+- Testcase thủ công `TC-IT-DEVICE-02` tăng từ 68 lên 92 case, chia theo bảy
+  thiết bị: CashChanger 42, Customer Display 19, Printer 9, CashDrawer 11,
+  Payment 5, Scanner 3 và Keyboard 3. Workbook có đúng tám sheet gồm thay đổi
+  lịch sử và bảy sheet thiết bị, giữ freeze pane `AE11`, validation, công thức
+  và layout đọc được sau render toàn bộ sheet.
+- Verification local: `TabetPos.Host.slnx` build đủ 21 project, 0 error,
+  0 warning; toàn bộ `TabetPos.Test` đạt 91/91, trong đó nhóm
+  `DeviceIntegrationTestViewModelTests` đạt 14/14; DeviceCtrl build đạt 0 error
+  với một warning `CS4014` đã tồn tại ngoài scope. Validator
+  Markdown đạt đúng 92 case, regression renderer đạt 10/10 và workbook
+  read-back đạt đúng 92 ID, không có công thức `#REF!`.
+
+### Follow-up 2026-08-19: PeripheralIntegrationRunner 92 case trên POS thật
+
+- Đã xóa toàn bộ project unit/UI/Host test và reference tương ứng khỏi root
+  solution cùng Host solution; `PeripheralIntegrationRunner` là test runner duy
+  nhất còn lại. Runner tự kiểm tra đúng 92 ID `IT-DEVICE-001..092`, không thiếu
+  hoặc trùng, và phân biệt `PASS`, `FAIL`, `PENDING`; OPOS lỗi không còn được
+  chuyển thành PASS. Build runner 3 project và Host solution 14 project đều đạt
+  0 error, 0 warning.
+- Lượt thực máy OPOS-only `20260819-172400` trên POS `192.168.9.176`, deploy root
+  `C:\Deploy\TabetPos.DebugNew`, đạt coverage 92/92: 53 PASS, 9 FAIL, 30 PENDING,
+  gửi 75 Host command. Payment 5 case và scanner/keyboard 6 case được chủ động
+  để PENDING theo phạm vi chạy; không gửi command tới các thiết bị này. Evidence
+  local nằm tại `scratch/evidence/pos-peripherals/20260819-172400/pos/`.
+- CashChanger PASS 25 case, gồm deposit 0円 Begin/Pause/Fix/End/Recovery,
+  `DispenseChange(0,10)`, status, Seisa, ClearInput, change 0円,
+  EndDepositFlagOn, ClearHandle, DataEventCount và CheckHealth. Printer PASS đủ
+  9/9 gồm text, JAN13, JAN8, QR, cut 100%, bitmap và full receipt. Customer
+  Display PASS 13 case gồm viewport `0,0`, marquee, Create/Refresh/Destroy window,
+  DirectIO, LinDsp/Telop. CashDrawer PASS Start/End/status/open,
+  RetrieveStatistics và WaitForDrawerClose.
+- Lượt `20260819-172400` ban đầu giữ chín lỗi thực làm evidence: CashChanger
+  OpenDrawer RC=113, AsyncStart RC=-1, ForceRecovery fail tại FixDeposit, Answer
+  null; CustomerDisplay và CashDrawer CheckHealth RC=106; snapshot OPOS thiếu
+  `State` ở CashChanger và thiếu `OPOSConstData`/`State` ở Display/Drawer.
+- Sau khi sửa Host và runner, lượt xác nhận cuối `20260819-180150` trên cùng POS
+  đạt coverage 92/92: 63 PASS, 0 FAIL, 29 PENDING, gửi 82 Host command. Evidence
+  local nằm tại
+  `scratch/evidence/pos-peripherals/20260819-180150/pos/summary.md`; app POS được
+  khôi phục sau test. AsyncStart/AsyncEnd trả đúng kết quả OPOS; Answer null-safe;
+  ForceRecovery phân biệt bước cleanup không bắt buộc; property snapshot chỉ đọc
+  54/44/22 property thực sự được control cung cấp và không còn lỗi.
+- CashChanger OpenDrawer trên thiết bị thật đi tới trạng thái RC=114,
+  Extended=217 `collection cassette removal wait`; runner chỉ coi đúng cặp mã
+  này là PASS vì xác nhận được chuyển trạng thái vật lý mong đợi. CustomerDisplay
+  và CashDrawer CheckHealth được thử đủ level 1/2/3 sau Open/Claim/Enable; service
+  object đều trả RC=106, Extended=1 nên hai case được ghi PENDING có lý do cụ thể,
+  không còn là FAIL hoặc lỗi chung.
+- Theo quyết định sau lượt test thật, đã bỏ nút và testcase CheckHealth của
+  CustomerDisplay/CashDrawer vì service object thực tế không hỗ trợ; vẫn giữ
+  CheckHealth của CashChanger và HealthCheck riêng của CAFIS Payment. Catalog
+  hiện tại có 90 ID, loại `IT-DEVICE-081` và `IT-DEVICE-086`; mapping-only đạt
+  90/90. Tài liệu `TC-IT-DEVICE-02` và workbook được cập nhật lên 1.1.1, đúng 90
+  case. Chưa chạy lại toàn bộ thiết bị sau thay đổi chỉ loại testcase này; nếu
+  chiếu theo evidence thực `20260819-180150` thì còn 63 PASS, 0 FAIL, 27 PENDING.
 
 ### Follow-up 2026-08-20: timeout `CashChangerForceRecovery`
 
@@ -408,17 +670,23 @@ promote_to_knowledge: false
 - Chưa chạy cài mới trên một máy POS sạch. Máy `192.168.9.176` đã open và in
   giấy thật thành công bằng package/deploy hiện tại, nhưng một máy mới vẫn cần
   đúng USB printer và mapping USB riêng.
-- Payment transaction và thao tác mở CashDrawer vẫn chủ động không chạy. Lượt
-  `20260818-164318` đã xác nhận mapping/OPOS của Payment và đọc trạng thái
-  CashDrawer an toàn, nhưng chưa chứng minh payment terminal hoặc mở drawer.
+- Payment transaction vẫn chủ động để PENDING do chưa có môi trường CAFIS test.
+  CashDrawer OpenDrawer và WaitForDrawerClose đã PASS trên lượt
+  `20260819-172400`.
 - `TabetPos.ApplicationControls.slnx` còn absolute project path của máy
   `C:\Users\koyamata\...`, nên build solution độc lập fail; build trực tiếp
   `TabetPos.ApplicationControls.csproj` và build qua Applications solution đều
   pass.
-- `TabetPos.UITests` restore/build đạt 0 error, 0 warning nhưng test Appium iOS
-  không chạy được trên máy Windows vì thiếu output
-  `net10.0-ios\iossimulator-arm64\TabetPos.Applications.app` và môi trường iOS
-  Simulator/Appium. Đây là environment limitation, không phải compile failure.
+- Scanner và keyboard không chạy lại trong lượt OPOS-only theo quyết định phạm
+  vi; sáu case được giữ PENDING. Firmware, vendor DirectIO, Collect,
+  DispenseCash, AdjustCashCounts và thay đổi statistics cũng PENDING vì chưa có
+  file/lệnh/buffer vendor đã xác nhận an toàn.
+- CustomerDisplay thực tế báo `CapDescriptors=false`, vì vậy Set/ClearDescriptor
+  PENDING; marquee và additional window đều chạy thành công. Hai CheckHealth của
+  CustomerDisplay/CashDrawer vẫn PENDING vì service object không chấp nhận cả ba
+  level chuẩn dù lifecycle Open/Claim/Enable đã thành công. Các lỗi property,
+  AsyncStart, Answer, ForceRecovery và OpenDrawer của lượt đầu đã được xử lý và
+  xác nhận lại ở lượt `20260819-180150`.
 - Chưa deploy bản timeout 10 giây lên POS và chưa replay UI để xác nhận App nhận
   response trước hạn; lần kiểm tra tiếp theo cần đối chiếu không còn
   `Pipe is broken` sau `CashChangerForceRecovery`.
@@ -452,6 +720,34 @@ promote_to_knowledge: false
 - TabetPosBoilerplate checkout rename legacy Ks directories 353 bin obj files
 - HostDeviceClassRegistry external legacy KsUtility KsClassID KsLogControls
 - 13e4621 origin develop POS host integration debug tooling
+- TabetPos.sln Rider 28 projects multi-process AppServer Applications runner
+- README Rider Host OPOS quick start verify force troubleshooting
+- Epos2iOS Windows placeholder EnableDefaultCompileItems false IsBindingProject
+- TabetPos.sln Epos2iOS ActiveCfg no Build.0 DeviceCtrl conditional iOS reference
+- PosDebug POS Logs AppServer.runtime.log UTF-8 no CLIXML Rider stream
+- Device Test Workbench seven device Application state session physical guard
+- DeviceIntegrationTestViewModel operation log payment redaction 74 tests
+- 1c24299 origin develop Device Test Workbench button spacing Printer groups
+- MauiPOSHost parity thin DeviceCtrl Application orchestration atomic commands
+- CashChanger Fix End EndDepositFlagOn cash dispense DirectIO async full status
+- CustomerDisplay descriptor window LinDsp Telop DirectIO Printer bitmap QR cut
+- ee399f3 origin develop complete device command migration
+- Device Test Workbench Japanese labels no physical guard all commands after Start
+- CashChangerForceRecovery OPOS FixDeposit Repay ClearInput PostCheck two confirmations
+- OPOS printer paper feed four newlines CutPaper 90 QR cut edge MauiPOSHost parity
+- CustomerDisplay DeviceUse Open Claim DeviceEnabled capabilities viewport 0 0
+- CapDescriptors CapHMarquee CapVMarquee DeviceWindows Rows Columns 未対応
+- CustomerDisplay CreateWindow RefreshWindow DestroyWindow lifecycle validation
+- WindowsRawKeyboardStrategy Raw Input VID_04DD VirtualKey ScanCode device ID
+- KeyboardBusinessKeyMapper Shift 0x1000 double Insert 0x2D2D COM9 scanner serial
+- TC-IT-DEVICE-02 92 manual cases OPOS maintenance statistics firmware properties
+- OposCheckHealth RetrieveStatistics ResetStatistics UpdateStatistics GetProperties
+- CashChanger AdjustCashCounts CompareFirmwareVersion UpdateFirmware EndDepositFlagOn
+- CashDrawer DirectIO WaitForDrawerClose COM callbacks SOData excluded
+- PeripheralIntegrationRunner current catalog 90/90 excludes IT-DEVICE-081 IT-DEVICE-086
+- PeripheralIntegrationRunner real evidence 20260819-180150 63 pass 0 fail 29 pending 82 commands before exclusions
+- OPOS-only Payment input devices pending CashChanger 25 Printer 9 Display 13 Drawer 6
+- OPOS property State OPOSConstData RC106 RC113 AsyncStart Answer ForceRecovery
 - CashChangerForceRecovery ResponseTimeoutMilliseconds 10000 Pipe is broken
 - OposClaimTimeoutMilliseconds 5000 Printer Payment common constant
 - 2026-08-19 19:02 19:03 19:04 Host ResultCode 0 App timeout 5 seconds

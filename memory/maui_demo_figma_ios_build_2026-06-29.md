@@ -110,6 +110,23 @@ Using `Source="figma_demo_camera.svg"` built successfully but produced blank ima
 
 After replacing glyph placeholders with SVG `Image` elements, simulator and non-signing device builds passed. The latest comparison contact sheet is `scratch/demo-figma-compare/contact-after-svg-icons.png`.
 
+### Windows image-name follow-up 2026-08-18
+
+WinUI generates each SVG as scale-qualified PNG files such as
+`figma_demo_camera.scale-100.png`; a XAML source without an extension was not
+resolved and the Demo Figma images appeared blank on Windows. The page now uses
+an `OnPlatform` source for every Figma image: WinUI receives the logical `.png`
+name, while iOS/Android retain the extensionless name already verified on the
+iOS simulator. Example:
+
+```xml
+<Image Source="{OnPlatform Default=figma_demo_camera, WinUI=figma_demo_camera.png}" />
+```
+
+Windows verification found matching generated assets for all 11 unique logical
+image names. `TabetPos.Applications.csproj` then built 17 projects for
+`net10.0-windows10.0.19041.0` with 0 errors and 0 warnings.
+
 ## System bar and footer rule follow-up
 
 For the demo flow, do not try to make the iOS system time/date match Figma. The iOS status bar and bottom home/navigation area are system-owned and should remain visible. Visual comparison should focus on app content.

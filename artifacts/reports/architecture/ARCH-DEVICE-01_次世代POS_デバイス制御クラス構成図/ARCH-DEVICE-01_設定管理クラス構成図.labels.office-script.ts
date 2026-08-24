@@ -1,20 +1,20 @@
 // Generated from Markdown: ARCH-DEVICE-01_次世代POS_デバイス制御クラス構成図.md
-// Source contract SHA-256: df44c022273274e0e23bdd29f0a59f782029342f3eb023d6241d747cfa6cc05b
+// Source contract SHA-256: 47fe955fe86b78bcf1963b86aaca9add8189b497a6ebfd78b37f1ad6e2fab066
 // Generated output; do not edit. Change Markdown or the owning renderer and regenerate both scripts.
 
 function main(workbook: ExcelScript.Workbook) {
   const sheet = workbook.getActiveWorksheet();
-  const expectedSheetBase = "05_クラス構成_01";
+  const expectedSheetBase = "06_設定管理クラス構成図_01";
   if (!isExpectedRenderSheet(sheet.getName(), expectedSheetBase)) {
     throw new Error("Activate the render sheet created by the matching main script before running labels.");
   }
-  const shapePrefix = "shape_d51_";
-  const edgePrefix = "edge_d51_";
-  const sectionPrefix = "section_bg_d51_";
-  const edgeLabelPrefix = "edge_label_d51_";
-  const shapeGroupPrefix = "shape_group_d51_";
-  const shapeCommentPrefix = "shape_comment_d51_";
-  const edgeLabelAnchors: { [key: string]: number[] } = { "edge_d51_01_APP_VIEW_to_APP_SERVICE": [0.555621, 1], "edge_d51_02_DEVICE_CTRL_CORE_CONFIG_GROUP_RUNTIME_to_DEVICE_CTRL_CORE_CONFIG_GROUP_CONFIG": [0.5, 0.5], "edge_d51_03_DEVICE_CTRL_CORE_CONFIG_GROUP_DEFAULT_to_DEVICE_CTRL_CORE_CONFIG_GROUP_CONFIG": [0.5, 0.5], "edge_d51_04_DEVICE_CTRL_CORE_CONFIG_GROUP_CONFIG_to_DEVICE_CTRL_CORE_CONFIG_GROUP_RUNTIME": [0.225962, 1], "edge_d51_05_DEVICE_CTRL_CORE_CONFIG_GROUP_CONFIG_to_DEVICE_CTRL_CORE_CONFIG_GROUP_MODEL": [0.54467, 1], "edge_d51_06_DEVICE_CTRL_CORE_MANAGER_to_DEVICE_CTRL_CORE_CONFIG_GROUP_MODEL": [0.621604, 0], "edge_d51_07_DEVICE_CTRL_CORE_MANAGER_to_DEVICE_CTRL_STRATEGY_PATTERN_FACTORY": [0.441085, 0], "edge_d51_08_APP_BOOT_to_DEVICE_CTRL_CORE_MANAGER": [0.818587, 0.936457], "edge_d51_09_APP_BOOT_to_DEVICE_CTRL_CORE_EVENT_RECEIVER": [0.547039, 0], "edge_d51_10_DEVICE_CTRL_CORE_MANAGER_to_DEVICE_CTRL_CORE_CONFIG_GROUP_CONFIG": [0.699701, 0.218384], "edge_d51_11_DEVICE_CTRL_CORE_MANAGER_to_DEVICE_CTRL_CORE_PIPE_CLIENT": [0.508807, 0.426123], "edge_d51_12_DEVICE_CTRL_CORE_MANAGER_to_DEVICE_CTRL_CORE_EVENT_RECEIVER": [0.080532, 0.560182], "edge_d51_13_APP_SERVICE_to_DEVICE_CTRL_CORE_MANAGER": [0.616146, 0.50814], "edge_d51_14_APP_SERVICE_to_DEVICE_CTRL_STRATEGY_PATTERN_CONTRACT": [0.386902, 1], "edge_d51_15_DEVICE_CTRL_STRATEGY_PATTERN_FACTORY_to_DEVICE_CTRL_STRATEGY_PATTERN_PLATFORM_WIN_CONNECTOR": [0.358209, 0.5], "edge_d51_16_DEVICE_CTRL_STRATEGY_PATTERN_FACTORY_to_DEVICE_CTRL_STRATEGY_PATTERN_PLATFORM_WIN_DIRECT": [0.16346, 0.736915], "edge_d51_17_DEVICE_CTRL_STRATEGY_PATTERN_FACTORY_to_DEVICE_CTRL_STRATEGY_PATTERN_PLATFORM_IOS": [0.268657, 0.676923], "edge_d51_18_DEVICE_CTRL_STRATEGY_PATTERN_FACTORY_to_DEVICE_CTRL_STRATEGY_PATTERN_PLATFORM_ANDROID": [0.343071, 1], "edge_d51_19_DEVICE_CTRL_STRATEGY_PATTERN_PLATFORM_WIN_CONNECTOR_to_DEVICE_CTRL_STRATEGY_PATTERN_CONTRACT": [0.669678, 0], "edge_d51_20_DEVICE_CTRL_STRATEGY_PATTERN_PLATFORM_WIN_DIRECT_to_DEVICE_CTRL_STRATEGY_PATTERN_CONTRACT": [0.915719, 0.504463], "edge_d51_21_DEVICE_CTRL_STRATEGY_PATTERN_PLATFORM_IOS_to_DEVICE_CTRL_STRATEGY_PATTERN_CONTRACT": [0.444608, 0], "edge_d51_22_DEVICE_CTRL_STRATEGY_PATTERN_PLATFORM_ANDROID_to_DEVICE_CTRL_STRATEGY_PATTERN_CONTRACT": [0.787755, 0.492337], "edge_d51_23_DEVICE_CTRL_STRATEGY_PATTERN_PLATFORM_WIN_CONNECTOR_to_DEVICE_CTRL_CORE_OPOS_CLIENT": [0.5, 0], "edge_d51_24_DEVICE_CTRL_CORE_OPOS_CLIENT_to_DEVICE_CTRL_CORE_PIPE_CLIENT": [0.5, 0.5], "edge_d51_25_DEVICE_CTRL_CORE_CONTRACTS_to_DEVICE_CTRL_CORE_OPOS_CLIENT": [0.741315, 1], "edge_d51_26_DEVICE_CTRL_CORE_CONTRACTS_to_DEVICE_CTRL_CORE_PIPE_CLIENT": [0.505892, 0], "edge_d51_27_DEVICE_CTRL_CORE_CONTRACTS_to_DEVICE_CTRL_CORE_EVENT_RECEIVER": [0.431352, 0], "edge_d51_28_DEVICE_CTRL_CORE_PIPE_CLIENT_to_EXTERNAL_CONNECTOR": [0.491216, 0], "edge_d51_29_EXTERNAL_CONNECTOR_to_DEVICE_CTRL_CORE_EVENT_RECEIVER": [0.621237, 0], "edge_d51_30_DEVICE_CTRL_CORE_CONTRACTS_to_EXTERNAL_CONNECTOR": [0.299709, 0], "edge_d51_31_EXTERNAL_CONNECTOR_to_EXTERNAL_WIN_OPOS_DEVICE": [0.462892, 0], "edge_d51_32_DEVICE_CTRL_STRATEGY_PATTERN_PLATFORM_WIN_DIRECT_to_EXTERNAL_WIN_DIRECT_DEVICE": [0.488906, 0], "edge_d51_33_DEVICE_CTRL_STRATEGY_PATTERN_PLATFORM_IOS_to_EXTERNAL_MOBILE_DEVICE": [0.456431, 1], "edge_d51_34_DEVICE_CTRL_STRATEGY_PATTERN_PLATFORM_ANDROID_to_EXTERNAL_MOBILE_DEVICE": [0.456431, 1] };
+  const shapePrefix = "shape_d61_";
+  const edgePrefix = "edge_d61_";
+  const sectionPrefix = "section_bg_d61_";
+  const edgeLabelPrefix = "edge_label_d61_";
+  const shapeGroupPrefix = "shape_group_d61_";
+  const shapeCommentPrefix = "shape_comment_d61_";
+  const edgeLabelAnchors: { [key: string]: number[] } = { "edge_d61_01_CONFIG_DOMAIN_MANAGER_to_CONFIG_DOMAIN_CONFIG": [0.5, 0.5], "edge_d61_02_CONFIG_DOMAIN_CONFIG_to_CONFIG_DOMAIN_RUNTIME": [0.081967, 0.5], "edge_d61_03_CONFIG_DOMAIN_CONFIG_to_CONFIG_DOMAIN_DEFAULT": [0.601287, 1], "edge_d61_04_CONFIG_DOMAIN_CONFIG_to_CONFIG_DOMAIN_MODEL": [0.5, 0.5], "edge_d61_05_CONFIG_DOMAIN_MODEL_to_CONFIG_DOMAIN_ACTIVE": [0.5, 0.5], "edge_d61_06_CONFIG_DOMAIN_MODEL_to_CONFIG_DOMAIN_SPEC": [0.436203, 0.5] };
   const shapes = sheet.getShapes();
   const existingNames: { [key: string]: boolean } = {};
   const edgeCandidates: { shapeIndex: number; name: string; title: string; description: string; left: number; top: number; width: number; height: number }[] = [];
@@ -357,7 +357,7 @@ function addShapeComment(sheet: ExcelScript.Worksheet, obstacleBounds: number[][
   box.setName(shapeName);
   box.setWidth(width);
   box.setHeight(height);
-  applyCommentView(box, "#FFF2CC", 0.7, "#BF9000", 2);
+  applyCommentView(box, "", 1, "", 0);
 
   const frame = box.getTextFrame();
   frame.getTextRange().setText(text);
@@ -371,7 +371,7 @@ function addShapeComment(sheet: ExcelScript.Worksheet, obstacleBounds: number[][
   font.setName("Meiryo UI");
   font.setSize(9);
   font.setBold(false);
-  font.setColor("#404040");
+  font.setColor("");
   box.setAltTextTitle(targetTitle);
   box.setAltTextDescription(text);
   if (!placeShapeComment(obstacleBounds, box, sourceId, targetLeft, targetTop, targetWidth, targetHeight, reviewLeft, reviewRight, reviewTop)) {

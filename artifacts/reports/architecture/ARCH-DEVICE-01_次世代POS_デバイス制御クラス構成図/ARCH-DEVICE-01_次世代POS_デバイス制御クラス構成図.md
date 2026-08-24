@@ -3,7 +3,7 @@
 次世代POS
 ARCH-DEVICE-01 デバイス制御クラス構成図
 文書ID: ARCH-DEVICE-01
-第0.1.0版
+第0.1.1版
 2026年8月24日
 
 ## 表紙
@@ -18,7 +18,7 @@ ARCH-DEVICE-01 デバイス制御クラス構成図
 | 文書名 | 次世代POS デバイス制御クラス構成図 |
 | 成果物名 | 次世代POS デバイス制御クラス構成図 |
 | 対象 | タブレットPOS端末アプリのアプリケーション層とデバイス制御層の関係 |
-| 版数 | 0.1.0 |
+| 版数 | 0.1.1 |
 | 作成日 | 2026/08/24 |
 | 作成者 | VTI サム |
 | レビュー担当 | SMJ 蒲田 |
@@ -33,6 +33,7 @@ ARCH-DEVICE-01 デバイス制御クラス構成図
 | No. | 版数 | 変更日 | 区分 | 変更箇所（項番等） | 変更内容 | 担当者 |
 |---|---|---|---|---|---|---|
 | 1 | 0.1.0 | 2026/08/24 | 新規 | 全体 | デバイス制御クラス構成図を新規作成。責務領域、構成要素、および関連プログラム仕様書の対応を整理。 | VTI サム |
+| 2 | 0.1.1 | 2026/08/24 | 変更 | クラス構成図 | 単一の構成図を、全体、設定管理、およびプラットフォーム別の3図に分割し、責務領域と構成要素の説明を各図の説明シートに整理。 | VTI サム |
 
 ## 目次
 
@@ -45,8 +46,12 @@ ARCH-DEVICE-01 デバイス制御クラス構成図
 4. 概要
 5. 対象範囲
 6. 関連資料
-7. クラス構成図
-8. 責務領域・構成要素
+7. 全体クラス構成図
+8. 全体クラス構成図（説明）
+9. 設定管理クラス構成図
+10. 設定管理クラス構成図（説明）
+11. プラットフォーム別クラス構成図
+12. プラットフォーム別クラス構成図（説明）
 ```
 
 ## 02_概要
@@ -91,15 +96,17 @@ WindowsのOPOS／OCX系はデバイスコネクタを経由し、Windows直接�
 | 複数ベンダー対応の開発者 | 業務フローを変更せずに、プラットフォーム別クラスとデバイス設定を追加する。 |
 | レビュー担当者・テスト担当者 | 責務境界、構成要素の関係、実装識別子、およびプラットフォーム範囲を確認する。 |
 
-### 2.5 本書の読み方
+### 2.5 本書の構成
 
-① 03_対象範囲で、デバイス制御層の対象と他文書で管理する対象を確認する。
+(1) 03_対象範囲で、デバイス制御層の対象と他文書で管理する対象を確認する。
 
-② 05_クラス構成_01で、（1）アプリケーション層、（2）デバイス制御層、および（3）外部境界の関係を確認する。
+(2) 05_全体クラス構成図_01の5.1で、アプリケーション層から公開デバイス契約までの主要な依存関係を確認する。
 
-③ 05_クラス構成_02の5.2で、図中の（1）〜（3）が担当する責務と、詳細を定義する関連資料を確認する。
+(3) 06_設定管理クラス構成図_01の6.1で、設定の読込、フォールバック、保存、および適用を担当するクラスとモデルの関係を確認する。
 
-④ 05_クラス構成_02の5.3で、各構成要素の実装識別子、主な連携・利用条件、および関連プログラム仕様書を確認する。
+(4) 07_プラットフォーム別クラス構成図_01の7.1で、Windows OPOS／OCX、Windows直接接続、iOS、およびAndroidのストラテジーと通信境界を確認する。
+
+(5) 各クラス構成図の説明シートで、該当する責務領域、構成要素、実装識別子、主な連携・利用条件、および関連プログラム仕様書を確認する。
 
 ## 03_対象範囲
 
@@ -142,34 +149,33 @@ WindowsのOPOS／OCX系はデバイスコネクタを経由し、Windows直接�
 | ARCH-HOST-01 | タブレットPOS デバイスコネクタ基本設計書 | Windows上のデバイスコネクタのプロセス境界と通信を定義する。 |
 | CFG-01 | タブレットPOS デバイス制御層設定ファイル記載要領 | デバイスの定義方法と有効デバイス設定を定義する。 |
 | EX-DEVICE-01 | 次世代POS デバイス制御実装例集 | 本書で示すインターフェースを使用したC#の実装例を提供する。 |
-| PS-DEVICE-01〜11 | タブレットPOS デバイス制御 プログラム仕様書 | 本書の論理構成要素に対応するクラス、インターフェース、およびメソッドの詳細を定義する。構成要素ごとの対応は5.3に示す。 |
+| PS-DEVICE-01〜11 | タブレットPOS デバイス制御 プログラム仕様書 | 本書の論理構成要素に対応するクラス、インターフェース、およびメソッドの詳細を定義する。構成要素ごとの対応は、各クラス構成図の説明シートに示す。 |
 | - | デバイス制御層_ドキュメント一覧 | デバイス制御層文書群の位置付けと目的を示す。 |
 
-## 05_クラス構成_01
+## 05_全体クラス構成図_01
 
-以下の図は、業務処理の呼出元からプラットフォーム別ストラテジーおよび周辺機器までの関係を示す。
+以下の図は、アプリケーション層からデバイス制御層の公開窓口までの主要なクラスおよびインターフェースの関係を示す。
 
 #### 凡例
 
-矢印の向きは関係の方向を示し、色と線種は関係の意味を示す。要求と同期応答、または実機制御と結果を同じ経路で送受信する関係のみを双方向で示し、非同期イベントと設定参照は独立した一方向の関係として示す。
+3図で共通して使用する関係を以下に示す。
 
 | 表示 | 色 | 意味 |
 |---|---|---|
-| タブレットPOS端末アプリ領域 | 背景:#F7FBFF / 枠線:#4472C4 / 文字:#111111 / 太さ:2 | アプリケーション層、デバイス制御層、およびプラットフォーム別ストラテジーがタブレットPOS端末アプリ内に属することを示す。 |
-| 構成要素 | 背景:#F8FBFD / 枠線:#0D32B2 / 文字:#111111 / 太さ:2 | タブレットPOS端末アプリ内の論理構成要素、設定元、および処理を示す。 |
-| デバイスコネクタ | 背景:#FCE4D6 / 枠線:#ED7D31 / 文字:#111111 / 太さ:2 | OPOS／OCXを利用するWindows別プロセスを示す。 |
-| 周辺機器 | 背景:#E4DFEC / 枠線:#8064A2 / 文字:#111111 / 太さ:2 | デバイスコネクタまたはプラットフォーム別ストラテジーから制御される機器を示す。 |
-| 責務領域 | 背景:透明 / 枠線:#ED7D31 / 文字:#111111 / 太さ:2 | 同じ責務を持つ要素のグループを示す。背景は透明とし、オレンジ色の枠線を使用する。 |
-| コネクターラベル | 背景:#FFFFFF / 枠線:透明 / 文字:#111111 / 太さ:0 | コネクター中央に重ね、背後の線を隠して関係を読みやすくする折返し可能なラベルを示す。 |
-| 補足コメント | 背景:#FFF2CC / 枠線:#BF9000 / 文字:#404040 / 太さ:2 / 透過率:70% | 明示した構成要素の設計上の補足を示す。 |
-| ━━▶ 主処理 | 線:#1F4E79 / 線種:実線 / 太さ:2 | 主な呼出または依存関係を示す。 |
-| ◀━━▶ コマンド通信 | 線:#1F4E79 / 線種:実線 / 太さ:3 | デバイス制御層からの要求とデバイスコネクタからの同期応答をコマンド通信用パイプで送受信する関係を示す。 |
-| ━━▶ ライフサイクル | 線:#548235 / 線種:実線 / 太さ:2 | 初期化、開始、および終了に関する呼出を示す。 |
-| ◀━━▶ 実機制御 | 線:#7030A0 / 線種:実線 / 太さ:2 | プラットフォーム別ストラテジーまたはデバイスコネクタと周辺機器間の制御と結果を示す。 |
-| ┄┄▶ 非同期イベント | 線:#C65911 / 線種:破線 / 太さ:2 | 同期応答とは別にデバイスコネクタから通知されるイベントを示す。 |
-| ┈┈▶ 設定参照 | 線:#7F7F7F / 線種:破線 / 太さ:2 | 設定情報を参照、フォールバック、保存、または適用する関係を示す。 |
+| 責務領域 | 背景:#F7FBFF / 枠線:#4472C4 / 文字:#111111 / 太さ:2 | クラスを所有する上位の責務領域を示す。 |
+| アプリケーション領域 | 背景:#DDEBF7 / 枠線:#4472C4 / 文字:#111111 / 太さ:2 | アプリケーション層の責務領域を示す。 |
+| デバイス制御領域 | 背景:#E2F0D9 / 枠線:#70AD47 / 文字:#111111 / 太さ:2 | デバイス制御層の責務領域を示す。 |
+| クラス | 背景:#F8FBFD / 枠線:#0D32B2 / 文字:#111111 / 太さ:2 | アプリ内のクラスまたは同種クラス群を示す。 |
+| 公開インターフェース | 背景:#DDEBF7 / 枠線:#4472C4 / 文字:#111111 / 太さ:2 | 公開インターフェースまたは同種インターフェース群を示す。 |
+| 《設定資源》 | 背景:#FFF2CC / 枠線:#BF9000 / 文字:#111111 / 太さ:2 | クラスではなく、設定サービスが読み込む設定ファイルまたはフォールバック用の組込みリソースを示す。 |
+| 共通通信契約 | 背景:#FFF2CC / 枠線:#BF9000 / 文字:#111111 / 太さ:2 | デバイス制御層とデバイスコネクタが共有する通信契約を示す。 |
+| 《接続境界》 | 背景:#FCE4D6 / 枠線:#ED7D31 / 文字:#111111 / 太さ:2 | OS API、SDK、または別プロセスとの通信境界を示す。 |
+| 利用対象外実装 | 背景:#F2F2F2 / 枠線:#7F7F7F / 文字:#666666 / 太さ:2 / 線種:破線 | 構成上は存在するが、現在は利用できない実装を示す。 |
+| ━━▶ 主な関係 | 線:#4472C4 / 線種:実線 / 太さ:2 | 主な呼出、生成、返却、または通信の関係を示す。 |
+| ┄┄▶ 補助関係 | 線:#7F7F7F / 線種:破線 / 太さ:2 | インターフェースの実装、補助的な参照、またはフォールバックの関係を示す。 |
+| コネクターラベル | 背景:#FFFFFF / 枠線:透明 / 文字:#111111 / 太さ:0 | コネクター上に関係の内容を表示する。 |
 
-### 5.1 クラス構成図
+### 5.1 全体クラス構成図
 
 ```mermaid
 ---
@@ -181,165 +187,280 @@ config:
     cycleBreakingStrategy: GREEDY
   flowchart:
     curve: linear
-    nodeSpacing: 30
-    rankSpacing: 60
+    nodeSpacing: 26
+    rankSpacing: 50
 ---
 flowchart LR
     %% diagram-profile=logical-architecture
-    %% excel-connector-mode=attached
-    %% legend-bind container=責務領域
-    %% legend-bind container.APP=タブレットPOS端末アプリ領域
-    %% legend-bind container.DEVICE_CTRL=責務領域
-    %% legend-bind container.CORE=タブレットPOS端末アプリ領域
-    %% legend-bind container.STRATEGY_PATTERN=責務領域
-    %% legend-bind container.PLATFORM=タブレットPOS端末アプリ領域
-    %% legend-bind container.CONFIG_GROUP=責務領域
-    %% legend-bind container.EXTERNAL=責務領域
-    %% legend-bind class.component=構成要素
-    %% legend-bind class.connector=デバイスコネクタ
-    %% legend-bind class.peripheral=周辺機器
-    %% legend-bind edge.default=━━▶ 主処理
-    %% legend-bind edge.dashed=┈┈▶ 設定参照
-    %% legend-bind edge.7=━━▶ ライフサイクル
-    %% legend-bind edge.8=━━▶ ライフサイクル
-    %% legend-bind edge.27=◀━━▶ コマンド通信
-    %% legend-bind edge.28=┄┄▶ 非同期イベント
-    %% legend-bind edge.30=◀━━▶ 実機制御
-    %% legend-bind edge.31=◀━━▶ 実機制御
-    %% legend-bind edge.32=◀━━▶ 実機制御
-    %% legend-bind edge.33=◀━━▶ 実機制御
+    %% legend-bind container.APP=アプリケーション領域
+    %% legend-bind container.DEVICE_CTRL=デバイス制御領域
+    %% legend-bind class.classNode=クラス
+    %% legend-bind class.interfaceNode=公開インターフェース
+    %% legend-bind edge.default=━━▶ 主な関係
     %% legend-bind label=コネクターラベル
-    %% legend-bind comment=補足コメント
-    %% alt-text shape.CONNECTOR=コマンド通信用パイプとイベント通知用パイプはデバイス制御層との通信に使用する。周辺機器との物理接続はデバイスコネクタ側で管理する。
-    subgraph APP["（1） アプリケーション層"]
-        BOOT("① 構成ルート・ライフサイクル<br/>（MauiProgram / App）")
-        VIEW("② 画面状態管理<br/>（ViewModel）")
-        SERVICE("③ アプリケーションサービス<br/>デバイス呼出を管理")
-        VIEW -->|ユースケースを呼出| SERVICE
+    subgraph APP["（1）アプリケーション層"]
+        BOOT["① 構成ルート・ライフサイクル<br/><b>MauiProgram / App</b>"]
+        VIEW["② 画面状態管理<br/><b>DeviceIntegrationTestViewModel等</b>"]
+        SERVICE["③ アプリケーションサービス<br/><b>IDeviceIntegrationTestStrategyProvider等</b>"]
+        VIEW -->|ユースケース| SERVICE
     end
 
-    subgraph DEVICE_CTRL["（2） デバイス制御層（DeviceCtrl）"]
-        subgraph CORE["① 共通制御・設定"]
-            subgraph CONFIG_GROUP["①-1 設定サービス・ストレージ"]
-                RUNTIME("①-1-1 ランタイム設定<br/>アプリデータ領域")
-                DEFAULT("①-1-2 デフォルト設定<br/>デバイス制御層のリソース")
-                CONFIG("①-1-3 設定サービス<br/>（DeviceControllerConfigService）")
-                MODEL("①-1-4 デバイス仕様モデル<br/>（DeviceConfig / ActiveDevice / DeviceSpec）")
-                RUNTIME -.-> CONFIG
-                DEFAULT -.->|フォールバック| CONFIG
-                CONFIG -.-> RUNTIME
-                CONFIG -->|デシリアライズ| MODEL
-            end
-            MANAGER("①-2 デバイスマネージャー<br/>（DeviceManager）")
-            OPOS_CLIENT("①-3 OPOSコマンド変換<br/>（OposNamedPipeCommandClient）")
-            PIPE_CLIENT("①-4 名前付きパイプクライアント<br/>（INamedPipeClient / NamedPipeClient）")
-            EVENT_RECEIVER("①-5 名前付きパイプイベント受信<br/>（IDeviceEventReceiver / NamedPipeEventReceiver）")
-            CONTRACTS("①-6 共通デバイス通信契約<br/>（TabletPos.DeviceContracts）")
-            MANAGER -.->|適用| MODEL
-        end
+    subgraph DEVICE_CTRL["（2）デバイス制御層（DeviceCtrl）"]
+        MANAGER["① デバイスマネージャー<br/><b>DeviceManager</b>"]
+        CONFIG["② 設定サービス<br/><b>DeviceControllerConfigService</b>"]
+        FACTORY["③ ストラテジーファクトリー<br/><b>StrategyFactory&lt;T&gt;</b>"]
+        CONTRACT["④ 《インターフェース》<br/>公開デバイス契約群<br/><b>1. IPrinterStrategy<br/>2. IBarcodeScannerStrategy<br/>3. ICashChangerStrategy<br/>4. ICustomerDisplayStrategy<br/>5. IDrawerStrategy<br/>6. IPaymentStrategy<br/>7. IKeyboardStrategy</b>"]
+        EVENT["⑤ 《インターフェース》<br/>イベント受信<br/><b>IDeviceEventReceiver</b>"]
 
-        subgraph STRATEGY_PATTERN["② ストラテジーパターン"]
-            FACTORY("②-1 ストラテジーファクトリー<br/>（StrategyFactory&lt;T&gt;）")
-            CONTRACT("②-2 公開デバイス契約<br/>（IPrinterStrategy等）")
-            subgraph PLATFORM["②-3 プラットフォーム別ストラテジー<br/>公開デバイス契約を実装"]
-                WIN_CONNECTOR("②-3-1 Windows OPOS／OCX<br/>ストラテジー")
-                WIN_DIRECT("②-3-2 Windows直接接続<br/>SerialPort / Raw Input")
-                IOS("②-3-3 iOS直接接続<br/>TCP/IP・Bluetooth / カメラ・BLE")
-                ANDROID("②-3-4 Android直接接続<br/>Bluetooth・カメラ・USB / 現在は利用不可")
-            end
-        end
-        MANAGER --> FACTORY
+        MANAGER -->|設定を委譲| CONFIG
+        MANAGER -->|生成を要求| FACTORY
+        FACTORY -->|公開契約として返却| CONTRACT
     end
 
-    subgraph EXTERNAL["（3） 外部境界"]
-        CONNECTOR("① デバイスコネクタ<br/>Windows別プロセス")
-        WIN_OPOS_DEVICE("② Windows OPOS／OCX機器<br/>USB / COM")
-        WIN_DIRECT_DEVICE("③ Windows直接接続機器<br/>COM / Raw Input")
-        MOBILE_DEVICE("④ iOS／Android周辺機器<br/>プラットフォームから直接接続")
-    end
+    SERVICE -->|ストラテジーを取得| MANAGER
+    SERVICE -->|デバイス操作| CONTRACT
+    BOOT -->|デバイス制御の初期化<br/>（InitializeAsync）| MANAGER
+    BOOT -->|デバイスイベント受信の開始・停止<br/>（StartAsync / StopAsync）| EVENT
 
-    BOOT -->|InitializeAsync| MANAGER
-    BOOT -->|StartAsync / StopAsync| EVENT_RECEIVER
-    MANAGER --> CONFIG
-    MANAGER -.->|通信設定を適用| PIPE_CLIENT
-    MANAGER -.->|通信設定を適用| EVENT_RECEIVER
-    SERVICE -->|Get...StrategyAsync| MANAGER
-    SERVICE -->|Start / デバイス操作 / End| CONTRACT
-    FACTORY -->|生成| WIN_CONNECTOR
-    FACTORY -->|生成| WIN_DIRECT
-    FACTORY -->|生成| IOS
-    FACTORY -->|生成| ANDROID
-    WIN_CONNECTOR -->|実装| CONTRACT
-    WIN_DIRECT -->|実装| CONTRACT
-    IOS -->|実装| CONTRACT
-    ANDROID -->|実装| CONTRACT
-    WIN_CONNECTOR -->|コマンドと結果を変換| OPOS_CLIENT
-    OPOS_CLIENT -->|要求を送信| PIPE_CLIENT
-    CONTRACTS -.->|要求・応答DTO| OPOS_CLIENT
-    CONTRACTS -.->|パイプ名・既定値| PIPE_CLIENT
-    CONTRACTS -.->|イベントDTO・既定値| EVENT_RECEIVER
-    PIPE_CLIENT <-->|要求／同期応答<br/>コマンド通信用パイプ| CONNECTOR
-    CONNECTOR -.->|イベント通知用パイプ<br/>非同期イベント| EVENT_RECEIVER
-    CONTRACTS -.->|共通DTO・識別子| CONNECTOR
-    CONNECTOR <-->|実機制御／結果| WIN_OPOS_DEVICE
-    WIN_DIRECT <-->|実機制御／結果| WIN_DIRECT_DEVICE
-    IOS <-->|実機制御／結果| MOBILE_DEVICE
-    ANDROID <-->|実機制御／結果| MOBILE_DEVICE
+    BOOT ~~~ MANAGER
+    VIEW ~~~ CONFIG
+    SERVICE ~~~ CONTRACT
 
-    BOOT ~~~ MANAGER ~~~ CONNECTOR
-    VIEW ~~~ FACTORY ~~~ WIN_OPOS_DEVICE
-    SERVICE ~~~ ANDROID ~~~ MOBILE_DEVICE
-
-    class BOOT,VIEW,SERVICE,RUNTIME,DEFAULT,CONFIG,MODEL,MANAGER,OPOS_CLIENT,PIPE_CLIENT,EVENT_RECEIVER,CONTRACTS,FACTORY,CONTRACT,WIN_CONNECTOR,WIN_DIRECT,IOS,ANDROID component
-    class CONNECTOR connector
-    class WIN_OPOS_DEVICE,WIN_DIRECT_DEVICE,MOBILE_DEVICE peripheral
+    class BOOT,VIEW,SERVICE,MANAGER,CONFIG,FACTORY classNode
+    class CONTRACT,EVENT interfaceNode
 ```
 
-## 05_クラス構成_02
+## 05_全体クラス構成図_02
 
-クラス構成図に示す責務領域、責務グループ、および論理構成要素の関係を説明する。
+### 5.2 構成図の概要
 
-### 5.2 責務領域
+本図では、アプリケーション層からデバイス制御層を利用する流れを示す。
 
-クラス構成図の最上位に示す（1）〜（3）を、本書における責務境界とする。各責務領域の詳細を定義する関連資料は、同じ行から確認できる。
+- 画面状態管理は、画面で受け付けた業務要求をアプリケーションサービスへ渡す。
+- アプリケーションサービスは、デバイスマネージャーから対象デバイスのストラテジーを取得する。
+- デバイス操作は公開デバイス契約を介して実行するため、アプリケーション層は具象クラスを直接参照しない。
+- アプリの起動・終了に合わせて、デバイス制御の初期化（InitializeAsync）とデバイスイベント受信の開始・停止（StartAsync / StopAsync）を行う。
+- 設定管理の詳細は6.1、プラットフォーム別実装は7.1に示す。
+
+### 5.3 責務領域
+
+全体クラス構成では、アプリケーション層とデバイス制御層の境界を確認する。設定管理の内部は6.2～6.4、プラットフォーム固有処理と外部境界は7.2～7.4に示す。
 
 | 図中番号 | 責務領域 | 主な責務 | 主な構成要素 | 関連資料 |
 |---|---|---|---|---|
 | （1） | アプリケーション層 | 業務要求を受け付け、アプリケーションサービスからデバイス制御層の公開窓口と公開デバイス契約を呼び出す。アプリの起動・終了に合わせて初期化とイベント受信のライフサイクルを管理する。 | 構成ルート・ライフサイクル、画面状態管理、アプリケーションサービス | ARCH-02_タブレットPOS_端末アプリケーション構造設計書.xlsx<br>EX-DEVICE-01_次世代POS_デバイス制御実装例集.xlsx |
-| （2） | デバイス制御層（DeviceCtrl） | 設定を読み込んで有効なデバイスを選択し、公開デバイス契約を実装するストラテジーを生成する。プラットフォーム固有の通信とデバイス操作をアプリケーション層から分離する。 | 共通制御・設定、ストラテジーパターン | CFG-01_タブレットPOS_デバイス制御層設定ファイル記載要領.xlsx<br>EX-DEVICE-01_次世代POS_デバイス制御実装例集.xlsx |
-| （3） | 外部境界 | タブレットPOS端末アプリの外側で実行するデバイスコネクタと周辺機器を示し、名前付きパイプ、OPOS／OCX、SDK、およびOS APIの責務境界を明確にする。 | デバイスコネクタ、Windows OPOS／OCX機器、Windows直接接続機器、iOS／Android周辺機器 | ARCH-HOST-01_タブレットPOS_デバイスコネクタ基本設計書.xlsx |
+| （2） | デバイス制御層（DeviceCtrl） | 設定に基づいて有効なデバイスを選択し、公開デバイス契約を実装するストラテジーを生成する。プラットフォーム固有の通信とデバイス操作をアプリケーション層から分離する。 | デバイスマネージャー、設定サービス、ストラテジーファクトリー、公開デバイス契約 | CFG-01_タブレットPOS_デバイス制御層設定ファイル記載要領.xlsx<br>EX-DEVICE-01_次世代POS_デバイス制御実装例集.xlsx |
 
-（2）に含まれる各構成要素とプログラム仕様書の対応は、5.3に示す。
-
-### 5.3 責務領域と構成要素
-
-5.1の図が構成要素間の関係と接続方向を示し、本項が各構成要素の責務、主な連携・利用条件、実装識別子、および関連プログラム仕様書を一覧化する。設定項目と値はCFG-01、アプリケーション層からの具体的な利用方法はEX-DEVICE-01、デバイスコネクタ内部の処理はARCH-HOST-01で定義する。
+### 5.4 構成要素と実装対応
 
 <!-- excel-render table-grid=wide -->
 | 図中番号 | 論理構成要素 | 実装識別子 | 責務 | 主な連携・利用条件 | 関連プログラム仕様書 |
 |---|---|---|---|---|---|
 | （1） | アプリケーション層 |  |  |  |  |
-| （1）① | 構成ルート・ライフサイクル | MauiProgram、App | デバイス制御層のサービスを登録し、アプリの起動・終了に合わせてデバイス制御層の初期化、デバイスコネクタの起動・停止、およびイベント受信の開始・停止を管理する。 | 初期化はDeviceManagerへ委譲し、設定ファイルを直接読み込まない。 | PS-DEVICE-05_タブレットPOS_デバイス制御_サービス登録_プログラム仕様書.xlsx |
-| （1）② | 画面状態管理 | DeviceIntegrationTestViewModel等 | 画面から受け付けた業務要求をアプリケーションサービスへ渡し、返された結果を画面状態へ反映する。 | DeviceManager、ストラテジー、通信API、およびSDKを直接呼び出さない。 | － |
-| （1）③ | アプリケーションサービス | IDeviceIntegrationTestStrategyProvider、DeviceIntegrationTestStrategyProvider等 | デバイス種別に対応するストラテジーを取得し、Start、デバイス操作、およびEndを公開デバイス契約経由で呼び出す。 | ベンダー、OS、および接続方式による分岐を業務処理へ持ち込まない。 | － |
+| ① | 構成ルート・ライフサイクル | MauiProgram、App | デバイス制御層のサービスを登録し、アプリの起動・終了に合わせて初期化、デバイスコネクタの起動・停止、およびイベント受信の開始・停止を管理する。 | 初期化はDeviceManagerへ委譲し、設定ファイルを直接読み込まない。 | PS-DEVICE-05_タブレットPOS_デバイス制御_サービス登録_プログラム仕様書.xlsx |
+| ② | 画面状態管理 | DeviceIntegrationTestViewModel等 | 画面から受け付けた業務要求をアプリケーションサービスへ渡し、返された結果を画面状態へ反映する。 | DeviceManager、ストラテジー、通信API、およびSDKを直接呼び出さない。 | － |
+| ③ | アプリケーションサービス | IDeviceIntegrationTestStrategyProvider、DeviceIntegrationTestStrategyProvider等 | デバイス種別に対応するストラテジーを取得し、Start、デバイス操作、およびEndを公開デバイス契約経由で呼び出す。 | ベンダー、OS、および接続方式による分岐を業務処理へ持ち込まない。 | － |
 | （2） | デバイス制御層（DeviceCtrl） |  |  |  |  |
-| （2）①-1-1 | ランタイム設定 | device_controller_config.json | アプリデータ領域に保存されたデバイス制御設定を保持する。 | ファイルが存在し、有効なデバイス仕様へ変換できる場合に優先して使用する。 | PS-DEVICE-03_タブレットPOS_デバイス制御_組込み設定ストレージ_プログラム仕様書.xlsx |
-| （2）①-1-2 | デフォルト設定 | TabletPos.DeviceCtrlの埋め込みリソース | ランタイム設定を使用できない場合の初期設定を保持する。 | ランタイム設定が存在しない、または無効な場合に使用する。 | PS-DEVICE-03_タブレットPOS_デバイス制御_組込み設定ストレージ_プログラム仕様書.xlsx |
-| （2）①-1-3 | 設定サービス | DeviceControllerConfigService | 設定ストレージインターフェースを介して組込み設定ストレージへアクセスし、設定を読み込み、デシリアライズし、保存後に新しい設定を適用する。 | ランタイム設定を優先し、読込・変換に失敗した場合はデフォルト設定へ切り替える。保存先はランタイム設定とする。取消時は切り替えず、保存失敗時は現在の設定を維持する。 | PS-DEVICE-02_タブレットPOS_デバイス制御_設定サービス_プログラム仕様書.xlsx<br>PS-DEVICE-04_タブレットPOS_デバイス制御_設定ストレージインターフェース_プログラム仕様書.xlsx |
-| （2）①-1-4 | デバイス仕様モデル | DeviceConfig、ActiveDevice、DeviceSpec | デバイスID、種別、OS、ストラテジー名、接続情報、および有効デバイスの対応を保持する。 | devices、activeDevices、およびappSettings.namedPipeから実行時の選択と通信設定に必要な情報を提供する。 | PS-DEVICE-06_タブレットPOS_デバイス制御_デバイス構成_プログラム仕様書.xlsx<br>PS-DEVICE-09_タブレットPOS_デバイス制御_デバイス仕様モデル_プログラム仕様書.xlsx |
-| （2）①-2 | デバイスマネージャー | DeviceManager | 設定を初期化・保存し、デバイス種別、OS、および有効デバイスIDに対応するデバイス仕様を選択する。 | シングルトンとして現在の設定を保持し、選択したデバイス仕様からストラテジーの生成を要求する。 | PS-DEVICE-01_タブレットPOS_デバイス制御_デバイスマネージャー_プログラム仕様書.xlsx |
-| （2）①-3 | OPOSコマンド変換 | OposNamedPipeCommandClient | Windows OPOS／OCXストラテジーの操作を共通要求へ変換し、デバイスコネクタの応答をストラテジーの結果へ変換する。 | 名前付きパイプクライアントを介してデバイスコネクタへ同期コマンドを送信する。 | PS-DEVICE-10_タブレットPOS_デバイス制御_名前付きパイプクライアント_プログラム仕様書.xlsx |
-| （2）①-4 | 名前付きパイプクライアント | INamedPipeClient、NamedPipeClient | 共通要求をコマンド通信用パイプへ送信し、同期応答を受信する。 | デバイスマネージャーが適用したパイプ名、タイムアウト、および再試行設定を使用する。 | PS-DEVICE-10_タブレットPOS_デバイス制御_名前付きパイプクライアント_プログラム仕様書.xlsx |
-| （2）①-5 | 名前付きパイプイベント受信 | IDeviceEventReceiver、NamedPipeEventReceiver | イベント通知用パイプから共通イベントを継続受信する。 | Appのライフサイクルで開始・停止する。現行ソースではEventReceivedの購読者がなく、受信イベントをアプリケーションユースケースへ引き渡さない。 | PS-DEVICE-11_タブレットPOS_デバイス制御_名前付きパイプイベント受信_プログラム仕様書.xlsx |
-| （2）①-6 | 共通デバイス通信契約 | TabletPos.DeviceContracts | デバイス制御層とデバイスコネクタが共有する要求、応答、イベント、識別子、および通信既定値を定義する。 | 両者は同じDTOを参照し、同名の通信モデルを個別に保持しない。 | PS-DEVICE-10_タブレットPOS_デバイス制御_名前付きパイプクライアント_プログラム仕様書.xlsx<br>PS-DEVICE-11_タブレットPOS_デバイス制御_名前付きパイプイベント受信_プログラム仕様書.xlsx |
-| （2）②-1 | ストラテジーファクトリー | StrategyFactory&lt;TBase&gt; | 選択されたデバイス仕様に対応するプラットフォーム別ストラテジーを生成する。 | 生成したインスタンスへデバイス仕様とロガーを設定し、公開デバイス契約として返す。 | PS-DEVICE-07_タブレットPOS_デバイス制御_ストラテジーファクトリー_プログラム仕様書.xlsx |
-| （2）②-2 | 公開デバイス契約 | IPrinterStrategy、IBarcodeScannerStrategy、ICashChangerStrategy、ICustomerDisplayStrategy、IDrawerStrategy、IPaymentStrategy、IKeyboardStrategy | デバイス種別ごとに共通のStart、デバイス操作、およびEndをアプリケーションサービスへ公開する。 | プラットフォーム別ストラテジーが契約を実装し、呼出側は具象クラスに依存しない。 | PS-DEVICE-08_タブレットPOS_デバイス制御_デバイスストラテジー基底_プログラム仕様書.xlsx |
-| （2）②-3-1 | Windows OPOS／OCXストラテジー | OposPrinterStrategy、OposCashChangerStrategy、OposCustomerDisplayStrategy、OposDrawerStrategy、OposCafisArchPaymentStrategy等 | 公開デバイス契約を実装し、OPOSコマンド変換と名前付きパイプ通信を介してデバイスコネクタへ操作を渡す。 | WindowsのOPOS／OCXまたはCAFIS Arch環境を必要とするデバイスで使用する。 | PS-DEVICE-08_タブレットPOS_デバイス制御_デバイスストラテジー基底_プログラム仕様書.xlsx |
-| （2）②-3-2 | Windows直接接続ストラテジー | SerialHandyScannerStrategy、WindowsRawKeyboardStrategy、SerialCashChangerStrategy等 | SerialPort・COMまたはRaw Input APIを使用し、Windows周辺機器を直接制御する。 | スキャナーと専用キーボードは利用可能である。シリアル自動釣銭機は公開デバイス契約の必須操作を満たさないため利用対象外とする。 | PS-DEVICE-08_タブレットPOS_デバイス制御_デバイスストラテジー基底_プログラム仕様書.xlsx |
-| （2）②-3-3 | iOS直接接続ストラテジー | IosEpsonPrinterStrategy、IosCameraBarcodeScannerStrategy、IosBleBarcodeScannerStrategy、IosCustomerDisplayStrategy | SDKまたはOS APIを使用し、iOS上の周辺機器へ直接接続する。 | レシートプリンター、スキャナー、およびカスタマディスプレイで利用可能である。 | PS-DEVICE-08_タブレットPOS_デバイス制御_デバイスストラテジー基底_プログラム仕様書.xlsx |
-| （2）②-3-4 | Android直接接続ストラテジー | AndroidBluetoothPrinterStrategy、AndroidCameraBarcodeScannerStrategy、AndroidEpsonDm70DCustomerDisplayStrategy | Bluetooth、カメラ、またはUSBを使用するAndroid向けの公開デバイス契約を実装する。 | 設定と登録は存在するが、現在は周辺機器を操作する必須処理を提供していないため利用不可とする。 | PS-DEVICE-08_タブレットPOS_デバイス制御_デバイスストラテジー基底_プログラム仕様書.xlsx |
-| （3） | 外部境界 |  |  |  |  |
-| （3）① | デバイスコネクタ | TabletPos.Host | Windows別プロセスとしてOPOS／OCXおよびCAFIS Arch資源を保持し、対象デバイスを制御する。 | コマンド通信用パイプで要求と同期応答を送受信し、イベント通知用パイプから非同期イベントを送信する。 | － |
-| （3）② | Windows OPOS／OCX機器 | OPOS／OCX機器、CAFIS Arch対応機器 | デバイスコネクタからドライバーを介して物理操作を実行し、結果またはイベントを返す。 | USBまたはCOMの物理接続はデバイスコネクタ側で管理する。 | － |
-| （3）③ | Windows直接接続機器 | シリアル機器、専用キーボード | Windows直接接続ストラテジーから物理操作を受け付ける。 | COM、USBシリアル変換、またはRaw Inputで接続する。 | － |
-| （3）④ | iOS／Android周辺機器 | プリンター、カメラ・BLEスキャナー、カスタマディスプレイ | 各プラットフォーム別ストラテジーからSDKまたはOS APIを介して物理操作を受け付ける。 | iOSは利用可能である。Androidは現在のストラテジーが必須操作を提供していないため接続を実行しない。 | － |
+| ① | デバイスマネージャー | DeviceManager | 現在の設定を保持し、使用するデバイス仕様とストラテジーを選択する。 | 設定の読込・保存と選択条件の詳細は6.2および6.4に示す。 | PS-DEVICE-01_タブレットPOS_デバイス制御_デバイスマネージャー_プログラム仕様書.xlsx |
+| ② | 設定サービス | DeviceControllerConfigService | 設定を読み込み、デバイスマネージャーが使用する設定モデルを提供する。 | 読込、フォールバック、保存、および適用の詳細は6.2および6.4に示す。 | PS-DEVICE-02_タブレットPOS_デバイス制御_設定サービス_プログラム仕様書.xlsx<br>PS-DEVICE-04_タブレットPOS_デバイス制御_設定ストレージインターフェース_プログラム仕様書.xlsx |
+| ③ | ストラテジーファクトリー | StrategyFactory&lt;TBase&gt; | 選択されたデバイス仕様に対応するプラットフォーム別ストラテジーを生成する。 | 生成したインスタンスへデバイス仕様とロガーを設定し、公開デバイス契約として返す。 | PS-DEVICE-07_タブレットPOS_デバイス制御_ストラテジーファクトリー_プログラム仕様書.xlsx |
+| ④ | 公開デバイス契約 | IPrinterStrategy、IBarcodeScannerStrategy、ICashChangerStrategy、ICustomerDisplayStrategy、IDrawerStrategy、IPaymentStrategy、IKeyboardStrategy | デバイス種別ごとに共通のStart、デバイス操作、およびEndをアプリケーションサービスへ公開する。 | プラットフォーム別ストラテジーが契約を実装し、呼出側は具象クラスに依存しない。 | PS-DEVICE-08_タブレットPOS_デバイス制御_デバイスストラテジー基底_プログラム仕様書.xlsx |
+| ⑤ | イベント受信 | IDeviceEventReceiver、NamedPipeEventReceiver | イベント通知用パイプから共通イベントを継続受信する。 | Appのライフサイクルで開始・停止する。現行ソースではEventReceivedの購読者がなく、受信イベントをアプリケーションユースケースへ引き渡さない。 | PS-DEVICE-11_タブレットPOS_デバイス制御_名前付きパイプイベント受信_プログラム仕様書.xlsx |
+
+## 06_設定管理クラス構成図_01
+
+以下の図は、デバイス制御設定の読込、フォールバック、保存、および適用を担当するクラス、モデル、および設定元の関係を示す。
+
+### 6.1 設定管理クラス構成図
+
+```mermaid
+---
+config:
+  layout: elk
+  elk:
+    mergeEdges: false
+    nodePlacementStrategy: BRANDES_KOEPF
+    cycleBreakingStrategy: GREEDY
+  flowchart:
+    curve: linear
+    nodeSpacing: 26
+    rankSpacing: 50
+---
+flowchart LR
+    %% diagram-profile=logical-architecture
+%% legend-bind container.CONFIG_DOMAIN=デバイス制御領域
+    %% legend-bind class.classNode=クラス
+    %% legend-bind class.artifactNode=《設定資源》
+    %% legend-bind edge.default=━━▶ 主な関係
+    %% legend-bind edge.dashed=┄┄▶ 補助関係
+    %% legend-bind label=コネクターラベル
+    subgraph CONFIG_DOMAIN["（1）設定管理"]
+        MANAGER["① デバイスマネージャー<br/><b>DeviceManager</b>"]
+        CONFIG["② 設定サービス<br/><b>DeviceControllerConfigService</b>"]
+        RUNTIME["③ 《設定資源》<br/>ランタイム設定<br/><b>device_controller_config.json</b>"]
+        DEFAULT["④ 《設定資源》<br/>デフォルト設定<br/><b>TabletPos.DeviceCtrl組込みリソース</b>"]
+        MODEL["⑤ 設定モデル<br/><b>DeviceConfig</b>"]
+        ACTIVE["⑥ 有効デバイス<br/><b>ActiveDevice</b>"]
+        SPEC["⑦ デバイス仕様<br/><b>DeviceSpec</b>"]
+
+        MANAGER -->|初期化・保存を委譲| CONFIG
+        CONFIG -->|優先読込・保存| RUNTIME
+        CONFIG -.->|フォールバック| DEFAULT
+        CONFIG -->|デシリアライズ| MODEL
+        MODEL -->|保持| ACTIVE
+        MODEL -->|保持| SPEC
+    end
+
+    class MANAGER,CONFIG,MODEL,ACTIVE,SPEC classNode
+    class RUNTIME,DEFAULT artifactNode
+```
+
+## 06_設定管理クラス構成図_02
+
+### 6.2 構成図の概要
+
+本図では、どの設定を読み込み、どのデバイス仕様を有効にするかを示す。
+
+- 設定サービスは、使用可能なランタイム設定を優先して読み込む。
+- ランタイム設定を使用できない場合は、組込みのデフォルト設定を読み込む。
+- 読み込んだJSON設定は、実行時に参照するデバイス仕様モデルへ変換する。
+- デバイスマネージャーは、デバイス種別、OS、および有効デバイスIDを基に、有効デバイス（ActiveDevice）とデバイス仕様（DeviceSpec）を決定する。
+- 設定項目と値はCFG-01、各クラスのメソッド仕様はPS-DEVICE-01〜06およびPS-DEVICE-09で定義する。
+
+### 6.3 責務領域
+
+設定管理に関する責務はデバイス制御層が所有する。設定項目と値はCFG-01で定義する。
+
+| 図中番号 | 責務領域 | 主な責務 | 関連資料 |
+|---|---|---|---|
+| （1） | 設定管理 | 設定の読込、フォールバック、保存、適用、および有効なデバイス仕様の選択を管理する。 | CFG-01_タブレットPOS_デバイス制御層設定ファイル記載要領.xlsx |
+
+### 6.4 構成要素と実装対応
+
+本項は、設定を読み込み、選択し、適用する構成要素の責務と実装対応を示す。
+
+<!-- excel-render table-grid=wide -->
+| 図中番号 | 論理構成要素 | 実装識別子 | 責務 | 主な連携・利用条件 | 関連プログラム仕様書 |
+|---|---|---|---|---|---|
+| （1） | 設定管理 |  |  |  |  |
+| ① | デバイスマネージャー | DeviceManager | 設定を初期化・保存し、デバイス種別、OS、および有効デバイスIDに対応するデバイス仕様を選択する。 | シングルトンとして現在の設定を保持し、選択したデバイス仕様からストラテジーの生成を要求する。 | PS-DEVICE-01_タブレットPOS_デバイス制御_デバイスマネージャー_プログラム仕様書.xlsx |
+| ② | 設定サービス | DeviceControllerConfigService | 設定ストレージインターフェースを介して組込み設定ストレージへアクセスし、設定を読み込み、デシリアライズし、保存後に新しい設定を適用する。 | ランタイム設定を優先し、読込・変換に失敗した場合はデフォルト設定へ切り替える。保存先はランタイム設定とする。取消時は切り替えず、保存失敗時は現在の設定を維持する。 | PS-DEVICE-02_タブレットPOS_デバイス制御_設定サービス_プログラム仕様書.xlsx<br>PS-DEVICE-04_タブレットPOS_デバイス制御_設定ストレージインターフェース_プログラム仕様書.xlsx |
+| ③ | ランタイム設定 | device_controller_config.json | アプリデータ領域に保存されたデバイス制御設定を保持する。 | ファイルが存在し、有効なデバイス仕様へ変換できる場合に優先して使用する。 | PS-DEVICE-03_タブレットPOS_デバイス制御_組込み設定ストレージ_プログラム仕様書.xlsx |
+| ④ | デフォルト設定 | TabletPos.DeviceCtrlの埋め込みリソース | ランタイム設定を使用できない場合の初期設定を保持する。 | ランタイム設定が存在しない、または無効な場合に使用する。 | PS-DEVICE-03_タブレットPOS_デバイス制御_組込み設定ストレージ_プログラム仕様書.xlsx |
+| ⑤ | 設定モデル | DeviceConfig | デバイス設定全体を保持する。 | devices、activeDevices、およびappSettings.namedPipeを保持し、設定選択と通信設定に必要な情報を提供する。 | PS-DEVICE-06_タブレットPOS_デバイス制御_デバイス構成_プログラム仕様書.xlsx<br>PS-DEVICE-09_タブレットPOS_デバイス制御_デバイス仕様モデル_プログラム仕様書.xlsx |
+| ⑥ | 有効デバイス | ActiveDevice | OSおよびデバイス種別ごとに使用するデバイスIDを保持する。 | デバイスマネージャーが有効なデバイス仕様を選択するときに参照する。 | PS-DEVICE-06_タブレットPOS_デバイス制御_デバイス構成_プログラム仕様書.xlsx<br>PS-DEVICE-09_タブレットPOS_デバイス制御_デバイス仕様モデル_プログラム仕様書.xlsx |
+| ⑦ | デバイス仕様 | DeviceSpec | デバイスID、種別、OS、ストラテジー名、および接続情報を保持する。 | 選択したストラテジーの生成と通信設定に使用する。 | PS-DEVICE-06_タブレットPOS_デバイス制御_デバイス構成_プログラム仕様書.xlsx<br>PS-DEVICE-09_タブレットPOS_デバイス制御_デバイス仕様モデル_プログラム仕様書.xlsx |
+
+## 07_プラットフォーム別クラス構成図_01
+
+以下の図は、公開デバイス契約を実装するプラットフォーム別ストラテジーと、各プラットフォームの通信境界を示す。
+
+### 7.1 プラットフォーム別クラス構成図
+
+```mermaid
+---
+config:
+  layout: elk
+  elk:
+    mergeEdges: false
+    nodePlacementStrategy: BRANDES_KOEPF
+    cycleBreakingStrategy: GREEDY
+  flowchart:
+    curve: linear
+    nodeSpacing: 26
+    rankSpacing: 50
+---
+flowchart LR
+    %% diagram-profile=logical-architecture
+%% legend-bind container.PLATFORM_DOMAIN=デバイス制御領域
+%% legend-bind container.EXTERNAL_DOMAIN=《接続境界》
+    %% legend-bind class.classNode=クラス
+    %% legend-bind class.interfaceNode=公開インターフェース
+    %% legend-bind class.contractNode=共通通信契約
+    %% legend-bind class.boundaryNode=《接続境界》
+    %% legend-bind class.unavailableNode=利用対象外実装
+    %% legend-bind edge.default=━━▶ 主な関係
+    %% legend-bind edge.dashed=┄┄▶ 補助関係
+    %% legend-bind label=コネクターラベル
+    subgraph PLATFORM_DOMAIN["（1）デバイス制御層（プラットフォーム別処理）"]
+        CONTRACT["① 《インターフェース》<br/>公開デバイス契約群<br/><b>1. IPrinterStrategy<br/>2. IBarcodeScannerStrategy<br/>3. ICashChangerStrategy<br/>4. ICustomerDisplayStrategy<br/>5. IDrawerStrategy<br/>6. IPaymentStrategy<br/>7. IKeyboardStrategy</b>"]
+        PLATFORM["② プラットフォーム別<br/>ストラテジー群"]
+        OPOS["③ Windows OPOS／OCX<br/><b>OposPrinterStrategy等</b>"]
+        WIN_DIRECT["④ Windows直接接続<br/><b>SerialHandyScannerStrategy等</b>"]
+        IOS["⑤ iOS直接接続<br/><b>IosEpsonPrinterStrategy等</b>"]
+        ANDROID["⑥ Android直接接続<br/><b>AndroidBluetoothPrinterStrategy等</b><br/>現在は利用不可"]
+        OPOS_COMM["⑦ OPOS通信クラス群<br/><b>OposNamedPipeCommandClient<br/>NamedPipeClient / NamedPipeEventReceiver</b>"]
+        DEVICE_CONTRACTS["⑧ 共通デバイス通信契約<br/><b>TabletPos.DeviceContracts</b>"]
+
+        CONTRACT -.->|実装クラス群| PLATFORM
+        PLATFORM --> OPOS
+        PLATFORM --> WIN_DIRECT
+        PLATFORM --> IOS
+        PLATFORM -.-> ANDROID
+        OPOS -->|コマンド変換| OPOS_COMM
+        DEVICE_CONTRACTS -.->|共通DTO| OPOS_COMM
+    end
+
+    subgraph EXTERNAL_DOMAIN["（2）外部境界"]
+        CONNECTOR["① 《接続境界》<br/>デバイスコネクタ<br/><b>TabletPos.Host</b>"]
+        WIN_API["② 《接続境界》<br/>Windows API<br/><b>SerialPort / Raw Input</b>"]
+        IOS_API["③ 《接続境界》<br/>iOS SDK / OS API<br/><b>TCP/IP・Bluetooth / カメラ・BLE</b>"]
+        ANDROID_API["④ 《接続境界》<br/>Android API<br/><b>Bluetooth / カメラ / USB</b>"]
+    end
+
+    OPOS_COMM -->|名前付きパイプ通信| CONNECTOR
+    WIN_DIRECT -->|直接接続| WIN_API
+    IOS -->|直接接続| IOS_API
+    ANDROID -.->|現在は接続しない| ANDROID_API
+
+    CONTRACT ~~~ CONNECTOR
+    PLATFORM ~~~ IOS_API
+    DEVICE_CONTRACTS ~~~ ANDROID_API
+
+    class CONTRACT interfaceNode
+    class PLATFORM,OPOS,WIN_DIRECT,IOS,OPOS_COMM classNode
+    class DEVICE_CONTRACTS contractNode
+    class CONNECTOR,WIN_API,IOS_API boundaryNode
+    class ANDROID,ANDROID_API unavailableNode
+```
+
+## 07_プラットフォーム別クラス構成図_02
+
+### 7.2 構成図の概要
+
+本図では、公開デバイス契約を各プラットフォームでどのように実装し、どの経路で機器に接続するかを示す。
+
+- Windows OPOS／OCXでは、ストラテジーからOPOSコマンド変換、名前付きパイプクライアント、およびデバイスコネクタを経由して機器に接続する。
+- Windows直接接続では、SerialPortまたはRaw Input APIを使用する。スキャナーと専用キーボードは利用できるが、シリアル自動釣銭機は利用対象外とする。
+- iOSでは、SDKまたはOS APIを使用して機器に直接接続する。
+- Androidでは、Bluetooth、カメラ、またはUSBを使用するクラスと登録は存在するが、必須処理を提供していないため現在は利用できない。
+- ストラテジーファクトリーとの生成関係は5.1、対象機器と利用条件は7.4に示す。
+
+### 7.3 責務領域
+
+プラットフォーム別クラス構成では、デバイス制御層に閉じ込めるプラットフォーム固有処理と、アプリの外側にある接続先の境界を確認する。
+
+| 図中番号 | 責務領域 | 主な責務 | 主な構成要素 | 関連資料 |
+|---|---|---|---|---|
+| （1） | デバイス制御層（プラットフォーム別処理） | 公開デバイス契約をプラットフォーム別ストラテジーで実装し、OPOS／OCX、SerialPort、Raw Input、SDK、およびOS APIの違いを呼出側から隠蔽する。 | Windows OPOS／OCXストラテジー、Windows直接接続ストラテジー、iOS直接接続ストラテジー、Android直接接続ストラテジー | EX-DEVICE-01_次世代POS_デバイス制御実装例集.xlsx |
+| （2） | 外部境界 | タブレットPOS端末アプリの外側で実行するデバイスコネクタと周辺機器を示し、名前付きパイプ、OPOS／OCX、SDK、およびOS APIの責務境界を明確にする。 | デバイスコネクタ、Windows OPOS／OCX機器、Windows直接接続機器、iOS／Android周辺機器 | ARCH-HOST-01_タブレットPOS_デバイスコネクタ基本設計書.xlsx |
+
+### 7.4 構成要素と実装対応
+
+<!-- excel-render table-grid=wide -->
+| 図中番号 | 論理構成要素 | 実装識別子 | 責務 | 主な連携・利用条件 | 関連プログラム仕様書 |
+|---|---|---|---|---|---|
+| （1） | デバイス制御層（プラットフォーム別処理） |  |  |  |  |
+| ① | 公開デバイス契約 | IPrinterStrategy、IBarcodeScannerStrategy、ICashChangerStrategy、ICustomerDisplayStrategy、IDrawerStrategy、IPaymentStrategy、IKeyboardStrategy | デバイス種別ごとに共通のStart、デバイス操作、およびEndをアプリケーションサービスへ公開する。 | プラットフォーム別ストラテジーが契約を実装し、呼出側は具象クラスに依存しない。 | PS-DEVICE-08_タブレットPOS_デバイス制御_デバイスストラテジー基底_プログラム仕様書.xlsx |
+| ② | プラットフォーム別ストラテジー群 | － | 公開デバイス契約を実装するストラテジーをプラットフォームと接続方式ごとに分類する。 | デバイスマネージャーが選択したデバイス仕様に基づいて対象ストラテジーを生成する。 | PS-DEVICE-08_タブレットPOS_デバイス制御_デバイスストラテジー基底_プログラム仕様書.xlsx |
+| ③ | Windows OPOS／OCXストラテジー | OposPrinterStrategy、OposCashChangerStrategy、OposCustomerDisplayStrategy、OposDrawerStrategy、OposCafisArchPaymentStrategy等 | 公開デバイス契約を実装し、OPOSコマンド変換と名前付きパイプ通信を介してデバイスコネクタへ操作を渡す。 | WindowsのOPOS／OCXまたはCAFIS Arch環境を必要とするデバイスで使用する。 | PS-DEVICE-08_タブレットPOS_デバイス制御_デバイスストラテジー基底_プログラム仕様書.xlsx |
+| ④ | Windows直接接続ストラテジー | SerialHandyScannerStrategy、WindowsRawKeyboardStrategy、SerialCashChangerStrategy等 | SerialPort・COMまたはRaw Input APIを使用し、Windows周辺機器を直接制御する。 | スキャナーと専用キーボードは利用可能である。シリアル自動釣銭機は公開デバイス契約の必須操作を満たさないため利用対象外とする。 | PS-DEVICE-08_タブレットPOS_デバイス制御_デバイスストラテジー基底_プログラム仕様書.xlsx |
+| ⑤ | iOS直接接続ストラテジー | IosEpsonPrinterStrategy、IosCameraBarcodeScannerStrategy、IosBleBarcodeScannerStrategy、IosCustomerDisplayStrategy | SDKまたはOS APIを使用し、iOS上の周辺機器へ直接接続する。 | レシートプリンター、スキャナー、およびカスタマディスプレイで利用可能である。 | PS-DEVICE-08_タブレットPOS_デバイス制御_デバイスストラテジー基底_プログラム仕様書.xlsx |
+| ⑥ | Android直接接続ストラテジー | AndroidBluetoothPrinterStrategy、AndroidCameraBarcodeScannerStrategy、AndroidEpsonDm70DCustomerDisplayStrategy | Bluetooth、カメラ、またはUSBを使用するAndroid向けの公開デバイス契約を実装する。 | 設定と登録は存在するが、現在は周辺機器を操作する必須処理を提供していないため利用不可とする。 | PS-DEVICE-08_タブレットPOS_デバイス制御_デバイスストラテジー基底_プログラム仕様書.xlsx |
+| ⑦ | OPOS通信クラス群 | OposNamedPipeCommandClient、INamedPipeClient、NamedPipeClient、NamedPipeEventReceiver | Windows OPOS／OCXストラテジーの操作を共通要求へ変換し、コマンド通信用パイプへ送信して同期応答を受信する。イベント通知用パイプから共通イベントを受信する。 | デバイスマネージャーが適用したパイプ名、タイムアウト、および再試行設定を使用する。 | PS-DEVICE-10_タブレットPOS_デバイス制御_名前付きパイプクライアント_プログラム仕様書.xlsx<br>PS-DEVICE-11_タブレットPOS_デバイス制御_名前付きパイプイベント受信_プログラム仕様書.xlsx |
+| ⑧ | 共通デバイス通信契約 | TabletPos.DeviceContracts | デバイス制御層とデバイスコネクタが共有する要求、応答、イベント、識別子、および通信既定値を定義する。 | 両者は同じDTOを参照し、同名の通信モデルを個別に保持しない。 | PS-DEVICE-10_タブレットPOS_デバイス制御_名前付きパイプクライアント_プログラム仕様書.xlsx<br>PS-DEVICE-11_タブレットPOS_デバイス制御_名前付きパイプイベント受信_プログラム仕様書.xlsx |
+| （2） | 外部境界 |  |  |  |  |
+| ① | デバイスコネクタ | TabletPos.Host | Windows別プロセスとしてOPOS／OCXおよびCAFIS Arch資源を保持し、対象デバイスを制御する。 | コマンド通信用パイプで要求と同期応答を送受信し、イベント通知用パイプから非同期イベントを送信する。 | － |
+| ② | Windows API | SerialPort、Raw Input | Windows直接接続ストラテジーから周辺機器の物理操作を受け付ける。 | スキャナーと専用キーボードは利用可能である。シリアル自動釣銭機は現在の必須操作を満たさないため利用対象外とする。 | － |
+| ③ | iOS SDK／OS API | TCP/IP、Bluetooth、カメラ、BLE | iOS直接接続ストラテジーから周辺機器の物理操作を受け付ける。 | レシートプリンター、スキャナー、およびカスタマディスプレイで利用する。 | － |
+| ④ | Android API | Bluetooth、カメラ、USB | Android直接接続ストラテジーから周辺機器の物理操作を受け付ける。 | 現在のストラテジーが必須操作を提供していないため、接続を実行しない。 | － |
