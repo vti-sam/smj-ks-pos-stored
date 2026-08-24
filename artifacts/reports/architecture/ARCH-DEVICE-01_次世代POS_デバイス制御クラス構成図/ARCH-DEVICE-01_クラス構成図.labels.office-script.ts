@@ -1,5 +1,5 @@
 // Generated from Markdown: ARCH-DEVICE-01_次世代POS_デバイス制御クラス構成図.md
-// Source contract SHA-256: 93a7b5fdb993a43564e4bb95e2a9521e2bcce3bac325867f42c157c44f8d61f1
+// Source contract SHA-256: 6da626232b5e200b816c574f8074c1d7d927180b14a666409095f6f03fff6560
 // Generated output; do not edit. Change Markdown or the owning renderer and regenerate both scripts.
 
 function main(workbook: ExcelScript.Workbook) {
@@ -11,10 +11,10 @@ function main(workbook: ExcelScript.Workbook) {
   const shapePrefix = "shape_d51_";
   const edgePrefix = "edge_d51_";
   const sectionPrefix = "section_bg_d51_";
-  const edgeGroupPrefix = "edge_group_d51_";
   const edgeLabelPrefix = "edge_label_d51_";
   const shapeGroupPrefix = "shape_group_d51_";
   const shapeCommentPrefix = "shape_comment_d51_";
+  const edgeLabelAnchors: { [key: string]: number[] } = { "edge_d51_01_APP_VIEW_to_APP_SERVICE": [0.555621, 1], "edge_d51_02_DEVICE_CTRL_CORE_CONFIG_GROUP_RUNTIME_to_DEVICE_CTRL_CORE_CONFIG_GROUP_CONFIG": [0.5, 0.5], "edge_d51_03_DEVICE_CTRL_CORE_CONFIG_GROUP_DEFAULT_to_DEVICE_CTRL_CORE_CONFIG_GROUP_CONFIG": [0.5, 0.5], "edge_d51_04_DEVICE_CTRL_CORE_CONFIG_GROUP_CONFIG_to_DEVICE_CTRL_CORE_CONFIG_GROUP_RUNTIME": [0.225962, 1], "edge_d51_05_DEVICE_CTRL_CORE_CONFIG_GROUP_CONFIG_to_DEVICE_CTRL_CORE_CONFIG_GROUP_MODEL": [0.54467, 1], "edge_d51_06_DEVICE_CTRL_CORE_MANAGER_to_DEVICE_CTRL_CORE_CONFIG_GROUP_MODEL": [0.621604, 0], "edge_d51_07_DEVICE_CTRL_CORE_MANAGER_to_DEVICE_CTRL_STRATEGY_PATTERN_FACTORY": [0.441085, 0], "edge_d51_08_APP_BOOT_to_DEVICE_CTRL_CORE_MANAGER": [0.209168, 0.10255], "edge_d51_09_APP_BOOT_to_DEVICE_CTRL_CORE_EVENT_RECEIVER": [0.547039, 0], "edge_d51_10_DEVICE_CTRL_CORE_MANAGER_to_DEVICE_CTRL_CORE_CONFIG_GROUP_CONFIG": [0.699701, 0.218384], "edge_d51_11_DEVICE_CTRL_CORE_MANAGER_to_DEVICE_CTRL_CORE_PIPE_CLIENT": [0.508807, 0.426123], "edge_d51_12_DEVICE_CTRL_CORE_MANAGER_to_DEVICE_CTRL_CORE_EVENT_RECEIVER": [0.080532, 0.560182], "edge_d51_13_APP_SERVICE_to_DEVICE_CTRL_CORE_MANAGER": [0.644377, 0.53411], "edge_d51_14_APP_SERVICE_to_DEVICE_CTRL_STRATEGY_PATTERN_CONTRACT": [0.386902, 1], "edge_d51_15_DEVICE_CTRL_STRATEGY_PATTERN_FACTORY_to_DEVICE_CTRL_STRATEGY_PATTERN_PLATFORM_WIN_CONNECTOR": [0.358209, 0.5], "edge_d51_16_DEVICE_CTRL_STRATEGY_PATTERN_FACTORY_to_DEVICE_CTRL_STRATEGY_PATTERN_PLATFORM_WIN_DIRECT": [0.16346, 0.736915], "edge_d51_17_DEVICE_CTRL_STRATEGY_PATTERN_FACTORY_to_DEVICE_CTRL_STRATEGY_PATTERN_PLATFORM_IOS": [0.268657, 0.676923], "edge_d51_18_DEVICE_CTRL_STRATEGY_PATTERN_FACTORY_to_DEVICE_CTRL_STRATEGY_PATTERN_PLATFORM_ANDROID": [0.343071, 1], "edge_d51_19_DEVICE_CTRL_STRATEGY_PATTERN_PLATFORM_WIN_CONNECTOR_to_DEVICE_CTRL_STRATEGY_PATTERN_CONTRACT": [0.669678, 0], "edge_d51_20_DEVICE_CTRL_STRATEGY_PATTERN_PLATFORM_WIN_DIRECT_to_DEVICE_CTRL_STRATEGY_PATTERN_CONTRACT": [0.915719, 0.504463], "edge_d51_21_DEVICE_CTRL_STRATEGY_PATTERN_PLATFORM_IOS_to_DEVICE_CTRL_STRATEGY_PATTERN_CONTRACT": [0.444608, 0], "edge_d51_22_DEVICE_CTRL_STRATEGY_PATTERN_PLATFORM_ANDROID_to_DEVICE_CTRL_STRATEGY_PATTERN_CONTRACT": [0.787755, 0.492337], "edge_d51_23_DEVICE_CTRL_STRATEGY_PATTERN_PLATFORM_WIN_CONNECTOR_to_DEVICE_CTRL_CORE_OPOS_CLIENT": [0.5, 0], "edge_d51_24_DEVICE_CTRL_CORE_OPOS_CLIENT_to_DEVICE_CTRL_CORE_PIPE_CLIENT": [0.5, 0.5], "edge_d51_25_DEVICE_CTRL_CORE_CONTRACTS_to_DEVICE_CTRL_CORE_OPOS_CLIENT": [0.741315, 1], "edge_d51_26_DEVICE_CTRL_CORE_CONTRACTS_to_DEVICE_CTRL_CORE_PIPE_CLIENT": [0.505892, 0], "edge_d51_27_DEVICE_CTRL_CORE_CONTRACTS_to_DEVICE_CTRL_CORE_EVENT_RECEIVER": [0.431352, 0], "edge_d51_28_DEVICE_CTRL_CORE_PIPE_CLIENT_to_EXTERNAL_CONNECTOR": [0.491216, 0], "edge_d51_29_EXTERNAL_CONNECTOR_to_DEVICE_CTRL_CORE_EVENT_RECEIVER": [0.621237, 0], "edge_d51_30_DEVICE_CTRL_CORE_CONTRACTS_to_EXTERNAL_CONNECTOR": [0.299709, 0], "edge_d51_31_EXTERNAL_CONNECTOR_to_EXTERNAL_WIN_OPOS_DEVICE": [0.462892, 0], "edge_d51_32_DEVICE_CTRL_STRATEGY_PATTERN_PLATFORM_WIN_DIRECT_to_EXTERNAL_WIN_DIRECT_DEVICE": [0.488906, 0], "edge_d51_33_DEVICE_CTRL_STRATEGY_PATTERN_PLATFORM_IOS_to_EXTERNAL_MOBILE_DEVICE": [0.456431, 1], "edge_d51_34_DEVICE_CTRL_STRATEGY_PATTERN_PLATFORM_ANDROID_to_EXTERNAL_MOBILE_DEVICE": [0.456431, 1] };
   const shapes = sheet.getShapes();
   const existingNames: { [key: string]: boolean } = {};
   const edgeCandidates: { shapeIndex: number; name: string; title: string; description: string; left: number; top: number; width: number; height: number }[] = [];
@@ -31,7 +31,7 @@ function main(workbook: ExcelScript.Workbook) {
     const isEdge = name.indexOf(edgePrefix) === 0;
     const isNode = name.indexOf(shapePrefix) === 0;
     const isSection = name.indexOf(sectionPrefix) === 0;
-    const isOwnedGroup = name.indexOf(edgeGroupPrefix) === 0 || name.indexOf(shapeGroupPrefix) === 0;
+    const isOwnedGroup = name.indexOf(shapeGroupPrefix) === 0;
     if (!isEdge && !isNode && !isSection && !isOwnedGroup) {
       continue;
     }
@@ -75,17 +75,17 @@ function main(workbook: ExcelScript.Workbook) {
   for (let i = 0; i < edgeCandidates.length; i++) {
     const candidate = edgeCandidates[i];
     const suffix = candidate.name.slice(edgePrefix.length);
-    const groupName = edgeGroupPrefix + suffix;
-    if (existingNames[groupName]) {
+    const labelName = edgeLabelPrefix + suffix;
+    if (existingNames[labelName]) {
       continue;
     }
-    const labelName = edgeLabelPrefix + suffix;
-    const centerX = candidate.left + candidate.width / 2;
-    const centerY = candidate.top + candidate.height / 2;
-    if (!addConnectorLabel(sheet, obstacleBounds, labelName, groupName, shapes[candidate.shapeIndex], candidate.title, candidate.description, centerX, centerY, candidate.width, candidate.height, reviewLeft, reviewRight, reviewTop)) {
+    const anchorRatio = edgeLabelAnchors[candidate.name];
+    const centerX = candidate.left + candidate.width * (anchorRatio ? anchorRatio[0] : 0.5);
+    const centerY = candidate.top + candidate.height * (anchorRatio ? anchorRatio[1] : 0.5);
+    if (!addConnectorLabel(sheet, obstacleBounds, labelName, candidate.title, candidate.description, centerX, centerY, candidate.width, candidate.height, reviewLeft, reviewRight, reviewTop)) {
       failedOverlayIds.push(candidate.name);
     } else {
-      existingNames[groupName] = true;
+      existingNames[labelName] = true;
     }
   }
 
@@ -140,16 +140,22 @@ function applyShapeView(shape: ExcelScript.Shape, fill: string, bordered: boolea
 }
 
 function applyConnectorView(connector: ExcelScript.Shape, line: ExcelScript.Line, dashed: boolean, bidirectional: boolean, color: string, lineWeight: number) {
+  applyConnectorSegmentView(connector, line, dashed, bidirectional, true, color, lineWeight);
+}
+
+function applyConnectorSegmentView(connector: ExcelScript.Shape, line: ExcelScript.Line, dashed: boolean, beginArrow: boolean, endArrow: boolean, color: string, lineWeight: number) {
   connector.getLineFormat().setVisible(true);
   connector.getLineFormat().setColor(color);
   connector.getLineFormat().setWeight(lineWeight);
   if (dashed) {
     connector.getLineFormat().setDashStyle(ExcelScript.ShapeLineDashStyle.dash);
   }
-  if (bidirectional) {
+  if (beginArrow) {
     line.setBeginArrowheadStyle(ExcelScript.ArrowheadStyle.triangle);
   }
-  line.setEndArrowheadStyle(ExcelScript.ArrowheadStyle.triangle);
+  if (endArrow) {
+    line.setEndArrowheadStyle(ExcelScript.ArrowheadStyle.triangle);
+  }
 }
 
 function applyConnectorLabelView(box: ExcelScript.Shape, fill: string, fillTransparency: number, stroke: string, lineWeight: number) {
@@ -274,7 +280,7 @@ function labelHeight(text: string, width: number): number {
   return height;
 }
 
-function addConnectorLabel(sheet: ExcelScript.Worksheet, obstacleBounds: number[][], shapeName: string, groupName: string, connector: ExcelScript.Shape, altTextTitle: string, text: string, centerX: number, centerY: number, connectorWidth: number, connectorHeight: number, reviewLeft: number, reviewRight: number, reviewTop: number): boolean {
+function addConnectorLabel(sheet: ExcelScript.Worksheet, obstacleBounds: number[][], shapeName: string, altTextTitle: string, text: string, centerX: number, centerY: number, connectorWidth: number, connectorHeight: number, reviewLeft: number, reviewRight: number, reviewTop: number): boolean {
   const width = labelWidth(text);
   const height = labelHeight(text, width);
   const box = sheet.addTextBox(text);
@@ -304,10 +310,6 @@ function addConnectorLabel(sheet: ExcelScript.Worksheet, obstacleBounds: number[
   }
   box.setZOrder(ExcelScript.ShapeZOrder.bringToFront);
   appendObstacleBounds(obstacleBounds, box);
-  const group = sheet.addGroup([connector, box]);
-  group.setName(groupName);
-  group.setAltTextTitle(altTextTitle || text);
-  group.setAltTextDescription(text);
   return true;
 }
 
