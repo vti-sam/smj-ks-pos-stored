@@ -186,6 +186,7 @@ config:
 ---
 flowchart LR
     %% diagram-profile=logical-architecture
+    %% excel-connector-mode=attached
     %% legend-bind container=責務領域
     %% legend-bind container.APP=タブレットPOS端末アプリ領域
     %% legend-bind container.DEVICE_CTRL=責務領域
