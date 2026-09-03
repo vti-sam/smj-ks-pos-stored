@@ -1,5 +1,5 @@
 // Generated from Markdown: ARCH-DEVICE-01_次世代POS_デバイス制御クラス構成図.md
-// Source contract SHA-256: 47fe955fe86b78bcf1963b86aaca9add8189b497a6ebfd78b37f1ad6e2fab066
+// Source contract SHA-256: f22c3d055d57849473685addd3662b31e51208f198a6ec361ad34129c36cc29a
 // Generated output; do not edit. Change Markdown or the owning renderer and regenerate both scripts.
 
 function main(workbook: ExcelScript.Workbook) {
@@ -8,14 +8,16 @@ function main(workbook: ExcelScript.Workbook) {
   sheet.activate();
   const anchor = sheet.getCell(anchorPosition.rowIndex, anchorPosition.columnIndex);
   const originTop = anchor.getTop();
-  const canvasColumnCount = 36;
-  const baselineCanvasRowCount = 23;
+  const canvasColumnCount = 37;
+  const baselineCanvasRowCount = 30;
   formatDiagramGrid(anchor, baselineCanvasRowCount, canvasColumnCount);
 
-  const laneRange1 = getAnchoredRange(anchor, 0, 0, 1, 36);
+  const laneRange1 = getAnchoredRange(anchor, 0, 0, 1, 37);
 
   addCellLaneTable(anchor, baselineCanvasRowCount - 1);
 
+  const shape_d61_CONFIG_DOMAIN_DATABASE = addTextShape(sheet, "shape_d61_CONFIG_DOMAIN_DATABASE", "⑧ 《設定資源》\nデバイス制御設定データベース\ndevice_controller_config.db", 0, 0, 227.594812, 105.200308, 10, true, "#FFF2CC", 0, "#BF9000", 2, "#111111", true, "center", "rectangle", false);
+  setShapeAltText(shape_d61_CONFIG_DOMAIN_DATABASE, "⑧ 《設定資源》 デバイス制御設定データベース device_controller_config.db", "");
   const shape_d61_CONFIG_DOMAIN_DEFAULT = addTextShape(sheet, "shape_d61_CONFIG_DOMAIN_DEFAULT", "④ 《設定資源》\nデフォルト設定\nTabletPos.DeviceCtrl組込みリソース", 0, 0, 217.08, 105.200308, 10, true, "#FFF2CC", 0, "#BF9000", 2, "#111111", true, "center", "rectangle", false);
   setShapeAltText(shape_d61_CONFIG_DOMAIN_DEFAULT, "④ 《設定資源》 デフォルト設定 TabletPos.DeviceCtrl組込みリソース", "");
   const shape_d61_CONFIG_DOMAIN_RUNTIME = addTextShape(sheet, "shape_d61_CONFIG_DOMAIN_RUNTIME", "③ 《設定資源》\nランタイム設定\ndevice_controller_config.json", 0, 0, 238.174853, 85.162154, 10, true, "#FFF2CC", 0, "#BF9000", 2, "#111111", true, "center", "rectangle", false);
@@ -31,9 +33,9 @@ function main(workbook: ExcelScript.Workbook) {
   const shape_d61_CONFIG_DOMAIN_MODEL = addTextShape(sheet, "shape_d61_CONFIG_DOMAIN_MODEL", "⑤ 設定モデル\nDeviceConfig", 0, 0, 134.279113, 65.124, 10, true, "#F8FBFD", 0, "#0D32B2", 2, "#111111", true, "center", "rectangle", false);
   setShapeAltText(shape_d61_CONFIG_DOMAIN_MODEL, "⑤ 設定モデル DeviceConfig", "");
 
-  const geometryBottom = placeMermaidGeometry([shape_d61_CONFIG_DOMAIN_DEFAULT, shape_d61_CONFIG_DOMAIN_RUNTIME, shape_d61_CONFIG_DOMAIN_CONFIG, shape_d61_CONFIG_DOMAIN_MANAGER, shape_d61_CONFIG_DOMAIN_ACTIVE, shape_d61_CONFIG_DOMAIN_SPEC, shape_d61_CONFIG_DOMAIN_MODEL], [908.919984, 919.467411, 523.655167, 133.067715, 1188.984494, 1188.984494, 936.783368], [195.625846, 315.854769, 101.697, 101.697, 74.562, 164.733692, 85.416], anchor.getLeft(), originTop);
+  const geometryBottom = placeMermaidGeometry([shape_d61_CONFIG_DOMAIN_DATABASE, shape_d61_CONFIG_DOMAIN_DEFAULT, shape_d61_CONFIG_DOMAIN_RUNTIME, shape_d61_CONFIG_DOMAIN_CONFIG, shape_d61_CONFIG_DOMAIN_MANAGER, shape_d61_CONFIG_DOMAIN_ACTIVE, shape_d61_CONFIG_DOMAIN_SPEC, shape_d61_CONFIG_DOMAIN_MODEL], [951.798083, 946.540677, 957.088103, 522.034475, 131.447023, 1226.605186, 1226.605186, 974.40406], [94.600154, 315.019846, 435.248769, 114.137354, 114.137354, 193.956, 284.127692, 204.81], anchor.getLeft(), originTop);
 
-  const diagramBottom = Math.max(originTop + 42, geometryBottom, originTop + 391.834619);
+  const diagramBottom = Math.max(originTop + 42, geometryBottom, originTop + 509.607927);
   const bodyEndRowOffset = Math.max(11, Math.ceil((diagramBottom - originTop + 18) / 18) - 1);
   const canvasRowCount = Math.max(baselineCanvasRowCount, bodyEndRowOffset + 1);
   formatDiagramGrid(anchor, canvasRowCount, canvasColumnCount);
@@ -41,18 +43,19 @@ function main(workbook: ExcelScript.Workbook) {
     addCellLaneTable(anchor, bodyEndRowOffset);
   }
 
-  const edge_d61_01_CONFIG_DOMAIN_MANAGER_to_CONFIG_DOMAIN_CONFIG = addMermaidConnectorRoute(sheet, "edge_d61_01_CONFIG_DOMAIN_MANAGER_to_CONFIG_DOMAIN_CONFIG", [232.736657, 399.721273], [101.697, 101.697], anchor.getLeft(), originTop, false, false, "初期化・保存を委譲", "初期化・保存を委譲", "#4472C4", 2);
-  const edge_d61_02_CONFIG_DOMAIN_CONFIG_to_CONFIG_DOMAIN_RUNTIME = addMermaidConnectorRoute(sheet, "edge_d61_02_CONFIG_DOMAIN_CONFIG_to_CONFIG_DOMAIN_RUNTIME", [644.249369, 650.869417, 656.773215, 656.773215, 662.677013, 797.040292], [117.978, 117.978, 123.881798, 309.950972, 315.854769, 315.854769], anchor.getLeft(), originTop, false, false, "優先読込・保存", "優先読込・保存", "#4472C4", 2);
-  const edge_d61_03_CONFIG_DOMAIN_CONFIG_to_CONFIG_DOMAIN_DEFAULT = addMermaidConnectorRoute(sheet, "edge_d61_03_CONFIG_DOMAIN_CONFIG_to_CONFIG_DOMAIN_DEFAULT", [644.249369, 663.393264, 669.297061, 669.297061, 675.200859, 797.040292], [101.697, 101.697, 107.600798, 189.722048, 195.625846, 195.625846], anchor.getLeft(), originTop, true, false, "フォールバック", "フォールバック", "#7F7F7F", 2);
-  const edge_d61_04_CONFIG_DOMAIN_CONFIG_to_CONFIG_DOMAIN_MODEL = addMermaidConnectorRoute(sheet, "edge_d61_04_CONFIG_DOMAIN_CONFIG_to_CONFIG_DOMAIN_MODEL", [644.249369, 866.304119], [85.416, 85.416], anchor.getLeft(), originTop, false, false, "デシリアライズ", "デシリアライズ", "#4472C4", 2);
-  const edge_d61_05_CONFIG_DOMAIN_MODEL_to_CONFIG_DOMAIN_ACTIVE = addMermaidConnectorRoute(sheet, "edge_d61_05_CONFIG_DOMAIN_MODEL_to_CONFIG_DOMAIN_ACTIVE", [1003.922924, 1112.028069], [74.562, 74.562], anchor.getLeft(), originTop, false, false, "保持", "保持", "#4472C4", 2);
-  const edge_d61_06_CONFIG_DOMAIN_MODEL_to_CONFIG_DOMAIN_SPEC = addMermaidConnectorRoute(sheet, "edge_d61_06_CONFIG_DOMAIN_MODEL_to_CONFIG_DOMAIN_SPEC", [1003.922924, 1045.174886, 1051.078684, 1051.078684, 1056.982482, 1112.028069], [96.27, 96.27, 102.173798, 158.829895, 164.733692, 164.733692], anchor.getLeft(), originTop, false, false, "保持", "保持", "#4472C4", 2);
+  const edge_d61_01_CONFIG_DOMAIN_MANAGER_to_CONFIG_DOMAIN_CONFIG = addMermaidConnectorRoute(sheet, "edge_d61_01_CONFIG_DOMAIN_MANAGER_to_CONFIG_DOMAIN_CONFIG", [231.115965, 398.100581], [114.137354, 114.137354], anchor.getLeft(), originTop, false, false, "初期化・保存を委譲", "初期化・保存を委譲", "#4472C4", 2);
+  const edge_d61_02_CONFIG_DOMAIN_CONFIG_to_CONFIG_DOMAIN_RUNTIME = addMermaidConnectorRoute(sheet, "edge_d61_02_CONFIG_DOMAIN_CONFIG_to_CONFIG_DOMAIN_RUNTIME", [642.628677, 649.248725, 655.152523, 655.152523, 661.056321, 834.660984], [133.674554, 133.674554, 139.578352, 429.344972, 435.248769, 435.248769], anchor.getLeft(), originTop, false, false, "優先読込・保存", "優先読込・保存", "#4472C4", 2);
+  const edge_d61_03_CONFIG_DOMAIN_CONFIG_to_CONFIG_DOMAIN_DEFAULT = addMermaidConnectorRoute(sheet, "edge_d61_03_CONFIG_DOMAIN_CONFIG_to_CONFIG_DOMAIN_DEFAULT", [642.628677, 661.772571, 667.676369, 667.676369, 673.580167, 834.660984], [120.649754, 120.649754, 126.553552, 309.116048, 315.019846, 315.019846], anchor.getLeft(), originTop, true, false, "フォールバック", "フォールバック", "#7F7F7F", 2);
+  const edge_d61_04_CONFIG_DOMAIN_CONFIG_to_CONFIG_DOMAIN_MODEL = addMermaidConnectorRoute(sheet, "edge_d61_04_CONFIG_DOMAIN_CONFIG_to_CONFIG_DOMAIN_MODEL", [642.628677, 674.296417, 680.200215, 680.200215, 686.104013, 903.924811], [107.624954, 107.624954, 113.528752, 198.906202, 204.81, 204.81], anchor.getLeft(), originTop, false, false, "デシリアライズ", "デシリアライズ", "#4472C4", 2);
+  const edge_d61_05_CONFIG_DOMAIN_CONFIG_to_CONFIG_DOMAIN_DATABASE = addMermaidConnectorRoute(sheet, "edge_d61_05_CONFIG_DOMAIN_CONFIG_to_CONFIG_DOMAIN_DATABASE", [642.628677, 834.660984], [94.600154, 94.600154], anchor.getLeft(), originTop, false, false, "検証済み設定を反映", "検証済み設定を反映", "#4472C4", 2);
+  const edge_d61_06_CONFIG_DOMAIN_MODEL_to_CONFIG_DOMAIN_ACTIVE = addMermaidConnectorRoute(sheet, "edge_d61_06_CONFIG_DOMAIN_MODEL_to_CONFIG_DOMAIN_ACTIVE", [1041.543617, 1149.648761], [193.956, 193.956], anchor.getLeft(), originTop, false, false, "保持", "保持", "#4472C4", 2);
+  const edge_d61_07_CONFIG_DOMAIN_MODEL_to_CONFIG_DOMAIN_SPEC = addMermaidConnectorRoute(sheet, "edge_d61_07_CONFIG_DOMAIN_MODEL_to_CONFIG_DOMAIN_SPEC", [1041.543617, 1082.795579, 1088.699376, 1088.699376, 1094.603174, 1149.648761], [215.664, 215.664, 221.567798, 278.223895, 284.127692, 284.127692], anchor.getLeft(), originTop, false, false, "保持", "保持", "#4472C4", 2);
 
   configurePdfReview(workbook, sheet, anchor, canvasRowCount, canvasColumnCount, false);
 }
 
 function addCellLaneTable(anchor: ExcelScript.Range, bodyEndRowOffset: number) {
-  addLaneColumns(anchor, 0, 0, 36, bodyEndRowOffset, "（1）設定管理", "#E2F0D9", 0, "#70AD47", 2, "#111111");
+  addLaneColumns(anchor, 0, 0, 37, bodyEndRowOffset, "（1）設定管理", "#E2F0D9", 0, "#70AD47", 2, "#111111");
 }
 
 function placeMermaidGeometry(shapes: ExcelScript.Shape[], centerOffsetsX: number[], centerOffsetsY: number[], originLeft: number, originTop: number): number {

@@ -1,5 +1,5 @@
 // Generated from Markdown: ARCH-DEVICE-01_次世代POS_デバイス制御クラス構成図.md
-// Source contract SHA-256: 47fe955fe86b78bcf1963b86aaca9add8189b497a6ebfd78b37f1ad6e2fab066
+// Source contract SHA-256: f22c3d055d57849473685addd3662b31e51208f198a6ec361ad34129c36cc29a
 // Generated output; do not edit. Change Markdown or the owning renderer and regenerate both scripts.
 
 function main(workbook: ExcelScript.Workbook) {
@@ -14,7 +14,7 @@ function main(workbook: ExcelScript.Workbook) {
   const edgeLabelPrefix = "edge_label_d61_";
   const shapeGroupPrefix = "shape_group_d61_";
   const shapeCommentPrefix = "shape_comment_d61_";
-  const edgeLabelAnchors: { [key: string]: number[] } = { "edge_d61_01_CONFIG_DOMAIN_MANAGER_to_CONFIG_DOMAIN_CONFIG": [0.5, 0.5], "edge_d61_02_CONFIG_DOMAIN_CONFIG_to_CONFIG_DOMAIN_RUNTIME": [0.081967, 0.5], "edge_d61_03_CONFIG_DOMAIN_CONFIG_to_CONFIG_DOMAIN_DEFAULT": [0.601287, 1], "edge_d61_04_CONFIG_DOMAIN_CONFIG_to_CONFIG_DOMAIN_MODEL": [0.5, 0.5], "edge_d61_05_CONFIG_DOMAIN_MODEL_to_CONFIG_DOMAIN_ACTIVE": [0.5, 0.5], "edge_d61_06_CONFIG_DOMAIN_MODEL_to_CONFIG_DOMAIN_SPEC": [0.436203, 0.5] };
+  const edgeLabelAnchors: { [key: string]: number[] } = { "edge_d61_01_CONFIG_DOMAIN_MANAGER_to_CONFIG_DOMAIN_CONFIG": [0.5, 0.5], "edge_d61_02_CONFIG_DOMAIN_CONFIG_to_CONFIG_DOMAIN_RUNTIME": [0.065217, 0.5], "edge_d61_03_CONFIG_DOMAIN_CONFIG_to_CONFIG_DOMAIN_DEFAULT": [0.130435, 0.5], "edge_d61_04_CONFIG_DOMAIN_CONFIG_to_CONFIG_DOMAIN_MODEL": [0.583192, 1], "edge_d61_05_CONFIG_DOMAIN_CONFIG_to_CONFIG_DOMAIN_DATABASE": [0.5, 0.5], "edge_d61_06_CONFIG_DOMAIN_MODEL_to_CONFIG_DOMAIN_ACTIVE": [0.5, 0.5], "edge_d61_07_CONFIG_DOMAIN_MODEL_to_CONFIG_DOMAIN_SPEC": [0.436203, 0.5] };
   const shapes = sheet.getShapes();
   const existingNames: { [key: string]: boolean } = {};
   const edgeCandidates: { shapeIndex: number; name: string; title: string; description: string; left: number; top: number; width: number; height: number }[] = [];

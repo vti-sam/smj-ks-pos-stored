@@ -1,5 +1,5 @@
 // Generated from Markdown: ARCH-HOST-01_タブレットPOS_デバイスコネクタ基本設計書.md
-// Source contract SHA-256: ac501706a621f6572e3cdb581616e7aeae6f62e8fb44e22c23217490b43c90ce
+// Source contract SHA-256: a39dd9aa2b736b2818c59ce07fc18e912f2cef033362af28346380a7458e4c37
 // Generated output; do not edit. Change Markdown or the owning renderer and regenerate both scripts.
 
 function main(workbook: ExcelScript.Workbook) {
@@ -11,10 +11,10 @@ function main(workbook: ExcelScript.Workbook) {
   const shapePrefix = "shape_d512_";
   const edgePrefix = "edge_d512_";
   const sectionPrefix = "section_bg_d512_";
-  const edgeGroupPrefix = "edge_group_d512_";
   const edgeLabelPrefix = "edge_label_d512_";
   const shapeGroupPrefix = "shape_group_d512_";
   const shapeCommentPrefix = "shape_comment_d512_";
+  const edgeLabelAnchors: { [key: string]: number[] } = { "edge_d512_01_APP_APP_COORD_LIFECYCLE_to_APP_APP_COORD_PROCESS": [0.5, 0.5], "edge_d512_02_APP_APP_ACCESS_APP_SETTING_to_APP_APP_ACCESS_SELECT": [0.576923, 0.532731], "edge_d512_03_APP_APP_ACCESS_SELECT_to_APP_APP_ACCESS_COMMAND": [0.5, 0.5], "edge_d512_04_APP_APP_ACCESS_COMMAND_to_APP_APP_ACCESS_SYNC_RESULT": [0.5, 0.5], "edge_d512_05_APP_APP_COORD_BUSINESS_to_APP_APP_ACCESS_SELECT": [0.260434, 0], "edge_d512_06_APP_APP_ACCESS_SYNC_RESULT_to_APP_APP_COORD_BUSINESS": [0.5, 0.311419], "edge_d512_07_HOST_HOST_SERVICE_RUNTIME_to_HOST_HOST_SERVICE_SERVER": [0.576923, 0.534154], "edge_d512_08_HOST_HOST_EXEC_HOST_SETTING_to_HOST_HOST_EXEC_MANAGER": [0.576923, 0.472437], "edge_d512_09_HOST_HOST_EXEC_ORDER_to_HOST_HOST_EXEC_CONTROL": [0.5, 0.5], "edge_d512_10_HOST_HOST_EXEC_CONTROL_to_HOST_HOST_EXEC_MANAGER": [0.576923, 0.519396], "edge_d512_11_HOST_HOST_SERVICE_SERVER_to_HOST_HOST_EXEC_ORDER": [0.50842, 0.5], "edge_d512_12_HOST_HOST_EXEC_MANAGER_to_HOST_HOST_ADAPTER_ADAPTER": [0.654545, 1], "edge_d512_13_HOST_HOST_EXEC_MANAGER_to_HOST_HOST_SERVICE_EVENT": [0.5, 0], "edge_d512_14_APP_APP_COORD_PROCESS_to_HOST_HOST_SERVICE_RUNTIME": [0.487537, 0], "edge_d512_15_APP_APP_ACCESS_COMMAND_to_HOST_HOST_SERVICE_SERVER": [0.334815, 0.684932], "edge_d512_16_HOST_HOST_SERVICE_EVENT_to_APP_APP_ACCESS_EVENT_RX": [0.817949, 0.382369], "edge_d512_17_APP_APP_ACCESS_COMMAND_to_APP_APP_ACCESS_CONTRACT": [0.512433, 0.719363], "edge_d512_18_APP_APP_ACCESS_EVENT_RX_to_APP_APP_ACCESS_CONTRACT": [0.5, 0.5], "edge_d512_19_HOST_HOST_SERVICE_SERVER_to_APP_APP_ACCESS_CONTRACT": [0.823041, 0.444938], "edge_d512_20_HOST_HOST_SERVICE_EVENT_to_APP_APP_ACCESS_CONTRACT": [0.817512, 0.336429], "edge_d512_21_HOST_HOST_ADAPTER_ADAPTER_to_DEVICE_CASH": [0.98263, 0.30199], "edge_d512_22_HOST_HOST_ADAPTER_ADAPTER_to_DEVICE_DRAWER": [0.297166, 0.0625], "edge_d512_23_HOST_HOST_ADAPTER_ADAPTER_to_DEVICE_DISPLAY": [0.98263, 0.387246], "edge_d512_24_HOST_HOST_ADAPTER_ADAPTER_to_DEVICE_PAYMENT": [0.612333, 0.447368], "edge_d512_25_HOST_HOST_ADAPTER_ADAPTER_to_DEVICE_PRINTER": [0.580751, 0.346939] };
   const shapes = sheet.getShapes();
   const existingNames: { [key: string]: boolean } = {};
   const edgeCandidates: { shapeIndex: number; name: string; title: string; description: string; left: number; top: number; width: number; height: number }[] = [];
@@ -31,7 +31,7 @@ function main(workbook: ExcelScript.Workbook) {
     const isEdge = name.indexOf(edgePrefix) === 0;
     const isNode = name.indexOf(shapePrefix) === 0;
     const isSection = name.indexOf(sectionPrefix) === 0;
-    const isOwnedGroup = name.indexOf(edgeGroupPrefix) === 0 || name.indexOf(shapeGroupPrefix) === 0;
+    const isOwnedGroup = name.indexOf(shapeGroupPrefix) === 0;
     if (!isEdge && !isNode && !isSection && !isOwnedGroup) {
       continue;
     }
@@ -75,17 +75,17 @@ function main(workbook: ExcelScript.Workbook) {
   for (let i = 0; i < edgeCandidates.length; i++) {
     const candidate = edgeCandidates[i];
     const suffix = candidate.name.slice(edgePrefix.length);
-    const groupName = edgeGroupPrefix + suffix;
-    if (existingNames[groupName]) {
+    const labelName = edgeLabelPrefix + suffix;
+    if (existingNames[labelName]) {
       continue;
     }
-    const labelName = edgeLabelPrefix + suffix;
-    const centerX = candidate.left + candidate.width / 2;
-    const centerY = candidate.top + candidate.height / 2;
-    if (!addConnectorLabel(sheet, obstacleBounds, labelName, groupName, shapes[candidate.shapeIndex], candidate.title, candidate.description, centerX, centerY, candidate.width, candidate.height, reviewLeft, reviewRight, reviewTop)) {
+    const anchorRatio = edgeLabelAnchors[candidate.name];
+    const centerX = candidate.left + candidate.width * (anchorRatio ? anchorRatio[0] : 0.5);
+    const centerY = candidate.top + candidate.height * (anchorRatio ? anchorRatio[1] : 0.5);
+    if (!addConnectorLabel(sheet, obstacleBounds, labelName, candidate.title, candidate.description, centerX, centerY, candidate.width, candidate.height, reviewLeft, reviewRight, reviewTop)) {
       failedOverlayIds.push(candidate.name);
     } else {
-      existingNames[groupName] = true;
+      existingNames[labelName] = true;
     }
   }
 
@@ -140,16 +140,22 @@ function applyShapeView(shape: ExcelScript.Shape, fill: string, bordered: boolea
 }
 
 function applyConnectorView(connector: ExcelScript.Shape, line: ExcelScript.Line, dashed: boolean, bidirectional: boolean, color: string, lineWeight: number) {
+  applyConnectorSegmentView(connector, line, dashed, bidirectional, true, color, lineWeight);
+}
+
+function applyConnectorSegmentView(connector: ExcelScript.Shape, line: ExcelScript.Line, dashed: boolean, beginArrow: boolean, endArrow: boolean, color: string, lineWeight: number) {
   connector.getLineFormat().setVisible(true);
   connector.getLineFormat().setColor(color);
   connector.getLineFormat().setWeight(lineWeight);
   if (dashed) {
     connector.getLineFormat().setDashStyle(ExcelScript.ShapeLineDashStyle.dash);
   }
-  if (bidirectional) {
+  if (beginArrow) {
     line.setBeginArrowheadStyle(ExcelScript.ArrowheadStyle.triangle);
   }
-  line.setEndArrowheadStyle(ExcelScript.ArrowheadStyle.triangle);
+  if (endArrow) {
+    line.setEndArrowheadStyle(ExcelScript.ArrowheadStyle.triangle);
+  }
 }
 
 function applyConnectorLabelView(box: ExcelScript.Shape, fill: string, fillTransparency: number, stroke: string, lineWeight: number) {
@@ -274,7 +280,7 @@ function labelHeight(text: string, width: number): number {
   return height;
 }
 
-function addConnectorLabel(sheet: ExcelScript.Worksheet, obstacleBounds: number[][], shapeName: string, groupName: string, connector: ExcelScript.Shape, altTextTitle: string, text: string, centerX: number, centerY: number, connectorWidth: number, connectorHeight: number, reviewLeft: number, reviewRight: number, reviewTop: number): boolean {
+function addConnectorLabel(sheet: ExcelScript.Worksheet, obstacleBounds: number[][], shapeName: string, altTextTitle: string, text: string, centerX: number, centerY: number, connectorWidth: number, connectorHeight: number, reviewLeft: number, reviewRight: number, reviewTop: number): boolean {
   const width = labelWidth(text);
   const height = labelHeight(text, width);
   const box = sheet.addTextBox(text);
@@ -304,10 +310,6 @@ function addConnectorLabel(sheet: ExcelScript.Worksheet, obstacleBounds: number[
   }
   box.setZOrder(ExcelScript.ShapeZOrder.bringToFront);
   appendObstacleBounds(obstacleBounds, box);
-  const group = sheet.addGroup([connector, box]);
-  group.setName(groupName);
-  group.setAltTextTitle(altTextTitle || text);
-  group.setAltTextDescription(text);
   return true;
 }
 

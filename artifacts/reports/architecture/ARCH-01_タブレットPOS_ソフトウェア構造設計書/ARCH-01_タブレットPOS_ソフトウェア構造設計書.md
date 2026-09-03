@@ -4,9 +4,9 @@
 
 文書ID: ARCH-01
 
-第1.0.2版
+第1.0.3版
 
-2026年8月24日
+2026年8月31日
 
 ## 改訂履歴
 
@@ -20,6 +20,7 @@
 | 2026/06/23 | 1.0.0 | 停止要求とデバイスコネクタ（Host）構成図を現行方式に合わせて更新 | VTI    | -      |
 | 2026/06/25 | 1.0.1 | 設定ファイル名、Named Pipe 名、デバイスコネクタ（Host）の通常運用時の自動起動・停止方針を現行構成に合わせて更新 | VTI    | -      |
 | 2026/08/24 | 1.0.2 | DeviceContracts、OPOSコマンド変換、Printer・PaymentのHost統合、およびイベント受信の現行ライフサイクルを反映し、App・DeviceCtrl・Host間の責務を更新 | VTI    | -      |
+| 2026/08/31 | 1.0.3 | device_controller_config.jsonを設定の読込元として維持し、検証済み設定をSQLiteへ反映する構成と保存順序を追加 | VTI    | -      |
 |            |       |                                                                                                                                                                          |        |        |
 
 ## 目次
@@ -149,6 +150,7 @@
 |---|
 | ARCH-02_タブレットPOS_端末アプリケーション構造設計書.docx |
 | デバイスコネクタ構造設計書 |
+| DB-DEVICE-01_デバイス制御設定_SQLiteテーブル定義書.xlsx |
 | PS-HOST-01_タブレットPOS_ホスト_名前付きパイプコマンドサーバー_プログラム仕様書.xlsx |
 | PS-HOST-02_タブレットPOS_ホスト_名前付きパイプデバイスホストアダプター_プログラム仕様書.xlsx |
 | PS-HOST-03_タブレットPOS_ホスト_デバイスコマンドルーター_プログラム仕様書.xlsx |
@@ -664,6 +666,10 @@ Platform-local strategy は以下の方針で実装する。
 | `NamedPipeSettings` | コマンド通信用パイプ `TabletPos.Host.Command`、イベント通知用パイプ `TabletPos.Host.Event`、接続・応答タイムアウト、再試行回数・間隔、およびイベント再接続間隔。`DeviceManager` がコマンド通信とイベント受信の両方へ適用する。 |
 
 `device_controller_config.json` は `TabletPos.DeviceCtrl` の設定ファイルである。package default は `TabletPos.DeviceCtrl/Resources/Raw/device_controller_config.json` に埋め込み、runtime編集後の設定は `FileSystem.AppDataDirectory/device_controller_config.json` に保存する。起動時はruntime設定を優先し、存在しない場合または読込・解析できない場合はpackage defaultを読み込む。
+
+読み込みと検証に成功した設定は、JSONを取込元として `FileSystem.AppDataDirectory/device_controller_config.db` のデバイス制御設定テーブルへ同一トランザクションで反映する。SQLiteは設定の反映先であり、アプリ起動時の設定読込元としては使用しない。
+
+設定保存時は、ランタイム設定ファイルを更新した後、同じ設定をSQLiteへ反映する。両方の保存に成功した場合に、`DeviceManager` が新しい設定を適用する。
 
 `host_device_config.json` は `TabletPos.Host` のデバイス読込source-of-truthである。`TabletPos.DeviceCtrl` の `device_controller_config.json` は Application から見た有効strategy選択であり、デバイスコネクタ（Host）の device loading 設定を置き換えない。
 
@@ -1377,6 +1383,7 @@ commit `b484ac1` 以降、デバイスコネクタ（Host）側の自社管理�
 |---|---|---|
 | `host_device_config.json` | `AppServer/Resources/host_device_config.json` | デバイスコネクタ（Host）側のデバイス読込、runtime class ID、device-specific parameter |
 | `device_controller_config.json` | `TabletPos.DeviceCtrl/Resources/Raw/device_controller_config.json` / `FileSystem.AppDataDirectory/device_controller_config.json` | デバイス制御層（DeviceCtrl）側の有効strategy選択、接続設定、Named Pipe 設定 |
+| `device_controller_config.db` | `FileSystem.AppDataDirectory/device_controller_config.db` | 検証済みのdevice_controller_config.jsonから反映するデバイス制御設定。テーブル構成はDB-DEVICE-01で定義する |
 | Sentry config | app config / environment variable | `TabletPos.Core.Monitoring` の監視設定 |
 | Log sync config | app config / environment variable | `TabletPos.Core.Logging` の保守ログ・収集ログ同期設定 |
 | ローカルログ | `FileSystem.AppDataDirectory/logs` | `TabletPos.Core.Logging` の保守ログ・収集ログ |

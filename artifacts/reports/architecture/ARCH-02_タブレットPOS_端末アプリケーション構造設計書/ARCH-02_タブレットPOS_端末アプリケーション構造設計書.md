@@ -1,8 +1,8 @@
 タブレットPOS
 ARCH-02 端末アプリケーション構造設計書
 文書ID: ARCH-02
-第1.0.1版
-2026年8月24日
+第1.0.2版
+2026年8月31日
 
 ## 改訂履歴
 
@@ -10,6 +10,7 @@ ARCH-02 端末アプリケーション構造設計書
 | :----- | :--- | :--- | :----- | :----- |
 | 2026/06/19 | 1.0.0 | タブレットPOS ソフトウェア全体構造設計書の構成に合わせ、端末アプリケーションの Presentation / Application / Domain / Ports / Infrastructure の責務と実装規約を定義 | VTI | - |
 | 2026/08/24 | 1.0.1 | 現行ソースに合わせてDI登録、DeviceManager初期化、実機確認用strategy provider、Host・イベント受信ライフサイクル、およびDeviceCtrl設定管理の責務を更新 | VTI | - |
+| 2026/08/31 | 1.0.2 | DeviceCtrl設定のJSON読込、SQLite反映、およびJSONを先に保存する更新順序を追加 | VTI | - |
 
 ## 目次
 
@@ -81,6 +82,7 @@ ARCH-02 端末アプリケーション構造設計書
 |---|
 | ARCH-01_タブレットPOS_ソフトウェア構造設計書.docx |
 | デバイスコネクタ構造設計書 |
+| DB-DEVICE-01_デバイス制御設定_SQLiteテーブル定義書.xlsx |
 | PS-HOST-01_タブレットPOS_ホスト_名前付きパイプコマンドサーバー_プログラム仕様書.xlsx |
 | PS-HOST-02_タブレットPOS_ホスト_名前付きパイプデバイスホストアダプター_プログラム仕様書.xlsx |
 | PS-HOST-03_タブレットPOS_ホスト_デバイスコマンドルーター_プログラム仕様書.xlsx |
@@ -241,11 +243,11 @@ Infrastructure は Application / Ports から呼び出される実装であり�
 
 ### 5.4 設定・ログ・永続化
 
-デバイス設定はDeviceCtrl内部の `DeviceControllerConfigService` が `device_controller_config.json` から読み込む。runtime設定ファイルを優先し、存在しない、または有効な設定へ変換できない場合はpackage defaultを読み込み、DeviceManagerへ反映する。端末アプリケーションは設定ファイルを直接読み込まない。
+デバイス設定はDeviceCtrl内部の `DeviceControllerConfigService` が `device_controller_config.json` から読み込む。ランタイム設定を優先し、存在しない、または有効な設定へ変換できない場合はデフォルト設定を読み込む。読み込みと検証に成功した設定を `device_controller_config.db` へ反映した後、`DeviceManager` へ適用する。SQLiteはアプリ起動時の設定読込元としては使用しない。端末アプリケーションは設定ファイルとデータベースを直接操作しない。
 
 ログは `AppLogger` / Serilog を経由し、端末アプリケーションのログファイルは app data 配下の `logs/app.log` を基本とする。
 
-ローカル状態、設定、DB migration は `MauiProgram` と Core layer 登録により初期化される。runtime 設定保存時は app data 配下の `device_controller_config.json` を更新する。
+ローカル状態、設定、およびDB migrationは `MauiProgram` とCore layerの登録により初期化される。デバイス設定の保存時は、app data配下の `device_controller_config.json` を先に更新し、同じ設定を `device_controller_config.db` へ反映する。両方の保存に成功した場合に、`DeviceManager` が新しい設定を適用する。
 
 ## 6. 実装規約
 
@@ -279,7 +281,7 @@ DeviceCtrl 呼び出しを伴う画面は、device 未接続、設定不備、ti
 
 Host再起動またはNamed Pipe切断を検出した場合は、通信異常を操作結果「失敗」として記録し、再起動前のstrategy参照を破棄して画面状態を「未接続」へ戻すことを確認する。後続操作は、`Start`で新しいHostセッションを確立してから実行する。
 
-device_controller_config更新時はJSON変換、DeviceManagerへの再適用、コマンド通信とイベント受信へのNamedPipeSettings反映、および既存画面への影響を確認する。
+device_controller_config更新時は、JSONの検証と保存、SQLiteの4テーブルへの反映、JSONとSQLiteの設定内容の一致、`DeviceManager` への再適用、コマンド通信とイベント受信へのNamedPipeSettings反映、および既存画面への影響を確認する。SQLiteへの反映に失敗した場合は新しい設定を適用せず、保存済みJSONから次回起動時に再反映できることを確認する。
 
 ## 7. 関連資料
 
