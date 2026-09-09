@@ -9,7 +9,7 @@
 | 文書ID | PS-DEVICE-09 |
 | 文書名 | タブレットPOS デバイス制御 デバイス仕様モデル プログラム仕様書 |
 | 対象 | タブレットPOS / デバイス仕様モデル |
-| 版数 | 0.0.2 |
+| 版数 | 1.0.0 |
 | 作成日 | 2026/08/24 |
 | 作成者 | VTI サム |
 | レビュー担当 | SMJ 蒲田 |
@@ -21,8 +21,7 @@
 
 | 版数 | 日付 | 変更内容 | 作成者 | 承認者 |
 | --- | --- | --- | --- | --- |
-| 0.0.2 | 2026/08/24 | 同一モデル境界のDeviceConfigプロパティと接続値変換メソッドを追加し、ソースとの対応を完全化 | VTI サム | SMJ 蒲田 |
-| 0.0.1 | 2026/08/24 | 初版作成 | VTI サム | SMJ 蒲田 |
+| 1.0.0 | 2026/08/24 | 正式版として初版を作成。 | VTI サム | SMJ 蒲田 |
 
 ## クラス情報
 
@@ -30,7 +29,7 @@
 | --- | --- |
 | 機能名 | デバイス仕様モデル |
 | 物理クラス名 | DeviceSpec / DeviceConfig |
-| 名前空間 | TabletPos.DeviceCtrl.Models.Device |
+| 名前空間 | Pos.DeviceCtrl.Models.Device |
 | アクセス修飾子 | public |
 | 継承/実装 | - |
 
@@ -38,7 +37,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/TabletPosBoilerplate/TabletPos.DeviceCtrl/Models/Device/DeviceSpec.cs |
+| ソースファイル | sources/pos-integration/Pos.DeviceCtrl/Models/Device/DeviceSpec.cs |
 | 対象クラス | DeviceSpec / DeviceConfig |
 | 設計対象 | デバイス識別情報、ストラテジー指定、接続設定参照、識別子生成 |
 

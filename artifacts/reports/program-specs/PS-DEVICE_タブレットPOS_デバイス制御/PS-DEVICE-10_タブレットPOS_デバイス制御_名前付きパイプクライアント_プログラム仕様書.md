@@ -9,7 +9,7 @@
 | 文書ID | PS-DEVICE-10 |
 | 文書名 | タブレットPOS デバイス制御 名前付きパイプクライアント プログラム仕様書 |
 | 対象 | タブレットPOS / Hostコマンド通信 |
-| 版数 | 0.0.2 |
+| 版数 | 1.0.0 |
 | 作成日 | 2026/08/24 |
 | 作成者 | VTI サム |
 | レビュー担当 | SMJ 蒲田 |
@@ -21,8 +21,7 @@
 
 | 版数 | 日付 | 変更内容 | 作成者 | 承認者 |
 | --- | --- | --- | --- | --- |
-| 0.0.2 | 2026/08/24 | OposNamedPipeCommandClientとの責務境界を明確化し、本クラスを通信・タイムアウト・再試行の共通実装として整理 | VTI サム | SMJ 蒲田 |
-| 0.0.1 | 2026/08/24 | 初版作成 | VTI サム | SMJ 蒲田 |
+| 1.0.0 | 2026/08/24 | 正式版として初版を作成。 | VTI サム | SMJ 蒲田 |
 
 ## クラス情報
 
@@ -30,7 +29,7 @@
 | --- | --- |
 | 機能名 | Hostコマンド通信 |
 | 物理クラス名 | NamedPipeClient |
-| 名前空間 | TabletPos.DeviceCtrl.Modules |
+| 名前空間 | Pos.DeviceCtrl.Modules |
 | アクセス修飾子 | public sealed |
 | 継承/実装 | INamedPipeClient |
 
@@ -38,7 +37,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/TabletPosBoilerplate/TabletPos.DeviceCtrl/Platforms/Windows/Modules/NamedPipeClient.cs |
+| ソースファイル | sources/pos-integration/Pos.DeviceCtrl/Platforms/Windows/Modules/NamedPipeClient.cs |
 | 対象クラス | NamedPipeClient |
 | 設計対象 | 設定反映、共通通信契約を使用したコマンド送信、パイプ接続、応答待機、再試行、例外変換 |
 
@@ -120,7 +119,7 @@ Windows環境でタブレットPOSからHostプロセスへデバイスコマン
 
 - ① 引数の設定を_settingsへ保持する。
 - ② 設定がnullでなく、PipeNameが旧パイプ名TabletPOSPipeMessageと完全一致するか確認する。
-- ③ 旧パイプ名の場合はPipeNameをTabletPos.Host.Commandへ変更する。
+- ③ 旧パイプ名の場合はPipeNameをPos.DeviceConnector.Commandへ変更する。
 
 備考: 設定がnullの場合は各既定値を使用する。
 
@@ -336,9 +335,9 @@ Windows環境でタブレットPOSからHostプロセスへデバイスコマン
 ## 処理フロー/注意事項
 
 - DeviceManagerはWindows環境でNamedPipeSettingsをConfigureへ反映する。
-- SendCommandは要求をJSON化し、TabletPos.Host.Commandへ送信して成功応答を返す。
+- SendCommandは要求をJSON化し、Pos.DeviceConnector.Commandへ送信して成功応答を返す。
 - パイプ名、接続タイムアウト、応答タイムアウト、再試行回数および再試行間隔の既定値はDeviceContractsで一元管理する。
-- 旧パイプ名TabletPOSPipeMessageを受け取った場合は現行名TabletPos.Host.Commandへ補正する。
+- 旧パイプ名TabletPOSPipeMessageを受け取った場合は現行名Pos.DeviceConnector.Commandへ補正する。
 - 接続失敗は送信前のみ設定回数まで再試行し、送信後の応答失敗は再試行しない。
 - 通信異常はNamedPipeCommunicationException、Host処理失敗はHostCommandExceptionとして区別する。
 - OposNamedPipeCommandClientがStrategy固有の要求生成と結果変換を担当し、NamedPipeClientは共通DTOの送受信、タイムアウトおよび再試行だけを担当する。

@@ -9,7 +9,7 @@
 | 文書ID | PS-DEVICE-06 |
 | 文書名 | タブレットPOS デバイス制御 デバイス構成 プログラム仕様書 |
 | 対象 | タブレットPOS / デバイス構成変換 |
-| 版数 | 0.0.1 |
+| 版数 | 1.0.0 |
 | 作成日 | 2026/08/24 |
 | 作成者 | VTI サム |
 | レビュー担当 | SMJ 蒲田 |
@@ -21,7 +21,7 @@
 
 | 版数 | 日付 | 変更内容 | 作成者 | 承認者 |
 | --- | --- | --- | --- | --- |
-| 0.0.1 | 2026/08/24 | 初版作成 | VTI サム | SMJ 蒲田 |
+| 1.0.0 | 2026/08/24 | 正式版として初版を作成。 | VTI サム | SMJ 蒲田 |
 
 ## クラス情報
 
@@ -29,7 +29,7 @@
 | --- | --- |
 | 機能名 | デバイス構成変換 |
 | 物理クラス名 | DeviceConfiguration |
-| 名前空間 | TabletPos.DeviceCtrl.Configuration |
+| 名前空間 | Pos.DeviceCtrl.Configuration |
 | アクセス修飾子 | public static |
 | 継承/実装 | - |
 
@@ -37,7 +37,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/TabletPosBoilerplate/TabletPos.DeviceCtrl/Configuration/DeviceConfiguration.cs |
+| ソースファイル | sources/pos-integration/Pos.DeviceCtrl/Configuration/DeviceConfiguration.cs |
 | 対象クラス | DeviceConfiguration |
 | 設計対象 | クラス本体、JSON変換条件、デバイス識別キー、異常時動作 |
 

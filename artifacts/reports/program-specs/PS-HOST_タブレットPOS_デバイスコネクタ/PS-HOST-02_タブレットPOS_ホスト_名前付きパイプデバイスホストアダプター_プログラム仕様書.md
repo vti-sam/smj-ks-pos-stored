@@ -9,9 +9,9 @@
 | 文書ID | PS-HOST-02 |
 | 文書名 | タブレットPOS ホスト 名前付きパイプデバイスホストアダプター プログラム仕様書 |
 | 対象 | タブレットPOS / 名前付きパイプデバイスホストアダプター |
-| 版数 | 0.0.4 |
+| 版数 | 1.0.0 |
 | 作成日 | 2026/06/19 |
-| 作成者 | VTI サム, VTI 吉田 |
+| 作成者 | VTI サム |
 | レビュー担当 | SMJ 蒲田 |
 | 承認者 | SMJ 蒲田 |
 | 目的 | 対象クラスの構造、フィールド／プロパティ及びメソッド仕様を定義する。 |
@@ -21,10 +21,7 @@
 
 | 版数 | 日付 | 変更内容 | 作成者 | 承認者 |
 | --- | --- | --- | --- | --- |
-| 0.0.4 | 2026/07/23 | ARCH-HOST-01に合わせて、デバイスコネクタ、タブレットPOS端末アプリ、および通信経路の表記を統一 | VTI サム |  |
-| 0.0.3 | 2026/07/23 | 現行クラス名、ルーティングキー選択、応答送信後のデバイスコネクタ制御処理を更新 | VTI サム |  |
-| 0.0.2 | 2026/06/21 | クラス仕様、フィールド/プロパティ、メソッド仕様を更新 | VTI サム |  |
-| 0.0.1 | 2026/06/19 | 初版作成 | VTI サム |  |
+| 1.0.0 | 2026/07/23 | 正式版として初版を作成。 | VTI サム | SMJ 蒲田 |
 
 ## クラス情報
 
@@ -40,7 +37,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/TabletPosBoilerplate/TabletPos.Host/src/TabletHost/DeviceHost/NamedPipeDeviceHostAdapter.cs |
+| ソースファイル | sources/pos-integration/Pos.DeviceConnector/src/DeviceConnector/DeviceConnector/NamedPipeDeviceHostAdapter.cs |
 | 対象クラス | NamedPipeDeviceHostAdapter |
 | 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 
@@ -255,5 +252,5 @@
 
 ### 注意事項
 
-- 既定 pipe 名は `TabletPos.Host.Command` と `TabletPos.Host.Event`。
+- 既定 pipe 名は `Pos.DeviceConnector.Command` と `Pos.DeviceConnector.Event`。
 - 「Kill」／「ReStart」要求によるデバイスコネクタ制御は、コマンド応答の送信完了後に実行される。

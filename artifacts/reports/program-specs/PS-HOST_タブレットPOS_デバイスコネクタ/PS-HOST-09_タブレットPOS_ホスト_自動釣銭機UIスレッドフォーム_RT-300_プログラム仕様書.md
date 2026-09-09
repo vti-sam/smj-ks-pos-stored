@@ -9,9 +9,9 @@
 | 文書ID | PS-HOST-09 |
 | 文書名 | タブレットPOS ホスト 自動釣銭機UIスレッドフォーム RT-300 プログラム仕様書 |
 | 対象 | タブレットPOS / 自動釣銭機UIスレッドフォーム RT-300 |
-| 版数 | 0.0.5 |
+| 版数 | 1.0.0 |
 | 作成日 | 2026/06/19 |
-| 作成者 | VTI サム, VTI 吉田 |
+| 作成者 | VTI サム |
 | レビュー担当 | SMJ 蒲田 |
 | 承認者 | SMJ 蒲田 |
 | 目的 | 対象クラスの構造、フィールド／プロパティ及びメソッド仕様を定義する。 |
@@ -21,11 +21,7 @@
 
 | 版数 | 日付 | 変更内容 | 作成者 | 承認者 |
 | --- | --- | --- | --- | --- |
-| 0.0.5 | 2026/07/23 | ARCH-HOST-01に合わせて、自動釣銭機とOPOS／OCXの表記を統一 | VTI サム |  |
-| 0.0.4 | 2026/06/25 | 内部フォームの表示可否判定の表現を明確化 | VTI サム |  |
-| 0.0.3 | 2026/06/25 | UIスレッドフォームの位置づけを追記 | VTI サム |  |
-| 0.0.2 | 2026/06/21 | クラス仕様、フィールド/プロパティ、メソッド仕様を更新 | VTI サム |  |
-| 0.0.1 | 2026/06/19 | 初版作成 | VTI サム |  |
+| 1.0.0 | 2026/07/23 | 正式版として初版を作成。 | VTI サム | SMJ 蒲田 |
 
 ## クラス情報
 
@@ -41,7 +37,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/TabletPosBoilerplate/TabletPos.Host/src/TabletDevice/CashChanger/CashChangerByRT300/CashChangerByRT300Form.cs |
+| ソースファイル | sources/pos-integration/Pos.DeviceConnector/src/TabletDevice/CashChanger/CashChangerByRT300/CashChangerByRT300Form.cs |
 | 対象クラス | CashChangerByRt300Form |
 | 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 

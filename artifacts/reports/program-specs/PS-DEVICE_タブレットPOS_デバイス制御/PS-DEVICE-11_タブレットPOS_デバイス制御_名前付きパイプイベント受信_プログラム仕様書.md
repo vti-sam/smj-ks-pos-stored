@@ -9,7 +9,7 @@
 | 文書ID | PS-DEVICE-11 |
 | 文書名 | タブレットPOS デバイス制御 名前付きパイプイベント受信 プログラム仕様書 |
 | 対象 | タブレットPOS / Hostイベント受信 |
-| 版数 | 0.0.2 |
+| 版数 | 1.0.0 |
 | 作成日 | 2026/08/24 |
 | 作成者 | VTI サム |
 | レビュー担当 | SMJ 蒲田 |
@@ -21,8 +21,7 @@
 
 | 版数 | 日付 | 変更内容 | 作成者 | 承認者 |
 | --- | --- | --- | --- | --- |
-| 0.0.2 | 2026/08/24 | Appライフサイクルによる受信開始・停止と、現行コードでEventReceived購読先が未登録である状態を反映 | VTI サム | SMJ 蒲田 |
-| 0.0.1 | 2026/08/24 | 初版作成 | VTI サム | SMJ 蒲田 |
+| 1.0.0 | 2026/08/24 | 正式版として初版を作成。 | VTI サム | SMJ 蒲田 |
 
 ## クラス情報
 
@@ -30,7 +29,7 @@
 | --- | --- |
 | 機能名 | Hostイベント受信 |
 | 物理クラス名 | NamedPipeEventReceiver |
-| 名前空間 | TabletPos.DeviceCtrl.Modules |
+| 名前空間 | Pos.DeviceCtrl.Modules |
 | アクセス修飾子 | public sealed |
 | 継承/実装 | IDeviceEventReceiver |
 
@@ -38,7 +37,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/TabletPosBoilerplate/TabletPos.DeviceCtrl/Platforms/Windows/Modules/NamedPipeEventReceiver.cs |
+| ソースファイル | sources/pos-integration/Pos.DeviceCtrl/Platforms/Windows/Modules/NamedPipeEventReceiver.cs |
 | 対象クラス | NamedPipeEventReceiver |
 | 設計対象 | 設定反映、共通通信契約を使用した受信タスク管理、イベントパイプ接続、再接続、購読者通知 |
 
@@ -229,7 +228,7 @@ Windows環境でHostプロセスのイベント用名前付きパイプへ接続
 ## 処理フロー/注意事項
 
 - DeviceManagerはWindows環境でNamedPipeSettingsをConfigureへ反映する。
-- StartAsyncは受信ループを一つだけ開始し、TabletPos.Host.Eventへ接続する。
+- StartAsyncは受信ループを一つだけ開始し、Pos.DeviceConnector.Eventへ接続する。
 - イベントパイプ名、接続タイムアウトおよび再接続間隔の既定値はDeviceContractsで一元管理する。
 - Hostから受信した1行単位のJSONをNamedPipeDeviceEventへ変換してEventReceivedで通知する。
 - AppはWindow作成・有効化・再開時にHost起動完了後のStartAsyncを実行し、Window停止・破棄時はStopAsyncを実行してからHostを停止する。

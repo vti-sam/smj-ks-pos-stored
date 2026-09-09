@@ -9,9 +9,9 @@
 | 文書ID | PS-HOST-11 |
 | 文書名 | タブレットPOS ホスト カスタマディスプレイ制御 SHARP プログラム仕様書 |
 | 対象 | タブレットPOS / カスタマディスプレイ制御 SHARP |
-| 版数 | 0.0.5 |
+| 版数 | 1.0.0 |
 | 作成日 | 2026/06/19 |
-| 作成者 | VTI サム, VTI 吉田 |
+| 作成者 | VTI サム |
 | レビュー担当 | SMJ 蒲田 |
 | 承認者 | SMJ 蒲田 |
 | 目的 | 対象クラスの構造、フィールド／プロパティ及びメソッド仕様を定義する。 |
@@ -21,11 +21,7 @@
 
 | 版数 | 日付 | 変更内容 | 作成者 | 承認者 |
 | --- | --- | --- | --- | --- |
-| 0.0.5 | 2026/08/24 | 使用開始・終了、能力取得、OPOS共通操作、Descriptor・Window能力判定、および結果共通化を現行ソースへ反映 | VTI サム | SMJ 蒲田 |
-| 0.0.4 | 2026/07/23 | ARCH-HOST-01に合わせて、カスタマディスプレイとタブレットPOS端末アプリの表記を統一 | VTI サム |  |
-| 0.0.3 | 2026/06/25 | 内部フォームの表示扱いを明確化 | VTI サム |  |
-| 0.0.2 | 2026/06/21 | クラス仕様、フィールド/プロパティ、メソッド仕様を更新 | VTI サム |  |
-| 0.0.1 | 2026/06/19 | 初版作成 | VTI サム |  |
+| 1.0.0 | 2026/08/24 | 正式版として初版を作成。 | VTI サム | SMJ 蒲田 |
 
 ## クラス情報
 
@@ -41,7 +37,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/TabletPosBoilerplate/TabletPos.Host/src/TabletDevice/CustomerDisplay/CustomerDisplayBySharp/CustomerDisplayBySharp.cs |
+| ソースファイル | sources/pos-integration/Pos.DeviceConnector/src/TabletDevice/CustomerDisplay/CustomerDisplayBySharp/CustomerDisplayBySharp.cs |
 | 対象クラス | CustomerDisplayBySharp |
 | 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 

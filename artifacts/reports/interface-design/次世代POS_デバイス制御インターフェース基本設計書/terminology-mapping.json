@@ -1,0 +1,78 @@
+{
+  "source": "SVN/4200_グランドデザイン/グランドデザイン_Ver3.0.5.pptx",
+  "purpose": "Đối chiếu thuật ngữ của tài liệu interface và tài liệu kiến trúc, cấu hình liên quan.",
+  "mappings": [
+    {
+      "from": "カスタマーディスプレイ",
+      "to": "カスタマディスプレイ",
+      "source_pages": [
+        20
+      ]
+    },
+    {
+      "from": "レシートプリンター",
+      "to": "レシートプリンタ",
+      "source_pages": [
+        20
+      ]
+    },
+    {
+      "from": "接続方法",
+      "to": "接続方式",
+      "source_pages": [
+        20
+      ]
+    },
+    {
+      "from": "デバイスコネクター",
+      "to": "デバイスコネクタ",
+      "source_pages": [
+        20,
+        33,
+        34
+      ]
+    },
+    {
+      "from": "釣銭機",
+      "to": "自動釣銭機",
+      "source_pages": [
+        20,
+        34
+      ]
+    },
+    {
+      "from": "Device Control (tên phạm vi tổng thể)",
+      "to": "デバイス制御基盤",
+      "source_pages": [
+        32,
+        33
+      ]
+    },
+    {
+      "from": "Device Connector (văn bản tiếng Nhật)",
+      "to": "デバイスコネクタ",
+      "source_pages": [
+        33,
+        34
+      ]
+    }
+  ],
+  "distinctions": [
+    "デバイス制御基盤, デバイス制御ブリッジ và デバイスコネクタ là các thành phần khác nhau, không thay thế lẫn nhau.",
+    "A4プリンタ là thiết bị; A4帳票印刷 là chức năng.",
+    "POSAカード取引 là giao dịch thẻ, không phải thiết bị ngoại vi."
+  ],
+  "preserved": [
+    "Tên file và đường dẫn",
+    "API và tham số cần thiết để tích hợp"
+  ],
+  "documents": [
+    "project-store\\artifacts\\reports\\interface-design\\次世代POS_デバイス制御インターフェース基本設計書\\次世代POS_デバイス制御インターフェース基本設計書.md",
+    "project-store\\artifacts\\reports\\configuration-guides\\CFG-01_タブレットPOS_デバイス制御層設定ファイル記載要領\\CFG-01_タブレットPOS_デバイス制御層設定ファイル記載要領.md",
+    "project-store\\artifacts\\reports\\architecture\\ARCH-00_次世代POS_アーキテクチャ提案書\\ARCH-00_次世代POS_アーキテクチャ提案書.md",
+    "project-store\\artifacts\\reports\\architecture\\ARCH-01_タブレットPOS_ソフトウェア構造設計書\\ARCH-01_タブレットPOS_ソフトウェア構造設計書.md",
+    "project-store\\artifacts\\reports\\architecture\\ARCH-DEVICE-01_次世代POS_デバイス制御クラス構成図\\ARCH-DEVICE-01_次世代POS_デバイス制御クラス構成図.md",
+    "project-store\\artifacts\\reports\\architecture\\ARCH-HOST-01_タブレットPOS_デバイスコネクタ基本設計書\\ARCH-HOST-01_タブレットPOS_デバイスコネクタ基本設計書.md"
+  ],
+  "presentation": "Chỉ trình bày tên nghiệp vụ và model; không đưa mã đăng ký OPOS vào tài liệu."
+}

@@ -9,7 +9,7 @@
 | 文書ID | PS-DEVICE-05 |
 | 文書名 | タブレットPOS デバイス制御 サービス登録 プログラム仕様書 |
 | 対象 | タブレットPOS / デバイス制御サービス登録 |
-| 版数 | 0.0.1 |
+| 版数 | 1.0.0 |
 | 作成日 | 2026/08/24 |
 | 作成者 | VTI サム |
 | レビュー担当 | SMJ 蒲田 |
@@ -21,7 +21,7 @@
 
 | 版数 | 日付 | 変更内容 | 作成者 | 承認者 |
 | --- | --- | --- | --- | --- |
-| 0.0.1 | 2026/08/24 | 初版作成 | VTI サム | SMJ 蒲田 |
+| 1.0.0 | 2026/09/03 | 正式版として初版を作成。 | VTI サム | SMJ 蒲田 |
 
 ## クラス情報
 
@@ -29,7 +29,7 @@
 | --- | --- |
 | 機能名 | デバイス制御サービス登録 |
 | 物理クラス名 | ServiceCollectionExtensions |
-| 名前空間 | TabletPos.DeviceCtrl |
+| 名前空間 | Pos.DeviceCtrl |
 | アクセス修飾子 | public static |
 | 継承/実装 | - |
 
@@ -37,7 +37,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/TabletPosBoilerplate/TabletPos.DeviceCtrl/ServiceCollectionExtensions.cs |
+| ソースファイル | sources/tablet-pos/Pos.DeviceCtrl/ServiceCollectionExtensions.cs |
 | 対象クラス | ServiceCollectionExtensions |
 | 設計対象 | クラス本体、プラットフォーム別サービス登録、メソッド仕様 |
 
@@ -62,15 +62,15 @@
 
 | No | 可視性 | 戻り値 | メソッド名 | 概要 |
 | --- | --- | --- | --- | --- |
-| ① | public static | IServiceCollection | AddTabletPosDeviceCtrl | デバイス制御で使用するサービスをプラットフォーム別に登録する。 |
+| ① | public static | IServiceCollection | AddPosDeviceCtrl | デバイス制御で使用するサービスをプラットフォーム別に登録する。 |
 
 ## メソッド詳細
 
-### ①. AddTabletPosDeviceCtrl
+### ①. AddPosDeviceCtrl
 
 | 項目 | 内容 |
 | --- | --- |
-| シグネチャ | `public static IServiceCollection AddTabletPosDeviceCtrl(this IServiceCollection services)` |
+| シグネチャ | `public static IServiceCollection AddPosDeviceCtrl(this IServiceCollection services)` |
 | 可視性 | public static |
 | 戻り値 | IServiceCollection |
 | 戻り値内容 | デバイス制御サービスを登録したサービスコレクション。 |
@@ -83,7 +83,7 @@
 
 処理内容:
 
-- ① 設定ストレージ、設定サービスおよびデバイスマネージャーをシングルトンとして登録する。
+- ① 設定ストレージにSqliteDeviceControllerConfigStorageを割り当て、設定サービスおよびデバイスマネージャーとともにシングルトンとして登録する。
 - ② Windowsビルドでは、名前付きパイプのコマンド送信とイベント受信をシングルトンとして登録する。
 - ③ Windowsビルドでは、自動釣銭機、カスタマディスプレイ、プリンター、スキャナー、キーボード、ドロアおよび決済の各ストラテジーを一時サービスとして登録する。
 - ④ iOSビルドでは、空実装のイベント受信とiOS用のプリンター、スキャナーおよびカスタマディスプレイの各ストラテジーを登録する。

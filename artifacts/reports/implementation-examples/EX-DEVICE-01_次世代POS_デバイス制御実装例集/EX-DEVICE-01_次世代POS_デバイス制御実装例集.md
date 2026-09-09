@@ -9,9 +9,9 @@
 | 文書ID | EX-DEVICE-01 |
 | 成果物名 | 次世代POS デバイス制御実装例集 |
 | 対象 | アプリケーションサービスから公開デバイス契約を利用するC#実装例 |
-| 版数 | 0.5.1 |
+| 版数 | 1.0.0 |
 | 作成日 | 2026/08/24 |
-| 作成者 | VTI サム, VTI 吉田 |
+| 作成者 | VTI サム |
 | レビュー担当 | SMJ 蒲田 |
 | 承認者 | SMJ 蒲田 |
 | 目的 | ベンダー、OS、または接続方式に依存しない、デバイス別の共通呼出方法を定義する。 |
@@ -20,19 +20,8 @@
 ## 変更履歴
 
 | No. | 版数 | 変更日 | 区分 | 変更箇所（項番等） | 変更内容 | 担当者 |
-|---|---|---|---|---|---|---|
-| 1 | 0.1.0 | 2026/07/21 | 新規 | - | 新規作成。 | VTI サム |
-| 2 | 0.2.0 | 2026/07/21 | 改訂 | 全体 | 共通フローとデバイス別の6実装例に内容を集約。 | VTI サム |
-| 3 | 0.3.0 | 2026/07/22 | 改訂 | 共通利用フロー | アプリケーションサービスの責務境界、スキャナーのタイムアウト、およびカスタマディスプレイのライフサイクルを追加。 | VTI サム |
-| 4 | 0.4.0 | 2026/07/22 | 改訂 | 概要 | device_controller_config.jsonの所有範囲とDeviceManagerによる初期化方法を追加。 | VTI サム |
-| 5 | 0.4.1 | 2026/07/22 | 改訂 | 対象範囲 | WindowsのOPOS／OCX経由と、プラットフォームから周辺機器へ直接接続する経路を分離。 | VTI サム |
-| 6 | 0.4.2 | 2026/07/23 | 改訂 | 対象範囲 | Windows、iOS、およびAndroidの接続方式と責務境界をソースコードに合わせて明確化。 | VTI サム |
-| 7 | 0.4.3 | 2026/07/23 | 改訂 | プラットフォーム対応 | 各実装例の適用可否と現行の実装状況に内容を集約。 | VTI サム |
-| 8 | 0.4.4 | 2026/07/23 | 改訂 | 概要、共通利用フロー | 本書の対象をソフトウェア設計と実装例に整理し、StartとEndがソフトウェアのライフサイクルであることを明確化。 | VTI サム |
-| 9 | 0.4.5 | 2026/07/23 | 改訂 | 全体 | デバイスコネクター、デバイス制御層、ドロア、カスタマディスプレイ、および名前付きパイプの表記を関連文書と統一。 | VTI サム |
-| 10 | 0.4.6 | 2026/07/23 | 改訂 | 共通利用フロー | ARCH-HOST-01に合わせて処理フェーズ、判定、異常経路、およびコネクターの表示を統一。 | VTI サム |
-| 11 | 0.5.0 | 2026/08/24 | 改訂 | 全体 | 日本語のMarkdownを正式なソース・オブ・トゥルースとして再構成し、名前空間とソースパスをTabletPos.*に統一。現行ソースに合わせて専用キーボードのイベント型をKeyboardKeyEventArgsに更新。 | VTI サム |
-| 12 | 0.5.1 | 2026/08/24 | 改訂 | 関連資料 | Program Specificationの参照範囲を現行のPS-DEVICE-01〜11へ更新。 | VTI サム |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | 1.0.0 | 2026/08/24 | 新規 | 全体 | 正式版として初版を作成。 | VTI サム |
 
 ## 目次
 
@@ -136,7 +125,7 @@ StartとEndはソフトウェア上のデバイス・ライフサイクルを示
 | 異常処理 | 背景:#F4CCCC / 枠線:#C00000 / 文字:#111111 / 太さ:2 | 継続できない結果または業務側で判定する結果。 |
 | 処理フェーズ | 背景:透明 / 枠線:#4472C4 / 文字:#111111 / 太さ:2 | 準備から結果返却までの処理区分。 |
 | ラベル | 背景:#FFFFFF / 枠線:透明 / 文字:#111111 / 太さ:0 | コネクター中央で背後の線を隠すラベル。 |
-| 主処理 | 線:#1F4E79 / 線種:実線 / 太さ:2 | 通常の処理順序。 |
+| 主処理 | 線:#548235 / 線種:実線 / 太さ:2 | 通常の処理順序。 |
 | 異常経路 | 線:#C00000 / 線種:破線 / 太さ:2 | 例外またはデバイス処理の異常経路。 |
 
 ### 5.1 共通利用フロー
@@ -152,66 +141,66 @@ StartとEndはソフトウェア上のデバイス・ライフサイクルを示
 %% legend-bind edge.dashed=異常経路
 %% legend-bind label=ラベル
 flowchart LR
-  subgraph PREPARE["（1） 準備"]
-    direction TB
-    PREPARE_REQUEST["① 業務要求を受け付ける"]
-    PREPARE_GET["② ストラテジーを要求する"]
-    PREPARE_SELECT["③ 有効デバイスを選択し<br/>ストラテジーを生成する"]
-    PREPARE_EXISTS{"④ ストラテジーがあるか"}
-    PREPARE_UNAVAILABLE["⑤ デバイスなしの分岐で<br/>処理を終了する"]
-  end
-  subgraph START_PHASE["（2） 開始"]
-    direction TB
-    START_CALL["① Startを呼び出す"]
-    START_DEVICE["② デバイスを初期化<br/>または接続する"]
-    START_OK{"③ Startが成功したか"}
-    START_ERROR["④ Start失敗の分岐で<br/>処理を終了する"]
-  end
-  subgraph DEVICE_ACTION["（3） デバイス操作"]
-    direction TB
-    ACTION_CALL["① デバイス操作を呼び出す"]
-    ACTION_EXECUTE["② プラットフォーム別の<br/>処理を実行する"]
-    ACTION_OK{"③ 結果が有効か"}
-    ACTION_ERROR["④ 操作エラーを記録する"]
-  end
-  subgraph FINISH["（4） 終了"]
-    direction TB
-    FINISH_CALL["① finallyでEndを呼び出す"]
-    FINISH_DEVICE["② 処理を終了または<br/>リソースを解放する"]
-    FINISH_ERROR{"③ 操作エラーがあるか"}
-  end
-  subgraph RESULT["（5） 結果返却"]
-    direction TB
-    RESULT_SUCCESS["① 結果をユースケースへ返す"]
-    RESULT_FAILURE["② エラーを業務処理へ渡す"]
-    RESULT_COMPLETE["③ 完了"]
-  end
+ subgraph PREPARE["（1） 準備"]
+ direction TB
+ PREPARE_REQUEST["① 業務要求を受け付ける"]
+ PREPARE_GET["② ストラテジーを要求する"]
+ PREPARE_SELECT["③ 有効デバイスを選択し<br/>ストラテジーを生成する"]
+ PREPARE_EXISTS{"④ ストラテジーがあるか"}
+ PREPARE_UNAVAILABLE["⑤ デバイスなしの分岐で<br/>処理を終了する"]
+ end
+ subgraph START_PHASE["（2） 開始"]
+ direction TB
+ START_CALL["① Startを呼び出す"]
+ START_DEVICE["② デバイスを初期化<br/>または接続する"]
+ START_OK{"③ Startが成功したか"}
+ START_ERROR["④ Start失敗の分岐で<br/>処理を終了する"]
+ end
+ subgraph DEVICE_ACTION["（3） デバイス操作"]
+ direction TB
+ ACTION_CALL["① デバイス操作を呼び出す"]
+ ACTION_EXECUTE["② プラットフォーム別の<br/>処理を実行する"]
+ ACTION_OK{"③ 結果が有効か"}
+ ACTION_ERROR["④ 操作エラーを記録する"]
+ end
+ subgraph FINISH["（4） 終了"]
+ direction TB
+ FINISH_CALL["① finallyでEndを呼び出す"]
+ FINISH_DEVICE["② 処理を終了または<br/>リソースを解放する"]
+ FINISH_ERROR{"③ 操作エラーがあるか"}
+ end
+ subgraph RESULT["（5） 結果返却"]
+ direction TB
+ RESULT_SUCCESS["① 結果をユースケースへ返す"]
+ RESULT_FAILURE["② エラーを業務処理へ渡す"]
+ RESULT_COMPLETE["③ 完了"]
+ end
 
-  PREPARE_REQUEST --> PREPARE_GET --> PREPARE_SELECT --> PREPARE_EXISTS
-  PREPARE_EXISTS -->|はい| START_CALL
-  PREPARE_EXISTS -->|いいえ| PREPARE_UNAVAILABLE
-  PREPARE_UNAVAILABLE --> RESULT_COMPLETE
-  START_CALL --> START_DEVICE --> START_OK
-  START_OK -->|はい| ACTION_CALL
-  START_OK -->|いいえ| START_ERROR
-  START_DEVICE -.-> START_ERROR
-  START_ERROR --> RESULT_COMPLETE
-  ACTION_CALL --> ACTION_EXECUTE --> ACTION_OK
-  ACTION_OK -->|はい| FINISH_CALL
-  ACTION_OK -->|いいえ| ACTION_ERROR
-  ACTION_EXECUTE -.-> ACTION_ERROR
-  ACTION_ERROR --> FINISH_CALL
-  FINISH_CALL --> FINISH_DEVICE --> FINISH_ERROR
-  FINISH_ERROR -->|いいえ| RESULT_SUCCESS
-  FINISH_ERROR -->|はい| RESULT_FAILURE
-  RESULT_SUCCESS --> RESULT_COMPLETE
-  RESULT_FAILURE --> RESULT_COMPLETE
+ PREPARE_REQUEST --> PREPARE_GET --> PREPARE_SELECT --> PREPARE_EXISTS
+ PREPARE_EXISTS -->|はい| START_CALL
+ PREPARE_EXISTS -.->|いいえ| PREPARE_UNAVAILABLE
+ PREPARE_UNAVAILABLE -.-> RESULT_COMPLETE
+ START_CALL --> START_DEVICE --> START_OK
+ START_OK -->|はい| ACTION_CALL
+ START_OK -.->|いいえ| START_ERROR
+ START_DEVICE -.->|初期化・接続時の例外| START_ERROR
+ START_ERROR -.-> RESULT_COMPLETE
+ ACTION_CALL --> ACTION_EXECUTE --> ACTION_OK
+ ACTION_OK -->|はい| FINISH_CALL
+ ACTION_OK -.->|いいえ| ACTION_ERROR
+ ACTION_EXECUTE -.->|デバイス操作時の例外| ACTION_ERROR
+ ACTION_ERROR -.->|エラー後も終了処理を実行| FINISH_CALL
+ FINISH_CALL --> FINISH_DEVICE --> FINISH_ERROR
+ FINISH_ERROR -->|いいえ| RESULT_SUCCESS
+ FINISH_ERROR -.->|はい| RESULT_FAILURE
+ RESULT_SUCCESS --> RESULT_COMPLETE
+ RESULT_FAILURE -.-> RESULT_COMPLETE
 
-  class PREPARE_REQUEST,PREPARE_GET,START_CALL,ACTION_CALL,ACTION_ERROR,FINISH_CALL,RESULT_SUCCESS app
-  class PREPARE_SELECT,START_DEVICE,ACTION_EXECUTE,FINISH_DEVICE control
-  class PREPARE_EXISTS,START_OK,ACTION_OK,FINISH_ERROR decision
-  class PREPARE_UNAVAILABLE,START_ERROR,RESULT_FAILURE error
-  class RESULT_COMPLETE app
+ class PREPARE_REQUEST,PREPARE_GET,START_CALL,ACTION_CALL,ACTION_ERROR,FINISH_CALL,RESULT_SUCCESS app
+ class PREPARE_SELECT,START_DEVICE,ACTION_EXECUTE,FINISH_DEVICE control
+ class PREPARE_EXISTS,START_OK,ACTION_OK,FINISH_ERROR decision
+ class PREPARE_UNAVAILABLE,START_ERROR,RESULT_FAILURE error
+ class RESULT_COMPLETE app
 ```
 
 #### 図の補足
@@ -258,38 +247,38 @@ flowchart LR
 ### 6.2 C#実装例
 
 ```csharp
-using TabletPos.DeviceCtrl;
+using Pos.DeviceCtrl;
 
-namespace TabletPos.Applications.Application.Devices;
+namespace Pos.Applications.Application.Devices;
 
 public sealed class BarcodeScannerExample(DeviceManager deviceManager)
 {
-    public async Task<string> ReadOnceAsync(
-        TimeSpan timeout,
-        CancellationToken cancellationToken)
-    {
-        if (timeout <= TimeSpan.Zero)
-            throw new ArgumentOutOfRangeException(nameof(timeout));
+ public async Task<string> ReadOnceAsync(
+ TimeSpan timeout,
+ CancellationToken cancellationToken)
+ {
+ if (timeout <= TimeSpan.Zero)
+ throw new ArgumentOutOfRangeException(nameof(timeout));
 
-        var strategy = await deviceManager.GetScannerStrategyAsync()
-            ?? throw new InvalidOperationException("No active scanner is configured.");
+ var strategy = await deviceManager.GetScannerStrategyAsync()
+ ?? throw new InvalidOperationException("No active scanner is configured.");
 
-        await strategy.Start();
-        try
-        {
-            var received = new TaskCompletionSource<string?>(
-                TaskCreationOptions.RunContinuationsAsynchronously);
-            await strategy.Scan(value => received.TrySetResult(value));
-            var value = await received.Task.WaitAsync(timeout, cancellationToken);
-            return string.IsNullOrWhiteSpace(value)
-                ? throw new InvalidOperationException("The scanner returned no data.")
-                : value;
-        }
-        finally
-        {
-            await strategy.End();
-        }
-    }
+ await strategy.Start();
+ try
+ {
+ var received = new TaskCompletionSource<string?>(
+ TaskCreationOptions.RunContinuationsAsynchronously);
+ await strategy.Scan(value => received.TrySetResult(value));
+ var value = await received.Task.WaitAsync(timeout, cancellationToken);
+ return string.IsNullOrWhiteSpace(value)
+ ? throw new InvalidOperationException("The scanner returned no data.")
+ : value;
+ }
+ finally
+ {
+ await strategy.End();
+ }
+ }
 }
 ```
 
@@ -314,33 +303,33 @@ public sealed class BarcodeScannerExample(DeviceManager deviceManager)
 ### 7.2 C#実装例
 
 ```csharp
-using TabletPos.DeviceCtrl;
-using TabletPos.DeviceCtrl.Models.PrinterLayout;
+using Pos.DeviceCtrl;
+using Pos.DeviceCtrl.Models.PrinterLayout;
 
-namespace TabletPos.Applications.Application.Devices;
+namespace Pos.Applications.Application.Devices;
 
 public sealed class ReceiptPrinterExample(DeviceManager deviceManager)
 {
-    public async Task PrintAsync(Receipt receipt)
-    {
-        var strategy = await deviceManager.GetPrinterStrategyAsync()
-            ?? throw new InvalidOperationException("No active receipt printer is configured.");
+ public async Task PrintAsync(Receipt receipt)
+ {
+ var strategy = await deviceManager.GetPrinterStrategyAsync()
+ ?? throw new InvalidOperationException("No active receipt printer is configured.");
 
-        var startResult = await strategy.Start();
-        if (!startResult.Success)
-            throw new InvalidOperationException("The receipt printer could not be started.");
+ var startResult = await strategy.Start();
+ if (!startResult.Success)
+ throw new InvalidOperationException("The receipt printer could not be started.");
 
-        try
-        {
-            var result = await strategy.PrintReceipt(receipt);
-            if (!result.Success)
-                throw new InvalidOperationException("Receipt printing did not report success.");
-        }
-        finally
-        {
-            await strategy.End();
-        }
-    }
+ try
+ {
+ var result = await strategy.PrintReceipt(receipt);
+ if (!result.Success)
+ throw new InvalidOperationException("Receipt printing did not report success.");
+ }
+ finally
+ {
+ await strategy.End();
+ }
+ }
 }
 ```
 
@@ -366,40 +355,40 @@ public sealed class ReceiptPrinterExample(DeviceManager deviceManager)
 ### 8.2 C#実装例
 
 ```csharp
-using TabletPos.DeviceCtrl;
-using TabletPos.DeviceCtrl.Interfaces;
+using Pos.DeviceCtrl;
+using Pos.DeviceCtrl.Interfaces;
 
-namespace TabletPos.Applications.Application.Devices;
+namespace Pos.Applications.Application.Devices;
 
 public sealed class CustomerDisplaySession(DeviceManager deviceManager) : IAsyncDisposable
 {
-    private ICustomerDisplayStrategy? _strategy;
+ private ICustomerDisplayStrategy? _strategy;
 
-    public async Task StartAsync()
-    {
-        if (_strategy is not null) return;
-        var strategy = await deviceManager.GetCustomerDisplayStrategyAsync()
-            ?? throw new InvalidOperationException("No active customer display is configured.");
-        await strategy.Start();
-        _strategy = strategy;
-    }
+ public async Task StartAsync()
+ {
+ if (_strategy is not null) return;
+ var strategy = await deviceManager.GetCustomerDisplayStrategyAsync()
+ ?? throw new InvalidOperationException("No active customer display is configured.");
+ await strategy.Start();
+ _strategy = strategy;
+ }
 
-    public async Task ShowTotalAsync(string itemText, string totalText)
-    {
-        var strategy = _strategy
-            ?? throw new InvalidOperationException("The display session is not started.");
-        await strategy.DisplayTextAt(itemText, row: 0, column: 0);
-        await strategy.DisplayTextAt(totalText, row: 1, column: 0);
-    }
+ public async Task ShowTotalAsync(string itemText, string totalText)
+ {
+ var strategy = _strategy
+ ?? throw new InvalidOperationException("The display session is not started.");
+ await strategy.DisplayTextAt(itemText, row: 0, column: 0, attribute: 0);
+ await strategy.DisplayTextAt(totalText, row: 1, column: 0, attribute: 0);
+ }
 
-    public async ValueTask DisposeAsync()
-    {
-        if (_strategy is null) return;
-        var strategy = _strategy;
-        _strategy = null;
-        try { await strategy.ClearText(); }
-        finally { await strategy.End(); }
-    }
+ public async ValueTask DisposeAsync()
+ {
+ if (_strategy is null) return;
+ var strategy = _strategy;
+ _strategy = null;
+ try { await strategy.ClearText(); }
+ finally { await strategy.End(); }
+ }
 }
 ```
 
@@ -423,27 +412,27 @@ public sealed class CustomerDisplaySession(DeviceManager deviceManager) : IAsync
 ### 9.2 C#実装例
 
 ```csharp
-using TabletPos.DeviceCtrl;
+using Pos.DeviceCtrl;
 
-namespace TabletPos.Applications.Application.Devices;
+namespace Pos.Applications.Application.Devices;
 
 public sealed class DrawerExample(DeviceManager deviceManager)
 {
-    public async Task OpenAsync()
-    {
-        var strategy = await deviceManager.GetDrawerStrategyAsync()
-            ?? throw new InvalidOperationException("No active drawer is configured.");
-        await strategy.Start();
-        try
-        {
-            if (!await strategy.OpenDrawer())
-                throw new InvalidOperationException("The drawer did not report success.");
-        }
-        finally
-        {
-            await strategy.End();
-        }
-    }
+ public async Task OpenAsync()
+ {
+ var strategy = await deviceManager.GetDrawerStrategyAsync()
+ ?? throw new InvalidOperationException("No active drawer is configured.");
+ await strategy.Start();
+ try
+ {
+ if (!await strategy.OpenDrawer())
+ throw new InvalidOperationException("The drawer did not report success.");
+ }
+ finally
+ {
+ await strategy.End();
+ }
+ }
 }
 ```
 
@@ -468,30 +457,30 @@ public sealed class DrawerExample(DeviceManager deviceManager)
 
 ```csharp
 using System.Globalization;
-using TabletPos.DeviceCtrl;
+using Pos.DeviceCtrl;
 
-namespace TabletPos.Applications.Application.Devices;
+namespace Pos.Applications.Application.Devices;
 
 public sealed class CashChangerExample(DeviceManager deviceManager)
 {
-    public async Task DispenseAsync(int amount)
-    {
-        if (amount <= 0)
-            throw new ArgumentOutOfRangeException(nameof(amount));
+ public async Task DispenseAsync(int amount)
+ {
+ if (amount <= 0)
+ throw new ArgumentOutOfRangeException(nameof(amount));
 
-        var strategy = await deviceManager.GetCashChangerStrategyAsync()
-            ?? throw new InvalidOperationException("No active cash changer is configured.");
+ var strategy = await deviceManager.GetCashChangerStrategyAsync()
+ ?? throw new InvalidOperationException("No active cash changer is configured.");
 
-        await strategy.Start();
-        try
-        {
-            await strategy.DispenseChange(amount.ToString(CultureInfo.InvariantCulture));
-        }
-        finally
-        {
-            await strategy.End();
-        }
-    }
+ await strategy.Start();
+ try
+ {
+ await strategy.DispenseChange(amount.ToString(CultureInfo.InvariantCulture));
+ }
+ finally
+ {
+ await strategy.End();
+ }
+ }
 }
 ```
 
@@ -516,40 +505,40 @@ public sealed class CashChangerExample(DeviceManager deviceManager)
 ### 11.2 C#実装例
 
 ```csharp
-using TabletPos.DeviceCtrl;
-using TabletPos.DeviceCtrl.Interfaces;
+using Pos.DeviceCtrl;
+using Pos.DeviceCtrl.Interfaces;
 
-namespace TabletPos.Applications.Application.Devices;
+namespace Pos.Applications.Application.Devices;
 
 public sealed class DedicatedKeyboardExample(DeviceManager deviceManager) : IAsyncDisposable
 {
-    private IKeyboardStrategy? _strategy;
+ private IKeyboardStrategy? _strategy;
 
-    public async Task StartAsync(Action<KeyboardKeyEventArgs> onKeyReceived)
-    {
-        if (_strategy is not null) return;
-        var strategy = await deviceManager.GetKeyboardStrategyAsync()
-            ?? throw new InvalidOperationException("No active dedicated keyboard is configured.");
-        await strategy.Start();
-        try
-        {
-            await strategy.Listen(onKeyReceived);
-            _strategy = strategy;
-        }
-        catch
-        {
-            await strategy.End();
-            throw;
-        }
-    }
+ public async Task StartAsync(Action<KeyboardKeyEventArgs> onKeyReceived)
+ {
+ if (_strategy is not null) return;
+ var strategy = await deviceManager.GetKeyboardStrategyAsync()
+ ?? throw new InvalidOperationException("No active dedicated keyboard is configured.");
+ await strategy.Start();
+ try
+ {
+ await strategy.Listen(onKeyReceived);
+ _strategy = strategy;
+ }
+ catch
+ {
+ await strategy.End();
+ throw;
+ }
+ }
 
-    public async ValueTask DisposeAsync()
-    {
-        if (_strategy is null) return;
-        var strategy = _strategy;
-        _strategy = null;
-        await strategy.End();
-    }
+ public async ValueTask DisposeAsync()
+ {
+ if (_strategy is null) return;
+ var strategy = _strategy;
+ _strategy = null;
+ await strategy.End();
+ }
 }
 ```
 

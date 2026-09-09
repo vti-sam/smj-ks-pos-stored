@@ -9,9 +9,9 @@
 | 文書ID | PS-HOST-13 |
 | 文書名 | タブレットPOS ホスト 名前付きパイプイベントパブリッシャー プログラム仕様書 |
 | 対象 | タブレットPOS / 名前付きパイプイベントパブリッシャー |
-| 版数 | 0.0.3 |
+| 版数 | 1.0.0 |
 | 作成日 | 2026/07/23 |
-| 作成者 | VTI サム, VTI 吉田 |
+| 作成者 | VTI サム |
 | レビュー担当 | SMJ 蒲田 |
 | 承認者 | SMJ 蒲田 |
 | 目的 | 対象クラスの構造、フィールド／プロパティ及びメソッド仕様を定義する。 |
@@ -21,9 +21,7 @@
 
 | 版数 | 日付 | 変更内容 | 作成者 | 承認者 |
 | --- | --- | --- | --- | --- |
-| 0.0.3 | 2026/08/24 | 未接続時イベントの保留、クライアント単位の順序送信、非同期送信異常時の接続除外、および停止時の資源解放を現行ソースへ統一 | VTI サム | SMJ 蒲田 |
-| 0.0.2 | 2026/07/23 | ARCH-HOST-01に合わせて、デバイスコネクタ、タブレットPOS端末アプリ、およびイベント通知経路の表記を統一 | VTI サム |  |
-| 0.0.1 | 2026/07/23 | 初版作成 | VTI サム |  |
+| 1.0.0 | 2026/08/24 | 正式版として初版を作成。 | VTI サム | SMJ 蒲田 |
 
 ## クラス情報
 
@@ -39,7 +37,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/TabletPosBoilerplate/TabletPos.Host/src/TabletHost/DeviceHost/NamedPipeEventPublisher.cs |
+| ソースファイル | sources/pos-integration/Pos.DeviceConnector/src/DeviceConnector/DeviceConnector/NamedPipeEventPublisher.cs |
 | 対象クラス | NamedPipeEventPublisher |
 | 設計対象 | クラス本体、フィールド/プロパティ、メソッド仕様 |
 

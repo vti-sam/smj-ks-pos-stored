@@ -94,10 +94,8 @@ Link nội bộ dùng path từ workspace root với prefix `project-store/`.
 
 - `memory/` chỉ lưu historical context có relevance trực tiếp với project,
   không phải active source-of-truth hoặc changelog của rule/skill/tool chung.
-- **Memory Opt-in Gate**: không tự query, đọc, ghi, sync hoặc rebuild memory
-  trong task thường. Chỉ thao tác khi User yêu cầu rõ, hoặc sau khi User trả lời
-  đồng ý cho câu hỏi tùy chọn ở cuối task; việc hoàn tất task không phụ thuộc
-  vào câu trả lời này.
+- Điều kiện tự lưu và quyền retrieval tuân theo **Memory chọn lọc** tại root
+  `AGENTS.md`; không hỏi lưu memory ở cuối lượt.
 - Trước khi ghi phải có project anchor kiểm chứng được; trước file mới phải tìm
   memory cùng anchor/identifier để update đúng outcome.
 - Body phải tách đúng bốn mục `Outcome`, `Evidence`, `Unresolved` và
@@ -148,5 +146,5 @@ Link nội bộ dùng path từ workspace root với prefix `project-store/`.
 - Knowledge/memory, management và artifact phải pass completion contract của
   owner skill; verify ở phạm vi hẹp nhất chứng minh được thay đổi.
 - Sau mỗi write, kiểm tra diff và status của root cùng nested `project-store/`.
-- Chỉ khi User đã opt-in lưu memory thì closeout mới báo kết quả write/read-back;
-  task thường không chạy memory closeout và không cần trạng thái memory.
+- Không thêm trạng thái memory vào closeout thông thường. Chỉ báo khi User yêu
+  cầu hoặc có lỗi lưu ảnh hưởng tới khả năng dùng lại kết quả.

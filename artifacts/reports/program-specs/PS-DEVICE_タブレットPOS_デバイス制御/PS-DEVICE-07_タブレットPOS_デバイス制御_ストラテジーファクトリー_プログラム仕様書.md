@@ -9,7 +9,7 @@
 | 文書ID | PS-DEVICE-07 |
 | 文書名 | タブレットPOS デバイス制御 ストラテジーファクトリー プログラム仕様書 |
 | 対象 | タブレットPOS / デバイスストラテジー生成 |
-| 版数 | 0.0.1 |
+| 版数 | 1.0.0 |
 | 作成日 | 2026/08/24 |
 | 作成者 | VTI サム |
 | レビュー担当 | SMJ 蒲田 |
@@ -21,7 +21,7 @@
 
 | 版数 | 日付 | 変更内容 | 作成者 | 承認者 |
 | --- | --- | --- | --- | --- |
-| 0.0.1 | 2026/08/24 | 初版作成 | VTI サム | SMJ 蒲田 |
+| 1.0.0 | 2026/08/24 | 正式版として初版を作成。 | VTI サム | SMJ 蒲田 |
 
 ## クラス情報
 
@@ -29,7 +29,7 @@
 | --- | --- |
 | 機能名 | デバイスストラテジー生成 |
 | 物理クラス名 | StrategyFactory<TBase> |
-| 名前空間 | TabletPos.DeviceCtrl.Factory |
+| 名前空間 | Pos.DeviceCtrl.Factory |
 | アクセス修飾子 | public static |
 | 継承/実装 | - |
 
@@ -37,7 +37,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/TabletPosBoilerplate/TabletPos.DeviceCtrl/Factory/StrategyFactory.cs |
+| ソースファイル | sources/pos-integration/Pos.DeviceCtrl/Factory/StrategyFactory.cs |
 | 対象クラス | StrategyFactory<TBase> |
 | 設計対象 | 型登録、ストラテジー生成、デバイス仕様およびロガーの初期化 |
 

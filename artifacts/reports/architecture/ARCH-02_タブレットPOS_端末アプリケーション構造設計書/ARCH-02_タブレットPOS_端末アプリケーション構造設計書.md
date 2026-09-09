@@ -1,49 +1,73 @@
+# ARCH-02 タブレットPOS 端末アプリケーション構造設計書
+
 タブレットPOS
 ARCH-02 端末アプリケーション構造設計書
 文書ID: ARCH-02
-第1.0.2版
-2026年8月31日
+第1.0.0版
+2026年9月3日
 
-## 改訂履歴
+## 表紙
 
-| 改訂日 | 版数 | 内容 | 改訂者 | 承認者 |
-| :----- | :--- | :--- | :----- | :----- |
-| 2026/06/19 | 1.0.0 | タブレットPOS ソフトウェア全体構造設計書の構成に合わせ、端末アプリケーションの Presentation / Application / Domain / Ports / Infrastructure の責務と実装規約を定義 | VTI | - |
-| 2026/08/24 | 1.0.1 | 現行ソースに合わせてDI登録、DeviceManager初期化、実機確認用strategy provider、Host・イベント受信ライフサイクル、およびDeviceCtrl設定管理の責務を更新 | VTI | - |
-| 2026/08/31 | 1.0.2 | DeviceCtrl設定のJSON読込、SQLite反映、およびJSONを先に保存する更新順序を追加 | VTI | - |
+文書情報を以下に示す。
+
+| 項目 | 内容 |
+|---|---|
+| 文書ID | ARCH-02 |
+| PJ名 | タブレットPOS |
+| システム名 | タブレットPOS |
+| 成果物名 | 端末アプリケーション構造設計書 |
+| 版数 | 1.0.0 |
+| 作成日 | 2026/09/03 |
+
+## 変更履歴
+
+| No. | 版数 | 変更日 | 区分 | 変更箇所（項番等） | 変更内容 | 担当者 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | 1.0.0 | 2026/09/03 | 新規 | 全体 | 正式版として初版を作成。 | VTI |
 
 ## 目次
 
+```text
+1. イントロダクション
+2. 基本アーキテクチャ
+3. プレゼンテーション層
+4. アプリケーション層
+5. ドメイン／ポート／インフラストラクチャ
+6. 実装規約
+7. 関連資料
+8. 結論
+```
+
 - [1. イントロダクション](#1-イントロダクション)
-  - [1.1 本書の位置づけ](#11-本書の位置づけ)
-  - [1.2 前提事項](#12-前提事項)
-  - [1.3 対象読者](#13-対象読者)
-  - [1.4 関連ドキュメント](#14-関連ドキュメント)
+ - [1.1 本書の位置づけ](#11-本書の位置づけ)
+ - [1.2 前提事項](#12-前提事項)
+ - [1.3 対象読者](#13-対象読者)
+ - [1.4 関連ドキュメント](#14-関連ドキュメント)
 - [2. 基本アーキテクチャ](#2-基本アーキテクチャ)
-  - [2.1 端末アプリケーションの責務](#21-端末アプリケーションの責務)
-  - [2.2 レイヤ構成](#22-レイヤ構成)
-  - [2.3 依存関係ルール](#23-依存関係ルール)
-  - [2.4 採用技術](#24-採用技術)
-- [3. Presentation 層](#3-presentation-層)
-  - [3.1 構成要素](#31-構成要素)
-  - [3.2 画面と ViewModel](#32-画面と-viewmodel)
-  - [3.3 Shell 画面遷移](#33-shell-画面遷移)
-  - [3.4 画面ライフサイクル](#34-画面ライフサイクル)
-- [4. Application 層](#4-application-層)
-  - [4.1 構成要素](#41-構成要素)
-  - [4.2 サービス実装規約](#42-サービス実装規約)
-  - [4.3 デバイス制御層との連携](#43-デバイス制御層との連携)
-  - [4.4 非同期処理とエラー処理](#44-非同期処理とエラー処理)
-- [5. Domain / Ports / Infrastructure](#5-domain--ports--infrastructure)
-  - [5.1 Domain 層](#51-domain-層)
-  - [5.2 Ports 層](#52-ports-層)
-  - [5.3 Infrastructure 層](#53-infrastructure-層)
-  - [5.4 設定・ログ・永続化](#54-設定ログ永続化)
+ - [2.1 端末アプリケーションの責務](#21-端末アプリケーションの責務)
+ - [2.2 レイヤ構成](#22-レイヤ構成)
+ - [2.3 依存関係ルール](#23-依存関係ルール)
+ - [2.4 採用技術](#24-採用技術)
+- [3. プレゼンテーション層](#3-プレゼンテーション層)
+ - [3.1 構成要素](#31-構成要素)
+ - [3.2 画面とビューモデル](#32-画面とビューモデル)
+ - [3.3 シェル画面遷移](#33-シェル画面遷移)
+ - [3.4 画面ライフサイクル](#34-画面ライフサイクル)
+- [4. アプリケーション層](#4-アプリケーション層)
+ - [4.1 構成要素](#41-構成要素)
+ - [4.2 サービス実装規約](#42-サービス実装規約)
+ - [4.3 デバイス制御層との連携](#43-デバイス制御層との連携)
+ - [4.4 非同期処理とエラー処理](#44-非同期処理とエラー処理)
+- [5. ドメイン／ポート／インフラストラクチャ](#5-ドメインポートインフラストラクチャ)
+ - [5.1 ドメイン層](#51-ドメイン層)
+ - [5.2 ポート層](#52-ポート層)
+ - [5.3 インフラストラクチャ層](#53-インフラストラクチャ層)
+ - [5.4 設定・ログ・永続化](#54-設定ログ永続化)
 - [6. 実装規約](#6-実装規約)
-  - [6.1 DI 登録規約](#61-di-登録規約)
-  - [6.2 画面追加規約](#62-画面追加規約)
-  - [6.3 命名・配置規約](#63-命名配置規約)
-  - [6.4 テスト・検証観点](#64-テスト検証観点)
+ - [6.1 DI 登録規約](#61-di-登録規約)
+ - [6.2 画面追加規約](#62-画面追加規約)
+ - [6.3 命名・配置規約](#63-命名配置規約)
+ - [6.4 テスト・検証観点](#64-テスト検証観点)
 - [7. 関連資料](#7-関連資料)
 - [8. 結論](#8-結論)
 
@@ -53,7 +77,7 @@ ARCH-02 端末アプリケーション構造設計書
 
 本書は、タブレットPOS 端末アプリケーションの内部構造を定義する構造設計書である。
 
-対象は `TabletPos.Applications` を中心とし、UI、画面遷移、ViewModel、Application service、設定サービス、DeviceCtrl 呼び出し境界を扱う。
+対象は `Pos.Applications` を中心とし、UI、画面遷移、ViewModel、Application service、設定サービス、DeviceCtrl 呼び出し境界を扱う。
 
 本書は個別業務画面の詳細仕様ではない。個別機能の入力項目、業務判定、帳票レイアウトは各機能仕様書で定義する。
 
@@ -65,7 +89,7 @@ ARCH-02 端末アプリケーション構造設計書
 
 画面遷移は MAUI Shell route と `IRouteRegistry` / `INavigationService` の組み合わせで管理する。
 
-デバイス制御は `TabletPos.DeviceCtrl` の strategy interface を経由し、画面層から OPOS / OCX / Named Pipe を直接呼び出さない。
+デバイス制御は `Pos.DeviceCtrl` の strategy interface を経由し、画面層から OPOS / OCX / Named Pipe を直接呼び出さない。
 
 ### 1.3 対象読者
 
@@ -81,7 +105,7 @@ ARCH-02 端末アプリケーション構造設計書
 | ファイル名 |
 |---|
 | ARCH-01_タブレットPOS_ソフトウェア構造設計書.docx |
-| デバイスコネクタ構造設計書 |
+| デバイスコネクタ基本設計書 |
 | DB-DEVICE-01_デバイス制御設定_SQLiteテーブル定義書.xlsx |
 | PS-HOST-01_タブレットPOS_ホスト_名前付きパイプコマンドサーバー_プログラム仕様書.xlsx |
 | PS-HOST-02_タブレットPOS_ホスト_名前付きパイプデバイスホストアダプター_プログラム仕様書.xlsx |
@@ -107,14 +131,14 @@ ARCH-02 端末アプリケーション構造設計書
 
 ![端末アプリケーション構造図](ARCH-02_タブレットPOS_端末アプリケーション構造図.svg)
 
-図内の太字はclass名または仕様IDを示し、下段は基本設計レベルの責務を示す。端末アプリケーション層は画面、ViewModel、navigation、DeviceManager初期化、およびHost・イベント受信のライフサイクルを担当する。デバイス設定の読込・保存とstrategy選択は `TabletPos.DeviceCtrl`、物理制御は `TabletPos.DeviceCtrl` と `TabletPos.Host` へ委譲する。
+図内の太字はclass名または仕様IDを示し、下段は基本設計レベルの責務を示す。端末アプリケーション層は画面、ViewModel、navigation、DeviceManager初期化、およびHost・イベント受信のライフサイクルを担当する。デバイス設定の読込・保存とstrategy選択は `Pos.DeviceCtrl`、物理制御は `Pos.DeviceCtrl` と `Pos.DeviceConnector` へ委譲する。
 
-| 設計要素 | 対象 class / file | 基本設計上の役割 |
+| 設計要素 | 対象クラス／ファイル | 基本設計上の役割 |
 |---|---|---|
 | 起動構成 | `MauiProgram`, `DependencyInjection` | MAUI appの生成、`AddApplicationServices`によるDI構成、ローカルDB migration、および`DeviceManager.InitializeAsync`の起動を行う |
 | 画面遷移 | `AppShell`, `IRouteRegistry`, `INavigationService` | Shell route 登録、route 名の一元管理、ViewModel からの画面遷移要求を扱う |
 | 画面構成 | `MainPage`, `MainPageViewModel` | 画面表示、入力状態、command、navigation / device service 呼び出しを分離する |
-| デバイス設定 | `DeviceManager`, `DeviceControllerConfigService` | 端末アプリケーションは`DeviceManager.InitializeAsync`だけを起動し、DeviceCtrl内部の設定サービスが`device_controller_config.json`を読み込んで設定を反映する |
+| デバイス設定 | `DeviceManager`, `DeviceControllerConfigService` | 端末アプリケーションは`DeviceManager.InitializeAsync`だけを起動し、DeviceCtrl内部の設定サービスが起動時JSON取込、SQLiteへの再登録・フォールバック読込、および設定適用を行う |
 | 実機確認用デバイス境界 | `DeviceIntegrationTestViewModel`, `IDeviceIntegrationTestStrategyProvider`, `DeviceIntegrationTestStrategyProvider` | ViewModelからDeviceManagerを直接参照せず、デバイス種別ごとの公開strategyを取得する |
 | デバイスサービスライフサイクル | `App`, `IHostProcessManager`, `IDeviceEventReceiver` | Window作成・有効化・再開時にHostとイベント受信を開始し、停止・破棄時にイベント受信とHostを停止する |
 
@@ -148,10 +172,10 @@ Infrastructure は Ports の実装として配置し、OS API、ファイル、H
 | Navigation | MAUI Shell | Route based navigation |
 | DI | Microsoft.Extensions.DependencyInjection | Page / ViewModel / service 登録 |
 | Logging | Serilog / AppLogger | アプリケーションログ |
-| Device boundary | TabletPos.DeviceCtrl | 周辺機器制御 strategy 呼び出し |
-| Shared device contract | TabletPos.DeviceContracts | DeviceCtrlとHostで共有する名前付きパイプ要求・応答・イベントDTO、識別子、および通信既定値 |
+| Device boundary | Pos.DeviceCtrl | 周辺機器制御 strategy 呼び出し |
+| Shared device contract | Pos.DeviceContracts | DeviceCtrlとHostで共有する名前付きパイプ要求・応答・イベントDTO、識別子、および通信既定値 |
 
-## 3. Presentation 層
+## 3. プレゼンテーション層
 
 ### 3.1 構成要素
 
@@ -161,7 +185,7 @@ Infrastructure は Ports の実装として配置し、OS API、ファイル、H
 
 `Views.Base.BaseContentPage` と `BaseViewModel` は loading 表示、lifecycle、header 表示、キー入力処理の共通基盤である。
 
-### 3.2 画面と ViewModel
+### 3.2 画面とビューモデル
 
 画面は Page と ViewModel を 1 対 1 に近い粒度で構成する。
 
@@ -169,7 +193,7 @@ ViewModel は画面状態、入力検証、画面操作、Application service �
 
 ViewModel から他画面へ遷移する場合は `INavigationService` を利用し、`Shell.Current.GoToAsync` を各 ViewModel に分散させない。
 
-### 3.3 Shell 画面遷移
+### 3.3 シェル画面遷移
 
 `AppShell.RegisterRoutes` は `IRouteRegistry.RegisterRoute<TPage, TViewModel>` を呼び出し、Shell route と ViewModel から route を引く対応を登録する。
 
@@ -187,13 +211,13 @@ ViewModel から他画面へ遷移する場合は `INavigationService` を利用
 
 `OnResumingAsync` / `OnStoppingAsync` はアプリ foreground / background 遷移時の再接続、保存、停止処理に利用する。
 
-## 4. Application 層
+## 4. アプリケーション層
 
 ### 4.1 構成要素
 
 Application層は、Navigation、Hostプロセス管理、実機確認用strategy provider、共通Result、command / query handler契約など、画面をまたぐ処理を提供する。デバイス設定の読込と保存はDeviceCtrl内部の責務とする。
 
-`MauiProgram` は `AddApplicationServices()` を呼び出す。`DependencyInjection.AddApplicationServices` は `AddTabletPosDeviceCtrl()` によりDeviceCtrlを登録し、`IHostProcessManager`、`IDeviceIntegrationTestStrategyProvider`、`IRouteRegistry`、`INavigationService`、`AppShell`、Page、およびViewModelをDI登録する。
+`MauiProgram` は `AddApplicationServices()` を呼び出す。`DependencyInjection.AddApplicationServices` は `AddPosDeviceCtrl()` によりDeviceCtrlを登録し、`IHostProcessManager`、`IDeviceIntegrationTestStrategyProvider`、`IRouteRegistry`、`INavigationService`、`AppShell`、Page、およびViewModelをDI登録する。
 
 ### 4.2 サービス実装規約
 
@@ -221,21 +245,21 @@ Service は UI 表示そのものではなく、画面から呼び出される�
 
 DeviceCtrl 呼び出し失敗時の表示文言、再試行可否、画面遷移は Application / Presentation 側で判断する。
 
-## 5. Domain / Ports / Infrastructure
+## 5. ドメイン／ポート／インフラストラクチャ
 
-### 5.1 Domain 層
+### 5.1 ドメイン層
 
 Domain 層は業務ルール、金額計算、販売状態、入力可否など、UI と device implementation から独立した判断を保持する。
 
 現行ソースでは画面実装に近い処理が多いため、業務ルールが増える場合は ViewModel から Domain service / model へ段階的に分離する。
 
-### 5.2 Ports 層
+### 5.2 ポート層
 
 Ports は Application 層が利用する抽象契約である。
 
 例として、`INavigationService`、`IRouteRegistry`、`IHostProcessManager`、`IDeviceIntegrationTestStrategyProvider`、DeviceCtrlの各strategy interfaceが該当する。
 
-### 5.3 Infrastructure 層
+### 5.3 インフラストラクチャ層
 
 Infrastructure 層は OS API、ファイルアクセス、HTTP、MAUI platform dispatcher、local settings、device SDK などの実装詳細を担当する。
 
@@ -243,17 +267,17 @@ Infrastructure は Application / Ports から呼び出される実装であり�
 
 ### 5.4 設定・ログ・永続化
 
-デバイス設定はDeviceCtrl内部の `DeviceControllerConfigService` が `device_controller_config.json` から読み込む。ランタイム設定を優先し、存在しない、または有効な設定へ変換できない場合はデフォルト設定を読み込む。読み込みと検証に成功した設定を `device_controller_config.db` へ反映した後、`DeviceManager` へ適用する。SQLiteはアプリ起動時の設定読込元としては使用しない。端末アプリケーションは設定ファイルとデータベースを直接操作しない。
+デバイス設定はDeviceCtrl内部の `DeviceControllerConfigService` がアプリ起動時に `device_controller_config.json` の取込を試行する。読込・検証できた場合は `device_controller_config.db` へ再登録し、SQLiteから設定を復元する。JSONを取得または使用できない場合は既存SQLiteへフォールバックし、SQLiteも未初期化の場合だけ組込みデフォルトを登録する。実行中はSQLiteから読み込み、`DeviceManager` へ適用する。端末アプリケーションは設定ファイルとデータベースを直接操作しない。
 
 ログは `AppLogger` / Serilog を経由し、端末アプリケーションのログファイルは app data 配下の `logs/app.log` を基本とする。
 
-ローカル状態、設定、およびDB migrationは `MauiProgram` とCore layerの登録により初期化される。デバイス設定の保存時は、app data配下の `device_controller_config.json` を先に更新し、同じ設定を `device_controller_config.db` へ反映する。両方の保存に成功した場合に、`DeviceManager` が新しい設定を適用する。
+ローカル状態、設定、およびDB migrationは `MauiProgram` とCore layerの登録により初期化される。デバイス設定の保存時は `device_controller_config.db` を更新し、保存に成功した場合に `DeviceManager` が新しい設定を適用する。JSONへは書き戻さず、外部JSONの変更は次回アプリ起動時に再取込する。
 
 ## 6. 実装規約
 
 ### 6.1 DI 登録規約
 
-Page、ViewModel、Serviceは `DependencyInjection.AddApplicationServices` で登録し、`MauiProgram` はこの拡張メソッドを一度呼び出す。DeviceCtrlの登録は `AddTabletPosDeviceCtrl` へ委譲する。
+Page、ViewModel、Serviceは `DependencyInjection.AddApplicationServices` で登録し、`MauiProgram` はこの拡張メソッドを一度呼び出す。DeviceCtrlの登録は `AddPosDeviceCtrl` へ委譲する。
 
 画面常駐または共有状態が必要なものは Singleton、画面遷移ごとに状態を分離するものは Transient とする。
 
@@ -269,7 +293,7 @@ ViewModel は `BaseViewModel` を継承し、初期化、再表示、画面離�
 
 画面名は `{Feature}Page`、ViewModel は `{Feature}PageViewModel` を基本とする。
 
-Application serviceは用途別folderにinterfaceと実装を配置する。Hostプロセス管理は `Application/Devices`、実機確認用strategy providerは `Application/Devices/Testing`、navigationは `Ports/Navigation` と `Infrastructure/Navigation` に分離する。DeviceCtrlの設定サービスは `TabletPos.DeviceCtrl/Configuration` に配置する。
+Application serviceは用途別folderにinterfaceと実装を配置する。Hostプロセス管理は `Application/Devices`、実機確認用strategy providerは `Application/Devices/Testing`、navigationは `Ports/Navigation` と `Infrastructure/Navigation` に分離する。DeviceCtrlの設定サービスは `Pos.DeviceCtrl/Configuration` に配置する。
 
 Platform 固有処理は platform service として分離し、ViewModel に OS 分岐を埋め込まない。
 
@@ -281,19 +305,19 @@ DeviceCtrl 呼び出しを伴う画面は、device 未接続、設定不備、ti
 
 Host再起動またはNamed Pipe切断を検出した場合は、通信異常を操作結果「失敗」として記録し、再起動前のstrategy参照を破棄して画面状態を「未接続」へ戻すことを確認する。後続操作は、`Start`で新しいHostセッションを確立してから実行する。
 
-device_controller_config更新時は、JSONの検証と保存、SQLiteの4テーブルへの反映、JSONとSQLiteの設定内容の一致、`DeviceManager` への再適用、コマンド通信とイベント受信へのNamedPipeSettings反映、および既存画面への影響を確認する。SQLiteへの反映に失敗した場合は新しい設定を適用せず、保存済みJSONから次回起動時に再反映できることを確認する。
+device_controller_config更新時は、入力JSONの検証、SQLiteの4テーブルへの再登録、SQLiteからの設定復元、`DeviceManager` への再適用、コマンド通信とイベント受信へのNamedPipeSettings反映、および既存画面への影響を確認する。JSONを取得できない再起動では前回SQLiteへ保存した設定を使用できること、SQLiteへの保存に失敗した場合は新しい設定を適用しないことを確認する。
 
 ## 7. 関連資料
 
-- `sources/TabletPosBoilerplate/TabletPos.Applications/MauiProgram.cs`
-- `sources/TabletPosBoilerplate/TabletPos.Applications/App.xaml.cs`
-- `sources/TabletPosBoilerplate/TabletPos.Applications/Composition/DependencyInjection.cs`
-- `sources/TabletPosBoilerplate/TabletPos.Applications/AppShell.xaml.cs`
-- `sources/TabletPosBoilerplate/TabletPos.Applications/Presentation/ViewModels/Base/BaseViewModel.cs`
-- `sources/TabletPosBoilerplate/TabletPos.Applications/Application/Devices/Testing/DeviceIntegrationTestStrategyProvider.cs`
-- `sources/TabletPosBoilerplate/TabletPos.DeviceCtrl/Configuration/DeviceControllerConfigService.cs`
-- `sources/TabletPosBoilerplate/TabletPos.DeviceCtrl/DeviceManager.cs`
-- `sources/TabletPosBoilerplate/TabletPos.DeviceCtrl/Interfaces/`
+- `sources/pos-integration/Pos.Applications/MauiProgram.cs`
+- `sources/pos-integration/Pos.Applications/App.xaml.cs`
+- `sources/pos-integration/Pos.Applications/Composition/DependencyInjection.cs`
+- `sources/pos-integration/Pos.Applications/AppShell.xaml.cs`
+- `sources/pos-integration/Pos.Applications/Presentation/ViewModels/Base/BaseViewModel.cs`
+- `sources/pos-integration/Pos.Applications/Application/Devices/Testing/DeviceIntegrationTestStrategyProvider.cs`
+- `sources/pos-integration/Pos.DeviceCtrl/Configuration/DeviceControllerConfigService.cs`
+- `sources/pos-integration/Pos.DeviceCtrl/DeviceManager.cs`
+- `sources/pos-integration/Pos.DeviceCtrl/Interfaces/`
 
 ## 8. 結論
 

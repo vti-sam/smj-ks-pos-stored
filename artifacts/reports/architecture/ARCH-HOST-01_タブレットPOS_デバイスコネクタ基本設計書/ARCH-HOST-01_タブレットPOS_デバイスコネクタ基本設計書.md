@@ -3,7 +3,7 @@
 タブレットPOS
 ARCH-HOST-01 デバイスコネクタ基本設計書
 文書ID: ARCH-HOST-01
-第0.3.11版
+第1.0.0版
 2026年8月31日
 
 ## 表紙
@@ -18,9 +18,9 @@ ARCH-HOST-01 デバイスコネクタ基本設計書
 | 成果物名 | デバイスコネクタ基本設計書 |
 | 文書名 | タブレットPOS デバイスコネクタ基本設計書 |
 | 対象 | デバイスコネクタ、およびタブレットPOS端末アプリとのプロセス間連携 |
-| 版数 | 0.3.11 |
+| 版数 | 1.0.0 |
 | 作成日 | 2026/08/31 |
-| 作成者 | VTI サム、VTI　吉田 |
+| 作成者 | VTI サム |
 | レビュー担当 | SMJ 鎌田 |
 | 承認者 | SMJ 鎌田 |
 | 目的 | タブレットPOS端末アプリから直接利用できない既存のOPOS、OCX、ActiveX、および既存DLLを別プロセスで利用するため、デバイスコネクタの役割、機能、インターフェース、設定、エラー処理、およびログを基本設計として定義する。 |
@@ -32,29 +32,8 @@ ARCH-HOST-01 デバイスコネクタ基本設計書
 本書の版数と主な変更内容を示す。
 
 | No. | 版数 | 変更日 | 区分 | 変更箇所（項番等） | 変更内容 | 担当者 |
-|---:|---|---|---|---|---|---|
-| 1 | 0.2.8 | 2026/07/08 | 新規 | 全体 | デバイスコネクタの基本設計書として新規作成。 | VTI サム |
-| 2 | 0.2.16 | 2026/07/10 | 変更 | 全体 | 本文と図の論理名称を日本語へ統一し、物理識別子の記載箇所を整理。 | VTI サム |
-| 3 | 0.2.21 | 2026/07/10 | 変更 | 全体 | 全体構成を、3つの責務領域と主経路を示す全体概要図、および詳細構成図の2段構成へ変更。 | VTI サム |
-| 4 | 0.2.23 | 2026/07/11 | 変更 | 全体 | 同期応答経路とプロセス終了確認を明確化し、デバイス操作失敗と通信失敗を分離。通常の停止制御と対象外デバイス記載をエラー一覧から整理。 | VTI サム |
-| 5 | 0.2.24 | 2026/07/11 | 変更 | 全体 | プロセス起動準備確認、所有プロセスの停止、非同期イベント受信、通信再試行、設定読込、エラー処理、およびログを設計方針として確定。全体構成とライフサイクルを更新。 | VTI サム |
-| 6 | 0.2.25 | 2026/07/11 | 変更 | 全体 | 通信再試行、再送禁止、イベント再接続、異常種別、および稼働確認の時間条件を各処理図へ反映。 | VTI サム |
-| 7 | 0.2.26 | 2026/07/11 | 変更 | 全体 | デバイス操作要求処理とライフサイクルを通常運用フローへ統合し、起動・操作・終了および主要異常経路を1図で確認できる構成へ変更。 | VTI サム |
-| 8 | 0.2.27 | 2026/07/11 | 変更 | 全体 | 理解しにくい構成要素だけに表示する補足コメントの表示規約を凡例へ追加。 | VTI サム |
-| 9 | 0.2.28 | 2026/07/11 | 変更 | 全体 | 通常運用フローと重複していたライフサイクル設計を統合し、管理責務および保守・デバッグ時の扱いを通常運用説明へ集約。 | VTI サム |
-| 10 | 0.2.29 | 2026/07/11 | 変更 | 全体 | 対象デバイスを対象範囲へ統合し、単独のデバイス別設計を廃止。機能詳細の手順表示と各一覧の番号付けを整理。 | VTI サム |
-| 11 | 0.3.0 | 2026/07/12 | 変更 | 全体 | システム全体、責務グループ、構成要素、機能の順に理解できる構成へ再設計。3つの図と本文の役割を整理し、重複していた処理説明を各設計章へ集約。 | VTI サム |
-| 12 | 0.3.1 | 2026/07/13 | 変更 | 全体 | 図の関係について、矢印の向きと色・線種の役割を分離し、主処理、コマンド通信、実機制御、非同期イベント、設定参照、および異常経路の表示規約を明確化。 | VTI サム |
-| 13 | 0.3.2 | 2026/07/13 | 変更 | 全体 | 補足コメントの色指定と透過率の記載を分離し、淡い黄色の背景、黄土色の枠線、および濃い灰色の文字で表示する規約を明確化。 | VTI サム |
-| 14 | 0.3.3 | 2026/07/14 | 変更 | 全体 | MAUIアプリと既存のOPOS、OCX、ActiveX、および既存DLLの実行環境差異を別プロセス化の理由として明確化。デバイスコネクタの実行形態、将来機器の対応方針、および名称を整理し、旧通信方式に関する記載を削除。 | VTI サム |
-| 15 | 0.3.4 | 2026/07/17 | 変更 | 全体 | 対象デバイスのメーカー・機種名とOPOS／OCXの利用範囲を明確化。デバイスコネクタ起動時のMutexによる二重起動防止、およびアプリ終了時の停止処理を運用シナリオ、機能設計、図、実装対応へ反映。 | VTI サム |
-| 16 | 0.3.5 | 2026/07/21 | 変更 | 全体 | CAFIS Arch Saturnを初期対象に追加し、対象範囲、全体構成、通信・デバイス設計、異常・運用設計、実装対応へ反映。デバイスコネクタのプロセス管理、実機制御、Windows導入・保守の責任分界を明確化。 | VTI サム |
-| 17 | 0.3.6 | 2026/07/21 | 変更 | 全体 | CAFIS Arch Saturnのアプリ側有効デバイス区分、アプリ側設定ID、デバイスID、およびデバイスコネクタ側のid／name／classIdを設計値として確定し、対象範囲、通信・データ設計、設定・デバイス設計、実装対応へ反映。未確定表現と抽象的な設定例を整理。 | VTI サム |
-| 18 | 0.3.7 | 2026/07/24 | 変更 | 全体 | 運用シナリオ図と説明のフェーズおよび全処理番号を一致させ、非同期イベントをデバイス操作フェーズへ統合。デバイス制御設定の名称をランタイム設定／デフォルト設定へ統一し、図の表示規約を凡例参照方式へ統一。 | VTI サム |
-| 19 | 0.3.8 | 2026/07/27 | 変更 | 全体 | ケーズ様が利用する対応機種をRZ-4DP3カスタマディスプレイおよびUP-J46DW3ドロアへ統一し、OCXの登録名を対応機種として扱う記載を削除。 | VTI サム |
-| 20 | 0.3.9 | 2026/08/17 | 変更 | 全体 | SHARP 80mmレシートプリンターを初期対象へ追加し、アプリ側設定、デバイスコネクタ側設定、OPOS POSPrinter通信、印字範囲、異常・運用設計、および実装対応を反映。CAFIS Arch Saturnのライフサイクル識別値と要求ペイロードを実装済み契約へ統一。 | VTI サム |
-| 21 | 0.3.10 | 2026/08/24 | 変更 | 全体 | 共通デバイス通信契約、OPOS要求変換とパイプ通信の責務境界、5種類のHost実装、およびイベント受信の現行実装状態を最新ソースへ統一。 | VTI サム |
-| 22 | 0.3.11 | 2026/08/31 | 変更 | デバイス制御設定管理 | device_controller_config.jsonを読込元として維持し、検証済み設定をSQLiteへ反映する起動処理、保存順序、および異常時の扱いを追加。 | VTI サム |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | 1.0.0 | 2026/09/03 | 新規 | 全体 | 正式版として初版を作成。 | VTI サム |
 
 ## 目次
 
@@ -93,7 +72,7 @@ ARCH-HOST-01 デバイスコネクタ基本設計書
 
 アプリケーション層は業務上必要なデバイス操作をデバイス制御層へ依頼する。デバイス制御層の各OPOS Strategyは`OposNamedPipeCommandClient`へ委譲し、同クラスが要求生成と応答変換を共通化する。`NamedPipeClient`はコマンド通信用パイプの接続、送受信、再試行、およびタイムアウトを担当する。デバイスコネクタは要求順序の保証、対象デバイスの選択、既存デバイス資源の呼出し、および非同期イベント配信を担当する。この境界により、アプリケーション層はOPOS、OCX、ActiveX、既存DLL、またはデバイスコネクタ内部実装を直接呼び出さない。
 
-要求、応答、イベント、識別子、ペイロードキー、および通信既定値は`TabletPos.DeviceContracts`を共通デバイス通信契約として共有する。アプリはライフサイクルに合わせて`NamedPipeEventReceiver`を開始・停止するためイベント受信処理は稼働するが、現行コードには`EventReceived`の購読先がなく、受信イベントをアプリケーション層のユースケースへ引き渡していない。
+要求、応答、イベント、識別子、ペイロードキー、および通信既定値は`Pos.DeviceContracts`を共通デバイス通信契約として共有する。アプリはライフサイクルに合わせて`NamedPipeEventReceiver`を開始・停止するためイベント受信処理は稼働するが、現行コードには`EventReceived`の購読先がなく、受信イベントをアプリケーション層のユースケースへ引き渡していない。
 
 デバイスコネクタは、現行POSで使用している既存デバイスを継続利用するための互換境界とする。今後追加する機器は、既存デバイス資源を必要とする場合を除き、端末アプリから直接制御する。
 
@@ -168,17 +147,17 @@ ARCH-HOST-01 デバイスコネクタ基本設計書
 
 ### 3.2 対象デバイス
 
-初期対象は、GLORY RT-300／RAD-300自動釣銭機、SHARP UP-J46DW3ドロア、SHARP RZ-4DP3カスタマディスプレイ、CAFIS Arch Saturn決済端末、およびSHARP 80mmレシートプリンターの5種類とする。機種名またはOPOS論理名、デバイスコネクタで利用する既存デバイス資源、およびアプリ側設定とデバイスコネクタ側設定の対応を次に示す。
+初期対象は、GLORY RT-300／RAD-300自動釣銭機、SHARP UP-J36DW3ドロア、SHARP RZ-4DP1カスタマディスプレイ、CAFIS Arch Saturn決済端末、およびSHARP 80mmレシートプリンタの5種類とする。機種名、デバイスコネクタで利用する既存デバイス資源、およびアプリ側設定とデバイスコネクタ側設定の対応を次に示す。
 
 #### 3.2.1 デバイスID対応
 
 | 対象デバイス | メーカー／機種名 | 利用する既存デバイス資源 | アプリ側有効デバイス区分 | アプリ側設定ID | デバイスコネクタ要求のデバイス識別値 | デバイスコネクタ側設定の識別子／クラス識別子 |
 |---|---|---|---|---|---|---|
-| 自動釣銭機 | GLORY RT-300／RAD-300 | OPOS／OCX | local_cashchanger | cash_changer_glory_rt300_windows | 釣銭機（CashChanger） | CashChanger / CashChanger1 |
-| ドロア | SHARP UP-J46DW3 | OCX | local_drawer | drawer_external_windows | キャッシュドロア（CashDrawer） | CashDrawer / CashDrawer1 |
-| カスタマディスプレイ | SHARP RZ-4DP3 | OPOS／OCX | local_display | customer_display_sharp_windows | カスタマーディスプレイ（CustomerDisplay） | CustomerDisplay / CustomerDisplay1 |
+| 自動釣銭機 | GLORY RT-300／RAD-300 | OPOS／OCX | local_cashchanger | cash_changer_glory_rt300_windows | 自動釣銭機（CashChanger） | CashChanger / CashChanger1 |
+| ドロア | SHARP UP-J36DW3 | OCX | local_drawer | drawer_external_windows | キャッシュドロア（CashDrawer） | CashDrawer / CashDrawer1 |
+| カスタマディスプレイ | SHARP RZ-4DP1 | OPOS／OCX | local_display | customer_display_sharp_windows | カスタマディスプレイ（CustomerDisplay） | CustomerDisplay / CustomerDisplay1 |
 | 決済端末 | CAFIS Arch Saturn | OPOS／OCX（CAT） | local_payment | payment_cafis_arch_saturn_windows | 決済端末（Payment） | Payment / Payment1 |
-| レシートプリンター | SHARP 80mmレシートプリンター（OPOS論理名：SHARPRECPRT80） | OPOS POSPrinter | local_printer | printer_sharp_windows | プリンター（Printer） | Printer / POSPrinter1 |
+| レシートプリンタ | SHARP 80mmレシートプリンタ | OPOS POSPrinter | local_printer | printer_sharp_windows | プリンター（Printer） | Printer / POSPrinter1 |
 
 ### 3.3 対象外
 
@@ -194,7 +173,7 @@ ARCH-HOST-01 デバイスコネクタ基本設計書
 
 ### 3.4 将来機器の対応方針
 
-今後追加する機器は、既存のOPOS、OCX、ActiveX、または既存DLLを利用する必要がある場合を除き、iPadと同様に端末アプリから直接制御する。初期対象のCAFIS Arch Saturn決済端末とSHARP 80mmレシートプリンターはWindowsのOPOS／OCXまたはOPOS POSPrinterを利用するため、デバイスコネクタ経由で制御する。デバイスコネクタは、現行POSで使用している既存デバイスを継続利用する場合に限定して使用する。
+今後追加する機器は、既存のOPOS、OCX、ActiveX、または既存DLLを利用する必要がある場合を除き、iPadと同様に端末アプリから直接制御する。初期対象のCAFIS Arch Saturn決済端末とSHARP 80mmレシートプリンタはWindowsのOPOS／OCXまたはOPOS POSPrinterを利用するため、デバイスコネクタ経由で制御する。デバイスコネクタは、現行POSで使用している既存デバイスを継続利用する場合に限定して使用する。
 
 デバイスコネクタ経由で制御する既存デバイスの使用が終了した後は、デバイスコネクタを不要な資材として整理できる構成とする。
 
@@ -206,7 +185,6 @@ ARCH-HOST-01 デバイスコネクタ基本設計書
 |---|---|---|
 | ARCH-01 | タブレットPOS ソフトウェア構造設計書 | タブレットPOS全体構造の前提資料。 |
 | ARCH-02 | タブレットPOS 端末アプリケーション構造設計書 | 端末アプリ側の構造の前提資料。 |
-| ARCH-03 | タブレットPOS デバイスコネクタ構造設計書 | デバイスコネクタの構造、責務、主要コンポーネントの前提資料。 |
 | CFG-01 | タブレットPOS デバイス制御設定ファイル記載要領 | device_controller_config.jsonとhost_device_config.jsonの記載要領。 |
 | DB-DEVICE-01 | デバイス制御設定 SQLiteテーブル定義書 | device_controller_config.jsonから反映する4テーブルの物理構成。 |
 | PS-HOST-01 | 名前付きパイプコマンドサーバー | コマンド受信部のプログラム仕様。 |
@@ -217,8 +195,8 @@ ARCH-HOST-01 デバイスコネクタ基本設計書
 | PS-HOST-06 | デバイスマネージャー | デバイス生成、保持、検索、停止の仕様。 |
 | PS-HOST-07 | デバイスベース | デバイス共通基底処理の仕様。 |
 | PS-HOST-08 | 自動釣銭機制御 GLORY RT-300／RAD-300 | GLORY RT-300／RAD-300自動釣銭機のプログラム仕様。 |
-| PS-HOST-10 | ドロア制御 SHARP UP-J46DW3 | SHARP UP-J46DW3ドロアのプログラム仕様。 |
-| PS-HOST-11 | カスタマディスプレイ制御 SHARP RZ-4DP3 | SHARP RZ-4DP3カスタマディスプレイのプログラム仕様。 |
+| PS-HOST-10 | ドロア制御 SHARP UP-J36DW3 | SHARP UP-J36DW3ドロアのプログラム仕様。 |
+| PS-HOST-11 | カスタマディスプレイ制御 SHARP RZ-4DP1 | SHARP RZ-4DP1カスタマディスプレイのプログラム仕様。 |
 | DC-PAY-WIN-001 | OPOS CAFIS Arch決済ストラテジー | CAFIS Arch Saturnの接続、切断、疎通確認、決済実行、および再印字の設計。 |
 
 ## 05_全体構成_01
@@ -246,7 +224,7 @@ ARCH-HOST-01 デバイスコネクタ基本設計書
 | ◇ | 背景:#FFF2CC / 枠線:#BF9000 / 文字:#111111 / 太さ:2 | 次の処理を決める判定を示す。 |
 | 異常処理 | 背景:#F4CCCC / 枠線:#C00000 / 文字:#111111 / 太さ:2 | 起動中止、通信失敗、または強制終了などの主要な異常結果を示す。 |
 | 運用フェーズ | 背景:#FFFFFF / 枠線:#4472C4 / 文字:#111111 / 太さ:2 | 起動、デバイス操作、および終了の区切りを示す。 |
-| 初期対象デバイスの論理名 | 背景:#FFFFFF / 枠線:#7F7F7F / 文字:#111111 / 太さ:1 | 図内では釣銭機（RT-300）、キャッシュドロア（SHARP）、カスタマーディスプレイ（SHARP）、決済端末（CAFIS Arch Saturn）、レシートプリンター（SHARP 80mm）と表す。 |
+| 初期対象デバイスの論理名 | 背景:#FFFFFF / 枠線:#7F7F7F / 文字:#111111 / 太さ:1 | 図内では自動釣銭機（RT-300）、キャッシュドロア（SHARP）、カスタマディスプレイ（SHARP）、決済端末（CAFIS Arch Saturn）、レシートプリンタ（SHARP 80mm）と表す。 |
 | コネクターラベル | 背景:#FFFFFF / 枠線:透明 / 文字:#111111 / 太さ:0 | コネクター中央に重ね、背後の線を隠して関係を読みやすくするラベルを示す。 |
 | ━━▶ 主処理 | 線:#1F4E79 / 線種:実線 / 太さ:2 | 通常の処理順または一方向の要求を示す。 |
 | ◀━━▶ コマンド通信 | 線:#1F4E79 / 線種:実線 / 太さ:3 | アプリからの要求とデバイスコネクタからの同期応答を同じ通信経路で送受信する関係を示す。 |
@@ -262,24 +240,24 @@ ARCH-HOST-01 デバイスコネクタ基本設計書
 %%{init: {"flowchart": {"defaultRenderer": "dagre", "curve": "linear", "nodeSpacing": 54, "rankSpacing": 92}}}%%
 %% diagram-profile=system-context
 flowchart LR
-    %% legend-bind class.app=（1）タブレットPOS端末アプリ
-    %% legend-bind class.host=（2）デバイスコネクタ
-    %% legend-bind class.device=（3）周辺機器
-    %% legend-bind edge.default=◀━━▶ コマンド通信
-    %% legend-bind edge.1=┄┄▶ 非同期イベント
-    %% legend-bind edge.2=◀━━▶ 実機制御
-    %% legend-bind label=コネクターラベル
-    APP("（1） タブレットPOS端末アプリ<br/>MAUIプロセス<br/>業務判断／デバイス操作の依頼")
-    HOST("（2） デバイスコネクタ<br/>Windows別プロセス<br/>既存デバイス資源の呼出し")
-    DEVICE("（3） 周辺機器<br/>自動釣銭機：GLORY RT-300／RAD-300<br/>ドロア：SHARP UP-J46DW3<br/>カスタマディスプレイ：SHARP RZ-4DP3<br/>決済端末：CAFIS Arch Saturn<br/>レシートプリンター：SHARP 80mm")
+ %% legend-bind class.app=（1）タブレットPOS端末アプリ
+ %% legend-bind class.host=（2）デバイスコネクタ
+ %% legend-bind class.device=（3）周辺機器
+ %% legend-bind edge.default=◀━━▶ コマンド通信
+ %% legend-bind edge.1=┄┄▶ 非同期イベント
+ %% legend-bind edge.2=◀━━▶ 実機制御
+ %% legend-bind label=コネクターラベル
+ APP("（1） タブレットPOS端末アプリ<br/>MAUIプロセス<br/>業務判断／デバイス操作の依頼")
+ HOST("（2） デバイスコネクタ<br/>Windows別プロセス<br/>既存デバイス資源の呼出し")
+ DEVICE("（3） 周辺機器<br/>自動釣銭機：GLORY RT-300／RAD-300<br/>ドロア：SHARP UP-J36DW3<br/>カスタマディスプレイ：SHARP RZ-4DP1<br/>決済端末：CAFIS Arch Saturn<br/>レシートプリンター：SHARP 80mm")
 
-    APP <-->|コマンド通信用パイプ<br/>要求（アプリ→コネクタ）<br/>同期応答（コネクタ→アプリ）| HOST
-    HOST -.->|イベント通知用パイプ<br/>非同期イベント（コネクタ→DeviceCtrl受信処理）| APP
-    HOST <-->|実機制御（コネクタ→機器）<br/>結果（機器→コネクタ）| DEVICE
+ APP <-->|コマンド通信用パイプ<br/>要求（アプリ→コネクタ）<br/>同期応答（コネクタ→アプリ）| HOST
+ HOST -.->|イベント通知用パイプ<br/>非同期イベント（コネクタ→DeviceCtrl受信処理）| APP
+ HOST <-->|実機制御（コネクタ→機器）<br/>結果（機器→コネクタ）| DEVICE
 
-    class APP app
-    class HOST host
-    class DEVICE device
+ class APP app
+ class HOST host
+ class DEVICE device
 ```
 
 #### 5.1.2 論理構成図
@@ -287,119 +265,113 @@ flowchart LR
 ```mermaid
 ---
 config:
-  layout: elk
-  elk:
-    mergeEdges: false
-    nodePlacementStrategy: BRANDES_KOEPF
-    cycleBreakingStrategy: GREEDY
-  flowchart:
-    curve: linear
-    nodeSpacing: 26
-    rankSpacing: 50
+ layout: elk
+ elk:
+ mergeEdges: false
+ nodePlacementStrategy: BRANDES_KOEPF
+ cycleBreakingStrategy: GREEDY
+ flowchart:
+ curve: linear
+ nodeSpacing: 26
+ rankSpacing: 50
 ---
 flowchart LR
-    %% diagram-profile=logical-architecture
-    %% legend-bind container=責務グループ（責務領域内の内枠）
-    %% legend-bind container.APP=（1）タブレットPOS端末アプリ
-    %% legend-bind container.HOST=（2）デバイスコネクタ
-    %% legend-bind container.DEVICE=（3）周辺機器
-    %% legend-bind class.component=角丸ブロック
-    %% legend-bind edge.default=━━▶ 主処理
-    %% legend-bind edge.1=┈┈▶ 設定参照
-    %% legend-bind edge.7=┈┈▶ 設定参照
-    %% legend-bind edge.12=┄┄▶ 非同期イベント
-    %% legend-bind edge.13=━━▶ ライフサイクル
-    %% legend-bind edge.14=◀━━▶ コマンド通信
-    %% legend-bind edge.15=┄┄▶ 非同期イベント
-    %% legend-bind edge.16=┈┈▶ 設定参照
-    %% legend-bind edge.17=┈┈▶ 設定参照
-    %% legend-bind edge.18=┈┈▶ 設定参照
-    %% legend-bind edge.19=┈┈▶ 設定参照
-    %% legend-bind edge.20=◀━━▶ 実機制御
-    %% legend-bind edge.21=◀━━▶ 実機制御
-    %% legend-bind edge.22=◀━━▶ 実機制御
-    %% legend-bind edge.23=◀━━▶ 実機制御
-    %% legend-bind edge.24=◀━━▶ 実機制御
-    %% legend-bind label=コネクターラベル
-    subgraph APP["（1） タブレットPOS端末アプリ（アプリプロセス）"]
-        subgraph APP_COORD["① アプリケーション層（業務・プロセス管理）"]
-            BUSINESS("①-1 画面・業務処理")
-            LIFECYCLE("①-2 アプリライフサイクル")
-            PROCESS("①-3 デバイスコネクタ<br/>プロセス管理")
-            LIFECYCLE --> PROCESS
-        end
-        subgraph APP_ACCESS["② デバイス制御層"]
-            SELECT("②-1 設定・制御方式選択")
-            COMMAND("②-2 コマンド通信")
-            SYNC_RESULT("②-3 同期結果変換")
-            EVENT_RX("②-4 イベント受信<br/>現行：購読先未登録")
-            APP_SETTING("②-5 アプリ側設定")
-            CONTRACT("②-6 共通デバイス通信契約<br/>TabletPos.DeviceContracts<br/>要求・応答・イベント・識別子・既定値")
-            APP_SETTING -.-> SELECT
-            SELECT --> COMMAND --> SYNC_RESULT
-        end
-        BUSINESS --> SELECT
-        SYNC_RESULT --> BUSINESS
-    end
+ %% diagram-profile=logical-architecture
+ %% legend-bind container=責務グループ（責務領域内の内枠）
+ %% legend-bind container.APP=（1）タブレットPOS端末アプリ
+ %% legend-bind container.HOST=（2）デバイスコネクタ
+ %% legend-bind container.DEVICE=（3）周辺機器
+ %% legend-bind class.component=角丸ブロック
+ %% legend-bind edge.default=━━▶ 主処理
+ %% legend-bind edge.1=┈┈▶ 設定参照
+ %% legend-bind edge.7=┈┈▶ 設定参照
+ %% legend-bind edge.12=┄┄▶ 非同期イベント
+ %% legend-bind edge.13=━━▶ ライフサイクル
+ %% legend-bind edge.14=◀━━▶ コマンド通信
+ %% legend-bind edge.15=┈┈▶ 設定参照
+ %% legend-bind edge.16=┈┈▶ 設定参照
+ %% legend-bind edge.17=┈┈▶ 設定参照
+ %% legend-bind edge.18=◀━━▶ 実機制御
+ %% legend-bind edge.19=◀━━▶ 実機制御
+ %% legend-bind edge.20=◀━━▶ 実機制御
+ %% legend-bind edge.21=◀━━▶ 実機制御
+ %% legend-bind edge.22=◀━━▶ 実機制御
+ %% legend-bind label=コネクターラベル
+ subgraph APP["（1） タブレットPOS端末アプリ（アプリプロセス）"]
+ subgraph APP_COORD["① アプリケーション層（業務・プロセス管理）"]
+ BUSINESS("①-1 画面・業務処理")
+ LIFECYCLE("①-2 アプリライフサイクル")
+ PROCESS("①-3 デバイスコネクタ<br/>プロセス管理")
+ LIFECYCLE --> PROCESS
+ end
+ subgraph APP_ACCESS["② デバイス制御層"]
+ SELECT("②-1 設定・制御方式選択")
+ COMMAND("②-2 コマンド通信")
+ SYNC_RESULT("②-3 同期結果変換")
+ APP_SETTING("②-4 アプリ側設定")
+ CONTRACT("②-5 共通デバイス通信契約<br/>Pos.DeviceContracts<br/>要求・応答・イベント・識別子・既定値")
+ APP_SETTING -.-> SELECT
+ SELECT --> COMMAND --> SYNC_RESULT
+ end
+ BUSINESS --> SELECT
+ SYNC_RESULT --> BUSINESS
+ end
 
-    subgraph HOST["（2） デバイスコネクタ（Windows別プロセス）"]
-        subgraph HOST_SERVICE["① プロセス・通信サービス"]
-            RUNTIME("①-1 起動・停止管理<br/>Mutexによる二重起動防止")
-            SERVER("①-2 コマンド受付")
-            EVENT("①-3 イベント配信")
-            RUNTIME --> SERVER
-        end
-        subgraph HOST_EXEC["② コマンド実行"]
-            ORDER("②-1 デバイスID別順序制御")
-            CONTROL("②-2 要求変換・コマンド制御")
-            MANAGER("②-3 デバイス管理")
-            HOST_SETTING("②-4 デバイスコネクタ側設定")
-            HOST_SETTING -.-> MANAGER
-            ORDER --> CONTROL --> MANAGER
-        end
-        subgraph HOST_ADAPTER["③ 既存デバイス資源呼出し"]
-            ADAPTER("③-1 ホスト内部実装<br/>OPOS／OCX／既存DLL")
-        end
-        SERVER --> ORDER
-        MANAGER --> ADAPTER
-        MANAGER -.->|デバイス処理結果| EVENT
-    end
+ subgraph HOST["（2） デバイスコネクタ（Windows別プロセス）"]
+ subgraph HOST_SERVICE["① プロセス・通信サービス"]
+ RUNTIME("①-1 起動・停止管理<br/>Mutexによる二重起動防止")
+ SERVER("①-2 コマンド受付")
+ EVENT("①-3 イベント配信")
+ RUNTIME --> SERVER
+ end
+ subgraph HOST_EXEC["② コマンド実行"]
+ ORDER("②-1 デバイスID別順序制御")
+ CONTROL("②-2 要求変換・コマンド制御")
+ MANAGER("②-3 デバイス管理")
+ HOST_SETTING("②-4 デバイスコネクタ側設定")
+ HOST_SETTING -.-> MANAGER
+ ORDER --> CONTROL --> MANAGER
+ end
+ subgraph HOST_ADAPTER["③ 既存デバイス資源呼出し"]
+ ADAPTER("③-1 ホスト内部実装<br/>OPOS／OCX／既存DLL")
+ end
+ SERVER --> ORDER
+ MANAGER --> ADAPTER
+ MANAGER -.->|デバイス処理結果| EVENT
+ end
 
-    subgraph DEVICE["（3） 周辺機器"]
-        CASH("① 自動釣銭機<br/>GLORY RT-300／RAD-300")
-        DRAWER("② ドロア<br/>SHARP UP-J46DW3")
-        DISPLAY("③ カスタマディスプレイ<br/>SHARP RZ-4DP3")
-        PAYMENT("④ 決済端末<br/>CAFIS Arch Saturn")
-        PRINTER("⑤ レシートプリンター<br/>SHARP 80mm")
-    end
+ subgraph DEVICE["（3） 周辺機器"]
+ CASH("① 自動釣銭機<br/>GLORY RT-300／RAD-300")
+ DRAWER("② ドロア<br/>SHARP UP-J36DW3")
+ DISPLAY("③ カスタマディスプレイ<br/>SHARP RZ-4DP1")
+ PAYMENT("④ 決済端末<br/>CAFIS Arch Saturn")
+ PRINTER("⑤ レシートプリンター<br/>SHARP 80mm")
+ end
 
-    BUSINESS ~~~ RUNTIME ~~~ CASH
-    COMMAND ~~~ MANAGER ~~~ DISPLAY
-    CONTRACT ~~~ HOST_SETTING ~~~ PRINTER
+ BUSINESS ~~~ RUNTIME ~~~ CASH
+ COMMAND ~~~ MANAGER ~~~ DISPLAY
+ CONTRACT ~~~ HOST_SETTING ~~~ PRINTER
 
-    PROCESS -->|OSプロセス制御| RUNTIME
-    COMMAND <-->|コマンド通信用パイプ<br/>要求／同期応答| SERVER
-    EVENT -.->|イベント通知用パイプ<br/>非同期イベント| EVENT_RX
-    COMMAND -.->|要求・応答契約を参照| CONTRACT
-    EVENT_RX -.->|イベント契約を参照| CONTRACT
-    SERVER -.->|要求・応答契約を参照| CONTRACT
-    EVENT -.->|イベント契約を参照| CONTRACT
-    ADAPTER <-->|制御／結果| CASH
-    ADAPTER <-->|制御／結果| DRAWER
-    ADAPTER <-->|制御／結果| DISPLAY
-    ADAPTER <-->|制御／結果| PAYMENT
-    ADAPTER <-->|制御／結果| PRINTER
+ PROCESS -->|OSプロセス制御| RUNTIME
+ COMMAND <-->|コマンド通信用パイプ<br/>要求／同期応答| SERVER
+ COMMAND -.->|要求・応答契約を参照| CONTRACT
+ SERVER -.->|要求・応答契約を参照| CONTRACT
+ EVENT -.->|イベント契約を参照| CONTRACT
+ ADAPTER <-->|制御／結果| CASH
+ ADAPTER <-->|制御／結果| DRAWER
+ ADAPTER <-->|制御／結果| DISPLAY
+ ADAPTER <-->|制御／結果| PAYMENT
+ ADAPTER <-->|制御／結果| PRINTER
 
-    class BUSINESS,LIFECYCLE,PROCESS,APP_SETTING,SELECT,COMMAND,SYNC_RESULT,EVENT_RX,RUNTIME,SERVER,EVENT,HOST_SETTING,ORDER,CONTROL,MANAGER,ADAPTER,CONTRACT,CASH,DRAWER,DISPLAY,PAYMENT,PRINTER component
+ class BUSINESS,LIFECYCLE,PROCESS,APP_SETTING,SELECT,COMMAND,SYNC_RESULT,RUNTIME,SERVER,EVENT,HOST_SETTING,ORDER,CONTROL,MANAGER,ADAPTER,CONTRACT,CASH,DRAWER,DISPLAY,PAYMENT,PRINTER component
 ```
 
 #### 図の補足
 
 - システムコンテキスト図は、3つの責務領域、プロセス境界、および領域間の通信だけを示す。
 - 論理構成図は、各責務領域を責務グループと論理構成要素へ分解する。責務グループは「① アプリケーション層」のように番号を先頭に付けたオレンジ色の内枠で示す。番号は5.3と対応する。
-- タブレットPOS端末アプリはMAUIプロセス、デバイスコネクタは既存デバイス資源を利用するWindows別プロセスとして、同一Windows端末上で動作する。要求、応答、およびイベント通知には名前付きパイプを使用し、両プロセスは`TabletPos.DeviceContracts`の通信契約を共有する。
+- タブレットPOS端末アプリはMAUIプロセス、デバイスコネクタは既存デバイス資源を利用するWindows別プロセスとして、同一Windows端末上で動作する。要求、応答、およびイベント通知には名前付きパイプを使用し、両プロセスは`Pos.DeviceContracts`の通信契約を共有する。
 - アプリケーション層はOPOS、OCX、ActiveX、既存DLL、またはデバイスコネクタ内部実装を直接呼び出さない。デバイス操作はデバイス制御層を経由し、プロセスの起動・停止はデバイスコネクタプロセス管理が担当する。
-- `App`はHost起動後に`NamedPipeEventReceiver`を開始し、停止時はHost停止前に受信処理を停止する。現行コードには`EventReceived`購読先がないため、受信イベントはアプリケーション層のユースケースへ引き渡されない。
 - デバイスコネクタ側のホスト内部実装は、アプリ側のストラテジークラスではなく、既存デバイス資源を呼び出すための内部構成要素である。
 - 再試行、タイムアウト、所有プロセス、および異常分岐は静的構成ではなく、06_運用シナリオで示す。
 
@@ -419,71 +391,69 @@ flowchart LR
 
 （1）タブレットPOS端末アプリは、業務判断とデバイス利用を担当し、デバイスコネクタ内部の実機制御を直接扱わない。
 
-  ① アプリケーション層（業務・プロセス管理）は、業務上のデバイス利用とデバイスコネクタプロセスのライフサイクルを管理する。
+ ① アプリケーション層（業務・プロセス管理）は、業務上のデバイス利用とデバイスコネクタプロセスのライフサイクルを管理する。
 
-    ①-1 画面・業務処理は、必要なデバイス操作を依頼し、同期結果を業務処理へ反映する。非同期イベントの業務利用は現行実装の対象外である。
-      関連シート: 06_運用シナリオ_02、07_機能設計
-    ①-2 アプリライフサイクルは、アプリの起動、再開、停止、および強制終了をプロセス管理へ通知する。
-      関連シート: 06_運用シナリオ_02
-    ①-3 デバイスコネクタプロセス管理は、既存プロセスの存在・稼働確認、未起動時の起動、停止要求、および所有プロセスの終了監視を行う。
-      関連シート: 06_運用シナリオ_02、07_機能設計、10_異常・運用設計
+ ①-1 画面・業務処理は、必要なデバイス操作を依頼し、同期結果を業務処理へ反映する。非同期イベントの業務利用は現行実装の対象外である。
+ 関連シート: 06_運用シナリオ_02、07_機能設計
+ ①-2 アプリライフサイクルは、アプリの起動、再開、停止、および強制終了をプロセス管理へ通知する。
+ 関連シート: 06_運用シナリオ_02
+ ①-3 デバイスコネクタプロセス管理は、既存プロセスの存在・稼働確認、未起動時の起動、停止要求、および所有プロセスの終了監視を行う。
+ 関連シート: 06_運用シナリオ_02、07_機能設計、10_異常・運用設計
 
-  ② デバイス制御層は、アプリ内の要求をプロセス間通信へ変換し、結果をアプリケーション層へ戻す。
+ ② デバイス制御層は、アプリ内の要求をプロセス間通信へ変換し、結果をアプリケーション層へ戻す。
 
-    ②-1 設定・制御方式選択は、読み込み済み設定から有効デバイスとデバイスコネクタ経由の制御方式を選択する。
-      関連シート: 07_機能設計、09_設定・デバイス設計
-    ②-2 コマンド通信は、`OposNamedPipeCommandClient`で要求を生成し、`NamedPipeClient`を使用してコマンド通信用パイプへ送信し、同期応答を受信する。
-      関連シート: 07_機能設計、08_通信・データ設計
-    ②-3 同期結果変換は、`OposNamedPipeCommandClient`で同期応答をStrategyの結果形式へ変換し、呼出元へ返す。
-      関連シート: 07_機能設計、08_通信・データ設計、10_異常・運用設計
-    ②-4 イベント受信は、`NamedPipeEventReceiver`がイベント通知用パイプへ接続して受信と再接続を行う。現行コードには`EventReceived`購読先がないため、受信イベントをアプリケーション層へ通知しない。
-      関連シート: 07_機能設計、08_通信・データ設計、10_異常・運用設計
-    ②-5 アプリ側設定は、`device_controller_config.json`から有効デバイス、Strategy、パイプ名、および通信設定を読み込む。
-      関連シート: CFG-01、09_設定・デバイス設計
-    ②-6 共通デバイス通信契約は、`TabletPos.DeviceContracts`の要求・応答・イベントDTO、識別子、ペイロードキー、および通信既定値をアプリとデバイスコネクタへ提供する。
-      関連シート: 08_通信・データ設計、09_設定・デバイス設計、10_異常・運用設計
+ ②-1 設定・制御方式選択は、読み込み済み設定から有効デバイスとデバイスコネクタ経由の制御方式を選択する。
+ 関連シート: 07_機能設計、09_設定・デバイス設計
+ ②-2 コマンド通信は、`OposNamedPipeCommandClient`で要求を生成し、`NamedPipeClient`を使用してコマンド通信用パイプへ送信し、同期応答を受信する。
+ 関連シート: 07_機能設計、08_通信・データ設計
+ ②-3 同期結果変換は、`OposNamedPipeCommandClient`で同期応答をStrategyの結果形式へ変換し、呼出元へ返す。
+ 関連シート: 07_機能設計、08_通信・データ設計、10_異常・運用設計
+ ②-4 アプリ側設定は、起動時に`device_controller_config.json`をSQLiteへ取り込み、実行中はSQLiteから有効デバイス、Strategy、パイプ名、および通信設定を読み込む。
+ 関連シート: CFG-01、09_設定・デバイス設計
+ ②-5 共通デバイス通信契約は、`Pos.DeviceContracts`の要求・応答・イベントDTO、識別子、ペイロードキー、および通信既定値をアプリとデバイスコネクタへ提供する。
+ 関連シート: 08_通信・データ設計、09_設定・デバイス設計、10_異常・運用設計
 
 （2）デバイスコネクタは、MAUIアプリから直接利用しない既存デバイス資源をWindows別プロセス内に保持し、要求制御と実機制御を担当する。
 
-  ① プロセス・通信サービスは、デバイスコネクタの稼働状態と二つの名前付きパイプを管理する。
+ ① プロセス・通信サービスは、デバイスコネクタの稼働状態と二つの名前付きパイプを管理する。
 
-    ①-1 起動・停止管理は、Mutexによる排他制御で二重起動を防止し、通信サービスとデバイス管理を開始・停止して稼働状態を管理する。
-      関連シート: 06_運用シナリオ_02、07_機能設計、10_異常・運用設計
-    ①-2 コマンド受付は、一接続につき一要求を受け付け、同じ接続で同期応答を返す。
-      関連シート: 07_機能設計、08_通信・データ設計
-    ①-3 イベント配信は、デバイス処理結果をイベント通知用パイプの接続先へ送信する。
-      関連シート: 07_機能設計、08_通信・データ設計
+ ①-1 起動・停止管理は、Mutexによる排他制御で二重起動を防止し、通信サービスとデバイス管理を開始・停止して稼働状態を管理する。
+ 関連シート: 06_運用シナリオ_02、07_機能設計、10_異常・運用設計
+ ①-2 コマンド受付は、一接続につき一要求を受け付け、同じ接続で同期応答を返す。
+ 関連シート: 07_機能設計、08_通信・データ設計
+ ①-3 イベント配信は、デバイス処理結果をイベント通知用パイプの接続先へ送信する。
+ 関連シート: 07_機能設計、08_通信・データ設計
 
-  ② コマンド実行は、受信した要求を順序制御し、対象デバイスの実行結果を応答へ変換する。
+ ② コマンド実行は、受信した要求を順序制御し、対象デバイスの実行結果を応答へ変換する。
 
-    ②-1 デバイスID別順序制御は、同一デバイスIDの要求を投入順に処理する。
-      関連シート: 06_運用シナリオ_02、07_機能設計
-    ②-2 要求変換・コマンド制御は、通信形式を内部要求へ変換し、制御要求またはデバイス操作要求として実行する。
-      関連シート: 07_機能設計、08_通信・データ設計、10_異常・運用設計
-    ②-3 デバイス管理は、設定に基づくデバイス生成、保持、検索、実行、および停止を管理する。
-      関連シート: 07_機能設計、09_設定・デバイス設計、10_異常・運用設計
+ ②-1 デバイスID別順序制御は、同一デバイスIDの要求を投入順に処理する。
+ 関連シート: 06_運用シナリオ_02、07_機能設計
+ ②-2 要求変換・コマンド制御は、通信形式を内部要求へ変換し、制御要求またはデバイス操作要求として実行する。
+ 関連シート: 07_機能設計、08_通信・データ設計、10_異常・運用設計
+ ②-3 デバイス管理は、設定に基づくデバイス生成、保持、検索、実行、および停止を管理する。
+ 関連シート: 07_機能設計、09_設定・デバイス設計、10_異常・運用設計
 
-  ③ 既存デバイス資源呼出しは、既存デバイス資源の差異をデバイスコネクタ内部へ閉じ込める。アプリ側のストラテジークラスではなく、既存デバイスを呼び出すためのホスト内部実装として扱う。
+ ③ 既存デバイス資源呼出しは、既存デバイス資源の差異をデバイスコネクタ内部へ閉じ込める。アプリ側のストラテジークラスではなく、既存デバイスを呼び出すためのホスト内部実装として扱う。
 
-    ③-1 ホスト内部実装は、OPOS、OCX、ActiveX、既存DLL、共有メモリ、要求／応答ファイルなどを利用して実機を制御する。
-      関連シート: 09_設定・デバイス設計、11_実装対応
+ ③-1 ホスト内部実装は、OPOS、OCX、ActiveX、既存DLL、共有メモリ、要求／応答ファイルなどを利用して実機を制御する。
+ 関連シート: 09_設定・デバイス設計、11_実装対応
 
 （3）周辺機器は、デバイスコネクタのホスト内部実装から制御される店舗設備である。
 
-  ① 自動釣銭機（GLORY RT-300／RAD-300）は、入金、払出、状態確認、およびエラー確認を行う。
-    関連シート: 03_対象範囲、09_設定・デバイス設計
-  ② ドロア（SHARP UP-J46DW3）は、ドロア開放を行う。
-    関連シート: 03_対象範囲、09_設定・デバイス設計
-  ③ カスタマディスプレイ（SHARP RZ-4DP3）は、表示、消去、スクロール、および位置指定表示を行う。
-    関連シート: 03_対象範囲、09_設定・デバイス設計
-  ④ 決済端末（CAFIS Arch Saturn）は、端末接続、切断、疎通確認、決済実行、および再印字を行う。
-    関連シート: 03_対象範囲、08_通信・データ設計、09_設定・デバイス設計
-  ⑤ レシートプリンター（SHARP 80mm）は、文字、JAN／EANバーコード、QRコードの印字、および用紙カットを行う。
-    関連シート: 03_対象範囲、08_通信・データ設計、09_設定・デバイス設計
+ ① 自動釣銭機（GLORY RT-300／RAD-300）は、入金、払出、状態確認、およびエラー確認を行う。
+ 関連シート: 03_対象範囲、09_設定・デバイス設計
+ ② ドロア（SHARP UP-J36DW3）は、ドロア開放を行う。
+ 関連シート: 03_対象範囲、09_設定・デバイス設計
+ ③ カスタマディスプレイ（SHARP RZ-4DP1）は、表示、消去、スクロール、および位置指定表示を行う。
+ 関連シート: 03_対象範囲、09_設定・デバイス設計
+ ④ 決済端末（CAFIS Arch Saturn）は、端末接続、切断、疎通確認、決済実行、および再印字を行う。
+ 関連シート: 03_対象範囲、08_通信・データ設計、09_設定・デバイス設計
+ ⑤ レシートプリンタ（SHARP 80mm）は、文字、JAN／EANバーコード、QRコードの印字、および用紙カットを行う。
+ 関連シート: 03_対象範囲、08_通信・データ設計、09_設定・デバイス設計
 
 ### 5.4 デバイスコネクタの実行形態
 
-本設計では、GLORY RT-300／RAD-300自動釣銭機、SHARP UP-J46DW3ドロア、SHARP RZ-4DP3カスタマディスプレイ、CAFIS Arch Saturn決済端末、およびSHARP 80mmレシートプリンターの既存デバイス資源を一つのデバイスコネクタプロセスで管理する。デバイスコネクタはMutexによる排他制御を行い、二重起動を防止する。
+本設計では、GLORY RT-300／RAD-300自動釣銭機、SHARP UP-J36DW3ドロア、SHARP RZ-4DP1カスタマディスプレイ、CAFIS Arch Saturn決済端末、およびSHARP 80mmレシートプリンタの既存デバイス資源を一つのデバイスコネクタプロセスで管理する。デバイスコネクタはMutexによる排他制御を行い、二重起動を防止する。
 
 通常運用時は画面を表示せず、バックグラウンドで動作する。デバイスコネクタを直接開始・停止する画面は、デバッグ引数（DEBUG）付きで起動した場合だけ表示する。
 
@@ -497,96 +467,93 @@ flowchart LR
 %%{init: {"flowchart": {"defaultRenderer": "dagre", "curve": "linear", "nodeSpacing": 30, "rankSpacing": 58}}}%%
 %% diagram-profile=operational-scenario
 flowchart LR
-    %% legend-bind container=運用フェーズ
-    %% legend-bind class.app=アプリケーション層
-    %% legend-bind class.control=デバイス制御層
-    %% legend-bind class.host=デバイスコネクタ内処理
-    %% legend-bind class.decision=◇
-    %% legend-bind class.error=異常処理
-    %% legend-bind edge.default=━━▶ 主処理
-    %% legend-bind edge.dashed=┄┄▶ 異常経路
-    %% legend-bind edge.0=━━▶ ライフサイクル
-    %% legend-bind edge.1=━━▶ ライフサイクル
-    %% legend-bind edge.2=━━▶ ライフサイクル
-    %% legend-bind edge.3=━━▶ ライフサイクル
-    %% legend-bind edge.4=━━▶ ライフサイクル
-    %% legend-bind edge.5=━━▶ ライフサイクル
-    %% legend-bind edge.15=┄┄▶ 非同期イベント
-    %% legend-bind edge.16=━━▶ ライフサイクル
-    %% legend-bind edge.17=━━▶ ライフサイクル
-    %% legend-bind edge.18=━━▶ ライフサイクル
-    %% legend-bind edge.19=━━▶ ライフサイクル
-    %% legend-bind edge.20=━━▶ ライフサイクル
-    %% legend-bind edge.21=━━▶ ライフサイクル
-    %% legend-bind edge.23=━━▶ ライフサイクル
-    %% legend-bind edge.24=━━▶ ライフサイクル
-    %% legend-bind edge.25=━━▶ ライフサイクル
-    %% legend-bind label=コネクターラベル
-    subgraph START["（1） 起動フェーズ"]
-        direction TB
-        S1("① アプリ起動")
-        S2("② 設定を準備<br/>ランタイム設定 → デフォルト設定")
-        S3("③ 既存プロセスを確認し<br/>未起動時だけ起動")
-        S4("④ デバイスコネクタは<br/>Mutexで二重起動防止")
-        S5("⑤ 通信・対象デバイスを準備")
-        S6{"⑥ 起動準備が<br/>完了したか"}
-        S7("⑦ イベント受信を開始して<br/>運用開始")
-        START_ERROR("⑧ 起動を中止して<br/>異常を記録")
+ %% legend-bind container=運用フェーズ
+ %% legend-bind class.app=アプリケーション層
+ %% legend-bind class.control=デバイス制御層
+ %% legend-bind class.host=デバイスコネクタ内処理
+ %% legend-bind class.decision=◇
+ %% legend-bind class.error=異常処理
+ %% legend-bind edge.default=━━▶ 主処理
+ %% legend-bind edge.dashed=┄┄▶ 異常経路
+ %% legend-bind edge.0=━━▶ ライフサイクル
+ %% legend-bind edge.1=━━▶ ライフサイクル
+ %% legend-bind edge.2=━━▶ ライフサイクル
+ %% legend-bind edge.3=━━▶ ライフサイクル
+ %% legend-bind edge.4=━━▶ ライフサイクル
+ %% legend-bind edge.5=━━▶ ライフサイクル
+ %% legend-bind edge.15=━━▶ ライフサイクル
+ %% legend-bind edge.16=━━▶ ライフサイクル
+ %% legend-bind edge.17=━━▶ ライフサイクル
+ %% legend-bind edge.18=━━▶ ライフサイクル
+ %% legend-bind edge.19=━━▶ ライフサイクル
+ %% legend-bind edge.20=━━▶ ライフサイクル
+ %% legend-bind edge.22=━━▶ ライフサイクル
+ %% legend-bind edge.23=━━▶ ライフサイクル
+ %% legend-bind edge.24=━━▶ ライフサイクル
+ %% legend-bind label=コネクターラベル
+ subgraph START["（1） 起動フェーズ"]
+ direction TB
+ S1("① アプリ起動")
+ S2("② 設定を準備<br/>起動時JSON → SQLite<br/>取込不可時はSQLite")
+ S3("③ 既存プロセスを確認し<br/>未起動時だけ起動")
+ S4("④ デバイスコネクタは<br/>Mutexで二重起動防止")
+ S5("⑤ 通信・対象デバイスを準備")
+ S6{"⑥ 起動準備が<br/>完了したか"}
+ S7("⑦ イベント受信を開始して<br/>運用開始")
+ START_ERROR("⑧ 起動を中止して<br/>異常を記録")
 
-        S1 --> S2 --> S3 --> S4 --> S5 --> S6
-        S6 -->|はい| S7
-        S6 -.->|いいえ| START_ERROR
-    end
+ S1 --> S2 --> S3 --> S4 --> S5 --> S6
+ S6 -->|はい| S7
+ S6 -.->|いいえ| START_ERROR
+ end
 
-    subgraph OPERATION["（2） デバイス操作フェーズ"]
-        direction TB
-        O1("① デバイス操作を依頼")
-        O2("② 接続を確認して<br/>コマンド要求を送信")
-        O3("③ 順序制御して<br/>対象デバイスを制御<br/>決済端末とレシートプリンターは<br/>Windows OPOSを利用")
-        O4{"④ 同期結果を<br/>確定できたか"}
-        O5("⑤ 正常応答または<br/>失敗応答を返却")
-        COMM_ERROR("⑥ 通信失敗を返却<br/>送信後は自動再送なし")
-        O6{"⑦ 運用を継続するか"}
-        EVENT("⑧ 非同期イベントを発行し<br/>受信処理が受信<br/>現行：購読先未登録")
+ subgraph OPERATION["（2） デバイス操作フェーズ"]
+ direction TB
+ O1("① デバイス操作を依頼")
+ O2("② 接続を確認して<br/>コマンド要求を送信")
+ O3("③ 順序制御して<br/>対象デバイスを制御<br/>決済端末とレシートプリンターは<br/>Windows OPOSを利用")
+ O4{"④ 同期結果を<br/>確定できたか"}
+ O5("⑤ 正常応答または<br/>失敗応答を返却")
+ COMM_ERROR("⑥ 通信失敗を返却<br/>送信後は自動再送なし")
+ O6{"⑦ 運用を継続するか"}
 
-        O1 --> O2 --> O3 --> O4
-        O4 -->|はい| O5 --> O6
-        O4 -.->|いいえ| COMM_ERROR --> O6
-        O6 -->|はい| O1
-        O3 -.->|デバイス処理結果| EVENT
-    end
+ O1 --> O2 --> O3 --> O4
+ O4 -->|はい| O5 --> O6
+ O4 -.->|いいえ| COMM_ERROR --> O6
+ O6 -->|はい| O1
+ end
 
-    subgraph STOP["（3） 終了フェーズ"]
-        direction TB
-        T1("① アプリ停止・強制終了<br/>イベント受信を停止")
-        T2{"② 所有プロセスか"}
-        T3("③ 停止要求を送信")
-        T4("④ デバイスコネクタが<br/>接続とデバイスを停止")
-        T5{"⑤ 10秒以内に<br/>終了したか"}
-        T6("⑥ 所有プロセスツリーを<br/>強制終了")
-        T7("⑦ 終了処理完了")
+ subgraph STOP["（3） 終了フェーズ"]
+ direction TB
+ T1("① アプリ停止・強制終了<br/>イベント受信を停止")
+ T2{"② 所有プロセスか"}
+ T3("③ 停止要求を送信")
+ T4("④ デバイスコネクタが<br/>接続とデバイスを停止")
+ T5{"⑤ 10秒以内に<br/>終了したか"}
+ T6("⑥ 所有プロセスツリーを<br/>強制終了")
+ T7("⑦ 終了処理完了")
 
-        T1 --> T2
-        T2 -->|いいえ| T7
-        T2 -->|はい| T3
-        T3 --> T4 --> T5
-        T5 -->|はい| T7
-        T5 -.->|いいえ| T6 --> T7
-    end
+ T1 --> T2
+ T2 -->|いいえ| T7
+ T2 -->|はい| T3
+ T3 --> T4 --> T5
+ T5 -->|はい| T7
+ T5 -.->|いいえ| T6 --> T7
+ end
 
-    S7 --> O1
-    O6 -->|いいえ| T1
+ S7 --> O1
+ O6 -->|いいえ| T1
 
-    class S1,S2,S3,S7,T1,T2,T3,T5,T7 app
-    class O1,O2,O4,O5,O6 control
-    class S4,S5,O3,EVENT,T4 host
-    class S6,O4,O6,T2,T5 decision
-    class START_ERROR,COMM_ERROR,T6 error
+ class S1,S2,S3,S7,T1,T2,T3,T5,T7 app
+ class O1,O2,O4,O5,O6 control
+ class S4,S5,O3,EVENT,T4 host
+ class S6,O4,O6,T2,T5 decision
+ class START_ERROR,COMM_ERROR,T6 error
 ```
 
 #### 図の補足
 
-- 起動フェーズは、設定、既存プロセスの確認、Mutexによる二重起動防止、通信、および対象デバイスを順に準備する。ランタイム設定を使用できない場合だけデフォルト設定へ切り替え、検証済み設定をSQLiteへ反映する。設定の反映を含む起動準備が完了しない場合は運用を開始しない。
+- 起動フェーズは、設定、既存プロセスの確認、Mutexによる二重起動防止、通信、および対象デバイスを順に準備する。ランタイムJSONを検証できた場合はSQLiteへ再登録し、取込不可時は既存SQLiteへフォールバックする。JSONとSQLiteのどちらも使用できない場合だけデフォルト設定をSQLiteへ登録する。設定準備が完了しない場合は運用を開始しない。
 - デバイス開始は50ミリ秒間隔で最大3回試行する。最終失敗したデバイスだけを起動済み一覧から除外し、他のデバイスで起動処理を継続する。
 - 稼働確認は最大10秒、500ミリ秒間隔で行う。実行ファイル、必須設定、プロセス起動、または稼働確認に失敗した場合は運用を開始しない。
 - コマンド接続は要求送信前に限り500ミリ秒間隔で最大3回試行する。送信後に同期結果を確定できない場合は、二重実行防止のため同一要求を自動再送しない。
@@ -612,7 +579,7 @@ flowchart LR
 
 ① アプリ起動を契機に、デバイス制御層とデバイスコネクタの初期化を開始する。再開時は読み込み済みのデバイス制御設定を使用する。
 
-② デバイス制御層はdevice_controller_config.jsonのランタイム設定を優先して読み込む。使用できない場合は警告を記録してデバイス制御層に同梱したデフォルト設定へ切り替える。読み込みと検証に成功した設定を `device_controller_config.db` の4テーブルへ同一トランザクションで反映し、SQLiteから設定は読み込まない。デフォルト設定を使用できない場合、またはSQLiteへの反映に失敗した場合は例外を返してアプリ起動を中止する。
+② デバイス制御層はアプリ起動時にdevice_controller_config.jsonを読み込む。検証できた場合は `device_controller_config.db` の4テーブルへ同一トランザクションで再登録し、SQLiteから設定モデルを復元する。JSONを取得または使用できない場合は警告を記録し、既存SQLiteから設定を復元する。SQLiteも未初期化の場合だけデバイス制御層に同梱したデフォルト設定をSQLiteへ登録する。いずれの方法でも設定を準備できない場合は例外を返してアプリ起動を中止する。
 
 ③ デバイスコネクタプロセス管理は同名プロセスの存在と稼働状態を確認する。既存プロセスが稼働中の場合はそのプロセスを利用し、未起動の場合だけデバイスコネクタ起動プログラムをWindows別プロセスとして起動して所有プロセスとして保持する。通常時は画面を表示せず、バックグラウンドで動作させる。
 
@@ -624,7 +591,7 @@ flowchart LR
 
 ⑦ 起動準備の完了を確認できた場合は、`NamedPipeEventReceiver.StartAsync`を実行してイベント受信処理を開始し、デバイス操作を開始する。
 
-⑧ 実行ファイル、デバイス制御層のデフォルト設定、SQLiteへの設定反映、プロセス起動、デバイスコネクタの必須設定、または稼働確認に失敗した場合は、起動を中止して異常を記録する。
+⑧ 実行ファイル、デバイス制御層のJSON取込・SQLite読込／保存・デフォルト設定、プロセス起動、デバイスコネクタの必須設定、または稼働確認に失敗した場合は、起動を中止して異常を記録する。
 
 関連機能: F-HOST-001、F-HOST-002、F-HOST-003、F-HOST-004、F-HOST-007、F-HOST-009
 
@@ -634,7 +601,7 @@ flowchart LR
 
 ② 設定・制御方式選択は、読み込み済み設定から有効デバイスとデバイスコネクタ経由の制御方式を選択する。コマンド通信は要求送信前の接続に失敗した場合だけ500ミリ秒間隔で最大3回接続を試行し、接続後はJSON要求を一行で送信する。
 
-③ デバイスコネクタは要求を受け付け、同一デバイスIDの要求を投入順に処理する。要求を内部形式へ変換し、対象デバイスを検索してホスト内部実装へ処理を渡す。CAFIS Arch Saturnはホスト内部のOPOS CAT／OCXで制御する。SHARP 80mmレシートプリンターはホスト内部のOPOS POSPrinterで制御する。
+③ デバイスコネクタは要求を受け付け、同一デバイスIDの要求を投入順に処理する。要求を内部形式へ変換し、対象デバイスを検索してホスト内部実装へ処理を渡す。CAFIS Arch Saturnはホスト内部のOPOS CAT／OCXで制御する。SHARP 80mmレシートプリンタはホスト内部のOPOS POSPrinterで制御する。
 
 ④ デバイスコネクタは、ホスト内部実装の処理結果から同期結果を確定できたかを判定する。
 
@@ -681,7 +648,7 @@ flowchart LR
 | 1 | プロセスライフサイクル | 起動、終了 | （1）①-3 デバイスコネクタプロセス管理、（2）①-1 起動・停止管理 | F-HOST-001、F-HOST-002、F-HOST-011 |
 | 2 | コマンド通信 | デバイス操作 | （1）②-2 コマンド通信、（1）②-3 同期結果変換、（2）①-2 コマンド受付 | F-HOST-003、F-HOST-005、F-HOST-010 |
 | 3 | コマンド・デバイス実行 | 起動、デバイス操作、終了 | （2）② コマンド実行、（2）③ 既存デバイス資源呼出し | F-HOST-006、F-HOST-007、F-HOST-008、F-HOST-009 |
-| 4 | 非同期通知 | 非同期イベント | （2）①-3 イベント配信、（1）②-4 イベント受信 | F-HOST-004 |
+| 4 | 非同期通知 | 非同期イベント | （2）①-3 イベント配信 | F-HOST-004 |
 
 （1）②-1 設定・制御方式選択は、各機能を実行する前提条件として09_設定・デバイス設計で定義する。独立したF-HOST機能IDは付与しない。
 
@@ -707,18 +674,18 @@ flowchart LR
 |---|---|---|---|---|---|---|
 | F-HOST-006 | デバイスID単位順序制御 | 同一デバイスIDの要求順序を保証する。 | 入力: 解析済み要求、デバイスID／出力: 順序制御後の要求 | デバイスIDごとのSTAワーカーで投入順に処理する。 | 処理例外は失敗応答とする。デバイスIDなしの制御要求は共通キューで扱う。 | （2）②-1 |
 | F-HOST-007 | デバイスコネクタ制御 | 稼働確認、デバイスコネクタ停止要求、保守用デバイスコネクタ再起動要求を処理する。 | 入力: デバイスコネクタ制御要求／出力: 稼働状態、受付応答、停止・再起動指示 | デバイス検索を行わず制御要求として処理する。 | 未対応要求は失敗応答とし、停止・再起動は受付応答の書込後に実行する。 | （2）①-1、（2）②-2 |
-| F-HOST-008 | デバイス操作 | 対象デバイスへ使用開始、使用終了、またはメソッド実行を依頼する。CAFIS Arch Saturnでは接続、切断、疎通確認、決済実行、再印字を扱う。SHARP 80mmレシートプリンターでは文字、JAN／EANバーコード、QRコードの印字、および用紙カットを扱う。 | 入力: デバイスID、メソッドID、付加データ／出力: デバイス実行結果 | 起動済みデバイスを検索し、既存デバイス資源を呼び出すホスト内部実装へ処理を渡す。 | 必須項目不足、未登録デバイス、デバイス実行失敗は失敗応答とする。 | （2）②-2、（2）②-3、（2）③-1 |
+| F-HOST-008 | デバイス操作 | 対象デバイスへ使用開始、使用終了、またはメソッド実行を依頼する。CAFIS Arch Saturnでは接続、切断、疎通確認、決済実行、再印字を扱う。SHARP 80mmレシートプリンタでは文字、JAN／EANバーコード、QRコードの印字、および用紙カットを扱う。 | 入力: デバイスID、メソッドID、付加データ／出力: デバイス実行結果 | 起動済みデバイスを検索し、既存デバイス資源を呼び出すホスト内部実装へ処理を渡す。 | 必須項目不足、未登録デバイス、デバイス実行失敗は失敗応答とする。 | （2）②-2、（2）②-3、（2）③-1 |
 | F-HOST-009 | デバイス管理 | 設定に基づいて対象デバイスを生成、保持、検索、停止する。 | 入力: host_device_config.json／出力: 起動済みデバイス、準備状態 | デバイス開始を50ミリ秒間隔で最大3回試行する。 | 最終失敗したデバイスは登録しない。必須設定異常時はプロセスを終了する。 | （2）②-3、（2）③-1 |
 
 ### 7.5 非同期通知機能
 
 | 機能ID | 機能名 | 責務 | 入力／出力 | 正常時 | 異常時 | 主な構成要素 |
 |---|---|---|---|---|---|---|
-| F-HOST-004 | イベント送受信 | デバイス処理結果を同期応答とは別にイベント通知用パイプへ送信し、デバイス制御層で受信する。 | 入力: デバイス処理結果通知／出力: イベントJSON、`EventReceived` | `NamedPipeEventPublisher`が送信し、`NamedPipeEventReceiver`が受信して`EventReceived`を発行する。現行コードには購読先がない。 | 送信失敗した接続を除外する。受信側は切断時に1秒間隔で再接続し、同期応答を変更しない。 | （2）①-3、（1）②-4 |
+| F-HOST-004 | イベント送受信 | デバイス処理結果を同期応答とは別にイベント通知用パイプへ送信し、デバイス制御層で受信する。 | 入力: デバイス処理結果通知／出力: イベントJSON、`EventReceived` | `NamedPipeEventPublisher`が送信し、`NamedPipeEventReceiver`が受信して`EventReceived`を発行する。現行コードには購読先がない。 | 送信失敗した接続を除外する。受信側は切断時に1秒間隔で再接続し、同期応答を変更しない。 | （2）①-3 |
 
 ## 08_通信・データ設計
 
-06_運用シナリオと07_機能設計で使用するプロセス間通信について、経路、同期区分、およびデータ契約を定義する。要求・応答・イベントDTO、メッセージID、デバイスID、メソッドID、ペイロードキー、および通信既定値のsource of truthは`TabletPos.DeviceContracts`とする。
+06_運用シナリオと07_機能設計で使用するプロセス間通信について、経路、同期区分、およびデータ契約を定義する。要求・応答・イベントDTO、メッセージID、デバイスID、メソッドID、ペイロードキー、および通信既定値のsource of truthは`Pos.DeviceContracts`とする。
 
 ### 8.1 通信モデル
 
@@ -726,9 +693,9 @@ flowchart LR
 
 | No. | 区分 | 送信元 | 送信先 | パイプ名 | 要求形式 | 応答形式 | 同期区分 | 備考 |
 |---|---|---|---|---|---|---|---|---|
-| 1 | コマンド要求 | デバイス制御、デバイスコネクタプロセス管理部、保守用停止要求送信ツール | デバイスコネクタ | コマンド通信用パイプ（TabletPos.Host.Command） | JSON | JSON | 同期 | デバイス操作要求とデバイスコネクタ制御要求を扱う。1接続で1要求を送る。 |
-| 2 | コマンド応答 | デバイスコネクタ | 要求元 | コマンド通信用パイプ（TabletPos.Host.Command） | - | JSON | 同期 | 要求と同じ接続で1行の結果を返す。 |
-| 3 | イベント通知 | デバイスコネクタ | デバイス制御 / `NamedPipeEventReceiver` | イベント通知用パイプ（TabletPos.Host.Event） | JSON | `NamedPipeDeviceEvent` / `EventReceived` | 非同期 | 切断時に1秒間隔で再接続する。現行コードには`EventReceived`購読先がないため、アプリケーション層へは通知しない。 |
+| 1 | コマンド要求 | デバイス制御、デバイスコネクタプロセス管理部、保守用停止要求送信ツール | デバイスコネクタ | コマンド通信用パイプ（Pos.DeviceConnector.Command） | JSON | JSON | 同期 | デバイス操作要求とデバイスコネクタ制御要求を扱う。1接続で1要求を送る。 |
+| 2 | コマンド応答 | デバイスコネクタ | 要求元 | コマンド通信用パイプ（Pos.DeviceConnector.Command） | - | JSON | 同期 | 要求と同じ接続で1行の結果を返す。 |
+| 3 | イベント通知 | デバイスコネクタ | デバイス制御 / `NamedPipeEventReceiver` | イベント通知用パイプ（Pos.DeviceConnector.Event） | JSON | `NamedPipeDeviceEvent` / `EventReceived` | 非同期 | 切断時に1秒間隔で再接続する。現行コードには`EventReceived`購読先がないため、アプリケーション層へは通知しない。 |
 
 ### 8.2 コマンド要求
 
@@ -736,15 +703,15 @@ flowchart LR
 
 ```json
 {
-  "RequestId": "00000001",
-  "Message": "DeviceMethod",
-  "DeviceId": "CustomerDisplay",
-  "MethodId": "DisplayText",
-  "Handle": "12345",
-  "Payload": {
-    "Data": "TOTAL 1,000",
-    "Attribute": "0"
-  }
+ "RequestId": "00000001",
+ "Message": "DeviceMethod",
+ "DeviceId": "CustomerDisplay",
+ "MethodId": "DisplayText",
+ "Handle": "12345",
+ "Payload": {
+ "Data": "TOTAL 1,000",
+ "Attribute": "0"
+ }
 }
 ```
 
@@ -756,7 +723,7 @@ flowchart LR
 |---|---|---|---|---|---|---|
 | 1 | 要求ID（RequestId） | string | 必須 | 要求を追跡するID。 | 00000001 | デバイス制御は既定でGUID形式のIDを生成する。 |
 | 2 | メッセージ（Message） | string | 任意 | メッセージ種別。 | デバイスメソッド実行（DeviceMethod） | 未指定時は、デバイスメソッド実行として扱う。 |
-| 3 | デバイスID（DeviceId） | string | 条件付き必須 | 対象デバイスID。 | カスタマーディスプレイ（CustomerDisplay） | デバイスコネクタ停止要求とデバイスコネクタ再起動要求では未指定可。 |
+| 3 | デバイスID（DeviceId） | string | 条件付き必須 | 対象デバイスID。 | カスタマディスプレイ（CustomerDisplay） | デバイスコネクタ停止要求とデバイスコネクタ再起動要求では未指定可。 |
 | 4 | メソッドID（MethodId） | string | 条件付き必須 | 対象メソッドID。 | 文字列表示（DisplayText） | デバイスメソッド実行では必須。 |
 | 5 | ハンドル（Handle） | string | 任意 | 呼出元を識別するハンドル。 | 12345 | デバイス制御は未指定時にメインウィンドウハンドルまたはプロセスIDを設定する。デバイスコネクタ単体では未指定を0として扱う。 |
 | 6 | 付加データ（Payload） | object | 任意 | 文字列キーと文字列値で構成するデバイス操作引数。 | { "Data": "TOTAL 1,000", "Attribute": "0" } | 内容はデバイスIDとメソッドIDにより変わる。 |
@@ -767,14 +734,14 @@ flowchart LR
 
 ```json
 {
-  "RequestId": "00000001",
-  "Success": true,
-  "ResultCode": 0,
-  "Message": "",
-  "Payload": {
-    "ResultCode": "0",
-    "ReturnValue": "0"
-  }
+ "RequestId": "00000001",
+ "Success": true,
+ "ResultCode": 0,
+ "Message": "",
+ "Payload": {
+ "ResultCode": "0",
+ "ReturnValue": "0"
+ }
 }
 ```
 
@@ -796,17 +763,17 @@ flowchart LR
 
 ```json
 {
-  "EventId": "a1b2c3",
-  "RelatedRequestId": null,
-  "EventType": "ReplyDevice",
-  "DeviceId": "CustomerDisplay",
-  "MethodId": "DisplayText",
-  "Handle": "12345",
-  "Message": "ReplyDevice",
-  "Payload": {
-    "ResultCode": "0",
-    "ReturnValue": "0"
-  }
+ "EventId": "a1b2c3",
+ "RelatedRequestId": null,
+ "EventType": "ReplyDevice",
+ "DeviceId": "CustomerDisplay",
+ "MethodId": "DisplayText",
+ "Handle": "12345",
+ "Message": "ReplyDevice",
+ "Payload": {
+ "ResultCode": "0",
+ "ReturnValue": "0"
+ }
 }
 ```
 
@@ -841,7 +808,7 @@ flowchart LR
 
 ### 8.6 決済端末コマンド
 
-CAFIS Arch Saturnのデバイス制御は、アプリ側有効デバイス区分（local_payment）で選択したアプリ側設定ID（payment_cafis_arch_saturn_windows）を使用し、デバイスID（Payment）を設定した要求を名前付きパイプでデバイスコネクタへ送信する。デバイスコネクタは、デバイスコネクタ側設定のid（Payment）、name（CAFIS Arch）、classId（Payment1）から決済端末実装を生成し、Windows上のOPOS CAT／OCXへ処理を渡して実行結果を同期応答で返す。
+CAFIS Arch Saturnのデバイス制御は、アプリ側有効デバイス区分（local_payment）で選択したアプリ側設定ID（payment_cafis_arch_saturn_windows）を使用し、デバイスID（Payment）を設定した要求を名前付きパイプでデバイスコネクタへ送信する。デバイスコネクタは、デバイスコネクタ側設定のid（Payment）、classId（Payment1）から決済端末実装を生成し、Windows上のOPOS CAT／OCXへ処理を渡して実行結果を同期応答で返す。
 
 | No. | 操作 | メソッド識別値 | OPOS CAT／OCX処理 | 入力 | 出力 |
 |---|---|---|---|---|---|
@@ -853,9 +820,9 @@ CAFIS Arch Saturnのデバイス制御は、アプリ側有効デバイス区分
 
 決済情報、カード情報、および決済端末の応答全文はログに出力しない。
 
-### 8.7 SHARP 80mmレシートプリンターコマンド
+### 8.7 SHARP 80mmレシートプリンタコマンド
 
-SHARP 80mmレシートプリンターのデバイス制御は、アプリ側有効デバイス区分（local_printer）で選択したアプリ側設定ID（printer_sharp_windows）を使用し、デバイスID（Printer）を設定した要求を名前付きパイプでデバイスコネクタへ送信する。デバイスコネクタは、デバイスコネクタ側設定のid（Printer）、name（SHARPRECPRT80）、classId（POSPrinter1）からプリンター実装を生成し、Windows上のOPOS POSPrinterへ処理を渡して実行結果を同期応答で返す。
+SHARP 80mmレシートプリンタのデバイス制御は、アプリ側有効デバイス区分（local_printer）で選択したアプリ側設定ID（printer_sharp_windows）を使用し、デバイスID（Printer）を設定した要求を名前付きパイプでデバイスコネクタへ送信する。デバイスコネクタは、デバイスコネクタ側設定のid（Printer）、classId（POSPrinter1）からプリンター実装を生成し、Windows上のOPOS POSPrinterへ処理を渡して実行結果を同期応答で返す。
 
 | No. | 操作 | メソッド識別値 | プリンターサービスオブジェクト処理 | 入力 | 出力 |
 |---|---|---|---|---|---|
@@ -875,7 +842,7 @@ SHARP 80mmレシートプリンターのデバイス制御は、アプリ側有�
 
 | 設定領域 | 決定する内容 | 読込主体 | 異常時 |
 |---|---|---|---|
-| アプリ側設定 | 使用デバイス、制御方式、コマンド・イベント通信用パイプ、および通信条件。 | デバイス制御層 | ランタイム設定を使用できない場合はデフォルト設定へ切り替える。デフォルト設定を使用できない場合、またはSQLiteへの設定反映に失敗した場合はアプリ起動を中止する。 |
+| アプリ側設定 | 使用デバイス、制御方式、コマンド・イベント通信用パイプ、および通信条件。 | デバイス制御層 | 起動時にJSONをSQLiteへ取り込み、取込不可時は既存SQLiteへフォールバックする。JSONとSQLiteのどちらも使用できない場合だけデフォルト設定を登録する。実行中はSQLiteから読み込む。 |
 | デバイスコネクタ側設定 | 起動するホスト内部実装、その識別情報、および実装パラメータ。 | デバイスコネクタ / デバイス管理 | 必須設定を使用できない場合は通信受付を停止し、デバイスコネクタを異常終了する。 |
 | Windows OPOS／OCX導入設定 | ドライバー、COM／OCX登録、OPOS Service Object、OPOS POSPrinter Common Control、論理デバイス名、通信ポート、CAFIS Arch設定フォルダー、およびベンダーログ。 | Windows導入・保守作業 | 必要な登録・設定がない場合は該当デバイスを使用せず、導入状態を修正後にデバイスコネクタを再起動する。 |
 
@@ -883,18 +850,17 @@ SHARP 80mmレシートプリンターのデバイス制御は、アプリ側有�
 
 | No. | 設定ファイル | 管轄 | 用途 | 読込タイミング | 備考 |
 |---|---|---|---|---|---|
-| 1 | device_controller_config.json | デバイス制御層 | 端末で使用するデバイス候補、有効デバイス、アプリ側の制御方式、および名前付きパイプ設定を定義する。 | アプリ起動時 | アプリデータ領域のランタイム設定を優先する。ランタイム設定が存在しない、または読込・解析できない場合はデバイス制御層に同梱したデフォルト設定を使用する。検証済み設定は `device_controller_config.db` へ反映するが、SQLiteを設定読込元にはしない。デフォルト設定を使用できない場合、またはSQLiteへの反映に失敗した場合はアプリ起動を中止する。 |
+| 1 | device_controller_config.json | デバイス制御層 | 端末で使用するデバイス候補、有効デバイス、アプリ側の制御方式、および名前付きパイプ設定を定義する。 | アプリ起動時 | 起動ごとに取込を試行する。読込・検証できた場合は `device_controller_config.db` へ再登録する。取得または使用できない場合は既存SQLiteへフォールバックする。SQLiteも未初期化の場合だけ組込みデフォルト設定を登録する。実行中の設定はSQLiteから読み込む。 |
 | 2 | host_device_config.json | デバイスコネクタ側 | デバイスコネクタが生成、保持するホスト内部実装を定義する。 | デバイスコネクタ本体開始時 | デバイスコネクタ実行フォルダを基準に読む。必須設定に異常がある場合は通信受付を終了し、プロセスを異常終了する。 |
 
 ### 9.3 設定項目
 
 | No. | 設定ファイル | キー | 内容 | 設定例 | 必須 | 備考 |
 |---|---|---|---|---|---|---|
-| 1 | device_controller_config.json | appSettings.namedPipe.pipeName | デバイスコネクタ経由時のコマンド通信用パイプ名。 | コマンド通信用パイプ（TabletPos.Host.Command） | 任意 | 省略時は共通既定値`TabletPos.Host.Command`を使用する。 |
+| 1 | device_controller_config.json | appSettings.namedPipe.pipeName | デバイスコネクタ経由時のコマンド通信用パイプ名。 | コマンド通信用パイプ（Pos.DeviceConnector.Command） | 任意 | 省略時は共通既定値`Pos.DeviceConnector.Command`を使用する。 |
 | 2 | device_controller_config.json | activeDevices | OSごとにアプリ側で利用するデバイスを選択する。 | local_cashchanger、local_display、local_drawer、local_payment、local_printer | 必須 | デバイスコネクタ側の起動対象とは役割が違う。 |
 | 3 | host_device_config.json | devices | デバイスコネクタが起動するホスト内部実装一覧。 | 配列 | 必須 | 初期対象デバイスを定義する。 |
 | 4 | host_device_config.json | devices[].id | デバイスコネクタ内のデバイスID。 | CustomerDisplay、CashDrawer、CashChanger、Printer、Payment | 必須 | 要求のデバイスID（DeviceId）と対応する。 |
-| 5 | host_device_config.json | devices[].name | 実行時に使用するデバイス名または論理名。 | SHARPRZ4DP1B、SHARPUPJ36DW3、CASHCHANGER、SHARPRECPRT80、CAFIS Arch | 必須 | 既存実装の識別に使う。 |
 | 6 | host_device_config.json | devices[].classId | デバイスコネクタ側で生成する実装識別ID。 | CustomerDisplay1、CashDrawer1、CashChanger1、POSPrinter1、Payment1 | 必須 | CustomerDisplay1は読込時にLineDisplay1へ変換し、ほかのIDはそのまま実装生成へ使用する。 |
 | 7 | host_device_config.json | devices[].visible | デバイス用フォームを表示するか。 | false | 任意 | デバッグ時や既存フォーム制約で使用する。 |
 | 8 | host_device_config.json | devices[].parameters | デバイスごとの追加パラメータ文字列。 | 空文字 | 任意 | 文字列として指定する。 |
@@ -902,7 +868,7 @@ SHARP 80mmレシートプリンターのデバイス制御は、アプリ側有�
 | 10 | device_controller_config.json | appSettings.namedPipe.responseTimeoutMs | 通常コマンドの応答タイムアウト。 | 30000 | 任意 | 0以下または未指定の場合は30000ミリ秒を使用する。レシート印字と決済は要求ペイロードに設定した操作別上限300000ミリ秒を使用する。 |
 | 11 | device_controller_config.json | appSettings.namedPipe.connectionRetryCount | 要求送信前の接続試行回数。 | 3 | 任意 | 0以下または未指定の場合は3回とする。要求送信後は再送しない。 |
 | 12 | device_controller_config.json | appSettings.namedPipe.connectionRetryIntervalMs | 接続再試行間隔。 | 500 | 任意 | 0以下または未指定の場合は500ミリ秒を使用する。 |
-| 13 | device_controller_config.json | appSettings.namedPipe.eventPipeName | イベント通知用パイプ名。 | イベント通知用パイプ（TabletPos.Host.Event） | 任意 | 省略時は共通既定値`TabletPos.Host.Event`を使用する。 |
+| 13 | device_controller_config.json | appSettings.namedPipe.eventPipeName | イベント通知用パイプ名。 | イベント通知用パイプ（Pos.DeviceConnector.Event） | 任意 | 省略時は共通既定値`Pos.DeviceConnector.Event`を使用する。 |
 | 14 | device_controller_config.json | appSettings.namedPipe.eventReconnectIntervalMs | イベント通知用パイプの再接続間隔。 | 1000 | 任意 | 0以下または未指定の場合は1000ミリ秒を使用する。 |
 
 ### 9.4 設定ファイル対応関係
@@ -916,20 +882,20 @@ SHARP 80mmレシートプリンターのデバイス制御は、アプリ側有�
 | 実装の位置付け | デバイス制御層のストラテジークラスを選択する。 | アプリ側のストラテジークラスではなく、既存デバイス資源を呼び出すホスト内部実装を選択する。 |
 | デバイスコネクタ連携 | コマンド通信用／イベント通知用パイプ名、接続タイムアウト、および再接続条件を持つ。 | デバイスコネクタ内のホスト内部実装を持つ。 |
 | 参照タイミング | アプリ起動時に読み込み、デバイス操作時は読み込み済み設定を参照する。 | デバイスコネクタ起動時。 |
-| 更新方法 | ランタイム設定をアプリデータ領域へ先に保存し、同じ設定をSQLiteへ反映した後、デバイス制御を再初期化する。 | 配置ファイルを更新し、デバイスコネクタプロセスを再起動する。 |
+| 更新方法 | 設定更新時はSQLiteへ保存してデバイス制御へ反映する。外部JSONを更新した場合はアプリ再起動時に再取込する。 | 配置ファイルを更新し、デバイスコネクタプロセスを再起動する。 |
 | 置換関係 | デバイスコネクタ設定を置き換えない。 | アプリ設定を置き換えない。 |
 
 ### 9.5 デバイス別設計
 
-起動条件のデバイスコネクタ側識別情報は、デバイスIDおよび実装識別IDを示し、接続に必要な場合は実行時名を併記する。
+起動条件には、利用する機器と必要な接続設定を示します。
 
 | No. | デバイス名 | 主な担当 | 主な処理 | 起動条件 | 終了条件 | 主な制約 | 備考 |
 |---:|---|---|---|---|---|---|---|
-| 1 | GLORY RT-300／RAD-300自動釣銭機 | 自動釣銭機制御部 | 入金、払出、状態確認、エラー確認。 | host_device_config.jsonに自動釣銭機（CashChanger） / 実行時名（CASHCHANGER） / 実装識別ID（CashChanger1）として定義されている。 | デバイスコネクタ停止時またはデバイス停止処理時。 | デバイスコネクタ内のOPOS／OCX、UIスレッド、共有メモリ、要求／応答ファイルを利用する。 | デバイス開始は最大3回試行する。同期応答とデバイス処理結果通知を分けて扱う。 |
-| 2 | SHARP UP-J46DW3ドロア | ドロア制御部 | ドロアオープン。 | host_device_config.jsonにキャッシュドロア（CashDrawer） / 実装識別ID（CashDrawer1）として定義されている。 | デバイスコネクタ停止時またはデバイス停止処理時。 | デバイスコネクタ内のSHARP既存実装と、OCXを保持する非表示フォームを利用する。 | 結果コードと拡張結果コードを返す。 |
-| 3 | SHARP RZ-4DP3カスタマディスプレイ | カスタマディスプレイ制御部 | 表示、消去、スクロール、位置指定表示。 | host_device_config.jsonにカスタマーディスプレイ（CustomerDisplay） / 実装識別ID（CustomerDisplay1）として定義されている。デバイスコネクタ（Host）内部では既存クラスIDのLineDisplay1に変換して既存実装を生成する。 | デバイスコネクタ停止時またはデバイス停止処理時。 | デバイスコネクタ内のSHARP既存実装、OPOS／OCXを保持する非表示フォーム、および日本語文字列を利用する。 | 名前付きパイプはUTF-8の一行単位で送受信する。 |
-| 4 | CAFIS Arch Saturn決済端末 | 決済端末制御部 | 端末接続、切断、疎通確認、決済実行、再印字。 | device_controller_config.jsonに有効デバイス区分（local_payment） / アプリ側設定ID（payment_cafis_arch_saturn_windows）として定義し、host_device_config.jsonに決済端末（Payment） / 実行時名（CAFIS Arch） / 実装識別ID（Payment1）として定義する。Windows側にはOPOS CAT／OCX、OPOS論理名（CAFIS Arch）、接続設定を導入する。 | デバイスコネクタ停止時または端末切断処理時。 | WindowsのCOM／OCX登録、OPOS Service Object、論理デバイス名、通信ポート、およびCAFIS Arch設定フォルダーが必要。 | 決済情報および端末応答全文はログに出力しない。 |
-| 5 | SHARP 80mmレシートプリンター | レシートプリンター制御部 | デバイス使用開始・終了、文字・JAN／EANバーコード・QRコードの印字、用紙カット。 | device_controller_config.jsonに有効デバイス区分（local_printer） / アプリ側設定ID（printer_sharp_windows）として定義し、host_device_config.jsonにプリンター（Printer） / OPOS論理名（SHARPRECPRT80） / 実装識別ID（POSPrinter1）として定義する。Windows側にはOPOS POSPrinter Common Control、Service Object、および論理デバイス名を導入する。 | デバイスコネクタ停止時またはデバイス使用終了処理時。 | 32ビットCOM、OPOS POSPrinter Common Control、Service Object、および論理デバイス名が必要。 | ロゴ、スタンプ、画像、電子ジャーナル、および旧業務固有のレシート整形処理は対象外。 |
+| 1 | GLORY RT-300／RAD-300自動釣銭機 | 自動釣銭機制御部 | 入金、払出、状態確認、エラー確認。 | host_device_config.jsonに自動釣銭機（CashChanger） / 実装識別ID（CashChanger1）として定義されている。 | デバイスコネクタ停止時またはデバイス停止処理時。 | デバイスコネクタ内のOPOS／OCX、UIスレッド、共有メモリ、要求／応答ファイルを利用する。 | デバイス開始は最大3回試行する。同期応答とデバイス処理結果通知を分けて扱う。 |
+| 2 | SHARP UP-J36DW3ドロア | ドロア制御部 | ドロアオープン。 | host_device_config.jsonにキャッシュドロア（CashDrawer） / 実装識別ID（CashDrawer1）として定義されている。 | デバイスコネクタ停止時またはデバイス停止処理時。 | デバイスコネクタ内のSHARP既存実装と、OCXを保持する非表示フォームを利用する。 | 結果コードと拡張結果コードを返す。 |
+| 3 | SHARP RZ-4DP1カスタマディスプレイ | カスタマディスプレイ制御部 | 表示、消去、スクロール、位置指定表示。 | host_device_config.jsonにカスタマディスプレイ（CustomerDisplay） / 実装識別ID（CustomerDisplay1）として定義されている。デバイスコネクタ（Host）内部では既存クラスIDのLineDisplay1に変換して既存実装を生成する。 | デバイスコネクタ停止時またはデバイス停止処理時。 | デバイスコネクタ内のSHARP既存実装、OPOS／OCXを保持する非表示フォーム、および日本語文字列を利用する。 | 名前付きパイプはUTF-8の一行単位で送受信する。 |
+| 4 | CAFIS Arch Saturn決済端末 | 決済端末制御部 | 端末接続、切断、疎通確認、決済実行、再印字。 | device_controller_config.jsonに有効デバイス区分（local_payment） / アプリ側設定ID（payment_cafis_arch_saturn_windows）として定義し、host_device_config.jsonに決済端末（Payment） / 実装識別ID（Payment1）として定義する。Windows側にはOPOS CAT／OCX、OPOS論理名（CAFIS Arch）、接続設定を導入する。 | デバイスコネクタ停止時または端末切断処理時。 | WindowsのCOM／OCX登録、OPOS Service Object、論理デバイス名、通信ポート、およびCAFIS Arch設定フォルダーが必要。 | 決済情報および端末応答全文はログに出力しない。 |
+| 5 | SHARP 80mmレシートプリンタ | レシートプリンタ制御部 | デバイス使用開始・終了、文字・JAN／EANバーコード・QRコードの印字、用紙カット。 | device_controller_config.jsonに有効デバイス区分（local_printer） / アプリ側設定ID（printer_sharp_windows）として定義し、host_device_config.jsonにプリンター（Printer） / 実装識別ID（POSPrinter1）として定義する。Windows側にはOPOS POSPrinter Common Control、Service Object、および論理デバイス名を導入する。 | デバイスコネクタ停止時またはデバイス使用終了処理時。 | 32ビットCOM、OPOS POSPrinter Common Control、Service Object、および論理デバイス名が必要。 | ロゴ、スタンプ、画像、電子ジャーナル、および旧業務固有のレシート整形処理は対象外。 |
 
 ## 10_異常・運用設計
 
@@ -972,16 +938,16 @@ SHARP 80mmレシートプリンターのデバイス制御は、アプリ側有�
 | 9 | デバイス実行 | デバイスメソッド実行が0以外を返す。 | デバイス戻り値。 | 成功フラグ（Success）=falseとしてデバイス結果コードを返す。 | 通信応答として受信し、デバイス操作失敗として扱う。 | ホスト内部実装のログ。 | 実機状態、OPOS状態、引数を確認する。 |
 | 10 | 順序制御 | 処理中に例外が発生する。 | 処理単位内の例外。 | 例外を失敗応答へ変換する。 | 成功フラグ（Success）=false、結果コード（ResultCode）=-1 | コマンド処理異常ログ。 | 要求ID（RequestId）と応答メッセージ（Message）を起点にログを確認する。 |
 | 11 | デバイス起動 | デバイス生成または開始失敗。 | 起動時例外。 | 失敗した実装を停止し、50ミリ秒間隔で最大3回試行する。最終失敗時は起動済みリストに追加しない。 | 該当デバイスID要求時に未登録エラー。 | 最終失敗をInfoログへ出力する。 | OPOS設定、OCX登録、デバイス接続を確認する。 |
-| 12 | デバイス監視 | 釣銭機（CashChanger）から30秒以上応答がない。 | 60秒ごとの生存監視（KeepAlive）確認。 | 状態監視ログを出力する。 | コマンド応答とは別扱い。 | Debugログ。 | 実機接続、デバイス処理停止状態を確認する。 |
+| 12 | デバイス監視 | 自動釣銭機（CashChanger）から30秒以上応答がない。 | 60秒ごとの生存監視（KeepAlive）確認。 | 状態監視ログを出力する。 | コマンド応答とは別扱い。 | Debugログ。 | 実機接続、デバイス処理停止状態を確認する。 |
 | 13 | イベント通信 | デバイスコネクタの送信失敗、またはデバイス制御の切断・受信失敗。 | 書込、接続、読込、JSON解析の例外。 | 送信失敗した接続を接続一覧から除外する。 | デバイス制御は異常をログへ出力し、1秒間隔で再接続する。コマンド応答は変更しない。 | イベント通信異常ログ。 | デバイスコネクタ稼働状態、パイプ接続、およびイベントJSONを確認する。 |
 | 14 | 所有プロセス停止 | デバイスコネクタ停止要求失敗、応答タイムアウト、または所有プロセスが10秒以内に終了しない。 | 通信例外、応答待機、プロセス終了待機。 | デバイスコネクタ停止要求を受信できた場合は通常の停止処理を継続する。 | 通信失敗をログへ出力して終了監視を継続し、10秒経過時は所有プロセスツリーを強制終了する。 | 停止要求失敗または強制終了ログ。 | パイプ状態、停止処理、および残存プロセスを確認する。 |
 | 15 | デバイスコネクタ停止 | デバイスコネクタ停止処理中に例外が発生する。 | 停止処理例外。 | 停止異常をログへ出力する。 | デバイスコネクタ停止要求の受付応答は書込済みのため変更しない。 | デバイスコネクタ停止異常ログ。 | 残存プロセス、パイプハンドル、デバイス解放状態を確認する。 |
 | 16 | 設定読込 | host_device_config.jsonの読込、JSON解析、id、name、classIdに問題がある。 | 設定読込またはデバイス生成時。 | 通信受付を停止し、起動異常をログへ出力してプロセスを終了する。 | 稼働確認は失敗し、デバイス操作を開始しない。 | デバイスコネクタ起動異常ログ。 | ファイル配置、JSON形式、id、name、classIdを確認して再起動する。 |
 | 17 | 稼働確認 | プロセス起動から10秒以内に稼働中応答を受信できない。 | 稼働確認要求の失敗または準備未完了応答。 | 準備未完了時は失敗応答を返す。 | 起動確認失敗としてログへ出力し、以後のデバイス要求は通信失敗としてアプリケーション層へ返す。 | デバイスコネクタ起動確認異常ログ。 | 設定読込、デバイス起動、およびコマンド通信用パイプを確認する。 |
 | 18 | コマンド応答 | 応答JSONのシリアライズまたは書込に失敗する。 | シリアライズ例外または書込例外。 | コマンド処理異常をログへ出力し、接続を終了する。 | 通信例外として扱い、同一要求を自動再送しない。 | コマンド処理異常ログ、デバイス制御側通信異常ログ。 | 要求IDを起点にデバイスコネクタ側の実行結果を確認する。 |
-| 19 | デバイス制御設定読込・反映 | device_controller_config.jsonのランタイム設定またはデフォルト設定を読込・解析できない、またはSQLiteへ反映できない。 | アプリ起動時のファイル読込、JSON解析・検証、またはデータベース書込例外。 | デバイスコネクタ側処理なし。 | ランタイム設定の異常時は警告ログを出力してデフォルト設定へ切り替える。デフォルト設定の異常時、またはSQLite反映失敗時はエラーログを出力してアプリ起動を中止する。設定保存時のSQLite反映失敗では現在のメモリ設定を維持する。 | デバイス制御設定異常ログ。 | ランタイム設定、デフォルト設定、アプリデータ領域の書込権限・空き容量、およびデバイス制御設定データベースを確認して再起動する。 |
+| 19 | デバイス制御設定読込・反映 | device_controller_config.jsonを読込・解析できない、SQLiteから設定を復元できない、またはSQLiteへ保存できない。 | アプリ起動時のファイル読込、JSON解析・検証、またはデータベース読込・書込例外。 | デバイスコネクタ側処理なし。 | JSON取込の異常時は警告ログを出力して既存SQLiteへフォールバックする。SQLiteも未初期化の場合はデフォルト設定を登録する。設定を準備できない場合はエラーログを出力してアプリ起動を中止する。設定保存失敗時は現在のメモリ設定を維持する。 | デバイス制御設定異常ログ。 | ランタイム設定、デフォルト設定、アプリデータ領域の読込・書込権限・空き容量、およびデバイス制御設定データベースを確認して再起動する。 |
 | 20 | CAFIS Arch決済端末の起動・実行 | OPOS CAT／OCXを開始できない、またはCAFIS Arch操作が失敗する。 | Open、Claim、Enable、DirectIO、またはOPOS結果コード。 | 失敗結果と技術コードを応答へ変換する。個別要求の失敗でデバイスコネクタ全体は停止しない。 | 成功フラグ（Success）=falseの失敗応答。 | デバイス実行結果、CAFIS Archベンダーログ。決済機微情報は出力しない。 | COM／OCX登録、OPOS Service Object、論理デバイス名、接続先、通信ポート、ConfigDir、実機接続を確認する。 |
-| 21 | SHARP 80mmレシートプリンターの起動・印字 | OPOS POSPrinterを開始できない、レシート要素が不正・未対応、または印字処理が失敗する。 | Open、Claim、Enable、TransactionPrint、PrintNormal、PrintBarCode、CutPaper、またはOPOS結果コード。 | 不正・未対応のレシート要素またはOPOS失敗を明確な失敗応答へ変換する。個別要求の失敗でデバイスコネクタ全体は停止しない。 | 成功フラグ（Success）=falseの失敗応答。 | 要求ID、操作種別、OPOS結果コード、処理段階。ReceiptJsonおよびレシート印字内容は出力しない。 | OPOS POSPrinter Common Control、Service Object、論理デバイス名、用紙、および実機状態を確認する。 |
+| 21 | SHARP 80mmレシートプリンタの起動・印字 | OPOS POSPrinterを開始できない、レシート要素が不正・未対応、または印字処理が失敗する。 | Open、Claim、Enable、TransactionPrint、PrintNormal、PrintBarCode、CutPaper、またはOPOS結果コード。 | 不正・未対応のレシート要素またはOPOS失敗を明確な失敗応答へ変換する。個別要求の失敗でデバイスコネクタ全体は停止しない。 | 成功フラグ（Success）=falseの失敗応答。 | 要求ID、操作種別、OPOS結果コード、処理段階。ReceiptJsonおよびレシート印字内容は出力しない。 | OPOS POSPrinter Common Control、Service Object、論理デバイス名、用紙、および実機状態を確認する。 |
 
 ### 10.4 ログ出力方針
 
@@ -1010,12 +976,12 @@ SHARP 80mmレシートプリンターのデバイス制御は、アプリ側有�
 | 11 | デバイス未登録 | Info | デバイスコネクタ / コマンド処理部 | 要求ID、未登録デバイスID。 |
 | 12 | デバイス実行結果 | Debug | ホスト内部実装 | メソッドID、結果コード（ResultCode）、拡張結果コード（ResultCodeExtended）。 |
 | 13 | デバイス起動異常 | Info | デバイス管理部 | 最終試行で起動できなかったデバイスIDと例外内容。 |
-| 14 | デバイス監視異常 | Debug | デバイス管理部 | 釣銭機（CashChanger）の最終応答日時。 |
+| 14 | デバイス監視異常 | Debug | デバイス管理部 | 自動釣銭機（CashChanger）の最終応答日時。 |
 | 15 | イベント通信異常 | Warning / Info | デバイス制御 / 名前付きパイプ通信、デバイスコネクタ / イベント配信部 | パイプ名、イベントID、デバイスID、処理段階、例外種別。 |
 | 16 | 所有プロセス強制終了 | Warning | アプリケーション層 / デバイスコネクタプロセス管理部 | プロセスID、終了待機時間、プロセスツリー強制終了。 |
 | 17 | デバイス制御設定異常 | Warning / Error | デバイス制御層 / デバイス制御設定管理 | 設定ファイル種別、読込元、例外種別、デフォルト設定への切替有無、およびSQLite反映結果。付加データおよび設定全文は出力しない。 |
 | 18 | CAFIS Arch決済端末実行異常 | Info / Warning | デバイスコネクタ / 決済端末制御部 | 要求ID、操作種別、OPOS結果コード、処理段階。決済情報、カード情報、および端末応答全文は出力しない。 |
-| 19 | SHARP 80mmレシートプリンター実行異常 | Info / Warning | デバイスコネクタ / レシートプリンター制御部 | 要求ID、操作種別、OPOS結果コード、処理段階。ReceiptJsonおよびレシート印字内容は出力しない。 |
+| 19 | SHARP 80mmレシートプリンタ実行異常 | Info / Warning | デバイスコネクタ / レシートプリンタ制御部 | 要求ID、操作種別、OPOS結果コード、処理段階。ReceiptJsonおよびレシート印字内容は出力しない。 |
 
 ### 10.6 運用・保守責任分界
 
@@ -1027,7 +993,7 @@ SHARP 80mmレシートプリンターのデバイス制御は、アプリ側有�
 | アプリ側の不具合対応 | アプリライフサイクル、プロセス管理、アプリ設定、名前付きパイプクライアント | タブレットPOS端末アプリの保守範囲。 |
 | デバイスコネクタ側の不具合対応 | Mutex、通信サーバー、順序制御、デバイス管理、OPOS／OCX呼出し | デバイスコネクタの設計・開発・保守範囲。 |
 | Windows導入・設定不備の対応 | ドライバー導入、COM／OCX登録、OPOS Service Object、OPOS POSPrinter Common Control、論理デバイス名、CAFIS Arch接続設定、ベンダーログ | Windows端末の導入・保守範囲。管理者権限が必要な登録作業を含む。 |
-| 実機・ベンダー固有障害の対応 | 実機故障、ファームウェア、回線、CAFIS Archベンダー設定、レシートプリンターの用紙・Service Object設定 | 導入・保守担当が切り分け、必要に応じて機器・決済ベンダーへ連携する。 |
+| 実機・ベンダー固有障害の対応 | 実機故障、ファームウェア、回線、CAFIS Archベンダー設定、レシートプリンタの用紙・Service Object設定 | 導入・保守担当が切り分け、必要に応じて機器・決済ベンダーへ連携する。 |
 
 ## 11_実装対応
 
@@ -1043,15 +1009,15 @@ SHARP 80mmレシートプリンターのデバイス制御は、アプリ側有�
 | 6 | （2）②-3 | F-HOST-009 | デバイス管理部 | TabletDeviceManager | デバイス生成、保持、検索、停止、準備状態管理。 | PS-HOST-06 |
 | 7 | （2）③-1 | F-HOST-008 | デバイス共通処理 | IFDevice、DeviceBase | デバイス共通の使用開始、使用終了、メソッド実行。 | PS-HOST-07 |
 | 8 | （2）③-1、（3）① | F-HOST-008 | 自動釣銭機制御部 | CashChangerByRt300、CashChangerByRt300Form | GLORY RT-300／RAD-300自動釣銭機のOPOS／OCXを利用した既存制御処理。 | PS-HOST-08 |
-| 9 | （2）③-1、（3）② | F-HOST-008 | ドロア制御部 | CashDrawerBySharp、CashDrawerBySharpForm | SHARP UP-J46DW3ドロアの既存制御処理とOCX保持。 | PS-HOST-10 |
-| 10 | （2）③-1、（3）③ | F-HOST-008 | カスタマディスプレイ制御部 | CustomerDisplayBySharp、CustomerDisplayBySharpForm | SHARP RZ-4DP3カスタマディスプレイの既存制御処理とOPOS／OCX保持。 | PS-HOST-11 |
+| 9 | （2）③-1、（3）② | F-HOST-008 | ドロア制御部 | CashDrawerBySharp、CashDrawerBySharpForm | SHARP UP-J36DW3ドロアの既存制御処理とOCX保持。 | PS-HOST-10 |
+| 10 | （2）③-1、（3）③ | F-HOST-008 | カスタマディスプレイ制御部 | CustomerDisplayBySharp、CustomerDisplayBySharpForm | SHARP RZ-4DP1カスタマディスプレイの既存制御処理とOPOS／OCX保持。 | PS-HOST-11 |
 | 11 | （1）①-3 | F-HOST-001、F-HOST-002、F-HOST-011 | デバイスコネクタプロセス管理 | HostProcessManager | プロセス存在・稼働確認、起動、デバイスコネクタ停止要求、所有プロセス終了監視、強制終了。 | 本書 06_運用シナリオ_02 |
 | 12 | （2）②-2 | F-HOST-005 | 要求・応答変換 | NamedPipeCommandMapper | JSON要求の内部コマンド変換、および処理結果のJSON応答変換。 | PS-HOST-02、PS-HOST-04 |
-| 13 | （1）②-1 | - | デバイス制御設定管理 | DeviceControllerConfigService、SqliteDeviceControllerConfigStorage、DeviceManager | ランタイム設定またはデフォルト設定の読込・検証、SQLiteへの反映、有効デバイスと制御方式の選択。 | CFG-01、DB-DEVICE-01 |
-| 14 | （1）②-2、（1）②-4 | F-HOST-003、F-HOST-004 | 名前付きパイプ通信 | INamedPipeClient、NamedPipeClient、IDeviceEventReceiver、NamedPipeEventReceiver | コマンド通信用パイプの接続・送受信・タイムアウト、およびイベント受信・切断時の再接続。 | 本書 08_通信・データ設計、PS-DEVICE-10、PS-DEVICE-11 |
+| 13 | （1）②-1 | - | デバイス制御設定管理 | DeviceControllerConfigService、SqliteDeviceControllerConfigStorage、DeviceManager | 起動時JSON取込、SQLiteへの再登録・フォールバック読込、実行時保存、有効デバイスと制御方式の選択。 | CFG-01、DB-DEVICE-01 |
+| 14 | （1）②-2 | F-HOST-003、F-HOST-004 | 名前付きパイプ通信 | INamedPipeClient、NamedPipeClient、IDeviceEventReceiver、NamedPipeEventReceiver | コマンド通信用パイプの接続・送受信・タイムアウト、およびイベント受信・切断時の再接続。 | 本書 08_通信・データ設計、PS-DEVICE-10、PS-DEVICE-11 |
 | 15 | （1）②-2、（1）②-3 | F-HOST-005、F-HOST-008、F-HOST-010 | 要求生成・結果変換 | OposCashChangerStrategy、OposDrawerStrategy、OposCustomerDisplayStrategy、OposCafisArchPaymentStrategy、OposPrinterStrategy、OposNamedPipeCommandClient | 各Strategyから共通要求変換へ委譲し、共通通信応答をStrategyの結果形式へ変換して呼出元へ返す。 | 本書 06_運用シナリオ_02、08_通信・データ設計、DC-PAY-WIN-001 |
 | 16 | （2）①-1 | F-HOST-002、F-HOST-007 | デバイスコネクタ起動・二重起動防止 | デバイスコネクタ起動プログラム（TabletDeviceServer.AppServer.exe）／起動エントリ（Program） | Mutexによる排他制御、既存デバイス資源を管理する単一プロセスの生成・開始、通常時のバックグラウンド実行、デバッグ画面。 | 本書 06_運用シナリオ_02 |
 | 17 | - | F-HOST-007 | 保守用停止要求送信ツール | 停止要求送信プロセス（AppStopServer） | アプリとは独立した保守操作としてデバイスコネクタ停止要求を送信する。 | 本書 06_運用シナリオ_02 |
-| 18 | （2）③-1、（3）④ | F-HOST-008 | 決済端末制御部 | CafisArchPaymentDevice（登録ID: Payment1）／CAFIS Arch OPOS CAT／OCX（OPOS.CAT.CAFIS_Arch_OCX.SO.1） | CAFIS Arch SaturnのOpen・Claim・Enable、DirectIO、Disable・Release・Closeをデバイスコネクタ内で実行する。 | DC-PAY-WIN-001、本書 08_通信・データ設計 |
-| 19 | （2）③-1、（3）⑤ | F-HOST-008 | レシートプリンター制御部 | OposPrinterDevice（POSPrinter1）／OPOS POSPrinter（SHARPRECPRT80） | デバイス使用開始・終了、文字・JAN／EANバーコード・QRコードの印字、および用紙カットをデバイスコネクタ内で実行する。 | 本書 08_通信・データ設計 |
-| 20 | （1）②-2〜②-6、（2）①-2〜①-3 | F-HOST-003、F-HOST-004、F-HOST-005、F-HOST-010 | 共通デバイス通信契約 | TabletPos.DeviceContracts（NamedPipeDeviceCommandRequest、NamedPipeDeviceCommandResponse、NamedPipeDeviceEvent、DeviceCommandDefaults、DeviceOperationTimeouts、DeviceHostProcessDefaults、DeviceMessages、DeviceIds、DeviceMethodIds、DevicePayloadKeys、OposPrinterValues） | 要求・応答・イベントDTO、識別子、ペイロードキー、通信・処理既定値、およびOPOSプリンター既定値をアプリとデバイスコネクタで共有する。 | PS-DEVICE-10、PS-DEVICE-11、本書 08_通信・データ設計 |
+| 18 | （2）③-1、（3）④ | F-HOST-008 | 決済端末制御部 | CafisArchPaymentDevice（登録ID: Payment1）／CAFIS Arch OPOS CAT／OCX | CAFIS Arch SaturnのOpen・Claim・Enable、DirectIO、Disable・Release・Closeをデバイスコネクタ内で実行する。 | DC-PAY-WIN-001、本書 08_通信・データ設計 |
+| 19 | （2）③-1、（3）⑤ | F-HOST-008 | レシートプリンタ制御部 | OposPrinterDevice（POSPrinter1）／OPOS POSPrinter | デバイス使用開始・終了、文字・JAN／EANバーコード・QRコードの印字、および用紙カットをデバイスコネクタ内で実行する。 | 本書 08_通信・データ設計 |
+| 20 | （1）②-2〜②-5、（2）①-2〜①-3 | F-HOST-003、F-HOST-004、F-HOST-005、F-HOST-010 | 共通デバイス通信契約 | Pos.DeviceContracts（NamedPipeDeviceCommandRequest、NamedPipeDeviceCommandResponse、NamedPipeDeviceEvent、DeviceCommandDefaults、DeviceOperationTimeouts、DeviceHostProcessDefaults、DeviceMessages、DeviceIds、DeviceMethodIds、DevicePayloadKeys、OposPrinterValues） | 要求・応答・イベントDTO、識別子、ペイロードキー、通信・処理既定値、およびOPOSプリンター既定値をアプリとデバイスコネクタで共有する。 | PS-DEVICE-10、PS-DEVICE-11、本書 08_通信・データ設計 |

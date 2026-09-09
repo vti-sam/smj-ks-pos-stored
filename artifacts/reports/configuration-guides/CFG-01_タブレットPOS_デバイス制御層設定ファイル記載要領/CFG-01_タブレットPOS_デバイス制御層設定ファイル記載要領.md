@@ -1,130 +1,127 @@
 ---
 title: デバイス制御層設定ファイル記載要領
 document_id: CFG-01
-project: tablet_pos
+project: pos
 type: configuration-guide
 status: final
 source:
-  - chat:2026-06-11
-  - sources/TabletPosBoilerplate/TabletPos.DeviceCtrl/Resources/Raw/device_controller_config.json
-  - sources/TabletPosBoilerplate/TabletPos.Host/src/AppServer/Resources/host_device_config.json
+ - chat:2026-06-11
+ - sources/pos-integration/Pos.DeviceCtrl/Resources/Raw/device_controller_config.json
+ - sources/pos-integration/Pos.DeviceConnector/src/AppServer/Resources/host_device_config.json
 tags:
-  - タブレットPOS
-  - device-controller
-  - config
-  - writing-guide
+ - POS
+ - device-controller
+ - config
+ - writing-guide
 ---
 
 # デバイス制御層設定ファイル記載要領
 
 文書ID: CFG-01
 
+第1.0.0版
+
 ## 改訂履歴
 
 | 改訂日 | 版数 | 内容 | 改訂者 | 承認者 |
-|---|---|---|---|---|
-| 2026/08/24 | 0.1.5 | Hostの5デバイス定義、CustomerDisplay互換ID変換、Payment設定、名前付きパイプの共通タイムアウト／再試行／イベント設定を現行実装に合わせて更新 | VTI-サム | - |
-| 2026/07/23 | 0.1.4 | device_controller_config.jsonの管理責務をDeviceCtrlへ統一し、読込・フォールバック、接続方式、およびプラットフォーム別の利用状態を現行実装に合わせて更新 | VTI-サム | - |
-| 2026/06/25 | 0.1.3 | 設定ファイル名、配置先、Named Pipe 名を現行構成に合わせて更新 | VTI-サム | - |
-| 2026/06/15 | 0.1.2 | `device_controller_config.json` の全体記載例を追加 | VTI-サム | - |
-| 2026/06/12 | 0.1.1 | デバイス種類ごとの `device_controller_config.json` 記載例を追加 | VTI-サム | - |
-| 2026/06/11 | 0.1.0 | `device_controller_config.json` および `host_device_config.json` の記載要領を新規作成 | VTI-サム | - |
+| --- | --- | --- | --- | --- |
+| 2026/09/03 | 1.0.0 | 正式版として初版を作成。 | SMJサム | - |
 
 ## 目次
 
 - [1. はじめに](#1-はじめに)
-  - [1.1 本書の位置づけ](#11-本書の位置づけ)
-  - [1.2 対象ファイル](#12-対象ファイル)
-  - [1.3 前提事項](#13-前提事項)
-  - [1.4 関連ドキュメント](#14-関連ドキュメント)
+ - [1.1 本書の位置づけ](#11-本書の位置づけ)
+ - [1.2 対象ファイル](#12-対象ファイル)
+ - [1.3 前提事項](#13-前提事項)
+ - [1.4 関連ドキュメント](#14-関連ドキュメント)
 - [2. 設定ファイルの全体像](#2-設定ファイルの全体像)
-  - [2.1 デバイス設定を含む全体構成](#21-デバイス設定を含む全体構成)
-  - [2.2 設定ファイルの役割サマリ](#22-設定ファイルの役割サマリ)
-  - [2.3 本書の読み進め方](#23-本書の読み進め方)
+ - [2.1 デバイス設定を含む全体構成](#21-デバイス設定を含む全体構成)
+ - [2.2 設定ファイルの役割サマリ](#22-設定ファイルの役割サマリ)
+ - [2.3 本書の読み進め方](#23-本書の読み進め方)
 - [3. device_controller_config.json 詳細](#3-device_controller_configjson-詳細)
-  - [3.1 役割](#31-役割)
-  - [3.2 起動時設定読込フロー](#32-起動時設定読込フロー)
-  - [3.3 起動時処理概要](#33-起動時処理概要)
-  - [3.4 ルート項目](#34-ルート項目)
-  - [3.5 devices 配列](#35-devices-配列)
-  - [3.6 devices[].config](#36-devicesconfig)
-  - [3.7 activeDevices](#37-activedevices)
-  - [3.8 appSettings.namedPipe](#38-appsettingsnamedpipe)
-  - [3.9 記載値一覧](#39-記載値一覧)
+ - [3.1 役割](#31-役割)
+ - [3.2 起動時設定読込フロー](#32-起動時設定読込フロー)
+ - [3.3 起動時処理概要](#33-起動時処理概要)
+ - [3.4 ルート項目](#34-ルート項目)
+ - [3.5 devices 配列](#35-devices-配列)
+ - [3.6 devices[].config](#36-devicesconfig)
+ - [3.7 activeDevices](#37-activedevices)
+ - [3.8 appSettings.namedPipe](#38-appsettingsnamedpipe)
+ - [3.9 記載値一覧](#39-記載値一覧)
 - [4. host_device_config.json 詳細](#4-host_device_configjson-詳細)
-  - [4.1 役割](#41-役割)
-  - [4.2 起動時設定読込フロー](#42-起動時設定読込フロー)
-  - [4.3 起動時処理概要](#43-起動時処理概要)
-  - [4.4 ルート項目](#44-ルート項目)
-  - [4.5 devices 配列](#45-devices-配列)
-  - [4.6 現行定義一覧](#46-現行定義一覧)
-  - [4.7 端末側設定との対応関係](#47-端末側設定との対応関係)
+ - [4.1 役割](#41-役割)
+ - [4.2 起動時設定読込フロー](#42-起動時設定読込フロー)
+ - [4.3 起動時処理概要](#43-起動時処理概要)
+ - [4.4 ルート項目](#44-ルート項目)
+ - [4.5 devices 配列](#45-devices-配列)
+ - [4.6 現行定義一覧](#46-現行定義一覧)
+ - [4.7 端末側設定との対応関係](#47-端末側設定との対応関係)
 - [5. デバイス取得・制御処理概要](#5-デバイス取得制御処理概要)
-  - [5.1 使用デバイス選択処理](#51-使用デバイス選択処理)
-  - [5.2 Windows 端末の外部機器制御](#52-windows-端末の外部機器制御)
-  - [5.3 iOS / Android 端末の外部機器制御](#53-ios--android-端末の外部機器制御)
+ - [5.1 使用デバイス選択処理](#51-使用デバイス選択処理)
+ - [5.2 Windows 端末の外部機器制御](#52-windows-端末の外部機器制御)
+ - [5.3 iOS / Android 端末の外部機器制御](#53-ios--android-端末の外部機器制御)
 - [6. 記載時チェックリスト](#6-記載時チェックリスト)
 - [7. デバイス種類ごとの記載例](#7-デバイス種類ごとの記載例)
-  - [7.1 記載例の前提](#71-記載例の前提)
-  - [7.2 プリンター](#72-プリンター)
-  - [7.3 スキャナー](#73-スキャナー)
-  - [7.4 カスタマーディスプレイ](#74-カスタマーディスプレイ)
-  - [7.5 キーボード](#75-キーボード)
-  - [7.6 キャッシュドロワー](#76-キャッシュドロワー)
-  - [7.7 自動釣銭機](#77-自動釣銭機)
-  - [7.8 決済端末](#78-決済端末)
-  - [7.9 device_controller_config.json 全体記載例](#79-device_controller_configjson-全体記載例)
+ - [7.1 記載例の前提](#71-記載例の前提)
+ - [7.2 プリンター](#72-プリンター)
+ - [7.3 スキャナ](#73-スキャナ)
+ - [7.4 カスタマディスプレイ](#74-カスタマディスプレイ)
+ - [7.5 キーボード](#75-キーボード)
+ - [7.6 ドロア](#76-ドロア)
+ - [7.7 自動釣銭機](#77-自動釣銭機)
+ - [7.8 決済端末](#78-決済端末)
+ - [7.9 device_controller_config.json 全体記載例](#79-device_controller_configjson-全体記載例)
 
 ## 1. はじめに
 
 ### 1.1 本書の位置づけ
 
-本書は、タブレットPOSのデバイス制御層で使用する設定ファイルの記載要領を定義する文書である。
+本書は、POSのデバイス制御層で使用する設定ファイルの記載要領を定義する文書である。
 
 対象読者は、端末ごとの周辺機器設定を作成・確認する開発者、テスト担当者、導入担当者である。
 
-本書では、端末アプリケーション側の設定である `device_controller_config.json` と、デバイスコネクタ（Host）側の設定である `host_device_config.json` を分けて説明する。
+本書では、端末アプリケーション側の設定である `device_controller_config.json` と、デバイスコネクタ側の設定である `host_device_config.json` を分けて説明する。
 
 ### 1.2 対象ファイル
 
 | ファイル | 所在 | 用途 |
 |---|---|---|
-| `device_controller_config.json` | `TabletPos.DeviceCtrl/Resources/Raw/device_controller_config.json` | DeviceCtrlに埋め込むデフォルト設定 |
-| `device_controller_config.json` | `FileSystem.AppDataDirectory/device_controller_config.json` | 起動後に編集・保存する端末別設定 |
-| `host_device_config.json` | `TabletPos.Host/src/AppServer/Resources/host_device_config.json` | デバイスコネクタ（Host）側に同梱するデバイス実装設定 |
-| `host_device_config.json` | `デバイスコネクタ実行フォルダ\Resources\host_device_config.json` | ビルド後にデバイスコネクタ（Host）が実際に読み込む設定 |
+| `device_controller_config.json` | `Pos.DeviceCtrl/Resources/Raw/device_controller_config.json` | DeviceCtrlに埋め込むデフォルト設定 |
+| `device_controller_config.json` | `FileSystem.AppDataDirectory/device_controller_config.json` | アプリ起動時にSQLiteへ取り込む端末別設定 |
+| `host_device_config.json` | `Pos.DeviceConnector/src/AppServer/Resources/host_device_config.json` | デバイスコネクタ側に同梱するデバイス実装設定 |
+| `host_device_config.json` | `デバイスコネクタ実行フォルダ\Resources\host_device_config.json` | ビルド後にデバイスコネクタが実際に読み込む設定 |
 
 ### 1.3 前提事項
 
 - `device_controller_config.json` は、端末アプリケーション側で使用するデバイス設定である。
-- `device_controller_config.json` の読込、フォールバック、保存、デシリアライズ、および適用は DeviceCtrl が行う。アプリケーション層は DeviceManager の公開 API だけを呼び出す。
-- `host_device_config.json` は、デバイスコネクタ（Host）側で使用するデバイス設定である。
-- `device_controller_config.json` は、デバイスコネクタ（Host）側のデバイス読込設定を置き換えない。
-- Windows の OPOS / OCX / ActiveX lifecycle はデバイスコネクタ（Host）側に閉じ込める。
+- `device_controller_config.json` の起動時読込・デシリアライズ、SQLiteへの再登録・フォールバック読込・保存、および適用は DeviceCtrl が行う。アプリケーション層は DeviceManager の公開 API だけを呼び出す。
+- `host_device_config.json` は、デバイスコネクタ側で使用するデバイス設定である。
+- `device_controller_config.json` は、デバイスコネクタ側のデバイス読込設定を置き換えない。
+- Windows の OPOS / OCX / ActiveX lifecycle はデバイスコネクタ側に閉じ込める。
 - 端末アプリケーションは OPOS / OCX / ActiveX を直接呼び出さない。
 
 ### 1.4 関連ドキュメント
 
-| ファイル名 |
+| 資料名 |
 |---|
-| ARCH-01_タブレットPOS_ソフトウェア構造設計書.docx |
-| ARCH-02_タブレットPOS_端末アプリケーション構造設計書.docx |
-| デバイスコネクタ構造設計書 |
-| PS-HOST-01_タブレットPOS_ホスト_名前付きパイプコマンドサーバー_プログラム仕様書.xlsx |
-| PS-HOST-02_タブレットPOS_ホスト_名前付きパイプデバイスホストアダプター_プログラム仕様書.xlsx |
-| PS-HOST-03_タブレットPOS_ホスト_デバイスコマンドルーター_プログラム仕様書.xlsx |
-| PS-HOST-04_タブレットPOS_ホスト_デバイスコマンドハンドラー_プログラム仕様書.xlsx |
-| PS-HOST-05_タブレットPOS_ホスト_デバイスサーバーホスト_プログラム仕様書.xlsx |
-| PS-HOST-06_タブレットPOS_ホスト_デバイスマネージャー_プログラム仕様書.xlsx |
-| PS-HOST-07_タブレットPOS_ホスト_デバイスベース_プログラム仕様書.xlsx |
-| PS-HOST-08_タブレットPOS_ホスト_自動釣銭機制御_RT-300_プログラム仕様書.xlsx |
-| PS-HOST-09_タブレットPOS_ホスト_自動釣銭機UIスレッドフォーム_RT-300_プログラム仕様書.xlsx |
-| PS-HOST-10_タブレットPOS_ホスト_ドロア制御_SHARP_プログラム仕様書.xlsx |
-| PS-HOST-11_タブレットPOS_ホスト_カスタマディスプレイ制御_SHARP_プログラム仕様書.xlsx |
-| PS-HOST-12_タブレットPOS_ホスト_名前付きパイプコマンドマッパー_プログラム仕様書.xlsx |
-| PS-HOST-13_タブレットPOS_ホスト_名前付きパイプイベントパブリッシャー_プログラム仕様書.xlsx |
-| PS-DEVICE-10_タブレットPOS_デバイス制御_名前付きパイプクライアント_プログラム仕様書.xlsx |
-| PS-DEVICE-11_タブレットPOS_デバイス制御_名前付きパイプイベント受信_プログラム仕様書.xlsx |
+| ソフトウェア構造設計書 |
+| 端末アプリケーション構造設計書 |
+| デバイスコネクタ基本設計書 |
+| 名前付きパイプコマンドサーバー プログラム仕様書 |
+| 名前付きパイプデバイスコネクタアダプター プログラム仕様書 |
+| デバイスコマンドルーター プログラム仕様書 |
+| デバイスコマンドハンドラー プログラム仕様書 |
+| デバイスサーバー プログラム仕様書 |
+| デバイスマネージャー プログラム仕様書 |
+| デバイスベース プログラム仕様書 |
+| 自動釣銭機制御 RT-300 プログラム仕様書 |
+| 自動釣銭機UIスレッドフォーム RT-300 プログラム仕様書 |
+| ドロア制御 SHARP プログラム仕様書 |
+| カスタマディスプレイ制御 SHARP プログラム仕様書 |
+| 名前付きパイプコマンドマッパー プログラム仕様書 |
+| 名前付きパイプイベントパブリッシャー プログラム仕様書 |
+| 名前付きパイプクライアント プログラム仕様書 |
+| 名前付きパイプイベント受信 プログラム仕様書 |
 
 ## 2. 設定ファイルの全体像
 
@@ -134,13 +131,13 @@ tags:
 
 | 構成要素 | 役割 | 関連する設定 |
 |---|---|---|
-| POS 利用者 | タブレットPOSアプリを操作する | - |
-| タブレットPOSアプリ | 売上、会計、周辺機器操作を行う端末アプリケーション | `device_controller_config.json` |
+| POS 利用者 | POSアプリを操作する | - |
+| POSアプリ | 売上、会計、周辺機器操作を行う端末アプリケーション | `device_controller_config.json` |
 | 端末側デバイス設定 | 端末で使用するデバイス候補、有効デバイス、接続情報を定義する | `device_controller_config.json` |
-| デバイスコネクタ（Host） | Windows端末でOPOS／OCX／ActiveXおよびCAFIS Arch機器を制御する外部プロセス | `host_device_config.json` |
-| デバイスコネクタ（Host）側デバイス設定 | デバイスコネクタ（Host）が起動・保持する既存デバイス資源を定義する | `host_device_config.json` |
-| 共通デバイス通信契約 | DeviceCtrlとHostが共有する要求・応答・イベント、識別子、パイプ名および既定値を定義する | `TabletPos.DeviceContracts`（コンパイル時定義。設定ファイルではない） |
-| Windows端末の外部機器 | カスタマーディスプレイ、キャッシュドロワー、自動釣銭機、レシートプリンター、決済端末 | 端末側設定 + デバイスコネクタ（Host）側設定 |
+| デバイスコネクタ | Windows端末でOPOS／OCX／ActiveXおよびCAFIS Arch機器を制御する外部プロセス | `host_device_config.json` |
+| デバイスコネクタ側デバイス設定 | デバイスコネクタが起動・保持する既存デバイス資源を定義する | `host_device_config.json` |
+| 共通デバイス通信契約 | DeviceCtrlとデバイスコネクタが共有する要求・応答・イベント、識別子、パイプ名および既定値を定義する | `Pos.DeviceContracts`（コンパイル時定義。設定ファイルではない） |
+| Windows端末の外部機器 | カスタマディスプレイ、ドロア、自動釣銭機、レシートプリンタ、決済端末 | 端末側設定 + デバイスコネクタ側設定 |
 | iOS / Android 端末の外部機器 | カメラ、Bluetooth、SDK 経由のプリンターなど | 主に端末側設定 |
 
 ### 2.2 設定ファイルの役割サマリ
@@ -148,11 +145,11 @@ tags:
 | 設定ファイル | 管轄 | 目的 | 主な構成 | 読込タイミング |
 |---|---|---|---|---|
 | `device_controller_config.json` | DeviceCtrl | 端末で使用するデバイス候補と有効デバイスを定義する | `devices`, `activeDevices`, `appSettings` | DeviceManagerの初期化時 |
-| `host_device_config.json` | デバイスコネクタ（Host）側 | デバイスコネクタ（Host）がロードする既存デバイス資源を定義する | `devices` | デバイスコネクタ（Host）起動時 |
+| `host_device_config.json` | デバイスコネクタ側 | デバイスコネクタがロードする既存デバイス資源を定義する | `devices` | デバイスコネクタ起動時 |
 
 補足:
 
-- Windows 端末で OPOS / OCX / ActiveX を利用する機器は、端末側設定とデバイスコネクタ（Host）側設定の両方を確認する。
+- Windows 端末で OPOS / OCX / ActiveX を利用する機器は、端末側設定とデバイスコネクタ側設定の両方を確認する。
 - iOS / Android 端末で端末内のカメラ、Bluetooth、SDK を利用する機器は、主に `device_controller_config.json` を確認する。
 - 2 つの設定ファイルは役割が異なるため、一方のファイルでもう一方を置き換えない。
 
@@ -181,18 +178,43 @@ tags:
 
 ### 3.2 起動時設定読込フロー
 
-![device_controller_config 起動時設定読込フロー](CFG-01_タブレットPOS_デバイス制御層設定ファイル起動時読込フロー.svg)
+```mermaid
+flowchart TB
+    START["① POSアプリを起動"]
+    CHECK["② AppData配下の<br/>device_controller_config.jsonを確認"]
+    READ["③ JSONをDeviceConfigへ変換して検証"]
+    STORE["④ device_controller_config.dbへ<br/>同一トランザクションで再登録"]
+    FALLBACK["⑤ 既存SQLiteへフォールバック"]
+    DEFAULT["⑥ 組込みデフォルトJSONをSQLiteへ登録"]
+    LOAD["⑦ SQLiteからDeviceConfigを復元"]
+    APPLY["⑧ OS別の有効デバイスと共通設定を適用"]
+    READY["⑨ DeviceCtrlの利用準備完了"]
+    ERROR["設定準備失敗<br/>SQLite読書込不可／組込デフォルト読込不可／記載不正"]
+
+    START --> CHECK
+    CHECK -->|JSON取得可| READ
+    CHECK -->|JSON取得不可| FALLBACK
+    READ -->|検証成功| STORE
+    READ -.->|読込・解析・検証失敗| FALLBACK
+    STORE --> LOAD
+    FALLBACK -->|登録済み| LOAD
+    FALLBACK -->|未初期化| DEFAULT
+    DEFAULT --> LOAD
+    DEFAULT -.->|登録失敗| ERROR
+    LOAD -.->|読込失敗| ERROR
+    LOAD --> APPLY --> READY
+```
 
 ### 3.3 起動時処理概要
 
 | 処理順 | 処理 | 内容 | 備考 |
 |---|---|---|---|
-| 1 | 初期化要求 | MauiProgramがDeviceManager.InitializeAsyncを呼び出す | アプリケーション層はファイルを読み込まない |
-| 2 | ランタイム設定確認 | DeviceCtrlがAppData配下のdevice_controller_config.jsonを確認する | 存在する場合はランタイム設定を優先する |
-| 3 | ランタイム設定読込 | ランタイム設定をDeviceConfigへ変換する | 読込またはJSON解析に失敗した場合は警告ログを出力する |
-| 4 | デフォルト設定使用 | ランタイム設定が存在しない、または使用できない場合、DeviceCtrlに埋め込まれたデフォルト設定を読み込む | ランタイム設定が存在しない場合は警告ログを出力しない |
-| 5 | デフォルト設定確認 | デフォルト設定をDeviceConfigへ変換する | 読込またはJSON解析に失敗した場合はエラーログを出力し、初期化を中止する |
-| 6 | 設定内容確認 | devices、activeDevices、appSettingsの内容を確認する | 参照先device IDが存在しない場合は設定不備として扱う |
+| 1 | 初期化要求 | DeviceControlWindowからDeviceRuntimeを開始し、DeviceRuntimeがDeviceManager.InitializeAsyncを呼び出す | アプリケーション層はファイルを読み込まない |
+| 2 | 起動時JSON確認 | DeviceCtrlがAppData配下のdevice_controller_config.jsonを確認する | アプリを再起動した場合も取込を再試行する |
+| 3 | JSON取込 | JSONをDeviceConfigへ変換して検証する | 読込またはJSON解析に失敗した場合は警告ログを出力し、既存SQLiteへフォールバックする |
+| 4 | SQLite再登録 | JSONを使用できる場合、device_controller_config.dbの4テーブルへ同一トランザクションで再登録する | JSONへは書き戻さない |
+| 5 | SQLite読込 | SQLiteからDeviceConfigを復元する | JSON取込後を含め、実行中に使用する設定はSQLiteから読み込む |
+| 6 | デフォルト設定使用 | JSONを使用できず、SQLiteも未初期化の場合だけ組込みデフォルトJSONをSQLiteへ登録する | 登録後はSQLiteから設定を復元する |
 | 7 | 設定適用 | DeviceManagerがOS別のストラテジーを登録し、有効デバイスと共通設定を適用する | 同時に複数回初期化されても読込と適用は一度だけ行う |
 | 8 | 利用準備完了 | DeviceCtrlの公開Getterを利用できる状態にする | OperationCanceledExceptionではフォールバックせず呼出元へ返す |
 
@@ -211,7 +233,7 @@ tags:
 | 分類 | キー | 型 | 必須 | 内容 | 備考 |
 |---|---|---|---|---|---|
 | devices 配列 | `id` | string | 必須 | 設定内で一意な device ID | `activeDevices` から参照するため重複不可 |
-| devices 配列 | `name` | string | 必須 | デバイス名または論理名 | デバイスコネクタ（Host）経由デバイスでは OPOS 論理名と対応させる |
+| devices 配列 | `name` | string | 必須 | デバイス名または論理名 | デバイスコネクタ経由デバイスでは OPOS 論理名と対応させる |
 | devices 配列 | `type` | string | 必須 | デバイス種別 | `activeDevices` のキーと一致させる |
 | devices 配列 | `vendor` | string | 任意 | ベンダー名 | 例: `sharp`, `epson` |
 | devices 配列 | `series` | string | 任意 | 機種・シリーズ識別 | 導入・保守時に識別しやすい値にする |
@@ -262,10 +284,10 @@ tags:
 | 分類 | キー | 型 | 必須 | 内容 | 備考 |
 |---|---|---|---|---|---|
 | activeDevices | `local_printer` | array | 任意 | プリンターの有効デバイス | 要素は `os` と `id` を持つ |
-| activeDevices | `local_scanner` | array | 任意 | スキャナーの有効デバイス | 要素は `os` と `id` を持つ |
+| activeDevices | `local_scanner` | array | 任意 | スキャナの有効デバイス | 要素は `os` と `id` を持つ |
 | activeDevices | `local_cashchanger` | array | 任意 | 自動釣銭機の有効デバイス | 要素は `os` と `id` を持つ |
-| activeDevices | `local_display` | array | 任意 | カスタマーディスプレイの有効デバイス | 要素は `os` と `id` を持つ |
-| activeDevices | `local_drawer` | array | 任意 | キャッシュドロワーの有効デバイス | 要素は `os` と `id` を持つ |
+| activeDevices | `local_display` | array | 任意 | カスタマディスプレイの有効デバイス | 要素は `os` と `id` を持つ |
+| activeDevices | `local_drawer` | array | 任意 | ドロアの有効デバイス | 要素は `os` と `id` を持つ |
 | activeDevices | `local_keyboard` | array | 任意 | POS キーボードの有効デバイス | 要素は `os` と `id` を持つ |
 | activeDevices | `local_payment` | array | 任意 | 決済端末の有効デバイス | 要素は `os` と `id` を持つ |
 | activeDevices 配列 | `os` | string | 必須 | 対象 OS | `devices[].os` と一致させる |
@@ -279,17 +301,17 @@ tags:
 
 ### 3.8 appSettings.namedPipe
 
-`appSettings.namedPipe` は、Windows端末からデバイスコネクタ（Host）へ機器制御を依頼する際の共通設定である。省略時の既定値は、`TabletPos.DeviceContracts`の`DeviceCommandDefaults`を参照する。
+`appSettings.namedPipe` は、Windows端末からデバイスコネクタへ機器制御を依頼する際の共通設定である。省略時の既定値は、`Pos.DeviceContracts`の`DeviceCommandDefaults`を参照する。
 
 | 分類 | キー | 型 | 必須 | 内容 | 備考 |
 |---|---|---|---|---|---|
-| appSettings | `namedPipe` | object | 任意 | デバイスコネクタ（Host）経由デバイス用の Named Pipe 設定 | iOS / Android では通常使用しない |
-| appSettings.namedPipe | `pipeName` | string | 任意 | デバイスコネクタ（Host）へ接続するための pipe 名 | 例: `TabletPos.Host.Command` |
+| appSettings | `namedPipe` | object | 任意 | デバイスコネクタ経由デバイス用の Named Pipe 設定 | iOS / Android では通常使用しない |
+| appSettings.namedPipe | `pipeName` | string | 任意 | デバイスコネクタへ接続するための pipe 名 | 例: `Pos.DeviceConnector.Command` |
 | appSettings.namedPipe | `connectionTimeoutMs` | number | 任意 | コマンド通信用パイプの接続待ち上限（ms） | 共通既定値: `5000` |
-| appSettings.namedPipe | `responseTimeoutMs` | number | 任意 | コマンド応答待ち上限（ms） | 共通既定値: `30000`。Printer／Paymentの操作別上限は`TabletPos.DeviceContracts.DeviceOperationTimeouts`で`300000`を定義する |
+| appSettings.namedPipe | `responseTimeoutMs` | number | 任意 | コマンド応答待ち上限（ms） | 共通既定値: `30000`。Printer／Paymentの操作別上限は`Pos.DeviceContracts.DeviceOperationTimeouts`で`300000`を定義する |
 | appSettings.namedPipe | `connectionRetryCount` | number | 任意 | 接続失敗時の再試行回数 | 現行設定: `3` |
 | appSettings.namedPipe | `connectionRetryIntervalMs` | number | 任意 | 接続再試行間隔（ms） | 現行設定: `500` |
-| appSettings.namedPipe | `eventPipeName` | string | 任意 | イベント通知用パイプ名 | 共通既定値: `TabletPos.Host.Event` |
+| appSettings.namedPipe | `eventPipeName` | string | 任意 | イベント通知用パイプ名 | 共通既定値: `Pos.DeviceConnector.Event` |
 | appSettings.namedPipe | `eventReconnectIntervalMs` | number | 任意 | イベント通知用パイプの再接続間隔（ms） | 共通既定値: `1000` |
 
 ### 3.9 記載値一覧
@@ -298,11 +320,11 @@ tags:
 
 | 値 | 対象 |
 |---|---|
-| `local_printer` | レシートプリンター |
-| `local_scanner` | バーコードスキャナー |
+| `local_printer` | レシートプリンタ |
+| `local_scanner` | バーコードスキャナ |
 | `local_cashchanger` | 自動釣銭機 |
-| `local_display` | カスタマーディスプレイ |
-| `local_drawer` | キャッシュドロワー |
+| `local_display` | カスタマディスプレイ |
+| `local_drawer` | ドロア |
 | `local_keyboard` | POS キーボード |
 | `local_payment` | 決済端末 |
 
@@ -322,23 +344,21 @@ tags:
 | Windowsシリアルデバイス | `serial`, `COM`, `USB` | `comport`とシリアル通信項目を使用する。USBシリアル変換もCOMポートとして扱う |
 | Windows専用キーボード | `RawInput` | Windows Raw Input APIを使用する |
 | iOSプリンター | `tcp`, `wifi`, `wi-fi`, `bluetooth` | TCP/IP接続では`ipaddress`、Bluetooth接続では`bluetoothaddress`を使用する |
-| iOSスキャナー | `camera`、BLE用設定 | カメラAPIまたはBluetooth Low Energy APIを使用する |
+| iOSスキャナ | `camera`、BLE用設定 | カメラAPIまたはBluetooth Low Energy APIを使用する |
 | Androidデバイス | `bluetooth`, `camera`, `USB` | 現在は設定値を保持するが、登録済みストラテジーから周辺機器への接続は実行しない |
 
 #### strategyclass
 
 | OS | strategyclass | 用途 |
 |---|---|---|
-| windows | `OposPrinterStrategy` | デバイスコネクタ（Host）経由プリンター |
-| windows | `OposScannerStrategy` | デバイスコネクタ（Host）経由スキャナー |
-| windows | `SerialHandyScannerStrategy` | Windows serial scanner |
-| windows | `OposCashChangerStrategy` | デバイスコネクタ（Host）経由自動釣銭機 |
-| windows | `SerialCashChangerStrategy` | Windows serial cash changer |
-| windows | `OposCustomerDisplayStrategy` | デバイスコネクタ（Host）経由カスタマーディスプレイ |
-| windows | `OposDrawerStrategy` | デバイスコネクタ（Host）経由キャッシュドロワー |
-| windows | `OposKeyboardStrategy` | OPOS keyboard |
-| windows | `WindowsRawKeyboardStrategy` | Windows raw keyboard listener |
-| windows | `OposCafisArchPaymentStrategy` | デバイスコネクタ（Host）経由 CAFIS Arch 決済端末 |
+| windows | `OposPrinterStrategy` | デバイスコネクタ経由プリンター |
+| windows | `SerialHandyScannerStrategy` | Windowsのシリアル接続スキャナ |
+| windows | `OposCashChangerStrategy` | デバイスコネクタ経由自動釣銭機 |
+| windows | `SerialCashChangerStrategy` | Windowsのシリアル接続自動釣銭機 |
+| windows | `OposCustomerDisplayStrategy` | デバイスコネクタ経由カスタマディスプレイ |
+| windows | `OposDrawerStrategy` | デバイスコネクタ経由ドロア |
+| windows | `WindowsRawKeyboardStrategy` | Windowsのキーボード入力 |
+| windows | `OposCafisArchPaymentStrategy` | デバイスコネクタ経由 CAFIS Arch 決済端末 |
 | ios | `IosEpsonPrinterStrategy` | iOS Epson printer |
 | ios | `IosCameraBarcodeScannerStrategy` | iOS camera scanner |
 | ios | `IosBleBarcodeScannerStrategy` | iOS BLE scanner |
@@ -355,80 +375,92 @@ tags:
 
 | 観点 | 内容 |
 |---|---|
-| 目的 | デバイスコネクタ（Host）がロードする既存デバイス資源を定義する |
+| 目的 | デバイスコネクタがロードする既存デバイス資源を定義する |
 | 対象 | OPOS / OCX / ActiveX / ベンダー提供 DLL で制御する周辺機器 |
-| 使用者 | デバイスコネクタ（Host） |
-| 主な判断 | デバイスコネクタ（Host）内でどの device ID をどの class ID で生成するか |
-| 配置元 | `TabletPos.Host/src/AppServer/Resources/host_device_config.json` |
+| 使用者 | デバイスコネクタ |
+| 主な判断 | デバイスコネクタ内でどの device ID をどの class ID で生成するか |
+| 配置元 | `Pos.DeviceConnector/src/AppServer/Resources/host_device_config.json` |
 | ビルド後配置先 | `デバイスコネクタ実行フォルダ\Resources\host_device_config.json` |
 | 実行時参照先 | `AppContext.BaseDirectory\Resources\host_device_config.json` |
 
 ### 4.2 起動時設定読込フロー
 
-![host_device_config 起動時設定読込フロー](CFG-01_タブレットPOS_デバイスコネクタ設定ファイル起動時読込フロー.svg)
+```mermaid
+flowchart TB
+    START["① デバイスコネクタ起動"]
+    CHECK["② Resources\\host_device_config.jsonを確認"]
+    READ["③ host_device_config.jsonを読み込む"]
+    DEVICES["④ devices配列を確認"]
+    VALIDATE["⑤ id／name／classIdを検証"]
+    FILTER["⑥ 有効な定義を起動対象にする"]
+    CREATE["⑦ classIdをもとに対象デバイス実装を生成"]
+    CONTROL["⑧ OPOS／OCX／ActiveX／Vendor DLLの制御を開始"]
+    READY["⑨ デバイスコネクタの利用準備完了"]
+    ERROR["設定不備<br/>JSON読込不可／id未設定／name空／classId不正"]
+
+    START --> CHECK --> READ --> DEVICES --> VALIDATE --> FILTER --> CREATE --> CONTROL --> READY
+    READ -.->|JSON読込不可| ERROR
+    VALIDATE -.->|定義不正| ERROR
+```
 
 ### 4.3 起動時処理概要
 
 | 処理順 | 処理 | 内容 | 備考 |
 |---|---|---|---|
-| 1 | デバイスコネクタ（Host）起動 | 通常運用時はタブレットPOSアプリのライフサイクルに合わせて起動する | ユーザーによる手動の開始操作は前提としない |
-| 2 | デバイスコネクタ（Host）側設定ファイル確認 | デバイスコネクタ実行フォルダ配下の `Resources\host_device_config.json` を確認する | ビルド時に `src\AppServer\Resources` から出力先へコピーされる |
+| 1 | デバイスコネクタ起動 | 通常運用時はPOSアプリのライフサイクルに合わせて起動する | ユーザーによる手動の開始操作は前提としない |
+| 2 | デバイスコネクタ側設定ファイル確認 | デバイスコネクタ実行フォルダ配下の `Resources\host_device_config.json` を確認する | ビルド時に `src\AppServer\Resources` から出力先へコピーされる |
 | 3 | 設定ファイル読込 | `host_device_config.json` を読み込む | JSON が読めない場合は設定不備として扱う |
-| 4 | devices 配列確認 | `devices` 配列を確認する | デバイスコネクタ（Host）が起動・保持する対象機器の一覧として使用する |
+| 4 | devices 配列確認 | `devices` 配列を確認する | デバイスコネクタが起動・保持する対象機器の一覧として使用する |
 | 5 | device 定義確認 | `id`, `name`, `classId` を確認する | `id` が設定されていない場合、`name` が空の場合、または `classId` が不正な場合は設定不備として扱う |
 | 6 | 起動対象決定 | 有効な定義だけを起動対象にする | 不備がある定義は起動対象から外す |
-| 7 | 対象デバイス実装生成 | `classId` をもとにデバイスコネクタ（Host）側の実装を生成する | - |
-| 8 | 外部機器制御開始 | OPOS / OCX / ActiveX / Vendor DLL をデバイスコネクタ（Host）側から呼び出す | 端末アプリケーション側からは直接呼び出さない |
-| 9 | 利用準備完了 | デバイスコネクタ（Host）側で利用できる状態にする | - |
+| 7 | 対象デバイス実装生成 | `classId` をもとにデバイスコネクタ側の実装を生成する | - |
+| 8 | 外部機器制御開始 | OPOS / OCX / ActiveX / Vendor DLL をデバイスコネクタ側から呼び出す | 端末アプリケーション側からは直接呼び出さない |
+| 9 | 利用準備完了 | デバイスコネクタ側で利用できる状態にする | - |
 
 ### 4.4 ルート項目
 
 | 分類 | キー | 型 | 必須 | 内容 | 備考 |
 |---|---|---|---|---|---|
-| ルート項目 | `devices` | array | 必須 | デバイスコネクタ（Host）がロードするデバイス実装一覧 | 各要素は `devices 配列` の定義に従う |
+| ルート項目 | `devices` | array | 必須 | デバイスコネクタがロードするデバイス実装一覧 | 各要素は `devices 配列` の定義に従う |
 
 ### 4.5 devices 配列
 
 | 分類 | キー | 型 | 必須 | 内容 | 備考 |
 |---|---|---|---|---|---|
-| devices 配列 | `id` | string | 必須 | デバイスコネクタ（Host）内の device ID | デバイスコネクタ（Host）内で制御対象の機器を識別するために使用 |
-| devices 配列 | `name` | string | 必須 | デバイスコネクタ（Host）内で使用する表示名または論理名 | OPOS 論理名または表示名 |
-| devices 配列 | `classId` | string | 必須 | デバイスコネクタ（Host）側の実装識別 ID | デバイスコネクタ（Host）側で生成可能な値を指定 |
+| devices 配列 | `id` | string | 必須 | デバイスコネクタ内の device ID | デバイスコネクタ内で制御対象の機器を識別するために使用 |
+| devices 配列 | `name` | string | 必須 | デバイスコネクタ内で使用する表示名または論理名 | OPOS 論理名または表示名 |
+| devices 配列 | `classId` | string | 必須 | デバイスコネクタ側の実装識別 ID | デバイスコネクタ側で生成可能な値を指定 |
 | devices 配列 | `visible` | boolean | 任意 | device form の表示有無 | 通常は `false` |
 | devices 配列 | `productName` | string | 任意 | 製品名・機種識別 | 保守時に device を識別するために使用 |
 | devices 配列 | `parameters` | string / object | 任意 | device-specific parameter | device 実装により参照内容が異なる |
 
 記載ルール:
 
-- `classId` はデバイスコネクタ（Host）側で生成可能な値を指定する。
-- `id` はデバイスコネクタ（Host）内で制御対象の機器を識別するため、重複させない。
+- `classId` はデバイスコネクタ側で生成可能な値を指定する。
+- `id` はデバイスコネクタ内で制御対象の機器を識別するため、重複させない。
 - `device_controller_config.json` 側の `devices[].name` / `devices[].id` と完全一致が必要な項目ではないが、運用上は対応関係が追跡できる命名にする。
 
-### 4.6 現行定義一覧
+### 4.6 対象機器
 
-本節では、デバイスコネクタ（Host）側でロード対象となる主要 device 定義を示す。
-
-| device ID | name | classId | visible | productName | 用途 |
-|---|---|---|---|---|---|
-| `CustomerDisplay` | `SHARPRZ4DP1B` | `CustomerDisplay1` | `false` | `SHARPRZ4DP1B` | カスタマーディスプレイ |
-| `CashDrawer` | `SHARPUPJ36DW3` | `CashDrawer1` | `false` | `SHARPUPJ36DW3` | キャッシュドロワー |
-| `CashChanger` | `CASHCHANGER` | `CashChanger1` | `false` | - | 自動釣銭機 |
-| `Printer` | `SHARPRECPRT80` | `POSPrinter1` | `false` | `SHARPRECPRT80` | OPOS プリンター |
-| `Payment` | `CAFIS Arch` | `Payment1` | `false` | `CAFIS Arch Saturn` | CAFIS Arch 決済端末 |
-
-`CustomerDisplay1`はHost設定の公式値である。`TabletDeviceSettingBase`が読込時に互換ID `LineDisplay1`へ変換し、レジストリの`CustomerDisplayBySharp`へ解決する。
+| 機器 | 機種 |
+| --- | --- |
+| カスタマディスプレイ | RZ-4DP1 |
+| ドロア | UP-J36DW3 |
+| 自動釣銭機 | RT-300、RAD-300 |
+| レシートプリンタ | POS内蔵 |
+| 決済端末 | CAFIS Arch Saturn |
 
 ### 4.7 端末側設定との対応関係
 
-`host_device_config.json` はデバイスコネクタ（Host）がロードするデバイス実装を定義する。一方、`device_controller_config.json` は端末アプリケーション側で有効にする制御方式と接続設定を定義する。
+`host_device_config.json` はデバイスコネクタがロードするデバイス実装を定義する。一方、`device_controller_config.json` は端末アプリケーション側で有効にする制御方式と接続設定を定義する。
 
 | 観点 | `device_controller_config.json` | `host_device_config.json` |
 |---|---|---|
-| 管轄 | 端末アプリケーション側 | デバイスコネクタ（Host）側 |
+| 管轄 | 端末アプリケーション側 | デバイスコネクタ側 |
 | 主キー | `devices[].id` | `devices[].id` |
 | 実装選択 | `strategyclass` | `classId` |
-| 接続設定 | `devices[].config` | `parameters` / デバイスコネクタ（Host）内デバイス実装設定 |
-| 参照タイミング | タブレットPOSアプリ起動時、デバイス制御時 | デバイスコネクタ（Host）起動時 |
+| 接続設定 | `devices[].config` | `parameters` / デバイスコネクタ内デバイス実装設定 |
+| 参照タイミング | POSアプリ起動時、デバイス制御時 | デバイスコネクタ起動時 |
 
 両ファイルの ID は必ずしも同一である必要はない。ただし、導入・保守時に追跡しやすいよう、device type、製品名、論理名の対応関係が分かる命名にする。
 
@@ -440,7 +472,7 @@ tags:
 
 | 処理順 | 処理 | 内容 | 参照設定 |
 |---|---|---|---|
-| 1 | デバイス種別を指定する | プリンター、スキャナー、ドロワーなど、使用したい device type を指定する | `activeDevices` |
+| 1 | デバイス種別を指定する | プリンター、スキャナ、ドロアなど、使用したい device type を指定する | `activeDevices` |
 | 2 | 実行 OS を確認する | 現在の端末が Windows / iOS / Android のどれかを確認する | `os` |
 | 3 | 有効 device ID を取得する | device type と OS が一致する `activeDevices.*[].id` を取得する | `activeDevices.*[].id` |
 | 4 | デバイス候補を取得する | `devices[]` から該当 ID の設定を取得する | `devices[].id` |
@@ -478,11 +510,11 @@ tags:
 | 4 | OS | `os` が `windows`, `ios`, `android` のいずれかであること |
 | 5 | device type | `type` が `activeDevices` のキーと一致すること |
 | 6 | strategyclass | アプリ内で使用可能な制御方式の識別名であること |
-| 7 | デバイスコネクタ（Host）経由設定 | `appSettings.namedPipe.pipeName` がデバイスコネクタ（Host）側の pipe 設定と一致すること |
+| 7 | デバイスコネクタ経由設定 | `appSettings.namedPipe.pipeName` がデバイスコネクタ側の pipe 設定と一致すること |
 | 8 | Serial device | `comport`, `baudrate`, `parity`, `databits`, `stopbits` が端末環境と一致すること |
 | 9 | Network device | `ipaddress`, `port` が実機環境と一致すること |
-| 10 | サーバー設定 | デバイスコネクタ（Host）経由デバイスの場合、デバイスコネクタ（Host）側 `host_device_config.json` に対応 device が定義されていること |
-| 11 | Runtime override | AppData 側に古い `device_controller_config.json` が残っていないこと |
+| 10 | サーバー設定 | デバイスコネクタ経由デバイスの場合、デバイスコネクタ側 `host_device_config.json` に対応 device が定義されていること |
+| 11 | 起動時取込 | AppData側の `device_controller_config.json` を次回起動時にSQLiteへ再登録してよい内容か確認すること |
 | 12 | Encoding | UTF-8 で保存されていること |
 
 ## 7. デバイス種類ごとの記載例
@@ -493,62 +525,39 @@ tags:
 
 - 本章の例は、`devices` 配列に追加する 1 要素の例である。
 - 実際に使用する device は、`activeDevices` 側で `os` と `id` を指定して有効化する。
-- デバイスコネクタ（Host）経由デバイスの場合、`device_controller_config.json` では端末アプリケーション側の device type、strategy、接続方式を定義する。デバイスコネクタ（Host）側でロードするデバイス実装は `host_device_config.json` に定義する。
+- デバイスコネクタ経由デバイスの場合、`device_controller_config.json` では端末アプリケーション側の device type、strategy、接続方式を定義する。デバイスコネクタ側でロードするデバイス実装は `host_device_config.json` に定義する。
 - `id`, `name`, `ipaddress`, `comport`, `macaddress` などは、導入先端末および実機環境に合わせて変更する。
 
 ### 7.2 プリンター
 
 #### Windows OPOS プリンター
 
-```json
-{
-  "id": "printer_sharp_windows",
-  "name": "SHARPRECPRT80",
-  "type": "local_printer",
-  "vendor": "sharp",
-  "series": "SHARP.window",
-  "lang": "jp",
-  "os": "windows",
-  "strategyclass": "OposPrinterStrategy",
-  "config": {
-    "connectiontype": "serial",
-    "ipaddress": "127.0.0.1",
-    "port": "",
-    "comport": "",
-    "macaddress": "",
-    "baudrate": "",
-    "parity": "",
-    "databits": "",
-    "stopbits": "",
-    "handshake": ""
-  }
-}
-```
+接続する機器に合わせて設定します。
 
 #### iOS Wi-Fi プリンター
 
 ```json
 {
-  "id": "printer_epson_mp80_ios",
-  "name": "receipt_printer",
-  "type": "local_printer",
-  "vendor": "epson",
-  "series": "MP80.ios.wifi",
-  "lang": "jp",
-  "os": "ios",
-  "strategyclass": "IosEpsonPrinterStrategy",
-  "config": {
-    "connectiontype": "wifi",
-    "ipaddress": "10.1.38.29",
-    "port": "",
-    "comport": "",
-    "macaddress": "",
-    "baudrate": "",
-    "parity": "",
-    "databits": "",
-    "stopbits": "",
-    "handshake": ""
-  }
+ "id": "printer_epson_mp80_ios",
+ "name": "receipt_printer",
+ "type": "local_printer",
+ "vendor": "epson",
+ "series": "MP80.ios.wifi",
+ "lang": "jp",
+ "os": "ios",
+ "strategyclass": "IosEpsonPrinterStrategy",
+ "config": {
+ "connectiontype": "wifi",
+ "ipaddress": "10.1.38.29",
+ "port": "",
+ "comport": "",
+ "macaddress": "",
+ "baudrate": "",
+ "parity": "",
+ "databits": "",
+ "stopbits": "",
+ "handshake": ""
+ }
 }
 ```
 
@@ -556,173 +565,123 @@ tags:
 
 ```json
 {
-  "id": "printer_epson_mp80_android",
-  "name": "receipt_printer",
-  "type": "local_printer",
-  "vendor": "epson",
-  "series": "MP80.android",
-  "lang": "jp",
-  "os": "android",
-  "strategyclass": "AndroidBluetoothPrinterStrategy",
-  "config": {
-    "connectiontype": "bluetooth",
-    "ipaddress": "",
-    "port": "",
-    "comport": "",
-    "macaddress": "",
-    "baudrate": "",
-    "parity": "",
-    "databits": "",
-    "stopbits": "",
-    "handshake": ""
-  }
+ "id": "printer_epson_mp80_android",
+ "name": "receipt_printer",
+ "type": "local_printer",
+ "vendor": "epson",
+ "series": "MP80.android",
+ "lang": "jp",
+ "os": "android",
+ "strategyclass": "AndroidBluetoothPrinterStrategy",
+ "config": {
+ "connectiontype": "bluetooth",
+ "ipaddress": "",
+ "port": "",
+ "comport": "",
+ "macaddress": "",
+ "baudrate": "",
+ "parity": "",
+ "databits": "",
+ "stopbits": "",
+ "handshake": ""
+ }
 }
 ```
 
-### 7.3 スキャナー
+### 7.3 スキャナ
 
-#### Windows シリアルスキャナー
+#### Windows シリアルスキャナ
 
 ```json
 {
-  "id": "scanner_opos_serial_windows",
-  "name": "opos_denso_scanner",
-  "type": "local_scanner",
-  "vendor": "denso",
-  "series": "denso.windows",
-  "lang": "jp",
-  "os": "windows",
-  "strategyclass": "SerialHandyScannerStrategy",
-  "config": {
-    "connectiontype": "COM",
-    "ipaddress": "",
-    "port": "",
-    "comport": "COM7",
-    "macaddress": "",
-    "baudrate": "38400",
-    "parity": "None",
-    "databits": "8",
-    "stopbits": "One",
-    "handshake": ""
-  }
+ "id": "scanner_opos_serial_windows",
+ "name": "opos_denso_scanner",
+ "type": "local_scanner",
+ "vendor": "denso",
+ "series": "denso.windows",
+ "lang": "jp",
+ "os": "windows",
+ "strategyclass": "SerialHandyScannerStrategy",
+ "config": {
+ "connectiontype": "COM",
+ "ipaddress": "",
+ "port": "",
+ "comport": "COM7",
+ "macaddress": "",
+ "baudrate": "38400",
+ "parity": "None",
+ "databits": "8",
+ "stopbits": "One",
+ "handshake": ""
+ }
 }
 ```
 
-#### Windows OPOS / Named Pipe スキャナー
+#### iOS / Android カメラスキャナ
 
 ```json
 {
-  "id": "scanner_opos_namedpipe_windows",
-  "name": "opos_namedpipe_scanner",
-  "type": "local_scanner",
-  "vendor": "opos",
-  "series": "namedpipe",
-  "lang": "jp",
-  "os": "windows",
-  "strategyclass": "OposScannerStrategy",
-  "config": {
-    "connectiontype": "NamedPipe",
-    "ipaddress": "",
-    "port": "",
-    "comport": "",
-    "macaddress": "",
-    "baudrate": "",
-    "parity": "",
-    "databits": "",
-    "stopbits": "",
-    "handshake": ""
-  }
+ "id": "scanner_ipad_camera_ios",
+ "name": "local_scanner",
+ "type": "local_scanner",
+ "vendor": "apple",
+ "series": "iPad_Camera.ios",
+ "lang": "jp",
+ "os": "ios",
+ "strategyclass": "IosCameraBarcodeScannerStrategy",
+ "config": {
+ "connectiontype": "camera",
+ "ipaddress": "",
+ "port": "",
+ "comport": "",
+ "macaddress": "",
+ "baudrate": "",
+ "parity": "",
+ "databits": "",
+ "stopbits": "",
+ "handshake": ""
+ }
 }
 ```
 
-#### iOS / Android カメラスキャナー
+Android 端末でカメラスキャナを使用する場合は、`os` を `android`、`strategyclass` を `AndroidCameraBarcodeScannerStrategy` に変更する。
+
+### 7.4 カスタマディスプレイ
+
+#### Windows OPOS カスタマディスプレイ
+
+接続する機器に合わせて設定します。
+
+#### Android カスタマディスプレイ
 
 ```json
 {
-  "id": "scanner_ipad_camera_ios",
-  "name": "local_scanner",
-  "type": "local_scanner",
-  "vendor": "apple",
-  "series": "iPad_Camera.ios",
-  "lang": "jp",
-  "os": "ios",
-  "strategyclass": "IosCameraBarcodeScannerStrategy",
-  "config": {
-    "connectiontype": "camera",
-    "ipaddress": "",
-    "port": "",
-    "comport": "",
-    "macaddress": "",
-    "baudrate": "",
-    "parity": "",
-    "databits": "",
-    "stopbits": "",
-    "handshake": ""
-  }
-}
-```
-
-Android 端末でカメラスキャナーを使用する場合は、`os` を `android`、`strategyclass` を `AndroidCameraBarcodeScannerStrategy` に変更する。
-
-### 7.4 カスタマーディスプレイ
-
-#### Windows OPOS カスタマーディスプレイ
-
-```json
-{
-  "id": "customer_display_sharp_windows",
-  "name": "SHARPRZ4DP1B",
-  "type": "local_display",
-  "vendor": "sharp",
-  "series": "",
-  "lang": "jp",
-  "os": "windows",
-  "strategyclass": "OposCustomerDisplayStrategy",
-  "config": {
-    "connectiontype": "USB",
-    "ipaddress": "",
-    "port": "",
-    "comport": "",
-    "macaddress": "",
-    "baudrate": "",
-    "parity": "",
-    "databits": "",
-    "stopbits": "",
-    "handshake": ""
-  }
-}
-```
-
-#### Android カスタマーディスプレイ
-
-```json
-{
-  "id": "customer_display_epson_dm70d_android",
-  "name": "customer_display",
-  "type": "local_display",
-  "vendor": "epson",
-  "series": "DM-D70.android",
-  "lang": "jp",
-  "os": "android",
-  "strategyclass": "AndroidEpsonDM70DCustomerDisplayStrategy",
-  "config": {
-    "connectiontype": "USB",
-    "ipaddress": "",
-    "port": "",
-    "comport": "",
-    "macaddress": "",
-    "baudrate": "",
-    "parity": "",
-    "databits": "",
-    "stopbits": "",
-    "handshake": ""
-  }
+ "id": "customer_display_epson_dm70d_android",
+ "name": "customer_display",
+ "type": "local_display",
+ "vendor": "epson",
+ "series": "DM-D70.android",
+ "lang": "jp",
+ "os": "android",
+ "strategyclass": "AndroidEpsonDM70DCustomerDisplayStrategy",
+ "config": {
+ "connectiontype": "USB",
+ "ipaddress": "",
+ "port": "",
+ "comport": "",
+ "macaddress": "",
+ "baudrate": "",
+ "parity": "",
+ "databits": "",
+ "stopbits": "",
+ "handshake": ""
+ }
 }
 ```
 
 ### 7.5 キーボード
 
-#### Windows OPOS キーボード
+#### Windowsキーボード
 
 ```json
 {
@@ -733,9 +692,9 @@ Android 端末でカメラスキャナーを使用する場合は、`os` を `an
   "series": "RZ-A476.windows",
   "lang": "jp",
   "os": "windows",
-  "strategyclass": "OposKeyboardStrategy",
+  "strategyclass": "WindowsRawKeyboardStrategy",
   "config": {
-    "connectiontype": "NamedPipe",
+    "connectiontype": "RawInput",
     "ipaddress": "",
     "port": "",
     "comport": "",
@@ -749,34 +708,34 @@ Android 端末でカメラスキャナーを使用する場合は、`os` を `an
 }
 ```
 
-Windows の Raw Keyboard listener を使用する場合は、`strategyclass` を `WindowsRawKeyboardStrategy` に変更し、実装が参照する接続情報に合わせて `config` を調整する。
+Windowsのキーボード入力は`WindowsRawKeyboardStrategy`を使用します。接続方式は`RawInput`です。
 
-### 7.6 キャッシュドロワー
+### 7.6 ドロア
 
-#### Windows OPOS ドロワー
+#### Windows OPOS ドロア
 
 ```json
 {
-  "id": "drawer_external_windows",
-  "name": "UPJ36DW3",
-  "type": "local_drawer",
-  "vendor": "external",
-  "series": "External.windows",
-  "lang": "jp",
-  "os": "windows",
-  "strategyclass": "OposDrawerStrategy",
-  "config": {
-    "connectiontype": "USB",
-    "ipaddress": "",
-    "port": "",
-    "comport": "",
-    "macaddress": "",
-    "baudrate": "",
-    "parity": "",
-    "databits": "",
-    "stopbits": "",
-    "handshake": ""
-  }
+ "id": "drawer_external_windows",
+ "name": "UPJ36DW3",
+ "type": "local_drawer",
+ "vendor": "external",
+ "series": "External.windows",
+ "lang": "jp",
+ "os": "windows",
+ "strategyclass": "OposDrawerStrategy",
+ "config": {
+ "connectiontype": "USB",
+ "ipaddress": "",
+ "port": "",
+ "comport": "",
+ "macaddress": "",
+ "baudrate": "",
+ "parity": "",
+ "databits": "",
+ "stopbits": "",
+ "handshake": ""
+ }
 }
 ```
 
@@ -786,26 +745,26 @@ Windows の Raw Keyboard listener を使用する場合は、`strategyclass` を
 
 ```json
 {
-  "id": "cash_changer_glory_rt300_windows",
-  "name": "local_cashchanger",
-  "type": "local_cashchanger",
-  "vendor": "glory",
-  "series": "RT-300.windows",
-  "lang": "jp",
-  "os": "windows",
-  "strategyclass": "OposCashChangerStrategy",
-  "config": {
-    "connectiontype": "COM",
-    "ipaddress": "",
-    "port": "",
-    "comport": "COM1",
-    "macaddress": "",
-    "baudrate": "9600",
-    "parity": "Even",
-    "databits": "7",
-    "stopbits": "One",
-    "handshake": ""
-  }
+ "id": "cash_changer_glory_rt300_windows",
+ "name": "local_cashchanger",
+ "type": "local_cashchanger",
+ "vendor": "glory",
+ "series": "RT-300.windows",
+ "lang": "jp",
+ "os": "windows",
+ "strategyclass": "OposCashChangerStrategy",
+ "config": {
+ "connectiontype": "COM",
+ "ipaddress": "",
+ "port": "",
+ "comport": "COM1",
+ "macaddress": "",
+ "baudrate": "9600",
+ "parity": "Even",
+ "databits": "7",
+ "stopbits": "One",
+ "handshake": ""
+ }
 }
 ```
 
@@ -813,26 +772,26 @@ Windows の Raw Keyboard listener を使用する場合は、`strategyclass` を
 
 ```json
 {
-  "id": "cash_changer_glory_rt300_serial",
-  "name": "local_cashchanger",
-  "type": "local_cashchanger",
-  "vendor": "glory",
-  "series": "RT-300.serial",
-  "lang": "jp",
-  "os": "windows",
-  "strategyclass": "SerialCashChangerStrategy",
-  "config": {
-    "connectiontype": "COM",
-    "ipaddress": "",
-    "port": "",
-    "comport": "COM1",
-    "macaddress": "",
-    "baudrate": "9600",
-    "parity": "Even",
-    "databits": "7",
-    "stopbits": "One",
-    "handshake": ""
-  }
+ "id": "cash_changer_glory_rt300_serial",
+ "name": "local_cashchanger",
+ "type": "local_cashchanger",
+ "vendor": "glory",
+ "series": "RT-300.serial",
+ "lang": "jp",
+ "os": "windows",
+ "strategyclass": "SerialCashChangerStrategy",
+ "config": {
+ "connectiontype": "COM",
+ "ipaddress": "",
+ "port": "",
+ "comport": "COM1",
+ "macaddress": "",
+ "baudrate": "9600",
+ "parity": "Even",
+ "databits": "7",
+ "stopbits": "One",
+ "handshake": ""
+ }
 }
 ```
 
@@ -842,165 +801,35 @@ Windows の Raw Keyboard listener を使用する場合は、`strategyclass` を
 
 ```json
 {
-  "id": "payment_cafis_arch_saturn_windows",
-  "name": "CAFIS Arch",
-  "type": "local_payment",
-  "vendor": "cafis",
-  "series": "Saturn.windows",
-  "lang": "jp",
-  "os": "windows",
-  "strategyclass": "OposCafisArchPaymentStrategy",
-  "config": {
-    "connectiontype": "OPOS",
-    "ipaddress": "",
-    "port": "",
-    "comport": "",
-    "macaddress": "",
-    "baudrate": "",
-    "parity": "",
-    "databits": "",
-    "stopbits": "",
-    "handshake": ""
-  }
+ "id": "payment_cafis_arch_saturn_windows",
+ "name": "CAFIS Arch",
+ "type": "local_payment",
+ "vendor": "cafis",
+ "series": "Saturn.windows",
+ "lang": "jp",
+ "os": "windows",
+ "strategyclass": "OposCafisArchPaymentStrategy",
+ "config": {
+ "connectiontype": "OPOS",
+ "ipaddress": "",
+ "port": "",
+ "comport": "",
+ "macaddress": "",
+ "baudrate": "",
+ "parity": "",
+ "databits": "",
+ "stopbits": "",
+ "handshake": ""
+ }
 }
 ```
 
-Host側の`host_device_config.json`には、`id=Payment`、`classId=Payment1`、`name=CAFIS Arch`の対応定義が必要である。
+デバイスコネクタ側の`host_device_config.json`には、`id=Payment`、`classId=Payment1`、`name=CAFIS Arch`の対応定義が必要である。
 
 ### 7.9 device_controller_config.json 全体記載例
 
-本節では、プリンター、スキャナー、カスタマーディスプレイ、キーボードを含む `device_controller_config.json` の全体記載例を示す。
+本節では、プリンター、スキャナ、カスタマーディスプレイ、キーボードを含む `device_controller_config.json` の全体記載例を示す。
 
-```json
-{
-  "devices": [
-    {
-      "id": "printer_sharp_windows",
-      "name": "SHARPRECPRT80",
-      "type": "local_printer",
-      "vendor": "sharp",
-      "series": "SHARP.window",
-      "lang": "jp",
-      "os": "windows",
-      "strategyclass": "OposPrinterStrategy",
-      "config": {
-        "connectiontype": "NamedPipe",
-        "ipaddress": "",
-        "port": "",
-        "comport": "",
-        "macaddress": "",
-        "baudrate": "",
-        "parity": "",
-        "databits": "",
-        "stopbits": "",
-        "handshake": ""
-      }
-    },
-    {
-      "id": "scanner_opos_namedpipe_windows",
-      "name": "opos_namedpipe_scanner",
-      "type": "local_scanner",
-      "vendor": "opos",
-      "series": "namedpipe",
-      "lang": "jp",
-      "os": "windows",
-      "strategyclass": "OposScannerStrategy",
-      "config": {
-        "connectiontype": "NamedPipe",
-        "ipaddress": "",
-        "port": "",
-        "comport": "",
-        "macaddress": "",
-        "baudrate": "",
-        "parity": "",
-        "databits": "",
-        "stopbits": "",
-        "handshake": ""
-      }
-    },
-    {
-      "id": "customer_display_sharp_windows",
-      "name": "SHARPRZ4DP1B",
-      "type": "local_display",
-      "vendor": "sharp",
-      "series": "SHARPRZ4DP1B.windows",
-      "lang": "jp",
-      "os": "windows",
-      "strategyclass": "OposCustomerDisplayStrategy",
-      "config": {
-        "connectiontype": "NamedPipe",
-        "ipaddress": "",
-        "port": "",
-        "comport": "",
-        "macaddress": "",
-        "baudrate": "",
-        "parity": "",
-        "databits": "",
-        "stopbits": "",
-        "handshake": ""
-      }
-    },
-    {
-      "id": "keyboard_sharp_pos_windows",
-      "name": "pos_keyboard",
-      "type": "local_keyboard",
-      "vendor": "sharp",
-      "series": "RZ-A476.windows",
-      "lang": "jp",
-      "os": "windows",
-      "strategyclass": "OposKeyboardStrategy",
-      "config": {
-        "connectiontype": "NamedPipe",
-        "ipaddress": "",
-        "port": "",
-        "comport": "",
-        "macaddress": "",
-        "baudrate": "",
-        "parity": "",
-        "databits": "",
-        "stopbits": "",
-        "handshake": ""
-      }
-    }
-  ],
-  "activeDevices": {
-    "local_printer": [
-      {
-        "os": "windows",
-        "id": "printer_sharp_windows"
-      }
-    ],
-    "local_scanner": [
-      {
-        "os": "windows",
-        "id": "scanner_opos_namedpipe_windows"
-      }
-    ],
-    "local_display": [
-      {
-        "os": "windows",
-        "id": "customer_display_sharp_windows"
-      }
-    ],
-    "local_keyboard": [
-      {
-        "os": "windows",
-        "id": "keyboard_sharp_pos_windows"
-      }
-    ]
-  },
-  "appSettings": {
-    "namedPipe": {
-      "pipeName": "TabletPos.Host.Command",
-      "connectionTimeoutMs": 5000,
-      "responseTimeoutMs": 30000,
-      "connectionRetryCount": 3,
-      "connectionRetryIntervalMs": 500,
-      "eventPipeName": "TabletPos.Host.Event",
-      "eventReconnectIntervalMs": 1000
-    }
-  }
-}
-```
+接続する機器に合わせて設定します。
 
-上記はデバイスコネクタ（Host）経由デバイスを使用する端末の記載例である。導入先で使用する機器に合わせて、`devices[].id`、`devices[].name`、`devices[].strategyclass`、`devices[].config`、および `activeDevices` の参照 ID を変更する。
+上記はデバイスコネクタ経由デバイスを使用する端末の記載例である。導入先で使用する機器に合わせて、`devices[].id`、`devices[].name`、`devices[].strategyclass`、`devices[].config`、および `activeDevices` の参照 ID を変更する。

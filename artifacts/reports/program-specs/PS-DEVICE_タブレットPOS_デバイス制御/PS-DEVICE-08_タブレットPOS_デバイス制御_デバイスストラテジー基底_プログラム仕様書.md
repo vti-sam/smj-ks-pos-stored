@@ -9,7 +9,7 @@
 | 文書ID | PS-DEVICE-08 |
 | 文書名 | タブレットPOS デバイス制御 デバイスストラテジー基底 プログラム仕様書 |
 | 対象 | タブレットPOS / デバイスストラテジー共通制御 |
-| 版数 | 0.0.1 |
+| 版数 | 1.0.0 |
 | 作成日 | 2026/08/24 |
 | 作成者 | VTI サム |
 | レビュー担当 | SMJ 蒲田 |
@@ -21,7 +21,7 @@
 
 | 版数 | 日付 | 変更内容 | 作成者 | 承認者 |
 | --- | --- | --- | --- | --- |
-| 0.0.1 | 2026/08/24 | 初版作成 | VTI サム | SMJ 蒲田 |
+| 1.0.0 | 2026/08/24 | 正式版として初版を作成。 | VTI サム | SMJ 蒲田 |
 
 ## クラス情報
 
@@ -29,7 +29,7 @@
 | --- | --- |
 | 機能名 | デバイスストラテジー共通制御 |
 | 物理クラス名 | DeviceStrategyBase |
-| 名前空間 | TabletPos.DeviceCtrl.StrategyBase |
+| 名前空間 | Pos.DeviceCtrl.StrategyBase |
 | アクセス修飾子 | public abstract |
 | 継承/実装 | - |
 
@@ -37,7 +37,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| ソースファイル | sources/TabletPosBoilerplate/TabletPos.DeviceCtrl/StrategyBase/DeviceStrategyBase.cs |
+| ソースファイル | sources/pos-integration/Pos.DeviceCtrl/StrategyBase/DeviceStrategyBase.cs |
 | 対象クラス | DeviceStrategyBase |
 | 設計対象 | デバイス仕様初期化、ロガー設定、開始と終了、共通コマンド実行、成功および失敗ログ |
 
