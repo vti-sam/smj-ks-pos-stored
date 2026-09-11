@@ -108,6 +108,10 @@ Link nội bộ dùng path từ workspace root với prefix `project-store/`.
 
 ## artifacts/
 
+- File diagram riêng chỉ được quản lý nội bộ trong repo, cùng tài liệu gốc
+  tương ứng. Không sao chép, đồng bộ hoặc bàn giao file diagram sang SVN hay
+  bất kỳ đích nào ngoài repo. Khi chuẩn bị bộ bàn giao, kiểm tra danh sách file
+  để loại file diagram riêng; sơ đồ nhúng trong tài liệu bàn giao vẫn được giữ.
 - `artifacts/` lưu raw customer file và artifact portable ngoài workflow
   Google Sheets. Source/mục đích tái sử dụng phải được ghi trong metadata hoặc
   companion document; đổi tên/di chuyển phải cập nhật internal link.

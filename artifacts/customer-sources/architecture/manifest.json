@@ -1,0 +1,205 @@
+[
+  {
+    "source": "C:\\Users\\LX26080219\\SAM\\svn\\1000_要件定義書\\1000_システム全体\\アーキテクチャ概要\\01.タブレットPOS_タブレットPOS⇔現行POSデータ連携.pptx",
+    "copy": "svn/1000_要件定義書/1000_システム全体/アーキテクチャ概要/01.タブレットPOS_タブレットPOS⇔現行POSデータ連携.pptx",
+    "sha256": "9dd1792ed537e19e00020f62ded84240f004b93d9166dbbc39d5a9298702b05c",
+    "bytes": 304029,
+    "status": "Bản ngoài old; chưa xác nhận phê duyệt"
+  },
+  {
+    "source": "C:\\Users\\LX26080219\\SAM\\svn\\1000_要件定義書\\1000_システム全体\\アーキテクチャ概要\\08.タブレットPOS_アーキテクチャ_在庫更新.pptx",
+    "copy": "svn/1000_要件定義書/1000_システム全体/アーキテクチャ概要/08.タブレットPOS_アーキテクチャ_在庫更新.pptx",
+    "sha256": "7a53a757729ce5155c9522970c8b1300b024c78251bfd7859bb7d0a3471b2298",
+    "bytes": 153892,
+    "status": "Bản ngoài old; chưa xác nhận phê duyệt"
+  },
+  {
+    "source": "C:\\Users\\LX26080219\\SAM\\svn\\1000_要件定義書\\1000_システム全体\\アーキテクチャ概要\\12.タブレットPOS_アーキテクチャ_本部データ連携.pptx",
+    "copy": "svn/1000_要件定義書/1000_システム全体/アーキテクチャ概要/12.タブレットPOS_アーキテクチャ_本部データ連携.pptx",
+    "sha256": "aca25d311ebae56428c8933b3ada38905fc08de1dab5780df1581a09fab11921",
+    "bytes": 113494,
+    "status": "Bản ngoài old; chưa xác nhận phê duyệt"
+  },
+  {
+    "source": "C:\\Users\\LX26080219\\SAM\\svn\\1000_要件定義書\\1000_システム全体\\アーキテクチャ概要\\16.タブレットPOS_アーキテクチャ_POPクライアント.pptx",
+    "copy": "svn/1000_要件定義書/1000_システム全体/アーキテクチャ概要/16.タブレットPOS_アーキテクチャ_POPクライアント.pptx",
+    "sha256": "5784a20b0657cb03bdf9c63e1f875a5b688d736ab194baaaa499be6a83ca329e",
+    "bytes": 96355,
+    "status": "Bản ngoài old; chưa xác nhận phê duyệt"
+  },
+  {
+    "source": "C:\\Users\\LX26080219\\SAM\\svn\\1000_要件定義書\\1000_システム全体\\アーキテクチャ概要\\old\\Ks様承認済み\\JISEDAIKENTOU-61 02.参照系\\要件定義書（システム全体）_参照系（頁未定）.xlsx",
+    "copy": "svn/1000_要件定義書/1000_システム全体/アーキテクチャ概要/old/Ks様承認済み/JISEDAIKENTOU-61 02.参照系/要件定義書（システム全体）_参照系（頁未定）.xlsx",
+    "sha256": "9cc1c244b3c83e58a0fea31e2aeeacb21c50c176630591551de63303338c760a",
+    "bytes": 86831,
+    "status": "Lưu trong thư mục Ks様承認済み"
+  },
+  {
+    "source": "C:\\Users\\LX26080219\\SAM\\svn\\1000_要件定義書\\1000_システム全体\\アーキテクチャ概要\\old\\Ks様承認済み\\JISEDAIKENTOU-62 03.レシート出力方式設計\\要件定義書（システム全体）_７．５．９．印刷・帳票・EJD.xlsx",
+    "copy": "svn/1000_要件定義書/1000_システム全体/アーキテクチャ概要/old/Ks様承認済み/JISEDAIKENTOU-62 03.レシート出力方式設計/要件定義書（システム全体）_７．５．９．印刷・帳票・EJD.xlsx",
+    "sha256": "8eb198097770d888012044b6f3c6539893bf6a166ab2690401fea482bc443755",
+    "bytes": 1730354,
+    "status": "Lưu trong thư mục Ks様承認済み"
+  },
+  {
+    "source": "C:\\Users\\LX26080219\\SAM\\svn\\1000_要件定義書\\1000_システム全体\\アーキテクチャ概要\\old\\Ks様承認済み\\JISEDAIKENTOU-63 04.A4帳票出力方式設計\\※JISEDAIKENTOU-62 03.レシート出力方式設計に格納",
+    "copy": "svn/1000_要件定義書/1000_システム全体/アーキテクチャ概要/old/Ks様承認済み/JISEDAIKENTOU-63 04.A4帳票出力方式設計/※JISEDAIKENTOU-62 03.レシート出力方式設計に格納",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0,
+    "status": "Lưu trong thư mục Ks様承認済み"
+  },
+  {
+    "source": "C:\\Users\\LX26080219\\SAM\\svn\\1000_要件定義書\\1000_システム全体\\アーキテクチャ概要\\old\\Ks様承認済み\\JISEDAIKENTOU-64 05.電子ジャーナル方式設計\\※JISEDAIKENTOU-62 03.レシート出力方式設計に格納",
+    "copy": "svn/1000_要件定義書/1000_システム全体/アーキテクチャ概要/old/Ks様承認済み/JISEDAIKENTOU-64 05.電子ジャーナル方式設計/※JISEDAIKENTOU-62 03.レシート出力方式設計に格納",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0,
+    "status": "Lưu trong thư mục Ks様承認済み"
+  },
+  {
+    "source": "C:\\Users\\LX26080219\\SAM\\svn\\1000_要件定義書\\1000_システム全体\\アーキテクチャ概要\\old\\Ks様承認済み\\JISEDAIKENTOU-68 09.マスタSV\\要件定義書（システム全体）_マスター更新（夜間・定時・緊急）（頁未設定）.xlsx",
+    "copy": "svn/1000_要件定義書/1000_システム全体/アーキテクチャ概要/old/Ks様承認済み/JISEDAIKENTOU-68 09.マスタSV/要件定義書（システム全体）_マスター更新（夜間・定時・緊急）（頁未設定）.xlsx",
+    "sha256": "0dea41b0f989a91638526e91c345f6dae1037b90d053ba591eddb6fcbe51a56c",
+    "bytes": 86050,
+    "status": "Lưu trong thư mục Ks様承認済み"
+  },
+  {
+    "source": "C:\\Users\\LX26080219\\SAM\\svn\\1000_要件定義書\\1000_システム全体\\アーキテクチャ概要\\old\\Ks様承認済み\\※Backlogが完了になっている分を格納",
+    "copy": "svn/1000_要件定義書/1000_システム全体/アーキテクチャ概要/old/Ks様承認済み/※Backlogが完了になっている分を格納",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0,
+    "status": "Lưu trong thư mục Ks様承認済み"
+  },
+  {
+    "source": "C:\\Users\\LX26080219\\SAM\\svn\\1000_要件定義書\\1000_システム全体\\アーキテクチャ概要\\打合せ資料_処理概要図（FAX送信）.xlsx",
+    "copy": "svn/1000_要件定義書/1000_システム全体/アーキテクチャ概要/打合せ資料_処理概要図（FAX送信）.xlsx",
+    "sha256": "87be6cf01d295f878acbb14581f0ff10397f5f73c914614f414269868088d199",
+    "bytes": 273677,
+    "status": "Bản ngoài old; chưa xác nhận phê duyệt"
+  },
+  {
+    "source": "C:\\Users\\LX26080219\\SAM\\svn\\1000_要件定義書\\1000_システム全体\\アーキテクチャ概要\\打合せ資料_処理概要図（オフラインデータ連携（マスターダウンロード含む））.xlsx",
+    "copy": "svn/1000_要件定義書/1000_システム全体/アーキテクチャ概要/打合せ資料_処理概要図（オフラインデータ連携（マスターダウンロード含む））.xlsx",
+    "sha256": "090ae07340b1be7025cda12eb33be3f16ff853237c25cd3387e977011b1328cb",
+    "bytes": 241679,
+    "status": "Bản ngoài old; chưa xác nhận phê duyệt"
+  },
+  {
+    "source": "C:\\Users\\LX26080219\\SAM\\svn\\1000_要件定義書\\1000_システム全体\\アーキテクチャ概要\\打合せ資料_処理概要図（サイン・写真画像連携（配送業務端末））.xlsx",
+    "copy": "svn/1000_要件定義書/1000_システム全体/アーキテクチャ概要/打合せ資料_処理概要図（サイン・写真画像連携（配送業務端末））.xlsx",
+    "sha256": "451122ce0e7dcb0f21a89d363e296003c8cc7324e5c4fdb906d4c179c11bf0d0",
+    "bytes": 732974,
+    "status": "Bản ngoài old; chưa xác nhận phê duyệt"
+  },
+  {
+    "source": "C:\\Users\\LX26080219\\SAM\\svn\\1000_要件定義書\\1000_システム全体\\アーキテクチャ概要\\打合せ資料_処理概要図（マスター更新（夜間・定時・緊急））.xlsx",
+    "copy": "svn/1000_要件定義書/1000_システム全体/アーキテクチャ概要/打合せ資料_処理概要図（マスター更新（夜間・定時・緊急））.xlsx",
+    "sha256": "729b7c95522e0b20a23f3e7014d943125bae971946eb2ed132f804113f0cf2f9",
+    "bytes": 86053,
+    "status": "Bản ngoài old; chưa xác nhận phê duyệt"
+  },
+  {
+    "source": "C:\\Users\\LX26080219\\SAM\\svn\\1000_要件定義書\\1000_システム全体\\アーキテクチャ概要\\打合せ資料_処理概要図（レシート・Ａ４帳票・電子ジャーナル出力）.xlsx",
+    "copy": "svn/1000_要件定義書/1000_システム全体/アーキテクチャ概要/打合せ資料_処理概要図（レシート・Ａ４帳票・電子ジャーナル出力）.xlsx",
+    "sha256": "e212b9b81164211ea7846ecec90016ccbfa8b07a1eabdb29c7ac63bc724abfc1",
+    "bytes": 1730399,
+    "status": "Bản ngoài old; chưa xác nhận phê duyệt"
+  },
+  {
+    "source": "C:\\Users\\LX26080219\\SAM\\svn\\1000_要件定義書\\1000_システム全体\\アーキテクチャ概要\\打合せ資料_処理概要図（修理PC連携）.xlsx",
+    "copy": "svn/1000_要件定義書/1000_システム全体/アーキテクチャ概要/打合せ資料_処理概要図（修理PC連携）.xlsx",
+    "sha256": "21679d8ec790e0e113a67d04ac0ae315fce015bda3904274bebcc335bfc94b6a",
+    "bytes": 208453,
+    "status": "Bản ngoài old; chưa xác nhận phê duyệt"
+  },
+  {
+    "source": "C:\\Users\\LX26080219\\SAM\\svn\\1000_要件定義書\\1000_システム全体\\アーキテクチャ概要\\打合せ資料_処理概要図（参照系）.xlsx",
+    "copy": "svn/1000_要件定義書/1000_システム全体/アーキテクチャ概要/打合せ資料_処理概要図（参照系）.xlsx",
+    "sha256": "ec7fe9df98b647432fcb7877158abe5b39f0d96322b1e311a8913ff493be1918",
+    "bytes": 86700,
+    "status": "Bản ngoài old; chưa xác nhận phê duyệt"
+  },
+  {
+    "source": "C:\\Users\\LX26080219\\SAM\\svn\\1000_要件定義書\\1000_システム全体\\アーキテクチャ概要\\打合せ資料_処理概要図（売上実績・配送残）.xlsx",
+    "copy": "svn/1000_要件定義書/1000_システム全体/アーキテクチャ概要/打合せ資料_処理概要図（売上実績・配送残）.xlsx",
+    "sha256": "e8c1c4ff15d66d392cff631ac91ddfc592c3805b6037d9808d993a37f7141ebf",
+    "bytes": 178166,
+    "status": "Bản ngoài old; chưa xác nhận phê duyệt"
+  },
+  {
+    "source": "C:\\Users\\LX26080219\\SAM\\svn\\1000_要件定義書\\1000_システム全体\\アーキテクチャ概要\\打合せ資料_処理概要図（排他処理）.xlsx",
+    "copy": "svn/1000_要件定義書/1000_システム全体/アーキテクチャ概要/打合せ資料_処理概要図（排他処理）.xlsx",
+    "sha256": "502188d00b5ce6576132300b01baedd0907f3e13315ed0a5209164b6dbef2c0a",
+    "bytes": 221406,
+    "status": "Bản ngoài old; chưa xác nhận phê duyệt"
+  },
+  {
+    "source": "C:\\Users\\LX26080219\\SAM\\svn\\1000_要件定義書\\1000_システム全体\\アーキテクチャ概要\\打合せ資料_処理概要図（直接更新）.xlsx",
+    "copy": "svn/1000_要件定義書/1000_システム全体/アーキテクチャ概要/打合せ資料_処理概要図（直接更新）.xlsx",
+    "sha256": "208949c738af36a57691387bc7165a57ab85fb684ba42f7976342a86d48c5e65",
+    "bytes": 141299,
+    "status": "Bản ngoài old; chưa xác nhận phê duyệt"
+  },
+  {
+    "source": "C:\\Users\\LX26080219\\SAM\\svn\\1000_要件定義書\\1000_システム全体\\アーキテクチャ概要\\打合せ資料_処理概要図（端末入力データ保存、リカバリデータ保存）.xlsx",
+    "copy": "svn/1000_要件定義書/1000_システム全体/アーキテクチャ概要/打合せ資料_処理概要図（端末入力データ保存、リカバリデータ保存）.xlsx",
+    "sha256": "e968cf8405907fcf3b04870656e975fa0fe082927eb1bd873976ec0dafb77a1b",
+    "bytes": 201078,
+    "status": "Bản ngoài old; chưa xác nhận phê duyệt"
+  },
+  {
+    "source": "C:\\Users\\LX26080219\\SAM\\svn\\1000_要件定義書\\1000_システム全体\\アーキテクチャ概要\\打合せ資料_処理概要図（練習モード）.xlsx",
+    "copy": "svn/1000_要件定義書/1000_システム全体/アーキテクチャ概要/打合せ資料_処理概要図（練習モード）.xlsx",
+    "sha256": "7a31f099f272add07184c1bf3776f5a9e97fa56788946d172dacf8714f975de7",
+    "bytes": 245587,
+    "status": "Bản ngoài old; chưa xác nhận phê duyệt"
+  },
+  {
+    "source": "C:\\Users\\LX26080219\\SAM\\svn\\1000_要件定義書\\1000_システム全体\\アーキテクチャ概要\\old\\04.タブレットPOS_アーキテクチャ_A4帳票出力方式設計.pptx",
+    "copy": "svn/1000_要件定義書/1000_システム全体/アーキテクチャ概要/old/04.タブレットPOS_アーキテクチャ_A4帳票出力方式設計.pptx",
+    "sha256": "56f9bea9bd2f8407363396bca4d6cc998059f138e5f2a45d4b4a78c19c3fba04",
+    "bytes": 138886,
+    "status": "Bản lịch sử để đối chiếu"
+  },
+  {
+    "source": "C:\\Users\\LX26080219\\SAM\\svn\\1000_要件定義書\\1000_システム全体\\アーキテクチャ概要\\old\\readme.txt",
+    "copy": "svn/1000_要件定義書/1000_システム全体/アーキテクチャ概要/old/readme.txt",
+    "sha256": "83ba01c3850f0555bb0517acf80e4138237b9ef561344b772e633ef3290d1a07",
+    "bytes": 839,
+    "status": "Bản lịch sử để đối chiếu"
+  },
+  {
+    "source": "C:\\Users\\LX26080219\\SAM\\svn\\1000_要件定義書\\1000_システム全体\\アーキテクチャ概要\\old\\アーキテクチャ方式決定項目リスト_20260602.xlsx",
+    "copy": "svn/1000_要件定義書/1000_システム全体/アーキテクチャ概要/old/アーキテクチャ方式決定項目リスト_20260602.xlsx",
+    "sha256": "cae9569ee930aac8166e0fc4d61b645c76321c257069e25852c9e1a7f8ca3e9c",
+    "bytes": 18968,
+    "status": "Bản lịch sử để đối chiếu"
+  },
+  {
+    "source": "C:\\Users\\LX26080219\\SAM\\svn\\4200_グランドデザイン\\グランドデザイン_Ver3.0.5.pptx",
+    "copy": "svn/4200_グランドデザイン/グランドデザイン_Ver3.0.5.pptx",
+    "sha256": "0a844f16a1e0e870cf966e58d178825782f037650e0aafad8bc3e26241f0b011",
+    "bytes": 2442718,
+    "status": "Grand Design tham chiếu; không suy ra mọi nội dung đã chốt"
+  },
+  {
+    "source": "C:\\Users\\LX26080219\\SAM\\svn\\4200_グランドデザイン\\【別紙】決定事項一覧_20260616.xlsx",
+    "copy": "svn/4200_グランドデザイン/【別紙】決定事項一覧_20260616.xlsx",
+    "sha256": "c262acbc56fa549ae500046a006c35d608a38e05c0c7cbaf8025a9bebfb3d4e0",
+    "bytes": 26237,
+    "status": "Quyết định theo từng dòng và ngày; có cả nội dung tiếp tục xem xét"
+  },
+  {
+    "source": "C:\\Users\\LX26080219\\SAM\\svn\\0400_ドキュメント一覧\\ドキュメント一覧_Ver0.1.21.xlsx",
+    "copy": "svn/0400_ドキュメント一覧/ドキュメント一覧_Ver0.1.21.xlsx",
+    "sha256": "e23eabf8a9f0d8dbfd4f4036ee13e1062f2555d0f8f6b38d95eff2e589fd6a6f",
+    "bytes": 186673,
+    "status": "Danh mục tài liệu"
+  },
+  {
+    "source": "C:\\Users\\LX26080219\\SAM\\svn\\0500_共通部品開発\\2000_端末側\\10_共通部品一覧\\共通部品一覧_端末アプリ_Ver0.0.11.xlsm",
+    "copy": "svn/0500_共通部品開発/2000_端末側/10_共通部品一覧/共通部品一覧_端末アプリ_Ver0.0.11.xlsm",
+    "sha256": "bf3ec32e0836e8d28c9265786b42501bcc284f75ca6dc1a991cab1532ca4adb0",
+    "bytes": 435190,
+    "status": "Phân công thành phần; không phải bằng chứng đã triển khai"
+  }
+]
