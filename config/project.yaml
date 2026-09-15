@@ -28,7 +28,7 @@ knowledge_memory:
 source_code:
   projects:
     - id: tabletposboilerplate
-      path: sources/TabletPosBoilerplate
+      path: sources/tablet-pos
       codegraph:
         enabled: true
       scip:

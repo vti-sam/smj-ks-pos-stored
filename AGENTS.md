@@ -11,7 +11,7 @@ Link nội bộ dùng path từ workspace root với prefix `project-store/`.
 
 - `project-store/` là nested Git repo chứa snapshot portable riêng của project.
 - Chỉ `config/`, `artifacts/`, `management/` và
-  `skills/` là top-level data folder cho dữ liệu mới; knowledge/memory cũ tuân theo mục lưu trữ bên dưới.
+  `skills/` là các top-level data folder của project-store.
 - Application source nằm ngoài nested repo dưới `sources/<project>/`. Cache,
   index, build output, secret tracked và draft một lần không được lưu trong
   snapshot; dùng `scratch/` hoặc ignored path do owner skill quy định.
@@ -76,11 +76,11 @@ Link nội bộ dùng path từ workspace root với prefix `project-store/`.
 - Sau mọi online write, read-back đúng table và stable `id`, kiểm tra encoding
   UTF-8 và dừng nếu kết quả khác dry-run.
 
-## Dữ liệu knowledge/memory cũ
+## Memory và tra cứu artifact
 
 - FalkorDB chỉ index `artifacts/`. Knowledge chuyển sang Codex Memories; không tạo
   hoặc index kho knowledge riêng trong workspace.
-- `memory/` chỉ là bản lưu lịch sử; không tạo thêm hoặc index vào FalkorDB.
+- Memory cá nhân do Codex quản lý ngoài repo; không tạo kho memory riêng trong project-store.
 - Trước khi dùng lại kết luận cũ, đối chiếu evidence và trạng thái hiện tại.
 
 ## artifacts/
