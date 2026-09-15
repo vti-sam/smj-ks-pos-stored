@@ -93,11 +93,13 @@ Link nội bộ dùng path từ workspace root với prefix `project-store/`.
   Google Sheets. Source/mục đích tái sử dụng phải được ghi trong metadata hoặc
   companion document; đổi tên/di chuyển phải cập nhật internal link.
 - Draft/review/intermediate để trong `scratch/` hoặc output path do owner skill
-  quy định; artifact chính chỉ promote sau acceptance theo workflow.
-- Office projection do skill/renderer sinh không được lưu trong
-  `project-store/`; luôn render vào workspace-root `scratch/<artifact-family>/`.
-  Raw Office do User cung cấp vẫn được lưu như artifact nguồn; bản đã verify chỉ
-  được promote vào `artifacts/` khi User yêu cầu rõ đích bàn giao.
+  quy định; trạng thái chấp nhận của artifact theo workflow, không suy ra từ nơi lưu file.
+- PowerPoint (`.pptx`) được render trực tiếp vào folder artifact của tài liệu
+  tương ứng trong `artifacts/`, theo cấu trúc bundle hiện có; bản tạm và output
+  kiểm tra PowerPoint dùng workspace-root `scratch/`.
+- Excel/Word projection do skill/renderer sinh phải render vào workspace-root
+  `scratch/<artifact-family>/`; chỉ promote bản đã verify vào `artifacts/` khi
+  User yêu cầu rõ đích bàn giao. Raw Office do User cung cấp vẫn là artifact nguồn.
 - Naming, document ID, code, vocabulary, bundle layout và renderer thuộc
   skill tài liệu tương ứng; không copy danh sách convention vào rule này.
 
