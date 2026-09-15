@@ -10,8 +10,8 @@ Link nội bộ dùng path từ workspace root với prefix `project-store/`.
 ## Stored project
 
 - `project-store/` là nested Git repo chứa snapshot portable riêng của project.
-- Chỉ `config/`, `knowledge/`, `memory/`, `artifacts/`, `management/` và
-  `skills/` là top-level data folder được phép.
+- Chỉ `config/`, `artifacts/`, `management/` và
+  `skills/` là top-level data folder cho dữ liệu mới; knowledge/memory cũ tuân theo mục lưu trữ bên dưới.
 - Application source nằm ngoài nested repo dưới `sources/<project>/`. Cache,
   index, build output, secret tracked và draft một lần không được lưu trong
   snapshot; dùng `scratch/` hoặc ignored path do owner skill quy định.
@@ -29,8 +29,6 @@ Link nội bộ dùng path từ workspace root với prefix `project-store/`.
 | Project ID, resource binding, backend và endpoint không bí mật | `config/project.yaml` |
 | Credential, token và key material | Environment hoặc local ignored config |
 | WBS, risks, decisions, stakeholders, communications | `management/*.md`; Google Sheets chỉ là projection |
-| Tri thức bền đã verify | `knowledge/` |
-| Historical project outcome có anchor | `memory/` |
 | Raw customer file và artifact portable | `artifacts/` |
 | Workflow deterministic riêng của project | `skills/` |
 | Draft, candidate, cache, index và output tạm | Workspace `scratch/` hoặc ignored path do owner skill quy định |
@@ -43,8 +41,7 @@ Link nội bộ dùng path từ workspace root với prefix `project-store/`.
   khác biệt đã được xác định; không dùng nó để nhân bản template chung.
 - Secret thật chỉ nằm trong environment, `config/secrets.local.yaml` hoặc
   `config/keystore.local/`; các path local phải bị nested Git ignore.
-- `knowledge_memory.graph` phải ổn định và chỉ gồm chữ, số, dấu gạch dưới.
-  Không lưu cache hoặc index trong `config/`.
+- Không lưu cache hoặc index trong `config/`.
 - Binding source-intelligence nếu có phải lấy từ `config/project.yaml` và
   route qua owner skill; rule này không tự tạo index.
 - Khi đổi project ID, endpoint hoặc binding, chạy bootstrap dry-run và smoke
@@ -79,32 +76,12 @@ Link nội bộ dùng path từ workspace root với prefix `project-store/`.
 - Sau mọi online write, read-back đúng table và stable `id`, kiểm tra encoding
   UTF-8 và dừng nếu kết quả khác dry-run.
 
-## knowledge/
+## Dữ liệu knowledge/memory cũ
 
-- `knowledge/` là source-of-truth cho tri thức bền, reusable và có evidence;
-  backend/index chỉ là dữ liệu có thể rebuild.
-- Không lưu raw customer file, draft, credential, application source hoặc dữ
-  liệu chưa verify. Taxonomy, metadata và status phải có source/evidence.
-- Frontmatter, schema và lint dùng owner skill
-  `skills/knowledge-code/knowledge-memory-sync/`.
-- Verified case phải dùng `project-store/skills/verified-case-learning/` và
-  chỉ lưu evidence trực tiếp; candidate chưa đủ evidence để ở `scratch/`.
-
-## memory/
-
-- `memory/` chỉ lưu historical context có relevance trực tiếp với project,
-  không phải active source-of-truth hoặc changelog của rule/skill/tool chung.
-- Điều kiện tự lưu và quyền retrieval tuân theo **Memory chọn lọc** tại root
-  `AGENTS.md`; không hỏi lưu memory ở cuối lượt.
-- Trước khi ghi phải có project anchor kiểm chứng được; trước file mới phải tìm
-  memory cùng anchor/identifier để update đúng outcome.
-- Body phải tách đúng bốn mục `Outcome`, `Evidence`, `Unresolved` và
-  `Retrieval keys`. Evidence chỉ dùng source trực tiếp hoặc read-back; phần
-  chưa đủ căn cứ nằm ở `Unresolved`.
-- Dùng frontmatter `status: stale` khi limitation hoặc mâu thuẫn quan trọng
-  vẫn cần kiểm tra lại; không ghi suy luận chưa verify thành fact.
-- Không dump transcript, secret hoặc token. Frontmatter, capture, sync và
-  retrieval tuân theo owner skill và root memory gate.
+- `knowledge/` hiện có giữ tài liệu nguồn và tiếp tục được index cùng `artifacts/`
+  bằng FalkorDB. Tài liệu mới hoặc cần duy trì tiếp nằm trong `artifacts/` theo owner.
+- `memory/` chỉ là bản lưu lịch sử; không tạo thêm hoặc index vào FalkorDB.
+- Trước khi dùng lại kết luận cũ, đối chiếu evidence và trạng thái hiện tại.
 
 ## artifacts/
 
@@ -132,7 +109,7 @@ Link nội bộ dùng path từ workspace root với prefix `project-store/`.
 - Script đọc binding không bí mật từ `config/project.yaml`; credential chỉ
   đọc từ environment hoặc local ignored config.
 - Không lưu source, generated output, cache/index hoặc task history trong skill.
-  Durable knowledge ở `knowledge/`, candidate/draft ở `scratch/`.
+  Tài liệu bền ở `artifacts/`, candidate/draft ở `scratch/`.
 - Mỗi skill phải có validator hoặc verification command tương xứng với artifact
   nó tạo.
 
@@ -147,8 +124,6 @@ Link nội bộ dùng path từ workspace root với prefix `project-store/`.
 
 ## Verification và hoàn tất
 
-- Knowledge/memory, management và artifact phải pass completion contract của
+- Management và artifact phải pass completion contract của
   owner skill; verify ở phạm vi hẹp nhất chứng minh được thay đổi.
 - Sau mỗi write, kiểm tra diff và status của root cùng nested `project-store/`.
-- Không thêm trạng thái memory vào closeout thông thường. Chỉ báo khi User yêu
-  cầu hoặc có lỗi lưu ảnh hưởng tới khả năng dùng lại kết quả.

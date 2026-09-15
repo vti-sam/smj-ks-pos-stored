@@ -1,13 +1,13 @@
 ---
 name: verified-case-learning
-description: Phân tích feedback hoặc conversation do User chỉ định, đối chiếu với evidence của project và chỉ lưu case đã xác minh vào knowledge để FalkorDB retrieval dùng ở các phiên sau. Dùng khi User yêu cầu học từ feedback, gom case đúng/sai, tạo verified case, hoặc cập nhật một verified case hiện có; không dùng để tự động quét history, chạy scheduler hay coi cảm nhận User là bằng chứng nghiệp vụ duy nhất.
+description: Phân tích feedback hoặc conversation do User chỉ định, đối chiếu với evidence của project và chỉ lưu case đã xác minh thành artifact để tra cứu trực tiếp ở các phiên sau. Dùng khi User yêu cầu học từ feedback, gom case đúng/sai, tạo verified case, hoặc cập nhật một verified case hiện có; không dùng để tự động quét history, chạy scheduler hay coi cảm nhận User là bằng chứng nghiệp vụ duy nhất.
 ---
 
 # Verified Case Learning
 
 ## Mục tiêu
 
-Biến tín hiệu từ feedback thành một knowledge case nhỏ, có evidence truy ngược
+Biến tín hiệu từ feedback thành một artifact case nhỏ, có evidence truy ngược
 được và an toàn để retrieval đưa vào prompt ở phiên sau. Skill không fine-tune
 model, không tạo graph/index mới và không tự gọi LLM; việc phân tích do model
 trong conversation hiện tại thực hiện.
@@ -22,8 +22,8 @@ trong conversation hiện tại thực hiện.
 4. Feedback là tín hiệu tạo candidate, không tự chứng minh candidate đúng.
    Factual/business claim phải có project evidence trực tiếp.
 5. Chỉ case `confirmed` được ghi vào
-   `project-store/knowledge/verified-cases/`. Case `unknown` hoặc `refuted`
-   không được ghi vào knowledge.
+   `project-store/artifacts/verified-cases/`. Case `unknown` hoặc `refuted`
+   không được lưu làm artifact chính thức.
 6. Không tạo scheduler, taxonomy, dependency, graph hoặc storage workflow mới.
 
 ## Workflow
@@ -36,20 +36,19 @@ trong conversation hiện tại thực hiện.
 
 ### 2. Kiểm chứng
 
-- Với tài liệu/tri thức, dùng
-  `skills/knowledge-code/knowledge-memory-sync/` để query và đọc evidence.
+- Với tài liệu/tri thức, dùng `skills/knowledge-code/knowledge-memory-sync/` để tra cứu artifact/knowledge bằng FalkorDB rồi đọc evidence nguồn trực tiếp.
 - Với hành vi source code, dùng `skills/knowledge-code/source-code-intel/` và
   verify bằng source/test phù hợp.
 - Với source-of-truth online, dùng skill owner của backend và read-back khi có
   write; skill này không tự mở rộng quyền cập nhật backend.
 - Đánh giá evidence theo intent, entity, action, identifier và thời điểm.
 - Nếu evidence mâu thuẫn hoặc thiếu trực tiếp, kết luận `unknown`/`refuted` và
-  dừng trước khi ghi knowledge.
+  dừng trước khi lưu artifact chính thức.
 
 ### 3. Soạn case
 
 - Dùng `templates/verified-case.md`.
-- Giữ schema knowledge hiện có: `type: analysis`, `status: active`,
+- Giữ schema case hiện có: `type: analysis`, `status: active`,
   `scope: durable`, tag `verified-case`.
 - `source` phải có ít nhất một evidence trực tiếp ngoài feedback, conversation
   history hoặc LLM output.
@@ -63,15 +62,9 @@ trong conversation hiện tại thực hiện.
 1. Chỉ tạo/sửa file đích sau khi candidate đã `confirmed`.
 2. Chạy validator:
 
-   `rtk uv run project-store/skills/verified-case-learning/scripts/validate_verified_case.py project-store/knowledge/verified-cases/<case_id>.md`
+   `rtk uv run project-store/skills/verified-case-learning/scripts/validate_verified_case.py project-store/artifacts/verified-cases/<case_id>.md`
 
-3. Chạy knowledge lint:
-
-   `rtk uv run skills/knowledge-code/knowledge-memory-sync/scripts/lint_knowledge.py`
-
-4. Sync FalkorDB rồi chạy `doctor`.
-5. Query read-back bằng câu hỏi gốc và ít nhất một cách diễn đạt tương đương.
-   Không chỉnh keyword chỉ để làm đẹp ranking.
+3. Đọc lại đúng file và các evidence được trích dẫn; không sync hoặc query backend.
 
 ## Cập nhật case hiện có
 
@@ -84,4 +77,4 @@ trong conversation hiện tại thực hiện.
 ## Kết quả bàn giao
 
 Báo candidate được lưu hoặc bị loại, evidence, file đã đổi và kết quả
-validator/lint/sync/query. Không tạo memory chỉ để ghi lịch sử phát triển skill.
+validator và read-back. Không tạo memory chỉ để ghi lịch sử phát triển skill.

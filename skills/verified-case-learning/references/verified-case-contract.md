@@ -65,5 +65,5 @@ tự. Một case chỉ chứa một kết luận nghiệp vụ chính.
 - Không để `TODO`, placeholder hoặc câu hỏi mở trong case đã xác minh.
 
 File chỉ hợp lệ tại
-`project-store/knowledge/verified-cases/<case_id>.md`. Candidate chưa xác minh
-chỉ giữ tạm trong `scratch/` nếu cần và không sync vào FalkorDB.
+`project-store/artifacts/verified-cases/<case_id>.md`. Candidate chưa xác minh
+chỉ giữ tạm trong `scratch/` nếu cần và không lưu làm artifact chính thức.

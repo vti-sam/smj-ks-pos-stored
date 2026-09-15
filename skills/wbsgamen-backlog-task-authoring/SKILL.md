@@ -96,10 +96,7 @@ kiểm tra/sửa/test; không tự điền `end_date` khi chưa có evidence ho�
 
 1. Đọc root `AGENTS.md`, `project-store/AGENTS.md` và
    `skills/project-ops/backlog-sync/SKILL.md`.
-2. Nếu request phụ thuộc ticket, lịch sử hoặc quyết định trước đó, chạy query
-   của `skills/knowledge-code/knowledge-memory-sync/` và đọc source trực tiếp.
-   Nếu FalkorDB không kết nối được, báo degraded state và không suy luận thay
-   cho evidence.
+2. Nếu request phụ thuộc ticket, lịch sử hoặc quyết định trước đó, tìm artifact/Markdown quản trị liên quan và đọc source trực tiếp.
 3. Đọc issue liên quan bằng full issue reader. Đánh giá description, comment,
    changeLog, attachment, external link và shared-file result; nếu collector
    dừng vì giới hạn quyền, ghi rõ proof gap.
@@ -226,5 +223,4 @@ chứng minh được.
 - Không gán estimate file từ ticket KSNEWSYS sang WBSGAMEN nếu chưa có link hoặc
   yêu cầu trực tiếp.
 - Không lưu lịch sử xử lý một lần, transcript, secret hoặc task history vào
-  skill. Historical outcome chỉ thuộc `project-store/memory/` khi đạt memory
-  relevance gate và được User cho phép ghi.
+  skill. Kết luận cần duy trì được ghi trong artifact hoặc Markdown quản trị theo owner.

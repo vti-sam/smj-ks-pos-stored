@@ -110,9 +110,9 @@ def validate(path: Path) -> list[str]:
             if candidate.startswith(("project-store/", "sources/")) and not (workspace_root / candidate).exists():
                 errors.append(f"source path không tồn tại: {candidate}")
 
-    suffix = (Path("project-store/knowledge/verified-cases") / path.name).as_posix()
+    suffix = (Path("project-store/artifacts/verified-cases") / path.name).as_posix()
     if not path.resolve().as_posix().endswith(suffix):
-        errors.append("file phải nằm trong project-store/knowledge/verified-cases/")
+        errors.append("file phải nằm trong project-store/artifacts/verified-cases/")
 
     title_match = re.search(r"^# (.+?)\s*$", body, re.MULTILINE)
     if not title_match:

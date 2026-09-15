@@ -19,6 +19,7 @@ project:
   folder: smj-ks-pos
   aliases: []
 
+# Document retrieval binding; legacy key retained for database compatibility.
 knowledge_memory:
   backend: falkordblite
   graph: pm_control_smj_ks_pos_knowledge_memory_v1
