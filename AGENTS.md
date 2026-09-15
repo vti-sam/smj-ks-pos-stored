@@ -78,8 +78,8 @@ Link nội bộ dùng path từ workspace root với prefix `project-store/`.
 
 ## Dữ liệu knowledge/memory cũ
 
-- `knowledge/` hiện có giữ tài liệu nguồn và tiếp tục được index cùng `artifacts/`
-  bằng FalkorDB. Tài liệu mới hoặc cần duy trì tiếp nằm trong `artifacts/` theo owner.
+- FalkorDB chỉ index `artifacts/`. Knowledge chuyển sang Codex Memories; không tạo
+  hoặc index kho knowledge riêng trong workspace.
 - `memory/` chỉ là bản lưu lịch sử; không tạo thêm hoặc index vào FalkorDB.
 - Trước khi dùng lại kết luận cũ, đối chiếu evidence và trạng thái hiện tại.
 
