@@ -22,19 +22,29 @@ Link nội bộ dùng path từ workspace root với prefix `project-store/`.
 
 ## config/
 
+### Cấu hình và override
+
 - **Cấu hình chính**: `config/project.yaml` là source-of-truth portable duy nhất cho project ID,
   resource binding và backend dùng chung. Không đưa secret thật vào file này.
 - **Override**: `config/management.override.yaml` chỉ tồn tại khi owner workflow có một
   khác biệt đã được xác định; không dùng nó để nhân bản template chung.
+
+### Secret và dữ liệu tạm
+
 - **Secret**: Secret thật chỉ nằm trong environment, `config/secrets.local.yaml` hoặc
   `config/keystore.local/`; các path local phải bị nested Git ignore.
 - **Cache và index**: Không lưu cache hoặc index trong `config/`.
+
+### Binding và thay đổi môi trường
+
 - **Binding source-intelligence**: Binding source-intelligence nếu có phải lấy từ `config/project.yaml` và
   route qua owner skill; rule này không tự tạo index.
 - **Đổi binding**: Khi đổi project ID, endpoint hoặc binding, chạy bootstrap dry-run và smoke
   test read-only của workflow liên quan trước online write.
 
 ## management/
+
+### Nguồn dữ liệu và đồng bộ
 
 - **Nguồn Markdown**: Markdown trong `management/` là source-of-truth duy nhất. Google Sheets chỉ
   là projection có thể xoá và dựng lại từ Markdown; `.sync-state.json` chỉ là
@@ -51,6 +61,9 @@ Link nội bộ dùng path từ workspace root với prefix `project-store/`.
   `management-google-sheets import`; lệnh này tạo candidate trước, chỉ
   `--apply` mới cập nhật Markdown chính, và không tự publish lại. Schema và
   authoring gate thuộc `management-authoring`.
+
+### Record và nội dung quản lý
+
 - **Stable ID**: Duplicate stable `id` phải dừng; record mới chỉ được tạo khi request cho phép.
 - **Xóa record**: Chỉ xóa record khi dry-run của owner workflow đánh dấu xóa từ authoritative
   snapshot đã được duyệt; thiếu record trong partial cache không tự là lệnh xóa.
@@ -60,6 +73,9 @@ Link nội bộ dùng path từ workspace root với prefix `project-store/`.
   riêng trong rule này.
 - **Decisions**: Chỉ ghi Decisions khi task thực sự tạo hoặc thay đổi quyết định vận hành;
   không tạo decision store song song.
+
+### Xác nhận sau khi ghi
+
 - **Read-back**: Sau mọi online write, read-back đúng table và stable `id`, kiểm tra encoding
   UTF-8 và dừng nếu kết quả khác dry-run.
 
@@ -85,10 +101,15 @@ Link nội bộ dùng path từ workspace root với prefix `project-store/`.
 
 ## skills/
 
+### Nội dung và cấu hình skill
+
 - **Workflow riêng**: `skills/` chỉ chứa workflow portable đặc định cho project. Mỗi skill có
   `SKILL.md`; script phải deterministic, không tự gọi LLM và không hardcode
   secret.
 - **Đọc cấu hình**: Script đọc binding và credential theo mục `config/` ở trên.
+
+### Lưu trữ và kiểm tra skill
+
 - **Dữ liệu ngoài skill**: Không lưu source, generated output, cache/index hoặc task history trong skill.
   Tài liệu bền ở `artifacts/`, candidate/draft ở `scratch/`.
 - **Kiểm tra skill**: Mỗi skill phải có validator hoặc verification command tương xứng với artifact
