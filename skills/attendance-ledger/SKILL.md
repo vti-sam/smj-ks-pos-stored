@@ -29,6 +29,16 @@ Khi người dùng gửi tài liệu gọi là hợp đồng, kiểm tra tiêu �
 - Đối chiếu dấu ngày nghỉ có sẵn với lịch cuối tuần/ngày lễ đã xác minh cho kỳ hiện tại, sửa dấu sót từ mẫu trong phạm vi nhập công. Chỉ hỏi khi có lịch làm đặc biệt hoặc nguồn mâu thuẫn chưa được người dùng giải quyết.
 - Các mốc 7.75 giờ, 17:45 hoặc nghỉ trưa 1 giờ trong sample là ví dụ/quy ước của mẫu đó, không mặc định là điều kiện thực tế của người dùng. Không tự điền ngày tương lai thành công thực tế.
 
+## Kỳ chốt và phần công cuối tháng của mẫu đang dùng
+
+Với mẫu 派遣管理台帳 của project đã được người dùng xác nhận, bảng công bên trái bắt đầu ngày 21 tháng trước và kết thúc ngày 20 tháng hiện tại. Bảng 当月作業内容 bên phải tiếp tục từ ngày 21 đến ngày cuối tháng hiện tại. Yêu cầu “nhập hết tháng” bao gồm phần tiếp nối này; không đổi bảng trái thành ngày 1–cuối tháng hoặc kéo dài bảng trái để chứa toàn bộ khoảng ngày.
+
+- Đọc mẫu tham chiếu người dùng chỉ định để xác định vị trí ngày, ô nhập và vùng tổng. File trong thư mục `202510` là mẫu tham chiếu được chỉ định cho lần chỉnh kỳ; không lấy năm, công, mã dự án, chữ ký hoặc số tiền của mẫu làm dữ liệu của kỳ đang nhập.
+- Khi sửa ngày đầu kỳ, ánh xạ dữ liệu theo ngày thực tế và chuyển cả giờ làm, giờ nghỉ, 欠勤, nội dung, địa điểm và phân bổ dự án. Không chỉ sửa ngày đầu rồi để dữ liệu cũ gắn sang ngày khác. Công thức phân bổ ở phần tiếp nối phải theo cơ chế của mẫu, không tham chiếu nhầm vùng tổng bên trái cùng hàng.
+- Những ngày thuộc tháng trước được người dùng xác nhận để trống thì giữ trống công và 欠勤; không tự bổ sung giờ tiêu chuẩn hoặc tính thành nghỉ cá nhân. Không tự lặp quyết định để trống tháng trước cho kỳ khác chưa được xác nhận.
+- Kiểm tra riêng tổng kỳ chốt bên trái và tổng tháng bên phải. Hai tổng có thể khác nhau đúng theo phạm vi ngày. Giữ ý nghĩa ô tổng/kiểm tra của mẫu; không đổi phạm vi hoặc ép OK chỉ để loại NG. Tổng tháng phải bao gồm đủ phần ngày 1–20 và phần ngày 21–cuối tháng, không trùng hoặc thiếu ngày.
+- Trước khi lưu, đối chiếu từng ngày đã chuyển với bản nguồn và xuất ảnh kiểm tra thấy cả ngày đầu kỳ, phần tiếp nối cuối tháng và tổng tháng. Giữ trống ô duyệt; nội dung công việc không được kích hoạt công thức mẫu tự điền tên người duyệt.
+
 ## Ghi workbook
 
 Đọc skill spreadsheet hiện có để chọn công cụ. Với file local, có thể dùng Python để đọc đối chiếu và Excel COM để ghi/tính lại khi connector không hỗ trợ tương đương. Dùng instance Excel riêng, tắt macro và cập nhật link ngoài khi mở, chỉ đóng instance do task tạo.
@@ -36,6 +46,16 @@ Khi người dùng gửi tài liệu gọi là hợp đồng, kiểm tra tiêu �
 Làm trên bản sao tại đích đầu ra được workspace cho phép; giữ nguyên file nguồn. Nếu người dùng yêu cầu thay thế file gốc, backup trước và read-back sau. Không tự tạo chữ ký, dấu duyệt, thông tin thanh toán hoặc chi phí chưa được cung cấp.
 
 Chỉ ghi ô đầu vào đã xác định. Giữ công thức, định dạng, sheet, vùng in, hình và liên kết. openpyxl có thể bỏ WMF/đối tượng không hỗ trợ khi lưu: nếu thấy cảnh báo này, dùng Excel hoặc sửa OOXML có kiểm soát, không save bằng openpyxl. Đọc giá trị cache và công thức bằng hai lượt riêng; không lưu workbook đã load data_only=True.
+
+### Bảo toàn thuộc tính Excel
+
+Trước khi sửa, giữ bản gốc làm mốc đối chiếu và xác định chính xác ô, nội dung, công thức hoặc thuộc tính được phép thay đổi theo yêu cầu. Nhập giá trị vào ô không cấp quyền thay đổi định dạng của ô hoặc cả vùng. Khi đổi kỳ, đối chiếu công thức theo ngày và tham chiếu tương đối, không chỉ theo địa chỉ ô.
+
+- Giữ nguyên font, cỡ chữ, màu, nền, viền, number format, căn lề, Wrap Text, Shrink to fit, hướng chữ, khóa/ẩn ô và style của mẫu. Riêng cột nội dung công việc của mẫu này dùng Shrink to fit, không bật Wrap Text hoặc thêm ngắt dòng thủ công để xử lý chữ dài. Không thay việc tự thu nhỏ bằng cỡ font cố định.
+- Giữ chiều rộng cột, chiều cao hàng, ô gộp, hàng/cột/sheet ẩn, freeze panes, vùng in, tỷ lệ in, ngắt trang, header/footer, validation, conditional formatting, named ranges và protection. Xuất ảnh với vùng in tạm thì đóng mà không lưu thiết lập in tạm vào workbook bàn giao.
+- Giữ công thức ngoài phạm vi sửa, external links, hyperlinks, comments, drawings, ảnh, controls, VBA và quan hệ giữa các phần OOXML. Giữ đúng định dạng xlsx/xlsm; không chạy macro khi mở để kiểm tra. Không ghép lại media/drawings từ bản cũ mà chưa đối chiếu relationship ID, content type và đối tượng tương ứng.
+- Sau ghi, so sánh dữ liệu và công thức đã mở rộng shared formula, thuộc tính/style theo giá trị thực thay vì chỉ style ID, cấu trúc workbook và các phần ZIP với bản trước sửa. XML có thể được Excel sắp xếp lại; phân biệt khác biệt cách lưu với thay đổi ngữ nghĩa. Kiểm tra nhị phân VBA/media và quan hệ OOXML nếu có; liệt kê mọi khác biệt ngoài phạm vi thay vì mặc định là vô hại.
+- Tính lại khi sửa dữ liệu/công thức ảnh hưởng kết quả; sửa định dạng đơn thuần thì xác nhận công thức và giá trị cache không đổi. Đọc lại bản cuối, kiểm tra lỗi công thức, tổng và ảnh render. Không bàn giao nếu phát hiện mất thuộc tính hoặc thay đổi ngoài ý muốn chưa được xử lý; không khẳng định bảo toàn toàn bộ khi chỉ kiểm tra một phần.
 
 Giờ bắt đầu/kết thúc và thời lượng nghỉ dùng số thời gian Excel theo định dạng sẵn có; công số thập phân dùng đơn vị của cột. Không đồng nhất 7.75 với 7:75. Không ghi đè công thức tổng hoặc giờ tăng ca bằng số cố định. Nếu phải soạn mới mô tả tiếng Nhật trong workspace có Japanese authoring skill, route phần hành văn qua skill đó; facts vẫn lấy từ người dùng.
 
