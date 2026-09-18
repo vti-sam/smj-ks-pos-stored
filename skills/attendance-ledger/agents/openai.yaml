@@ -1,0 +1,4 @@
+interface:
+  display_name: "Nhập sổ công"
+  short_description: "Nhập công theo lịch nghỉ Nhật và quy tắc 欠勤 cá nhân"
+  default_prompt: "Dùng $attendance-ledger để điền sổ công từ dữ liệu tôi cung cấp, kiểm tra và lưu vào thư mục tháng trên share khi tôi yêu cầu."
