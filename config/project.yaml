@@ -110,6 +110,10 @@ backlog:
       project_key: SHARP_MULTI_DEVICE_POS
       language: vi
   connections:
+    backlog-kshd:
+      name: Backlog KsHD
+      base_url: https://kshd.backlog.com
+      api_key_env: BACKLOG_KSHD_API_KEY
     backlog-customer-smj-ks-pos:
       name: Backlog KH SMJ
       base_url: https://siconnect.backlog.com

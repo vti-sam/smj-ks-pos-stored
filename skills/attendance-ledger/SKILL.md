@@ -1,6 +1,6 @@
 ---
 name: attendance-ledger
-description: Điền công vào sổ Excel 就業管理台帳 hoặc 派遣管理台帳 từ dữ liệu làm việc người dùng cung cấp, đối chiếu file sample và bảo toàn mẫu, công thức.
+description: Điền sổ Excel 就業管理台帳 hoặc 派遣管理台帳 từ dữ liệu người dùng cung cấp, đối chiếu mẫu và bảo toàn định dạng, công thức.
 ---
 
 # Nhập sổ công
@@ -33,11 +33,18 @@ Khi người dùng gửi tài liệu gọi là hợp đồng, kiểm tra tiêu �
 
 Với mẫu 派遣管理台帳 của project đã được người dùng xác nhận, bảng công bên trái bắt đầu ngày 21 tháng trước và kết thúc ngày 20 tháng hiện tại. Bảng 当月作業内容 bên phải tiếp tục từ ngày 21 đến ngày cuối tháng hiện tại. Yêu cầu “nhập hết tháng” bao gồm phần tiếp nối này; không đổi bảng trái thành ngày 1–cuối tháng hoặc kéo dài bảng trái để chứa toàn bộ khoảng ngày.
 
-- Đọc mẫu tham chiếu người dùng chỉ định để xác định vị trí ngày, ô nhập và vùng tổng. File trong thư mục `202510` là mẫu tham chiếu được chỉ định cho lần chỉnh kỳ; không lấy năm, công, mã dự án, chữ ký hoặc số tiền của mẫu làm dữ liệu của kỳ đang nhập.
+- Mẫu chuẩn hiện tại cho lần làm tiếp theo là `project-store/artifacts/reference/attendance-ledger/就業管理台帳_記載サンプル_202609.xlsx`, bản tháng 9/2026 người dùng chỉ định sau khi quản lý sửa trên share. Đọc `README.md` cạnh mẫu để biết nguồn và khác biệt đã kiểm tra. Dùng mẫu để xác định cấu trúc hai phần, ô nhập SDM INPUT, công thức và vùng tổng. File trong thư mục `202510` chỉ là tham khảo lịch sử. Không lấy ngày công, dự án, mức tiền, ngưỡng tính tiền hoặc dấu duyệt của mẫu làm dữ liệu cho kỳ khác.
 - Khi sửa ngày đầu kỳ, ánh xạ dữ liệu theo ngày thực tế và chuyển cả giờ làm, giờ nghỉ, 欠勤, nội dung, địa điểm và phân bổ dự án. Không chỉ sửa ngày đầu rồi để dữ liệu cũ gắn sang ngày khác. Công thức phân bổ ở phần tiếp nối phải theo cơ chế của mẫu, không tham chiếu nhầm vùng tổng bên trái cùng hàng.
 - Những ngày thuộc tháng trước được người dùng xác nhận để trống thì giữ trống công và 欠勤; không tự bổ sung giờ tiêu chuẩn hoặc tính thành nghỉ cá nhân. Không tự lặp quyết định để trống tháng trước cho kỳ khác chưa được xác nhận.
 - Kiểm tra riêng tổng kỳ chốt bên trái và tổng tháng bên phải. Hai tổng có thể khác nhau đúng theo phạm vi ngày. Giữ ý nghĩa ô tổng/kiểm tra của mẫu; không đổi phạm vi hoặc ép OK chỉ để loại NG. Tổng tháng phải bao gồm đủ phần ngày 1–20 và phần ngày 21–cuối tháng, không trùng hoặc thiếu ngày.
-- Trước khi lưu, đối chiếu từng ngày đã chuyển với bản nguồn và xuất ảnh kiểm tra thấy cả ngày đầu kỳ, phần tiếp nối cuối tháng và tổng tháng. Giữ trống ô duyệt; nội dung công việc không được kích hoạt công thức mẫu tự điền tên người duyệt.
+- Trước khi lưu, đối chiếu từng ngày đã chuyển với bản nguồn và xuất ảnh kiểm tra thấy cả ngày đầu kỳ, phần tiếp nối cuối tháng và tổng tháng. Chỉ giữ dấu duyệt ở những ngày bản nguồn của chính kỳ đó đã được quản lý xác nhận; nội dung công việc không được kích hoạt công thức mẫu tự điền tên người duyệt.
+
+## SDM INPUT và dấu điện tử cá nhân
+
+- Khi người dùng yêu cầu nhập SDM INPUT, đọc đúng sheet `SDMINPUT_通常` của workbook đích và đối chiếu sheet `請求内容入力シート`, `パラメータ` cùng mẫu hiện tại. Chỉ điền mã đơn hàng, mã công việc và tên khách hàng/hệ thống có bằng chứng trong chính workbook của kỳ đó; phân biệt ô nhập với công thức tự tính. Không sao chép dữ liệu từ kỳ mẫu.
+- Điền xong công thực tế và nghỉ/vượt giờ của đúng kỳ, tính lại workbook rồi mới xác định số tiền SDM từ kết quả tính phí của kỳ đó. Ở mẫu tháng 9/2026, số tiền SDM bằng `請求内容入力シート!P7` (400.000 trước thuế), sau khi bảng công tính 19 giờ nghỉ và ngưỡng `控除` 20 giờ; `Q10` là số gồm thuế, không dùng thay P7. Với kỳ khác, đối chiếu nhãn/công thức của phiên bản workbook đang dùng, các ngưỡng được xác nhận cho kỳ đó, ô kiểm tra của bảng công và sheet tính phí; không cố định 400.000, 20 giờ hoặc địa chỉ ô của mẫu. Nếu số tiền hay tổng công không khớp, dừng điền số tiền SDM và báo chênh lệch.
+- Dấu cá nhân người dùng đã cung cấp nằm tại `project-store/skills/attendance-ledger/assets/son-electronic-seal.png`. Khi lập sổ công các kỳ sau cho chính người dùng, chèn đúng ảnh này vào vùng `④派遣元情報`, cạnh tên `派遣労働者氏名`; giữ tỷ lệ và hiển thị rõ, không che chữ. Kiểm tra số ảnh/dấu trước khi chèn để tránh đóng trùng. Người dùng đã cho phép dùng lại dấu này cho các kỳ sổ công của mình; không dùng cho người khác hoặc biểu mẫu khác.
+- Trong bản tháng 9/2026 課長 đã sửa, ô `ＳＭＪ責任者検印欄` của các ngày ông ấy duyệt ghi `陳`. Đây là dấu xác nhận của quản lý, khác dấu cá nhân của người dùng. Khi xử lý kỳ sau, chỉ giữ hoặc điền `陳` cho đúng ngày nếu có bản cùng kỳ do quản lý xác nhận hoặc chỉ dẫn trực tiếp xác nhận các ngày đã duyệt; không lấy dấu từ tháng mẫu để tự duyệt ngày chưa có bằng chứng. Dấu cá nhân là hình người dùng cấp, không suy từ tên hay chữ trong mẫu.
 
 ## Ghi workbook
 

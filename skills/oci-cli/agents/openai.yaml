@@ -1,0 +1,4 @@
+interface:
+  display_name: "OCI CLI"
+  short_description: "Kiểm tra OCI Gateway, mạng và Bastion bằng CLI"
+  default_prompt: "Dùng $oci-cli để kiểm tra tài nguyên OCI đúng compartment và region, báo evidence và phần chưa xác minh."

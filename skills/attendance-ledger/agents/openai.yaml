@@ -1,4 +1,4 @@
 interface:
   display_name: "Nhập sổ công"
-  short_description: "Nhập công đúng kỳ 21–20 và phần tiếp nối đến cuối tháng"
-  default_prompt: "Dùng $attendance-ledger để điền sổ công từ dữ liệu tôi cung cấp, giữ đúng kỳ 21–20 và phần tiếp nối cuối tháng, bảo toàn định dạng, công thức và thuộc tính Excel, đối chiếu bản trước sửa rồi lưu vào thư mục tháng trên share khi tôi yêu cầu."
+  short_description: "Nhập công đúng kỳ và giữ nguyên định dạng, công thức Excel"
+  default_prompt: "Dùng $attendance-ledger và mẫu chuẩn tháng 9/2026 để điền sổ công; tính lại công, nghỉ/vượt giờ trước khi ghi số tiền SDM INPUT của kỳ này. Giữ định dạng, công thức và các dấu đã xác nhận; lưu vào share theo yêu cầu."
