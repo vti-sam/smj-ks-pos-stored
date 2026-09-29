@@ -3,103 +3,26 @@ schema_version: 1
 project:
   id: smj-ks-pos
   display_name: SMJ KS POS
-  system_name: KsタブレットPOS（次世代システム）
-  document_name: KsタブレットPOS プロジェクト管理サマリー
-  target: 共通部品開発（初期開発）／デバイス制御層
-  milestone: 【MS】共通部品開発（初期開発）
-  version: "1.0"
-  created_date: "2026-08-04"
-  author: VTI サム
-  reviewer: SMJ 小林、SMJ鎌田、SMJ 南
-  approver: SMJ 菅原
-  purpose: デバイス制御層に関する設計、プログラム仕様書、ソースコード修正、テストおよびレビューの進捗と判断事項を一元管理する。
-  expected_outcome: 2026年8月のプログラム仕様書納品と9月の設計・開発完了に向け、成果物、レビュー、課題およびリスクを追跡できる状態。
-  document_category: プロジェクト管理（WBS・レビュー・リスク）
-  confidentiality: 関係者限り
-  folder: smj-ks-pos
-  aliases: []
 
 # Document retrieval binding; legacy key retained for database compatibility.
 knowledge_memory:
   backend: falkordblite
-  graph: pm_control_smj_ks_pos_knowledge_memory_v1
   database_path: scratch/falkordblite/smj-ks-pos.db
-
-source_code:
-  projects:
-    - id: tabletposboilerplate
-      path: sources/tablet-pos
-      codegraph:
-        enabled: true
-      scip:
-        enabled: true
-        indexer: scip-dotnet
-        indexer_version: "0.2.14"
-        consumer_version: "0.9.0"
-        output_dir: scratch/indexes/scip/tabletposboilerplate
-        targets:
-          - id: applications
-            path: TabletPos.Applications/TabletPos.Applications.csproj
-          - id: application-controls
-            path: TabletPos.ApplicationControls/TabletPos.ApplicationControls.csproj
-          - id: application-utils
-            path: TabletPos.ApplicationUtils/TabletPos.ApplicationUtils.csproj
-          - id: core
-            path: TabletPos.Core/TabletPos.Core.csproj
-          - id: device-control
-            path: TabletPos.DeviceCtrl/TabletPos.DeviceCtrl.csproj
-          - id: binding-android
-            path: TabletPos.BindingLibrary/Epos2Android/Epos2Android.csproj
-          - id: binding-ios
-            path: TabletPos.BindingLibrary/Epos2iOS/Epos2iOS.csproj
-          - id: host-app-server
-            path: TabletPos.Host/src/AppServer/AppServer.csproj
-          - id: host-app-stop-server
-            path: TabletPos.Host/src/AppStopServer/AppStopServer.csproj
-          - id: host-device-definition
-            path: TabletPos.Host/src/TabletDeviceDefinition/TabletDeviceDefinition.csproj
-          - id: host-device-manager
-            path: TabletPos.Host/src/TabletDeviceManager/TabletDeviceManager.csproj
-          - id: host-device-setting
-            path: TabletPos.Host/src/TabletDeviceSettingBase/TabletDeviceSettingBase.csproj
-          - id: host-device-base
-            path: TabletPos.Host/src/TabletDevice/DeviceBase/DeviceBase.csproj
-          - id: host-cash-changer-base
-            path: TabletPos.Host/src/TabletDevice/CashChanger/CashChangerBase/CashChangerBase.csproj
-          - id: host-cash-changer
-            path: TabletPos.Host/src/TabletDevice/CashChanger/CashChangerByRT300/CashChangerByRT300.csproj
-          - id: host-cash-drawer
-            path: TabletPos.Host/src/TabletDevice/CashDrawer/CashDrawerBySharp/CashDrawerBySharp.csproj
-          - id: host-customer-display
-            path: TabletPos.Host/src/TabletDevice/CustomerDisplay/CustomerDisplayBySharp/CustomerDisplayBySharp.csproj
-          - id: host-payment
-            path: TabletPos.Host/src/TabletDevice/Payment/PaymentByCafisArch/PaymentByCafisArch.csproj
-          - id: host-printer
-            path: TabletPos.Host/src/TabletDevice/Printer/PrinterByOpos/PrinterByOpos.csproj
-          - id: host-tablet
-            path: TabletPos.Host/src/TabletHost/DeviceHost/TabletHost.csproj
-          - id: peripheral-integration-runner
-            path: tools/PeripheralIntegrationRunner/PeripheralIntegrationRunner.csproj
 
 google:
   service_account:
     email: project-sheets-bot@sharp-smj-sheets.iam.gserviceaccount.com
     key_path: project-store/config/keystore.local/google/sheets-service-account.json
-    credentials_env: GOOGLE_APPLICATION_CREDENTIALS
-    mcp_credentials_env: SERVICE_ACCOUNT_PATH
   resources:
     spreadsheet_id: 1cNCS6-y0tX7hkpZ2Y26UfVVPGtFOOxQOwd5AVfUgMpA
-    spreadsheet_url: https://docs.google.com/spreadsheets/d/1cNCS6-y0tX7hkpZ2Y26UfVVPGtFOOxQOwd5AVfUgMpA/edit
     drive_folder_id: 180qn9_ruaXA703CDd9VDlbpgPJnNONkP
 
 backlog:
   role_aliases:
     customer: backlogCus
     cus: backlogCus
-    backlogCus: backlogCus
     internal: backlogMe
     me: backlogMe
-    backlogMe: backlogMe
   bindings:
     backlogCus:
       connection: backlog-customer-smj-ks-pos
@@ -110,10 +33,6 @@ backlog:
       project_key: SHARP_MULTI_DEVICE_POS
       language: vi
   connections:
-    backlog-kshd:
-      name: Backlog KsHD
-      base_url: https://kshd.backlog.com
-      api_key_env: BACKLOG_KSHD_API_KEY
     backlog-customer-smj-ks-pos:
       name: Backlog KH SMJ
       base_url: https://siconnect.backlog.com

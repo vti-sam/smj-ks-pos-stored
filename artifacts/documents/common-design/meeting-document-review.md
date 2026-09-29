@@ -7,7 +7,7 @@ Ngày rà soát: 2026-09-10. Phạm vi: nội dung cuộc họp ngày 2026-09-04
 - Meeting note: `C:/Users/LX26080219/.codex/attachments/cd0ddf89-c67c-4711-87cc-5037a696fc94/pasted-text.txt`. Bản dựng lại từ âm thanh; Speaker 1 và Speaker 3 chưa được định danh. Các đoạn nghe không rõ không được dùng để suy ra tên component, cam kết hoặc người chịu trách nhiệm.
 - Document list: `0400_ドキュメント一覧/ドキュメント一覧_Ver0.1.21.xlsx`. Không xác nhận đây là phiên bản mới nhất trên server; đây là bản dùng để đối chiếu trong checkout local.
 - Phân công component: `0500_共通部品開発/2000_端末側/10_共通部品一覧/共通部品一覧_端末アプリ_Ver0.0.11.xlsm`, sheet `端末アプリ共通部品一覧`.
-- Nguồn thiết kế hiện tại: các Markdown được liệt kê trong `project-store/artifacts/common-design/README.md`; bộ Office hiện tại mang phiên bản 0.1.0.
+- Nguồn thiết kế hiện tại: các Markdown được liệt kê trong `project-store/artifacts/documents/common-design/README.md`; bộ Office hiện tại mang phiên bản 0.1.0.
 - Lượt này xác minh tài liệu, phân công ghi trong danh sách và việc di chuyển file. Không chạy lại build, test tự động, kiểm thử thiết bị hay kiểm chứng tất cả DLL/OCX. Không suy ra nghiệm thu sản phẩm từ việc đã có thiết kế.
 
 ## 2. Việc sắp xếp và cập nhật đã thực hiện
