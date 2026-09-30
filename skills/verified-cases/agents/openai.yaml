@@ -1,0 +1,5 @@
+interface:
+  display_name: Lưu trường hợp đã xác minh
+  short_description: Lưu trường hợp đã xác minh theo yêu cầu và dữ liệu dự án
+  default_prompt: Dùng $verified-cases để lưu trường hợp đã xác minh theo yêu cầu
+    hiện tại.

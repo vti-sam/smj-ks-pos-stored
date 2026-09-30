@@ -1,9 +1,9 @@
 ---
-name: wbsgamen-backlog-task-authoring
+name: backlog-tasks
 description: Soạn, rà soát và chuẩn bị tạo hoặc cập nhật task trong Backlog project WBSGAMEN (KsタブレットPOS WBS（UI・共通部品）) theo mẫu task đang dùng của dự án. Dùng khi User hỏi cách tạo WBSGAMEN task, cần viết description tiếng Nhật cho task/子タスク/レビュー, cần tránh tạo task trùng, hoặc cần chuẩn bị payload Backlog; không dùng để tự ghi Backlog khi chưa có approval và không dùng để tạo file WBS riêng.
 ---
 
-# WBSGAMEN Backlog Task Authoring
+# Soạn task Backlog WBSGAMEN
 
 ## Mục tiêu
 
@@ -12,8 +12,8 @@ ngay công việc, deliverable, điều kiện hoàn thành, dependency và hàn
 theo. Không biến WBS thành một file Excel/Word riêng nếu source hiện tại chỉ yêu
 cầu task Backlog.
 
-Skill này giữ facts và metadata theo `backlog-sync`. Skill
-`japanese-workplace-communication` giữ mục đích giao tiếp, cấu trúc câu và cách
+Skill này giữ facts và metadata theo `backlog`. Skill
+`japanese` giữ mục đích giao tiếp, cấu trúc câu và cách
 viết tiếng Nhật. Không để câu tiếng Nhật tự bổ sung scope, owner, deadline,
 đường dẫn hoặc quyết định chưa có evidence.
 
@@ -95,7 +95,7 @@ kiểm tra/sửa/test; không tự điền `end_date` khi chưa có evidence ho�
 ### 1. Xác định task đích
 
 1. Đọc root `AGENTS.md`, `project-store/AGENTS.md` và
-   `skills/project-ops/backlog-sync/SKILL.md`.
+   `skills/management/backlog/SKILL.md`.
 2. Nếu request phụ thuộc ticket, lịch sử hoặc quyết định trước đó, tìm artifact/Markdown quản trị liên quan và đọc source trực tiếp.
 3. Đọc issue liên quan bằng full issue reader. Đánh giá description, comment,
    changeLog, attachment, external link và shared-file result; nếu collector
@@ -107,11 +107,11 @@ Read-only discovery cho project chưa có binding riêng có thể dùng connect
 đã cấu hình và project key lấy từ source hiện tại:
 
 ```bash
-rtk uv run --with pyyaml python skills/project-ops/backlog-sync/scripts/manage.py \
+rtk uv run --with pyyaml python skills/management/backlog/scripts/manage.py \
   issues --connection <backlog-connection> --project-key <project-key> \
   --keyword "<từ khóa>" --count 20
 
-rtk uv run --with pyyaml python skills/project-ops/backlog-sync/scripts/manage.py \
+rtk uv run --with pyyaml python skills/management/backlog/scripts/manage.py \
   get-issue <ISSUE-KEY> --role customer
 ```
 
@@ -140,9 +140,10 @@ Không tự chuyển MM sang `estimatedHours`. Chỉ ghi giờ khi project rule 
 User cung cấp công thức chuyển đổi. Effort phải truy nguyên về estimate hoặc
 quyết định đã được chấp thuận.
 
-### 3. Soạn description tiếng Việt để review
+### 3. Soạn description theo ngôn ngữ được yêu cầu
 
-Trước khi viết tiếng Nhật gửi KH, tạo bản tiếng Việt ngắn cho User duyệt.
+Nếu User đã yêu cầu tiếng Nhật, viết thẳng tiếng Nhật. Chỉ tạo bản tiếng Việt
+để review khi chưa chỉ định ngôn ngữ gửi ra ngoài hoặc User yêu cầu.
 Giữ các facts đã xác minh và đánh dấu phần còn thiếu; không tự điền placeholder
 thành sự thật.
 
@@ -156,13 +157,13 @@ việc. Ví dụ semantic (chưa phải nội dung cố định của mọi tick
 - Thực hiện test.
 ```
 
-Sau khi User duyệt facts, dùng Japanese Workplace Communication với audience,
+Dùng dữ kiện đã có và Japanese Workplace Communication khi cần cấu trúc nội dung, với audience,
 relationship, medium và required action đã chốt. Đọc:
 
-- `skills/doc-authoring/japanese-workplace-communication/SKILL.md`;
-- `skills/doc-authoring/japanese-workplace-communication/references/core-communication-logic.md`;
-- `skills/doc-authoring/japanese-workplace-communication/references/backlog-issue-writing.md`;
-- `skills/doc-authoring/japanese-workplace-communication/references/authoring-handoff.md`.
+- `skills/communication/japanese/SKILL.md`;
+- `skills/communication/japanese/references/core-communication-logic.md`;
+- `skills/communication/japanese/references/backlog-issue-writing.md`;
+- `skills/communication/japanese/references/authoring-handoff.md`.
 
 Với description của Backlog task, viết tiếng Nhật trực tiếp, ngắn và trung tính; không thêm
 greeting, closing, email ceremony hoặc lặp lại cùng một yêu cầu ở nhiều section.
@@ -174,19 +175,19 @@ Markdown khi schema yêu cầu.
 ### 4. Chuẩn bị payload, chưa ghi online
 
 Khi project binding đã tồn tại trong `project-store/config/project.yaml`, dùng
-workflow của `backlog-sync`:
+workflow của `backlog`:
 
 ```bash
-rtk uv run --with pyyaml python skills/project-ops/backlog-sync/scripts/issue_authoring.py \
+rtk uv run --with pyyaml python skills/management/backlog/scripts/issue_authoring.py \
   context --project <stored-project-id> --role customer \
   --keyword "<keyword>" --output scratch/backlog_context.yaml
 
-rtk uv run --with pyyaml python skills/project-ops/backlog-sync/scripts/issue_authoring.py \
+rtk uv run --with pyyaml python skills/management/backlog/scripts/issue_authoring.py \
   validate --data-file scratch/backlog_intake.yaml \
   --context-file scratch/backlog_context.yaml \
   --project <stored-project-id> --role customer
 
-rtk uv run --with pyyaml python skills/project-ops/backlog-sync/scripts/issue_authoring.py \
+rtk uv run --with pyyaml python skills/management/backlog/scripts/issue_authoring.py \
   render --data-file scratch/backlog_intake.yaml \
   --context-file scratch/backlog_context.yaml \
   --project <stored-project-id> --role customer \

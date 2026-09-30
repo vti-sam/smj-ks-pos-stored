@@ -1,0 +1,4 @@
+interface:
+  display_name: Điền sổ công
+  short_description: Điền sổ công theo yêu cầu và dữ liệu dự án
+  default_prompt: Dùng $attendance để điền sổ công theo yêu cầu hiện tại.

@@ -62,9 +62,9 @@ image chỉ để thử quyền khi user mới yêu cầu kiểm tra.
 
 ## Nguồn cú pháp
 
-- [OCI CLI reference](https://docs.oracle.com/en-us/iaas/tools/oci-cli/latest/oci_cli_docs/)
+- [OCI CLI reference](https://docs.oracle.com/en-us/iaas/tools/oci/latest/oci_cli_docs/)
 - [Session authentication](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/clitoken.htm)
-- [Gateway commands](https://docs.oracle.com/en-us/iaas/tools/oci-cli/latest/oci_cli_docs/cmdref/api-gateway/gateway.html)
+- [Gateway commands](https://docs.oracle.com/en-us/iaas/tools/oci/latest/oci_cli_docs/cmdref/api-gateway/gateway.html)
 - [Listing Gateways](https://docs.oracle.com/en-us/iaas/Content/APIGateway/Tasks/apigatewaylisting.htm)
 
 Đối chiếu command help trước mutation; reference không thay thế quyền thực hiện.

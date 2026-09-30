@@ -1,0 +1,4 @@
+interface:
+  display_name: Kiểm tra vận hành OCI
+  short_description: Kiểm tra vận hành OCI theo yêu cầu và dữ liệu dự án
+  default_prompt: Dùng $oci để kiểm tra vận hành OCI theo yêu cầu hiện tại.

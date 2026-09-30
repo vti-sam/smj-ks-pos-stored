@@ -2,7 +2,7 @@ schema_version: 1
 
 project:
   id: smj-ks-pos
-  display_name: SMJ KS POS
+  display_name: タブレットPOS
 
 # Document retrieval binding; legacy key retained for database compatibility.
 knowledge_memory:

@@ -1,4 +1,0 @@
-interface:
-  display_name: "Nhập sổ công"
-  short_description: "Nhập công đúng kỳ và giữ nguyên định dạng, công thức Excel"
-  default_prompt: "Dùng $attendance-ledger và mẫu chuẩn tháng 9/2026 để điền sổ công; tính lại công, nghỉ/vượt giờ trước khi ghi số tiền SDM INPUT của kỳ này. Giữ định dạng, công thức và các dấu đã xác nhận; lưu vào share theo yêu cầu."

@@ -1,0 +1,5 @@
+interface:
+  display_name: Soạn task Backlog WBSGAMEN
+  short_description: Soạn task Backlog WBSGAMEN theo yêu cầu và dữ liệu dự án
+  default_prompt: Dùng $backlog-tasks để soạn task Backlog WBSGAMEN theo yêu cầu hiện
+    tại.

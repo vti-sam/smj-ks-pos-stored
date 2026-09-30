@@ -20,8 +20,8 @@ Kế thừa chỉ dẫn root; file này chỉ bổ sung phạm vi `project-store
 
 ## Nội dung quản lý
 
-- Markdown trong `management/` là nguồn chính. `management-authoring` giữ schema,
-  nội dung và stable ID; `management-google-sheets` giữ bố cục và đồng bộ.
+- Markdown trong `management/` là nguồn chính. `project-tables` giữ schema,
+  nội dung và stable ID; `google-sheets` giữ bố cục và đồng bộ.
   Google Sheets và `.sync-state.json` là dữ liệu có thể dựng lại từ nguồn.
 - Chỉ tạo WBS/record khi được yêu cầu. ID phải duy nhất; không định danh bằng số dòng.
   `deadline` là hạn kế hoạch; `end_date` chỉ ghi khi có căn cứ đã hoàn thành.

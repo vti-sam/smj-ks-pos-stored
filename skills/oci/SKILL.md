@@ -1,9 +1,9 @@
 ---
-name: oci-cli
+name: oci
 description: Kiểm tra và thao tác OCI của project bằng CLI, gồm API Gateway, compartment, mạng, Bastion và quyền triển khai Functions/Container Registry. Dùng khi cần xác minh tài nguyên hoặc chuẩn bị thay đổi hạ tầng có phạm vi rõ.
 ---
 
-# OCI CLI
+# Kiểm tra vận hành OCI
 
 ## Phạm vi
 

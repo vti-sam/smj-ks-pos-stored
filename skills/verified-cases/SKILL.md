@@ -1,9 +1,9 @@
 ---
-name: verified-case-learning
+name: verified-cases
 description: Phân tích feedback hoặc conversation do User chỉ định, đối chiếu với evidence của project và chỉ lưu case đã xác minh thành artifact để tra cứu trực tiếp ở các phiên sau. Dùng khi User yêu cầu học từ feedback, gom case đúng/sai, tạo verified case, hoặc cập nhật một verified case hiện có; không dùng để tự động quét history, chạy scheduler hay coi cảm nhận User là bằng chứng nghiệp vụ duy nhất.
 ---
 
-# Verified Case Learning
+# Lưu trường hợp đã xác minh
 
 ## Mục tiêu
 
@@ -36,8 +36,8 @@ trong conversation hiện tại thực hiện.
 
 ### 2. Kiểm chứng
 
-- Với tài liệu/tri thức, dùng `skills/knowledge-code/artifact-retrieval/` để tra cứu artifact/knowledge bằng FalkorDB rồi đọc evidence nguồn trực tiếp.
-- Với hành vi source code, dùng `skills/knowledge-code/source-code-intel/` và
+- Với tài liệu/tri thức, dùng `skills/search/rag/` để tra cứu artifact/knowledge bằng FalkorDB rồi đọc evidence nguồn trực tiếp.
+- Với hành vi source code, dùng `skills/code/code-analysis/` và
   verify bằng source/test phù hợp.
 - Với source-of-truth online, dùng skill owner của backend và read-back khi có
   write; skill này không tự mở rộng quyền cập nhật backend.
@@ -62,7 +62,7 @@ trong conversation hiện tại thực hiện.
 1. Chỉ tạo/sửa file đích sau khi candidate đã `confirmed`.
 2. Chạy validator:
 
-   `rtk uv run project-store/skills/verified-case-learning/scripts/validate_verified_case.py project-store/artifacts/verified-cases/<case_id>.md`
+   `rtk uv run project-store/skills/verified-cases/scripts/validate_verified_case.py project-store/artifacts/verified-cases/<case_id>.md`
 
 3. Đọc lại đúng file và các evidence được trích dẫn; không sync hoặc query backend.
 
