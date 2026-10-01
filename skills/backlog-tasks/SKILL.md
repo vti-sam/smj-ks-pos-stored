@@ -95,7 +95,7 @@ kiểm tra/sửa/test; không tự điền `end_date` khi chưa có evidence ho�
 ### 1. Xác định task đích
 
 1. Đọc root `AGENTS.md`, `project-store/AGENTS.md` và
-   `skills/management/backlog/SKILL.md`.
+   `skills/ops/backlog-sync/SKILL.md`.
 2. Nếu request phụ thuộc ticket, lịch sử hoặc quyết định trước đó, tìm artifact/Markdown quản trị liên quan và đọc source trực tiếp.
 3. Đọc issue liên quan bằng full issue reader. Đánh giá description, comment,
    changeLog, attachment, external link và shared-file result; nếu collector
@@ -107,11 +107,11 @@ Read-only discovery cho project chưa có binding riêng có thể dùng connect
 đã cấu hình và project key lấy từ source hiện tại:
 
 ```bash
-rtk uv run --with pyyaml python skills/management/backlog/scripts/manage.py \
+rtk uv run --with pyyaml python skills/ops/backlog-sync/scripts/manage.py \
   issues --connection <backlog-connection> --project-key <project-key> \
   --keyword "<từ khóa>" --count 20
 
-rtk uv run --with pyyaml python skills/management/backlog/scripts/manage.py \
+rtk uv run --with pyyaml python skills/ops/backlog-sync/scripts/manage.py \
   get-issue <ISSUE-KEY> --role customer
 ```
 
@@ -160,10 +160,10 @@ việc. Ví dụ semantic (chưa phải nội dung cố định của mọi tick
 Dùng dữ kiện đã có và Japanese Workplace Communication khi cần cấu trúc nội dung, với audience,
 relationship, medium và required action đã chốt. Đọc:
 
-- `skills/communication/japanese/SKILL.md`;
-- `skills/communication/japanese/references/core-communication-logic.md`;
-- `skills/communication/japanese/references/backlog-issue-writing.md`;
-- `skills/communication/japanese/references/authoring-handoff.md`.
+- `skills/design/japanese-workplace-communication/SKILL.md`;
+- `skills/design/japanese-workplace-communication/references/core-communication-logic.md`;
+- `skills/design/japanese-workplace-communication/references/backlog-issue-writing.md`;
+- `skills/design/japanese-workplace-communication/references/authoring-handoff.md`.
 
 Với description của Backlog task, viết tiếng Nhật trực tiếp, ngắn và trung tính; không thêm
 greeting, closing, email ceremony hoặc lặp lại cùng một yêu cầu ở nhiều section.
@@ -178,16 +178,16 @@ Khi project binding đã tồn tại trong `project-store/config/project.yaml`, 
 workflow của `backlog`:
 
 ```bash
-rtk uv run --with pyyaml python skills/management/backlog/scripts/issue_authoring.py \
+rtk uv run --with pyyaml python skills/ops/backlog-sync/scripts/issue_authoring.py \
   context --project <stored-project-id> --role customer \
   --keyword "<keyword>" --output scratch/backlog_context.yaml
 
-rtk uv run --with pyyaml python skills/management/backlog/scripts/issue_authoring.py \
+rtk uv run --with pyyaml python skills/ops/backlog-sync/scripts/issue_authoring.py \
   validate --data-file scratch/backlog_intake.yaml \
   --context-file scratch/backlog_context.yaml \
   --project <stored-project-id> --role customer
 
-rtk uv run --with pyyaml python skills/management/backlog/scripts/issue_authoring.py \
+rtk uv run --with pyyaml python skills/ops/backlog-sync/scripts/issue_authoring.py \
   render --data-file scratch/backlog_intake.yaml \
   --context-file scratch/backlog_context.yaml \
   --project <stored-project-id> --role customer \

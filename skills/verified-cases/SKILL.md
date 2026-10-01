@@ -36,7 +36,7 @@ trong conversation hiện tại thực hiện.
 
 ### 2. Kiểm chứng
 
-- Với tài liệu/tri thức, dùng `skills/search/rag/` để tra cứu artifact/knowledge bằng FalkorDB rồi đọc evidence nguồn trực tiếp.
+- Với tài liệu/tri thức, dùng `skills/retrieval/artifact-retrieval/` để tra cứu artifact/knowledge bằng FalkorDB rồi đọc evidence nguồn trực tiếp.
 - Với hành vi source code, dùng `skills/code/code-analysis/` và
   verify bằng source/test phù hợp.
 - Với source-of-truth online, dùng skill owner của backend và read-back khi có
