@@ -1,0 +1,1348 @@
+{
+  "source_folder": "C:\\Users\\LX26080219\\Downloads\\drive-download-20260930T034229Z-1-001",
+  "selection": "Đặc tả và hướng dẫn Office/PDF; README của Epson; ảnh mẫu hóa đơn, kết hợp thanh toán và flow CAFIS. Có lấy tài liệu trong ZIP con. Loại bản trùng theo SHA-256. Không nhập code, binary, bộ cài hay dữ liệu test.",
+  "documents": [
+    {
+      "file": "SB-H50資料.pdf",
+      "group": "Epson",
+      "size": 2331623,
+      "sha256": "c13065fcaca93358c67a4bf4993a7b1342a434ad63437a1537c7f9b84766bdd4",
+      "sources": [
+        "07_EPSON SB-H50 資料・SDK\\SB-H50資料.pdf"
+      ]
+    },
+    {
+      "file": "補足説明_日本語.txt",
+      "group": "Epson",
+      "size": 471,
+      "sha256": "f71197bc4160cab252063f880f1cfaab464b51e4ed117c618597b823813b76ce",
+      "sources": [
+        "07_EPSON SB-H50 資料・SDK\\README.ja.txt"
+      ],
+      "original_file": "README.ja.txt"
+    },
+    {
+      "file": "補足説明.pdf",
+      "group": "Glory-SHARP",
+      "size": 621692,
+      "sha256": "bc36fcd45534caa8c4d4926229c3efb6d1d0f6a3a02b5f16ac5ee66ab17021e8",
+      "sources": [
+        "04_POS・自動釣銭機資料 (Glory)\\Glory 自動釣銭機\\Readme.pdf"
+      ],
+      "original_file": "Readme.pdf"
+    },
+    {
+      "file": "DM-D70_詳細取扱説明書_英語_revG.pdf",
+      "group": "Epson",
+      "size": 5712593,
+      "sha256": "8a6ebb94a7560e358507466c487e3b4fdba9be41f09c90a8399c033e91382473",
+      "sources": [
+        "07_EPSON SB-H50 資料・SDK\\DM-D70_trg_en_revG.pdf"
+      ],
+      "original_file": "DM-D70_trg_en_revG.pdf"
+    },
+    {
+      "file": "OPOS_アプリケーションプログラマーズガイド.pdf",
+      "group": "Glory-SHARP",
+      "size": 4875598,
+      "sha256": "8dcf84a6db1c6cfff610bcdc9b4eb9e345ddd85ce8f3af58f5672c9dc0b8fa78",
+      "sources": [
+        "04_POS・自動釣銭機資料 (Glory)\\Glory 自動釣銭機\\OPOS_APG.pdf"
+      ],
+      "original_file": "OPOS_APG.pdf"
+    },
+    {
+      "file": "300SerSSW仕様書.pdf",
+      "group": "Glory-SHARP",
+      "size": 687205,
+      "sha256": "dceb3640d4df56517c8c95f28923c363ac1967bf5d1697385a0e333b2d9326d9",
+      "sources": [
+        "04_POS・自動釣銭機資料 (Glory)\\Glory 自動釣銭機\\300SerSSW仕様書.pdf"
+      ]
+    },
+    {
+      "file": "TM-DT_周辺機器連携_日本語_revG.pdf",
+      "group": "Epson",
+      "size": 1784421,
+      "sha256": "6a861f8e44c0cc501f92e8cb44880af0b99706c500696138befc18dc00ba9432",
+      "sources": [
+        "07_EPSON SB-H50 資料・SDK\\TM-DT_Peripherals_ja_revG.pdf",
+        "07_EPSON SB-H50 資料・SDK\\ePOS_SDK_iOS_v2.35.0\\ePOS_SDK_iOS_v2.35.0\\TM-DT_Peripherals_ja_revG.pdf",
+        "07_EPSON SB-H50 資料・SDK\\ePOS_SDK_Android_v2.35.0\\ePOS_SDK_Android_v2.35.0\\TM-DT_Peripherals_ja_revG.pdf",
+        "07_EPSON SB-H50 資料・SDK\\ePOS-Device_XML_um_ja_revAA.zip :: ePOS-Device_XML_um_ja_revAA/TM-DT_Peripherals_ja_revG.pdf"
+      ],
+      "original_file": "TM-DT_Peripherals_ja_revG.pdf"
+    },
+    {
+      "file": "SB-H50_周辺機器連携_日本語_revB.pdf",
+      "group": "Epson",
+      "size": 641625,
+      "sha256": "b777d97c19aa3d0680c65ba60531cc4ffd80b0dc55473e299db7c948f6de69f6",
+      "sources": [
+        "07_EPSON SB-H50 資料・SDK\\SB-H50_Peripherals_ja_revB.pdf",
+        "07_EPSON SB-H50 資料・SDK\\ePOS_SDK_iOS_v2.35.0\\ePOS_SDK_iOS_v2.35.0\\SB-H50_Peripherals_ja_revB.pdf",
+        "07_EPSON SB-H50 資料・SDK\\ePOS_SDK_Android_v2.35.0\\ePOS_SDK_Android_v2.35.0\\SB-H50_Peripherals_ja_revB.pdf",
+        "07_EPSON SB-H50 資料・SDK\\ePOS-Device_XML_um_ja_revAA.zip :: ePOS-Device_XML_um_ja_revAA/SB-H50_Peripherals_ja_revB.pdf",
+        "07_EPSON SB-H50 資料・SDK\\SB-H50_PERIPHERALS_JA_REVB (2).ZIP :: SB-H50_PERIPHERALS_JA_REVB/周辺機器制御ガイドの共通部/SB-H50_Peripherals_ja_revB.pdf"
+      ],
+      "original_file": "SB-H50_Peripherals_ja_revB.pdf"
+    },
+    {
+      "file": "ePOS-Device_XML_ユーザーズマニュアル_日本語_revAA.pdf",
+      "group": "Epson",
+      "size": 7207035,
+      "sha256": "d95c916829902b5b770923acbc1513ac63e0bdac1eac1ac115443f3ae9ee14ea",
+      "sources": [
+        "07_EPSON SB-H50 資料・SDK\\ePOS-Device_XML_um_ja_revAA.pdf",
+        "07_EPSON SB-H50 資料・SDK\\ePOS-Device_XML_um_ja_revAA.zip :: ePOS-Device_XML_um_ja_revAA/ePOS-Device_XML_um_ja_revAA.pdf"
+      ],
+      "original_file": "ePOS-Device_XML_um_ja_revAA.pdf"
+    },
+    {
+      "file": "300Serインターフェース仕様書.pdf",
+      "group": "Glory-SHARP",
+      "size": 1527568,
+      "sha256": "abb3b602a4a7026d14cefa66e2f7a4b817f4e538e77b1ee603b98ad8af0c6fd9",
+      "sources": [
+        "04_POS・自動釣銭機資料 (Glory)\\Glory 自動釣銭機\\300Serインターフェース仕様書.pdf"
+      ]
+    },
+    {
+      "file": "300_N300シリーズIF仕様書.pdf",
+      "group": "Glory-SHARP",
+      "size": 2299576,
+      "sha256": "178ef50ce6f7d6d2f0d95d223d8fb77fc0f2e61c442d424a20695a56257188c9",
+      "sources": [
+        "04_POS・自動釣銭機資料 (Glory)\\Glory 自動釣銭機\\300_N300シリーズIF仕様書.pdf"
+      ]
+    },
+    {
+      "file": "CAFIS_Arch_操作手順.xlsx",
+      "group": "CAFIS",
+      "size": 239451,
+      "sha256": "4e0960cb0b2834ce96bb695fd6048e34dd8ce1ab348da9fa9cfdd929ae6a9b24",
+      "sources": [
+        "18_CAFISArch資料\\18_CAFISArch資料\\POSHost\\20260217\\HDSD.xlsx"
+      ],
+      "original_file": "HDSD.xlsx"
+    },
+    {
+      "file": "自動釣銭機連動対応_ＳＳＷ設定_Ver1.40.xlsx",
+      "group": "Glory-SHARP",
+      "size": 229980,
+      "sha256": "66234a064ca4c3fb3836d8bdb66ba0b62d51dcad59fc78d8f38969a53b92c178",
+      "sources": [
+        "04_POS・自動釣銭機資料 (Glory)\\Glory 自動釣銭機\\自動釣銭機連動対応_ＳＳＷ設定_Ver1.40.xlsx"
+      ]
+    },
+    {
+      "file": "08_コード定義書.xlsx",
+      "group": "Barcode",
+      "size": 176910,
+      "sha256": "5c6bd5e8a49e201b517d98af7baccfdcb5d8abe883c4db3ccd3969dfa02f4640",
+      "sources": [
+        "10_Sổ định nghĩa BarCode\\08_ｺｰﾄﾞ定義書(Sổ định nghĩa Barcode).xlsx"
+      ],
+      "original_file": "08_ｺｰﾄﾞ定義書(Sổ định nghĩa Barcode).xlsx"
+    },
+    {
+      "file": "RZ-A476SA396S_基本ソフトウェア説明書_第1.0版.pdf",
+      "group": "Glory-SHARP",
+      "size": 1777885,
+      "sha256": "e57c45ed794e7c2cdbb129ae27a7d98ac877925932ba68923c5bce80f233f312",
+      "sources": [
+        "04_POS・自動釣銭機資料 (Glory)\\SHARP POS\\RZ-A476SA396S_基本ソフトウェア説明書_第1.0版.pdf",
+        "04_POS・自動釣銭機資料 (Glory)\\SHARP POS\\RZA476S_A396S_Kihon_1.00 (1).zip :: RZA476S_A396S_Kihon_1.00/Manual/RZ-A476SA396S_èεû{â/âtâgâEâFâAÉαû╛Åæ_æµ1.0ö┼.pdf"
+      ]
+    },
+    {
+      "file": "プログラム仕様書：7レシート項目説明_レイアウト設計.xlsx",
+      "group": "Glory-SHARP",
+      "size": 15997727,
+      "sha256": "251e99d107b2a7348b17aeef2911a33433d3ddeffd33831c33ad569709fd2f28",
+      "sources": [
+        "04_POS・自動釣銭機資料 (Glory)\\Glory 自動釣銭機\\プログラム仕様書：7レシート項目説明Thiết kế layout.xlsx"
+      ],
+      "original_file": "プログラム仕様書：7レシート項目説明Thiết kế layout.xlsx"
+    },
+    {
+      "file": "RZ-A476SA396S_POSデバイスAPI説明書_別冊_第1.0版.pdf",
+      "group": "Glory-SHARP",
+      "size": 7185870,
+      "sha256": "061bbce8c2a72bd296885b4a0fe3e00d1403263a1ec3891dd5f33e854452e566",
+      "sources": [
+        "04_POS・自動釣銭機資料 (Glory)\\SHARP POS\\RZ-A476SA396S_POSデバイスAPI説明書_別冊_第1.0版.pdf",
+        "04_POS・自動釣銭機資料 (Glory)\\SHARP POS\\RZA476S_A396S_Kihon_1.00 (1).zip :: RZA476S_A396S_Kihon_1.00/Manual/RZ-A476SA396S_POSデバイスAPI説明書_別冊_第1.0版.pdf"
+      ]
+    },
+    {
+      "file": "7-48-02_法人内.jpg",
+      "group": "Receipt",
+      "size": 64553,
+      "sha256": "a688bb59bbe2ebefc0c5164175d9eabfe13c140c00b63e158b27be337cd258de",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-48-02_法人内.jpg"
+      ]
+    },
+    {
+      "file": "7-26-01_設置環境.jpg",
+      "group": "Receipt",
+      "size": 101016,
+      "sha256": "fb12736482b2d4c4ab04ad563ecc0b78ef1e7edf5ac45d46b0f981ff8717fbb5",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-26-01_設置環境.jpg"
+      ]
+    },
+    {
+      "file": "7-48-01_ｴﾘｱ内.jpg",
+      "group": "Receipt",
+      "size": 63882,
+      "sha256": "b614e7ee51880072e264ab6bd85082ad9b6cba9bf68e9d3e91aa0605629e1860",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-48-01_ｴﾘｱ内.jpg"
+      ]
+    },
+    {
+      "file": "7-89_汎用商品券売上票.jpg",
+      "group": "Receipt",
+      "size": 98342,
+      "sha256": "308368f789349f4adce6ff17ac40a4279fef273c651432dea2441a4396ced9d0",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-89_汎用商品券売上票.jpg"
+      ]
+    },
+    {
+      "file": "7-01-01_お買上げ明細.jpg",
+      "group": "Receipt",
+      "size": 876183,
+      "sha256": "d42ea532e3b4d152f925f61d5841f461508910b2af48ef19aade5f93c6ac5101",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-01-01_お買上げ明細.jpg"
+      ]
+    },
+    {
+      "file": "7-21-01_携帯分割売上票.jpg",
+      "group": "Receipt",
+      "size": 750637,
+      "sha256": "3bfe089edbfbe758a0c1922fe4c84283d5fb68726790b018e021489581625761",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-21-01_携帯分割売上票.jpg"
+      ]
+    },
+    {
+      "file": "7-22-01_携帯分割売上票.jpg",
+      "group": "Receipt",
+      "size": 377613,
+      "sha256": "4f475824783bf7f89c1fd0de636a61cfdcbae187aaf4940e852fd0caa6717646",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-22-01_携帯分割売上票.jpg"
+      ]
+    },
+    {
+      "file": "7-30-01_長期無料保証書.jpg",
+      "group": "Receipt",
+      "size": 376337,
+      "sha256": "63aa31803bc691c021b4bcd4f46e6a8e358052b25670ee4f0e34cb236eaa254e",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-30-01_長期無料保証書.jpg"
+      ]
+    },
+    {
+      "file": "7-88_デジタル商品券売上票.jpg",
+      "group": "Receipt",
+      "size": 100360,
+      "sha256": "950bde9c24a52a6248900c1e82fa95711a5ad800ce143cc0a299ca24760716bb",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-88_デジタル商品券売上票.jpg"
+      ]
+    },
+    {
+      "file": "決済方法の組合せ.png",
+      "group": "Payment",
+      "size": 278105,
+      "sha256": "5129031f99f40075d2601868fc9689c2e0a6ee1fe335d7fdfbc2c0a7506208a5",
+      "sources": [
+        "15. Kết hợp các phương thức thanh toán\\Kết hợp các phương thức thanh toán.png"
+      ],
+      "original_file": "Kết hợp các phương thức thanh toán.png"
+    },
+    {
+      "file": "2.　CAH51_POS連動接続仕様書（CREDIT編）_1.6版190320_150.pdf",
+      "group": "CAFIS",
+      "size": 26059933,
+      "sha256": "fd8d578fb77e90ccb1e8c6ebdbe9299404d79866d0654d86bcb1333845928a8c",
+      "sources": [
+        "18_CAFISArch資料\\18_CAFISArch資料\\2.　CAH51_POS連動接続仕様書（CREDIT編）_1.6版190320_150.pdf"
+      ]
+    },
+    {
+      "file": "補足説明_英語.txt",
+      "group": "Epson",
+      "size": 22860,
+      "sha256": "80ce22b55ad8bf2765375f55786e6e4a3b0709a259d2bc35b57c86e5a94118a1",
+      "sources": [
+        "07_EPSON SB-H50 資料・SDK\\ePOS_SDK_iOS_v2.35.0\\ePOS_SDK_iOS_v2.35.0\\README.en.txt"
+      ],
+      "original_file": "README.en.txt"
+    },
+    {
+      "file": "Epson_補足説明_日本語.txt",
+      "group": "Epson",
+      "size": 26494,
+      "sha256": "46284f40d4de0360d306e2666fc7ca7a51862891b97252e132b59ec0f31511f3",
+      "sources": [
+        "07_EPSON SB-H50 資料・SDK\\ePOS_SDK_iOS_v2.35.0\\ePOS_SDK_iOS_v2.35.0\\README.ja.txt"
+      ],
+      "original_file": "Epson__README.ja.txt"
+    },
+    {
+      "file": "7-18-01_クレジット売上票.jpg",
+      "group": "Receipt",
+      "size": 108828,
+      "sha256": "d6d4a72d821d9f3b95ed6ed0c9b29c97bc99a7b001a1f1deb34e4eddc487fdf5",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-18-01_クレジット売上票.jpg"
+      ]
+    },
+    {
+      "file": "7-20-01_携帯分割内訳明細.jpg",
+      "group": "Receipt",
+      "size": 73978,
+      "sha256": "0b257144fed6d747bd3a1bd87d25098d6abf9797f68251aa1bb9bec24af66db3",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-20-01_携帯分割内訳明細.jpg"
+      ]
+    },
+    {
+      "file": "7-31-01_長期無料保証明細.jpg",
+      "group": "Receipt",
+      "size": 113527,
+      "sha256": "864ff8958a7f7c6dad2bcf67d4a1b56d6a2cb1de3e6c94597b8cc0171bbfa1b8",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-31-01_長期無料保証明細.jpg"
+      ]
+    },
+    {
+      "file": "7-89_練習_汎用商品券売上票.jpg",
+      "group": "Receipt",
+      "size": 137433,
+      "sha256": "9d7103505f94d62f1632cfe2de149ff8e5ea86cd6b55c092116cc485b0f1f9c4",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-89_練習_汎用商品券売上票.jpg"
+      ]
+    },
+    {
+      "file": "2.　CAH51_POS連動接続仕様書（CREDIT編）_1.6版190320_150.docx",
+      "group": "CAFIS",
+      "size": 1974275,
+      "sha256": "37105bfa144185209b664ef9022e8cb450cfb2c9733a47e7f35f6fbcb1a6ef78",
+      "sources": [
+        "18_CAFISArch資料\\18_CAFISArch資料\\2.　CAH51_POS連動接続仕様書（CREDIT編）_1.6版190320_150.docx"
+      ]
+    },
+    {
+      "file": "7-34-01_あんしん延長保証書.jpg",
+      "group": "Receipt",
+      "size": 122932,
+      "sha256": "d0f8d58f129b19118aae2a68c4b7c3ee5014d7457da08c06500903ca1cd131a4",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-34-01_あんしん延長保証書.jpg"
+      ]
+    },
+    {
+      "file": "7-36-01_展示品対策費確認票.jpg",
+      "group": "Receipt",
+      "size": 70403,
+      "sha256": "6f67b3701d20bd56dd30151d885ced2ea7ca16a44baeb80910da8e3a843f368f",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-36-01_展示品対策費確認票.jpg"
+      ]
+    },
+    {
+      "file": "7-52-01_商品添付票取消一覧.jpg",
+      "group": "Receipt",
+      "size": 60785,
+      "sha256": "88de485522166aad31d9dde76029c1e5719b86d03524da9cc2d711f3b1eec2c6",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-52-01_商品添付票取消一覧.jpg"
+      ]
+    },
+    {
+      "file": "7-05-01_配送・来店・宅配伝票.jpg",
+      "group": "Receipt",
+      "size": 434210,
+      "sha256": "edcb684873e0a7cfbcbb6bb6a4a9f5465c75f9a83e40a8a52103a69d71e5a693",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-05-01_配送・来店・宅配伝票.jpg"
+      ]
+    },
+    {
+      "file": "7-89_練習_デジタル商品券売上票.jpg",
+      "group": "Receipt",
+      "size": 193726,
+      "sha256": "5c702265a505f5b0fcdd5868e5956a2cff2b201c177628ad2dc812509cc7620d",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-89_練習_デジタル商品券売上票.jpg"
+      ]
+    },
+    {
+      "file": "7-01-02_お買上げ明細(セット).jpg",
+      "group": "Receipt",
+      "size": 229635,
+      "sha256": "cf74a8d0d020ae0191e9d69efc8be5312b6543f0bb25b228eb6ec77846b41099",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-01-02_お買上げ明細(セット).jpg"
+      ]
+    },
+    {
+      "file": "7-03-01_お買上明細(商品変更).jpg",
+      "group": "Receipt",
+      "size": 1185731,
+      "sha256": "e0d13ad45c4661d541b79ccd0b0abcba3330b6a4d6211fecd6c5b0746e6f55d7",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-03-01_お買上明細(商品変更).jpg"
+      ]
+    },
+    {
+      "file": "7-09-01_配送・来店・宅配準備票.jpg",
+      "group": "Receipt",
+      "size": 1009427,
+      "sha256": "4fb8da83356c0d59435532774771521dbb875babc69b033e055a670865255bc3",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-09-01_配送・来店・宅配準備票.jpg"
+      ]
+    },
+    {
+      "file": "7-15-01_来店案内(購入者のみ).jpg",
+      "group": "Receipt",
+      "size": 102721,
+      "sha256": "7168dfc665be78ebbf255ecc372db79de5086b15abaee5a996a6b7a60480a4db",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-15-01_来店案内(購入者のみ).jpg"
+      ]
+    },
+    {
+      "file": "7-40-02_中国銀聯カード番号差異.jpg",
+      "group": "Receipt",
+      "size": 93914,
+      "sha256": "bf08a27f444a994c4f42c01fa2c8531457f2855105f7ec74d95917303a96f20c",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-40-02_中国銀聯カード番号差異.jpg"
+      ]
+    },
+    {
+      "file": "決済方法の組合せ_V2.png",
+      "group": "Payment",
+      "size": 247865,
+      "sha256": "a535aaecfe46163c6c2bee525fbb64fd19c822187808150bdd13b9c834139b32",
+      "sources": [
+        "15. Kết hợp các phương thức thanh toán\\kết hợp các phương thức thanh toán _V2.png"
+      ],
+      "original_file": "kết hợp các phương thức thanh toán _V2.png"
+    },
+    {
+      "file": "2.　CAH51_POS連動接続仕様書（CREDIT編）_1.6版190320_150(1).docx",
+      "group": "CAFIS",
+      "size": 1974424,
+      "sha256": "879bc3a8f252a84a917ace89751c914883a61297ef10ffb522149df85ccbfc37",
+      "sources": [
+        "18_CAFISArch資料\\18_CAFISArch資料\\2.　CAH51_POS連動接続仕様書（CREDIT編）_1.6版190320_150(1).docx"
+      ]
+    },
+    {
+      "file": "【カタログ】BC-BS802DII.pdf",
+      "group": "Scanner",
+      "size": 2954470,
+      "sha256": "67c8bda5a508ddff211dccfb7e32d6f2316b3a34ca679799d8c2eab687b01af5",
+      "sources": [
+        "08_Bluetoothスキャナカタログ(Bluetooth Scanner)\\08_Bluetoothスキャナカタログ\\【カタログ】BC-BS802DII.pdf"
+      ]
+    },
+    {
+      "file": "7-01-01_お買上げ明細(雑番返品).jpg",
+      "group": "Receipt",
+      "size": 168422,
+      "sha256": "874b367442516198127dc2258705190cd38d15e27fc717794fd2aaa48c0b7cf3",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-01-01_お買上げ明細(雑番返品).jpg"
+      ]
+    },
+    {
+      "file": "7-01-06_お買上げ明細（売上返品）.jpg",
+      "group": "Receipt",
+      "size": 422194,
+      "sha256": "b5d94e03ef781ccc4a40422d6e0760ec82ebd90ff4b1dc4aa14edf20dd9cb3d7",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-01-06_お買上げ明細（売上返品）.jpg"
+      ]
+    },
+    {
+      "file": "7-24-01_モバイルバーコード売上票.jpg",
+      "group": "Receipt",
+      "size": 81696,
+      "sha256": "314c0971c9d525bbc66df6825f37a60f8b429da707301fe037bdc833b68ec7c0",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-24-01_モバイルバーコード売上票.jpg"
+      ]
+    },
+    {
+      "file": "7-31-02_長期無料保証明細_管理前.jpg",
+      "group": "Receipt",
+      "size": 54793,
+      "sha256": "6c6a172a9de2c8ec797b069ba2cabc738d6f40e81e6fa66dd02c591987bdd42f",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-31-02_長期無料保証明細_管理前.jpg"
+      ]
+    },
+    {
+      "file": "7-38-01_店舗対策費伝票ジャーナル.jpg",
+      "group": "Receipt",
+      "size": 60933,
+      "sha256": "88bf67aceb2927fa3fe47ecdd6487231971a84ad7d645e4114a78272803feff5",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-38-01_店舗対策費伝票ジャーナル.jpg"
+      ]
+    },
+    {
+      "file": "7-40-01_クレジットカード番号差異.jpg",
+      "group": "Receipt",
+      "size": 92224,
+      "sha256": "d2843f288a6c59f3653e2ddbd9108f8abe843c6c57333c2218382745a77e92ab",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-40-01_クレジットカード番号差異.jpg"
+      ]
+    },
+    {
+      "file": "7-42-01_お買上票(コミッション).jpg",
+      "group": "Receipt",
+      "size": 54692,
+      "sha256": "95a73ac38f47a6437c42cbeb0c5157fc20e54dd752be78a9cb3309873421245c",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-42-01_お買上票(コミッション).jpg"
+      ]
+    },
+    {
+      "file": "7-54-01_商品添付票《お買上準備》.jpg",
+      "group": "Receipt",
+      "size": 103084,
+      "sha256": "e89686a313bcaada2e6f62a03193dcb52067e2860f690b30f6dc415cc9275e94",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-54-01_商品添付票《お買上準備》.jpg"
+      ]
+    },
+    {
+      "file": "7-58_練習_配送売上_自配_設置環境.jpg",
+      "group": "Receipt",
+      "size": 267111,
+      "sha256": "fd5fbe266d4aee91a00268b67a4b781a30431c7f292b556a1b5f7f0b38ccf639",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-58_練習_配送売上_自配_設置環境.jpg"
+      ]
+    },
+    {
+      "file": "7-64_練習_配送売上_自配_配送伝票.jpg",
+      "group": "Receipt",
+      "size": 1397572,
+      "sha256": "7724fe8864fc9d6b8d626d6cfe564c55359bc8025f68af225d9f169b24c61531",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-64_練習_配送売上_自配_配送伝票.jpg"
+      ]
+    },
+    {
+      "file": "7-80_練習_売上返品_自配_配送伝票.jpg",
+      "group": "Receipt",
+      "size": 506712,
+      "sha256": "ae57128bac708a9b39a7a1358e69ef088a55c2568527dc07820e545ad6ed2c88",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-80_練習_売上返品_自配_配送伝票.jpg"
+      ]
+    },
+    {
+      "file": "RZ-A476SA396S_POSデバイスAPI説明書_第1.0版.pdf",
+      "group": "Glory-SHARP",
+      "size": 1156853,
+      "sha256": "ab646b51e2e9462f9f06588699202db78ed0fbd0afc80a47a0d071bf547c5a47",
+      "sources": [
+        "04_POS・自動釣銭機資料 (Glory)\\SHARP POS\\RZ-A476SA396S_POSデバイスAPI説明書(Thuyết minh)_第1.0版.pdf",
+        "04_POS・自動釣銭機資料 (Glory)\\SHARP POS\\RZA476S_A396S_Kihon_1.00 (1).zip :: RZA476S_A396S_Kihon_1.00/Manual/RZ-A476SA396S_POSデバイスAPI説明書_第1.0版.pdf"
+      ]
+    },
+    {
+      "file": "7-01-05_お買上明細(テストモード).jpg",
+      "group": "Receipt",
+      "size": 317740,
+      "sha256": "4498a1585ba4b84cffa8fae10cfa3ad9d156a5f71fdd4a16371173b716fc087d",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-01-05_お買上明細(テストモード).jpg"
+      ]
+    },
+    {
+      "file": "7-15-02_お届け案内(別配送先あり).jpg",
+      "group": "Receipt",
+      "size": 246127,
+      "sha256": "c626bec748d54f1b2bb4549b95399a7e020f5b0df15c69c405082a0f4a3854d8",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-15-02_お届け案内(別配送先あり).jpg"
+      ]
+    },
+    {
+      "file": "7-21-01_携帯分割売上票(雑番返品).jpg",
+      "group": "Receipt",
+      "size": 111637,
+      "sha256": "afa34c9e800029248d39cc2467fccd11c4898384c7737a1cd80417a01f4f0da3",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-21-01_携帯分割売上票(雑番返品).jpg"
+      ]
+    },
+    {
+      "file": "7-21-02_携帯分割売上票(商品変更).jpg",
+      "group": "Receipt",
+      "size": 328874,
+      "sha256": "6cb790297dff344372a478a2538f5470e3945380d527734ee4e2d68301f03ff0",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-21-02_携帯分割売上票(商品変更).jpg"
+      ]
+    },
+    {
+      "file": "7-55_練習_配送売上_自配_銀聯売上票.jpg",
+      "group": "Receipt",
+      "size": 109791,
+      "sha256": "b22c6c032a02eca79c1a20f0defea394e09dff12d96d54008f26eac700f15205",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-55_練習_配送売上_自配_銀聯売上票.jpg"
+      ]
+    },
+    {
+      "file": "7-56_練習_配送売上_自配_お買上明細.jpg",
+      "group": "Receipt",
+      "size": 1055980,
+      "sha256": "6da35e6740d4549f721b340f13089fe6f145ff3041b1e397d743cafb5bed4450",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-56_練習_配送売上_自配_お買上明細.jpg"
+      ]
+    },
+    {
+      "file": "7-57_練習_配送売上_自配_お届け案内.jpg",
+      "group": "Receipt",
+      "size": 258162,
+      "sha256": "e5bbbfcb4b8245eb21d5db50bc7ba36129f2ad42db352218327aea9eb1fed9ba",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-57_練習_配送売上_自配_お届け案内.jpg"
+      ]
+    },
+    {
+      "file": "7-62_練習_配送売上_自配_銀聯売上票.jpg",
+      "group": "Receipt",
+      "size": 97063,
+      "sha256": "193382284e616116bd9bef4a50492039291591e3e7ae7e05cedc090cdd67ba2f",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-62_練習_配送売上_自配_銀聯売上票.jpg"
+      ]
+    },
+    {
+      "file": "7-69_練習_配送売上_自配_配送準備票.jpg",
+      "group": "Receipt",
+      "size": 1110397,
+      "sha256": "68160f08849c62593314d7171b7803544583c975a95fd1873c158140f39c800c",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-69_練習_配送売上_自配_配送準備票.jpg"
+      ]
+    },
+    {
+      "file": "7-72_練習_売上返品_自配_お買上明細.jpg",
+      "group": "Receipt",
+      "size": 326968,
+      "sha256": "f34988a79d2a439f1df182c46e43c198bf7f3b4201fa39e06dcbca6036c437f4",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-72_練習_売上返品_自配_お買上明細.jpg"
+      ]
+    },
+    {
+      "file": "7-73_練習_売上返品_自配_お届け案内.jpg",
+      "group": "Receipt",
+      "size": 205072,
+      "sha256": "76d4748c8647dee8bd7d0f9ee4e1d54aa93dd9bced632c1b3cede364ac43261c",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-73_練習_売上返品_自配_お届け案内.jpg"
+      ]
+    },
+    {
+      "file": "7-85_練習_売上返品_自配_配送準備票.jpg",
+      "group": "Receipt",
+      "size": 791982,
+      "sha256": "e1c35ad4342f74267cb93c21cd84f06bb17d45d7d52a1a46edd28ece71421461",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-85_練習_売上返品_自配_配送準備票.jpg"
+      ]
+    },
+    {
+      "file": "7-87_練習_売上返品_自配_取消報告書.jpg",
+      "group": "Receipt",
+      "size": 531851,
+      "sha256": "f4f7d6c2ca5f1b11682a2199ea99a47665ca07b51f3b9c245f07d05c967b933e",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-87_練習_売上返品_自配_取消報告書.jpg"
+      ]
+    },
+    {
+      "file": "7-01-02_お買上げ明細(内工事代値引).jpg",
+      "group": "Receipt",
+      "size": 109455,
+      "sha256": "ec067e9354c389d1bfd9b4b7b7bf80e4130dc7aebfc0401dda24e7bb1cef81b9",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-01-02_お買上げ明細(内工事代値引).jpg"
+      ]
+    },
+    {
+      "file": "7-1-04_お買上げ明細(QRコード付き).jpg",
+      "group": "Receipt",
+      "size": 131347,
+      "sha256": "749d9413b90e9a6b262655f255df94ce11fba0eac4909b37731e4c02fefea148",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-1-04_お買上げ明細(QRコード付き).jpg"
+      ]
+    },
+    {
+      "file": "7-28-01_メーカー保証書添付用レシート.jpg",
+      "group": "Receipt",
+      "size": 114970,
+      "sha256": "2db01eae9ff63219141767fc0a5293d86397c7cdc7670412380c517b85019837",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-28-01_メーカー保証書添付用レシート.jpg"
+      ]
+    },
+    {
+      "file": "7-44-01_POSAカードエラー状況一覧.jpg",
+      "group": "Receipt",
+      "size": 187853,
+      "sha256": "0ebc47b4f66437bc705589dbef23714969a281d0b08c3aaafc8208ca1028e040",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-44-01_POSAカードエラー状況一覧.jpg"
+      ]
+    },
+    {
+      "file": "JSON_仕様書_英語_revC.pdf",
+      "group": "Epson",
+      "size": 586598,
+      "sha256": "587741daf0181d1f081c6e48d7d0be6bf1711649a6efbe1a5fa25d2877dc844e",
+      "sources": [
+        "07_EPSON SB-H50 資料・SDK\\ePOS_SDK_iOS_v2.35.0\\ePOS_SDK_iOS_v2.35.0\\JSON_spc_en_revC.pdf",
+        "07_EPSON SB-H50 資料・SDK\\ePOS_SDK_Android_v2.35.0\\ePOS_SDK_Android_v2.35.0\\JSON_spc_en_revC.pdf"
+      ],
+      "original_file": "JSON_spc_en_revC.pdf"
+    },
+    {
+      "file": "7-60_練習_配送売上_自配_口座引落確認書.jpg",
+      "group": "Receipt",
+      "size": 89262,
+      "sha256": "2e7d0bfd960a7559764d8d4c9cf7e14ea683661074f4d073dced3d4bfa78abfb",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-60_練習_配送売上_自配_口座引落確認書.jpg"
+      ]
+    },
+    {
+      "file": "7-68_練習_配送売上_自配_携帯分割売上票.jpg",
+      "group": "Receipt",
+      "size": 851465,
+      "sha256": "7a1b6644d787895c39ace8da95ad252120aff19ed04bbe3df23c91e0aca3b317",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-68_練習_配送売上_自配_携帯分割売上票.jpg"
+      ]
+    },
+    {
+      "file": "7-84_練習_売上返品_自配_携帯分割売上票.jpg",
+      "group": "Receipt",
+      "size": 372060,
+      "sha256": "800c412f28cff5aac07f1f0a38c05981e6339c51c48c50135e380691f62f3f97",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-84_練習_売上返品_自配_携帯分割売上票.jpg"
+      ]
+    },
+    {
+      "file": "Epson_補足説明_英語.txt",
+      "group": "Epson",
+      "size": 21630,
+      "sha256": "c780e9f9eaaa1db802076832acf37b481015598b85b29ccd39c92d8cc28bfc94",
+      "sources": [
+        "07_EPSON SB-H50 資料・SDK\\ePOS_SDK_Android_v2.35.0\\ePOS_SDK_Android_v2.35.0\\README.en.txt"
+      ],
+      "original_file": "Epson__README.en.txt"
+    },
+    {
+      "file": "Epson_補足説明_日本語_c8a1a3bd.txt",
+      "group": "Epson",
+      "size": 25565,
+      "sha256": "c8a1a3bd1a38d415384322cdbd51eecb43810794a752f9821d875dada5cc2417",
+      "sources": [
+        "07_EPSON SB-H50 資料・SDK\\ePOS_SDK_Android_v2.35.0\\ePOS_SDK_Android_v2.35.0\\README.ja.txt"
+      ],
+      "original_file": "Epson__README.ja__c8a1a3bd.txt"
+    },
+    {
+      "file": "7-01-03_お買上明細(POSA_現金決済).jpg",
+      "group": "Receipt",
+      "size": 196860,
+      "sha256": "bf3a35d6742054a481caa645e50c7ddb8a058e9ade8a3b26bb18df71f8537cc4",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-01-03_お買上明細(POSA_現金決済).jpg"
+      ]
+    },
+    {
+      "file": "7-05-01_配送・来店・宅配伝票(雑番返品).jpg",
+      "group": "Receipt",
+      "size": 419327,
+      "sha256": "7d50d885825df9e9d3cc106b99d30702c35bd501422a9e15f44594edbf30bfc2",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-05-01_配送・来店・宅配伝票(雑番返品).jpg"
+      ]
+    },
+    {
+      "file": "7-05-02_配送・来店・宅配伝票（売上返品）.jpg",
+      "group": "Receipt",
+      "size": 500972,
+      "sha256": "309046c272a14d3f7117861b99e81f426c7873053425506d4ecc8f19da802332",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-05-02_配送・来店・宅配伝票（売上返品）.jpg"
+      ]
+    },
+    {
+      "file": "7-07-01_配送・来店・宅配伝票(商品変更).jpg",
+      "group": "Receipt",
+      "size": 1644853,
+      "sha256": "1b13b37750a41a7305f208ea3d1830ab1c2163641a05950744e968da447e7453",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-07-01_配送・来店・宅配伝票(商品変更).jpg"
+      ]
+    },
+    {
+      "file": "7-61_練習_配送売上_自配_Ｅｄｙ支払確認書.jpg",
+      "group": "Receipt",
+      "size": 107569,
+      "sha256": "037f09228df55edda365872349be20ff037cfd1967b1478d05b248eda27e8625",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-61_練習_配送売上_自配_Ｅｄｙ支払確認書.jpg"
+      ]
+    },
+    {
+      "file": "7-66_練習_配送売上_自配_クレジット売上票.jpg",
+      "group": "Receipt",
+      "size": 458746,
+      "sha256": "cb87d4514c1028ca71441115408310927dc910dce473b973fcc533ff6cbcf226",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-66_練習_配送売上_自配_クレジット売上票.jpg"
+      ]
+    },
+    {
+      "file": "7-67_練習_配送売上_自配_携帯分割内訳明細.jpg",
+      "group": "Receipt",
+      "size": 93793,
+      "sha256": "790ff371a78532c37159d49806ddeeb653fc91fb53ba9286d696a41649ad5a34",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-67_練習_配送売上_自配_携帯分割内訳明細.jpg"
+      ]
+    },
+    {
+      "file": "7-78_練習_売上返品_自配_クレジット売上票.jpg",
+      "group": "Receipt",
+      "size": 185933,
+      "sha256": "e84aa895e12f60d3e93f0e6cf40a9a0fb72e517878fde198772840d5396f172e",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-78_練習_売上返品_自配_クレジット売上票.jpg"
+      ]
+    },
+    {
+      "file": "7-82_練習_売上返品_自配_クレジット売上票.jpg",
+      "group": "Receipt",
+      "size": 385965,
+      "sha256": "6282d6c78218d72e79725e593c6538a6c72c273e147e284e8054fede37dddb2f",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-82_練習_売上返品_自配_クレジット売上票.jpg"
+      ]
+    },
+    {
+      "file": "7-83_練習_売上返品_自配_携帯分割内訳明細.jpg",
+      "group": "Receipt",
+      "size": 96780,
+      "sha256": "5683518f7d78c9e8e4d2278a69530458a7a236d63c905b90795158e3cd611b24",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-83_練習_売上返品_自配_携帯分割内訳明細.jpg"
+      ]
+    },
+    {
+      "file": "釣銭機OPOS機能一覧.xlsx",
+      "group": "Glory-SHARP",
+      "size": 114952,
+      "sha256": "790ab713182a331cba20fd65ad6db2c5ae46ff60ac0194ab13a1100202a621a6",
+      "sources": [
+        "04_POS・自動釣銭機資料 (Glory)\\Glory 自動釣銭機\\釣銭機OPOS機能一覧(chức năng máy đổi tiền cần đối ứng).xlsx"
+      ],
+      "original_file": "釣銭機OPOS機能一覧(chức năng máy đổi tiền cần đối ứng).xlsx"
+    },
+    {
+      "file": "7-46-01_POSAカード有効化エラージャーナル.jpg",
+      "group": "Receipt",
+      "size": 36992,
+      "sha256": "1f49cbf543f53341608948941d6a97dfdecbf9500f2ac2b6133d0b8975541240",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-46-01_POSAカード有効化エラージャーナル.jpg"
+      ]
+    },
+    {
+      "file": "JSON_仕様書_revI.pdf",
+      "group": "Epson",
+      "size": 452907,
+      "sha256": "f79955d997856ea1e324f52dcf464f4ee38d710f29ddae80a9787296a4ab6934",
+      "sources": [
+        "07_EPSON SB-H50 資料・SDK\\ePOS_SDK_iOS_v2.35.0\\ePOS_SDK_iOS_v2.35.0\\JSON_Spec_sheet_revI.pdf",
+        "07_EPSON SB-H50 資料・SDK\\ePOS_SDK_Android_v2.35.0\\ePOS_SDK_Android_v2.35.0\\JSON_Spec_sheet_revI.pdf"
+      ],
+      "original_file": "JSON_Spec_sheet_revI.pdf"
+    },
+    {
+      "file": "7-71_練習_売上返品_自配_クレジットカード売上票.jpg",
+      "group": "Receipt",
+      "size": 114508,
+      "sha256": "da3776ae4f411824a2f13ae577f3fbb6a0ae2ca26ec6b1c78c9eed1b6f961d0c",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-71_練習_売上返品_自配_クレジットカード売上票.jpg"
+      ]
+    },
+    {
+      "file": "7-78_練習_売上返品_自配_クレジットカード売上票.jpg",
+      "group": "Receipt",
+      "size": 97499,
+      "sha256": "d1d8cc1f819823427157f6b34f00f9649890476a742b9ba3c81bfe84a6602716",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-78_練習_売上返品_自配_クレジットカード売上票.jpg"
+      ]
+    },
+    {
+      "file": "カスタマーディスプレイAPI仕様.pptx",
+      "group": "Display",
+      "size": 1281406,
+      "sha256": "3a66b6f5f0b9c05a82e315eb6de5bc2fbac4483773fdd431c3c6c820bf70eb7c",
+      "sources": [
+        "16.Tài liệu về tính năng tùy chỉnh màn hình phụ (Customize Display)\\カスタマーディスプレイAPI仕様.pptx"
+      ]
+    },
+    {
+      "file": "SB-H50_周辺機器連携_Glory_300_N300_日本語_revA (SB-H50_自動つり銭機周辺機器連動).pdf",
+      "group": "Epson",
+      "size": 1354534,
+      "sha256": "090927221d3a5f4fcbcd89b9717e07e409b99ad0d7cb94dae3c75b1ad312ad77",
+      "sources": [
+        "07_EPSON SB-H50 資料・SDK\\SB-H50_Peripherals_Glory_300_N300_ja_revA (SB-H50_自動つり銭機周辺機器連動).pdf"
+      ],
+      "original_file": "SB-H50_Peripherals_Glory_300_N300_ja_revA (SB-H50_自動つり銭機周辺機器連動).pdf"
+    },
+    {
+      "file": "7-11-01_売上取消／返品及び入金配送完了取消報告書.jpg",
+      "group": "Receipt",
+      "size": 361505,
+      "sha256": "8ded48be534388c8dcfcc2275cfd45c6a910abf5463f18c2e7216d9f4f21d00c",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-11-01_売上取消／返品及び入金配送完了取消報告書.jpg"
+      ]
+    },
+    {
+      "file": "7-59_練習_配送売上_自配_お買上票(コッミション).jpg",
+      "group": "Receipt",
+      "size": 66925,
+      "sha256": "6445c875149e533ab29ce09226629e5bf26c7fcdd1e7a1afde90e870d00f06b1",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-59_練習_配送売上_自配_お買上票(コッミション).jpg"
+      ]
+    },
+    {
+      "file": "7-65_練習_配送売上_自配_お買上票(コッミション).jpg",
+      "group": "Receipt",
+      "size": 67497,
+      "sha256": "36ebbe94c11311f22402ac779a542f108dfb9905474a76dbd0faed12c67e3fe2",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-65_練習_配送売上_自配_お買上票(コッミション).jpg"
+      ]
+    },
+    {
+      "file": "7-70_練習_配送売上_自配_商品添付票(お買上準備).jpg",
+      "group": "Receipt",
+      "size": 145166,
+      "sha256": "6772c85c63d3a04de9deda74c0eaa02feb5ace34706938babc5716f9bb4b8967",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-70_練習_配送売上_自配_商品添付票(お買上準備).jpg"
+      ]
+    },
+    {
+      "file": "7-75_練習_売上返品_自配_お買上票(コッミション).jpg",
+      "group": "Receipt",
+      "size": 70834,
+      "sha256": "848636903a162c6f6326683d0fb48abed96631236e0eddb0f785af8282ed6092",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-75_練習_売上返品_自配_お買上票(コッミション).jpg"
+      ]
+    },
+    {
+      "file": "7-81_練習_売上返品_自配_お買上票(コッミション).jpg",
+      "group": "Receipt",
+      "size": 70713,
+      "sha256": "901dc9ad4b4ee2d61a7121d43a288d9875959d72e123be1c2090623688e75c38",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-81_練習_売上返品_自配_お買上票(コッミション).jpg"
+      ]
+    },
+    {
+      "file": "7-63_練習_配送売上_自配_メーカー保証書添付レシート.jpg",
+      "group": "Receipt",
+      "size": 132432,
+      "sha256": "2e53e0c24478ce4ab334204de374f083d9a5c7114ebdea79013d2e51324e4bf8",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-63_練習_配送売上_自配_メーカー保証書添付レシート.jpg"
+      ]
+    },
+    {
+      "file": "ePOS_SDK_iOS_ユーザーズマニュアル_英語_revAG.pdf",
+      "group": "Epson",
+      "size": 19076384,
+      "sha256": "6dd03990e31bb00f350037b26c46b6891c932fe8d93307b0751760e2269ae0a1",
+      "sources": [
+        "07_EPSON SB-H50 資料・SDK\\ePOS_SDK_iOS_v2.35.0\\ePOS_SDK_iOS_v2.35.0\\ePOS_SDK_iOS_um_en_revAG.pdf"
+      ],
+      "original_file": "ePOS_SDK_iOS_um_en_revAG.pdf"
+    },
+    {
+      "file": "ePOS_SDK_iOS_ユーザーズマニュアル_日本語_revAI.pdf",
+      "group": "Epson",
+      "size": 13834198,
+      "sha256": "70399fe07eeb95acede037a031dc88c2afd88fa36b8b3e6770fa067d5f2261ef",
+      "sources": [
+        "07_EPSON SB-H50 資料・SDK\\ePOS_SDK_iOS_v2.35.0\\ePOS_SDK_iOS_v2.35.0\\ePOS_SDK_iOS_um_ja_revAI.pdf"
+      ],
+      "original_file": "ePOS_SDK_iOS_um_ja_revAI.pdf"
+    },
+    {
+      "file": "TM-DT_周辺機器連携_英語_revD.pdf",
+      "group": "Epson",
+      "size": 1942643,
+      "sha256": "aca42349dd215bf3249146b8f5569e819070b8f1a51581959cef6e1ddaabcf59",
+      "sources": [
+        "07_EPSON SB-H50 資料・SDK\\ePOS_SDK_iOS_v2.35.0\\ePOS_SDK_iOS_v2.35.0\\TM-DT_Peripherals_en_revD.pdf",
+        "07_EPSON SB-H50 資料・SDK\\ePOS_SDK_Android_v2.35.0\\ePOS_SDK_Android_v2.35.0\\TM-DT_Peripherals_en_revD.pdf"
+      ],
+      "original_file": "TM-DT_Peripherals_en_revD.pdf"
+    },
+    {
+      "file": "7-11-01_売上取消／返品及び入金配送完了取消報告書（売上返品）.jpg",
+      "group": "Receipt",
+      "size": 770325,
+      "sha256": "7f523861e5c16c2f483e7c84937a1e6a086644ad55c367da34f6319095afecc4",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-11-01_売上取消／返品及び入金配送完了取消報告書（売上返品）.jpg"
+      ]
+    },
+    {
+      "file": "7-28-02_メーカー保証書添付用レシート（メーカーコールセンター情報印字）.jpg",
+      "group": "Receipt",
+      "size": 110204,
+      "sha256": "48a171f5755456b34b46ddfda0051cbb22bdfbed0c07c98960df37f0b76dfb26",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-28-02_メーカー保証書添付用レシート（メーカーコールセンター情報印字）.jpg"
+      ]
+    },
+    {
+      "file": "7-13-01_売上取消／返品及び入金配送完了取消報告書《返金を伴わない商品変更》.jpg",
+      "group": "Receipt",
+      "size": 1586597,
+      "sha256": "9bbb6c78cf868bafda4f0c4f5b4d068e91233d78172ebe84d0e8fd0577001c77",
+      "sources": [
+        "09_レシート出力サンプル種類(Các loại layout hóa đơn )\\09_レシート出力サンプル種類\\7-13-01_売上取消／返品及び入金配送完了取消報告書《返金を伴わない商品変更》.jpg"
+      ]
+    },
+    {
+      "file": "4.　CAH53_POS連動接続仕様書（銀聯編）_1.4版.pdf",
+      "group": "CAFIS",
+      "size": 2005421,
+      "sha256": "55084297fdf314e3bb2ab49bca5a789cf5c61aa88354916a5afd7f45ac0e12a7",
+      "sources": [
+        "18_CAFISArch資料\\18_CAFISArch資料\\Đối ứng các phương thức thanh toán khác\\4.　CAH53_POS連動接続仕様書（銀聯編）_1.4版.pdf"
+      ]
+    },
+    {
+      "file": "6.　CAH55_POS連動接続仕様書（iD編）_1.4版.pdf",
+      "group": "CAFIS",
+      "size": 1188903,
+      "sha256": "ac7555a0b7a066ae35987fb27d1ab22a1197f83f13bb896844200a69ed8dcfa5",
+      "sources": [
+        "18_CAFISArch資料\\18_CAFISArch資料\\Đối ứng các phương thức thanh toán khác\\6.　CAH55_POS連動接続仕様書（iD編）_1.4版.pdf"
+      ]
+    },
+    {
+      "file": "7.　CAH56_POS連動接続仕様書（Edy編）_1.4版.pdf",
+      "group": "CAFIS",
+      "size": 1251712,
+      "sha256": "c2a00284761187bd56f3de10b651a3faf2d94ffef0f6267207e712ba24fb875e",
+      "sources": [
+        "18_CAFISArch資料\\18_CAFISArch資料\\Đối ứng các phương thức thanh toán khác\\7.　CAH56_POS連動接続仕様書（Edy編）_1.4版.pdf"
+      ]
+    },
+    {
+      "file": "ePOS_SDK_Android_ユーザーズマニュアル_英語_revAH.pdf",
+      "group": "Epson",
+      "size": 19646343,
+      "sha256": "9ddfa62f1b9577247834055948392e9481627553342e6d3fb6558aa8cb1b4a94",
+      "sources": [
+        "07_EPSON SB-H50 資料・SDK\\ePOS_SDK_Android_v2.35.0\\ePOS_SDK_Android_v2.35.0\\ePOS_SDK_Android_um_en_revAH.pdf"
+      ],
+      "original_file": "ePOS_SDK_Android_um_en_revAH.pdf"
+    },
+    {
+      "file": "ePOS_SDK_Android_ユーザーズマニュアル_日本語_revAH.pdf",
+      "group": "Epson",
+      "size": 13819659,
+      "sha256": "18633537be0220abd5fd1b604469be6a5d5aadd9105fb671ba2eb1367e1f2463",
+      "sources": [
+        "07_EPSON SB-H50 資料・SDK\\ePOS_SDK_Android_v2.35.0\\ePOS_SDK_Android_v2.35.0\\ePOS_SDK_Android_um_ja_revAH.pdf"
+      ],
+      "original_file": "ePOS_SDK_Android_um_ja_revAH.pdf"
+    },
+    {
+      "file": "ePOS_SDK_iOS_移行ガイド_英語_revE.pdf",
+      "group": "Epson",
+      "size": 1387076,
+      "sha256": "044e5c6837f38ae193359fc318e776b72cce2265ad38ffdab2d966fe8f849815",
+      "sources": [
+        "07_EPSON SB-H50 資料・SDK\\ePOS_SDK_iOS_v2.35.0\\ePOS_SDK_iOS_v2.35.0\\ePOS_SDK_iOS_Migration_Guide_en_revE.pdf"
+      ],
+      "original_file": "ePOS_SDK_iOS_Migration_Guide_en_revE.pdf"
+    },
+    {
+      "file": "ePOS_SDK_iOS_移行ガイド_日本語_revE.pdf",
+      "group": "Epson",
+      "size": 1536248,
+      "sha256": "ca5bc6594edc47f40ea6567ca84131bc661711497a1b1c2299dc0b87d89b8c01",
+      "sources": [
+        "07_EPSON SB-H50 資料・SDK\\ePOS_SDK_iOS_v2.35.0\\ePOS_SDK_iOS_v2.35.0\\ePOS_SDK_iOS_Migration_Guide_ja_revE.pdf"
+      ],
+      "original_file": "ePOS_SDK_iOS_Migration_Guide_ja_revE.pdf"
+    },
+    {
+      "file": "8.　CAH57_POS連動接続仕様書（WAON編）_1.5版.pdf",
+      "group": "CAFIS",
+      "size": 1787063,
+      "sha256": "d7ebc7c6e4715cf0646405f74ba7083651c3d9333120504d6c43ba54a8034fe3",
+      "sources": [
+        "18_CAFISArch資料\\18_CAFISArch資料\\Đối ứng các phương thức thanh toán khác\\8.　CAH57_POS連動接続仕様書（WAON編）_1.5版.pdf"
+      ]
+    },
+    {
+      "file": "1_POS連動接続仕様書（共通編）_2.X版.pdf",
+      "group": "CAFIS",
+      "size": 2678139,
+      "sha256": "26782965c967dd2fef162d4708f7c9d8a8cd4df48d5734cad68ff17beb9ab721",
+      "sources": [
+        "18_CAFISArch資料\\18_CAFISArch資料\\1.Thông số kỹ thuật kết nối liên động POS(Phần chung)_連動接続仕様書（共通編） _2.X版.pdf"
+      ],
+      "original_file": "1.Thông số kỹ thuật kết nối liên động POS(Phần chung)_連動接続仕様書（共通編） _2.X版.pdf"
+    },
+    {
+      "file": "5.　CAH54_POS連動接続仕様書（交通系IC編）_1.4版.pdf",
+      "group": "CAFIS",
+      "size": 1593279,
+      "sha256": "f08c74c4db0ef8905a76a2739a1884d330e6ffc451004c42f5b4a4eb80aada79",
+      "sources": [
+        "18_CAFISArch資料\\18_CAFISArch資料\\Đối ứng các phương thức thanh toán khác\\5.　CAH54_POS連動接続仕様書（交通系IC編）_1.4版.pdf"
+      ]
+    },
+    {
+      "file": "1_POS連動接続仕様書（共通編）_2.X版.docx",
+      "group": "CAFIS",
+      "size": 1602890,
+      "sha256": "95dd7464f849398928237c9a18fcd952f1d7a3a8e6a575117e1082da5c04592f",
+      "sources": [
+        "18_CAFISArch資料\\18_CAFISArch資料\\1.Thông số kỹ thuật kết nối liên động POS(Phần chung)_連動接続仕様書（共通編） _2.X版.docx"
+      ],
+      "original_file": "1.Thông số kỹ thuật kết nối liên động POS(Phần chung)_連動接続仕様書（共通編） _2.X版.docx"
+    },
+    {
+      "file": "11.　CAH60_POS連動接続仕様書（nanaco編）_1.4版.pdf",
+      "group": "CAFIS",
+      "size": 1217364,
+      "sha256": "d052fc7ce4f82648c9097a81f2d0fdfc242f0a737c3d174b7b3f0b25f00e6143",
+      "sources": [
+        "18_CAFISArch資料\\18_CAFISArch資料\\Đối ứng các phương thức thanh toán khác\\11.　CAH60_POS連動接続仕様書（nanaco編）_1.4版.pdf"
+      ]
+    },
+    {
+      "file": "9.　CAH58_POS連動接続仕様書（QUICPay編）_1.5版.pdf",
+      "group": "CAFIS",
+      "size": 1374242,
+      "sha256": "c033c82177cbf061ed8f6ff94c3cd4b116674bc6b4c09dd01422ccd7438103d2",
+      "sources": [
+        "18_CAFISArch資料\\18_CAFISArch資料\\Đối ứng các phương thức thanh toán khác\\9.　CAH58_POS連動接続仕様書（QUICPay編）_1.5版.pdf"
+      ]
+    },
+    {
+      "file": "27_CAH81_POS連動試験_ArchSilulator説明書_1.5版.pdf",
+      "group": "CAFIS",
+      "size": 736554,
+      "sha256": "ee53a795d1746984cc0a30f0acfbf7e71592184a512bb46407c029d3844b9dad",
+      "sources": [
+        "18_CAFISArch資料\\18_CAFISArch資料\\27.　CAH81_POS連動試験(kiểm tra lliên động POS)_Sổ thuyết minh ArchSilulator_1.5版.pdf"
+      ],
+      "original_file": "27.　CAH81_POS連動試験(kiểm tra lliên động POS)_Sổ thuyết minh ArchSilulator_1.5版.pdf"
+    },
+    {
+      "file": "3.　CAH52_POS連動接続仕様書（デビット編）_1.2版190320.pdf",
+      "group": "CAFIS",
+      "size": 44884319,
+      "sha256": "b93efd8ce0b769c82af33cc196f7a5d38db0390b1630a66e1fa81c4c424382b7",
+      "sources": [
+        "18_CAFISArch資料\\18_CAFISArch資料\\Đối ứng các phương thức thanh toán khác\\3.　CAH52_POS連動接続仕様書（デビット編）_1.2版190320.pdf"
+      ]
+    },
+    {
+      "file": "7.　CAH56_POS連動接続仕様書（楽天Edy編）_1.4版190320.pdf",
+      "group": "CAFIS",
+      "size": 13141714,
+      "sha256": "9eb63fd4e08eff01d9bdae2df14429e17e69c9ab6819c77172628c1d45852795",
+      "sources": [
+        "18_CAFISArch資料\\18_CAFISArch資料\\Đối ứng các phương thức thanh toán khác\\7.　CAH56_POS連動接続仕様書（楽天Edy編）_1.4版190320.pdf"
+      ]
+    },
+    {
+      "file": "3_POS連動接続仕様書（Credit／NFC編）_1.0版.pdf",
+      "group": "CAFIS",
+      "size": 1160020,
+      "sha256": "de28187093a69686a717d309eeffee06ab36cedd9b54c46e1eab7cd4a0c04a30",
+      "sources": [
+        "18_CAFISArch資料\\18_CAFISArch資料\\3. Thông số kỹ thuật kết nối liên động POS（Credit／NFC編）連動接続仕様書（Credit／NFC編）_1.0版.pdf"
+      ],
+      "original_file": "3. Thông số kỹ thuật kết nối liên động POS（Credit／NFC編）連動接続仕様書（Credit／NFC編）_1.0版.pdf"
+    },
+    {
+      "file": "POS連動接続仕様書（共通編）_23ページ.png",
+      "group": "CAFIS",
+      "size": 44533,
+      "sha256": "671e08bb24fed96128b8959e1cb0b3d5c27560847bd86dc6f1c5f3249d038037",
+      "sources": [
+        "18_CAFISArch資料\\18_CAFISArch資料\\Flow nghiệp vụ\\Trang 23_ 1.Thông số kỹ thuật kết nối liên động POS(Phần chung).X版.png"
+      ],
+      "original_file": "Trang 23_ 1.Thông số kỹ thuật kết nối liên động POS(Phần chung).X版.png"
+    },
+    {
+      "file": "ePOS_SDK_Android_移行ガイド_英語_revE.pdf",
+      "group": "Epson",
+      "size": 1215777,
+      "sha256": "a9e57291ffa8d701d69e464a8adeb4f9f004baae71e761d0dd314e4f4cae4562",
+      "sources": [
+        "07_EPSON SB-H50 資料・SDK\\ePOS_SDK_Android_v2.35.0\\ePOS_SDK_Android_v2.35.0\\ePOS_SDK_Android_Migration_Guide_en_revE.pdf"
+      ],
+      "original_file": "ePOS_SDK_Android_Migration_Guide_en_revE.pdf"
+    },
+    {
+      "file": "ePOS_SDK_Android_移行ガイド_日本語_revE.pdf",
+      "group": "Epson",
+      "size": 1360772,
+      "sha256": "1249a1f0b47d8077a2b507a04194e470123b4b74ac877060c4a7941336e772ff",
+      "sources": [
+        "07_EPSON SB-H50 資料・SDK\\ePOS_SDK_Android_v2.35.0\\ePOS_SDK_Android_v2.35.0\\ePOS_SDK_Android_Migration_Guide_ja_revE.pdf"
+      ],
+      "original_file": "ePOS_SDK_Android_Migration_Guide_ja_revE.pdf"
+    },
+    {
+      "file": "プログラム仕様書(Ks12000I：配送売上)：7レシート・ジャーナル項目説明.xlsx",
+      "group": "Glory-SHARP",
+      "size": 5668143,
+      "sha256": "0ecc391709f7c34c41885b6f498c20fa700b5527f63460dc130711c9baa493e5",
+      "sources": [
+        "04_POS・自動釣銭機資料 (Glory)\\Glory 自動釣銭機\\KsSource.zip :: プログラム仕様書(Ks12000I：配送売上)：7レシート・ジャーナル項目説明.xlsx"
+      ]
+    },
+    {
+      "file": "プログラム仕様書(Ks12000I：配送売上)：17案件別ロジック⑥：釣銭機.xlsx",
+      "group": "Glory-SHARP",
+      "size": 2802526,
+      "sha256": "3be1dde56744969cfa7c5bd933dcc3c3032bc8e1a0ed47c49ef94d6aca95a11a",
+      "sources": [
+        "04_POS・自動釣銭機資料 (Glory)\\Glory 自動釣銭機\\KsSource.zip :: プログラム仕様書(Ks12000I：配送売上)：17案件別ロジック⑥：釣銭機.xlsx"
+      ]
+    },
+    {
+      "file": "ePOS_バーコードサンプル.pdf",
+      "group": "Epson",
+      "size": 521089,
+      "sha256": "46427b4bd2d12673e7bb1b827d52200f213a5ef7c390214a91f48af25a03370e",
+      "sources": [
+        "07_EPSON SB-H50 資料・SDK\\ePOS_SDK_Sample_JavaScript.zip :: ePOS_SDK_Sample_JavaScript/ePOS_Sample_Barcode.pdf",
+        "07_EPSON SB-H50 資料・SDK\\ePOS_SDK_iOS_v2.35.0\\ePOS_SDK_iOS_v2.35.0\\ePOS_SDK_Sample_iOS.zip :: ePOS_SDK_Sample_iOS/ePOS2_Sample_Barcode.pdf",
+        "07_EPSON SB-H50 資料・SDK\\ePOS_SDK_Android_v2.35.0\\ePOS_SDK_Android_v2.35.0\\ePOS_SDK_Sample_Android.zip :: ePOS_SDK_Sample_Android/ePOS2_Sample_Barcode.pdf"
+      ],
+      "original_file": "ePOS_Sample_Barcode.pdf"
+    },
+    {
+      "file": "SB-H50_周辺機器連携_CAFIS_Arch_日本語_revA.pdf",
+      "group": "Epson",
+      "size": 1460778,
+      "sha256": "2463d274681e688149811265700b4f21bc31d37d9f4edc81fd43d67d80796fe6",
+      "sources": [
+        "07_EPSON SB-H50 資料・SDK\\SB-H50_PERIPHERALS_JA_REVB (2).ZIP :: SB-H50_PERIPHERALS_JA_REVB/信用照会端末の接続方法詳細/SB-H50_Peripherals_CAFIS_Arch_ja_revA.pdf"
+      ],
+      "original_file": "SB-H50_Peripherals_CAFIS_Arch_ja_revA.pdf"
+    },
+    {
+      "file": "SB-H50_周辺機器連携_JET-S_日本語_revA.pdf",
+      "group": "Epson",
+      "size": 1673245,
+      "sha256": "752183f99d18e6a43941fd3cda4b4f02e3bb2c7265be81e1aa1cb89a145951de",
+      "sources": [
+        "07_EPSON SB-H50 資料・SDK\\SB-H50_PERIPHERALS_JA_REVB (2).ZIP :: SB-H50_PERIPHERALS_JA_REVB/信用照会端末の接続方法詳細/SB-H50_Peripherals_JET-S_ja_revA.pdf"
+      ],
+      "original_file": "SB-H50_Peripherals_JET-S_ja_revA.pdf"
+    },
+    {
+      "file": "SB-H50_周辺機器連携_stera_terminal_日本語_revA.pdf",
+      "group": "Epson",
+      "size": 1251670,
+      "sha256": "536bda87290b227263c4dc723dd8e2c8dfee3cad382705836fab9fa68b080c7a",
+      "sources": [
+        "07_EPSON SB-H50 資料・SDK\\SB-H50_PERIPHERALS_JA_REVB (2).ZIP :: SB-H50_PERIPHERALS_JA_REVB/信用照会端末の接続方法詳細/SB-H50_Peripherals_stera_terminal_ja_revA.pdf"
+      ],
+      "original_file": "SB-H50_Peripherals_stera_terminal_ja_revA.pdf"
+    },
+    {
+      "file": "RZ-A476S_ミラーリング説明書_v1.01.pdf",
+      "group": "Glory-SHARP",
+      "size": 1603435,
+      "sha256": "923cd72813d4459804d0f66009aab1d5efd78ed5e135768314c40982de5bab79",
+      "sources": [
+        "04_POS・自動釣銭機資料 (Glory)\\SHARP POS\\RZA476S_A396S_Kihon_1.00 (1).zip :: RZA476S_A396S_Kihon_1.00/Manual/RZ-A476S_ミラーリング説明書_v1.01.pdf"
+      ]
+    },
+    {
+      "file": "RZ-A476SA396S_PFO説明書_v1.0.pdf",
+      "group": "Glory-SHARP",
+      "size": 1563540,
+      "sha256": "9d6166aec4454d7c7185113dc0f7ae136d3e52a4963864ab2363857b2bddea5d",
+      "sources": [
+        "04_POS・自動釣銭機資料 (Glory)\\SHARP POS\\RZA476S_A396S_Kihon_1.00 (1).zip :: RZA476S_A396S_Kihon_1.00/Manual/RZ-A476SA396S_PFO説明書_v1.0.pdf"
+      ]
+    },
+    {
+      "file": "RZ-A476SA396S_POSユーティリティ説明書_第1.0版.pdf",
+      "group": "Glory-SHARP",
+      "size": 1598225,
+      "sha256": "61f459257183249028ddbfaee7c5e5e156228aac05601308cede9846c0093fa4",
+      "sources": [
+        "04_POS・自動釣銭機資料 (Glory)\\SHARP POS\\RZA476S_A396S_Kihon_1.00 (1).zip :: RZA476S_A396S_Kihon_1.00/Manual/RZ-A476SA396S_POSユーティリティ説明書_第1.0版.pdf"
+      ]
+    },
+    {
+      "file": "自動更新説明書_v1.0.pdf",
+      "group": "Glory-SHARP",
+      "size": 574713,
+      "sha256": "acc47d3911646cff1ee60e1c5d6adb16d763e35cc0b9cc03fcf1aaf0f355a2dd",
+      "sources": [
+        "04_POS・自動釣銭機資料 (Glory)\\SHARP POS\\RZA476S_A396S_Kihon_1.00 (1).zip :: RZA476S_A396S_Kihon_1.00/Manual/RZ-A476SA396S_â/âtâgÄ⌐ô«ìXÉVÉαû╛Åæ_v1.0.pdf"
+      ],
+      "original_file": "âtâgÄ⌐ô«ìXÉVÉαû╛Åæ_v1.0.pdf"
+    }
+  ]
+}

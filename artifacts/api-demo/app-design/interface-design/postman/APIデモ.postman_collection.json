@@ -1,0 +1,542 @@
+{
+  "info": {
+    "name": "APIデモ",
+    "description": "全6件のAPIを確認します。このファイルをPostmanにインポートし、コレクション全体を上から順に実行してください。APIキーは設定済みです。ログインとトークン更新で取得したトークンは自動設定されます。最後にログアウトします。全6件でHTTP 200を返します。",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "noauth"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://10.50.229.223",
+      "type": "string",
+      "description": "接続先。末尾のスラッシュは不要です。"
+    },
+    {
+      "key": "api_key",
+      "value": "25394115492102eaaa58bd491807184536a725ea7a030ab49ba6d507b759bbed",
+      "type": "string",
+      "description": "別途受領したAPIキーを入力します。"
+    },
+    {
+      "key": "tantosha_code",
+      "value": "00001",
+      "type": "string",
+      "description": "ログインに使用する検証用担当者コードです。"
+    },
+    {
+      "key": "approver_code",
+      "value": "00001",
+      "type": "string",
+      "description": "承認権限確認に使用する検証用担当者コードです。"
+    },
+    {
+      "key": "access_token",
+      "value": "",
+      "type": "string",
+      "description": "ログイン・更新で自動設定します。"
+    },
+    {
+      "key": "refresh_token",
+      "value": "",
+      "type": "string",
+      "description": "ログインで自動設定します。"
+    },
+    {
+      "key": "menu_id",
+      "value": "",
+      "type": "string",
+      "description": "メニュー取得で自動設定します。"
+    },
+    {
+      "key": "password",
+      "value": "sample-value",
+      "type": "string",
+      "description": "任意項目です。現在は認証に使用しません。省略する場合はボディから項目を削除します。"
+    },
+    {
+      "key": "mise_code",
+      "value": "1071",
+      "type": "string",
+      "description": "任意の店舗コードです。指定値をセッションに保持します。"
+    },
+    {
+      "key": "tanmatsu_no",
+      "value": "02",
+      "type": "string",
+      "description": "任意の端末IDです。指定値をセッションに保持します。"
+    },
+    {
+      "key": "hojin_code",
+      "value": "011",
+      "type": "string"
+    },
+    {
+      "key": "training_mode",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "application_version",
+      "value": "1.0.0",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "01 ログイン",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "{{api_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Request-Id",
+            "value": "{{$guid}}"
+          },
+          {
+            "key": "X-Request-Date",
+            "value": "{{request_date}}"
+          }
+        ],
+        "url": "{{base_url}}/smj-api-demo/v1/login",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"tantosha_code\": \"{{tantosha_code}}\",\n  \"password\": \"{{password}}\",\n  \"hojin_code\": \"{{hojin_code}}\",\n  \"mise_code\": \"{{mise_code}}\",\n  \"tanmatsu_no\": \"{{tanmatsu_no}}\",\n  \"training_mode\": \"{{training_mode}}\",\n  \"application_version\": \"{{application_version}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "description": "担当者コードと任意項目を送信します。Variablesで値を変更できます。passwordは現在の認証判定には使用しません。"
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_date\", new Date().toUTCString());"
+            ]
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (!pm.variables.get(\"api_key\")) throw new Error(\"api_keyを設定してください。\");",
+              "[\"access_token\", \"refresh_token\", \"menu_id\"].forEach(k => pm.collectionVariables.set(k, \"\"));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "const data = pm.response.json();",
+              "pm.test(\"レスポンス内容\", function () {",
+              "if (data.token_type !== \"Bearer\" || !data.access_token || !data.refresh_token) throw new Error(\"トークンが取得できません。\");",
+              "if (data.kekka_code !== \"00001\" || data.yukokigen <= 0 || data.refresh_token.length !== 32) throw new Error(\"応答が不正です。\");",
+              "});",
+              "if (pm.response.code === 200) {",
+              "pm.collectionVariables.set(\"access_token\", data.access_token);",
+              "pm.collectionVariables.set(\"refresh_token\", data.refresh_token);",
+              "}"
+            ]
+          }
+        }
+      ],
+      "response": []
+    },
+    {
+      "name": "02 セッション情報",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "{{api_key}}"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Request-Id",
+            "value": "{{$guid}}"
+          },
+          {
+            "key": "X-Request-Date",
+            "value": "{{request_date}}"
+          }
+        ],
+        "url": "{{base_url}}/smj-api-demo/v1/me"
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_date\", new Date().toUTCString());"
+            ]
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (!pm.variables.get(\"api_key\")) throw new Error(\"api_keyを設定してください。\");"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "const data = pm.response.json();",
+              "pm.test(\"レスポンス内容\", function () {",
+              "if (data.user.tantou_code !== pm.variables.get(\"tantosha_code\") || !data.store_code || !data.terminal_id) throw new Error(\"セッション情報が不正です。\");",
+              "if (data.store_code !== pm.variables.get(\"mise_code\") || data.terminal_id !== pm.variables.get(\"tanmatsu_no\")) throw new Error(\"指定した店舗・端末が保持されていません。\");",
+              "});",
+              "if (pm.response.code === 200) {",
+              "",
+              "}"
+            ]
+          }
+        }
+      ],
+      "response": []
+    },
+    {
+      "name": "03 メニュー取得",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "{{api_key}}"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Request-Id",
+            "value": "{{$guid}}"
+          },
+          {
+            "key": "X-Request-Date",
+            "value": "{{request_date}}"
+          }
+        ],
+        "url": "{{base_url}}/smj-api-demo/v1/menus?offset=0&limit=20"
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_date\", new Date().toUTCString());"
+            ]
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (!pm.variables.get(\"api_key\")) throw new Error(\"api_keyを設定してください。\");"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "const data = pm.response.json();",
+              "pm.test(\"レスポンス内容\", function () {",
+              "if (!Array.isArray(data.menu_items) || data.menu_items.length === 0 || data.offset !== 0 || data.limit !== 20) throw new Error(\"検証用メニューが取得できません。\");",
+              "data.menu_items.forEach(m => { if (!m.menu_id || typeof m.requires_approval !== \"boolean\") throw new Error(\"メニュー項目が不正です。\"); });",
+              "});",
+              "if (pm.response.code === 200) {",
+              "if (Array.isArray(data.menu_items) && data.menu_items.length) {",
+              "const menu = data.menu_items.reduce((a,b) => a.required_permission_level >= b.required_permission_level ? a : b);",
+              "pm.collectionVariables.set(\"menu_id\", menu.menu_id);",
+              "}",
+              "}"
+            ]
+          }
+        }
+      ],
+      "response": []
+    },
+    {
+      "name": "04 承認権限確認",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "{{api_key}}"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Request-Id",
+            "value": "{{$guid}}"
+          },
+          {
+            "key": "X-Request-Date",
+            "value": "{{request_date}}"
+          }
+        ],
+        "url": "{{base_url}}/smj-api-demo/v1/authorizations",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"menu_id\": \"{{menu_id}}\",\n  \"approver_codes\": [\n    \"{{approver_code}}\"\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_date\", new Date().toUTCString());"
+            ]
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (!pm.variables.get(\"api_key\")) throw new Error(\"api_keyを設定してください。\");"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "const data = pm.response.json();",
+              "pm.test(\"レスポンス内容\", function () {",
+              "if (data.authorized !== true || data.menu_id !== pm.variables.get(\"menu_id\") || data.combined_permission_level < data.required_permission_level) throw new Error(\"承認結果が不正です。\");",
+              "});",
+              "if (pm.response.code === 200) {",
+              "",
+              "}"
+            ]
+          }
+        }
+      ],
+      "response": []
+    },
+    {
+      "name": "05 トークン更新",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "{{api_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Request-Id",
+            "value": "{{$guid}}"
+          },
+          {
+            "key": "X-Request-Date",
+            "value": "{{request_date}}"
+          }
+        ],
+        "url": "{{base_url}}/smj-api-demo/v1/access-token-saihakko-irai",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"login_user_hojin_code\": \"{{hojin_code}}\",\n  \"login_user_tempo_code\": \"{{mise_code}}\",\n  \"login_user_tanmatsu_no\": \"{{tanmatsu_no}}\",\n  \"training_mode\": \"{{training_mode}}\",\n  \"application_version\": \"{{application_version}}\",\n  \"refresh_token\": \"{{refresh_token}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_date\", new Date().toUTCString());"
+            ]
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (!pm.variables.get(\"api_key\")) throw new Error(\"api_keyを設定してください。\");"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "const data = pm.response.json();",
+              "pm.test(\"レスポンス内容\", function () {",
+              "if (data.token_type !== \"Bearer\" || !data.access_token || data.yukokigen <= 0) throw new Error(\"更新結果が不正です。\");",
+              "});",
+              "if (pm.response.code === 200) {",
+              "pm.collectionVariables.set(\"access_token\", data.access_token);",
+              "}"
+            ]
+          }
+        }
+      ],
+      "response": []
+    },
+    {
+      "name": "06 ログアウト",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "{{api_key}}"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Request-Id",
+            "value": "{{$guid}}"
+          },
+          {
+            "key": "X-Request-Date",
+            "value": "{{request_date}}"
+          }
+        ],
+        "url": "{{base_url}}/smj-api-demo/v1/logout",
+        "body": {
+          "mode": "raw",
+          "raw": "{}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"request_date\", new Date().toUTCString());"
+            ]
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (!pm.variables.get(\"api_key\")) throw new Error(\"api_keyを設定してください。\");"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "const data = pm.response.json();",
+              "pm.test(\"レスポンス内容\", function () {",
+              "if (data.logged_out !== true) throw new Error(\"ログアウトできません。\");",
+              "});",
+              "if (pm.response.code === 200) {",
+              "",
+              "}"
+            ]
+          }
+        }
+      ],
+      "response": []
+    }
+  ]
+}
