@@ -3,6 +3,9 @@
 Kế thừa chỉ dẫn root; file này chỉ bổ sung phạm vi `project-store/`.
 Đường dẫn tài liệu tính từ workspace root với tiền tố `project-store/`.
 
+- Chủ động tra Codex Memory khi cần ngữ cảnh hoặc quyết định trước đó; dùng
+  skill `skills/search/rag/` để tìm hoặc đối chiếu dữ liệu dự án khi chưa rõ nguồn.
+
 ## Cấu trúc và cấu hình
 
 - Đây là Git repo riêng. Dữ liệu dùng lại nằm trong `config/`, `artifacts/`,
@@ -36,10 +39,13 @@ Kế thừa chỉ dẫn root; file này chỉ bổ sung phạm vi `project-store
 
 ## Tài liệu và skill riêng
 
+- Thư mục trong `artifacts/` dùng tên tiếng Anh, chữ thường, phân tách từ bằng
+  dấu gạch nối (`kebab-case`). Tên file tài liệu bên trong phải dùng tiếng Nhật
+  như hiện tại; giữ nguyên các identifier trong tên file.
 - RAG chỉ index Markdown/YAML trong `artifacts/`; cách chọn công cụ theo root.
 - Giữ nguồn và mục đích sử dụng của tài liệu. Đổi tên/di chuyển phải sửa liên kết;
   không suy ra tài liệu đã được duyệt chỉ từ thư mục lưu.
-- Quy ước đặt tên, ID, thuật ngữ và render thuộc skill tài liệu tương ứng.
+- Quy ước đặt tên file, ID, thuật ngữ và render thuộc skill tài liệu tương ứng.
   Không sao chép quy ước đó thành một bộ chỉ dẫn khác ở đây.
 - `skills/` chỉ chứa quy trình đặc thù dự án; cấu hình đọc từ `config/`.
   Script chạy xác định theo đầu vào, không tự gọi LLM; không lưu lịch sử chat,
